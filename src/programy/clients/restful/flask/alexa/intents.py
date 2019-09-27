@@ -16,11 +16,12 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 import json
 import argparse
-from abc import ABCMeta, abstractmethod
+from abc import ABC
+from abc import abstractmethod
+from programy.utils.console.console import outputLog
 
 
-class Intent(object):
-    __metaclass__ = ABCMeta
+class Intent(ABC):
 
     @abstractmethod
     def generate(self):
@@ -28,7 +29,6 @@ class Intent(object):
 
 
 class SystemIntent(Intent):
-    __metaclass__ = ABCMeta
 
     def __init__(self, samples_file=None):
         self._samples_file = samples_file
@@ -58,7 +58,7 @@ class CancelIntent(SystemIntent):
 
     def __init__(self, samples_file=None):
         SystemIntent.__init__(self, samples_file)
-        
+
     def get_name(self):
         return "AMAZON.CancelIntent"
 
@@ -81,7 +81,7 @@ class StopIntent(SystemIntent):
         return "AMAZON.StopIntent"
 
 
-class QueryIntent(object):
+class QueryIntent():
 
     def __init__(self, query):
         self._query = query
@@ -98,12 +98,12 @@ class QueryIntent(object):
         return slot
 
 
-class LanguageModel(object):
+class LanguageModel():
 
     def __init__(self, invocationName, intents):
 
-        assert (isinstance(invocationName, str))
-        assert (isinstance(intents, list))
+        assert isinstance(invocationName, str)
+        assert isinstance(intents, list)
 
         self._invocationName = invocationName
         self._intents = intents
@@ -117,11 +117,11 @@ class LanguageModel(object):
         return model
 
 
-class InteractionModel(object):
+class InteractionModel():
 
     def __init__(self, languageModel):
 
-        assert (isinstance(languageModel, LanguageModel))
+        assert isinstance(languageModel, LanguageModel)
 
         self._languageModel = languageModel
 
@@ -131,11 +131,10 @@ class InteractionModel(object):
         return model
 
 
-class Intents(object):
+class Intents():
 
     def __init__(self, interactionModel):
-
-        assert (isinstance(interactionModel, InteractionModel))
+        assert isinstance(interactionModel, InteractionModel)
 
         self._interactionModel = interactionModel
 
@@ -145,7 +144,7 @@ class Intents(object):
         return intents
 
 
-class IntentGenerator(object):
+class IntentGenerator():
 
     def __init__(self, invocation_name, system_intents, intents_word_file, intents_json_file, intents_mapping_file):
         self._invocation_name = invocation_name
@@ -176,7 +175,7 @@ class IntentGenerator(object):
 
 if __name__ == '__main__':
 
-    print("Generating intents...")
+    outputLog(None, "Generating intents...")
 
     parser = argparse.ArgumentParser(description='Program-Y Alexa Client Intent Generatorr')
     try:
@@ -185,7 +184,7 @@ if __name__ == '__main__':
         parser.add_argument('-ci', '--cancel_intent', action='store_true', help="Include Cancel Intent")
         parser.add_argument('-cif', '--cancel_intent_file', help="Cancel Intents file")
         parser.add_argument('-hi', '--help_intent', action='store_true', help="Include Help Intent")
-        parser.add_argument('-hif', '--help_intent_file',help="Help Intent file")
+        parser.add_argument('-hif', '--help_intent_file', help="Help Intent file")
         parser.add_argument('-si', '--stop_intent', action='store_true', help="Include Stop Intent")
         parser.add_argument('-sif', '--stop_intent_file', help="Stop Intent file")
         parser.add_argument('-if', '--intents_file', required=True, help="Intents filename")
@@ -202,15 +201,16 @@ if __name__ == '__main__':
         if args.help_intent is True:
             system_intents.append(HelpIntent(args.help_intent_file))
 
-        print("\nReading [%s]"%args.intents_file)
+        outputLog(None, "\nReading [%s]" % args.intents_file)
 
-        generator = IntentGenerator(args.invocation_name, system_intents, args.intents_file, args.intents_json, args.intents_maps)
+        generator = IntentGenerator(args.invocation_name, system_intents, args.intents_file, args.intents_json,
+                                    args.intents_maps)
         generator.generate()
 
-        print("\nGenerated [%s]"%args.intents_json)
-        print("Generated [%s]"%args.intents_maps)
+        outputLog(None, "\nGenerated [%s]" % args.intents_json)
+        outputLog(None, "Generated [%s]" % args.intents_maps)
 
 
     except Exception as e:
-        print(e)
-        parser.print_help()
+        outputLog(None, "Error generating Alexa intents", e)
+        parser.output_help()

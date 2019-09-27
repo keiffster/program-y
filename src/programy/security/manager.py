@@ -20,12 +20,12 @@ from programy.dialog.sentence import Sentence
 from programy.config.brain.securities import BrainSecuritiesConfiguration
 
 
-class SecurityManager(object):
+class SecurityManager:
 
     def __init__(self, security_configuration):
 
-        assert (security_configuration is not None)
-        assert (isinstance(security_configuration, BrainSecuritiesConfiguration))
+        assert security_configuration is not None
+        assert isinstance(security_configuration, BrainSecuritiesConfiguration)
 
         self._configuration = security_configuration
         self._authentication = None
@@ -88,16 +88,18 @@ class SecurityManager(object):
         else:
             YLogger.debug(self, "No authorisation configuration defined")
 
-
     def failed_authentication(self, client_context):
         YLogger.error(client_context, "[%s] failed authentication!")
 
         # If we have an SRAI defined, then use that
         if self.authentication.configuration.denied_srai is not None:
-            match_context = client_context.brain.aiml_parser.match_sentence(client_context,
-                                                             Sentence(client_context, self.authentication.configuration.denied_srai),
-                                                             topic_pattern="*",
-                                                             that_pattern="*")
+            match_context = client_context.brain.aiml_parser.\
+                match_sentence(client_context,
+                               Sentence(client_context,
+                                        self.authentication.configuration.denied_srai),
+                               topic_pattern="*",
+                               that_pattern="*")
+
             # If the SRAI matched then return the result
             if match_context is not None:
                 return client_context.brain.resolve_matched_template(client_context, match_context)
@@ -112,4 +114,3 @@ class SecurityManager(object):
             if self.authentication.authenticate(client_context) is False:
                 return self.failed_authentication(client_context)
         return None
-

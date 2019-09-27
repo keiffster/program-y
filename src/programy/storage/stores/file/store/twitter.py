@@ -14,11 +14,10 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.utils.logging.ylogger import YLogger
 import os
 import os.path
 import shutil
-
+from programy.utils.logging.ylogger import YLogger
 from programy.storage.stores.file.store.filestore import FileStore
 from programy.storage.entities.twitter import TwitterStore
 
@@ -27,6 +26,12 @@ class FileTwitterStore(FileStore, TwitterStore):
 
     def __init__(self, storage_engine):
         FileStore.__init__(self, storage_engine)
+
+    def get_storage(self):
+        return self.storage_engine.configuration.triggers_storage
+
+    def _get_storage_path(self):
+        return self.storage_engine.configuration.twitter_storage.file
 
     def empty(self):
         if os.path.exists(self.storage_engine.configuration.twitter_storage.dirs[0]) is True:
@@ -60,4 +65,3 @@ class FileTwitterStore(FileStore, TwitterStore):
             YLogger.exception_nostack(None, "Failed to load last message ids [%s]", e, twitter_ids_file)
 
         return last_direct_message_id, last_status_id
-

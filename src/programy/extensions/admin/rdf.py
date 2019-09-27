@@ -16,7 +16,6 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 """
 from programy.utils.logging.ylogger import YLogger
-
 from programy.extensions.base import Extension
 
 
@@ -33,7 +32,7 @@ class RDFAdminExtension(Extension):
             if segments[1] == 'LIST':
                 rdf += "<ul>"
                 for subject in subjects:
-                    rdf += "<li>%s</li>"%subject
+                    rdf += "<li>%s</li>" % subject
                 rdf += "</ul>"
             else:
                 return str(len(subjects))
@@ -49,10 +48,10 @@ class RDFAdminExtension(Extension):
         elif segments[0] == "OBJECT":
             subject = segments[1]
             predicate = segments[2]
-            objects =  client_context.brain.rdf.objects(subject, predicate)
+            objects = client_context.brain.rdf.objects(subject, predicate)
             rdf += "<ul>"
-            for object in objects:
-                for obj in object:
+            for anobject in objects:
+                for obj in anobject:
                     rdf += "<li>%s</li>" % obj
             rdf += "</ul>"
 

@@ -22,6 +22,7 @@ from programy.security.authorise.authorisor import AuthorisationException
 from programy.config.brain.security import BrainSecurityAuthorisationConfiguration
 from programy.storage.factory import StorageFactory
 
+
 class BasicUserGroupAuthorisationService(Authoriser):
 
     def __init__(self, config: BrainSecurityAuthorisationConfiguration):
@@ -50,7 +51,7 @@ class BasicUserGroupAuthorisationService(Authoriser):
 
     def authorise(self, userid, role):
         if userid not in self._users:
-            raise AuthorisationException("User [%s] unknown to system!"%userid)
+            raise AuthorisationException("User [%s] unknown to system!" % userid)
 
         if userid in self._users:
             user = self._users[userid]

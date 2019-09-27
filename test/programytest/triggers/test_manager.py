@@ -1,15 +1,24 @@
 import unittest
-import os
-
+from typing import Dict
 from programy.triggers.manager import TriggerManager
 from programy.triggers.config import TriggerConfiguration
+from programy.context import ClientContext
+
+
+class MockTriggerManager(TriggerManager):
+
+    def __init__(self, config: TriggerConfiguration):
+        TriggerManager.__init__(self, config)
+
+    def trigger(self, event: str, client_context: ClientContext = None, additional: Dict[str, str] = None) -> bool:
+        return
 
 
 class TriggerManagerTests(unittest.TestCase):
 
     def test_init(self):
 
-        mgr = TriggerManager(TriggerConfiguration())
+        mgr = MockTriggerManager(TriggerConfiguration())
         self.assertIsNotNone(mgr)
 
     def test_init_with_events(self):

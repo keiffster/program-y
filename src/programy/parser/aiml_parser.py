@@ -14,36 +14,38 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 import logging
 import datetime
 import re
 from programy.utils.parsing.linenumxml import LineNumberingParser
-import xml.etree.ElementTree as ET
-
+import xml.etree.ElementTree as ET  # pylint: disable=wrong-import-order
 from programy.utils.logging.ylogger import YLogger
-from programy.parser.exceptions import ParserException, DuplicateGrammarException
+from programy.parser.exceptions import ParserException
+from programy.parser.exceptions import DuplicateGrammarException
 from programy.parser.pattern.graph import PatternGraph
 from programy.parser.template.graph import TemplateGraph
 from programy.utils.files.filefinder import FileFinder
 from programy.dialog.sentence import Sentence
 from programy.parser.pattern.matchcontext import MatchContext
 from programy.storage.factory import StorageFactory
+from programy.utils.console.console import outputLog
+
 
 class AIMLLoader(FileFinder):
-    
+
     def __init__(self, aiml_parser):
         FileFinder.__init__(self)
         self._aiml_parser = aiml_parser
 
-    def load_file_contents(self, id, filename, userid="*"):
+    def load_file_contents(self, fileid, filename, userid="*"):
+        del fileid
         try:
             return self._aiml_parser.parse_from_file(filename, userid=userid)
         except Exception as excep:
             YLogger.exception(self, "Failed to load contents of file from [%s]", excep, filename)
 
 
-class AIMLParser(object):
+class AIMLParser:
     RE_PATTERN_OF_TAG_AND_NAMESPACE_FROM_TEXT = re.compile("^{.*}.*$")
     RE_MATCH_OF_TAG_AND_NAMESPACE_FROM_TEXT = re.compile("^({.*})(.*)$")
 
@@ -109,9 +111,10 @@ class AIMLParser(object):
         diff = stop - start
 
         YLogger.info(self, "Total processing time %.6f secs", diff.total_seconds())
-        YLogger.info(self, "Loaded a total of %d aiml files with %d categories", total_aimls_loaded, self.num_categories)
+        YLogger.info(self, "Loaded a total of %d aiml files with %d categories", total_aimls_loaded,
+                     self.num_categories)
         if diff.total_seconds() > 0:
-            YLogger.info(self, "Thats approx %f aiml files per sec", total_aimls_loaded / diff.total_seconds())
+            YLogger.info(self, "Thats approx %f aiml files per sec", total_aimls_loaded // diff.total_seconds())
 
     def load_learnf_files_from_directory(self, configuration):
 
@@ -180,11 +183,6 @@ class AIMLParser(object):
         return tag_name, namespace
 
     def parse_from_file(self, filename, userid="*"):
-        """
-        Parse an AIML file and return all the cateogeries found in the file
-        :param filename: Name of file to parse
-        :return list of categories parsed from file:
-        """
         YLogger.info(self, "Loading aiml file: " + filename)
 
         try:
@@ -197,7 +195,8 @@ class AIMLParser(object):
             num_categories = self.parse_aiml(aiml, namespace, filename, userid=userid)
             stop = datetime.datetime.now()
             diff = stop - start
-            YLogger.info(self, "Processed %s with %d categories in %f.2 secs", filename, num_categories, diff.total_seconds())
+            YLogger.info(self, "Processed %s with %d categories in %f.2 secs", filename, num_categories,
+                         diff.total_seconds())
 
         except Exception as excep:
             YLogger.exception(self, "Failed to load contents of AIML file from [%s]", excep, filename)
@@ -251,9 +250,10 @@ class AIMLParser(object):
 
     def display_debug_info(self):
         if self._errors is not None:
-            print("Found a total of %d errors in your grammars, check your errors store" % len(self._errors))
+            outputLog(self, "Found a total of %d errors in your grammars, check your errors store" % len(self._errors))
         if self._duplicates is not None:
-            print("Found a total of %d duplicates in your grammars, check your duplicates store" % len(self._duplicates))
+            outputLog(self, "Found a total of %d duplicates in your grammars, check your duplicates store" % len(
+                self._duplicates))
 
     def handle_aiml_duplicate(self, dupe_excep, filename, expression):
         if self._duplicates is not None:
@@ -263,12 +263,13 @@ class AIMLParser(object):
                 YLogger.error(self, msg)
 
             startline = None
-            if hasattr(expression, "_start_line_number"):
-                startline = str(expression._start_line_number)
-
             endline = None
-            if hasattr(expression, "_end_line_number"):
-                endline = str(expression._end_line_number)
+            if expression is not None:
+                if hasattr(expression, "_start_line_number"):
+                    startline = str(expression._start_line_number)  # pylint: disable=protected-access
+
+                if hasattr(expression, "_end_line_number"):
+                    endline = str(expression._end_line_number)  # pylint: disable=protected-access
 
             self._duplicates.append([dupe_excep.message, filename, startline, endline])
 
@@ -280,16 +281,19 @@ class AIMLParser(object):
                 YLogger.error(self, msg)
 
             startline = None
-            if hasattr(expression, "_start_line_number"):
-                startline = str(expression._start_line_number)
-
             endline = None
-            if hasattr(expression, "_end_line_number"):
-                endline = str(expression._end_line_number)
+            if expression is not None:
+                if hasattr(expression, "_start_line_number"):
+                    startline = str(expression._start_line_number)  # pylint: disable=protected-access
+
+                if hasattr(expression, "_end_line_number"):
+                    endline = str(expression._end_line_number)  # pylint: disable=protected-access
 
             self._errors.append([parser_excep.message, filename, startline, endline])
 
     def parse_aiml(self, aiml_xml, namespace, filename=None, userid="*"):
+        del namespace
+
         self.parse_version(aiml_xml)
 
         categories_found = False
@@ -389,7 +393,7 @@ class AIMLParser(object):
 
     def find_all(self, element, name, namespace):
         if namespace is not None:
-            search = '%s%s'%(namespace, name)
+            search = '%s%s' % (namespace, name)
             return element.findall(search)
         return element.findall(name)
 
@@ -449,7 +453,8 @@ class AIMLParser(object):
         pattern = self.get_pattern(category_xml, namespace)
 
         if add_to_graph is True:
-            self._pattern_parser.add_pattern_to_graph(pattern, topic_element, that_element, template_graph_root, userid=userid)
+            self._pattern_parser.add_pattern_to_graph(pattern, topic_element, that_element, template_graph_root,
+                                                      userid=userid)
             self._num_categories += 1
 
         return (pattern, topic_element, that_element, template_graph_root)
@@ -460,7 +465,7 @@ class AIMLParser(object):
         that_sentence = Sentence(client_context, that_pattern)
 
         YLogger.debug(client_context, "AIML Parser matching sentence [%s], topic=[%s], that=[%s] ",
-                          pattern_sentence.text(client_context), topic_pattern, that_pattern)
+                      pattern_sentence.text(client_context), topic_pattern, that_pattern)
 
         sentence = Sentence(client_context)
         sentence.append_sentence(pattern_sentence)
@@ -473,7 +478,7 @@ class AIMLParser(object):
         context = MatchContext(max_search_depth=client_context.bot.configuration.max_search_depth,
                                max_search_timeout=client_context.bot.configuration.max_search_timeout)
 
-        template = self._pattern_parser._root_node.match(client_context, context, sentence)
+        template = self._pattern_parser.root.match(client_context, context, sentence)
 
         if template is not None:
             context.template_node = template

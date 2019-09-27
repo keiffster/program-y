@@ -14,21 +14,25 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
+from programy.utils.logging.ylogger import YLogger
 from programy.storage.stores.sql.store.sqlstore import SQLStore
 from programy.storage.entities.user import UserStore
 from programy.storage.stores.sql.dao.user import User
+
 
 class SQLUserStore(SQLStore, UserStore):
 
     def __init__(self, storage_engine):
         SQLStore.__init__(self, storage_engine)
 
+    def _get_all(self):
+        return self._storage_engine.session.query(User)
+
     def empty(self):
         self._storage_engine.session.query(User).delete()
 
-    def add_user(self, userid, client):
-        user = User(userid=userid, client=client)
+    def add_user(self, userid, clientid):
+        user = User(userid=userid, client=clientid)
         self._storage_engine.session.add(user)
         return user
 
@@ -50,8 +54,9 @@ class SQLUserStore(SQLStore, UserStore):
         try:
             self._storage_engine.session.query(User).filter(User.userid == userid, User.client == clientid).delete()
             return True
-        except:
-            pass
+
+        except Exception as excep:
+            YLogger.exception_nostack(self, "Failed to remove user", excep)
 
         return False
 
@@ -59,8 +64,8 @@ class SQLUserStore(SQLStore, UserStore):
         try:
             self._storage_engine.session.query(User).filter(User.userid == userid).delete()
             return True
-        except:
-            pass
+
+        except Exception as excep:
+            YLogger.exception_nostack(self, "Failed to remove user from all clients", excep)
 
         return False
-

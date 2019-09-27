@@ -16,7 +16,6 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 """
 from programy.utils.logging.ylogger import YLogger
-
 from programy.extensions.base import Extension
 
 
@@ -27,10 +26,10 @@ class SchedulerExtension(Extension):
         quantity = int(words[2])
         period = words[3].upper()
         if period in ['SECONDS', 'MINUTES', 'HOURS', 'DAYS', 'WEEKS']:
-            type = words[4]
-            if type in ['TEXT', 'SRAI']:
+            texttype = words[4]
+            if texttype in ['TEXT', 'SRAI']:
                 text = " ".join(words[5:])
-                self.schedule(client_context, action, quantity, period, type, text)
+                self.schedule(client_context, action, quantity, period, texttype, text)
                 return 'OK'
             else:
                 raise Exception('Scheduler action missing')
@@ -40,7 +39,7 @@ class SchedulerExtension(Extension):
     def get_users_jobs(self, client_context):
         user_jobs = []
         jobs = client_context.client.scheduler.list_jobs()
-        for id, job in jobs.items():
+        for _, job in jobs.items():
             if client_context.userid == job.args[1]:
                 user_jobs.append(job)
         return user_jobs
@@ -97,14 +96,15 @@ class SchedulerExtension(Extension):
         return 'ERR'
 
     def execute_lists(self, client_context, words):
+        del words
         jobs = self.get_users_jobs(client_context)
         if jobs:
-            str = "OK <olist>"
+            response = "OK <olist>"
             for job in jobs:
                 if client_context.userid == job.args[1]:
-                    str += "<item>" + job.id + "</item>"
-            str += "</olist>"
-            return str
+                    response += "<item>" + job.id + "</item>"
+            response += "</olist>"
+            return response
 
         return 'ERR'
 
@@ -134,45 +134,54 @@ class SchedulerExtension(Extension):
                     return self.execute_lists(client_context, words)
 
                 else:
-                    raise Exception ("Scheduler invalid action %s"% action)
+                    raise Exception("Scheduler invalid action %s" % action)
             else:
-                raise Exception ("Scheduler invalid command, must start with SCHEDULE")
+                raise Exception("Scheduler invalid command, must start with SCHEDULE")
 
         except Exception as excep:
             YLogger.exception(client_context, "Failed to parse Scheduler command", excep)
 
         return 'ERR'
 
-    def schedule(self, client_context, when, quantity, period, type, text):
+    def schedule(self, client_context, when, quantity, period, texttype, text):
 
         if when == 'IN':
             if period == 'SECONDS':
-                client_context.client.scheduler.schedule_in_n_seconds(client_context.userid, client_context.id, type, text, quantity)
+                client_context.client.scheduler.schedule_in_n_seconds(client_context.userid, client_context.id,
+                                                                      texttype, text, quantity)
             elif period == 'MINUTES':
-                client_context.client.scheduler.schedule_in_n_minutes(client_context.userid, client_context.id, type, text, quantity)
+                client_context.client.scheduler.schedule_in_n_minutes(client_context.userid, client_context.id,
+                                                                      texttype, text, quantity)
             elif period == 'HOURS':
-                client_context.client.scheduler.schedule_in_n_hours(client_context.userid, client_context.id, type, text, quantity)
+                client_context.client.scheduler.schedule_in_n_hours(client_context.userid, client_context.id, texttype,
+                                                                    text, quantity)
             elif period == 'DAYS':
-                client_context.client.scheduler.schedule_in_n_days(client_context.userid, client_context.id, type, text, quantity)
+                client_context.client.scheduler.schedule_in_n_days(client_context.userid, client_context.id, texttype,
+                                                                   text, quantity)
             elif period == 'WEEKS':
-                client_context.client.scheduler.schedule_in_n_weeks(client_context.userid, client_context.id, type, text, quantity)
+                client_context.client.scheduler.schedule_in_n_weeks(client_context.userid, client_context.id, texttype,
+                                                                    text, quantity)
             else:
-                raise Exception("Scheduler invalid period - %s"%period)
+                raise Exception("Scheduler invalid period - %s" % period)
 
         elif when == 'EVERY':
             if period == 'SECONDS':
-                client_context.client.scheduler.schedule_every_n_seconds(client_context.userid, client_context.id, type, text, quantity)
+                client_context.client.scheduler.schedule_every_n_seconds(client_context.userid, client_context.id,
+                                                                         texttype, text, quantity)
             elif period == 'MINUTES':
-                client_context.client.scheduler.schedule_every_n_minutes(client_context.userid, client_context.id, type, text, quantity)
+                client_context.client.scheduler.schedule_every_n_minutes(client_context.userid, client_context.id,
+                                                                         texttype, text, quantity)
             elif period == 'HOURS':
-                client_context.client.scheduler.schedule_every_n_hours(client_context.userid, client_context.id, type, text, quantity)
+                client_context.client.scheduler.schedule_every_n_hours(client_context.userid, client_context.id,
+                                                                       texttype, text, quantity)
             elif period == 'DAYS':
-                client_context.client.scheduler.schedule_every_n_days(client_context.userid, client_context.id, type, text, quantity)
+                client_context.client.scheduler.schedule_every_n_days(client_context.userid, client_context.id,
+                                                                      texttype, text, quantity)
             elif period == 'WEEKS':
-                client_context.client.scheduler.schedule_every_n_weeks(client_context.userid, client_context.id, type, text, quantity)
+                client_context.client.scheduler.schedule_every_n_weeks(client_context.userid, client_context.id,
+                                                                       texttype, text, quantity)
             else:
-                raise Exception("Scheduler invalid period - %s"%period)
+                raise Exception("Scheduler invalid period - %s" % period)
 
         else:
-            raise Exception("Scheduler invalid repeat - %s"%when)
-
+            raise Exception("Scheduler invalid repeat - %s" % when)

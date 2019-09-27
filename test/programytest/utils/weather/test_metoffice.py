@@ -16,7 +16,6 @@ from programy.utils.weather.metoffice import DV
 from programy.utils.weather.metoffice import SiteReport
 from programy.utils.weather.metoffice import MetOffice24HourForecast, MetOffice5DayForecast, MetOfficeObservation, MetOfficeWeatherReport
 from programy.utils.weather.metoffice import MetOffice
-from programy.utils.license.keys import LicenseKeys
 from programytest.client import TestClient
 
 

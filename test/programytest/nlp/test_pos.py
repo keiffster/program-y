@@ -10,7 +10,7 @@ class NGramsCreatorTests(unittest.TestCase):
         tags = PartsOfSpeechTagger.tag_string("Python is a high-level, general-purpose programming language.")
         self.assertIsNotNone(tags)
         print(tags)
-        self.assertEquals([('Python', 'NNP'),
+        self.assertEqual([('Python', 'NNP'),
                            ('is', 'VBZ'),
                            ('a', 'DT'),
                            ('high-level', 'JJ'),
@@ -21,6 +21,6 @@ class NGramsCreatorTests(unittest.TestCase):
 
     def test_type_to_string(self):
 
-        self.assertEquals("Proper noun, singular", PartsOfSpeechTagger.tag_to_string("NNP"))
-        self.assertEquals("Unknown", PartsOfSpeechTagger.tag_to_string(""))
-        self.assertEquals("Unknown", PartsOfSpeechTagger.tag_to_string("Rubbish"))
+        self.assertEqual("Proper noun, singular", PartsOfSpeechTagger.tag_to_string("NNP"))
+        self.assertEqual("Unknown", PartsOfSpeechTagger.tag_to_string(""))
+        self.assertEqual("Unknown", PartsOfSpeechTagger.tag_to_string("Rubbish"))

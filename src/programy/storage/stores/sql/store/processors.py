@@ -16,30 +16,33 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 import os
 from programy.utils.logging.ylogger import YLogger
-from programy.utils.classes.loader import ClassLoader
-
 from programy.storage.stores.sql.store.sqlstore import SQLStore
 from programy.storage.entities.processors import ProcessorStore
 from programy.storage.stores.sql.dao.processor import PreProcessor
 from programy.storage.stores.sql.dao.processor import PostProcessor
+from programy.storage.stores.sql.dao.processor import PostQuestionProcessor
 from programy.storage.entities.store import Store
 from programy.utils.classes.loader import ClassLoader
+from programy.utils.console.console import outputLog
 
 
 class SQLProcessorsStore(SQLStore, ProcessorStore):
 
+    def __init__(self, storage_engine):
+        SQLStore.__init__(self, storage_engine)
+
     def _get_storage_class(self):
         pass
 
-    def load(self, processor_factory):
+    def load(self, collector, name=None):
         processors = self.get_all_processors()
         for processor in processors:
             try:
-                processor_factory.add_processor(ClassLoader.instantiate_class(processor.classname)())
+                collector.add_processor(ClassLoader.instantiate_class(processor.classname)())
             except Exception as e:
                 YLogger.exception(self, "Failed pre-instantiating Processor [%s]", e, processor.classname)
 
-    def upload_from_file(self, filename, format=Store.TEXT_FORMAT, commit=True, verbose=False):
+    def upload_from_file(self, filename, fileformat=Store.TEXT_FORMAT, commit=True, verbose=False):
 
         count = 0
         success = 0
@@ -67,15 +70,24 @@ class SQLProcessorsStore(SQLStore, ProcessorStore):
                 processor = self._get_entity(line)
                 self.storage_engine.session.add(processor)
                 if verbose is True:
-                    print(line)
+                    outputLog(self, line)
                 return True
         return False
 
     def _get_entity(self, classname):
         raise NotImplementedError()
 
+    def get_all_processors(self):
+        return []
+
 
 class SQLPreProcessorsStore(SQLProcessorsStore, ProcessorStore):
+
+    def __init__(self, storage_engine):
+        SQLProcessorsStore.__init__(self, storage_engine)
+
+    def _get_all(self):
+        return self._storage_engine.session.query(ProcessLookupError)
 
     def empty(self):
         self._storage_engine.session.query(PreProcessor).delete()
@@ -89,6 +101,12 @@ class SQLPreProcessorsStore(SQLProcessorsStore, ProcessorStore):
 
 class SQLPostProcessorsStore(SQLProcessorsStore, ProcessorStore):
 
+    def __init__(self, storage_engine):
+        SQLProcessorsStore.__init__(self, storage_engine)
+
+    def _get_all(self):
+        return self._storage_engine.session.query(PostProcessor)
+
     def empty(self):
         self._storage_engine.session.query(PostProcessor).delete()
 
@@ -100,6 +118,12 @@ class SQLPostProcessorsStore(SQLProcessorsStore, ProcessorStore):
 
 
 class SQLPostQuestionProcessorsStore(SQLProcessorsStore, ProcessorStore):
+
+    def __init__(self, storage_engine):
+        SQLProcessorsStore.__init__(self, storage_engine)
+
+    def _get_all(self):
+        return self._storage_engine.session.query(PostQuestionProcessor)
 
     def empty(self):
         self._storage_engine.session.query(PostProcessor).delete()

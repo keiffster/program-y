@@ -21,7 +21,6 @@ from programy.storage.stores.nosql.mongo.dao.link import Link
 
 
 class MongoLinkStore(MongoStore, LinkStore):
-
     LINKS = "links"
     PRIMARY_USER = "primary_user"
     PROVIDED_KEY = 'provided_key'
@@ -39,21 +38,22 @@ class MongoLinkStore(MongoStore, LinkStore):
         self.add_document(link)
         return True
 
-    def get_link(self, primary_user):
+    def get_link(self, userid):
         collection = self.collection()
-        doc = collection.find_one({MongoLinkStore.PRIMARY_USER: primary_user})
+        doc = collection.find_one({MongoLinkStore.PRIMARY_USER: userid})
         if doc is not None:
             return Link.from_document(doc)
         return None
 
-    def remove_link(self, primary_user):
+    def remove_link(self, userid):
         collection = self.collection()
-        collection.delete_many({MongoLinkStore.PRIMARY_USER: primary_user})
+        collection.delete_many({MongoLinkStore.PRIMARY_USER: userid})
         return True
 
     def link_exists(self, userid, provided_key, generated_key):
         collection = self.collection()
-        link = collection.find_one({MongoLinkStore.PRIMARY_USER: userid, MongoLinkStore.PROVIDED_KEY: provided_key, MongoLinkStore.GENERATED_KEY: generated_key})
+        link = collection.find_one({MongoLinkStore.PRIMARY_USER: userid, MongoLinkStore.PROVIDED_KEY: provided_key,
+                                    MongoLinkStore.GENERATED_KEY: generated_key})
         return bool(link is not None)
 
     def update_link(self, link):

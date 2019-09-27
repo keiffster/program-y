@@ -14,15 +14,13 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.utils.logging.ylogger import YLogger
-
 from telegram.ext import Updater
 from telegram.ext import CommandHandler
 from telegram.ext import MessageHandler, Filters
-
+from programy.utils.logging.ylogger import YLogger
 from programy.clients.polling.client import PollingBotClient
 from programy.clients.polling.telegram.config import TelegramConfiguration
+from programy.utils.console.console import outputLog
 
 
 def start(telegram_bot, update):
@@ -49,6 +47,7 @@ class TelegramBotClient(PollingBotClient):
 
     def __init__(self, argument_parser=None):
         self._updater = None
+        self._telegram_token = None
         PollingBotClient.__init__(self, "telegram", argument_parser)
 
     def get_client_configuration(self):
@@ -127,12 +126,16 @@ class TelegramBotClient(PollingBotClient):
             YLogger.exception(self, "Failed to handle unknown", e)
 
     def display_connected_message(self):
-        print ("Telegram Bot connected and running...")
+        outputLog(self, "Telegram Bot connected and running...")
 
     def connect(self):
-        self.create_updater(self._telegram_token)
-        self.register_handlers()
-        return True
+        if self._telegram_token is not None:
+            self.create_updater(self._telegram_token)
+            self.register_handlers()
+            return True
+
+        outputLog(self, "No telegram token defined, unable to connect")
+        return False
 
     def poll_and_answer(self):
 
@@ -142,8 +145,8 @@ class TelegramBotClient(PollingBotClient):
             # Without this the system goes into 100% CPU utilisation
             self._updater.idle()
 
-        except KeyboardInterrupt as keye:
-            print("Telegram client stopping....")
+        except KeyboardInterrupt:
+            outputLog(self, "Telegram client stopping....")
             running = False
             self._updater.stop()
 
@@ -155,7 +158,7 @@ class TelegramBotClient(PollingBotClient):
 
 if __name__ == '__main__':
 
-    print("Initiating Telegram Client...")
+    outputLog(None, "Initiating Telegram Client...")
 
     TelegramBotClient.TELEGRAM_CLIENT = TelegramBotClient()
     TelegramBotClient.TELEGRAM_CLIENT.run()

@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import xml.etree.ElementTree as ET
 
 
-class OutOfBandProcessor(object):
+class OutOfBandProcessor:
 
     def __init__(self):
         self._xml = None
@@ -31,6 +31,7 @@ class OutOfBandProcessor(object):
     # Override this method in your own class to do something
     # useful with the command data
     def execute_oob_command(self, client_context):
+        del client_context
         return ""
 
     def process_out_of_bounds(self, client_context, oob: ET.Element):

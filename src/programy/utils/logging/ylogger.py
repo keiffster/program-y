@@ -18,7 +18,7 @@ import logging
 import traceback
 
 
-class YLoggerSnapshot(object):
+class YLoggerSnapshot:
 
     def __init__(self, criticals=0, fatals=0, errors=0, exceptions=0, warnings=0, infos=0, debugs=0):
         self._criticals = criticals
@@ -36,18 +36,17 @@ class YLoggerSnapshot(object):
 
     def to_json(self):
         return {
-                "criticals":    self._criticals,
-                "fatals":       self._fatals,
-                "errors":       self._errors,
-                "exceptions":   self._exceptions,
-                "warnings":     self._warnings,
-                "infos":        self._infos,
-                "debugs":       self._debugs
+            "criticals": self._criticals,
+            "fatals": self._fatals,
+            "errors": self._errors,
+            "exceptions": self._exceptions,
+            "warnings": self._warnings,
+            "infos": self._infos,
+            "debugs": self._debugs
         }
 
 
-class YLogger(object):
-
+class YLogger:
     CRITICALS = 0
     FATALS = 0
     ERRORS = 0
@@ -123,14 +122,14 @@ class YLogger(object):
     def exception_nostack(caller, message, exception, *args, **kwargs):
         YLogger.EXCEPTIONS += 1
         if logging.getLogger().isEnabledFor(logging.ERROR):
-            excep_msg = "%s [%s]"%(message, str(exception))
+            excep_msg = "%s [%s]" % (message, str(exception))
             logging.error(YLogger.format_message(caller, excep_msg), *args, **kwargs)
 
     @staticmethod
     def exception(caller, message, exception, *args, **kwargs):
         YLogger.EXCEPTIONS += 1
         if logging.getLogger().isEnabledFor(logging.ERROR):
-            excep_msg = "%s [%s]"%(message, str(exception))
+            excep_msg = "%s [%s]" % (message, str(exception))
             logging.error(YLogger.format_message(caller, excep_msg), *args, **kwargs)
             tb_lines = [line.rstrip('\n') for line in
                         traceback.format_exception(exception.__class__, exception, exception.__traceback__)]
@@ -154,5 +153,3 @@ class YLogger(object):
         YLogger.DEBUGS += 1
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug(YLogger.format_message(caller, message), *args, **kwargs)
-
-

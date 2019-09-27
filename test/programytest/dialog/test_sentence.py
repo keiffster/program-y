@@ -106,7 +106,7 @@ class SentenceTests(unittest.TestCase):
                      'subjectivity': 0.5,
                      'matched_context': {'max_search_depth': 100,
                                          'max_search_timeout': 60,
-                                         'total_search_start': datetime.datetime(2019, 8, 30, 7, 36, 54, 928185),
+                                         'total_search_start': datetime.datetime(2019, 8, 30, 7, 36, 54, 928185).strftime("%d/%m/%Y, %H:%M:%S"),
                                          'sentence': 'Hello',
                                          'response': "Hi There",
                                          'matched_nodes': [{'type': 'Topic',
@@ -127,8 +127,8 @@ class SentenceTests(unittest.TestCase):
         sentence = Sentence.from_json(self._client_context, json_data)
 
         self.assertIsNotNone(sentence)
-        self.assertEquals(sentence.words, ['One', 'Two', 'Three'])
-        self.assertEquals(sentence.response, "Hello")
-        self.assertEquals(sentence.positivity, 0.0)
-        self.assertEquals(sentence.subjectivity, 0.5)
+        self.assertEqual(sentence.words, ['One', 'Two', 'Three'])
+        self.assertEqual(sentence.response, "Hello")
+        self.assertEqual(sentence.positivity, 0.0)
+        self.assertEqual(sentence.subjectivity, 0.5)
         self.assertIsNotNone(sentence.matched_context)

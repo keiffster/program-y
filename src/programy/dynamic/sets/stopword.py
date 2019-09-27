@@ -21,7 +21,6 @@ from programy.nlp.stopwords import StopWords
 
 
 class IsStopWord(DynamicSet):
-
     NAME = "STOPWORD"
 
     def __init__(self, config):

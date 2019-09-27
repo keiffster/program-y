@@ -17,28 +17,34 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import os
 from programy.utils.logging.ylogger import YLogger
 from programy.utils.classes.loader import ClassLoader
-
 from programy.storage.stores.sql.store.sqlstore import SQLStore
 from programy.storage.entities.nodes import NodesStore
 from programy.storage.stores.sql.dao.node import PatternNode
 from programy.storage.stores.sql.dao.node import TemplateNode
 from programy.storage.entities.store import Store
+from programy.utils.console.console import outputLog
 
 
 class SQLNodesStore(SQLStore, NodesStore):
 
+    def __init__(self, storage_engine):
+        SQLStore.__init__(self, storage_engine)
+
     def _get_storage_class(self):
         pass
 
-    def load(self, node_factory):
+    def get_all_nodes(self):
+        raise NotImplementedError()
+
+    def load(self, collector, name=None):
         nodes = self.get_all_nodes()
         for node in nodes:
             try:
-                node_factory.add_node(node.name, ClassLoader.instantiate_class(node.node_class))
+                collector.add_node(node.name, ClassLoader.instantiate_class(node.node_class))
             except Exception as e:
-                YLogger.exception(self, "Failed pre-instantiating %s Node [%s]", e, node_factory.type, node.node_class)
+                YLogger.exception(self, "Failed pre-instantiating %s Node [%s]", e, collector.type, node.node_class)
 
-    def upload_from_file(self, filename, format=Store.TEXT_FORMAT, commit=True, verbose=False):
+    def upload_from_file(self, filename, fileformat=Store.TEXT_FORMAT, commit=True, verbose=False):
 
         count = 0
         success = 0
@@ -70,7 +76,7 @@ class SQLNodesStore(SQLStore, NodesStore):
                 node = self._get_entity(node_name, class_name)
                 self.storage_engine.session.add(node)
                 if verbose is True:
-                    print("[%s] = [%s]"%(node_name, class_name))
+                    outputLog(self, "[%s] = [%s]" % (node_name, class_name))
                 return True
         return False
 
@@ -79,6 +85,12 @@ class SQLNodesStore(SQLStore, NodesStore):
 
 
 class SQLPatternNodesStore(SQLNodesStore, NodesStore):
+
+    def __init__(self, storage_engine):
+        SQLNodesStore.__init__(self, storage_engine)
+
+    def _get_all(self):
+        return self._storage_engine.session.query(PatternNode)
 
     def empty(self):
         self._storage_engine.session.query(PatternNode).delete()
@@ -91,6 +103,12 @@ class SQLPatternNodesStore(SQLNodesStore, NodesStore):
 
 
 class SQLTemplateNodesStore(SQLNodesStore, NodesStore):
+
+    def __init__(self, storage_engine):
+        SQLNodesStore.__init__(self, storage_engine)
+
+    def _get_all(self):
+        return self._storage_engine.session.query(TemplateNode)
 
     def empty(self):
         self._storage_engine.session.query(TemplateNode).delete()

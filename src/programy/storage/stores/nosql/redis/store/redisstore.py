@@ -18,7 +18,6 @@ from programy.storage.entities.store import Store
 
 
 class RedisStore(Store):
-
     REDIS = "redis"
 
     def __init__(self, storage_engine):
@@ -50,4 +49,3 @@ class RedisStore(Store):
 
     def remove(self, s_key, clientid):
         self._storage_engine.redis.srem(s_key, clientid)
-

@@ -19,7 +19,6 @@ from programy.storage.entities.store import Store
 
 
 class MongoStore(Store):
-
     MONGO = "mongo"
 
     def __init__(self, storage_engine):
@@ -34,7 +33,7 @@ class MongoStore(Store):
 
     def drop(self):
         YLogger.info(self, "Dropping storage [%s]", self.store_name())
-        self.collection().drop ()
+        self.collection().drop()
 
     def commit(self):
         YLogger.info(self, "Commit collection [%s] not supported on Mongo", self.collection_name())
@@ -46,7 +45,7 @@ class MongoStore(Store):
         raise NotImplementedError()
 
     def collection(self):
-        return self._storage_engine._database[self.collection_name()]
+        return self._storage_engine.database[self.collection_name()]
 
     def empty(self):
         YLogger.info(self, "Emptying collection [%s]", self.collection_name())

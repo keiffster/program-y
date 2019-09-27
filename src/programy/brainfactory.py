@@ -14,20 +14,20 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
+from abc import ABC
+from abc import abstractmethod
 from programy.brain import Brain
 from programy.utils.classes.loader import ClassLoader
-from abc import abstractmethod, ABCMeta
+from programy.utils.logging.ylogger import YLogger
 
 
-class BrainSelector(object):
-    __metaclass__ = ABCMeta
+class BrainSelector(ABC):
 
     def __init__(self, configuration):
         self._configuration = configuration
 
     @abstractmethod
-    def select_brain(self, brains):
+    def select_brain(self):
         raise NotImplementedError()
 
 
@@ -60,7 +60,7 @@ class DefaultBrainSelector(BrainSelector):
         return None
 
 
-class BrainFactory(object):
+class BrainFactory:
 
     def __init__(self, bot):
         self._brains = {}
@@ -69,11 +69,11 @@ class BrainFactory(object):
         self.load_brain_selector(bot.configuration)
 
     def brainids(self):
-        return self._brains.keys()
+        return list(self._brains.keys())
 
-    def brain(self, id):
-        if id in self._brains:
-            return self._brains[id]
+    def brain(self, brainid):
+        if brainid in self._brains:
+            return self._brains[brainid]
         else:
             return None
 
@@ -87,8 +87,10 @@ class BrainFactory(object):
             self._brain_selector = DefaultBrainSelector(configuration, self._brains)
         else:
             try:
-                self._brain_selector = ClassLoader.instantiate_class(configuration.brain_selector)(configuration, self._brains)
-            except Exception as e:
+                self._brain_selector = ClassLoader.instantiate_class(configuration.brain_selector)(configuration,
+                                                                                                   self._brains)
+            except Exception as excep:
+                YLogger.exception_nostack(self, "Failed to load defined brain selector, loadiing default", excep)
                 self._brain_selector = DefaultBrainSelector(configuration, self._brains)
 
     def select_brain(self):
@@ -98,5 +100,5 @@ class BrainFactory(object):
         brains = []
         for brainid, brain in self._brains.items():
             brains.append({"id": brainid,
-                            "questions": brain.num_questions})
+                           "questions": brain.num_questions})
         return brains

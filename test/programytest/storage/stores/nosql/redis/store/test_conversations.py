@@ -52,14 +52,14 @@ class RedisConversationStoreTests(unittest.TestCase):
         store.load_conversation(client_context, conversation2)
         self.assertIsNotNone(conversation2)
 
-        self.assertEquals(conversation2.properties['ckey1'], "cvalue1")
-        self.assertEquals(conversation2.properties['ckey2'], "cvalue2")
+        self.assertEqual(conversation2.properties['ckey1'], "cvalue1")
+        self.assertEqual(conversation2.properties['ckey2'], "cvalue2")
 
-        self.assertEquals(conversation2.questions[0].sentence(0).response, "Hi")
-        self.assertEquals(conversation2.questions[0].sentence(0)._positivity, 0.5)
-        self.assertEquals(conversation2.questions[0].sentence(0)._subjectivity, 0.6)
+        self.assertEqual(conversation2.questions[0].sentence(0).response, "Hi")
+        self.assertEqual(conversation2.questions[0].sentence(0)._positivity, 0.5)
+        self.assertEqual(conversation2.questions[0].sentence(0)._subjectivity, 0.6)
 
-        self.assertEquals(conversation2.questions[0].properties['qkey1'], "qvalue1")
-        self.assertEquals(conversation2.questions[0].properties['qkey2'], "qvalue2")
+        self.assertEqual(conversation2.questions[0].properties['qkey1'], "qvalue1")
+        self.assertEqual(conversation2.questions[0].properties['qkey2'], "qvalue2")
 
         store.empty()

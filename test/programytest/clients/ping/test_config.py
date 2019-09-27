@@ -17,6 +17,8 @@ class PingResponderConfigurationTests(unittest.TestCase):
                 host: localhost
                 port: 6000
                 url: /api/v1.0/ping
+                ssl_cert_file: /cert/cert.file
+                ssl_key_file: /cert/keys.file
                 shutdown: /api/v1.0/shutdown
                 register: http://127.0.0.1:5000/api/healthcheck/v1.0/register
                 unregister: http://127.0.0.1:5000/api/healthcheck/v1.0/unregister
@@ -27,13 +29,15 @@ class PingResponderConfigurationTests(unittest.TestCase):
         responder_config = PingResponderConfig()
         responder_config.load_config_section(yaml, console_config, ".")
 
-        self.assertEquals(responder_config.name, "Responder")
-        self.assertEquals(responder_config.host, "localhost")
-        self.assertEquals(responder_config.port, 6000)
-        self.assertEquals(responder_config.url, "/api/v1.0/ping")
-        self.assertEquals(responder_config.shutdown, "/api/v1.0/shutdown")
-        self.assertEquals(responder_config.register, "http://127.0.0.1:5000/api/healthcheck/v1.0/register")
-        self.assertEquals(responder_config.unregister, "http://127.0.0.1:5000/api/healthcheck/v1.0/unregister")
+        self.assertEqual(responder_config.name, "Responder")
+        self.assertEqual(responder_config.host, "localhost")
+        self.assertEqual(responder_config.port, 6000)
+        self.assertEqual(responder_config.ssl_cert_file, "/cert/cert.file")
+        self.assertEqual(responder_config.ssl_key_file, "/cert/keys.file")
+        self.assertEqual(responder_config.url, "/api/v1.0/ping")
+        self.assertEqual(responder_config.shutdown, "/api/v1.0/shutdown")
+        self.assertEqual(responder_config.register, "http://127.0.0.1:5000/api/healthcheck/v1.0/register")
+        self.assertEqual(responder_config.unregister, "http://127.0.0.1:5000/api/healthcheck/v1.0/unregister")
 
     def test_without_data(self):
         yaml = YamlConfigurationFile()
@@ -48,10 +52,12 @@ class PingResponderConfigurationTests(unittest.TestCase):
         responder_config = PingResponderConfig()
         responder_config.load_config_section(yaml, console_config, ".")
 
-        self.assertEquals(responder_config.name, "Client Ping Responder")
+        self.assertEqual(responder_config.name, "Client Ping Responder")
         self.assertIsNone(responder_config.host)
         self.assertIsNone(responder_config.port)
         self.assertIsNone(responder_config.url)
+        self.assertIsNone(responder_config.ssl_cert_file)
+        self.assertIsNone(responder_config.ssl_key_file)
         self.assertIsNone(responder_config.shutdown)
         self.assertIsNone(responder_config.register)
         self.assertIsNone(responder_config.unregister)
@@ -68,10 +74,12 @@ class PingResponderConfigurationTests(unittest.TestCase):
         responder_config = PingResponderConfig()
         responder_config.load_config_section(yaml, console_config, ".")
 
-        self.assertEquals(responder_config.name, "Client Ping Responder")
+        self.assertEqual(responder_config.name, "Client Ping Responder")
         self.assertIsNone(responder_config.host)
         self.assertIsNone(responder_config.port)
         self.assertIsNone(responder_config.url)
+        self.assertIsNone(responder_config.ssl_cert_file)
+        self.assertIsNone(responder_config.ssl_key_file)
         self.assertIsNone(responder_config.shutdown)
         self.assertIsNone(responder_config.register)
         self.assertIsNone(responder_config.unregister)

@@ -15,9 +15,9 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.utils.logging.ylogger import YLogger
-
 from programy.mappings.base import DoubleStringPatternSplitCollection
 from programy.storage.factory import StorageFactory
+
 
 class GenderCollection(DoubleStringPatternSplitCollection):
 
@@ -44,4 +44,3 @@ class GenderCollection(DoubleStringPatternSplitCollection):
 
     def reload(self, storage_factory):
         self.load(storage_factory)
-

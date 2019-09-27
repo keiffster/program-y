@@ -16,11 +16,11 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 from programy.utils.logging.ylogger import YLogger
 from programy.storage.stores.nosql.mongo.store.mongostore import MongoStore
-from programy.storage.entities.rdf import RDFStore
+from programy.storage.entities.rdf import RDFReadOnlyStore
 from programy.storage.stores.nosql.mongo.dao.rdf import RDF
 
-class MongoRDFsStore(MongoStore, RDFStore):
 
+class MongoRDFsStore(RDFReadOnlyStore, MongoStore):
     RDFS = 'rdfs'
     SUBJECT = 'subject'
     PREDICATE = 'predicate'
@@ -39,25 +39,26 @@ class MongoRDFsStore(MongoStore, RDFStore):
         collection.remove({MongoRDFsStore.NAME: name})
 
     def add_rdf(self, name, subject, predicate, objct, replace_existing=True):
+        del replace_existing
         collection = self.collection()
         YLogger.info(self, "Adding RDF [%s] [%s] [%s] [%s]", name, subject, predicate, objct)
-        anrdf = RDF(name=name, subject=subject, predicate=predicate, object=objct)
+        anrdf = RDF(name=name, subject=subject, predicate=predicate, obj=objct)
         collection.insert_one(anrdf.to_document())
         return True
 
-    def load_all(self, rdf_collection):
+    def load_all(self, collector):
         YLogger.info(self, "Loading all RDFs")
         collection = self.collection()
         rdfs = collection.find({})
         for rdf in rdfs:
             YLogger.info(self, "Loading RDF [%s]", rdf[MongoRDFsStore.NAME])
-            rdf_collection.add_entity(rdf[MongoRDFsStore.SUBJECT], rdf[MongoRDFsStore.PREDICATE], rdf[MongoRDFsStore.OBJECT], rdf[MongoRDFsStore.NAME])
+            collector.add_entity(rdf[MongoRDFsStore.SUBJECT], rdf[MongoRDFsStore.PREDICATE], rdf[MongoRDFsStore.OBJECT],
+                                 rdf[MongoRDFsStore.NAME])
 
-    def load(self, rdf_collection, rdf_name):
+    def load(self, collector, name=None):
         collection = self.collection()
-        rdfs = collection.find({MongoRDFsStore.NAME: rdf_name})
+        rdfs = collection.find({MongoRDFsStore.NAME: name})
         for rdf in rdfs:
             YLogger.info(self, "Loading RDF [%s]", rdf[MongoRDFsStore.NAME])
-            rdf_collection.add_entity(rdf[MongoRDFsStore.SUBJECT], rdf[MongoRDFsStore.PREDICATE], rdf[MongoRDFsStore.OBJECT], rdf_name)
-
-
+            collector.add_entity(rdf[MongoRDFsStore.SUBJECT], rdf[MongoRDFsStore.PREDICATE], rdf[MongoRDFsStore.OBJECT],
+                                 name)

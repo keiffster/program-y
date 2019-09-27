@@ -14,15 +14,14 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.utils.logging.ylogger import YLogger
 from xml.etree import ElementTree
-
+from programy.utils.logging.ylogger import YLogger
 from programy.services.service import Service
 from programy.config.brain.service import BrainServiceConfiguration
 from programy.services.requestsapi import RequestsAPI
 
 
-class PandoraAPI(object):
+class PandoraAPI:
 
     def __init__(self, request_api=None):
         if request_api is None:

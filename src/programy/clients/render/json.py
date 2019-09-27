@@ -14,8 +14,6 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.utils.logging.ylogger import YLogger
-
 from programy.clients.render.renderer import RichMediaRenderer
 
 
@@ -85,15 +83,15 @@ class JSONRenderer(RichMediaRenderer):
             self._client.process_response(client_context, split)
         return split
 
-    def handle_list(self, client_context, list):
+    def handle_list(self, client_context, lst):
         if self._client:
-            self._client.process_response(client_context, list)
-        return list
+            self._client.process_response(client_context, lst)
+        return lst
 
-    def handle_ordered_list(self, client_context, list):
+    def handle_ordered_list(self, client_context, lst):
         if self._client:
-            self._client.process_response(client_context, list)
-        return list
+            self._client.process_response(client_context, lst)
+        return lst
 
     def handle_location(self, client_context, location):
         if self._client:

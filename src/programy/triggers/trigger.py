@@ -14,18 +14,16 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from abc import ABCMeta, abstractmethod
-
+from abc import ABC
+from abc import abstractmethod
 from programy.context import ClientContext
 
 
-class Trigger(object):
-    __metaclass__ = ABCMeta
+class Trigger(ABC):
 
     def __init__(self):
         pass
 
     @abstractmethod
-    def trigger(self, client_context: ClientContext = None, additional = None):
+    def trigger(self, client_context: ClientContext = None, additional=None):
         raise NotImplementedError()
-

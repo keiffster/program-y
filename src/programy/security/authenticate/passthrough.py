@@ -25,4 +25,5 @@ class BasicPassThroughAuthenticationService(Authenticator):
         Authenticator.__init__(self, configuration)
 
     def authenticate(self, client_context):
+        del client_context
         return True

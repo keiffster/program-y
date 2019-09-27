@@ -16,11 +16,12 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 from programy.utils.logging.ylogger import YLogger
 from programy.storage.stores.nosql.mongo.store.mongostore import MongoStore
-from programy.storage.entities.category import CategoryStore
+from programy.storage.entities.learnf import LearnfStore
 from programy.storage.stores.nosql.mongo.dao.category import Category
 from programy.storage.stores.nosql.mongo.store.categories import MongoCategoryStore
 
-class MongoLearnfStore(MongoStore, CategoryStore):
+
+class MongoLearnfStore(MongoStore, LearnfStore):
 
     def __init__(self, storage_engine):
         MongoStore.__init__(self, storage_engine)
@@ -30,12 +31,12 @@ class MongoLearnfStore(MongoStore, CategoryStore):
 
     def save_learnf(self, client_context, category):
         YLogger.debug(self, "Storing learnf category in Mongo [%s] [%s] [%s] [%s] [%s] [%s]",
-                            client_context.client.id,
-                            client_context.userid,
-                            category.pattern,
-                            category.topic,
-                            category.that,
-                            category.template)
+                      client_context.client.id,
+                      client_context.userid,
+                      category.pattern,
+                      category.topic,
+                      category.that,
+                      category.template)
 
         pattern = category.pattern
         topic = category.topic

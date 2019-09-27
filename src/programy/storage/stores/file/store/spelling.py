@@ -14,12 +14,12 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.utils.logging.ylogger import YLogger
 import os
 import os.path
-
+from programy.utils.logging.ylogger import YLogger
 from programy.storage.stores.file.store.filestore import FileStore
 from programy.storage.entities.spelling import SpellingStore
+
 
 class FileSpellingStore(FileStore, SpellingStore):
 
@@ -44,6 +44,8 @@ class FileSpellingStore(FileStore, SpellingStore):
         else:
             YLogger.error(self, "No spelling corpus found[%s]", corpus_filename)
 
+    def _get_storage_path(self):
+        return self.storage_engine.configuration.spelling_storage.file
+
     def get_storage(self):
         return self.storage_engine.configuration.spelling_storage
-

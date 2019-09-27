@@ -14,8 +14,10 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from programy.storage.stores.utils import DAOUtils
 
-class User(object):
+
+class User:
 
     def __init__(self, userid, client):
         self.id = None
@@ -23,7 +25,7 @@ class User(object):
         self.client = client
 
     def __repr__(self):
-       return "<User(id='%d', userid='%s', clientid='%s')>" % (self.id, self.userid, self.client)
+        return "<User(id='%d', userid='%s', clientid='%s')>" % (DAOUtils.valid_id(self.id), self.userid, self.client)
 
     def to_document(self):
         document = {"userid": self.userid,

@@ -14,15 +14,14 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from sqlalchemy import Column, Integer, String
-
+from sqlalchemy import Column
+from sqlalchemy import Integer
+from sqlalchemy import String
 from programy.storage.stores.sql.base import Base
 from programy.storage.stores.utils import DAOUtils
 
 
-class Node(object):
-
+class Node():
     id = Column(Integer, primary_key=True)
     name = Column(String(48))
     node_class = Column(String(512))
@@ -32,11 +31,13 @@ class PatternNode(Base, Node):
     __tablename__ = 'pattern_nodes'
 
     def __repr__(self):
-        return "<Pattern Node(id='%s', name='%s', node_class='%s')>" % (DAOUtils.valid_id(self.id), self.name, self.node_class)
+        return "<Pattern Node(id='%s', name='%s', node_class='%s')>" % (
+            DAOUtils.valid_id(self.id), self.name, self.node_class)
 
 
 class TemplateNode(Base, Node):
     __tablename__ = 'template_nodes'
 
     def __repr__(self):
-        return "<Template Node(id='%s', name='%s', node_class='%s')>" % (DAOUtils.valid_id(self.id), self.name, self.node_class)
+        return "<Template Node(id='%s', name='%s', node_class='%s')>" % (
+            DAOUtils.valid_id(self.id), self.name, self.node_class)

@@ -18,7 +18,7 @@ import nltk
 from nltk.corpus import stopwords
 
 
-class StopWords(object):
+class StopWords:
 
     # To use this you need to
     # import nltk

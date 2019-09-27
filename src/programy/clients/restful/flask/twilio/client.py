@@ -14,19 +14,17 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-# https://www.twilio.com/docs/quickstart/python/sms#sign-up-for-twilio-and-get-a-phone-number
-
-from programy.utils.logging.ylogger import YLogger
-
 from flask import Flask, request
 from twilio.rest import Client
 from twilio.twiml.messaging_response import MessagingResponse
-
+from programy.utils.logging.ylogger import YLogger
 from programy.clients.restful.flask.client import FlaskRestBotClient
 from programy.clients.restful.flask.twilio.config import TwilioConfiguration
+from programy.utils.console.console import outputLog
+
 
 TWILIO_CLIENT = None
+
 
 class TwilioBotClient(FlaskRestBotClient):
     
@@ -39,7 +37,7 @@ class TwilioBotClient(FlaskRestBotClient):
 
         self._twilio_client = self.create_twilio_client()
 
-        print("Twilio Client loaded")
+        outputLog(self, "Twilio Client loaded")
 
     @property
     def from_number(self):
@@ -56,7 +54,7 @@ class TwilioBotClient(FlaskRestBotClient):
     def create_twilio_client(self):
         return Client(self._account_sid, self._auth_token)
 
-    def create_response(self, client_number, answer):
+    def create_twilio_response(self, client_number, answer):
         response = MessagingResponse()
         response.message(body=answer, to=client_number)
         response_str = str(response)
@@ -78,7 +76,7 @@ class TwilioBotClient(FlaskRestBotClient):
 
         answer = self.ask_question(client_number, question)
 
-        response = self.create_response(client_number, answer)
+        response = self.create_twilio_response(client_number, answer)
 
         YLogger.debug(self, "Twillio sending [%s] to [%s]", answer, client_number)
 
@@ -87,18 +85,19 @@ class TwilioBotClient(FlaskRestBotClient):
 
 if __name__ == "__main__":
 
-    print("Initiating Twilio Client...")
+    outputLog(None, "Initiating Twilio Client...")
 
     TWILIO_CLIENT = TwilioBotClient()
 
     APP = Flask(__name__)
 
-    print("Exposing endpoint: "+TWILIO_CLIENT.configuration.client_configuration.api)
+    outputLog(None, "Exposing endpoint: "+TWILIO_CLIENT.configuration.client_configuration.api)
     @APP.route(TWILIO_CLIENT.configuration.client_configuration.api, methods=['POST'])
     def receive_message():
         try:
             return TWILIO_CLIENT.receive_message(request)
-        except Exception as e:
-            YLogger.exception(None, "Twilio Error", e)
+
+        except Exception as excep:
+            YLogger.exception(None, "Twilio Error", excep)
 
     TWILIO_CLIENT.run(APP)

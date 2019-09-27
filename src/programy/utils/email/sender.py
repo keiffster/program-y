@@ -1,19 +1,16 @@
-from programy.utils.logging.ylogger import YLogger
-
 import smtplib
 import mimetypes
-
 from email import encoders
 from email.mime.audio import MIMEAudio
 from email.mime.base import MIMEBase
 from email.mime.image import MIMEImage
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-
+from programy.utils.logging.ylogger import YLogger
 from programy.utils.email.config import EmailConfiguration
 
 
-class EmailSender(object):
+class EmailSender:
 
     def __init__(self, config: EmailConfiguration):
         self._config = config
@@ -66,7 +63,7 @@ class EmailSender(object):
     def _smtp_server(self, host, port):
         return smtplib.SMTP(host, port)
 
-    def _send_message(self, host, port, username, password, msg, attachments=[]):
+    def _send_message(self, host, port, username, password, msg, attachments=None):
 
         if attachments:
             self._add_mine_attachments(msg, attachments)
@@ -83,7 +80,7 @@ class EmailSender(object):
         server.quit()
         return result
 
-    def send(self, to, subject, message, attachments=[]):
+    def send(self, to, subject, message, attachments=None):
 
         try:
             if attachments:
@@ -95,16 +92,13 @@ class EmailSender(object):
                 msg = MIMEText(message)
 
             msg['Subject'] = subject
-            msg['From'] = self._config._from_addr
+            msg['From'] = self._config.from_addr
             msg['To'] = to
 
-            result = self._send_message(self._config.host, self._config.port, self._config.username, self._config.password, msg, attachments)
+            result = self._send_message(self._config.host, self._config.port, self._config.username,
+                                        self._config.password, msg, attachments)
             for email, error in result.items():
-                YLogger.error(None, "Email send failed [%s] = [%d] - [%s]"%(email, error[0], error[1]))
+                YLogger.error(None, "Email send failed [%s] = [%d] - [%s]" % (email, error[0], error[1]))
 
         except Exception as e:
             YLogger.exception(self, "Email sender failed", e)
-
-
-
-

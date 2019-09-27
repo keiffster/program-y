@@ -4,7 +4,7 @@ from programy.config.file.file import BaseConfigurationFile
 from programy.utils.substitutions.substitues import Substitutions
 
 
-class TestBaseConfigurationFile(BaseConfigurationFile):
+class MockBaseConfigurationFile(BaseConfigurationFile):
 
     def load_from_text(self, text, client_configuration, bot_root):
         return None
@@ -24,11 +24,26 @@ class TestBaseConfigurationFile(BaseConfigurationFile):
     def get_option(self, section, option_name, missing_value=None, subs: Substitutions = None):
         return None
 
+    def get_bool_option(self, section, option_name, missing_value=False, subs: Substitutions = None):
+        return None
+
+    def get_int_option(self, section, option_name, missing_value=0, subs: Substitutions = None):
+        return None
+
+    def get_keys(self, section):
+        return None
+
+    def get_multi_option(self, section, option_name, missing_value=None, subs: Substitutions = None):
+        return None
+
+    def get_multi_file_option(self, section, option_name, bot_root, missing_value=None, subs: Substitutions = None):
+        return None
+
 
 class BaseConfigurationFileTests(unittest.TestCase):
 
     def test_convert_to_bool(self):
-        config = TestBaseConfigurationFile()
+        config = MockBaseConfigurationFile()
 
         self.assertTrue(config.convert_to_bool("true"))
         self.assertTrue(config.convert_to_bool("True"))
@@ -45,7 +60,7 @@ class BaseConfigurationFileTests(unittest.TestCase):
             config.convert_to_bool("XXX")
 
     def test_convert_to_int(self):
-        config = TestBaseConfigurationFile()
+        config = MockBaseConfigurationFile()
 
         self.assertEqual(0, config.convert_to_int('0'))
         self.assertEqual(10, config.convert_to_int('10'))

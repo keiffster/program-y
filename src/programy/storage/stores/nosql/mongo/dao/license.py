@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.storage.stores.utils import DAOUtils
 
 
-class LicenseKey(object):
+class LicenseKey():
 
     def __init__(self, name, key):
         self.id = None
@@ -26,7 +26,7 @@ class LicenseKey(object):
 
     def __repr__(self):
         return "<LicenseKey(id='%s', name='%s', key='%s')>" % (
-        DAOUtils.valid_id(self.id), self.name, self.key)
+            DAOUtils.valid_id(self.id), self.name, self.key)
 
     def to_document(self):
         document = {"name": self.name,

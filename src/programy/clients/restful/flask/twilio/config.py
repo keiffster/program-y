@@ -15,7 +15,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.clients.restful.config import RestConfiguration
-from programy.utils.substitutions.substitues import Substitutions
 
 
 class TwilioConfiguration(RestConfiguration):
@@ -25,6 +24,3 @@ class TwilioConfiguration(RestConfiguration):
 
     def check_for_license_keys(self, license_keys):
         RestConfiguration.check_for_license_keys(self, license_keys)
-
-    def to_yaml(self, data, defaults=True):
-        super(TwilioConfiguration, self).to_yaml(data, defaults)

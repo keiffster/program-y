@@ -14,9 +14,9 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.utils.logging.ylogger import YLogger
 import sleekxmpp
+from programy.utils.logging.ylogger import YLogger
+
 
 class XmppClient(sleekxmpp.ClientXMPP):
 
@@ -50,7 +50,7 @@ class XmppClient(sleekxmpp.ClientXMPP):
             self.register_plugin('xep_0199')
 
     def start(self, event):
-        YLogger.debug(self, "XMPPClient starting....")
+        YLogger.debug(self, "XMPPClient starting....[%s]", str(event))
         self.send_presence()
         self.get_roster()
 

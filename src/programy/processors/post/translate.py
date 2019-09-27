@@ -14,7 +14,6 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.utils.logging.ylogger import YLogger
 from programy.processors.processing import PostProcessor
 
@@ -31,10 +30,11 @@ class TranslatorPostProcessor(PostProcessor):
         try:
             if translator is not None:
                 trans_string = translator.translate(word_string,
-                                            from_lang=translator_config.from_lang,
-                                            to_lang=translator_config.to_lang)
+                                                    from_lang=translator_config.from_lang,
+                                                    to_lang=translator_config.to_lang)
 
-                YLogger.debug(context, "Post translated [%s](%s) to [%s](%s)", word_string, translator_config.from_lang, trans_string, translator_config.to_lang)
+                YLogger.debug(context, "Post translated [%s](%s) to [%s](%s)", word_string, translator_config.from_lang,
+                              trans_string, translator_config.to_lang)
                 return trans_string
 
         except Exception as e:

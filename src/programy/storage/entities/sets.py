@@ -14,29 +14,26 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.storage.entities.store import Store
 
-class SetsStore(Store):
 
-    def add_to_set(self, name, value):
-        raise NotImplementedError("add_to_set missing from Sets Store")
+class SetsReadOnlyStore(Store):
 
-    def remove_from_set(self, name, value):
-        raise NotImplementedError("remove_from_set missing from Sets Store")
+    def __init__(self):
+        Store.__init__(self)
 
-    def load_all(self, set_collection):
+    def load_all(self, collector):
         raise NotImplementedError("load_all missing from Sets Store")
 
-    def load(self, set_collection):
+    def load(self, collector, name=None):
         raise NotImplementedError("load missing from Sets Store")
 
-    def split_into_fields(self, text):
-        return [text]
+    def split_into_fields(self, line):
+        return [line]
 
-    def process_line(self, name, text):
-        if text:
-            return self.add_to_set(name, text[0])
+    def process_line(self, name, fields, verbose=False):
+        if fields:
+            return self.add_to_set(name, fields[0])
         return False
 
     def add_set_values(self, the_set, value):
@@ -46,3 +43,14 @@ class SetsStore(Store):
             the_set[key] = []
         the_set[key].append(splits)
 
+
+class SetsReadWriteStore(SetsReadOnlyStore):
+
+    def __init__(self):
+        SetsReadOnlyStore.__init__(self)
+
+    def add_to_set(self, name, value, replace_existing=False):
+        raise NotImplementedError("add_to_set missing from Sets Store")
+
+    def remove_from_set(self, name, value):
+        raise NotImplementedError("remove_from_set missing from Sets Store")

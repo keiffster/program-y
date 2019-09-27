@@ -15,11 +15,17 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.storage.stores.sql.store.sqlstore import SQLStore
-from programy.storage.entities.maps import MapsStore
+from programy.storage.entities.maps import MapsReadOnlyStore
 from programy.storage.stores.sql.dao.map import Map
 
 
-class SQLMapsStore(SQLStore, MapsStore):
+class SQLMapsStore(SQLStore, MapsReadOnlyStore):
+
+    def __init__(self, storage_engine):
+        SQLStore.__init__(self, storage_engine)
+
+    def _get_all(self):
+        return self._storage_engine.session.query(Map)
 
     def empty(self):
         self._storage_engine.session.query(Map).delete()
@@ -31,23 +37,24 @@ class SQLMapsStore(SQLStore, MapsStore):
         return Map(name=name, key=key, value=value)
 
     def add_to_map(self, name, key, value, overwrite_existing=False):
+        del overwrite_existing
         amap = Map(name=name, key=key, value=value)
         self._storage_engine.session.add(amap)
         return True
 
     def remove_from_map(self, name, key):
-        self._storage_engine.session.query(Map).filter(Map.name==name, Map.key==key).delete()
+        self._storage_engine.session.query(Map).filter(Map.name == name, Map.key == key).delete()
 
-    def load_all(self, map_collection):
-        map_collection.empty()
+    def load_all(self, collector):
+        collector.empty()
         names = self._storage_engine.session.query(Map.name).distinct()
         for name in names:
-            self.load(map_collection, name[0])
+            self.load(collector, name[0])
 
-    def load(self, map_collection, map_name):
-        map_collection.remove(map_name)
-        values = self._storage_engine.session.query(Map).filter(Map.name==map_name)
+    def load(self, collector, name=None):
+        collector.remove(name)
+        values = self._storage_engine.session.query(Map).filter(Map.name == name)
         the_map = {}
         for item in values:
             the_map[item.key] = item.value
-        map_collection.add_map(map_name, the_map, 'sql')
+        collector.add_map(name, the_map, 'sql')

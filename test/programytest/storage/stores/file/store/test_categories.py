@@ -30,7 +30,7 @@ class FileCategoryStoreTests(CategoryStoreAsserts):
         config = FileStorageConfiguration()
         file = os.path.dirname(__file__) + os.sep + "data" + os.sep + "categories" + os.sep + "kinghorn.aiml"
         self.assertTrue(os.path.exists(file))
-        config._categories_storage = FileStoreConfiguration(file=file, format="xml", encoding="utf-8", delete_on_start=False)
+        config._categories_storage = FileStoreConfiguration(file=file, fileformat="xml", encoding="utf-8", delete_on_start=False)
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileCategoryStore(engine)
@@ -45,7 +45,7 @@ class FileCategoryStoreTests(CategoryStoreAsserts):
         config = FileStorageConfiguration()
         dirs = os.path.dirname(__file__) + os.sep + "data" + os.sep + "categories"
         self.assertTrue(os.path.exists(dirs))
-        config._categories_storage = FileStoreConfiguration(dirs=[dirs], extension="aiml", subdirs=False, format="xml", encoding="utf-8", delete_on_start=False)
+        config._categories_storage = FileStoreConfiguration(dirs=[dirs], extension="aiml", subdirs=False, fileformat="xml", encoding="utf-8", delete_on_start=False)
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileCategoryStore(engine)
@@ -60,7 +60,7 @@ class FileCategoryStoreTests(CategoryStoreAsserts):
         config = FileStorageConfiguration()
         dirs = os.path.dirname(__file__) + os.sep + "data" + os.sep + "categories"
         self.assertTrue(os.path.exists(dirs))
-        config._categories_storage = FileStoreConfiguration(dirs=[dirs], extension="aiml", subdirs=True, format="xml", encoding="utf-8", delete_on_start=False)
+        config._categories_storage = FileStoreConfiguration(dirs=[dirs], extension="aiml", subdirs=True, fileformat="xml", encoding="utf-8", delete_on_start=False)
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileCategoryStore(engine)

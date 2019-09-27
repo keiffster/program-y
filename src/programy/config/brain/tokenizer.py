@@ -39,9 +39,12 @@ class BrainTokenizerConfiguration(BaseConfigurationData):
         BaseConfigurationData.check_for_license_keys(self, license_keys)
 
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
+        del bot_root
         tokenizer = configuration_file.get_section(self._section_name, configuration)
         if tokenizer is not None:
-            self._classname = configuration_file.get_option(tokenizer, "classname", missing_value="programy.parser.tokenizer.Tokenizer", subs=subs)
+            self._classname = configuration_file.get_option(tokenizer, "classname",
+                                                            missing_value="programy.parser.tokenizer.Tokenizer",
+                                                            subs=subs)
             self._split_chars = configuration_file.get_option(tokenizer, "split_chars", missing_value=" ", subs=subs)
         else:
             YLogger.warning(self, "'tokenizer' section missing from bot config, using defaults")

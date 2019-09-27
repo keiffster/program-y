@@ -21,7 +21,7 @@ class FileNormalStoreTests(NormalsStoreAsserts):
 
     def test_load_from_file(self):
         config = FileStorageConfiguration()
-        config._normal_storage = FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "data" + os.sep + "lookups" + os.sep + "text" + os.sep + "normal.txt", format="text", encoding="utf-8", delete_on_start=False)
+        config._normal_storage = FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "data" + os.sep + "lookups" + os.sep + "text" + os.sep + "normal.txt", fileformat="text", encoding="utf-8", delete_on_start=False)
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileNormalStore(engine)

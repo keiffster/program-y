@@ -14,18 +14,15 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.utils.logging.ylogger import YLogger
-
 import os
 import os.path
 import shutil
-
+from programy.utils.logging.ylogger import YLogger
 from programy.storage.stores.file.store.filestore import FileStore
 from programy.storage.entities.triggers import TriggersStore
 
 
 class FileTriggersStore(FileStore, TriggersStore):
-
     SPLIT_CHAR = ':'
     COMMENT = '#'
 
@@ -35,12 +32,15 @@ class FileTriggersStore(FileStore, TriggersStore):
     def _get_storage_path(self):
         return self._storage_engine.configuration.triggers_storage.dirs[0]
 
+    def get_storage(self):
+        return self.storage_engine.configuration.triggers_storage
+
     def empty(self):
         vars_path = self._get_storage_path()
         if os.path.exists(vars_path) is True:
             shutil.rmtree(vars_path)
 
-    def _load_file_contents(self, trigger_collection, filename):
+    def _load_file_contents(self, collection, filename):
         if os.path.exists(filename):
             try:
                 with open(filename, "r") as vars_file:
@@ -52,10 +52,7 @@ class FileTriggersStore(FileStore, TriggersStore):
                                 if len(splits) > 1:
                                     event = splits[0].strip()
                                     classname = splits[1].strip()
-                                    trigger_collection.add_trigger(event, classname)
+                                    collection.add_trigger(event, classname)
 
             except Exception as e:
                 YLogger.exception_nostack(None, "Failed to load triggers [%s]", e, filename)
-
-    def get_storage(self):
-        return self.storage_engine.configuration.triggers_storage

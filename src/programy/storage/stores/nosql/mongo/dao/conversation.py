@@ -16,7 +16,8 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 from programy.dialog.conversation import Conversation as Convo
 
-class Conversation(object):
+
+class Conversation():
 
     def __init__(self, client_context, conversation):
         self.id = None
@@ -35,8 +36,8 @@ class Conversation(object):
         self.conversation = conversation
 
     def __repr__(self):
-        return "<Conversation(id='%s', client='%s', user='%s', bot='%s', brain='%s', depth='%d', question='%s', response='%s')" % \
-               (self.id, self.clientid, self.userid, self.botid, self.brainid, self.depth)
+        return "<Conversation(id='%s', client='%s', user='%s', bot='%s', brain='%s')" % \
+               (self.id, self.clientid, self.userid, self.botid, self.brainid)
 
     def to_document(self):
         document = {"clientid": self.clientid,

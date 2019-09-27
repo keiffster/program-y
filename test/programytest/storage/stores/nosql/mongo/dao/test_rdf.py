@@ -6,7 +6,7 @@ from programy.storage.stores.nosql.mongo.dao.rdf import RDF
 class RDFTests(unittest.TestCase):
 
     def test_init_no_id(self):
-        rdf = RDF(name="TEST", subject="subj", predicate="pred", object="obj")
+        rdf = RDF(name="TEST", subject="subj", predicate="pred", obj="obj")
 
         self.assertIsNotNone(rdf)
         self.assertIsNone(rdf.id)
@@ -17,7 +17,7 @@ class RDFTests(unittest.TestCase):
         self.assertEqual({'name': 'TEST', 'object': 'obj', 'predicate': 'pred', 'subject': 'subj'}, rdf.to_document())
 
     def test_init_with_id(self):
-        rdf = RDF(name="TEST", subject="subj", predicate="pred", object="obj")
+        rdf = RDF(name="TEST", subject="subj", predicate="pred", obj="obj")
         rdf.id = '666'
 
         self.assertIsNotNone(rdf)

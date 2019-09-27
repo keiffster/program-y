@@ -14,13 +14,12 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.utils.logging.ylogger import YLogger
-
 from programy.parser.template.nodes.base import TemplateNode
 from programy.services.service import ServiceFactory
 from programy.parser.exceptions import ParserException
 from programy.utils.text.text import TextUtils
+
 
 class TemplateSRAIXNode(TemplateNode):
 
@@ -46,7 +45,8 @@ class TemplateSRAIXNode(TemplateNode):
             YLogger.debug(client_context, "SRAIX service [%s] return [%s]", self._service, response)
             return response
         else:
-            YLogger.error(client_context, "Sorry SRAIX does not currently have an implementation for [%s]", self._service)
+            YLogger.error(client_context, "Sorry SRAIX does not currently have an implementation for [%s]",
+                          self._service)
             return ""
 
     def to_string(self):

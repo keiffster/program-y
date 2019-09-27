@@ -29,6 +29,7 @@ class ClientIdAuthenticationService(Authenticator):
         ]
 
     def user_auth_service(self, client_context):
+        del client_context
         return False
 
     # Its at this point that we would call a user auth service, and if that passes

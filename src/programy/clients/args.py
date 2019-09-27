@@ -19,9 +19,11 @@ import logging
 import argparse
 
 
-class ClientArguments(object):
+class ClientArguments():
 
     def __init__(self, client, parser=None):
+        del client
+        del parser
         self._bot_root = "."
         self._logging = logging.DEBUG
         self._config_name = "config.yaml"

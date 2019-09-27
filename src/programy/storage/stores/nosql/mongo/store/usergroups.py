@@ -14,9 +14,8 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.utils.logging.ylogger import YLogger
 import yaml
-
+from programy.utils.logging.ylogger import YLogger
 from programy.storage.entities.store import Store
 from programy.storage.stores.nosql.mongo.store.mongostore import MongoStore
 from programy.storage.entities.usergroups import UserGroupsStore
@@ -24,7 +23,6 @@ from programy.storage.stores.nosql.mongo.dao.usergroups import UserGroups
 
 
 class MongoUserGroupsStore(MongoStore, UserGroupsStore):
-
     USERGROUPS = 'usergroups'
 
     def __init__(self, storage_engine):
@@ -33,7 +31,7 @@ class MongoUserGroupsStore(MongoStore, UserGroupsStore):
     def collection_name(self):
         return MongoUserGroupsStore.USERGROUPS
 
-    def upload_from_file(self, filename, format=Store.TEXT_FORMAT, commit=True, verbose=False):
+    def upload_from_file(self, filename, fileformat=Store.TEXT_FORMAT, commit=True, verbose=False):
 
         YLogger.info(self, "Uploading usergroups from [%s] to Mongo", filename)
 

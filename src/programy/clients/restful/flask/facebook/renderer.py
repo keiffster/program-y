@@ -179,25 +179,25 @@ class FacebookRenderer(RichMediaRenderer):
 
     def create_card_payload(self, card):
         payload = {
-                    "title": card['title'],
-                    "image_url": card['image'],
-                    "subtitle": card['subtitle'],
-                    "buttons": []
-                }
+            "title": card['title'],
+            "image_url": card['image'],
+            "subtitle": card['subtitle'],
+            "buttons": []
+        }
 
         for button in card['buttons']:
             if button['url'] is not None:
                 payload['buttons'].append({
-                                "type": "web_url",
-                                "title": button['text'],
-                                "url": button['url']
-                            })
+                    "type": "web_url",
+                    "title": button['text'],
+                    "url": button['url']
+                })
             else:
                 payload['buttons'].append({
-                                "type": "web_url",
-                                "title": button['text'],
-                                "postback": button['postback']
-                            })
+                    "type": "web_url",
+                    "title": button['text'],
+                    "postback": button['postback']
+                })
 
         return payload
 
@@ -205,7 +205,7 @@ class FacebookRenderer(RichMediaRenderer):
         YLogger.debug(client_context, "Handling card...")
 
         if len(card['buttons']) > 3:
-            YLogger.warning(client_context,"More buttons than facebook allows for a card")
+            YLogger.warning(client_context, "More buttons than facebook allows for a card")
 
         payload = {
             'recipient': {
@@ -290,7 +290,7 @@ class FacebookRenderer(RichMediaRenderer):
             },
             "sender_action": "typing_on"
         }
-        result = self.send_payload(payload)
+        self.send_payload(payload)
         time.sleep(int(delay['seconds']))
         payload = {
             "recipient": {
@@ -308,7 +308,7 @@ class FacebookRenderer(RichMediaRenderer):
             return self.create_card_payload(item)
         return None
 
-    def handle_list(self, client_context, list):
+    def handle_list(self, client_context, lst):
         YLogger.debug(client_context, "Handling list...")
         payload = {
             "recipient": {
@@ -327,14 +327,14 @@ class FacebookRenderer(RichMediaRenderer):
             }
         }
 
-        for item in list['items']:
+        for item in lst.get('items', []):
             element = self.convert_to_element(item)
             if element is not None:
                 payload["message"]["attachment"]["payload"]["elements"].append(element)
 
         return self.send_payload(payload)
 
-    def handle_ordered_list(self, client_context, list):
+    def handle_ordered_list(self, client_context, lst):
         YLogger.debug(client_context, "Handling ordered...")
 
         payload = {
@@ -354,7 +354,7 @@ class FacebookRenderer(RichMediaRenderer):
             }
         }
 
-        for item in list['items']:
+        for item in lst.get('items', []):
             element = self.convert_to_element(item)
             if element is not None:
                 payload["message"]["attachment"]["payload"]["elements"].append(element)

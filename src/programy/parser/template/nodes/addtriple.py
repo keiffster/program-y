@@ -14,9 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.utils.logging.ylogger import YLogger
-
 from programy.parser.template.nodes.triple import TemplateTripleNode
 from programy.parser.exceptions import ParserException
 
@@ -52,10 +50,10 @@ class TemplateAddTripleNode(TemplateTripleNode):
         super(TemplateAddTripleNode, self).parse_expression(graph, expression)
 
         if self._subj is None:
-            raise ParserException("<%s> node missing subject attribue/element"%self.node_name)
+            raise ParserException("<%s> node missing subject attribue/element" % self.node_name)
 
-        if  self._pred is None:
-            raise ParserException("<%s> node missing predicate attribue/element"%self.node_name)
+        if self._pred is None:
+            raise ParserException("<%s> node missing predicate attribue/element" % self.node_name)
 
         if self._obj is None:
-            raise ParserException("<%s> node missing object attribue/element"%self.node_name)
+            raise ParserException("<%s> node missing object attribue/element" % self.node_name)

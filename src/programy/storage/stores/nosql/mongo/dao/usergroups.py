@@ -14,18 +14,17 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.storage.stores.utils import DAOUtils
 
 
-class UserGroups(object):
+class UserGroups:
 
     def __init__(self, usergroups):
         self.id = None
         self.usergroups = usergroups
 
     def __repr__(self):
-        return "<UserGroups(id='%s', usergroups='%s')>"%(DAOUtils.valid_id(self.id), self.usergroups)
+        return "<UserGroups(id='%s', usergroups='%s')>" % (DAOUtils.valid_id(self.id), self.usergroups)
 
     def to_document(self):
         document = {"usergroups": self.usergroups}

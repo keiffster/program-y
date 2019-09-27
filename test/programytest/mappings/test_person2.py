@@ -42,7 +42,7 @@ class Person2Tests(unittest.TestCase):
         storage_factory = StorageFactory()
 
         file_store_config = FileStorageConfiguration()
-        file_store_config._person2_storage = FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "test_files" + os.sep + "person2.txt", format="text", extension="txt", encoding="utf-8", delete_on_start=False)
+        file_store_config._person2_storage = FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "test_files" + os.sep + "person2.txt", fileformat="text", extension="txt", encoding="utf-8", delete_on_start=False)
 
         storage_engine = FileStorageEngine(file_store_config)
 
@@ -61,7 +61,7 @@ class Person2Tests(unittest.TestCase):
         storage_factory = StorageFactory()
 
         file_store_config = FileStorageConfiguration()
-        file_store_config._person2_storage = FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "test_files" + os.sep + "person2.txt", format="text", extension="txt", encoding="utf-8", delete_on_start=False)
+        file_store_config._person2_storage = FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "test_files" + os.sep + "person2.txt", fileformat="text", extension="txt", encoding="utf-8", delete_on_start=False)
 
         storage_engine = FileStorageEngine(file_store_config)
 

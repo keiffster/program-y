@@ -16,7 +16,8 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 from programy.storage.stores.utils import DAOUtils
 
-class Link(object):
+
+class Link():
 
     def __init__(self, primary_user, provided_key, generated_key, expires=None, expired=False, retry_count=0):
         self.id = None

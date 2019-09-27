@@ -23,8 +23,9 @@ from programy.clients.client import BotClient
 
 class PollingBotClient(BotClient):
 
-    def __init__(self, id, argument_parser=None):
-        BotClient.__init__(self, id, argument_parser=argument_parser)
+    def __init__(self, botid, argument_parser=None):
+        BotClient.__init__(self, botid, argument_parser=argument_parser)
+        self._running = False
 
     def connect(self):
         return True
@@ -33,12 +34,17 @@ class PollingBotClient(BotClient):
         return True
 
     def poll_and_answer(self):
-        raise NotImplementedError("You must override this and implement the logic poll for messages and send answers back")
+        raise NotImplementedError(
+            "You must override this and implement the logic poll for messages and send answers back")
 
     def sleep(self, period):
         time.sleep(period)
 
-    def run(self):
+    def display_connected_message(self):
+        raise NotImplementedError()
+
+    def run(self, app=None):
+        del app
         try:
             self.startup()
 

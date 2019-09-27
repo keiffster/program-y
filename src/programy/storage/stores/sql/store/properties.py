@@ -14,7 +14,6 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 import os
 import os.path
 import re
@@ -29,7 +28,6 @@ from programy.storage.entities.store import Store
 
 
 class SQLBasePropertyStore(SQLStore, PropertyStore):
-
     SPLIT_CHAR = ':'
     COMMENT = '#'
 
@@ -42,9 +40,12 @@ class SQLBasePropertyStore(SQLStore, PropertyStore):
     def empty_properties(self):
         self._get_all().delete()
 
+    def _get_entity(self, name, value):
+        raise NotImplementedError()
+
     def add_property(self, name, value):
-        property = self._get_entity(name=name, value=value)
-        self._storage_engine.session.add(property)
+        prop = self._get_entity(name=name, value=value)
+        self._storage_engine.session.add(prop)
         return True
 
     def add_properties(self, properties):
@@ -57,26 +58,28 @@ class SQLBasePropertyStore(SQLStore, PropertyStore):
     def get_properties(self):
         db_properties = self._get_all()
         properties = {}
-        for property in db_properties:
-            properties[property.name] = property.value
+        for prop in db_properties:
+            properties[prop.name] = prop.value
         return properties
 
-    def load(self, property_collection):
-        self.load_all(property_collection)
+    def load(self, collector, name=None):
+        del name
+        self.load_all(collector)
 
-    def load_all(self, property_collection):
-        property_collection.empty()
+    def load_all(self, collector):
+        collector.empty()
         db_propertys = self._get_all()
         for db_property in db_propertys:
-            self.add_to_collection(property_collection, db_property.name,  db_property.value)
+            self.add_to_collection(collector, db_property.name, db_property.value)
 
     def add_to_collection(self, collection, name, value):
         raise NotImplementedError()
 
     def split_into_fields(self, line):
-        return DoubleStringPatternSplitCollection.split_line_by_pattern(line, DoubleStringPatternSplitCollection.RE_OF_SPLIT_PATTERN)
+        return DoubleStringPatternSplitCollection.\
+            split_line_by_pattern(line, DoubleStringPatternSplitCollection.RE_OF_SPLIT_PATTERN)
 
-    def upload_from_file(self, filename, format=Store.TEXT_FORMAT, commit=True, verbose=False):
+    def upload_from_file(self, filename, fileformat=Store.TEXT_FORMAT, commit=True, verbose=False):
 
         count = 0
         success = 0
@@ -89,7 +92,7 @@ class SQLBasePropertyStore(SQLStore, PropertyStore):
                         if line:
                             if line.startswith(SQLBasePropertyStore.COMMENT) is False:
                                 splits = line.split(SQLBasePropertyStore.SPLIT_CHAR)
-                                if len(splits)>1:
+                                if len(splits) > 1:
                                     key = splits[0].strip()
                                     val = ":".join(splits[1:]).strip()
                                     if self.add_property(key, val) is True:
@@ -158,6 +161,6 @@ class SQLRegexStore(SQLBasePropertyStore, PropertyStore):
     def add_to_collection(self, collection, name, value):
         try:
             collection.add_property(name, re.compile(value, re.IGNORECASE))
-        except Exception as excep:
-            print("Error adding regex to collection: [%s] - %s"%(value, excep))
 
+        except Exception as excep:
+            YLogger.exception_nostack(self, "Error adding regex to collection: [%s]" % value, excep)

@@ -21,7 +21,6 @@ from programy.nlp.synsets.synsets import Synsets
 
 
 class IsSynset(DynamicSet):
-
     NAME = "SYNSET"
 
     def __init__(self, config):

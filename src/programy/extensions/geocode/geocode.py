@@ -15,7 +15,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.utils.logging.ylogger import YLogger
-
 from programy.utils.geo.google import GoogleMaps
 from programy.extensions.base import Extension
 
@@ -23,11 +22,11 @@ from programy.extensions.base import Extension
 class GeoCodeExtension(Extension):
 
     def get_geo_locator(self):
-        return  GoogleMaps()
+        return GoogleMaps()
 
     # execute() is the interface that is called from the <extension> tag in the AIML
-    def execute(self, context, data):
-        YLogger.debug(context, "GeoCode [%s]", data)
+    def execute(self, client_context, data):
+        YLogger.debug(client_context, "GeoCode [%s]", data)
 
         words = data.split(" ")
         if words[0] == 'POSTCODE1':
@@ -49,7 +48,7 @@ class GeoCodeExtension(Extension):
             lats = str_lat.split(".")
             lngs = str_lng.split(".")
 
-            return "LATITUDE DEC %s FRAC %s LONGITUDE DEC %s FRAC %s"%(
+            return "LATITUDE DEC %s FRAC %s LONGITUDE DEC %s FRAC %s" % (
                 lats[0], lats[1],
                 lngs[0], lngs[1]
             )

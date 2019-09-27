@@ -14,16 +14,12 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-# https://www.fullstackpython.com/blog/build-first-slack-bot-python.html
-
-from programy.utils.logging.ylogger import YLogger
 import re
-
 from slackclient import SlackClient
-
+from programy.utils.logging.ylogger import YLogger
 from programy.clients.polling.client import PollingBotClient
 from programy.clients.polling.slack.config import SlackConfiguration
+from programy.utils.console.console import outputLog
 
 
 SLACK_CLIENT = None
@@ -36,6 +32,8 @@ class SlackBotClient(PollingBotClient):
 
     def __init__(self, argument_parser=None):
         self._bot_token = None
+        self._starterbot_id = None
+        self._polling_interval = 1000
 
         PollingBotClient.__init__(self, "slack", argument_parser)
 
@@ -57,7 +55,9 @@ class SlackBotClient(PollingBotClient):
         if self._slack_client.rtm_connect(with_team_state=False) is True:
             # Read bot's user ID by calling Web API method `auth.test`
             self._starterbot_id = self.get_bot_id()
-            return True
+            if self._starterbot_id is not None:
+                return True
+
         return False
 
     def get_bot_id(self):
@@ -81,7 +81,7 @@ class SlackBotClient(PollingBotClient):
             If its not found, then this function returns None, None.
         """
         for event in slack_events:
-            if event["type"] == "message" and not "subtype" in event:
+            if event["type"] == "message" and "subtype" not in event:
                 self.parse_message(event)
  
     def parse_direct_mention(self, message_text):
@@ -122,7 +122,7 @@ class SlackBotClient(PollingBotClient):
         return self._slack_client.rtm_read()
 
     def display_connected_message(self):
-        print ("Slack Bot connected and running...")
+        outputLog(self, "Slack Bot connected and running...")
 
     def poll_and_answer(self):
         running = True
@@ -133,7 +133,7 @@ class SlackBotClient(PollingBotClient):
             self.sleep(self._polling_interval)
 
         except KeyboardInterrupt:
-            print("Slack client stopping via keyboard....")
+            outputLog(self, "Slack client stopping via keyboard....")
             running = False
 
         except Exception as excep:
@@ -144,7 +144,7 @@ class SlackBotClient(PollingBotClient):
 
 if __name__ == '__main__':
 
-    print("Initiating Slack Client...")
+    outputLog(None, "Initiating Slack Client...")
 
     SLACK_CLIENT = SlackBotClient()
     SLACK_CLIENT.run()

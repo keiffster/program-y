@@ -21,9 +21,9 @@ from programy.clients.client import BotClient
 
 class EventBotClient(BotClient):
 
-    def __init__(self, id, argument_parser=None):
+    def __init__(self, botid, argument_parser=None):
         self._running = False
-        BotClient.__init__(self, id, argument_parser=argument_parser)
+        BotClient.__init__(self, botid, argument_parser=argument_parser)
 
     def prior_to_run_loop(self):
         pass
@@ -34,12 +34,14 @@ class EventBotClient(BotClient):
             self._running = self.wait_and_answer()
 
     def wait_and_answer(self):
-        raise NotImplementedError("You must override this and implement the logic wait for a question and send an answer back")
+        raise NotImplementedError(
+            "You must override this and implement the logic wait for a question and send an answer back")
 
     def post_run_loop(self):
         pass
 
-    def run(self):
+    def run(self, app=None):
+        del app
 
         if self.arguments.noloop is False:
             YLogger.info(self, "Entering conversation loop...")

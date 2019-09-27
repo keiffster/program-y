@@ -19,7 +19,6 @@ from programy.utils.substitutions.substitues import Substitutions
 
 
 class MicrosoftConfiguration(RestConfiguration):
-
     NEW_USER_TEXT = "Hello and welcome, I'm here to help."
 
     def __init__(self):
@@ -30,6 +29,7 @@ class MicrosoftConfiguration(RestConfiguration):
     @property
     def new_user_text(self):
         return self._new_user_text
+
     @property
     def new_user_srai(self):
         return self._new_user_srai
@@ -37,11 +37,14 @@ class MicrosoftConfiguration(RestConfiguration):
     def check_for_license_keys(self, license_keys):
         RestConfiguration.check_for_license_keys(self, license_keys)
 
-    def load_configuration_section(self, configuration_file, microsoft, bot_root, subs: Substitutions = None):
-        if microsoft is not None:
-            self._new_user_text = configuration_file.get_option(microsoft, "new_user_text", missing_value=MicrosoftConfiguration.NEW_USER_TEXT, subs=subs)
-            self._new_user_srai = configuration_file.get_option(microsoft, "new_user_srai", missing_value=None, subs=subs)
-            super(MicrosoftConfiguration, self).load_configuration_section(configuration_file, microsoft, bot_root, subs=subs)
+    def load_configuration_section(self, configuration_file, section, bot_root, subs: Substitutions = None):
+        if section is not None:
+            self._new_user_text = configuration_file.get_option(section, "new_user_text",
+                                                                missing_value=MicrosoftConfiguration.NEW_USER_TEXT,
+                                                                subs=subs)
+            self._new_user_srai = configuration_file.get_option(section, "new_user_srai", missing_value=None, subs=subs)
+            super(MicrosoftConfiguration, self).load_configuration_section(configuration_file, section, bot_root,
+                                                                           subs=subs)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:

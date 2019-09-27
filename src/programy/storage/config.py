@@ -62,53 +62,61 @@ class StorageConfiguration(BaseConfigurationData):
                 keys = configuration_file.get_keys(store_config)
 
                 if 'type' not in keys:
-                    YLogger.error(None, "'type' section missing from client config stores element [%s], ignoring config", store)
+                    YLogger.error(None, "'type' section missing from client config stores element [%s], "
+                                        "ignoring config", store)
                     continue
 
                 if 'config' not in keys:
-                    YLogger.error(None, "'config' section missing from client config stores element [%s], ignoring config", store)
+                    YLogger.error(None, "'config' section missing from client config stores element [%s], "
+                                        "ignoring config", store)
                     continue
 
-                type = configuration_file.get_option(store_config, 'type', subs=subs)
+                storage_type = configuration_file.get_option(store_config, 'type', subs=subs)
 
-                if type == 'sql':
+                if storage_type == 'sql':
                     config = SQLStorageConfiguration()
                     config.load_config_section(configuration_file, store_config, bot_root, subs=subs)
+                    self._store_configs[store] = config
 
-                elif type == 'mongo':
+                elif storage_type == 'mongo':
                     config = MongoStorageConfiguration()
                     config.load_config_section(configuration_file, store_config, bot_root, subs=subs)
+                    self._store_configs[store] = config
 
-                elif type == 'redis':
+                elif storage_type == 'redis':
                     config = RedisStorageConfiguration()
                     config.load_config_section(configuration_file, store_config, bot_root, subs=subs)
+                    self._store_configs[store] = config
 
-                elif type == 'file':
+                elif storage_type == 'file':
                     config = FileStorageConfiguration()
                     config.load_config_section(configuration_file, store_config, bot_root, subs=subs)
+                    self._store_configs[store] = config
 
-                elif type == 'logger':
+                elif storage_type == 'logger':
                     config = LoggerStorageConfiguration()
                     config.load_config_section(configuration_file, store_config, bot_root, subs=subs)
+                    self._store_configs[store] = config
 
-                self._store_configs[store] = config
+                else:
+                    YLogger.error(self, "Unk own storage configuretion type [%s]", storage_type)
 
         else:
             YLogger.warning(self, "'storage' section missing from client config, using to defaults")
 
             self._entity_store = {}
-            self.add_default_entities(self._entity_store)
+            StorageConfiguration.add_default_entities(self._entity_store)
 
             self._store_configs = {}
-            self.add_default_stores(self._store_configs)
+            StorageConfiguration.add_default_stores(self._store_configs)
 
     def create_storage_config(self):
         config = {}
         config['entities'] = {}
-        self.add_default_entities(config['entities'])
+        StorageConfiguration.add_default_entities(config['entities'])
 
         config['stores'] = {}
-        self.add_default_stores(config['stores'])
+        StorageConfiguration.add_default_stores(config['stores'])
 
     def to_yaml(self, data, defaults=True):
 
@@ -116,8 +124,9 @@ class StorageConfiguration(BaseConfigurationData):
         data['stores'] = {}
 
         if defaults is True:
-            self.add_default_entities(data['entities'])
-            self.add_default_stores(data['stores'])
+            StorageConfiguration.add_default_entities(data['entities'])
+            StorageConfiguration.add_default_stores(data['stores'])
+
         else:
             data['entities'] = {}
             for key, value in self._entity_store.items():
@@ -128,73 +137,65 @@ class StorageConfiguration(BaseConfigurationData):
                 value.to_yaml(data['stores'][name], defaults)
 
     @staticmethod
-    def add_default_stores(amap):
-        
-        sql = SQLStorageConfiguration()
-        amap['sqlite'] = {'type': 'sql',
-                        'config': sql.create_sqlstorage_config()}
-
-        mongo = MongoStorageConfiguration()
-        amap['mongo'] = {'type': 'mongo',
-                         'config': mongo.create_mongostorage_config()}
-
-        redis = RedisStorageConfiguration()
-        amap['redis'] = {'type': 'redis',
-                         'config': redis.create_redisstorage_config()}
-
-        file = FileStorageConfiguration()
-        amap['file'] = {'type': 'file',
-                        'config': file.create_filestorage_config()}
-
-        logger = LoggerStorageConfiguration()
-        amap['logger'] = {'type': 'logger',
-                          'config': logger.create_loggerstorage_config()}
+    def add_default_stores(store_configs, file=True, sqlite=False, mongo=False, redis=False, logger=False):
+        if sqlite is True:
+            store_configs['sqlite'] = SQLStorageConfiguration()
+        if mongo is True:
+            store_configs['mongo'] = MongoStorageConfiguration()
+        if redis is True:
+            store_configs['redis'] = RedisStorageConfiguration()
+        if file is True:
+            store_configs['file'] = FileStorageConfiguration()
+        if logger is True:
+            store_configs['logger'] = LoggerStorageConfiguration()
 
     @staticmethod
-    def add_default_entities(amap):
+    def add_default_entities(entity_store, file=True, sqlite=False):
 
-        amap[StorageFactory.USERS] = 'sqlite'
-        amap[StorageFactory.LINKED_ACCOUNTS] = 'sqlite'
-        amap[StorageFactory.LINKS] = 'sqlite'
+        if sqlite is True:
+            entity_store[StorageFactory.USERS] = 'sqlite'
+            entity_store[StorageFactory.LINKED_ACCOUNTS] = 'sqlite'
+            entity_store[StorageFactory.LINKS] = 'sqlite'
 
-        amap[StorageFactory.CATEGORIES] = 'file'
-        amap[StorageFactory.ERRORS] = 'file'
-        amap[StorageFactory.DUPLICATES] = 'file'
-        amap[StorageFactory.LEARNF] = 'file'
+        if file is True:
+            entity_store[StorageFactory.CATEGORIES] = 'file'
+            entity_store[StorageFactory.ERRORS] = 'file'
+            entity_store[StorageFactory.DUPLICATES] = 'file'
+            entity_store[StorageFactory.LEARNF] = 'file'
 
-        amap[StorageFactory.CONVERSATIONS] = 'file'
+            entity_store[StorageFactory.CONVERSATIONS] = 'file'
 
-        amap[StorageFactory.MAPS] = 'file'
-        amap[StorageFactory.SETS] = 'file'
-        amap[StorageFactory.RDF] = 'file'
+            entity_store[StorageFactory.MAPS] = 'file'
+            entity_store[StorageFactory.SETS] = 'file'
+            entity_store[StorageFactory.RDF] = 'file'
 
-        amap[StorageFactory.DENORMAL] = 'file'
-        amap[StorageFactory.NORMAL] = 'file'
-        amap[StorageFactory.GENDER] = 'file'
-        amap[StorageFactory.PERSON] = 'file'
-        amap[StorageFactory.PERSON2] = 'file'
-        amap[StorageFactory.REGEX_TEMPLATES] = 'file'
+            entity_store[StorageFactory.DENORMAL] = 'file'
+            entity_store[StorageFactory.NORMAL] = 'file'
+            entity_store[StorageFactory.GENDER] = 'file'
+            entity_store[StorageFactory.PERSON] = 'file'
+            entity_store[StorageFactory.PERSON2] = 'file'
+            entity_store[StorageFactory.REGEX_TEMPLATES] = 'file'
 
-        amap[StorageFactory.PROPERTIES] = 'file'
-        amap[StorageFactory.DEFAULTS] = 'file'
-        amap[StorageFactory.VARIABLES] = 'file'
+            entity_store[StorageFactory.PROPERTIES] = 'file'
+            entity_store[StorageFactory.DEFAULTS] = 'file'
+            entity_store[StorageFactory.VARIABLES] = 'file'
 
-        amap[StorageFactory.TWITTER] = 'file'
+            entity_store[StorageFactory.TWITTER] = 'file'
 
-        amap[StorageFactory.SPELLING_CORPUS] = 'file'
+            entity_store[StorageFactory.SPELLING_CORPUS] = 'file'
 
-        amap[StorageFactory.LICENSE_KEYS] = 'file'
+            entity_store[StorageFactory.LICENSE_KEYS] = 'file'
 
-        amap[StorageFactory.PATTERN_NODES] = 'file'
-        amap[StorageFactory.TEMPLATE_NODES] = 'file'
+            entity_store[StorageFactory.PATTERN_NODES] = 'file'
+            entity_store[StorageFactory.TEMPLATE_NODES] = 'file'
 
-        amap[StorageFactory.BINARIES] = 'file'
-        amap[StorageFactory.BRAINTREE] = 'file'
+            entity_store[StorageFactory.BINARIES] = 'file'
+            entity_store[StorageFactory.BRAINTREE] = 'file'
 
-        amap[StorageFactory.PREPROCESSORS] = 'file'
-        amap[StorageFactory.POSTPROCESSORS] = 'file'
-        amap[StorageFactory.POSTQUESTIONPROCESSORS] = 'file'
+            entity_store[StorageFactory.PREPROCESSORS] = 'file'
+            entity_store[StorageFactory.POSTPROCESSORS] = 'file'
+            entity_store[StorageFactory.POSTQUESTIONPROCESSORS] = 'file'
 
-        amap[StorageFactory.USERGROUPS] = 'file'
+            entity_store[StorageFactory.USERGROUPS] = 'file'
 
-        amap[StorageFactory.TRIGGERS] = 'file'
+            entity_store[StorageFactory.TRIGGERS] = 'file'

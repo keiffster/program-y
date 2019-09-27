@@ -46,17 +46,17 @@ class SystemSetAIMLTests(unittest.TestCase):
     def test_dynamic_splitter_on(self):
         response = self._client_context.bot.ask_question(self._client_context, "START USERNAME WITH SPLITTER ON")
         self.assertIsNotNone(response)
-        self.assertEquals("What is your username?", response)
+        self.assertEqual("What is your username?", response)
 
         response = self._client_context.bot.ask_question(self._client_context, "fred.smith")
         self.assertIsNotNone(response)
-        self.assertEquals("Thanks, you entered fred. Thanks, you entered smith.", response)
+        self.assertEqual("Thanks, you entered fred. Thanks, you entered smith.", response)
 
     def test_dynamic_splitter_off(self):
         response = self._client_context.bot.ask_question(self._client_context, "START USERNAME WITH SPLITTER OFF")
         self.assertIsNotNone(response)
-        self.assertEquals("What is your username?", response)
+        self.assertEqual("What is your username?", response)
 
         response = self._client_context.bot.ask_question(self._client_context, "fred.smith")
         self.assertIsNotNone(response)
-        self.assertEquals("Thanks, you entered fred.smith.", response)
+        self.assertEqual("Thanks, you entered fred.smith.", response)

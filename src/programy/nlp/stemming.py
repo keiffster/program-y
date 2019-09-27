@@ -24,7 +24,7 @@ from nltk.stem.rslp import RSLPStemmer
 from nltk.stem.cistem import Cistem
 
 
-class Stemmer(object):
+class Stemmer:
 
     @staticmethod
     def download_additional():
@@ -40,17 +40,17 @@ class Stemmer(object):
         elif stemmer == "regex":
             regexp = kwargs['regexp']
             if 'min' in kwargs:
-                min = kwargs['min']
+                minimum = kwargs['min']
             else:
-                mins = 0
-            impl = RegexpStemmer(regexp=regexp, min=min)
+                minimum = 0
+            impl = RegexpStemmer(regexp=regexp, min=minimum)
         elif stemmer == "isri":
             impl = ISRIStemmer()
         elif stemmer == "snowball":
             if 'language' in kwargs:
-                language=kwargs['language']
+                language = kwargs['language']
             else:
-                language='english'
+                language = 'english'
             impl = SnowballStemmer(language=language)
         elif stemmer == "rslp":
             impl = RSLPStemmer()

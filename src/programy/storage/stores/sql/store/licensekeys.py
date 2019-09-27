@@ -16,11 +16,11 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 import os
 from programy.utils.logging.ylogger import YLogger
-
 from programy.storage.stores.sql.store.sqlstore import SQLStore
 from programy.storage.entities.license import LicenseStore
 from programy.storage.stores.sql.dao.license import LicenseKey
 from programy.storage.entities.store import Store
+from programy.utils.console.console import outputLog
 
 
 class SQLLicenseKeysStore(SQLStore, LicenseStore):
@@ -58,16 +58,17 @@ class SQLLicenseKeysStore(SQLStore, LicenseStore):
             licensekeys[licensekey.name] = licensekey.key
         return licensekeys
 
-    def load(self, licensekey_collection):
-        self.load_all(licensekey_collection)
+    def load(self, collector, name=None):
+        del name
+        self.load_all(collector)
 
-    def load_all(self, licensekeys):
-        licensekeys.empty()
+    def load_all(self, collector):
+        collector.empty()
         db_licensekeys = self._get_all()
         for db_licensekey in db_licensekeys:
-            licensekeys.add_key(db_licensekey.name,  db_licensekey.key)
+            collector.add_key(db_licensekey.name, db_licensekey.key)
 
-    def upload_from_file(self, filename, format=Store.TEXT_FORMAT, commit=True, verbose=False):
+    def upload_from_file(self, filename, fileformat=Store.TEXT_FORMAT, commit=True, verbose=False):
 
         count = 0
         success = 0
@@ -77,7 +78,7 @@ class SQLLicenseKeysStore(SQLStore, LicenseStore):
                 with open(filename, "r") as key_file:
                     for line in key_file:
                         if self._process_license_key_line(line, verbose) is True:
-                            success +=1
+                            success += 1
                         count += 1
 
                 if commit is True:
@@ -90,6 +91,7 @@ class SQLLicenseKeysStore(SQLStore, LicenseStore):
 
     def _process_license_key_line(self, line, verbose=False):
         line = line.strip()
+        result = False
         if line:
             if line.startswith('#') is False:
                 splits = line.split("=")
@@ -97,11 +99,11 @@ class SQLLicenseKeysStore(SQLStore, LicenseStore):
                     key_name = splits[0].strip()
                     # If key has = signs in it, then combine all elements past the first
                     key = "".join(splits[1:]).strip()
-                    license_key = self.add_licensekey(key_name, key)
+                    result = self.add_licensekey(key_name, key)
                     if verbose is True:
-                        print("[%s] = [%s]"%(key_name, key))
-                    return True
+                        outputLog(self, "[%s] = [%s]" % (key_name, key))
+
                 else:
                     YLogger.warning(self, "Invalid license key [%s]", line)
-        return False
 
+        return result

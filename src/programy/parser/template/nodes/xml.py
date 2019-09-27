@@ -14,14 +14,12 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.utils.logging.ylogger import YLogger
 import xml.etree.ElementTree as ET
-
 from programy.parser.template.nodes.attrib import TemplateAttribNode
 from programy.parser.template.nodes.word import TemplateWordNode
 from programy.parser.template.nodes.word import TemplateNode
 from programy.utils.text.text import TextUtils
+from programy.utils.logging.ylogger import YLogger
 
 
 class TemplateXMLNode(TemplateAttribNode):
@@ -46,7 +44,7 @@ class TemplateXMLNode(TemplateAttribNode):
 
     def to_xml(self, client_context):
         if self._name is not None:
-            xml = "<%s"%self._name
+            xml = "<%s" % self._name
             for attrib_name in self._attribs:
                 attrib_node = self._attribs[attrib_name]
                 attrib_value = attrib_node.to_xml(client_context)
@@ -56,13 +54,13 @@ class TemplateXMLNode(TemplateAttribNode):
             xml += ">"
             child_xml = self.children_to_xml(client_context)
             xml += child_xml
-            xml += "</%s>"%self._name
+            xml += "</%s>" % self._name
             return xml
         return ""
 
     def resolve(self, client_context):
         if self._name is not None:
-            xml = "<%s"%self._name
+            xml = "<%s" % self._name
             for attrib_name in self._attribs:
                 attrib_node = self._attribs[attrib_name]
                 attrib_value = attrib_node.resolve(client_context)
@@ -72,14 +70,14 @@ class TemplateXMLNode(TemplateAttribNode):
             xml += ">"
             child_xml = self.children_to_xml(client_context)
             xml += child_xml
-            xml += "</%s>"%self._name
+            xml += "</%s>" % self._name
             return xml
         return ""
 
     def parse_expression(self, graph, expression):
-        self._parse_node_with_attribs(graph, expression)
+        self._parse_node_with_xml_attribs(graph, expression)
 
-    def _parse_node_with_attribs(self, graph, expression):
+    def _parse_node_with_xml_attribs(self, graph, expression):
 
         try:
             self._name = TextUtils.tag_from_text(expression.tag)
@@ -91,8 +89,8 @@ class TemplateXMLNode(TemplateAttribNode):
                     end = attrib_value.rfind(">")
 
                     front = attrib_value[:start]
-                    middle = attrib_value[start:end+1]
-                    back = attrib_value[end+1:]
+                    middle = attrib_value[start:end + 1]
+                    back = attrib_value[end + 1:]
 
                     root = TemplateNode()
                     root.append(TemplateWordNode(front))
@@ -115,5 +113,5 @@ class TemplateXMLNode(TemplateAttribNode):
                 graph.parse_tag_expression(child, self)
                 self.parse_text(graph, self.get_tail_from_element(child))
 
-        except Exception as e:
-            print(e)
+        except Exception as excep:
+            YLogger.exception_nostack(self, "Failed to parse node with attributes", excep)

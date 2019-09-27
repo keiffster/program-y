@@ -16,7 +16,8 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 from programy.storage.stores.utils import DAOUtils
 
-class Property(object):
+
+class Property():
 
     def __init__(self, name, value):
         self.id = None
@@ -35,14 +36,14 @@ class Property(object):
 
     @staticmethod
     def from_document(data):
-        property = Property(None, None)
+        propertydao = Property(None, None)
         if '_id' in data:
-            property.id = data['_id']
+            propertydao.id = data['_id']
         if 'name' in data:
-            property.name = data['name']
+            propertydao.name = data['name']
         if 'value' in data:
-            property.value = data['value']
-        return property
+            propertydao.value = data['value']
+        return propertydao
 
 
 class DefaultVariable(Property):
@@ -55,14 +56,14 @@ class DefaultVariable(Property):
 
     @staticmethod
     def from_document(data):
-        property = DefaultVariable(None, None)
+        variabledao = DefaultVariable(None, None)
         if '_id' in data:
-            property.id = data['_id']
+            variabledao.id = data['_id']
         if 'name' in data:
-            property.name = data['name']
+            variabledao.name = data['name']
         if 'value' in data:
-            property.value = data['value']
-        return property
+            variabledao.value = data['value']
+        return variabledao
 
 
 class Regex(Property):
@@ -75,12 +76,11 @@ class Regex(Property):
 
     @staticmethod
     def from_document(data):
-        property = Regex(None, None)
+        regexdao = Regex(None, None)
         if '_id' in data:
-            property.id = data['_id']
+            regexdao.id = data['_id']
         if 'name' in data:
-            property.name = data['name']
+            regexdao.name = data['name']
         if 'value' in data:
-            property.value = data['value']
-        return property
-
+            regexdao.value = data['value']
+        return regexdao

@@ -39,6 +39,7 @@ class SchedulerJobStoreConfiguration(BaseConfigurationData):
         BaseConfigurationData.check_for_license_keys(self, license_keys)
 
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
+        del subs
         jobstore = configuration_file.get_section(self._section_name, configuration)
         if jobstore is not None:
             self._name = configuration_file.get_option(jobstore, "name", missing_value=None)
@@ -77,6 +78,8 @@ class SchedulerMongoJobStoreConfiguration(BaseConfigurationData):
         BaseConfigurationData.check_for_license_keys(self, license_keys)
 
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
+        del bot_root
+        del subs
         mongodb = configuration_file.get_section(self._section_name, configuration)
         if mongodb is not None:
             self._collection = configuration_file.get_option(mongodb, "collection", missing_value=None)
@@ -107,6 +110,8 @@ class SchedulerRedisJobStoreConfiguration(BaseConfigurationData):
         BaseConfigurationData.check_for_license_keys(self, license_keys)
 
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
+        del bot_root
+        del subs
         redis = configuration_file.get_section(self._section_name, configuration)
         if redis is not None:
             self._jobs_key = configuration_file.get_option(redis, "jobs_key", missing_value=None)
@@ -135,6 +140,8 @@ class SchedulerSqlAlchemyJobStoreConfiguration(BaseConfigurationData):
         BaseConfigurationData.check_for_license_keys(self, license_keys)
 
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
+        del bot_root
+        del subs
         sqlalchemy = configuration_file.get_section(self._section_name, configuration)
         if sqlalchemy is not None:
             self._url = configuration_file.get_option(sqlalchemy, "url", missing_value=None)
@@ -160,6 +167,8 @@ class SchedulerThreadPoolConfiguration(BaseConfigurationData):
         BaseConfigurationData.check_for_license_keys(self, license_keys)
 
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
+        del bot_root
+        del subs
         threadpool = configuration_file.get_section(self._section_name, configuration)
         if threadpool is not None:
             self._max_workers = configuration_file.get_option(threadpool, "max_workers", missing_value=None)
@@ -185,6 +194,8 @@ class SchedulerProcessPoolConfiguration(BaseConfigurationData):
         BaseConfigurationData.check_for_license_keys(self, license_keys)
 
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
+        del bot_root
+        del subs
         processpool = configuration_file.get_section(self._section_name, configuration)
         if processpool is not None:
             self._max_workers = configuration_file.get_option(processpool, "max_workers", missing_value=None)
@@ -215,6 +226,8 @@ class SchedulerJobDefaultsConfiguration(BaseConfigurationData):
         BaseConfigurationData.check_for_license_keys(self, license_keys)
 
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
+        del bot_root
+        del subs
         job_defaults = configuration_file.get_section(self._section_name, configuration)
         if job_defaults is not None:
             self._coalesce = configuration_file.get_option(job_defaults, "coalesce", missing_value=None)
@@ -281,12 +294,14 @@ class SchedulerConfiguration(BaseConfigurationData):
         return self._job_defaults
 
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
+        del subs
         scheduler = configuration_file.get_section(self._section_name, configuration)
         if scheduler is not None:
             self._name = configuration_file.get_option(scheduler, "name", missing_value=None)
             self._debug_level = configuration_file.get_int_option(scheduler, "debug_level", missing_value=0)
             self._add_listeners = configuration_file.get_bool_option(scheduler, "add_listeners", missing_value=False)
-            self._remove_all_jobs = configuration_file.get_bool_option(scheduler, "remove_all_jobs", missing_value=False)
+            self._remove_all_jobs = configuration_file.get_bool_option(scheduler, "remove_all_jobs",
+                                                                       missing_value=False)
 
             if 'jobstore' in scheduler:
                 self._jobstore = SchedulerJobStoreConfiguration()
@@ -348,7 +363,7 @@ class SchedulerConfiguration(BaseConfigurationData):
             if self.job_defaults.max_instances is not None:
                 config['apscheduler.job_defaults.max_instances'] = str(self.job_defaults.max_instances)
 
-        if len(config.keys()) > 0:
+        if len(config) > 0:
             return config
 
         return None
@@ -369,6 +384,3 @@ class SchedulerConfiguration(BaseConfigurationData):
         self.config_to_yaml(data, SchedulerThreadPoolConfiguration(), defaults)
         self.config_to_yaml(data, SchedulerProcessPoolConfiguration(), defaults)
         self.config_to_yaml(data, SchedulerJobDefaultsConfiguration(), defaults)
-
-
-

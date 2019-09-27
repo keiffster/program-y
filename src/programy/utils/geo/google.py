@@ -14,15 +14,14 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.utils.logging.ylogger import YLogger
 import json
 import urllib.request
-
+from programy.utils.logging.ylogger import YLogger
 from programy.utils.geo.latlong import LatLong
 from programy.utils.text.text import TextUtils
 
-class GoogleAddressComponent(object):
+
+class GoogleAddressComponent():
     def __init__(self):
         self.long_name = None
         self.short_name = None
@@ -36,7 +35,7 @@ class GoogleAddressComponent(object):
             self.types.append(address_type)
 
 
-class GoogleBounds(object):
+class GoogleBounds():
     def __init__(self):
         self.northeast = None
         self.southwest = None
@@ -46,7 +45,7 @@ class GoogleBounds(object):
         self.southwest = LatLong(data['southwest']['lat'], data['southwest']['lng'])
 
 
-class GoogleGeometry(object):
+class GoogleGeometry():
     def __init__(self):
         self.location_type = None
         self.location = None
@@ -62,7 +61,7 @@ class GoogleGeometry(object):
         self.viewport.parse_json(data['bounds'])
 
 
-class GoogleGeoLocation(object):
+class GoogleGeoLocation():
     def __init__(self):
         self.place_id = None
         self.formatted_address = None
@@ -88,7 +87,7 @@ class GoogleGeoLocation(object):
             self.types.append(type_data)
 
 
-class GoogelMapsResult(object):
+class GoogelMapsResult():
     def __init__(self):
         self.locations = []
         self.status = None
@@ -101,7 +100,7 @@ class GoogelMapsResult(object):
             self.locations.append(location)
 
 
-class GoogleDistance(object):
+class GoogleDistance():
     def __init__(self, origin, destination, country="UK", mode="driving", units="imperial"):
         self._origin = origin
         self._destination = destination
@@ -137,7 +136,7 @@ class GoogleDistance(object):
         self._duration_text = result['elements'][0]['duration']['text']
 
 
-class DirectionLegStep(object):
+class DirectionLegStep():
     def __init__(self):
         self._distance = None
         self._distance_text = None
@@ -157,7 +156,7 @@ class DirectionLegStep(object):
         self._instructions = TextUtils.strip_html(data['html_instructions'])
 
 
-class DirectionLeg(object):
+class DirectionLeg():
     def __init__(self):
         self._distance = None
         self._distance_text = None
@@ -179,7 +178,7 @@ class DirectionLeg(object):
         return ", ".join([step.instructions for step in self._steps])
 
 
-class GoogleDirections(object):
+class GoogleDirections():
     def __init__(self, origin, destination, country="UK", mode="driving", units="imperial"):
         self._origin = origin
         self._destination = destination
@@ -199,8 +198,7 @@ class GoogleDirections(object):
         return ", ".join([leg.steps_as_a_string() for leg in self._legs])
 
 
-class GoogleMaps(object):
-
+class GoogleMaps():
     DIRECTIONS = "http://maps.googleapis.com/maps/api/directions/json?origin={0}&destination={1}" \
                  "&country={2}&sensor=false&mode={3}"
     DISTANCE = "http://maps.googleapis.com/maps/api/distancematrix/json?origins={0}&destinations={1}" \
@@ -226,7 +224,7 @@ class GoogleMaps(object):
 
     def is_error_response(self, response):
         if 'status' in response:
-            if response['status'] == 'OVER_QUERY_LIMIT' :
+            if response['status'] == 'OVER_QUERY_LIMIT':
                 return True
         return False
 
@@ -239,7 +237,19 @@ class GoogleMaps(object):
 
         geodata = GoogelMapsResult()
         geodata.parse_json(response)
-        return geodata.locations[0].geometry.location
+
+        if len(geodata.locations) == 0:
+            raise Exception("No locations in GeoData")
+
+        location = geodata.locations[0]
+
+        if location.geometry is None:
+            raise Exception("No geometry in Location")
+
+        if location.geometry.location is None:
+            raise Exception("No location in Geometry")
+
+        return location.geometry.location
 
     ##################
 
@@ -282,4 +292,3 @@ class GoogleMaps(object):
         else:
             YLogger.error(self, "get_directions_between_addresses - %s", response['status'])
             return None
-

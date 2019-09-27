@@ -107,51 +107,51 @@ class ConversationTests(unittest.TestCase):
         json_data = conversation1.to_json()
         self.assertIsNotNone(json_data)
 
-        self.assertEquals("testclient", json_data['client_context']['clientid'])
-        self.assertEquals("testid", json_data['client_context']['userid'])
-        self.assertEquals("bot", json_data['client_context']['botid'])
-        self.assertEquals("brain", json_data['client_context']['brainid'])
-        self.assertEquals(0, json_data['client_context']['depth'])
+        self.assertEqual("testclient", json_data['client_context']['clientid'])
+        self.assertEqual("testid", json_data['client_context']['userid'])
+        self.assertEqual("bot", json_data['client_context']['botid'])
+        self.assertEqual("brain", json_data['client_context']['brainid'])
+        self.assertEqual(0, json_data['client_context']['depth'])
 
         conversation2 = Conversation.from_json(client_context, json_data)
 
-        self.assertEquals(conversation1._client_context.client.id, conversation2._client_context.client.id)
-        self.assertEquals(conversation1._client_context.userid, conversation2._client_context.userid)
-        self.assertEquals(conversation1._client_context.bot.id, conversation2._client_context.bot.id)
-        self.assertEquals(conversation1._client_context.brain.id, conversation2._client_context.brain.id)
-        self.assertEquals(conversation1._client_context._question_start_time,
+        self.assertEqual(conversation1._client_context.client.id, conversation2._client_context.client.id)
+        self.assertEqual(conversation1._client_context.userid, conversation2._client_context.userid)
+        self.assertEqual(conversation1._client_context.bot.id, conversation2._client_context.bot.id)
+        self.assertEqual(conversation1._client_context.brain.id, conversation2._client_context.brain.id)
+        self.assertEqual(conversation1._client_context._question_start_time,
                           conversation2._client_context._question_start_time)
-        self.assertEquals(conversation1._client_context._question_depth, conversation2._client_context._question_depth)
-        self.assertEquals(conversation1._client_context._id, conversation2._client_context._id)
+        self.assertEqual(conversation1._client_context._question_depth, conversation2._client_context._question_depth)
+        self.assertEqual(conversation1._client_context._id, conversation2._client_context._id)
 
-        self.assertEquals(conversation1.properties, conversation2.properties)
-        self.assertEquals(conversation1.max_histories, conversation2.max_histories)
+        self.assertEqual(conversation1.properties, conversation2.properties)
+        self.assertEqual(conversation1.max_histories, conversation2.max_histories)
 
         self.assertNotEquals(0, len(conversation1.questions))
         self.assertNotEquals(0, len(conversation2.questions))
-        self.assertEquals(len(conversation1.questions), len(conversation2.questions))
+        self.assertEqual(len(conversation1.questions), len(conversation2.questions))
 
         for i in range(len(conversation2.questions)):
             q1 = conversation1.questions[i]
             q2 = conversation2.questions[i]
 
-            self.assertEquals(q1.srai, q2.srai)
-            self.assertEquals(q1._current_sentence_no, q2._current_sentence_no)
+            self.assertEqual(q1.srai, q2.srai)
+            self.assertEqual(q1._current_sentence_no, q2._current_sentence_no)
 
-            self.assertEquals(q1.properties, q2.properties)
+            self.assertEqual(q1.properties, q2.properties)
 
             self.assertNotEquals(0, len(q1.sentences))
             self.assertNotEquals(0, len(q2.sentences))
-            self.assertEquals(len(q1.sentences), len(q2.sentences))
+            self.assertEqual(len(q1.sentences), len(q2.sentences))
 
             for j in range(len(q2.sentences)):
                 s1 = q1.sentences[j]
                 s2 = q2.sentences[j]
 
-                self.assertEquals(s1.words, s2.words)
-                self.assertEquals(s1.response, s2.response)
-                self.assertEquals(s1.positivity, s2.positivity)
-                self.assertEquals(s1.subjectivity, s2.subjectivity)
+                self.assertEqual(s1.words, s2.words)
+                self.assertEqual(s1.response, s2.response)
+                self.assertEqual(s1.positivity, s2.positivity)
+                self.assertEqual(s1.subjectivity, s2.subjectivity)
 
                 mc1 = s1.matched_context
                 mc2 = s2.matched_context
@@ -159,7 +159,9 @@ class ConversationTests(unittest.TestCase):
                 self.assertEquals(mc1.template_node, mc2.template_node)
                 self.assertEquals(mc1.max_search_depth, mc2.max_search_depth)
                 self.assertEquals(mc1.max_search_timeout, mc2.max_search_timeout)
-                self.assertEquals(mc1._total_search_start, mc2._total_search_start)
+                time1 = mc1._total_search_start.strftime("%d/%m/%Y, %H:%M:%S")
+                time2 = mc2._total_search_start.strftime("%d/%m/%Y, %H:%M:%S")
+                self.assertEquals(time1, time2)
 
                 self.assertNotEquals(0, len(mc1.matched_nodes))
                 self.assertNotEquals(0, len(mc2.matched_nodes))

@@ -26,9 +26,9 @@ class SentenceSplitterDynamicVarTests(unittest.TestCase):
         self.assertIsNotNone(dyn_var)
         active = dyn_var.get_value(self._client_context)
         self.assertIsNotNone(active)
-        self.assertEquals(Activatable.ON, active)
+        self.assertEqual(Activatable.ON, active)
 
         dyn_var.set_value(self._client_context, Activatable.OFF)
         active = dyn_var.get_value(self._client_context)
         self.assertIsNotNone(active)
-        self.assertEquals(Activatable.OFF, active)
+        self.assertEqual(Activatable.OFF, active)

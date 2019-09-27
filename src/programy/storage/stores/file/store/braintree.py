@@ -15,9 +15,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.utils.logging.ylogger import YLogger
-import os
-import os.path
-
 from programy.storage.stores.file.store.filestore import FileStore
 from programy.storage.entities.braintree import BraintreeStore
 
@@ -30,6 +27,9 @@ class FileBraintreeStore(FileStore, BraintreeStore):
     def _get_storage_path(self):
         return self.storage_engine.configuration.braintree_storage.file
 
+    def get_storage(self):
+        return self.storage_engine.configuration.braintree_storage
+
     def save_braintree(self, client_context, pattern_graph):
 
         try:
@@ -39,15 +39,15 @@ class FileBraintreeStore(FileStore, BraintreeStore):
             braintree_dirpath = self._get_dir_from_path(braintree_fullpath)
             self._ensure_dir_exists(braintree_dirpath)
 
-            format = self.storage_engine.configuration.braintree_storage.format
+            fileformat = self.storage_engine.configuration.braintree_storage.format
             encoding = self.storage_engine.configuration.braintree_storage.encoding
 
-            if format == FileStore.TEXT_FORMAT:
+            if fileformat == FileStore.TEXT_FORMAT:
                 with open(braintree_fullpath, "w+", encoding=encoding) as dump_file:
                     pattern_graph.dump(output_func=dump_file.write, eol="\n")
 
-            elif format == FileStore.XML_FORMAT:
-                braintree = '<?xml version="1.0" encoding="%s"?>\n'%encoding
+            elif fileformat == FileStore.XML_FORMAT:
+                braintree = '<?xml version="1.0" encoding="%s"?>\n' % encoding
                 braintree += '<aiml>\n'
                 braintree += pattern_graph.root.to_xml(client_context)
                 braintree += '</aiml>\n'
@@ -55,8 +55,7 @@ class FileBraintreeStore(FileStore, BraintreeStore):
                     dump_file.write(braintree)
 
             else:
-                YLogger.error(client_context, "Unknown braintree content type [%s]", format)
+                YLogger.error(client_context, "Unknown braintree content type [%s]", fileformat)
 
         except Exception as exc:
             YLogger.exception_nostack(client_context, "Failed to save Braintree", exc)
-

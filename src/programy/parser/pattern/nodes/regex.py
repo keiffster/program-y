@@ -14,10 +14,8 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.utils.logging.ylogger import YLogger
 import re
-
+from programy.utils.logging.ylogger import YLogger
 from programy.parser.pattern.nodes.base import PatternNode
 from programy.parser.pattern.equalsmatch import EqualsMatch
 from programy.parser.exceptions import ParserException
@@ -62,12 +60,12 @@ class PatternRegexNode(PatternNode):
         string = ""
         if self._pattern_template is not None:
             if include_user is True:
-                string += '<regex userid="%s" template="%s">'%(self.userid, self._pattern_template)
+                string += '<regex userid="%s" template="%s">' % (self.userid, self._pattern_template)
             else:
-                string += '<regex template="%s">'% self._pattern_template
+                string += '<regex template="%s">' % self._pattern_template
         else:
             if include_user is True:
-                string += '<regex userid="%s" pattern="%s">'%(self.userid, self._pattern_text)
+                string += '<regex userid="%s" pattern="%s">' % (self.userid, self._pattern_text)
             else:
                 string += '<regex pattern="%s">' % self._pattern_text
         string += super(PatternRegexNode, self).to_xml(client_context)
@@ -77,7 +75,8 @@ class PatternRegexNode(PatternNode):
     def to_string(self, verbose=True):
         if verbose is True:
             if self._pattern_template is not None:
-                return "REGEX [%s] [%s] template=[%s]" % (self.userid, self._child_count(verbose), self._pattern_template)
+                return "REGEX [%s] [%s] template=[%s]" % (
+                    self.userid, self._child_count(verbose), self._pattern_template)
             return "REGEX [%s] [%s] pattern=[%s]" % (self.userid, self._child_count(verbose), self._pattern_text)
 
         if self._pattern_template is not None:

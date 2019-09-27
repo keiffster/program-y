@@ -14,8 +14,10 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from programy.storage.stores.utils import DAOUtils
 
-class LinkedAccount(object):
+
+class LinkedAccount():
 
     def __init__(self, primary_userid, linked_userid):
         self.id = None
@@ -23,7 +25,9 @@ class LinkedAccount(object):
         self.linked_userid = linked_userid
 
     def __repr__(self):
-       return "<Linked(id='%d', primary='%s', linked='%s')>" % (self.id, self.primary_userid, self.linked_userid)
+        return "<Linked(id='%d', primary='%s', linked='%s')>" % (DAOUtils(self.id),
+                                                                 self.primary_userid,
+                                                                 self.linked_userid)
 
     def to_document(self):
         document = {"primary_userid": self.primary_userid,

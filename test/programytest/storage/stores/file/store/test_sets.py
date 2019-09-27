@@ -19,7 +19,7 @@ class FileSetsStoreTests(SetStoreAsserts):
 
     def test_load_from_test_dir_no_subdir(self):
         config = FileStorageConfiguration()
-        config._sets_storage = FileStoreConfiguration(dirs=[os.path.dirname(__file__) + os.sep + "data" + os.sep + "sets" + os.sep + "text"], extension="txt", subdirs=False, format="text", encoding="utf-8", delete_on_start=False)
+        config._sets_storage = FileStoreConfiguration(dirs=[os.path.dirname(__file__) + os.sep + "data" + os.sep + "sets" + os.sep + "text"], extension="txt", subdirs=False, fileformat="text", encoding="utf-8", delete_on_start=False)
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileSetsStore(engine)
@@ -36,7 +36,7 @@ class FileSetsStoreTests(SetStoreAsserts):
 
     def test_load_from_test_dir_with_subdir(self):
         config = FileStorageConfiguration()
-        config._sets_storage = FileStoreConfiguration(dirs=[os.path.dirname(__file__) + os.sep + "data" + os.sep + "sets" + os.sep + "text"], extension="txt", subdirs=True, format="text", encoding="utf-8", delete_on_start=False)
+        config._sets_storage = FileStoreConfiguration(dirs=[os.path.dirname(__file__) + os.sep + "data" + os.sep + "sets" + os.sep + "text"], extension="txt", subdirs=True, fileformat="text", encoding="utf-8", delete_on_start=False)
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileSetsStore(engine)

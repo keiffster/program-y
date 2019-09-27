@@ -21,7 +21,7 @@ class FilePerson2StoreTests(Person2sStoreAsserts):
 
     def test_load_from_file(self):
         config = FileStorageConfiguration()
-        config._person2_storage = FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "data" + os.sep + "lookups" + os.sep + "text" + os.sep + "person2.txt", format="text", encoding="utf-8", delete_on_start=False)
+        config._person2_storage = FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "data" + os.sep + "lookups" + os.sep + "text" + os.sep + "person2.txt", fileformat="text", encoding="utf-8", delete_on_start=False)
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FilePerson2Store(engine)

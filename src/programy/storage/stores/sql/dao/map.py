@@ -14,9 +14,9 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from sqlalchemy import Column, Integer, String
-
+from sqlalchemy import Column
+from sqlalchemy import Integer
+from sqlalchemy import String
 from programy.storage.stores.sql.base import Base
 from programy.storage.stores.utils import DAOUtils
 
@@ -33,5 +33,3 @@ class Map(Base):
     def __repr__(self):
         return "<Map(id='%s', name='%s', key='%s', value='%s')>" % \
                (DAOUtils.valid_id(self.id), self.name, self.key, self.value)
-
-

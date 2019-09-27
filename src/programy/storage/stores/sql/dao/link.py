@@ -14,9 +14,11 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from sqlalchemy import Column, Integer, String, Boolean, DateTime
-
+from sqlalchemy import Column
+from sqlalchemy import Integer
+from sqlalchemy import String
+from sqlalchemy import Boolean
+from sqlalchemy import DateTime
 from programy.storage.stores.sql.base import Base
 from programy.storage.stores.utils import DAOUtils
 
@@ -33,6 +35,7 @@ class Link(Base):
     retry_count = Column(Integer)
 
     def __repr__(self):
-        return "<Linked(id='%s', primary_user='%s', provided_key='%s', generated_key='%s', expired='%s', expires='%s', retry_count='%d')>" % \
-               (DAOUtils.valid_id(self.id), self.primary_user, self.provided_key, self.generated_key, self.expired, self.expires, self.retry_count)
-
+        return "<Linked(id='%s', primary_user='%s', provided_key='%s', generated_key='%s', " \
+               "expired='%s', expires='%s', retry_count='%d')>" % \
+               (DAOUtils.valid_id(self.id), self.primary_user, self.provided_key, self.generated_key, self.expired,
+                self.expires, self.retry_count)

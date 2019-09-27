@@ -17,16 +17,15 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 This is an example extension that allow you to call an external service to retreive the energy consumption data
 of the customer. Currently contains no authentication
 """
-
 from programy.utils.logging.ylogger import YLogger
-
 from programy.extensions.base import Extension
+
 
 class SpellingExtension(Extension):
 
     # execute() is the interface that is called from the <extension> tag in the AIML
-    def execute(self, context, data):
-        YLogger.debug(context, "Spelling - Calling external service for with extra data [%s]", data)
+    def execute(self, client_context, data):
+        YLogger.debug(client_context, "Spelling - Calling external service for with extra data [%s]", data)
 
         # SPELLING CORRECT <TEXT STRING>
         # SPELLING ENABLED
@@ -42,8 +41,8 @@ class SpellingExtension(Extension):
 
                         text = " ".join(words[2:])
 
-                        if context.bot.spell_checker is not None:
-                            corrected = context.bot.spell_checker.correct(text)
+                        if client_context.bot.spell_checker is not None:
+                            corrected = client_context.bot.spell_checker.correct(text)
 
                             return "SPELLING CORRECTED %s"%corrected
 
@@ -54,7 +53,7 @@ class SpellingExtension(Extension):
 
                     if words[1] == 'ENABLED':
 
-                        if context.bot.spell_checker is not None:
+                        if client_context.bot.spell_checker is not None:
                             return "SPELLING ENABLED"
                         else:
                             return "SPELLING DISABLED"

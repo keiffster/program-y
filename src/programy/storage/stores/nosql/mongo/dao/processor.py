@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.storage.stores.utils import DAOUtils
 
 
-class Processor(object):
+class Processor():
 
     def __init__(self, classname):
         self.id = None
@@ -37,7 +37,7 @@ class PreProcessor(Processor):
 
     def __repr__(self):
         return "<PreProcessor(id='%s', classname='%s')>" % (
-        DAOUtils.valid_id(self.id), self.classname)
+            DAOUtils.valid_id(self.id), self.classname)
 
     @staticmethod
     def from_document(data):
@@ -56,7 +56,7 @@ class PostProcessor(Processor):
 
     def __repr__(self):
         return "<PostProcessor(id='%s', classname='%s')>" % (
-        DAOUtils.valid_id(self.id), self.classname)
+            DAOUtils.valid_id(self.id), self.classname)
 
     @staticmethod
     def from_document(data):
@@ -75,7 +75,7 @@ class PostQuestionProcessor(Processor):
 
     def __repr__(self):
         return "<PostQuestionProcessor(id='%s', classname='%s')>" % (
-        DAOUtils.valid_id(self.id), self.classname)
+            DAOUtils.valid_id(self.id), self.classname)
 
     @staticmethod
     def from_document(data):

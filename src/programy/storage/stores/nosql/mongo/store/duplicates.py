@@ -21,7 +21,6 @@ from programy.storage.stores.nosql.mongo.dao.duplicate import Duplicate
 
 
 class MongoDuplicatesStore(MongoStore, DuplicatesStore):
-
     DUPLICATES = 'duplicates'
 
     def __init__(self, storage_engine):
@@ -30,9 +29,8 @@ class MongoDuplicatesStore(MongoStore, DuplicatesStore):
     def collection_name(self):
         return MongoDuplicatesStore.DUPLICATES
 
-    def save_duplicates(self, duplicates):
+    def save_duplicates(self, duplicates, commit=True):
         YLogger.info(self, "Saving duplicates to Mongo")
         for duplicate in duplicates:
             db_duplicate = Duplicate(duplicate=duplicate[0], file=duplicate[1], start=duplicate[2], end=duplicate[3])
             self.add_document(db_duplicate)
-

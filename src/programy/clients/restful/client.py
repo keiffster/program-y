@@ -14,21 +14,21 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from abc import ABC
+from abc import abstractmethod
 from programy.utils.logging.ylogger import YLogger
-from abc import ABCMeta, abstractmethod
-
 from programy.clients.client import BotClient
 from programy.clients.restful.config import RestConfiguration
-from programy.clients.restful.apihandlers import APIHandler_V1_0, APIHandler_V2_0
+from programy.clients.restful.apihandlers import APIHandler_V1_0
+from programy.clients.restful.apihandlers import APIHandler_V2_0
 from programy.clients.restful.apikeys import APIKeysHandler
 from programy.clients.restful.auth import RestAuthorizationHandler
 
 
-class RestBotClient(BotClient):
-    __metaclass__ = ABCMeta
+class RestBotClient(BotClient, ABC):
 
-    def __init__(self, id, argument_parser=None):
-        BotClient.__init__(self, id, argument_parser)
+    def __init__(self, botid, argument_parser=None):
+        BotClient.__init__(self, botid, argument_parser)
         self._api_keys = APIKeysHandler(self.configuration.client_configuration)
         self._authorization = None
         self._v1_0_handler = APIHandler_V1_0(self)

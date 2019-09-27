@@ -14,11 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.utils.logging.ylogger import YLogger
-
 from programy.parser.template.nodes.base import TemplateNode
-from programy.parser.exceptions import ParserException
 from programy.utils.text.text import TextUtils
 
 
@@ -29,16 +25,16 @@ class TemplateListNode(TemplateNode):
         self._items = []
 
     def resolve_list_items(self, client_context):
-        str = ""
+        resolved = ""
         for item in self._items:
-            str += "<item>%s</item>"%item.resolve(client_context)
-        return str
+            resolved += "<item>%s</item>" % item.resolve(client_context)
+        return resolved
 
     def resolve_to_string(self, client_context):
-        str = "<list>"
-        str += self.resolve_list_items(client_context)
-        str += "</list>"
-        return str
+        resolved = "<list>"
+        resolved += self.resolve_list_items(client_context)
+        resolved += "</list>"
+        return resolved
 
     def to_string(self):
         return "[LIST %d]" % (len(self._items))
@@ -64,4 +60,3 @@ class TemplateListNode(TemplateNode):
 
             tail_text = self.get_tail_from_element(child)
             self.parse_text(graph, tail_text)
-

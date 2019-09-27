@@ -4,7 +4,7 @@
 <category>
         <pattern>TESTDATE</pattern>
         <template>Nous sommes le
-            <sentence><date locale="fr_FR" format="%d %B %Y" jformat="dd MMMMMMMMM yyyy"/></sentence>
+            <sentence><date locale="fr_FR" cformat="%d %B %Y" jformat="dd MMMMMMMMM yyyy"/></sentence>
         </template>
 </category>
 

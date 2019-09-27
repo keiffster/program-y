@@ -14,10 +14,9 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.utils.logging.ylogger import YLogger
 import datetime
 from dateutil.relativedelta import relativedelta
+from programy.utils.logging.ylogger import YLogger
 from programy.parser.template.nodes.base import TemplateNode
 from programy.utils.text.text import TextUtils
 
@@ -138,7 +137,7 @@ class TemplateIntervalNode(TemplateNode):
     def parse_expression(self, graph, expression):
 
         if 'format' in expression.attrib:
-            self.interval_format = graph.get_word_node(expression.attrib['format'])
+            self._interval_format = graph.get_word_node(expression.attrib['format'])
 
         head_text = self.get_text_from_element(expression)
         self.parse_text(graph, head_text)
@@ -147,7 +146,7 @@ class TemplateIntervalNode(TemplateNode):
             tag_name = TextUtils.tag_from_text(child.tag)
 
             if tag_name == 'format':
-                self.interval_format = graph.get_word_node(self.get_text_from_element(child))
+                self._interval_format = graph.get_word_node(self.get_text_from_element(child))
 
             elif tag_name == 'style':
                 node = graph.get_base_node()
@@ -155,7 +154,7 @@ class TemplateIntervalNode(TemplateNode):
                 for sub_child in child:
                     graph.parse_tag_expression(sub_child, node)
                     node.parse_text(graph, self.get_text_from_element(child))
-                self.style = node
+                self._style = node
 
             elif tag_name == 'from':
                 node = graph.get_base_node()
@@ -163,7 +162,7 @@ class TemplateIntervalNode(TemplateNode):
                 for sub_child in child:
                     graph.parse_tag_expression(sub_child, node)
                     node.parse_text(graph, self.get_text_from_element(child))
-                self.interval_from = node
+                self._interval_from = node
 
             elif tag_name == 'to':
                 node = graph.get_base_node()
@@ -171,7 +170,7 @@ class TemplateIntervalNode(TemplateNode):
                 for sub_child in child:
                     graph.parse_tag_expression(sub_child, node)
                     node.parse_text(graph, self.get_text_from_element(child))
-                self.interval_to = node
+                self._interval_to = node
             else:
                 graph.parse_tag_expression(child, self)
 
@@ -179,12 +178,15 @@ class TemplateIntervalNode(TemplateNode):
             self.parse_text(graph, tail_text)
 
         if self.interval_format is None:
-            YLogger.warning(self, "Interval node, format missing, defaulting to 'c%%'!")
-            self.interval_format = "%c"
+            YLogger.warning(self, "Interval node, format missing, defaulting to '%c'!")
+            self._interval_format = "%c"
+
         if self.style is None:
             YLogger.warning(self, "style node, format missing, defaulting to 'days'!")
-            self.style = "days"
+            self._style = "days"
+
         if self.interval_from is None:
             YLogger.warning(self, "interval_from node, format missing !")
+
         if self.interval_to is None:
             YLogger.warning(self, "interval_to node, format missing !")

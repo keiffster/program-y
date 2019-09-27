@@ -5,6 +5,7 @@ from programy.utils.text.dateformat import DateFormatter
 
 from programytest.client import TestClient
 
+
 class DateTimeAIMLTestClient(TestClient):
 
     def __init__(self):

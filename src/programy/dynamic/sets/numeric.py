@@ -19,7 +19,6 @@ from programy.dynamic.sets.set import DynamicSet
 
 
 class IsNumeric(DynamicSet):
-
     NAME = "NUMBER"
 
     def __init__(self, config):

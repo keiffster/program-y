@@ -1,6 +1,6 @@
 import os
-import csv
 import os.path
+import csv
 from optparse import OptionParser
 
 
@@ -15,7 +15,7 @@ class CmdArgsHandler:
         parser.add_option("-o", "--output", dest="aimlloc",
                           help="Specify the location where the aiml file should go.")
 
-        (opts, args) = parser.parse_args()
+        (opts, _) = parser.parse_args()
 
         mandatories = ['aimlloc']
         self.check_manditory_opts_present(parser, opts, mandatories)

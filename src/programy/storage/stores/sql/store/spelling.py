@@ -19,16 +19,21 @@ from programy.storage.stores.sql.store.sqlstore import SQLStore
 from programy.storage.entities.spelling import SpellingStore
 from programy.storage.stores.sql.dao.corpus import Corpus
 from programy.storage.entities.store import Store
+from programy.utils.console.console import outputLog
+
 
 class SQLSpellingStore(SQLStore, SpellingStore):
 
     def __init__(self, storage_engine):
         SQLStore.__init__(self, storage_engine)
 
+    def _get_all(self):
+        return self._storage_engine.session.query(Corpus)
+
     def empty(self):
         self._storage_engine.session.query(Corpus).delete()
 
-    def upload_from_file(self, filename, format=Store.TEXT_FORMAT, commit=True, verbose=False):
+    def upload_from_file(self, filename, fileformat=Store.TEXT_FORMAT, commit=True, verbose=False):
 
         count = success = 0
 
@@ -40,7 +45,7 @@ class SQLSpellingStore(SQLStore, SpellingStore):
                         corpus = Corpus(word=word)
                         self.storage_engine.session.add(corpus)
                         if verbose is True:
-                            print(word)
+                            outputLog(self, word)
                         success += 1
                         count += 1
 
@@ -59,5 +64,3 @@ class SQLSpellingStore(SQLStore, SpellingStore):
             words.append(dbword.word)
         all_words = " ".join(words)
         spell_checker.add_corpus(all_words)
-
-

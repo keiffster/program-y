@@ -14,13 +14,10 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.parser.template.nodes.richmedia.link import TemplateLinkNode
-from programy.parser.template.nodes.richmedia.button import TemplateButtonNode
-from programy.parser.template.nodes.richmedia.card import TemplateCardNode
+from programy.utils.console.console import outputLog
 
 
-class OpenchatBotReponseObject(object):
+class OpenchatBotReponseObject:
 
     @staticmethod
     def get_parameter(data, name, defaultValue=None):
@@ -32,57 +29,57 @@ class OpenchatBotReponseObject(object):
 
 class OpenChatBotMediaDefaultAction(OpenchatBotReponseObject):
 
-    def __init__(self, type, label, payload):
-        self.type = type
+    def __init__(self, actiontype, label, payload):
+        self.actiontype = actiontype
         self.label = label
         self.payload = payload
 
     @staticmethod
     def parse(json_data):
-        type = OpenchatBotReponseObject.get_parameter(json_data, 'type', None)
+        actiontype = OpenchatBotReponseObject.get_parameter(json_data, 'type', None)
         label = OpenchatBotReponseObject.get_parameter(json_data, 'label', None)
         payload = OpenchatBotReponseObject.get_parameter(json_data, 'payload', None)
-        return OpenChatBotMediaDefaultAction(type, label, payload)
+        return OpenChatBotMediaDefaultAction(actiontype, label, payload)
 
     def to_aiml(self):
-        if self.type == 'web_url':
-            str = "<link>"
-            str += "<text>%s</text>" % self.label
+        if self.actiontype == 'web_url':
+            aiml = "<link>"
+            aiml += "<text>%s</text>" % self.label
             if self.payload is not None:
-                str += "<url>%s</url>" % self.payload
-            str += "</link>"
-            return str
+                aiml += "<url>%s</url>" % self.payload
+            aiml += "</link>"
+            return aiml
 
-        print ("Unknown Default Action type [%s]"%self.type)
+        outputLog(None, "Unknown Default Action type [%s]" % self.actiontype)
         return None
 
 
 class OpenChatBotMediaButton(OpenchatBotReponseObject):
 
-    def __init__(self, type, client, label, payload):
-        self.type = type
+    def __init__(self, actiontype, client, label, payload):
+        self.actiontype = actiontype
         self.client = client
         self.label = label
         self.payload = payload
 
     @staticmethod
     def parse(json_data):
-        type = OpenchatBotReponseObject.get_parameter(json_data, 'type', None)
+        actiontype = OpenchatBotReponseObject.get_parameter(json_data, 'type', None)
         client = OpenchatBotReponseObject.get_parameter(json_data, 'client', None)
         label = OpenchatBotReponseObject.get_parameter(json_data, 'label', None)
         payload = OpenchatBotReponseObject.get_parameter(json_data, 'payload', None)
-        return OpenChatBotMediaButton(type, client, label, payload)
+        return OpenChatBotMediaButton(actiontype, client, label, payload)
 
     def to_aiml(self):
-        if self.type == 'web_url':
-            str = "<button>"
-            str += "<text>%s</text>" % self.label
+        if self.actiontype == 'web_url':
+            aiml = "<button>"
+            aiml += "<text>%s</text>" % self.label
             if self.payload is not None:
-                str += "<url>%s</url>" % self.payload
-            str += "</button>"
-            return str
+                aiml += "<url>%s</url>" % self.payload
+            aiml += "</button>"
+            return aiml
 
-        print ("Unknown Button type [%s]" % self.type)
+        outputLog(self, "Unknown Button type [%s]" % self.actiontype)
         return None
 
 
@@ -116,65 +113,65 @@ class OpenChatBotMedia(OpenchatBotReponseObject):
         return OpenChatBotMedia(shortDesc, longDesc, title, mimeType, src, default_action, buttons)
 
     def to_aiml(self):
-        str = "<card>"
-        str += "<image>%s</image>" % self.src
-        str += "<title>%s</title>" % self.shortDesc
-        str += "<subtitle>%s</subtitle>" % self.longDesc
+        aiml = "<card>"
+        aiml += "<image>%s</image>" % self.src
+        aiml += "<title>%s</title>" % self.shortDesc
+        aiml += "<subtitle>%s</subtitle>" % self.longDesc
         for button in self.buttons:
-            if button.type == 'web_url':
-                str += "<button>"
-                str += "<text>%s</text>" % button.label
+            if button.actiontype == 'web_url':
+                aiml += "<button>"
+                aiml += "<text>%s</text>" % button.label
                 if button.payload is not None:
-                    str += "<url>%s</url>" % button.payload
-                str += "</button>"
-        str += "</card>"
-        return str
+                    aiml += "<url>%s</url>" % button.payload
+                aiml += "</button>"
+        aiml += "</card>"
+        return aiml
 
 
 class OpenChatBotTTS(OpenchatBotReponseObject):
 
-    def __init__(self, type, payload):
-        self.type = type
+    def __init__(self, actiontype, payload):
+        self.actiontype = actiontype
         self.payload = payload
 
     @staticmethod
     def parse(json_data):
-        type = OpenchatBotReponseObject.get_parameter(json_data, 'type', None)
+        actiontype = OpenchatBotReponseObject.get_parameter(json_data, 'type', None)
         payload = OpenchatBotReponseObject.get_parameter(json_data, 'payload', None)
-        return OpenChatBotTTS(type, payload)
+        return OpenChatBotTTS(actiontype, payload)
 
     def to_aiml(self):
-        str = "<tts>"
-        str += "<type>%s</type>" % self.type
-        str += self.payload
-        str += "</tts>"
-        return str
+        aiml = "<tts>"
+        aiml += "<type>%s</type>" % self.actiontype
+        aiml += self.payload
+        aiml += "</tts>"
+        return aiml
 
 
 class OpenChatBotSuggestion(OpenchatBotReponseObject):
 
-    def __init__(self, type, label, payload):
-        self.type = type
+    def __init__(self, actiontype, label, payload):
+        self.actiontype = actiontype
         self.label = label
         self.payload = payload
 
     @staticmethod
     def parse(json_data):
-        type = OpenchatBotReponseObject.get_parameter(json_data, 'type', None)
+        actiontype = OpenchatBotReponseObject.get_parameter(json_data, 'type', None)
         label = OpenchatBotReponseObject.get_parameter(json_data, 'label', None)
         payload = OpenchatBotReponseObject.get_parameter(json_data, 'payload', None)
-        return OpenChatBotSuggestion(type, label, payload)
+        return OpenChatBotSuggestion(actiontype, label, payload)
 
     def to_aiml(self):
-        if self.type == 'web_url':
-            str = "<link>"
-            str += "<text>%s</text>" % self.label
+        if self.actiontype == 'web_url':
+            aiml = "<link>"
+            aiml += "<text>%s</text>" % self.label
             if self.payload is not None:
-                str += "<url>%s</url>" % self.payload
-            str += "</link>"
-            return str
+                aiml += "<url>%s</url>" % self.payload
+            aiml += "</link>"
+            return aiml
 
-        print ("Unknown Suggestion type [%s]"%self.type)
+        outputLog(None, "Unknown Suggestion type [%s]" % self.actiontype)
         return None
 
 
@@ -205,44 +202,43 @@ class OpenChatBotResponse(OpenchatBotReponseObject):
 
         media = None
         if 'media' in json_data:
-            media = [OpenChatBotMedia.parse(media) for media in json_data['media']]
+            media = [OpenChatBotMedia.parse(mediax) for mediax in json_data['media']]
 
         suggestions = None
         if 'suggestions' in json_data:
-            suggestions = [OpenChatBotSuggestion.parse(suggestion) for suggestion in json_data['suggestions']]
+            suggestions = [OpenChatBotSuggestion.parse(suggestionx) for suggestionx in json_data['suggestions']]
 
-        contexts = None
+        contexts = []
         if 'context' in json_data:
-            contexts = [context for context in json_data['context']]
+            contexts = json_data['context'][:]
 
         return OpenChatBotResponse(query, userId, timestamp, text, tts, infoURL, media, suggestions, contexts)
 
     def to_aiml(self):
-        str = ""
+        aiml = ""
 
         if self.text is not None:
-            str += self.text
+            aiml += self.text
 
         if self.tts is not None:
-            str += " "
-            str += self.tts.to_aiml()
+            aiml += " "
+            aiml += self.tts.to_aiml()
 
         if self.media:
             for media in self.media:
-                str += " "
-                aiml = media.to_aiml()
-                if aiml:
-                    str += media.to_aiml()
+                media_aiml = media.to_aiml()
+                if media_aiml:
+                    aiml += " "
+                    aiml += media_aiml
 
         if self.suggestions:
             for suggestion in self.suggestions:
-                if suggestion is not None:
-                    aiml = suggestion.to_aiml()
-                    if aiml:
-                        str += " "
-                        str += media.to_aiml()
+                sugg_aiml = suggestion.to_aiml()
+                if sugg_aiml:
+                    aiml += " "
+                    aiml += sugg_aiml
 
-        return str
+        return aiml
 
 
 class OpenChatBotStatus(OpenchatBotReponseObject):
@@ -266,7 +262,7 @@ class OpenChatBotMeta(OpenchatBotReponseObject):
         self.botName = botName
         self.botIcon = botIcon
         self.version = version
-        self.copyright = copyr
+        self.copyr = copyr
         self.authors = authors
 
     @staticmethod
@@ -274,6 +270,6 @@ class OpenChatBotMeta(OpenchatBotReponseObject):
         botName = OpenchatBotReponseObject.get_parameter(json_data, 'botName', None)
         botIcon = OpenchatBotReponseObject.get_parameter(json_data, 'botIcon', None)
         version = OpenchatBotReponseObject.get_parameter(json_data, 'version', None)
-        copyright = OpenchatBotReponseObject.get_parameter(json_data, 'copyright', None)
+        copyr = OpenchatBotReponseObject.get_parameter(json_data, 'copyright', None)
         authors = OpenchatBotReponseObject.get_parameter(json_data, 'authors', None)
-        return OpenChatBotMeta(botName, botIcon, version, copyright, authors)
+        return OpenChatBotMeta(botName, botIcon, version, copyr, authors)

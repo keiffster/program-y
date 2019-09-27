@@ -20,7 +20,7 @@ class FileTemplateNodeStoreTests(unittest.TestCase):
 
     def test_load_variables(self):
         config = FileStorageConfiguration()
-        config._template_nodes_storage = FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "data" + os.sep + "nodes" + os.sep + "template_nodes.conf", format="text", encoding="utf-8", delete_on_start=False)
+        config._template_nodes_storage = FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "data" + os.sep + "nodes" + os.sep + "template_nodes.conf", fileformat="text", encoding="utf-8", delete_on_start=False)
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileTemplateNodeStore(engine)

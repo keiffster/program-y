@@ -14,14 +14,13 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.utils.logging.ylogger import YLogger
 import json
-
+from programy.utils.logging.ylogger import YLogger
 from programy.services.service import Service
 from programy.services.requestsapi import RequestsAPI
 
 
-class DuckDuckGoAPI(object):
+class DuckDuckGoAPI:
 
     def __init__(self, request_api=None):
         if request_api is None:
@@ -40,7 +39,7 @@ class DuckDuckGoAPI(object):
             raise Exception("No response from DuckDuckGo service")
 
         if response.status_code != 200:
-            raise Exception("Error response from DuckDuckGo service [%d]"%response.status_code)
+            raise Exception("Error response from DuckDuckGo service [%d]" % response.status_code)
 
         json_data = json.loads(response.text)
         if 'RelatedTopics' not in json_data:
@@ -73,7 +72,7 @@ class DuckDuckGoService(Service):
             self._api = api
 
         self._url = None
-        if config._url is None:
+        if config.url is None:
             raise Exception("Undefined url parameter")
         else:
             self._url = config.url
@@ -82,5 +81,6 @@ class DuckDuckGoService(Service):
         try:
             return self._api.ask_question(self._url, question)
         except Exception as e:
-            YLogger.error(client_context, "General error querying DuckDuckGo for question [%s] - [%s]", question, str(e))
+            YLogger.error(client_context, "General error querying DuckDuckGo for question [%s] - [%s]", question,
+                          str(e))
         return ""

@@ -14,18 +14,14 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.utils.logging.ylogger import YLogger
-from abc import ABCMeta, abstractmethod
-
-from programy.utils.classes.loader import ClassLoader
+from abc import ABC
+from abc import abstractmethod
 from programy.storage.factory import StorageFactory
 
 
-class ProcessorCollection(object):
+class ProcessorCollection:
 
     def __init__(self):
-        ClassLoader.__init__(self)
         self._processors = []
 
     @property
@@ -38,9 +34,9 @@ class ProcessorCollection(object):
     def add_processor(self, processor):
         self._processors.append(processor)
 
-    def process(self, client_context, word_string):
+    def process(self, context, word_string):
         for processor in self._processors:
-            word_string = processor.process(client_context, word_string)
+            word_string = processor.process(context, word_string)
         return word_string
 
     def load(self, storage_factory):
@@ -95,14 +91,13 @@ class PostQuestionProcessorCollection(ProcessorCollection):
 
 ##################################################################
 #
-class Processor:
-    __metaclass__ = ABCMeta
+class Processor(ABC):
 
     def __init__(self):
         pass
 
     @abstractmethod
-    def process(self, client_context, word_string):
+    def process(self, context, word_string):
         pass
 
 
@@ -114,7 +109,7 @@ class PreProcessor(Processor):
         Processor.__init__(self)
 
     @abstractmethod
-    def process(self, client_context, word_string):
+    def process(self, context, word_string):
         pass
 
 
@@ -125,7 +120,7 @@ class PostProcessor(Processor):
         Processor.__init__(self)
 
     @abstractmethod
-    def process(self, client_context, word_string):
+    def process(self, context, word_string):
         pass
 
 
@@ -136,5 +131,5 @@ class PostQuestionProcessor(Processor):
         Processor.__init__(self)
 
     @abstractmethod
-    def process(self, client_context, word_string):
+    def process(self, context, word_string):
         pass

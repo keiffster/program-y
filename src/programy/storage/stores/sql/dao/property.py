@@ -14,15 +14,14 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from sqlalchemy import Column, Integer, String
-
+from sqlalchemy import Column
+from sqlalchemy import Integer
+from sqlalchemy import String
 from programy.storage.stores.sql.base import Base
 from programy.storage.stores.utils import DAOUtils
 
 
-class PropertyBase(object):
-
+class PropertyBase():
     id = Column(Integer, primary_key=True)
     name = Column(String(48))
     value = Column(String(256))
@@ -41,7 +40,7 @@ class DefaultVariable(Base, PropertyBase):
 
     def __repr__(self):
         return "<DefaultVariable(id='%s', name='%s', value='%s')>" % (DAOUtils.valid_id(self.id),
-                                                                                 self.name, self.value)
+                                                                      self.name, self.value)
 
 
 class Regex(Base, PropertyBase):
@@ -49,5 +48,4 @@ class Regex(Base, PropertyBase):
 
     def __repr__(self):
         return "<Regex(id='%s', name='%s', value='%s')>" % (DAOUtils.valid_id(self.id),
-                                                                       self.name, self.value)
-
+                                                            self.name, self.value)

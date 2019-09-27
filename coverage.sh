@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 clear
+echo "=============================================================================="
+echo "coverage running..........."
 
 rm .coverage
 rm -rf ./cover

@@ -14,12 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.utils.logging.ylogger import YLogger
-
 from programy.parser.template.nodes.base import TemplateNode
-from programy.parser.exceptions import ParserException
-from programy.utils.text.text import TextUtils
 
 
 class TemplateImageNode(TemplateNode):
@@ -28,8 +23,7 @@ class TemplateImageNode(TemplateNode):
         TemplateNode.__init__(self)
 
     def resolve_to_string(self, client_context):
-        str = "<image>%s</image>"%self.resolve_children_to_string(client_context)
-        return str
+        return "<image>%s</image>" % self.resolve_children_to_string(client_context)
 
     def to_string(self):
         return "[IMAGE %d]" % (len(self._children))
@@ -41,4 +35,3 @@ class TemplateImageNode(TemplateNode):
     #
     def parse_expression(self, graph, expression):
         self._parse_node(graph, expression)
-

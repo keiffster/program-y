@@ -14,16 +14,16 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.utils.logging.ylogger import YLogger
-
 from programy.extensions.base import Extension
 from programy.nlp.synsets.synsets import Synsets
+from programy.utils.logging.ylogger import YLogger
 
 
 class SynsetsExtension(Extension):
 
     # execute() is the interface that is called from the <extension> tag in the AIML
-    def execute(self, context, data):
+    def execute(self, client_context, data):
+        del client_context
 
         words = data.split(" ")
         if words[0] == 'SIMILAR':
@@ -34,7 +34,7 @@ class SynsetsExtension(Extension):
             elif len(words) == 6:
                 word1 = words[1]
                 word2 = words[2]
-                weight = float("%s.%s"%(words[3], words[5]))
+                weight = float("%s.%s" % (words[3], words[5]))
             else:
                 return "FALSE"
 
@@ -44,7 +44,7 @@ class SynsetsExtension(Extension):
                     if result[2] >= weight:
                         return "TRUE"
             except Exception as e:
-                print(e)
+                YLogger.exception_nostack(self, "Failed to get similarity", e)
 
         elif words[0] == 'SIMILARS':
 
@@ -64,6 +64,6 @@ class SynsetsExtension(Extension):
             else:
                 return "FALSE"
 
-            return "TRUE %s"%" ".join([word.upper() for word in results])
+            return "TRUE %s" % " ".join([word.upper() for word in results])
 
         return "FALSE"

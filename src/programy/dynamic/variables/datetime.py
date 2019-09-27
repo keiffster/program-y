@@ -26,5 +26,6 @@ class GetTime(DynamicVariable):
         DynamicVariable.__init__(self, config)
 
     def get_value(self, client_context, value=None):
+        del value
         formatter = DateFormatter()
         return formatter.time_representation()

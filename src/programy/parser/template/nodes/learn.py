@@ -14,16 +14,15 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.utils.logging.ylogger import YLogger
 import xml.etree.ElementTree as ET
-
+from programy.utils.logging.ylogger import YLogger
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.eval import TemplateEvalNode
 from programy.utils.text.text import TextUtils
 from programy.parser.exceptions import ParserException
 
-class LearnCategory(object):
+
+class LearnCategory:
 
     def __init__(self, pattern, topic, that, template):
         self._pattern = pattern
@@ -87,7 +86,8 @@ class TemplateLearnNode(TemplateNode):
         count = 0
         for child in template.children:
             if isinstance(child, TemplateEvalNode):
-                new_word_node = client_context.brain.aiml_parser.template_parser.get_word_node(child.resolve(client_context))
+                new_word_node = client_context.brain.aiml_parser.template_parser.get_word_node(
+                    child.resolve(client_context))
                 new_template.children.append(new_word_node)
             else:
                 new_template.children.append(child)
@@ -125,13 +125,17 @@ class TemplateLearnNode(TemplateNode):
         return new_element
 
     def _create_new_category(self, client_context, category, userid="*"):
+        del userid
+
         new_pattern = self.resolve_element_evals(client_context, category.pattern)
         new_topic = self.resolve_element_evals(client_context, category.topic)
         new_that = self.resolve_element_evals(client_context, category.that)
 
         new_template = self.evaluate_eval_nodes(client_context, category.template)
 
-        client_context.brain.aiml_parser.pattern_parser.add_pattern_to_graph(new_pattern, new_topic, new_that, new_template, learn=True, userid=client_context.userid)
+        client_context.brain.aiml_parser.pattern_parser.add_pattern_to_graph(new_pattern, new_topic, new_that,
+                                                                             new_template, learn=True,
+                                                                             userid=client_context.userid)
 
         YLogger.debug(client_context, "[%s] resolved to new pattern [[%s] [%s] [%s]", self.to_string(),
                       ET.tostring(new_pattern, 'utf-8').decode('utf-8'),
@@ -181,4 +185,4 @@ class TemplateLearnNode(TemplateNode):
                 raise ParserException("Not supported yet")
 
             else:
-                raise ParserException("Invalid tag [%s] found in <learn>"%tag_name)
+                raise ParserException("Invalid tag [%s] found in <learn>" % tag_name)

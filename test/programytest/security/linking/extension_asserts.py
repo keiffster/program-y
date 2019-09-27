@@ -10,8 +10,8 @@ class AccountLinkerExtensionAsserts(unittest.TestCase):
         extension = AccountLinkingExtension()
         self.assertIsNotNone(extension)
 
-        self.assertEquals("ACCOUNT LINK FAILED UNKNOWN COMMAND", extension.execute(context, "UNKNOWN COMMAND"))
-        self.assertEquals("ACCOUNT LINK FAILED UNKNOWN COMMAND", extension.execute(context, "LINK UNKNOWN"))
+        self.assertEqual("ACCOUNT LINK FAILED UNKNOWN COMMAND", extension.execute(context, "UNKNOWN COMMAND"))
+        self.assertEqual("ACCOUNT LINK FAILED UNKNOWN COMMAND", extension.execute(context, "LINK UNKNOWN"))
 
     def assert_primary_account_link_success(self, context):
 
@@ -31,9 +31,9 @@ class AccountLinkerExtensionAsserts(unittest.TestCase):
         extension = AccountLinkingExtension()
         self.assertIsNotNone(extension)
 
-        self.assertEquals("INVALID PRIMARY ACCOUNT COMMAND", extension.execute(context, "LINK PRIMARY ACCOUNT"))
-        self.assertEquals("INVALID PRIMARY ACCOUNT COMMAND", extension.execute(context, "LINK PRIMARY ACCOUNT USERID"))
-        self.assertEquals("INVALID PRIMARY ACCOUNT COMMAND", extension.execute(context, "LINK PRIMARY ACCOUNT USERID CLIENT"))
+        self.assertEqual("INVALID PRIMARY ACCOUNT COMMAND", extension.execute(context, "LINK PRIMARY ACCOUNT"))
+        self.assertEqual("INVALID PRIMARY ACCOUNT COMMAND", extension.execute(context, "LINK PRIMARY ACCOUNT USERID"))
+        self.assertEqual("INVALID PRIMARY ACCOUNT COMMAND", extension.execute(context, "LINK PRIMARY ACCOUNT USERID CLIENT"))
 
     def assert_secondary_account_link_success(self, context):
 
@@ -56,9 +56,9 @@ class AccountLinkerExtensionAsserts(unittest.TestCase):
         extension = AccountLinkingExtension()
         self.assertIsNotNone(extension)
 
-        self.assertEquals("INVALID SECONDARY ACCOUNT COMMAND", extension.execute(context, "LINK SECONDARY ACCOUNT"))
-        self.assertEquals("INVALID SECONDARY ACCOUNT COMMAND", extension.execute(context, "LINK SECONDARY ACCOUNT PRIMARY_USER"))
-        self.assertEquals("INVALID SECONDARY ACCOUNT COMMAND", extension.execute(context, "LINK SECONDARY ACCOUNT PRIMARY_USER SECONDARY_CLIENT"))
-        self.assertEquals("INVALID SECONDARY ACCOUNT COMMAND", extension.execute(context, "LINK SECONDARY ACCOUNT PRIMARY_USER SECONDARY_CLIENT PRIMARY_USER"))
-        self.assertEquals("INVALID SECONDARY ACCOUNT COMMAND", extension.execute(context, "LINK SECONDARY ACCOUNT PRIMARY_USER SECONDARY_CLIENT PRIMARY_USER"))
-        self.assertEquals("INVALID SECONDARY ACCOUNT COMMAND", extension.execute(context, "LINK SECONDARY ACCOUNT PRIMARY_USER SECONDARY_CLIENT PRIMARY_USER GIVEN_TOKEN"))
+        self.assertEqual("INVALID SECONDARY ACCOUNT COMMAND", extension.execute(context, "LINK SECONDARY ACCOUNT"))
+        self.assertEqual("INVALID SECONDARY ACCOUNT COMMAND", extension.execute(context, "LINK SECONDARY ACCOUNT PRIMARY_USER"))
+        self.assertEqual("INVALID SECONDARY ACCOUNT COMMAND", extension.execute(context, "LINK SECONDARY ACCOUNT PRIMARY_USER SECONDARY_CLIENT"))
+        self.assertEqual("INVALID SECONDARY ACCOUNT COMMAND", extension.execute(context, "LINK SECONDARY ACCOUNT PRIMARY_USER SECONDARY_CLIENT PRIMARY_USER"))
+        self.assertEqual("INVALID SECONDARY ACCOUNT COMMAND", extension.execute(context, "LINK SECONDARY ACCOUNT PRIMARY_USER SECONDARY_CLIENT PRIMARY_USER"))
+        self.assertEqual("INVALID SECONDARY ACCOUNT COMMAND", extension.execute(context, "LINK SECONDARY ACCOUNT PRIMARY_USER SECONDARY_CLIENT PRIMARY_USER GIVEN_TOKEN"))

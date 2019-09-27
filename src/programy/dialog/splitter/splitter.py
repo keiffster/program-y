@@ -14,23 +14,21 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.utils.logging.ylogger import YLogger
-
 import re
-
+from programy.utils.logging.ylogger import YLogger
 from programy.utils.classes.loader import ClassLoader
 from programy.config.bot.splitter import BotSentenceSplitterConfiguration
 from programy.activate import Activatable
 
-class SentenceSplitter(Activatable):
 
+class SentenceSplitter(Activatable):
     ALL_PUNCTUATION = re.compile(r'[:\'";,.?!\(\)\-"]')
 
     def __init__(self, splitter_config):
         Activatable.__init__(self)
 
-        assert (splitter_config is not None)
-        assert (isinstance(splitter_config, BotSentenceSplitterConfiguration))
+        assert splitter_config is not None
+        assert isinstance(splitter_config, BotSentenceSplitterConfiguration)
 
         self._configuration = splitter_config
 

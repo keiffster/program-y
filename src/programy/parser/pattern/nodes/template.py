@@ -14,7 +14,6 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.parser.exceptions import ParserException
 from programy.parser.pattern.nodes.base import PatternNode
 
@@ -45,7 +44,7 @@ class PatternTemplateNode(PatternNode):
     def to_xml(self, client_context, include_user=False):
         string = ""
         if include_user is True:
-            string += '<template userid="%s">'%self.userid
+            string += '<template userid="%s">' % self.userid
         else:
             string += '<template>'
         string2 = super(PatternTemplateNode, self).to_xml(client_context, include_user)
@@ -55,7 +54,7 @@ class PatternTemplateNode(PatternNode):
 
     def to_string(self, verbose=True):
         if verbose is True:
-            return "PTEMPLATE [%s] [%s]" %(self.userid, self._child_count(verbose))
+            return "PTEMPLATE [%s] [%s]" % (self.userid, self._child_count(verbose))
         return "PTEMPLATE"
 
     def equivalent(self, other):
@@ -63,4 +62,3 @@ class PatternTemplateNode(PatternNode):
             if self.userid == other.userid:
                 return True
         return False
-

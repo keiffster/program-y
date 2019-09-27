@@ -38,8 +38,8 @@ class MockHeaders():
 class MockKikBotClient(KikBotClient):
 
     def __init__(self, argument_parser=None, kik_bot=None):
-        self._kik_bot = kik_bot
         self.test_question = None
+        self._kik_bot = kik_bot
         KikBotClient.__init__(self, argument_parser)
 
     def set_question(self, question):

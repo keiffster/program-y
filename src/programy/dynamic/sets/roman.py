@@ -21,7 +21,6 @@ from programy.dynamic.sets.set import DynamicSet
 
 
 class IsRomanNumeral(DynamicSet):
-
     NAME = "ROMAN"
 
     def __init__(self, config):

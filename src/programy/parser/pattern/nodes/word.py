@@ -14,7 +14,6 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.parser.exceptions import ParserException
 from programy.parser.pattern.nodes.base import PatternNode
 from programy.parser.pattern.equalsmatch import EqualsMatch
@@ -36,9 +35,9 @@ class PatternWordNode(PatternNode):
     def to_xml(self, client_context, include_user=False):
         string = ""
         if include_user:
-            string += '<word userid="%s" word="%s">'%(self.userid, self.word)
+            string += '<word userid="%s" word="%s">' % (self.userid, self.word)
         else:
-            string += '<word word="%s">'% self.word
+            string += '<word word="%s">' % self.word
         string += super(PatternWordNode, self).to_xml(client_context, include_user)
         string += '</word>\n'
         return string

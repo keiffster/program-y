@@ -14,16 +14,13 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.utils.logging.ylogger import YLogger
-
 import json
-
+from programy.utils.logging.ylogger import YLogger
 from programy.storage.stores.nosql.redis.store.redisstore import RedisStore
 from programy.storage.entities.conversation import ConversationStore
 
 
 class RedisConversationStore(RedisStore, ConversationStore):
-
     CHUNK_SIZE = 5000
 
     def __init__(self, storage_engine):
@@ -43,11 +40,12 @@ class RedisConversationStore(RedisStore, ConversationStore):
 
         cursor = '0'
         while cursor != 0:
-            cursor, keys = self._storage_engine._redis.scan(cursor=cursor, match=ns_keys, count=RedisConversationStore.CHUNK_SIZE)
+            cursor, keys = self._storage_engine.redis.scan(cursor=cursor, match=ns_keys,
+                                                           count=RedisConversationStore.CHUNK_SIZE)
             if keys:
-                self._storage_engine._redis.delete(*keys)
+                self._storage_engine.redis.delete(*keys)
 
-    def store_conversation(self, client_context, conversation):
+    def store_conversation(self, client_context, conversation, commit=True):
         try:
             convo_key = self._create_key(client_context)
             YLogger.debug(self, "Adding conversation [%s]", convo_key)
@@ -58,7 +56,8 @@ class RedisConversationStore(RedisStore, ConversationStore):
             self.save(convo_key, json_str)
 
         except Exception as e:
-            YLogger.exception (self, "Failed to save conversation to Redis for clientid [%s]", e, client_context.client.id)
+            YLogger.exception(self, "Failed to save conversation to Redis for clientid [%s]", e,
+                              client_context.client.id)
 
     def load_conversation(self, client_context, conversation):
 
@@ -76,7 +75,7 @@ class RedisConversationStore(RedisStore, ConversationStore):
             conversation.create_from_json(json_convo)
 
         except Exception as e:
-            YLogger.exception(self, "Failed to load conversation from Redis for clientid [%s]",e, client_context.client.id)
+            YLogger.exception(self, "Failed to load conversation from Redis for clientid [%s]", e,
+                              client_context.client.id)
 
         return conversation
-

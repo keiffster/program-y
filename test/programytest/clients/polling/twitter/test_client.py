@@ -317,7 +317,7 @@ class TwitterBotClientTests(unittest.TestCase):
 
         #TODO this writes to local storage rather than /tmp
         file_store_config = FileStorageConfiguration()
-        file_store_config._twitter_storage = FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "test_files" + os.sep + "gender.txt", format="text", extension="txt", encoding="utf-8", delete_on_start=False)
+        file_store_config._twitter_storage = FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "test_files" + os.sep + "gender.txt", fileformat="text", extension="txt", encoding="utf-8", delete_on_start=False)
 
         storage_engine = FileStorageEngine(file_store_config)
 

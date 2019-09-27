@@ -19,6 +19,8 @@ from programy.clients.events.console.client import ConsoleBotClient
 from programy.config.file.yaml_file import YamlConfigurationFile
 from programy.config.programy import ProgramyConfiguration
 from programy.clients.args import CommandLineClientArguments
+from programy.utils.substitutions.substitues import Substitutions
+from programy.utils.console.console import outputLog
 
 
 class MyEmbeddedBot(ConsoleBotClient):
@@ -31,7 +33,7 @@ class MyEmbeddedBot(ConsoleBotClient):
         client_args = CommandLineClientArguments(self, parser=None)
         return client_args
 
-    def load_configuration(self, arguments):
+    def load_configuration(self, arguments, subs: Substitutions = None):
 
         client_config = self.get_client_configuration()
         self._configuration = ProgramyConfiguration(client_config)
@@ -48,5 +50,4 @@ if __name__ == '__main__':
 
     response = my_bot.process_question(client_context, "Hello")
 
-    print("Response = ", response)
-
+    outputLog(None, "Response = ", response)

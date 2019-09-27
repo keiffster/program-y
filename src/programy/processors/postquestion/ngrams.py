@@ -14,10 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-
 from programy.utils.logging.ylogger import YLogger
-
 from programy.processors.processing import PostQuestionProcessor
 from programy.nlp.ngrams import NGramsCreator
 from programy.dialog.sentence import Sentence
@@ -40,6 +37,6 @@ class NGramsPostQuestionProcessor(PostQuestionProcessor):
                     return response
 
         except Exception as excep:
-            print(excep)
+            YLogger.exceptione(self, "Failed to create NGrams", excep)
 
         return None

@@ -14,18 +14,15 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.utils.logging.ylogger import YLogger
-
 import os
 import os.path
 import re
-
+from programy.utils.logging.ylogger import YLogger
 from programy.storage.stores.file.store.filestore import FileStore
 from programy.storage.entities.property import PropertyStore
 
 
 class FilePropertyStore(FileStore, PropertyStore):
-
     SPLIT_CHAR = ':'
     COMMENT = '#'
 
@@ -47,7 +44,7 @@ class FilePropertyStore(FileStore, PropertyStore):
 
     def add_property(self, name, value):
         props_path = self._get_storage_path()
-        properties = self._load_properties(props_path)
+        properties = self.load_properties(props_path)
         properties[name] = value
         self._write_properties(props_path, properties)
 
@@ -57,10 +54,10 @@ class FilePropertyStore(FileStore, PropertyStore):
 
     def get_properties(self):
         property_filepath = self._get_storage_path()
-        properties = self._load_properties(property_filepath)
+        properties = self.load_properties(property_filepath)
         return properties
 
-    def _load_properties(self, property_filepath):
+    def load_properties(self, property_filepath):
         properties = {}
         if os.path.exists(property_filepath):
             try:
@@ -72,14 +69,14 @@ class FilePropertyStore(FileStore, PropertyStore):
                         if line:
                             if line.startswith(FilePropertyStore.COMMENT) is False:
                                 splits = line.split(FilePropertyStore.SPLIT_CHAR)
-                                if len(splits)>1:
+                                if len(splits) > 1:
                                     key = splits[0].strip()
                                     val = self.process_value(splits[1:])
                                     if val is not None:
                                         properties[key] = val
 
             except Exception as excep:
-               YLogger.exception_nostack(self, "Failed to load properties file [%s]", excep, property_filepath)
+                YLogger.exception_nostack(self, "Failed to load properties file [%s]", excep, property_filepath)
 
         return properties
 
@@ -90,14 +87,14 @@ class FilePropertyStore(FileStore, PropertyStore):
         try:
             with open(property_filepath, "w+") as props_file:
                 for key, value in properties.items():
-                    props_file.write("%s%s%s\n"%(key, FilePropertyStore.SPLIT_CHAR, value))
+                    props_file.write("%s%s%s\n" % (key, FilePropertyStore.SPLIT_CHAR, value))
                 props_file.write("\n")
 
         except Exception as excep:
             YLogger.exception_nostack(self, "Failed to write properties file [%s]", excep, property_filepath)
 
     def _load_file_contents(self, collection, filename):
-        properties = self._load_properties(filename)
+        properties = self.load_properties(filename)
         for key, value in properties.items():
             collection.add_property(key, value)
 

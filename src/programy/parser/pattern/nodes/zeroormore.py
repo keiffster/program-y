@@ -14,16 +14,13 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.utils.logging.ylogger import YLogger
-
 from programy.parser.pattern.nodes.wildcard import PatternWildCardNode
 from programy.parser.pattern.match import Match
 from programy.parser.pattern.nodes.base import PatternNode
 
 
 class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
-
     MATCH_CHARS = ['^', '#']
 
     def __init__(self, wildcard, userid='*'):
@@ -42,7 +39,7 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
     def to_xml(self, client_context, include_user=False):
         string = ""
         if include_user is True:
-            string += '<zerormore userid="%s" wildcard="%s">\n'%(self.userid, self.wildcard)
+            string += '<zerormore userid="%s" wildcard="%s">\n' % (self.userid, self.wildcard)
         else:
             string += '<zerormore wildcard="%s">\n' % self.wildcard
         string += super(PatternZeroOrMoreWildCardNode, self).to_xml(client_context)
@@ -61,7 +58,7 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
                     return True
         return False
 
-    def consume(self, client_context, context, words, word_no, match_type, depth, parent_wildcard=False):
+    def consume(self, client_context, context, words, word_no, match_type, depth, parent=False):
 
         tabs = self.get_tabs(client_context, depth)
 
@@ -82,14 +79,15 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
             return match
 
         if self._topic is not None:
-            match = self._topic.consume(client_context, context, words, word_no, Match.TOPIC, depth+1)
+            match = self._topic.consume(client_context, context, words, word_no, Match.TOPIC, depth + 1)
 
             if match is not None:
                 YLogger.debug(client_context, "%sMatched topic, success!", tabs)
                 return match
 
             if words.word(word_no) == PatternNode.TOPIC:
-                YLogger.debug(client_context, "%s Looking for a %s, none given, no match found!", tabs, PatternNode.TOPIC)
+                YLogger.debug(client_context, "%s Looking for a %s, none given, no match found!", tabs,
+                              PatternNode.TOPIC)
                 context.pop_matches(matches_added)
                 return None
 
@@ -97,7 +95,7 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
 
         if self._priority_words or self._children:
 
-            ################################################################################################################
+            ######################################################################
             # Priority nodes
             for child in self._priority_words:
 
@@ -119,7 +117,7 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
                         context.pop_matches(matches_added)
                         return None
 
-            ################################################################################################################
+            #######################################################################
             # Children nodes
             for child in self._children:
 
@@ -133,7 +131,7 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
                     context.add_match(context_match2)
                     matches_added += 1
 
-                    match = child.consume(client_context, context, words, word_no+1, match_type, depth+1)
+                    match = child.consume(client_context, context, words, word_no + 1, match_type, depth + 1)
                     if match is not None:
                         return match
 
@@ -144,7 +142,8 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
             YLogger.debug(client_context, "%sWildcard %s matched %s", tabs, self._wildcard, word)
             context_match.add_word(word)
 
-            match = super(PatternZeroOrMoreWildCardNode, self).consume(client_context, context, words, word_no + 1, match_type, depth+1)
+            match = super(PatternZeroOrMoreWildCardNode, self).consume(client_context, context, words, word_no + 1,
+                                                                       match_type, depth + 1)
             if match is not None:
                 return match
 
@@ -158,7 +157,8 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
             YLogger.debug(client_context, "%sWildcard %s matched %s", tabs, self._wildcard, word)
             context_match.add_word(word)
 
-            match = super(PatternZeroOrMoreWildCardNode, self).consume(client_context, context, words, word_no + 1, match_type, depth+1)
+            match = super(PatternZeroOrMoreWildCardNode, self).consume(client_context, context, words, word_no + 1,
+                                                                       match_type, depth + 1)
             if match is not None:
                 return match
 
@@ -171,7 +171,8 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
         YLogger.debug(client_context, "%sNo children, consume words until next break point", tabs)
 
         while word_no < words.num_words() - 1:
-            match = super(PatternZeroOrMoreWildCardNode, self).consume(client_context, context, words, word_no, match_type, depth+1)
+            match = super(PatternZeroOrMoreWildCardNode, self).consume(client_context, context, words, word_no,
+                                                                       match_type, depth + 1)
             if match is not None:
                 return match
 
@@ -185,11 +186,13 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
             word_no += 1
             word = words.word(word_no)
 
-        if parent_wildcard is True:
-            match = super(PatternZeroOrMoreWildCardNode, self).consume(client_context, context, words, word_no+1, match_type,
+        if parent is True:
+            match = super(PatternZeroOrMoreWildCardNode, self).consume(client_context, context, words, word_no + 1,
+                                                                       match_type,
                                                                        depth + 1)
         else:
-            match = super(PatternZeroOrMoreWildCardNode, self).consume(client_context, context, words, word_no, match_type,
+            match = super(PatternZeroOrMoreWildCardNode, self).consume(client_context, context, words, word_no,
+                                                                       match_type,
                                                                        depth + 1)
         if match is not None:
             return match

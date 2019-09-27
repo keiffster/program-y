@@ -132,56 +132,63 @@ class StorageConfigurationTests(unittest.TestCase):
         self.assertIsNotNone(storage_config.storage_configurations)
         self.assert_storage_configurations(storage_config)
 
-    def assert_entity_store(self, storage_config):
+    def assert_entity_store(self, storage_config, file=True, sqllite=False):
 
-        self.assertEqual(storage_config.entity_store[StorageFactory.USERS], 'sqlite')
-        self.assertEqual(storage_config.entity_store[StorageFactory.LINKED_ACCOUNTS], 'sqlite')
-        self.assertEqual(storage_config.entity_store[StorageFactory.LINKS], 'sqlite')
+        if sqllite is True:
+            self.assertEqual(storage_config.entity_store[StorageFactory.USERS], 'sqlite')
+            self.assertEqual(storage_config.entity_store[StorageFactory.LINKED_ACCOUNTS], 'sqlite')
+            self.assertEqual(storage_config.entity_store[StorageFactory.LINKS], 'sqlite')
 
-        self.assertEqual(storage_config.entity_store[StorageFactory.CATEGORIES], 'file')
-        self.assertEqual(storage_config.entity_store[StorageFactory.ERRORS], 'file')
-        self.assertEqual(storage_config.entity_store[StorageFactory.DUPLICATES], 'file')
-        self.assertEqual(storage_config.entity_store[StorageFactory.LEARNF], 'file')
+        if file is True:
+            self.assertEqual(storage_config.entity_store[StorageFactory.CATEGORIES], 'file')
+            self.assertEqual(storage_config.entity_store[StorageFactory.ERRORS], 'file')
+            self.assertEqual(storage_config.entity_store[StorageFactory.DUPLICATES], 'file')
+            self.assertEqual(storage_config.entity_store[StorageFactory.LEARNF], 'file')
 
-        self.assertEqual(storage_config.entity_store[StorageFactory.CONVERSATIONS], 'file')
+            self.assertEqual(storage_config.entity_store[StorageFactory.CONVERSATIONS], 'file')
 
-        self.assertEqual(storage_config.entity_store[StorageFactory.MAPS], 'file')
-        self.assertEqual(storage_config.entity_store[StorageFactory.SETS], 'file')
-        self.assertEqual(storage_config.entity_store[StorageFactory.RDF], 'file')
+            self.assertEqual(storage_config.entity_store[StorageFactory.MAPS], 'file')
+            self.assertEqual(storage_config.entity_store[StorageFactory.SETS], 'file')
+            self.assertEqual(storage_config.entity_store[StorageFactory.RDF], 'file')
 
-        self.assertEqual(storage_config.entity_store[StorageFactory.DENORMAL], 'file')
-        self.assertEqual(storage_config.entity_store[StorageFactory.NORMAL], 'file')
-        self.assertEqual(storage_config.entity_store[StorageFactory.GENDER], 'file')
-        self.assertEqual(storage_config.entity_store[StorageFactory.PERSON], 'file')
-        self.assertEqual(storage_config.entity_store[StorageFactory.PERSON2], 'file')
-        self.assertEqual(storage_config.entity_store[StorageFactory.REGEX_TEMPLATES], 'file')
+            self.assertEqual(storage_config.entity_store[StorageFactory.DENORMAL], 'file')
+            self.assertEqual(storage_config.entity_store[StorageFactory.NORMAL], 'file')
+            self.assertEqual(storage_config.entity_store[StorageFactory.GENDER], 'file')
+            self.assertEqual(storage_config.entity_store[StorageFactory.PERSON], 'file')
+            self.assertEqual(storage_config.entity_store[StorageFactory.PERSON2], 'file')
+            self.assertEqual(storage_config.entity_store[StorageFactory.REGEX_TEMPLATES], 'file')
 
-        self.assertEqual(storage_config.entity_store[StorageFactory.PROPERTIES], 'file')
-        self.assertEqual(storage_config.entity_store[StorageFactory.DEFAULTS], 'file')
+            self.assertEqual(storage_config.entity_store[StorageFactory.PROPERTIES], 'file')
+            self.assertEqual(storage_config.entity_store[StorageFactory.DEFAULTS], 'file')
 
-        self.assertEqual(storage_config.entity_store[StorageFactory.TWITTER], 'file')
+            self.assertEqual(storage_config.entity_store[StorageFactory.TWITTER], 'file')
 
-        self.assertEqual(storage_config.entity_store[StorageFactory.SPELLING_CORPUS], 'file')
+            self.assertEqual(storage_config.entity_store[StorageFactory.SPELLING_CORPUS], 'file')
 
-        self.assertEqual(storage_config.entity_store[StorageFactory.LICENSE_KEYS], 'file')
+            self.assertEqual(storage_config.entity_store[StorageFactory.LICENSE_KEYS], 'file')
 
-        self.assertEqual(storage_config.entity_store[StorageFactory.TEMPLATE_NODES], 'file')
-        self.assertEqual(storage_config.entity_store[StorageFactory.PATTERN_NODES], 'file')
+            self.assertEqual(storage_config.entity_store[StorageFactory.TEMPLATE_NODES], 'file')
+            self.assertEqual(storage_config.entity_store[StorageFactory.PATTERN_NODES], 'file')
 
-        self.assertEqual(storage_config.entity_store[StorageFactory.BINARIES], 'file')
-        self.assertEqual(storage_config.entity_store[StorageFactory.BRAINTREE], 'file')
+            self.assertEqual(storage_config.entity_store[StorageFactory.BINARIES], 'file')
+            self.assertEqual(storage_config.entity_store[StorageFactory.BRAINTREE], 'file')
 
-        self.assertEqual(storage_config.entity_store[StorageFactory.PREPROCESSORS], 'file')
-        self.assertEqual(storage_config.entity_store[StorageFactory.POSTPROCESSORS], 'file')
+            self.assertEqual(storage_config.entity_store[StorageFactory.PREPROCESSORS], 'file')
+            self.assertEqual(storage_config.entity_store[StorageFactory.POSTPROCESSORS], 'file')
 
-        self.assertEqual(storage_config.entity_store[StorageFactory.USERGROUPS], 'file')
+            self.assertEqual(storage_config.entity_store[StorageFactory.USERGROUPS], 'file')
 
-        self.assertEqual(storage_config.entity_store[StorageFactory.TRIGGERS], 'file')
+            self.assertEqual(storage_config.entity_store[StorageFactory.TRIGGERS], 'file')
 
-    def assert_storage_configurations(self, storage_config):
+    def assert_storage_configurations(self, storage_config, file=True, sqlite=False, mongo=False, redis=False, logger=False):
 
-        self.assertTrue('sqlite' in storage_config.storage_configurations)
-        self.assertTrue('mongo' in storage_config.storage_configurations)
-        self.assertTrue('redis' in storage_config.storage_configurations)
-        self.assertTrue('file' in storage_config.storage_configurations)
-        self.assertTrue('logger' in storage_config.storage_configurations)
+        if sqlite is True:
+            self.assertTrue('sqlite' in storage_config.storage_configurations)
+        if mongo is True:
+            self.assertTrue('mongo' in storage_config.storage_configurations)
+        if redis is True:
+            self.assertTrue('redis' in storage_config.storage_configurations)
+        if file is True:
+            self.assertTrue('file' in storage_config.storage_configurations)
+        if logger is True:
+            self.assertTrue('logger' in storage_config.storage_configurations)

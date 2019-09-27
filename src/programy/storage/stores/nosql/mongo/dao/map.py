@@ -14,8 +14,10 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from programy.storage.stores.utils import DAOUtils
 
-class Map(object):
+
+class Map():
 
     def __init__(self, name, key_values):
         self.id = None
@@ -23,7 +25,7 @@ class Map(object):
         self.key_values = key_values
 
     def __repr__(self):
-        return "<Map(id='%d', name='%s')>" % (self.id, self.name)
+        return "<Map(id='%d', name='%s')>" % (DAOUtils.valid_id(self.id), self.name)
 
     def to_document(self):
         document = {"name": self.name,

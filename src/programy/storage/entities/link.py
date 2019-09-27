@@ -14,17 +14,18 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from programy.storage.entities.store import Store
 
 
-class LinkStore(object):
+class LinkStore(Store):
 
     def create_link(self, primary_userid, provided_key, generated_key, expires, expired=False, retry_count=0):
         raise NotImplementedError("create_link missing from Link Store")
 
-    def get_link(self, primary_userid):
+    def get_link(self, userid):
         raise NotImplementedError("get_link missing from Link Store")
 
-    def remove_link(self, primary_userid):
+    def remove_link(self, userid):
         raise NotImplementedError("remove_link missing from Link Store")
 
     def link_exists(self, userid, provided_key, generated_key):

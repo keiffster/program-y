@@ -14,26 +14,22 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-# https://kik.readthedocs.io/en/latest/user.html#installation
-
-from programy.utils.logging.ylogger import YLogger
-
-from flask import Flask, request, abort, Response
-
+from flask import Flask, request, Response
 from kik import KikApi, Configuration
 from kik.messages import messages_from_json, TextMessage
-
+from programy.utils.logging.ylogger import YLogger
 from programy.clients.restful.flask.client import FlaskRestBotClient
 from programy.clients.restful.flask.kik.config import KikConfiguration
+from programy.utils.console.console import outputLog
 
 
 class KikBotClient(FlaskRestBotClient):
 
     def __init__(self, argument_parser=None):
+        self._bot_api_key = None
         FlaskRestBotClient.__init__(self, "kik", argument_parser)
 
-        self.create_kik_bot()
+        self._kik_bot = self.create_kik_bot()
 
         YLogger.debug(self, "Kik Client is running....")
 
@@ -44,8 +40,14 @@ class KikBotClient(FlaskRestBotClient):
         self._bot_api_key = self.license_keys.get_key("KIK_BOT_API_KEY")
 
     def create_kik_bot(self):
-        self._kik_bot = KikApi(self.configuration.client_configuration.bot_name, self._bot_api_key)
-        self._kik_bot.set_configuration(Configuration(webhook=self.configuration.client_configuration.webhook))
+        if self._bot_api_key is not None:
+            kik_bot = KikApi(self.configuration.client_configuration.bot_name, self._bot_api_key)
+            kik_bot.set_configuration(Configuration(webhook=self.configuration.client_configuration.webhook))
+            return kik_bot
+
+        else:
+            YLogger.error(self, "Kik bot api key missing, unable to create kik bot")
+            return None
 
     def handle_text_message(self, message):
         question = message.body
@@ -98,6 +100,9 @@ class KikBotClient(FlaskRestBotClient):
         if self.configuration.client_configuration.debug is True:
             self.dump_request(request)
 
+        if self._kik_bot is None:
+            return Response(status=500)
+
         if not self._kik_bot.verify_signature(request.headers.get('X-Kik-Signature'), request.get_data()):
             return Response(status=403)
 
@@ -107,7 +112,7 @@ class KikBotClient(FlaskRestBotClient):
 
 if __name__ == "__main__":
 
-    print("Initiating Kik Client...")
+    outputLog(None, "Initiating Kik Client...")
 
     KIK_CLIENT = KikBotClient()
 

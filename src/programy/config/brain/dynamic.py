@@ -71,7 +71,7 @@ class BrainDynamicsConfiguration(BaseSectionConfigurationData):
         if vars_config is not None:
             for var_name in vars_config.keys():
                 dyn_var_class = vars_config[var_name]
-                self._dynamic_vars[var_name .upper()] = dyn_var_class
+                self._dynamic_vars[var_name.upper()] = dyn_var_class
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:

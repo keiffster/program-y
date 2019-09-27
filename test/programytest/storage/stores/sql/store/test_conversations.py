@@ -49,7 +49,7 @@ class SQLConversationStoreTests(ConverstionStoreAsserts):
 
         store._read_properties_from_db(client_context, 1, 2, ConversationPropertyDAO.CONVERSATION, properties2)
 
-        self.assertEquals({"key1": "value1", "key2": "value2"}, properties2)
+        self.assertEqual({"key1": "value1", "key2": "value2"}, properties2)
 
         store.empty()
 
@@ -75,7 +75,7 @@ class SQLConversationStoreTests(ConverstionStoreAsserts):
 
         store._read_properties_from_db(client_context, 1, 2, ConversationPropertyDAO.QUESTION, properties2)
 
-        self.assertEquals({"key1": "value1", "key2": "value2"}, properties2)
+        self.assertEqual({"key1": "value1", "key2": "value2"}, properties2)
 
         store.empty()
 
@@ -102,13 +102,13 @@ class SQLConversationStoreTests(ConverstionStoreAsserts):
 
         store._read_matches_from_db(client_context, matched_context2, 1)
 
-        self.assertEquals(1, len(matched_context2.matched_nodes))
-        self.assertEquals(Match.WORD, matched_context2.matched_nodes[0].matched_node_type)
-        self.assertEquals("WORD [Hello]", matched_context2.matched_nodes[0].matched_node_str)
+        self.assertEqual(1, len(matched_context2.matched_nodes))
+        self.assertEqual(Match.WORD, matched_context2.matched_nodes[0].matched_node_type)
+        self.assertEqual("WORD [Hello]", matched_context2.matched_nodes[0].matched_node_str)
         self.assertFalse(matched_context2.matched_nodes[0].matched_node_multi_word)
         self.assertFalse(matched_context2.matched_nodes[0].matched_node_wildcard)
-        self.assertEquals(1, len(matched_context2.matched_nodes[0].matched_node_words))
-        self.assertEquals(["Hello"], matched_context2.matched_nodes[0].matched_node_words)
+        self.assertEqual(1, len(matched_context2.matched_nodes[0].matched_node_words))
+        self.assertEqual(["Hello"], matched_context2.matched_nodes[0].matched_node_words)
 
         store.empty()
 
@@ -136,10 +136,10 @@ class SQLConversationStoreTests(ConverstionStoreAsserts):
 
         store._read_match_context_from_db(client_context, 1, matched_context2)
 
-        self.assertEquals(100, matched_context2.max_search_timeout)
-        self.assertEquals(100, matched_context2.max_search_depth)
-        self.assertEquals("Hello", matched_context2.sentence)
-        self.assertEquals("Hi There", matched_context2.response)
+        self.assertEqual(100, matched_context2.max_search_timeout)
+        self.assertEqual(100, matched_context2.max_search_depth)
+        self.assertEqual("Hello", matched_context2.sentence)
+        self.assertEqual("Hi There", matched_context2.response)
 
         store.empty()
 
@@ -168,11 +168,11 @@ class SQLConversationStoreTests(ConverstionStoreAsserts):
 
         store._read_sentences_from_db(client_context, 1, question2)
 
-        self.assertEquals(1, len(question2.sentences))
-        self.assertEquals(0.5, question2.sentences[0].positivity)
-        self.assertEquals(0.6, question2.sentences[0].subjectivity)
-        self.assertEquals(["Hello", "There"], question2.sentences[0].words)
-        self.assertEquals("Hi", question2.sentences[0].response)
+        self.assertEqual(1, len(question2.sentences))
+        self.assertEqual(0.5, question2.sentences[0].positivity)
+        self.assertEqual(0.6, question2.sentences[0].subjectivity)
+        self.assertEqual(["Hello", "There"], question2.sentences[0].words)
+        self.assertEqual("Hi", question2.sentences[0].response)
 
         store.empty()
 
@@ -203,13 +203,13 @@ class SQLConversationStoreTests(ConverstionStoreAsserts):
 
         store._read_questions_from_db(client_context, 1, conversation2)
 
-        self.assertEquals(1, len(conversation2.questions))
+        self.assertEqual(1, len(conversation2.questions))
 
-        self.assertEquals(1, len(conversation2.questions[0].sentences))
-        self.assertEquals(0.5, conversation2.questions[0].sentences[0].positivity)
-        self.assertEquals(0.6, conversation2.questions[0].sentences[0].subjectivity)
-        self.assertEquals(["Hello", "There"], conversation2.questions[0].sentences[0].words)
-        self.assertEquals("Hi", conversation2.questions[0].sentences[0].response)
+        self.assertEqual(1, len(conversation2.questions[0].sentences))
+        self.assertEqual(0.5, conversation2.questions[0].sentences[0].positivity)
+        self.assertEqual(0.6, conversation2.questions[0].sentences[0].subjectivity)
+        self.assertEqual(["Hello", "There"], conversation2.questions[0].sentences[0].words)
+        self.assertEqual("Hi", conversation2.questions[0].sentences[0].response)
 
         store.empty()
 
@@ -247,15 +247,15 @@ class SQLConversationStoreTests(ConverstionStoreAsserts):
 
         store.load_conversation (client_context, conversation2)
 
-        self.assertEquals(conversation2.properties['ckey1'], "cvalue1")
-        self.assertEquals(conversation2.properties['ckey2'], "cvalue2")
+        self.assertEqual(conversation2.properties['ckey1'], "cvalue1")
+        self.assertEqual(conversation2.properties['ckey2'], "cvalue2")
 
-        self.assertEquals(conversation2.questions[0].sentence(0).response, "Hi")
-        self.assertEquals(conversation2.questions[0].sentence(0)._positivity, 0.5)
-        self.assertEquals(conversation2.questions[0].sentence(0)._subjectivity, 0.6)
+        self.assertEqual(conversation2.questions[0].sentence(0).response, "Hi")
+        self.assertEqual(conversation2.questions[0].sentence(0)._positivity, 0.5)
+        self.assertEqual(conversation2.questions[0].sentence(0)._subjectivity, 0.6)
 
-        self.assertEquals(conversation2.questions[0].properties['qkey1'], "qvalue1")
-        self.assertEquals(conversation2.questions[0].properties['qkey2'], "qvalue2")
+        self.assertEqual(conversation2.questions[0].properties['qkey1'], "qvalue1")
+        self.assertEqual(conversation2.questions[0].properties['qkey2'], "qvalue2")
 
         store.empty()
 

@@ -15,27 +15,34 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.storage.stores.sql.store.sqlstore import SQLStore
-from programy.storage.entities.category import CategoryStore
+from programy.storage.entities.category import CategoryReadWriteStore
 from programy.storage.stores.sql.dao.category import Category
 
 
-class SQLCategoryStore(CategoryStore, SQLStore):
+class SQLCategoryStore(CategoryReadWriteStore, SQLStore):
 
     def __init__(self, storage_engine):
         SQLStore.__init__(self, storage_engine)
+
+    def _get_all(self):
+        return self._storage_engine.session.query(Category)
 
     def empty(self):
         self._storage_engine.session.query(Category).delete()
 
     def empty_named(self, name):
-        self._storage_engine.session.query(Category).filter(Category.groupid==name).delete()
+        self._storage_engine.session.query(Category).filter(Category.groupid == name).delete()
 
     def store_category(self, groupid, userid, topic, that, pattern, template):
         category = Category(groupid=groupid, userid=userid, topic=topic, that=that, pattern=pattern, template=template)
         self._storage_engine.session.add(category)
         return True
 
-    def load_all(self, parser):
+    def load(self, collector, name=None):
+        del name
+        self.load_all(collector)
+
+    def load_all(self, collector):
         categories = self._storage_engine.session.query(Category)
         for category in categories:
             self._load_category(category.groupid,
@@ -43,10 +50,10 @@ class SQLCategoryStore(CategoryStore, SQLStore):
                                 category.topic.strip(),
                                 category.that.strip(),
                                 category.template.strip(),
-                                parser)
+                                collector)
 
     def load_categories(self, groupid, parser):
-        categories = self._storage_engine.session.query(Category).filter(Category.groupid==groupid)
+        categories = self._storage_engine.session.query(Category).filter(Category.groupid == groupid)
         for category in categories:
             self._load_category(category.groupid,
                                 category.pattern.strip(),
@@ -54,4 +61,3 @@ class SQLCategoryStore(CategoryStore, SQLStore):
                                 category.that.strip(),
                                 category.template.strip(),
                                 parser)
-

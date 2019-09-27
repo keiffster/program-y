@@ -14,8 +14,6 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.utils.logging.ylogger import YLogger
-
 from programy.extensions.base import Extension
 from programy.nlp.wordnet.wordnet import WordNet
 
@@ -23,7 +21,8 @@ from programy.nlp.wordnet.wordnet import WordNet
 class WordNetExtension(Extension):
 
     # execute() is the interface that is called from the <extension> tag in the AIML
-    def execute(self, context, data):
+    def execute(self, client_context, data):
+        del client_context
 
         definitions = WordNet.get_definitions(data)
         if len(definitions) > 0:

@@ -14,11 +14,9 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.utils.logging.ylogger import YLogger
 import emoji
-
 from programy.processors.processing import PreProcessor
+
 
 class DemojizePreProcessor(PreProcessor):
 
@@ -26,4 +24,5 @@ class DemojizePreProcessor(PreProcessor):
         PreProcessor.__init__(self)
 
     def process(self, context, word_string):
+        del context
         return emoji.demojize(word_string)

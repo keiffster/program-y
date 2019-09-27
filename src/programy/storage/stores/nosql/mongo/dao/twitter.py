@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.storage.stores.utils import DAOUtils
 
 
-class Twitter(object):
+class Twitter:
 
     def __init__(self, last_direct_message_id, last_status_id):
         self.id = None

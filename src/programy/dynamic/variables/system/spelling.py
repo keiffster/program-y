@@ -14,23 +14,20 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.dynamic.variables.variable import DynamicVariable
-
-from programy.utils.text.dateformat import DateFormatter
+from programy.dynamic.variables.variable import DynamicSettableVariable
 
 
-class Spelling(DynamicVariable):
+class Spelling(DynamicSettableVariable):
 
     def __init__(self, config):
-        DynamicVariable.__init__(self, config)
+        DynamicSettableVariable.__init__(self, config)
 
     def get_value(self, client_context, value=None):
+        del value
         if client_context.bot.spell_checker is not None:
             return client_context.bot.spell_checker.active
         return None
 
-    def set_value(self, client_context, active):
+    def set_value(self, client_context, value):
         if client_context.bot.spell_checker is not None:
-            client_context.bot.spell_checker.active = active
-
+            client_context.bot.spell_checker.active = value

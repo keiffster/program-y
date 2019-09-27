@@ -14,8 +14,8 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from typing import Dict
 from programy.utils.logging.ylogger import YLogger
-
 from programy.triggers.config import TriggerConfiguration
 from programy.context import ClientContext
 from programy.triggers.manager import TriggerManager
@@ -36,7 +36,6 @@ class LocalTriggerManager(TriggerManager):
     def empty(self):
         for event in self._triggers.keys():
             self._triggers[event].clear()
-
 
     def get_triggers(self, event: str) -> list:
         if event in self._triggers:
@@ -75,7 +74,7 @@ class LocalTriggerManager(TriggerManager):
                 except Exception as e:
                     YLogger.exception(self, "Failed to load triggers from storage", e)
 
-    def trigger(self, event: str, client_context: ClientContext = None, additional: {} = None) -> bool:
+    def trigger(self, event: str, client_context: ClientContext = None, additional: Dict[str, str] = None) -> bool:
 
         if client_context is not None:
             assert isinstance(client_context, ClientContext)
@@ -96,7 +95,7 @@ class LocalTriggerManager(TriggerManager):
                     trigger.trigger(client_context=client_context, additional=additional)
                     return True
 
-                except Exception as exec:
-                    YLogger.exception(client_context, "Trigger %s failed to fire", exec, event)
+                except Exception as excep:
+                    YLogger.exception(client_context, "Trigger %s failed to fire", excep, event)
 
         return False

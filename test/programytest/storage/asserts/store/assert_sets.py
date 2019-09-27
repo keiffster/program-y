@@ -108,7 +108,7 @@ class SetStoreAsserts(unittest.TestCase):
 
         store.empty()
 
-        store.upload_from_file(os.path.dirname(__file__) + os.sep + "data" + os.sep + "sets" + os.sep + "csv" + os.sep + "testset.csv", format=Store.CSV_FORMAT)
+        store.upload_from_file(os.path.dirname(__file__) + os.sep + "data" + os.sep + "sets" + os.sep + "csv" + os.sep + "testset.csv", fileformat=Store.CSV_FORMAT)
 
         set_collection = SetCollection()
         store.load(set_collection, 'TESTSET')
@@ -122,7 +122,7 @@ class SetStoreAsserts(unittest.TestCase):
     def assert_upload_csv_files_from_directory_with_subdir(self, store):
         store.empty()
 
-        store.upload_from_directory(os.path.dirname(__file__) + os.sep + "data" + os.sep + "sets" + os.sep + "csv", format=Store.CSV_FORMAT)
+        store.upload_from_directory(os.path.dirname(__file__) + os.sep + "data" + os.sep + "sets" + os.sep + "csv", fileformat=Store.CSV_FORMAT)
 
         set_collection = SetCollection()
         store.load(set_collection, 'TESTSET')

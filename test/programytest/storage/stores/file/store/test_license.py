@@ -19,7 +19,7 @@ class FileLicenseKeysStoreTests(unittest.TestCase):
 
     def test_load_license_key(self):
         config = FileStorageConfiguration()
-        config._license_storage =  FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "data" + os.sep + "licenses" + os.sep + "test_license.keys", format="text", encoding="utf-8", delete_on_start=False)
+        config._license_storage =  FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "data" + os.sep + "licenses" + os.sep + "test_license.keys", fileformat="text", encoding="utf-8", delete_on_start=False)
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileLicenseStore(engine)

@@ -21,7 +21,7 @@ class TriggersConfigurationTests(unittest.TestCase):
         triggers_config = TriggerConfiguration()
         triggers_config.load_config_section(yaml, console_config, ".")
 
-        self.assertEquals("programy.triggers.rest.RestTriggerManager", triggers_config.manager)
+        self.assertEqual("programy.triggers.rest.RestTriggerManager", triggers_config.manager)
 
     def test_without_data(self):
         yaml = YamlConfigurationFile()
@@ -36,7 +36,7 @@ class TriggersConfigurationTests(unittest.TestCase):
         triggers_config = TriggerConfiguration()
         triggers_config.load_config_section(yaml, console_config, ".")
 
-        self.assertEquals("programy.triggers.local.LocalTriggerManager", triggers_config.manager)
+        self.assertEqual("programy.triggers.local.LocalTriggerManager", triggers_config.manager)
 
     def test_with_no_data(self):
         yaml = YamlConfigurationFile()
@@ -50,7 +50,7 @@ class TriggersConfigurationTests(unittest.TestCase):
         triggers_config = TriggerConfiguration()
         triggers_config.load_config_section(yaml, console_config, ".")
 
-        self.assertEquals("programy.triggers.local.LocalTriggerManager", triggers_config.manager)
+        self.assertEqual("programy.triggers.local.LocalTriggerManager", triggers_config.manager)
 
     def test_with_additional_data(self):
         yaml = YamlConfigurationFile()
@@ -69,7 +69,7 @@ class TriggersConfigurationTests(unittest.TestCase):
         triggers_config = TriggerConfiguration()
         triggers_config.load_config_section(yaml, console_config, ".")
 
-        self.assertEquals("programy.triggers.rest.RestTriggerManager", triggers_config.manager)
-        self.assertEquals(triggers_config.value("url"), "http://localhost:8989/api/v1.0/trigger")
-        self.assertEquals(triggers_config.value("method"), "POST")
-        self.assertEquals(triggers_config.value("token"), "123BC4F3D")
+        self.assertEqual("programy.triggers.rest.RestTriggerManager", triggers_config.manager)
+        self.assertEqual(triggers_config.value("url"), "http://localhost:8989/api/v1.0/trigger")
+        self.assertEqual(triggers_config.value("method"), "POST")
+        self.assertEqual(triggers_config.value("token"), "123BC4F3D")

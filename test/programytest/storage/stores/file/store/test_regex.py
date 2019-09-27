@@ -20,7 +20,7 @@ class FileRegexStoreTests(unittest.TestCase):
 
     def test_load_regex(self):
         config = FileStorageConfiguration()
-        config._regex_storage =  FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "data" + os.sep + "lookups" + os.sep + "text" + os.sep + "regex-templates.txt", format="text", encoding="utf-8", delete_on_start=False)
+        config._regex_storage =  FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "data" + os.sep + "lookups" + os.sep + "text" + os.sep + "regex-templates.txt", fileformat="text", encoding="utf-8", delete_on_start=False)
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileRegexStore(engine)

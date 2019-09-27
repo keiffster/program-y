@@ -15,17 +15,16 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.utils.logging.ylogger import YLogger
-
 from programy.storage.stores.file.store.filestore import FileStore
+from programy.storage.entities.rdf import RDFReadOnlyStore
 
-from programy.storage.entities.rdf import RDFStore
 
-class FileRDFStore(FileStore, RDFStore):
+class FileRDFStore(FileStore, RDFReadOnlyStore):
 
     def __init__(self, storage_engine):
         FileStore.__init__(self, storage_engine)
 
-    def _load_file_contents(self, rdf_collection, filename):
+    def _load_file_contents(self, collection, filename):
         YLogger.debug(self, "Loading rdf [%s]", filename)
         try:
             with open(filename, 'r', encoding='utf8') as my_file:
@@ -36,13 +35,16 @@ class FileRDFStore(FileStore, RDFStore):
                             subj = splits[0].upper()
                             pred = splits[1].upper()
                             obj = (":".join(splits[2:])).strip()
-                            
-                            rdf_name = self.get_just_filename_from_filepath(filename)
-                            
-                            rdf_collection.add_entity(subj, pred, obj, rdf_name, filename)
-                            
+
+                            rdf_name = FileStore.get_just_filename_from_filepath(filename)
+
+                            collection.add_entity(subj, pred, obj, rdf_name, filename)
+
         except Exception as excep:
             YLogger.exception_nostack(self, "Failed to load rdf [%s]", excep, filename)
+
+    def _get_storage_path(self):
+        return self.storage_engine.configuration.rdf_storage.dir
 
     def get_storage(self):
         return self.storage_engine.configuration.rdf_storage

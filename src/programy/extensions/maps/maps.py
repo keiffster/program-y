@@ -15,7 +15,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.utils.logging.ylogger import YLogger
-
 from programy.utils.geo.google import GoogleMaps
 from programy.extensions.base import Extension
 
@@ -26,8 +25,8 @@ class GoogleMapsExtension(Extension):
         return GoogleMaps()
 
     # execute() is the interface that is called from the <extension> tag in the AIML
-    def execute(self, context, data):
-        YLogger.debug(context, "GoogleMaps [%s]", data)
+    def execute(self, client_context, data):
+        YLogger.debug(client_context, "GoogleMaps [%s]", data)
 
         splits = data.split(" ")
         command = splits[0]
@@ -38,28 +37,36 @@ class GoogleMapsExtension(Extension):
 
         if command == "DISTANCE":
             distance = googlemaps.get_distance_between_addresses(from_place, to_place)
-            return self._format_distance_for_programy(distance)
+            if distance is not None:
+                return self._format_distance_for_programy(distance)
         elif command == "DIRECTIONS":
             directions = googlemaps.get_directions_between_addresses(from_place, to_place)
-            return self._format_directions_for_programy(directions)
+            if directions is not None:
+                return self._format_directions_for_programy(directions)
         else:
-            YLogger.error(context, "Unknown Google Maps Extension command [%s]", command)
+            YLogger.error(client_context, "Unknown Google Maps Extension command [%s]", command)
             return None
 
     def _format_distance_for_programy(self, distance):
         distance_splits = distance.distance_text.split(" ")
+
         value = distance_splits[0]
         if "." in value:
             value_splits = distance_splits[0].split(".")
             dec = value_splits[0]
             frac = value_splits[1]
+
         else:
             dec = value
             frac = "0"
+
         units = distance_splits[1]
         if units == 'mi':
             units = "miles"
-        return "DISTANCE DEC %s FRAC %s UNITS %s"%(dec, frac, units)
+
+        return "DISTANCE DEC %s FRAC %s UNITS %s" % (dec, frac, units)
 
     def _format_directions_for_programy(self, directions):
-        return "DIRECTIONS %s"%directions.legs_as_a_string()
+        if directions is not None:
+            return "DIRECTIONS %s" % directions.legs_as_a_string()
+        return None

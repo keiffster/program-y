@@ -14,9 +14,9 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from sqlalchemy import Column, Integer, String
-
+from sqlalchemy import Column
+from sqlalchemy import Integer
+from sqlalchemy import String
 from programy.storage.stores.sql.base import Base
 from programy.storage.stores.utils import DAOUtils
 
@@ -34,5 +34,3 @@ class RDF(Base):
     def __repr__(self):
         return "<RDF(id='%s', name='%s', subject='%s', predicate='%s', object='%s')>" % \
                (DAOUtils.valid_id(self.id), self.name, self.subject, self.predicate, self.object)
-
-

@@ -15,7 +15,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.utils.logging.ylogger import YLogger
-
 from programy.utils.newsapi.newsapi import NewsAPI
 from programy.extensions.base import Extension
 
@@ -23,7 +22,7 @@ from programy.extensions.base import Extension
 class NewsAPIExtension(Extension):
 
     def get_news_api_api(self, context):
-        return  NewsAPI(context.client.license_keys)
+        return NewsAPI(context.client.license_keys)
 
     def get_news(self, context, source, max_num, sort, reverse):
 
@@ -82,12 +81,12 @@ class NewsAPIExtension(Extension):
         return source, max_num, sort, reverse
 
     # execute() is the interface that is called from the <extension> tag in the AIML
-    def execute(self, context, data):
+    def execute(self, client_context, data):
 
-        source, max_num, sort, reverse = self.parse_data(context, data)
+        source, max_num, sort, reverse = self.parse_data(client_context, data)
 
         if source is None:
-            YLogger.error(context, "NewsAPIExtension no source passed in as data parameter!")
+            YLogger.error(client_context, "NewsAPIExtension no source passed in as data parameter!")
             return ""
 
-        return self.get_news(context, source, max_num, sort, reverse)
+        return self.get_news(client_context, source, max_num, sort, reverse)

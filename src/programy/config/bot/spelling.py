@@ -50,12 +50,15 @@ class BotSpellingConfiguration(BaseConfigurationData):
         BaseConfigurationData.check_for_license_keys(self, license_keys)
 
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
+        del bot_root
         spelling = configuration_file.get_section(self._section_name, configuration)
         if spelling is not None:
             self._classname = configuration_file.get_option(spelling, "classname", missing_value=None, subs=subs)
             self._alphabet = configuration_file.get_option(spelling, "alphabet", missing_value=None, subs=subs)
-            self._check_before = configuration_file.get_bool_option(spelling, "check_before", missing_value=False, subs=subs)
-            self._check_and_retry = configuration_file.get_bool_option(spelling, "check_and_retry", missing_value=False, subs=subs)
+            self._check_before = configuration_file.get_bool_option(spelling, "check_before", missing_value=False,
+                                                                    subs=subs)
+            self._check_and_retry = configuration_file.get_bool_option(spelling, "check_and_retry", missing_value=False,
+                                                                       subs=subs)
         else:
             YLogger.warning(self, "'spelling' section missing from bot config, using defaults")
 

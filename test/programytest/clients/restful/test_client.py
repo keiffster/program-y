@@ -7,12 +7,20 @@ from programy.clients.restful.config import RestConfiguration
 
 from programytest.clients.arguments import MockArgumentParser
 
+class MockRestBotClient(RestBotClient):
+
+    def server_abort(self, message, status_code):
+        return # No need to do anything
+
+    def create_response(self, response_data, status_code, version=1.0):
+        return "response"
+
 
 class RestBotClientTests(unittest.TestCase):
 
     def test_init(self):
         arguments = MockArgumentParser()
-        client = RestBotClient("testrest", arguments)
+        client = MockRestBotClient("testrest", arguments)
         self.assertIsNotNone(client)
         self.assertIsNotNone(client.get_client_configuration())
         self.assertIsInstance(client.get_client_configuration(), RestConfiguration)
@@ -22,11 +30,11 @@ class RestBotClientTests(unittest.TestCase):
         response, code = client.process_request(request, version=1.0)
         self.assertIsNotNone(response)
         self.assertIsNotNone(code)
-        self.assertEquals(500, code)
+        self.assertEqual(500, code)
 
     def test_api_keys(self):
         arguments = MockArgumentParser()
-        client = RestBotClient("testrest", arguments)
+        client = MockRestBotClient("testrest", arguments)
         self.assertIsNotNone(client)
 
         client.configuration.client_configuration._use_api_keys = True

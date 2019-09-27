@@ -14,16 +14,12 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.utils.logging.ylogger import YLogger
 import os
 import os.path
 import xml.etree.ElementTree as ET
-
 from programy.storage.stores.file.store.filestore import FileStore
 from programy.storage.entities.learnf import LearnfStore
-
 from programy.utils.logging.ylogger import YLogger
-
 
 
 class FileLearnfStore(FileStore, LearnfStore):
@@ -33,7 +29,7 @@ class FileLearnfStore(FileStore, LearnfStore):
 
     @staticmethod
     def create_learnf_path(client_context, learnf_dir):
-        return "%s%s%s.aiml"%(learnf_dir, os.sep, client_context.userid)
+        return "%s%s%s.aiml" % (learnf_dir, os.sep, client_context.userid)
 
     @staticmethod
     def create_learnf_file_if_missing(learnf_path):
@@ -95,7 +91,10 @@ class FileLearnfStore(FileStore, LearnfStore):
 
         return self.storage_engine.configuration.learnf_storage.dirs[0]
 
-    def create_category_xml_node(self, client_context, category)   :
+    def get_storage(self):
+        return self.storage_engine.configuration.learnf_storage
+
+    def create_category_xml_node(self, client_context, category):
         # Add our new element
         child = ET.Element("category")
         child.append(category.pattern)

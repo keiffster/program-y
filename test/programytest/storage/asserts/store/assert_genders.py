@@ -78,7 +78,7 @@ class GenderStoreAsserts(unittest.TestCase):
 
         store.empty()
 
-        store.upload_from_file(filename, format=Store.CSV_FORMAT)
+        store.upload_from_file(filename, fileformat=Store.CSV_FORMAT)
 
         collection = GenderCollection()
         store.load(collection)

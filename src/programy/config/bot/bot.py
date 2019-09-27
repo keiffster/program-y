@@ -29,7 +29,6 @@ from programy.utils.substitutions.substitues import Substitutions
 
 
 class BotConfiguration(BaseContainerConfigurationData):
-
     DEFAULT_ROOT = "."
     DEFAULT_RESPONSE = ""
     DEFAULT_RESPONSE_SRAI = ""
@@ -84,29 +83,38 @@ class BotConfiguration(BaseContainerConfigurationData):
             self._default_response = configuration_file.get_option(bot, "default_response",
                                                                    BotConfiguration.DEFAULT_RESPONSE, subs=subs)
             self._default_response_srai = configuration_file.get_option(bot, "default_response_srai",
-                                                                        BotConfiguration.DEFAULT_RESPONSE_SRAI, subs=subs)
+                                                                        BotConfiguration.DEFAULT_RESPONSE_SRAI,
+                                                                        subs=subs)
             self._empty_string = configuration_file.get_option(bot, "empty_string",
                                                                BotConfiguration.DEFAULT_EMPTY_STRING, subs=subs)
             self._exit_response = configuration_file.get_option(bot, "exit_response",
                                                                 BotConfiguration.DEFAULT_EXIT_RESPONSE, subs=subs)
             self._exit_response_srai = configuration_file.get_option(bot, "exit_response_srai",
-                                                                     BotConfiguration.DEFAULT_EXIT_RESPONSE_SRAI, subs=subs)
+                                                                     BotConfiguration.DEFAULT_EXIT_RESPONSE_SRAI,
+                                                                     subs=subs)
             self._initial_question = configuration_file.get_option(bot, "initial_question",
                                                                    BotConfiguration.DEFAULT_INITIAL_QUESTION, subs=subs)
             self._initial_question_srai = configuration_file.get_option(bot, "initial_question_srai",
-                                                                        BotConfiguration.DEFAULT_INITIAL_QUESTION_SRAI, subs=subs)
+                                                                        BotConfiguration.DEFAULT_INITIAL_QUESTION_SRAI,
+                                                                        subs=subs)
             self._override_properties = configuration_file.get_option(bot, "override_properties",
-                                                                      BotConfiguration.DEFAULT_OVERRIDE_PREDICATES, subs=subs)
-            self._max_question_recursion = configuration_file.get_int_option(bot, "max_question_recursion",
-                                                                             BotConfiguration.DEFAULT_MAX_QUESTION_RECURSION, subs=subs)
+                                                                      BotConfiguration.DEFAULT_OVERRIDE_PREDICATES,
+                                                                      subs=subs)
+            self._max_question_recursion = configuration_file.\
+                get_int_option(bot, "max_question_recursion", BotConfiguration.DEFAULT_MAX_QUESTION_RECURSION,
+                               subs=subs)
             self._max_question_timeout = configuration_file.get_int_option(bot, "max_question_timeout",
-                                                                           BotConfiguration.DEFAULT_MAX_QUESTION_TIMEOUT, subs=subs)
+                                                                           BotConfiguration.DEFAULT_MAX_QUESTION_TIMEOUT,
+                                                                           subs=subs)
             self._max_search_depth = configuration_file.get_int_option(bot, "max_search_depth",
-                                                                       BotConfiguration.DEFAULT_MAX_SEARCH_DEPTH, subs=subs)
+                                                                       BotConfiguration.DEFAULT_MAX_SEARCH_DEPTH,
+                                                                       subs=subs)
             self._max_search_timeout = configuration_file.get_int_option(bot, "max_search_timeout",
-                                                                         BotConfiguration.DEFAULT_MAX_SEARCH_TIMEOUT, subs=subs)
+                                                                         BotConfiguration.DEFAULT_MAX_SEARCH_TIMEOUT,
+                                                                         subs=subs)
             self._tab_parse_output = configuration_file.get_bool_option(bot, "tab_parse_output",
-                                                                        BotConfiguration.DEFAULT_TAB_PARSE_OUTPUT, subs=subs)
+                                                                        BotConfiguration.DEFAULT_TAB_PARSE_OUTPUT,
+                                                                        subs=subs)
 
             self._spelling.load_config_section(configuration_file, bot, bot_root, subs=subs)
 
@@ -145,7 +153,7 @@ class BotConfiguration(BaseContainerConfigurationData):
         else:
             YLogger.warning(self, "No brain name defined for bot [%s], defaulting to 'brain'.", self.section_name)
             brain_name = "brain"
-            self._brain_configs[0]._section_name = brain_name
+            self._brain_configs[0].section_name = brain_name
             self._brain_configs[0].load_configuration(configuration_file, bot_root, subs=subs)
 
     @property

@@ -19,7 +19,7 @@ class FileSpellingStoreTests(unittest.TestCase):
 
     def test_load_users_and_groups(self):
         config = FileStorageConfiguration()
-        config._usergroups_storage =  FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "data" + os.sep + "security" + os.sep + "roles.yaml", format="yaml", encoding="utf-8", delete_on_start=False)
+        config._usergroups_storage =  FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "data" + os.sep + "security" + os.sep + "roles.yaml", fileformat="yaml", encoding="utf-8", delete_on_start=False)
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileUserGroupStore(engine)

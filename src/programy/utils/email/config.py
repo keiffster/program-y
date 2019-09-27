@@ -25,11 +25,11 @@ class EmailConfiguration(BaseConfigurationData):
 
     def __init__(self):
         BaseConfigurationData.__init__(self, name="email")
-        self._host      = None
-        self._port      = None
-        self._username  = None
-        self._password  = None
-        self._from_addr  = None
+        self._host = None
+        self._port = None
+        self._username = None
+        self._password = None
+        self._from_addr = None
 
     @property
     def host(self):
@@ -54,9 +54,11 @@ class EmailConfiguration(BaseConfigurationData):
     def check_for_license_keys(self, license_keys):
         self._username = self._extract_license_key(self._username, license_keys)
         self._password = self._extract_license_key(self._password, license_keys)
-        BaseConfigurationData.check_for_license_keys(license_keys)
+        self.check_for_license_keys(license_keys)
 
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
+        del bot_root
+        del subs
         email = configuration_file.get_section(self._section_name, configuration)
         if email is not None:
             self._host = configuration_file.get_option(email, "host", missing_value=None)

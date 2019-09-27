@@ -14,11 +14,11 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.utils.logging.ylogger import YLogger
 from programy.parser.pattern.nodes.base import PatternNode
 from programy.parser.pattern.equalsmatch import EqualsMatch
 from programy.parser.exceptions import ParserException
+
 
 class PatternBotNode(PatternNode):
 
@@ -43,7 +43,7 @@ class PatternBotNode(PatternNode):
     def to_xml(self, client_context, include_user=False):
         string = ""
         if include_user is True:
-            string += '<bot userid="%s" property="%s">\n'%(self.userid, self.property)
+            string += '<bot userid="%s" property="%s">\n' % (self.userid, self.property)
         else:
             string += '<bot property="%s">\n' % self.property
         string += super(PatternBotNode, self).to_xml(client_context)

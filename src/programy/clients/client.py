@@ -37,12 +37,13 @@ from programy.triggers.system import SystemTriggers
 from programy.clients.ping.responder import PingResponder
 from programy.clients.botfactory import BotFactory
 from programy.clients.response import ResponseLogger
+from programy.utils.console.console import outputLog
 
 
 class BotClient(ResponseLogger):
 
-    def __init__(self, id, argument_parser=None):
-        self._id = id
+    def __init__(self, botid, argument_parser=None):
+        self._id = botid
         self._license_keys = LicenseKeys()
         self._storage = None
         self._scheduler = None
@@ -74,6 +75,7 @@ class BotClient(ResponseLogger):
 
         self.load_scheduler()
 
+        self._renderer = None
         self.load_renderer()
 
         self.load_email()
@@ -82,7 +84,8 @@ class BotClient(ResponseLogger):
 
         self.load_ping_responder()
 
-    def ylogger_type(self):
+    @staticmethod
+    def ylogger_type():
         return "client"
 
     @property
@@ -139,6 +142,7 @@ class BotClient(ResponseLogger):
         return self.bot_factory.get_question_counts()
 
     def add_client_arguments(self, parser=None):
+        del parser
         # Nothing to add
         return
 
@@ -147,6 +151,8 @@ class BotClient(ResponseLogger):
         return
 
     def parse_args(self, arguments, parsed_args):
+        del arguments
+        del parsed_args
         # Nothing to add
         return
 
@@ -158,8 +164,11 @@ class BotClient(ResponseLogger):
     def load_license_keys(self):
         if self.storage_factory.entity_storage_engine_available(StorageFactory.LICENSE_KEYS) is True:
             storage_engine = self.storage_factory.entity_storage_engine(StorageFactory.LICENSE_KEYS)
-            keys_store = storage_engine.license_store()
-            keys_store.load(self._license_keys)
+            if storage_engine is not None:
+                keys_store = storage_engine.license_store()
+                keys_store.load(self._license_keys)
+            else:
+                YLogger.error(self, "No storage engine available for license_keys")
         else:
             YLogger.warning(self, "No storage factory setting for license_keys")
 
@@ -176,8 +185,9 @@ class BotClient(ResponseLogger):
 
             except Exception as excep:
                 YLogger.exception(self, "Failed to open logging configuration [%s]", excep, arguments.logging)
+
         else:
-            print("Warning. No logging configuration file defined, using defaults...")
+            outputLog(self, "Warning. No logging configuration file defined, using defaults...")
 
     def get_client_configuration(self):
         """
@@ -193,7 +203,7 @@ class BotClient(ResponseLogger):
                 arguments.bot_root = os.path.dirname(arguments.config_filename)
             else:
                 arguments.bot_root = "."
-            print("No bot root argument set, defaulting to [%s]" % arguments.bot_root)
+            outputLog(self, "No bot root argument set, defaulting to [%s]" % arguments.bot_root)
 
         if arguments.config_filename is not None:
             self._configuration = ConfigurationFactory.load_configuration_from_file(self.get_client_configuration(),
@@ -202,7 +212,7 @@ class BotClient(ResponseLogger):
                                                                                     arguments.bot_root,
                                                                                     subs)
         else:
-            print("No configuration file specified, using defaults only !")
+            outputLog(self, "No configuration file specified, using defaults only !")
             self._configuration = ProgramyConfiguration(self.get_client_configuration())
 
     def load_scheduler(self):
@@ -227,7 +237,7 @@ class BotClient(ResponseLogger):
             YLogger.debug(None, "Loading Storage Factory")
             self._storage.load_engines_from_config(self.configuration.client_configuration.storage)
         else:
-            print("No storage defined!")
+            outputLog(self, "No storage defined!")
 
     def load_renderer(self):
         try:
@@ -248,7 +258,7 @@ class BotClient(ResponseLogger):
     def create_client_context(self, userid):
         client_context = ClientContext(self, userid)
         client_context.bot = self._bot_factory.select_bot()
-        client_context.brain = client_context.bot._brain_factory.select_brain()
+        client_context.brain = client_context.bot.brain_factory.select_brain()
         return client_context
 
     def load_ping_responder(self):
@@ -271,16 +281,6 @@ class BotClient(ResponseLogger):
         if self._ping_responder is not None:
             self._ping_responder.shutdown_ping_service()
 
-    def process_question(self, client_context, question):
-        raise NotImplementedError("You must override this and implement the logic to create a response to the question")
-
-    def render_response(self, client_context, response):
-        raise NotImplementedError("You must override this and implement the logic to process the response by rendering"
-                                  " using a RCS renderer")
-
-    def process_response(self, client_context, response):
-        raise NotImplementedError("You must override this and implement the logic to display the response to the user")
-
-    def run(self):
+    def run(self, app=None):
+        del app
         raise NotImplementedError("You must override this and implement the logic to run the client")
-

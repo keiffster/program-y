@@ -13,7 +13,7 @@ class TemplateGraphDateTests(TemplateGraphTestClient):
     def test_date_format_as_attrib(self):
         template = ET.fromstring("""
             <template>
-                <date format="%c" />
+                <date fileformat="%c" />
             </template>
             """)
         ast = self._graph.parse_template_expression(template)
@@ -34,7 +34,7 @@ class TemplateGraphDateTests(TemplateGraphTestClient):
     def test_date_format_as_attrib_full(self):
         template = ET.fromstring("""
             <template>
-                <date format="%c"></date>
+                <date fileformat="%c"></date>
             </template>
             """)
         ast = self._graph.parse_template_expression(template)

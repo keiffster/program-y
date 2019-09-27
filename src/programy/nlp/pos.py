@@ -17,8 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from textblob import TextBlob
 
 
-class PartsOfSpeechTagger(object):
-
+class PartsOfSpeechTagger:
     TAGS = {"CC": "Coordinating conjunction",
             "CD": "Cardinal number",
             "DT": "Determiner",

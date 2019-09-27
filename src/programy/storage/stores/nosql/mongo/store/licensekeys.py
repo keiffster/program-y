@@ -19,10 +19,10 @@ from programy.storage.entities.store import Store
 from programy.storage.stores.nosql.mongo.store.mongostore import MongoStore
 from programy.storage.entities.license import LicenseStore
 from programy.storage.stores.nosql.mongo.dao.license import LicenseKey
+from programy.utils.console.console import outputLog
 
 
 class MongoLicenseKeysStore(MongoStore, LicenseStore):
-
     LICENSEKEYS = "licensekeys"
 
     def __init__(self, storage_engine):
@@ -31,17 +31,21 @@ class MongoLicenseKeysStore(MongoStore, LicenseStore):
     def collection_name(self):
         return MongoLicenseKeysStore.LICENSEKEYS
 
-    def load(self, license_collection):
+    def load(self, collector, name=None):
+        del name
+        self.load_all(collector)
+
+    def load_all(self, collector):
         YLogger.info(self, "Loading license keys from Mongo")
         collection = self.collection()
 
-        license_collection.empty()
+        collector.empty()
 
         licensekeys = collection.find()
         for licensekey in licensekeys:
-            license_collection.add_key(licensekey['name'], licensekey['key'])
+            collector.add_key(licensekey['name'], licensekey['key'])
 
-    def upload_from_file(self, filename, format=Store.TEXT_FORMAT, commit=True, verbose=False):
+    def upload_from_file(self, filename, fileformat=Store.TEXT_FORMAT, commit=True, verbose=False):
         YLogger.info(self, "Uploading license keys to Mongo [%s]", filename)
         success = 0
         count = 0
@@ -71,7 +75,7 @@ class MongoLicenseKeysStore(MongoStore, LicenseStore):
                     # If key has = signs in it, then combine all elements past the first
                     key = "".join(splits[1:]).strip()
                     if verbose is True:
-                        print(key_name, "=", key)
+                        outputLog(self, key_name, "=", key)
 
                     licensekey = LicenseKey(name=key_name, key=key)
                     self.add_document(licensekey)

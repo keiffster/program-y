@@ -41,10 +41,10 @@ class MockWeatherExtension(WeatherExtension):
         self._maps_file = maps_file
         self._weather_file = weather_file
 
-    def get_geo_locator(self, bot):
+    def get_geo_locator(self):
         return MockGoogleMaps(self._maps_file)
 
-    def get_met_office(self, bot):
+    def get_met_office(self):
         return MockMetOffice(self._weather_file)
 
 

@@ -21,7 +21,6 @@ from programy.storage.stores.nosql.mongo.dao.twitter import Twitter
 
 
 class MongoTwitterStore(MongoStore, TwitterStore):
-
     TWITTER = 'twitter'
 
     def __init__(self, storage_engine):

@@ -15,12 +15,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.utils.logging.ylogger import YLogger
-
-try:
-    import _pickle as pickle
-except:
-    import pickle
-
 from programy.processors.processing import PreProcessorCollection
 from programy.processors.processing import PostProcessorCollection
 from programy.processors.processing import PostQuestionProcessorCollection
@@ -49,12 +43,12 @@ from programy.security.manager import SecurityManager
 from programy.oob.handler import OOBHandler
 
 
-class Brain(object):
+class Brain:
 
     def __init__(self, bot, configuration: BrainConfiguration):
 
-        assert (bot is not None)
-        assert (configuration is not None)
+        assert bot is not None
+        assert configuration is not None
 
         self._questions = 0
 
@@ -97,7 +91,8 @@ class Brain(object):
 
         self.load(self.configuration)
 
-    def ylogger_type(self):
+    @staticmethod
+    def ylogger_type():
         return "brain"
 
     @property
@@ -250,31 +245,31 @@ class Brain(object):
     def dump_brain_tree(self, client_context):
         self._braintree.dump_brain_tree(client_context)
 
-    def _load_denormals(self):
+    def load_denormals(self):
         self._denormal_collection.empty()
         self._denormal_collection.load(self.bot.client.storage_factory)
 
-    def _load_normals(self):
+    def load_normals(self):
         self._normal_collection.empty()
         self._normal_collection.load(self.bot.client.storage_factory)
 
-    def _load_genders(self):
+    def load_genders(self):
         self._gender_collection.empty()
         self._gender_collection.load(self.bot.client.storage_factory)
 
-    def _load_persons(self):
+    def load_persons(self):
         self._person_collection.empty()
         self._person_collection.load(self.bot.client.storage_factory)
 
-    def _load_person2s(self):
+    def load_person2s(self):
         self._person2_collection.empty()
         self._person2_collection.load(self.bot.client.storage_factory)
 
-    def _load_properties(self):
+    def load_properties(self):
         self._properties_collection.empty()
         self._properties_collection.load(self.bot.client.storage_factory)
 
-    def _load_default_variables(self):
+    def load_default_variables(self):
         self._default_variables_collection.empty()
         self._default_variables_collection.load(self.bot.client.storage_factory)
 
@@ -290,7 +285,7 @@ class Brain(object):
         if self._default_variables_collection.has_variable("subjectivity") is False:
             self._default_variables_collection.set_value("subjectivity", str(subjectivity))
 
-    def _load_maps(self):
+    def load_maps(self):
         self._maps_collection.empty()
         self._maps_collection.load(self.bot.client.storage_factory)
 
@@ -300,7 +295,7 @@ class Brain(object):
         else:
             YLogger.error(self, "Unknown map name [%s], unable to reload ", mapname)
 
-    def _load_sets(self):
+    def load_sets(self):
         self._sets_collection.empty()
         self._sets_collection.load(self.bot.client.storage_factory)
 
@@ -310,7 +305,7 @@ class Brain(object):
         else:
             YLogger.error(self, "Unknown set name [%s], unable to reload ", setname)
 
-    def _load_rdfs(self):
+    def load_rdfs(self):
         self._rdf_collection.empty()
         self._rdf_collection.load(self.bot.client.storage_factory)
 
@@ -341,16 +336,16 @@ class Brain(object):
         self._template_factory.load(self.bot.client.storage_factory)
 
     def load_collections(self):
-        self._load_denormals()
-        self._load_normals()
-        self._load_genders()
-        self._load_persons()
-        self._load_person2s()
-        self._load_properties()
-        self._load_default_variables()
-        self._load_rdfs()
-        self._load_sets()
-        self._load_maps()
+        self.load_denormals()
+        self.load_normals()
+        self.load_genders()
+        self.load_persons()
+        self.load_person2s()
+        self.load_properties()
+        self.load_default_variables()
+        self.load_rdfs()
+        self.load_sets()
+        self.load_maps()
         self._load_preprocessors()
         self._load_postprocessors()
         self._load_postquestionprocessors()
@@ -393,8 +388,8 @@ class Brain(object):
 
     def resolve_matched_template(self, client_context, match_context):
 
-        assert (client_context is not None)
-        assert (match_context is not None)
+        assert client_context is not None
+        assert match_context is not None
 
         template_node = match_context.template_node
 
@@ -411,9 +406,9 @@ class Brain(object):
 
     def ask_question(self, client_context, sentence, srai=False):
 
-        assert (client_context is not None)
-        assert (client_context.bot is not None)
-        assert (self._aiml_parser is not None)
+        assert client_context is not None
+        assert client_context.bot is not None
+        assert self._aiml_parser is not None
 
         client_context.brain = self
 
@@ -441,4 +436,3 @@ class Brain(object):
                 return self.resolve_matched_template(client_context, match_context)
 
         return None
-

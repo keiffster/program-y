@@ -19,7 +19,7 @@ class FileMapsStoreTests(MapStoreAsserts):
 
     def test_load_from_test_dir_no_subdir(self):
         config = FileStorageConfiguration()
-        config._maps_storage = FileStoreConfiguration(dirs=[os.path.dirname(__file__) + os.sep + "data" + os.sep + "maps" + os.sep + "text"], extension="txt", subdirs=False, format="text", encoding="utf-8", delete_on_start=False)
+        config._maps_storage = FileStoreConfiguration(dirs=[os.path.dirname(__file__) + os.sep + "data" + os.sep + "maps" + os.sep + "text"], extension="txt", subdirs=False, fileformat="text", encoding="utf-8", delete_on_start=False)
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileMapsStore(engine)
@@ -34,7 +34,7 @@ class FileMapsStoreTests(MapStoreAsserts):
 
     def test_load_from_test_dir_with_subdir(self):
         config = FileStorageConfiguration()
-        config._maps_storage = FileStoreConfiguration(dirs=[os.path.dirname(__file__) + os.sep + "data" + os.sep + "maps" + os.sep + "text"], extension="txt", subdirs=True, format="text", encoding="utf-8", delete_on_start=False)
+        config._maps_storage = FileStoreConfiguration(dirs=[os.path.dirname(__file__) + os.sep + "data" + os.sep + "maps" + os.sep + "text"], extension="txt", subdirs=True, fileformat="text", encoding="utf-8", delete_on_start=False)
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileMapsStore(engine)

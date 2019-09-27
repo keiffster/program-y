@@ -14,10 +14,8 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.utils.logging.ylogger import YLogger
 import subprocess
-
+from programy.utils.logging.ylogger import YLogger
 from programy.parser.exceptions import ParserException
 from programy.parser.template.nodes.attrib import TemplateAttribNode
 from programy.parser.template.nodes.word import TemplateWordNode
@@ -53,7 +51,7 @@ class TemplateSystemNode(TemplateAttribNode):
 
     def set_attrib(self, attrib_name, attrib_value):
         if attrib_name != 'timeout':
-            raise ParserException("Invalid attribute name %s for this node", attrib_name)
+            raise ParserException("Invalid attribute name [%s] for this node" % attrib_name)
         YLogger.warning(self, "System node timeout attrib currently ignored")
         self._timeout = attrib_value
 

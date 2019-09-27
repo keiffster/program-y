@@ -66,19 +66,19 @@ class MongoLookupStore(MongoStore, LookupsStore):
             return collection
         return {}
 
-    def load_all(self, lookup_collection):
-        self.load(lookup_collection)
+    def load_all(self, collector):
+        self.load(collector)
 
-    def load(self, lookup_collection):
+    def load(self, collector, name=None):
         YLogger.debug(self, "Loading lookup from Mongo [%s]", self.collection_name())
         collection = self.collection()
         lookups = collection.find()
         if lookups is not None:
             for lookup in lookups:
                 key, value = DoubleStringPatternSplitCollection.process_key_value(lookup['key'], lookup['value'])
-                lookup_collection.add_to_lookup(key, value)
+                collector.add_to_lookup(key, value)
 
-    def process_line(self, name, fields):
+    def process_line(self, name, fields, verbose=False):
         if fields:
             key = fields[0].upper()
             value = fields[1]
@@ -89,7 +89,7 @@ class MongoLookupStore(MongoStore, LookupsStore):
 class MongoDenormalStore(MongoLookupStore):
 
     def __init__(self, storage_engine):
-        MongoStore.__init__(self, storage_engine)
+        MongoLookupStore.__init__(self, storage_engine)
 
     def collection_name(self):
         return "denormals"
@@ -98,7 +98,7 @@ class MongoDenormalStore(MongoLookupStore):
 class MongoNormalStore(MongoLookupStore):
 
     def __init__(self, storage_engine):
-        MongoStore.__init__(self, storage_engine)
+        MongoLookupStore.__init__(self, storage_engine)
 
     def collection_name(self):
         return "normals"
@@ -107,7 +107,7 @@ class MongoNormalStore(MongoLookupStore):
 class MongoGenderStore(MongoLookupStore):
 
     def __init__(self, storage_engine):
-        MongoStore.__init__(self, storage_engine)
+        MongoLookupStore.__init__(self, storage_engine)
 
     def collection_name(self):
         return "genders"
@@ -116,7 +116,7 @@ class MongoGenderStore(MongoLookupStore):
 class MongoPersonStore(MongoLookupStore):
 
     def __init__(self, storage_engine):
-        MongoStore.__init__(self, storage_engine)
+        MongoLookupStore.__init__(self, storage_engine)
 
     def collection_name(self):
         return "persons"
@@ -125,7 +125,7 @@ class MongoPersonStore(MongoLookupStore):
 class MongoPerson2Store(MongoLookupStore):
 
     def __init__(self, storage_engine):
-        MongoStore.__init__(self, storage_engine)
+        MongoLookupStore.__init__(self, storage_engine)
 
     def collection_name(self):
         return "person2s"

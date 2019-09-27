@@ -14,20 +14,19 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.utils.logging.ylogger import YLogger
 import os
+from abc import ABC
+from abc import abstractmethod
+from programy.utils.logging.ylogger import YLogger
 
-from abc import ABCMeta, abstractmethod
 
-class FileFinder(object):
-    __metaclass__ = ABCMeta
+class FileFinder(ABC):
 
     def __init__(self):
         pass
 
     @abstractmethod
-    def load_file_contents(self, id, filename, userid="*"):
+    def load_file_contents(self, fileid, filename, userid="*"):
         """
         Never Implemented
         """
@@ -56,7 +55,7 @@ class FileFinder(object):
         collection = {}
         file_maps = {}
         for file in files:
-            just_filename = self.get_just_filename_from_filepath(file[0])
+            just_filename = FileFinder.get_just_filename_from_filepath(file[0])
             try:
                 if filename_as_userid is True:
                     userid = just_filename
@@ -70,7 +69,7 @@ class FileFinder(object):
         return collection, file_maps
 
     def load_single_file_contents(self, filename):
-        just_filename = self.get_just_filename_from_filepath(filename)
+        just_filename = FileFinder.get_just_filename_from_filepath(filename)
 
         collection = {}
         try:
@@ -80,7 +79,8 @@ class FileFinder(object):
 
         return collection
 
-    def get_just_filename_from_filepath(self, filepath):
+    @staticmethod
+    def get_just_filename_from_filepath(filepath):
 
         if os.sep in filepath:
             pathsplits = filepath.split(os.sep)

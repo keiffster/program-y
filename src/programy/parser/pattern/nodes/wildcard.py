@@ -14,9 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.utils.logging.ylogger import YLogger
-
 from programy.parser.exceptions import ParserException
 from programy.parser.pattern.nodes.base import PatternNode
 from programy.parser.pattern.nodes.topic import PatternTopicNode
@@ -61,25 +59,27 @@ class PatternWildCardNode(PatternNode):
     def check_child_is_wildcard(self, tabs, client_context, context, words, word_no, match_type, depth):
         if self._0ormore_hash is not None:
             YLogger.debug(client_context, "%sWildcard # is next node, moving on!", tabs)
-            match = self._0ormore_hash.consume(client_context, context, words, word_no+1, match_type, depth+1, parent_wildcard=True)
+            match = self._0ormore_hash.consume(client_context, context, words, word_no + 1, match_type, depth + 1,
+                                               parent=True)
             if match is not None:
                 return match
 
         if self._1ormore_underline is not None:
             YLogger.debug(client_context, "%sWildcard _ is next node, moving on!", tabs)
-            match = self._1ormore_underline.consume(client_context, context, words, word_no+1, match_type, depth+1)
+            match = self._1ormore_underline.consume(client_context, context, words, word_no + 1, match_type, depth + 1)
             if match is not None:
                 return match
 
         if self._0ormore_arrow is not None:
             YLogger.debug(client_context, "%sWildcard ^ is next node, moving on!", tabs)
-            match = self._0ormore_arrow.consume(client_context, context, words, word_no+1, match_type, depth+1, parent_wildcard=True)
+            match = self._0ormore_arrow.consume(client_context, context, words, word_no + 1, match_type, depth + 1,
+                                                parent=True)
             if match is not None:
                 return match
 
         if self._1ormore_star is not None:
             YLogger.debug(client_context, "%sWildcard * is next node, moving on!", tabs)
-            match = self._1ormore_star.consume(client_context, context, words, word_no+1, match_type, depth+1)
+            match = self._1ormore_star.consume(client_context, context, words, word_no + 1, match_type, depth + 1)
             if match is not None:
                 return match
 

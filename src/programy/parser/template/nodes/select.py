@@ -14,15 +14,14 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.utils.logging.ylogger import YLogger
 import json
-
+from programy.utils.logging.ylogger import YLogger
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.exceptions import ParserException
 from programy.utils.text.text import TextUtils
 
-class QueryBase(object):
+
+class QueryBase:
 
     def __init__(self, subj, pred, obj):
         self._subj = subj
@@ -42,12 +41,15 @@ class QueryBase(object):
         return self._obj
 
     def to_xml(self, client_context):
-        xml = "<subj>%s</subj>"%self._subj
-        xml += "<pred>%s</pred>"%self._pred
-        xml += "<obj>%s</obj>"%self._obj
+        del client_context
+        xml = "<subj>%s</subj>" % self._subj
+        xml += "<pred>%s</pred>" % self._pred
+        xml += "<obj>%s</obj>" % self._obj
         return xml
 
-    def execute(self, client_context):
+    def execute(self, client_context, variables=None):
+        del variables
+        del client_context
         return []
 
     def get_rdf(self, client_context):
@@ -69,12 +71,12 @@ class Query(QueryBase):
     def to_xml(self, client_context):
         xml = "<q>"
         xml += super(Query, self).to_xml(client_context)
-        xml + "</q>"
+        xml += "</q>"
         return xml
 
-    def execute(self, client_context, vars=None):
+    def execute(self, client_context, variables=None):
         subj, pred, obj = self.get_rdf(client_context)
-        if vars is None:
+        if variables is None:
             tuples = client_context.brain.rdf.matched_as_tuples(subj, pred, obj)
             results = []
             for atuple in tuples:
@@ -99,9 +101,9 @@ class NotQuery(QueryBase):
         xml += "</notq>"
         return xml
 
-    def execute(self, client_context, vars=None):
+    def execute(self, client_context, variables=None):
         subj, pred, obj = self.get_rdf(client_context)
-        if vars is None:
+        if variables is None:
             tuples = client_context.brain.rdf.not_matched_as_tuples(subj, pred, obj)
             results = []
             for atuple in tuples:
@@ -114,16 +116,16 @@ class NotQuery(QueryBase):
 
 class TemplateSelectNode(TemplateNode):
 
-    def __init__(self, queries=None, vars=None):
+    def __init__(self, queries=None, variables=None):
         TemplateNode.__init__(self)
         if queries is None:
             self._queries = []
         else:
             self._queries = queries[:]
-        if vars is None:
+        if variables is None:
             self._vars = []
         else:
-            self._vars = vars[:]
+            self._vars = variables[:]
 
     @property
     def queries(self):
@@ -134,6 +136,7 @@ class TemplateSelectNode(TemplateNode):
         return self._vars
 
     def encode_results(self, client_context, results):
+        del client_context
         # At some point put a config item here that allows us to switch between
         # XML, JSON, Yaml, and Picke
         return json.dumps(results)
@@ -148,7 +151,7 @@ class TemplateSelectNode(TemplateNode):
                 query_results = query.execute(client_context, self.vars)
                 results.append(query_results)
 
-            if self._vars:
+            if self.vars:
                 results = client_context.brain.rdf.unify(self.vars, results)
 
             resolved = self.encode_results(client_context, results)
@@ -161,9 +164,9 @@ class TemplateSelectNode(TemplateNode):
 
     def to_xml(self, client_context):
         xml = "<select>"
-        if self._vars:
+        if self.vars:
             xml += "<vars>"
-            xml += " ".join(self._vars)
+            xml += " ".join(self.vars)
             xml += "</vars>"
         if self._queries:
             for query in self._queries:
@@ -187,21 +190,30 @@ class TemplateSelectNode(TemplateNode):
             if tag_name == 'subj':
                 if child.text is not None and child.text.startswith("?"):
                     if child.text not in self.vars:
-                        YLogger.debug(self, "Variable [%s] defined in query element [%s], but not in vars!", child.text, tag_name)
+                        YLogger.debug(self, "Variable [%s] defined in query element [%s], but not in vars!",
+                                      child.text, tag_name)
                         self.vars.append(child.text)
+
                 subj = self.parse_children_as_word_node(graph, child)
+
             elif tag_name == 'pred':
                 if child.text is not None and child.text.startswith("?"):
                     if child.text not in self.vars:
-                        YLogger.debug(self, "Variable [%s] defined in query element [%s], but not in vars!", child.text, tag_name)
+                        YLogger.debug(self, "Variable [%s] defined in query element [%s], but not in vars!",
+                                      child.text, tag_name)
                         self.vars.append(child.text)
+
                 pred = self.parse_children_as_word_node(graph, child)
+
             elif tag_name == 'obj':
                 if child.text is not None and child.text.startswith("?"):
                     if child.text not in self.vars:
-                        YLogger.debug(self, "Variable [%s] defined in query element [%s], but not in vars!", child.text, tag_name)
+                        YLogger.debug(self, "Variable [%s] defined in query element [%s], but not in vars!",
+                                      child.text, tag_name)
                         self.vars.append(child.text)
+
                 obj = self.parse_children_as_word_node(graph, child)
+
             else:
                 YLogger.warning(self, "Unknown tag name [%s] in select query", tag_name)
 
@@ -219,13 +231,13 @@ class TemplateSelectNode(TemplateNode):
         else:
             self._queries.append(NotQuery(subj, pred, obj))
 
-
     def parse_expression(self, graph, expression):
 
         variables = expression.findall('./vars')
         if variables:
             if len(variables) > 1:
-               YLogger.warning(self, "Multiple <vars> found in select tag, using first")
+                YLogger.warning(self, "Multiple <vars> found in select tag, using first")
+
             self.parse_vars(variables[0].text)
 
         queries = expression.findall('./*')
@@ -235,4 +247,5 @@ class TemplateSelectNode(TemplateNode):
                 self.parse_query(graph, tag_name, query)
 
         if self.children:
-            raise ParserException("<select> node should not contain child text, use <select><vars></vars><q></q></select> only")
+            raise ParserException("<select> node should not contain child text, use <select><vars>"
+                                  "</vars><q></q></select> only")

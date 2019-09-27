@@ -14,12 +14,11 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.utils.logging.ylogger import YLogger
 from discord import Client as DiscordClient
-
+from programy.utils.logging.ylogger import YLogger
 from programy.clients.events.client import EventBotClient
 from programy.clients.events.discord.config import DiscordConfiguration
+from programy.utils.console.console import outputLog
 
 
 class DiscordBotClient(EventBotClient):
@@ -39,7 +38,7 @@ class DiscordBotClient(EventBotClient):
 
     def on_ready(self):
         YLogger.info(None, "Discord Client server now running")
-        print("Discord Client server now running")
+        outputLog(self, "Discord Client server now running")
         return True
 
     def ask_question(self, client_context, question):
@@ -49,9 +48,9 @@ class DiscordBotClient(EventBotClient):
         return self._discord_client.user
 
     def on_message(self, message):
-        print(message.author, self.get_discord_user())
+        outputLog(self, "Author:[%s], User:[%d]" % (message.author, self.get_discord_user()))
 
-        if message.author != self.get_discord_user():
+        if message.author.id != self.get_discord_user():
 
             try:
                 client_context = self.create_client_context(message.author.id)
@@ -62,19 +61,22 @@ class DiscordBotClient(EventBotClient):
             except Exception as e:
                 YLogger.exception(None, "Failed to ask question", e)
 
+        YLogger.error(self, "Author is Discord User, not allowed")
         return None
 
 
 if __name__ == '__main__':
 
-    print("Initiating Discord Client...")
+    outputLog(None, "Initiating Discord Client...")
 
     client = DiscordClient()
     discord = DiscordBotClient(client)
 
+
     @client.event
     async def on_ready():
         discord.on_ready()
+
 
     @client.event
     async def on_message(message):
@@ -83,5 +85,6 @@ if __name__ == '__main__':
             channel = message.channel
             if channel:
                 await channel.send(response)
+
 
     discord.run()

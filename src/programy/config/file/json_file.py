@@ -14,9 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 import json
-
 from programy.utils.logging.ylogger import YLogger
 from programy.config.file.file import BaseConfigurationFile
 from programy.config.programy import ProgramyConfiguration
@@ -29,18 +27,18 @@ class JSONConfigurationFile(BaseConfigurationFile):
         BaseConfigurationFile.__init__(self)
         self.json_data = None
 
-    def load_from_text(self, text, client_configuration, bot_root):
+    def load_from_text(self, text, client_configuration, bot_root, subs: Substitutions = None):
         self.json_data = json.loads(text)
         configuration = ProgramyConfiguration(client_configuration)
-        configuration.load_config_data(self, bot_root)
+        configuration.load_config_data(self, bot_root, subs)
         return configuration
 
-    def load_from_file(self, filename, client_configuration, bot_root):
+    def load_from_file(self, filename, client_configuration, bot_root, subs: Substitutions = None):
         configuration = ProgramyConfiguration(client_configuration)
         try:
             with open(filename, 'r+', encoding="utf-8") as json_data_file:
                 self.json_data = json.load(json_data_file)
-                configuration.load_config_data(self, bot_root)
+                configuration.load_config_data(self, bot_root, subs)
 
         except Exception as excep:
             YLogger.exception(self, "Failed to open json config file [%s]", excep, filename)
@@ -90,7 +88,8 @@ class JSONConfigurationFile(BaseConfigurationFile):
             return int(self._replace_subs(subs, option_value))
 
         if missing_value is not None:
-            YLogger.warning(self, "Missing value for [%s] in config, return default value %d", option_name, missing_value)
+            YLogger.warning(self, "Missing value for [%s] in config, return default value %d", option_name,
+                            missing_value)
         else:
             YLogger.warning(self, "Missing value for [%s] in config, return default value None", option_name)
 
@@ -100,7 +99,7 @@ class JSONConfigurationFile(BaseConfigurationFile):
         if missing_value is None:
             missing_value = []
 
-        value = self. get_option(section, option_name, missing_value)
+        value = self.get_option(section, option_name, missing_value)
         if isinstance(value, list):
             values = value
 
@@ -117,7 +116,7 @@ class JSONConfigurationFile(BaseConfigurationFile):
         if missing_value is None:
             missing_value = []
 
-        value = self. get_option(section, option_name, missing_value)
+        value = self.get_option(section, option_name, missing_value)
         if isinstance(value, list):
             values = value
 

@@ -25,7 +25,7 @@ from programy.dynamic.maps.predecessor import PredecessorMap
 from programy.dynamic.maps.successor import SuccessorMap
 
 
-class DynamicsCollection(object):
+class DynamicsCollection:
 
     def __init__(self):
         self._dynamic_sets = {}
@@ -75,6 +75,7 @@ class DynamicsCollection(object):
             self._dynamic_maps[PredecessorMap.NAME] = PredecessorMap(dynamics_configuration)
 
     def load_default_dynamic_vars(self, dynamics_configuration):
+        del dynamics_configuration
         return
 
     ###################################################################################################

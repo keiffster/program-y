@@ -55,13 +55,19 @@ class BotConversationsConfiguration(BaseConfigurationData):
         BaseConfigurationData.check_for_license_keys(self, license_keys)
 
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
+        del bot_root
         Conversations = configuration_file.get_section(self._section_name, configuration)
         if Conversations is not None:
-            self._max_histories = configuration_file.get_int_option(Conversations, "max_histories", missing_value=100, subs=subs)
-            self._initial_topic = configuration_file.get_option(Conversations, "initial_topic", missing_value="*", subs=subs)
-            self._restore_last_topic = configuration_file.get_bool_option(Conversations, "restore_last_topic", missing_value=False, subs=subs)
-            self._empty_on_start = configuration_file.get_bool_option(Conversations, "empty_on_start", missing_value=False, subs=subs)
-            self._multi_client = configuration_file.get_bool_option(Conversations, "multi_client", missing_value=False, subs=subs)
+            self._max_histories = configuration_file.get_int_option(Conversations, "max_histories", missing_value=100,
+                                                                    subs=subs)
+            self._initial_topic = configuration_file.get_option(Conversations, "initial_topic", missing_value="*",
+                                                                subs=subs)
+            self._restore_last_topic = configuration_file.get_bool_option(Conversations, "restore_last_topic",
+                                                                          missing_value=False, subs=subs)
+            self._empty_on_start = configuration_file.get_bool_option(Conversations, "empty_on_start",
+                                                                      missing_value=False, subs=subs)
+            self._multi_client = configuration_file.get_bool_option(Conversations, "multi_client", missing_value=False,
+                                                                    subs=subs)
         else:
             YLogger.warning(self, "'Conversations' section missing from bot config, using defaults")
 

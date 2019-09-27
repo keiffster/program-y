@@ -14,14 +14,10 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.utils.logging.ylogger import YLogger
-
 from programy.parser.template.nodes.indexed import TemplateIndexedNode
 
 
-#####################################################################################################################
-#
 class TemplateThatStarNode(TemplateIndexedNode):
 
     def __init__(self, index=1):
@@ -50,24 +46,12 @@ class TemplateThatStarNode(TemplateIndexedNode):
                         YLogger.error(client_context, "ThatStar index not in range [%d]", int_index)
                         resolved = ""
                 except Exception as excep:
-                    YLogger.error(client_context, "ThatStar index not in range [%d]", int_index)
+                    YLogger.exception_nostack(client_context, "ThatStar index not in range [%d]", excep, int_index)
                     resolved = ""
         else:
             resolved = ""
 
         YLogger.debug(client_context, "ThatStar Node [%s] resolved to [%s]", self.to_string(), resolved)
-
-        """
-        conversation = client_context.bot.get_conversation(client_context)
-
-        question = conversation.previous_nth_question(self.question - 1)
-
-        sentence = question.current_sentence()
-
-        resolved = sentence.matched_context.thatstar(client_context, self.sentence)
-
-        YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
-        """
 
         return resolved
 

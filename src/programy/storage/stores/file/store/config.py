@@ -15,14 +15,14 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.utils.logging.ylogger import YLogger
-
 from programy.config.section import BaseSectionConfigurationData
 from programy.utils.substitutions.substitues import Substitutions
 
 
 class FileStoreConfiguration(BaseSectionConfigurationData):
-    
-    def __init__(self, name='storage', dirs=None, extension=None, subdirs=False, format=None, encoding=None, delete_on_start=False, file=None):
+
+    def __init__(self, name='storage', dirs=None, extension=None, subdirs=False, fileformat=None, encoding=None,
+                 delete_on_start=False, file=None):
         BaseSectionConfigurationData.__init__(self, name)
 
         self._dirs = None
@@ -42,9 +42,9 @@ class FileStoreConfiguration(BaseSectionConfigurationData):
         self._extension = extension
         self._subdirs = subdirs
 
-        self._format = format
+        self._format = fileformat
         self._encoding = encoding
-        
+
         self._delete_on_start = delete_on_start
 
     def has_multiple_dirs(self):
@@ -114,7 +114,7 @@ class FileStoreConfiguration(BaseSectionConfigurationData):
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:
-            data['dirs'] = "./storage/%s"%self.id
+            data['dirs'] = "./storage/%s" % self.id
             data['extension'] = ".txt"
             data['subdirs'] = False
 

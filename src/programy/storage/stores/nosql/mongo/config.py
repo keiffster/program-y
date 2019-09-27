@@ -15,7 +15,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.utils.logging.ylogger import YLogger
-
 from programy.config.base import BaseConfigurationData
 from programy.storage.stores.nosql.mongo.engine import MongoStorageEngine
 from programy.utils.substitutions.substitues import Substitutions
@@ -34,18 +33,32 @@ class MongoStorageConfiguration(BaseConfigurationData):
     def url(self):
         return self._url
 
+    @url.setter
+    def url(self, url):
+        self._url = url
+
     @property
     def database(self):
         return self._database
+
+    @database.setter
+    def database(self, database):
+        self._database = database
 
     @property
     def drop_all_first(self):
         return self._drop_all_first
 
+    @drop_all_first.setter
+    def drop_all_first(self, drop_all):
+        self._drop_all_first = drop_all
+
     def check_for_license_keys(self, license_keys):
         BaseConfigurationData.check_for_license_keys(self, license_keys)
 
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
+        del bot_root
+        del subs
         storage = configuration_file.get_section(self._section_name, configuration)
         if storage is not None:
             self._url = configuration_file.get_option(storage, "url")
@@ -55,16 +68,9 @@ class MongoStorageConfiguration(BaseConfigurationData):
             YLogger.error(None, "'config' section missing from storage config")
 
     def create_mongostorage_config(self):
-        config = {}
-
-        config['url'] = self._url
-        config['databse'] = self._database
-        config['drop_all_first'] = self._drop_all_first
-
-        if len(config.keys()) > 0:
-            return config
-
-        return None
+        return {'url': self._url,
+                'databse': self._database,
+                'drop_all_first': self._drop_all_first}
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:

@@ -14,12 +14,11 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import re
 from programy.utils.logging.ylogger import YLogger
 from programy.utils.classes.loader import ClassLoader
 
 
-class Tokenizer(object):
+class Tokenizer:
 
     def __init__(self, split_chars=' '):
         self.split_chars = split_chars
@@ -51,4 +50,3 @@ class Tokenizer(object):
             return tokenizer_class(configuration.tokenizer.split_chars)
         else:
             return Tokenizer(configuration.tokenizer.split_chars)
-

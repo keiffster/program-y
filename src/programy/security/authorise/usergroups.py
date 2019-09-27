@@ -16,7 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 
-class Authorisable(object):
+class Authorisable:
 
     def __init__(self, identifier):
         self._id = identifier

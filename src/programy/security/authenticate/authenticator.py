@@ -18,7 +18,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.config.brain.security import BrainSecurityConfiguration
 
 
-class Authenticator(object):
+class Authenticator:
 
     def __init__(self, configuration: BrainSecurityConfiguration):
         self._configuration = configuration
@@ -34,4 +34,5 @@ class Authenticator(object):
         return self.configuration.denied_srai
 
     def authenticate(self, client_context):
+        del client_context
         return False

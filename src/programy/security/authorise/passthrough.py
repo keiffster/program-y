@@ -16,12 +16,12 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 from programy.security.authorise.authorisor import Authoriser
-from programy.config.brain.service import BrainServiceConfiguration
+from programy.config.brain.security import BrainSecurityConfiguration
 
 
 class PassThroughAuthorisationService(Authoriser):
 
-    def __init__(self, config: BrainServiceConfiguration):
+    def __init__(self, config: BrainSecurityConfiguration):
         Authoriser.__init__(self, config)
 
     def authorise(self, userid, role):

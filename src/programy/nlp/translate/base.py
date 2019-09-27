@@ -18,7 +18,7 @@ from programy.utils.logging.ylogger import YLogger
 from programy.utils.classes.loader import ClassLoader
 
 
-class BaseTranslator(object):
+class BaseTranslator:
 
     def initialise(self):
         pass
@@ -35,7 +35,7 @@ class BaseTranslator(object):
     def detect(self, text, default='EN'):
         raise NotImplementedError()
 
-    def translate(self, language, text):
+    def translate(self, text, from_lang, to_lang="EN"):
         raise NotImplementedError()
 
     @staticmethod
@@ -44,7 +44,7 @@ class BaseTranslator(object):
             try:
                 YLogger.info(None, "Loading translator from class [%s]", translator_config.classname)
                 translator_config = ClassLoader.instantiate_class(translator_config.classname)
-                translator= translator_config()
+                translator = translator_config()
                 translator.initialise()
                 return translator
             except Exception as excep:

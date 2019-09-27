@@ -31,10 +31,11 @@ class SanicRestConfiguration(RestConfiguration):
     def check_for_license_keys(self, license_keys):
         RestConfiguration.check_for_license_keys(self, license_keys)
 
-    def load_configuration_section(self, configuration_file, sanic, bot_root, subs: Substitutions = None):
-        if sanic is not None:
-            self._workers = configuration_file.get_option(sanic, "workers", missing_value=4, subs=subs)
-            super(SanicRestConfiguration, self).load_configuration_section(configuration_file, sanic, bot_root, subs=subs)
+    def load_configuration_section(self, configuration_file, section, bot_root, subs: Substitutions = None):
+        if section is not None:
+            self._workers = configuration_file.get_option(section, "workers", missing_value=4, subs=subs)
+            super(SanicRestConfiguration, self).load_configuration_section(configuration_file, section, bot_root,
+                                                                           subs=subs)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:

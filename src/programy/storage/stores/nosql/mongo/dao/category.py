@@ -17,10 +17,10 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.storage.stores.utils import DAOUtils
 
 
-class Category(object):
+class Category:
 
-    def __init__(self, groupid, userid, topic, that, pattern, template, id=None):
-        self.id = id
+    def __init__(self, groupid, userid, topic, that, pattern, template, categoryid=None):
+        self.id = categoryid
 
         self.groupid = groupid
         self.userid = userid
@@ -47,8 +47,7 @@ class Category(object):
 
     @staticmethod
     def from_document(data):
-
-        id = DAOUtils.get_value_from_data(data, '_id')
+        categoryid = DAOUtils.get_value_from_data(data, '_id')
         groupid = DAOUtils.get_value_from_data(data, 'groupid')
         userid = DAOUtils.get_value_from_data(data, 'userid')
         topic = DAOUtils.get_value_from_data(data, 'topic')
@@ -56,4 +55,5 @@ class Category(object):
         pattern = DAOUtils.get_value_from_data(data, 'pattern')
         template = DAOUtils.get_value_from_data(data, 'template')
 
-        return Category(id=id, groupid=groupid, userid=userid, topic=topic, that=that, pattern=pattern, template=template)
+        return Category(groupid=groupid, userid=userid, topic=topic, that=that,
+                        pattern=pattern, template=template, categoryid=categoryid, )

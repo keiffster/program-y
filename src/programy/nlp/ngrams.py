@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from textblob import TextBlob
 
 
-class NGramsCreator(object):
+class NGramsCreator:
 
     @staticmethod
     def get_ngrams(string, size=3):

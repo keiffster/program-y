@@ -12,9 +12,14 @@ class MockDiscordBotClient(DiscordBotClient):
     def __init__(self, discord_client: DiscordClient, argument_parser=None):
         DiscordBotClient.__init__(self, discord_client, argument_parser)
 
+    def get_discord_user(self):
+        return 1234567890
+
     def get_license_keys(self):
         return 'XYZ'
 
+    def ask_question(self, client_context, question):
+        return "Hello there."
 
 class MockAuthor():
 
@@ -65,13 +70,13 @@ class DiscordBotClientTests(unittest.TestCase):
         client = MockDiscordBotClient(MockDiscordClient(), arguments)
         self.assertIsNotNone(client)
 
-        response = client.on_message(MockMessage(MockAuthor("user1"), "hello"))
+        response = client.on_message(MockMessage(MockAuthor(1234567891), "hello"))
         self.assertIsNotNone(response)
 
     def test_on_message_same_user(self):
         arguments = MockArgumentParser()
 
-        user = MockAuthor("testid")
+        user = MockAuthor(1234567890)
 
         client = MockDiscordBotClient(MockDiscordClient(user=user), arguments)
         self.assertIsNotNone(client)

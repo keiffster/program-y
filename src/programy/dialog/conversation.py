@@ -14,18 +14,13 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.utils.logging.ylogger import YLogger
 import re
-
+from programy.utils.logging.ylogger import YLogger
 from programy.utils.text.text import TextUtils
 from programy.dialog.question import Question
-from programy.dialog.sentence import Sentence
-from programy.parser.pattern.matchcontext import MatchContext
-from programy.parser.pattern.match import Match
 
 
-class Conversation(object):
+class Conversation():
 
     def __init__(self, client_context):
         self._client_context = client_context
@@ -40,6 +35,10 @@ class Conversation(object):
     @property
     def max_histories(self):
         return self._max_histories
+
+    @max_histories.setter
+    def max_histories(self, histories):
+        self._max_histories = histories
 
     @property
     def properties(self):
@@ -121,7 +120,7 @@ class Conversation(object):
             else:
                 if len(self._questions) > 2:
                     for question in reversed(self._questions[:-2]):
-                        if question._srai is False and question.has_response():
+                        if question.srai is False and question.has_response():
                             that_question = question
                             break
 
@@ -132,15 +131,15 @@ class Conversation(object):
 
             # If the last response was valid, i.e not none and not empty string, then use
             # that as the that_pattern, otherwise we default to '*' as pattern
-            if that_sentence.response is not None and that_sentence.response != '':
+            if that_sentence is not None and that_sentence.response is not None and that_sentence.response != '':
                 that_pattern = self.parse_last_sentences_from_response(that_sentence.response)
                 YLogger.info(client_context, "That pattern = [%s]", that_pattern)
             else:
                 YLogger.info(client_context, "That pattern, no response, default to [*]")
                 that_pattern = "*"
 
-        except Exception as e:
-            YLogger.info(client_context, "No That pattern default to [*]")
+        except Exception as excep:
+            YLogger.exception_nostack(client_context, "No That pattern default to [*]", excep)
             that_pattern = "*"
 
         return that_pattern

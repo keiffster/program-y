@@ -41,7 +41,7 @@ class BrainOOBSConfiguration(BaseSectionConfigurationData):
         return None
 
     def oobs(self):
-        return self._oobs.keys()
+        return list(self._oobs.keys())
 
     def check_for_license_keys(self, license_keys):
         BaseSectionConfigurationData.check_for_license_keys(self, license_keys)

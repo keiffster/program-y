@@ -15,9 +15,11 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-class SentimentScores(object):
+
+class SentimentScores:
 
     def positivity(self, score, client_context=None):
+        del client_context
         # Score between -1.0 and 1.0
 
         if score < -0.9:
@@ -54,6 +56,7 @@ class SentimentScores(object):
             return "EXTREMELY POSITIVE"
 
     def subjectivity(self, score, client_context=None):
+        del client_context
         # Score between 0.0 and 1.0
 
         if score == 0.0:

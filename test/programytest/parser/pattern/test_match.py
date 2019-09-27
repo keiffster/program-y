@@ -68,11 +68,11 @@ class MatchTests(unittest.TestCase):
 
         json_data = match.to_json()
         self.assertIsNotNone(json_data)
-        self.assertEquals(json_data["type"], "Word")
-        self.assertEquals(json_data["node"], "WORD [Hello]")
-        self.assertEquals(json_data["words"], ["Hello"])
-        self.assertEquals(json_data["multi_word"], False)
-        self.assertEquals(json_data["wild_card"], False)
+        self.assertEqual(json_data["type"], "Word")
+        self.assertEqual(json_data["node"], "WORD [Hello]")
+        self.assertEqual(json_data["words"], ["Hello"])
+        self.assertEqual(json_data["multi_word"], False)
+        self.assertEqual(json_data["wild_card"], False)
 
     def test_from_json(self):
 
@@ -84,8 +84,8 @@ class MatchTests(unittest.TestCase):
 
         match = Match.from_json(json_data)
         self.assertIsNotNone(match)
-        self.assertEquals(Match.WORD, match.matched_node_type)
-        self.assertEquals(False, match._matched_node_multi_word)
-        self.assertEquals(False, match._matched_node_wildcard)
-        self.assertEquals("WORD [Hello]", match._matched_node_str)
-        self.assertEquals(["Hello"], match._matched_node_words)
+        self.assertEqual(Match.WORD, match.matched_node_type)
+        self.assertEqual(False, match._matched_node_multi_word)
+        self.assertEqual(False, match._matched_node_wildcard)
+        self.assertEqual("WORD [Hello]", match._matched_node_str)
+        self.assertEqual(["Hello"], match._matched_node_words)

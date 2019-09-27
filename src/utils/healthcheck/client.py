@@ -1,9 +1,26 @@
-from flask import Flask, request
-from flask import current_app
+"""
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 import requests
 import json
+"""
+import json
+import requests
+from flask import Flask, request
+from flask import current_app
 
-#servers = {"webchat": "http://127.0.0.1:8090/api/web/v1.0/ping"}
 servers = {}
 
 if __name__ == '__main__':
@@ -128,7 +145,10 @@ if __name__ == '__main__':
 
         return json.dumps(treedata)
 
+
+    # noinspection Pylint
     def get_health_check_from_serversX(servers):
+        del servers
 
         data = {'pings': [{'name': 'webchat1', 'ping': {'bots': [{'brains': [{'id': 'brain', 'questions': 0}], 'id': 'bot', 'questions': 0}], 'client': 'WebChat', 'logging': {'criticals': 0, 'debugs': 8249, 'errors': 50, 'exceptions': 1, 'fatals': 0, 'infos': 842, 'warnings': 446}, 'questions': 0, 'start_time': '2019-03-18 19:55:38.023020'}},
                           {'name': '2brains', 'ping': {

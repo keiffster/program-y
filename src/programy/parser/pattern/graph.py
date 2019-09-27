@@ -14,21 +14,20 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.utils.logging.ylogger import YLogger
-
 from programy.utils.text.text import TextUtils
 from programy.parser.exceptions import ParserException, DuplicateGrammarException
 from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
 from programy.parser.pattern.nodes.zeroormore import PatternZeroOrMoreWildCardNode
 
 
-class PatternGraph(object):
+class PatternGraph:
 
     def __init__(self, aiml_parser, root_node=None):
         self._aiml_parser = aiml_parser
         self._pattern_factory = aiml_parser.brain.pattern_factory
 
+        self._root_node = None
         self._set_root_node(root_node)
 
     @property
@@ -79,7 +78,7 @@ class PatternGraph(object):
 
         node_name = TextUtils.tag_from_text(element.tag)
         if self._pattern_factory.exists(node_name) is False:
-            raise ParserException("Unknown node name [%s]"%node_name)
+            raise ParserException("Unknown node name [%s]" % node_name)
 
         text = None
         if element.text is not None:
@@ -97,7 +96,7 @@ class PatternGraph(object):
         words = self._aiml_parser.brain.tokenizer.texts_to_words(stripped)
 
         for word in words:
-            if word != '': # Blank nodes add no value, ignore them
+            if word != '':  # Blank nodes add no value, ignore them
                 word = TextUtils.strip_whitespace(word)
 
                 new_node = self.node_from_text(word, userid=userid)
@@ -212,7 +211,8 @@ class PatternGraph(object):
         current_node = current_node.add_child(template_node, replace_existing=True)
         return current_node
 
-    def add_pattern_to_graph(self, pattern_element, topic_element, that_element, template_graph_root, learn=False, userid="*"):
+    def add_pattern_to_graph(self, pattern_element, topic_element, that_element, template_graph_root, learn=False,
+                             userid="*"):
 
         pattern_node = self.add_pattern_to_node(pattern_element, userid=userid)
 
@@ -223,13 +223,13 @@ class PatternGraph(object):
         if that_node.has_template() is True:
             if learn is False:
                 if pattern_element.text is not None:
-                    raise DuplicateGrammarException("Dupicate grammar tree found [%s]"%(pattern_element.text.strip()))
+                    raise DuplicateGrammarException("Dupicate grammar tree found [%s]" % (pattern_element.text.strip()))
                 else:
                     raise DuplicateGrammarException("Dupicate grammar tree found for bot/set")
             else:
                 if pattern_element.text is not None:
                     YLogger.warning(self, "Duplicate grammar tree found [%s] in learn, replacing existing",
-                                        pattern_element.text.strip())
+                                    pattern_element.text.strip())
                 else:
                     YLogger.warning(self, "Duplicate grammar tree found for bot/set in learn, replacing existing")
 
@@ -251,4 +251,3 @@ class PatternGraph(object):
 
     def dump(self, output_func=YLogger.debug, eol="", verbose=True):
         self.root.dump("", output_func, eol, verbose)
-

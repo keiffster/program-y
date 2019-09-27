@@ -37,10 +37,10 @@ class MockMetOffice(MetOffice):
 
 class MockWeatherExtension(WeatherExtension):
 
-    def get_geo_locator(self, bot):
+    def get_geo_locator(self):
         return MockGoogleMaps(WeathersAIMLTests.maps_file)
 
-    def get_met_office(self, bot):
+    def get_met_office(self):
         return MockMetOffice(WeathersAIMLTests.weather_file)
 
 
@@ -67,8 +67,8 @@ class WeathersAIMLTests(unittest.TestCase):
     def test_weather(self):
         WeathersAIMLTests.maps_file = os.path.dirname(__file__) + os.sep + "google_latlong.json"
         WeathersAIMLTests.weather_file = os.path.dirname(__file__) + os.sep + "observation.json"
-        threehourly = os.path.dirname(__file__) + os.sep + "forecast_3hourly.json"
-        daily       = os.path.dirname(__file__) + os.sep + "forecast_daily.json"
+        #WeathersAIMLTests.weather_file = os.path.dirname(__file__) + os.sep + "forecast_3hourly.json"
+        #WeathersAIMLTests.weather_file = os.path.dirname(__file__) + os.sep + "forecast_daily.json"
 
         response = self._client_context.bot.ask_question(self._client_context, "WEATHER LOCATION KY39UR WHEN TODAY")
         self.assertIsNotNone(response)

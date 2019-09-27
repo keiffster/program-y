@@ -17,6 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.storage.engine import StorageEngine
 from programy.storage.stores.logger.store.conversations import LoggerConversationStore
 
+
 class LoggerStorageEngine(StorageEngine):
 
     def __init__(self, configuration):
@@ -27,4 +28,3 @@ class LoggerStorageEngine(StorageEngine):
 
     def conversation_store(self):
         return LoggerConversationStore(self)
-

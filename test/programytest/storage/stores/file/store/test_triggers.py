@@ -31,7 +31,7 @@ class FileTriggersStoreTests(unittest.TestCase):
 
     def test_load_triggers(self):
         config = FileStorageConfiguration()
-        config._triggers_storage = FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "data" + os.sep + "triggers" + os.sep + "triggers.txt", format="text", encoding="utf-8", delete_on_start=False)
+        config._triggers_storage = FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "data" + os.sep + "triggers" + os.sep + "triggers.txt", fileformat="text", encoding="utf-8", delete_on_start=False)
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileTriggersStore(engine)

@@ -19,7 +19,7 @@ class MockWebChatBotClient(WebChatBotClient):
     def get_default_response(self, client_context):
         return "Sorry"
 
-    def create_response(self, response_data, userid, userid_expire_date):
+    def create_webchat_response(self, response_data, userid, userid_expire_date):
         return {'response': response_data}
 
     def get_answer(self, client_context, question):

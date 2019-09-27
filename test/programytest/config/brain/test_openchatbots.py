@@ -33,8 +33,8 @@ class BrainOpenChatBotsConfigurationTests(unittest.TestCase):
         openchatbots_config = BrainOpenChatBotsConfiguration()
         openchatbots_config.load_config_section(yaml, brain_config, ".")
 
-        self.assertEquals(openchatbots_config.protocols, ['http', 'https'])
-        self.assertEquals(openchatbots_config.domains, ['org', 'co.uk'])
+        self.assertEqual(openchatbots_config.protocols, ['http', 'https'])
+        self.assertEqual(openchatbots_config.domains, ['org', 'co.uk'])
 
         self.assertTrue(openchatbots_config.exists("chatbot1"))
         self.assertTrue(openchatbots_config.exists("chatbot2"))
@@ -54,8 +54,8 @@ class BrainOpenChatBotsConfigurationTests(unittest.TestCase):
         openchatbots_config = BrainOpenChatBotsConfiguration()
         openchatbots_config.load_config_section(yaml, brain_config, ".")
 
-        self.assertEquals(openchatbots_config.protocols, ['http'])
-        self.assertEquals(openchatbots_config.domains, [])
+        self.assertEqual(openchatbots_config.protocols, ['http'])
+        self.assertEqual(openchatbots_config.domains, [])
 
         self.assertFalse(openchatbots_config.exists("REST"))
         self.assertFalse(openchatbots_config.exists("Pannous"))
@@ -75,8 +75,8 @@ class BrainOpenChatBotsConfigurationTests(unittest.TestCase):
         openchatbots_config = BrainOpenChatBotsConfiguration()
         openchatbots_config.load_config_section(yaml, brain_config, ".")
 
-        self.assertEquals(openchatbots_config.protocols, ['http'])
-        self.assertEquals(openchatbots_config.domains, [])
+        self.assertEqual(openchatbots_config.protocols, ['http'])
+        self.assertEqual(openchatbots_config.domains, [])
 
         self.assertFalse(openchatbots_config.exists("REST"))
         self.assertFalse(openchatbots_config.exists("Pannous"))

@@ -17,8 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.utils.logging.ylogger import YLogger
 
 
-class Activatable(object):
-
+class Activatable:
     ON = 'ON'
     OFF = 'OFF'
 
@@ -39,4 +38,3 @@ class Activatable(object):
 
     def is_active(self):
         return bool(self._active == Activatable.ON)
-

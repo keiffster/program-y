@@ -36,11 +36,11 @@ class OpenChatBotDomainHandlerTests(unittest.TestCase):
         handler = OpenChatBotDomainHandler(config)
         self.assertIsNotNone(handler)
 
-        self.assertEquals("https://website1.com/.well-known/openchatbot-configuration", handler._create_query_url("website1", "https", "com"))
-        self.assertEquals("http://website1.com/.well-known/openchatbot-configuration", handler._create_query_url("website1", "http", "com"))
+        self.assertEqual("https://website1.com/.well-known/openchatbot-configuration", handler._create_query_url("website1", "https", "com"))
+        self.assertEqual("http://website1.com/.well-known/openchatbot-configuration", handler._create_query_url("website1", "http", "com"))
 
-        self.assertEquals("https://website1.org/.well-known/openchatbot-configuration", handler._create_query_url("website1", "https", ext="org"))
-        self.assertEquals("http://website1.org/.well-known/openchatbot-configuration", handler._create_query_url("website1", "http", ext="org"))
+        self.assertEqual("https://website1.org/.well-known/openchatbot-configuration", handler._create_query_url("website1", "https", ext="org"))
+        self.assertEqual("http://website1.org/.well-known/openchatbot-configuration", handler._create_query_url("website1", "http", ext="org"))
 
     def test_construction_with_scan_alternatives_com(self):
 
@@ -60,7 +60,7 @@ class OpenChatBotDomainHandlerTests(unittest.TestCase):
         domaincb = handler.get_endpoint("website1")
         self.assertIsNotNone(domaincb)
 
-        self.assertEquals("https://website1.com:80/api/mybot/v1.0/ask", domaincb.url)
+        self.assertEqual("https://website1.com:80/api/mybot/v1.0/ask", domaincb.url)
 
     def test_construction_with_scan_alternatives_org(self):
 
@@ -82,7 +82,7 @@ class OpenChatBotDomainHandlerTests(unittest.TestCase):
         domaincb = handler.get_endpoint("website1")
         self.assertIsNotNone(domaincb)
 
-        self.assertEquals("https://website1.com:80/api/mybot/v1.0/ask", domaincb.url)
+        self.assertEqual("https://website1.com:80/api/mybot/v1.0/ask", domaincb.url)
 
     def test_construction_with_no_scan_alternatives(self):
 
@@ -102,4 +102,4 @@ class OpenChatBotDomainHandlerTests(unittest.TestCase):
         domaincb = handler.get_endpoint("website1")
         self.assertIsNotNone(domaincb)
 
-        self.assertEquals("https://website1.com:80/api/mybot/v1.0/ask", domaincb.url)
+        self.assertEqual("https://website1.com:80/api/mybot/v1.0/ask", domaincb.url)

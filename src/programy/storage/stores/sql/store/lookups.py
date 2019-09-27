@@ -25,21 +25,22 @@ from programy.storage.stores.sql.dao.lookup import Person2
 from programy.storage.stores.sql.dao.lookup import Gender
 from programy.storage.entities.store import Store
 from programy.mappings.base import DoubleStringPatternSplitCollection
+from programy.utils.console.console import outputLog
 
 
 class SQLLookupsStore(SQLStore, LookupsStore):
 
-    def load_all(self, collection):
-        self.load(collection)
+    def __init__(self, storage_engine):
+        SQLStore.__init__(self, storage_engine)
 
-    def load(self, collection):
+    def load_all(self, collector):
+        self.load(collector)
+
+    def load(self, collector, name=None):
         db_lookups = self._get_all()
         for db_lookup in db_lookups:
             key, value = DoubleStringPatternSplitCollection.process_key_value(db_lookup.key, db_lookup.value)
-            collection.add_to_lookup(key, value)
-
-    def _get_all(self):
-        raise NotImplementedError()
+            collector.add_to_lookup(key, value)
 
     def _get_entity(self, key, value):
         raise NotImplementedError()
@@ -64,17 +65,18 @@ class SQLLookupsStore(SQLStore, LookupsStore):
         return True
 
     def split_into_fields(self, line):
-        return DoubleStringPatternSplitCollection.split_line_by_pattern(line, DoubleStringPatternSplitCollection.RE_OF_SPLIT_PATTERN)
+        return DoubleStringPatternSplitCollection.\
+            split_line_by_pattern(line, DoubleStringPatternSplitCollection.RE_OF_SPLIT_PATTERN)
 
-    def process_line(self, fields, verbose=False):
+    def process_line(self, name, fields, verbose=False):
         if fields and len(fields) == 2:
             result = self.add(fields[0].upper(), fields[1].upper())
             if verbose is True:
-                print("Key=[%s], Value={%s]"%(fields[0].upper(), fields[1].upper()))
+                outputLog(self, "Key=[%s], Value={%s]" % (fields[0].upper(), fields[1].upper()))
             return result
         return False
 
-    def upload_from_file(self, filename, format=Store.TEXT_FORMAT, commit=True, verbose=False):
+    def upload_from_file(self, filename, fileformat=Store.TEXT_FORMAT, commit=True, verbose=False):
 
         count = 0
         success = 0
@@ -86,7 +88,7 @@ class SQLLookupsStore(SQLStore, LookupsStore):
                         line = line.strip()
                         if line:
                             fields = self.split_into_fields(line)
-                            if self.process_line(fields, verbose) is True:
+                            if self.process_line(None, fields, verbose) is True:
                                 success += 1
                         count += 1
 
@@ -101,6 +103,9 @@ class SQLLookupsStore(SQLStore, LookupsStore):
 
 class SQLDenormalStore(SQLLookupsStore):
 
+    def __init__(self, storage_engine):
+        SQLLookupsStore.__init__(self, storage_engine)
+
     def empty(self):
         self._storage_engine.session.query(Denormal).delete()
 
@@ -112,14 +117,19 @@ class SQLDenormalStore(SQLLookupsStore):
 
     def _exists(self, key):
         try:
-            self._storage_engine.session.query(Denormal).filter(Denormal.key==key).one()
+            self._storage_engine.session.query(Denormal).filter(Denormal.key == key).one()
             return True
-        except Exception as e:
-            pass
+
+        except Exception as excep:
+            YLogger.exception_nostack(self, "Failed to check for existence", excep)
+
         return False
 
 
 class SQLNormalStore(SQLLookupsStore):
+
+    def __init__(self, storage_engine):
+        SQLLookupsStore.__init__(self, storage_engine)
 
     def empty(self):
         self._storage_engine.session.query(Normal).delete()
@@ -132,14 +142,19 @@ class SQLNormalStore(SQLLookupsStore):
 
     def _exists(self, key):
         try:
-            self._storage_engine.session.query(Normal).filter(Denormal.key==key).one()
+            self._storage_engine.session.query(Normal).filter(Denormal.key == key).one()
             return True
-        except Exception as e:
-            pass
+
+        except Exception as excep:
+            YLogger.exception_nostack(self, "Failed to check for existence", excep)
+
         return False
 
 
 class SQLGenderStore(SQLLookupsStore):
+
+    def __init__(self, storage_engine):
+        SQLLookupsStore.__init__(self, storage_engine)
 
     def empty(self):
         self._storage_engine.session.query(Gender).delete()
@@ -152,14 +167,18 @@ class SQLGenderStore(SQLLookupsStore):
 
     def _exists(self, key):
         try:
-            self._storage_engine.session.query(Normal).filter(Gender.key==key).one()
+            self._storage_engine.session.query(Normal).filter(Gender.key == key).one()
             return True
-        except Exception as e:
-            pass
+        except Exception as excep:
+            YLogger.exception_nostack(self, "Failed to check for existence", excep)
+
         return False
 
 
 class SQLPersonStore(SQLLookupsStore):
+
+    def __init__(self, storage_engine):
+        SQLLookupsStore.__init__(self, storage_engine)
 
     def empty(self):
         self._storage_engine.session.query(Person).delete()
@@ -172,14 +191,19 @@ class SQLPersonStore(SQLLookupsStore):
 
     def _exists(self, key):
         try:
-            self._storage_engine.session.query(Normal).filter(Person.key==key).one()
+            self._storage_engine.session.query(Normal).filter(Person.key == key).one()
             return True
-        except Exception as e:
-            pass
+
+        except Exception as excep:
+            YLogger.exception_nostack(self, "Failed to check for existence", excep)
+
         return False
 
 
 class SQLPerson2Store(SQLLookupsStore):
+
+    def __init__(self, storage_engine):
+        SQLLookupsStore.__init__(self, storage_engine)
 
     def empty(self):
         self._storage_engine.session.query(Person2).delete()
@@ -192,8 +216,10 @@ class SQLPerson2Store(SQLLookupsStore):
 
     def _exists(self, key):
         try:
-            self._storage_engine.session.query(Person2).filter(Denormal.key==key).one()
+            self._storage_engine.session.query(Person2).filter(Denormal.key == key).one()
             return True
-        except Exception as e:
-            pass
+
+        except Exception as excep:
+            YLogger.exception_nostack(self, "Failed to check for existence", excep)
+
         return False

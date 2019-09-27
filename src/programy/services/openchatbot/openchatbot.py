@@ -16,7 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 
-class OpenChatBot(object):
+class OpenChatBot:
 
     def __init__(self, name, url, methods, authorization=None, api_key=None):
         self._name = name
@@ -51,9 +51,9 @@ class OpenChatBot(object):
             endpoint = "/" + endpoint
 
         if port == 0:
-            return "%s%s"%(host, endpoint)
+            return "%s%s" % (host, endpoint)
         else:
-            return "%s:%d%s"%(host, port, endpoint)
+            return "%s:%d%s" % (host, port, endpoint)
 
     @staticmethod
     def create(name, payload):

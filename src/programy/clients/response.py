@@ -16,10 +16,13 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 
-class ResponseLogger(object):
+class ResponseLogger():
 
     def log_unknown_response(self, question):
+        del question
         return
 
     def log_response(self, question, answer):
+        del question
+        del answer
         return

@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.storage.stores.utils import DAOUtils
 
 
-class Error(object):
+class Error():
 
     def __init__(self, error, file, start, end):
         self.id = None
@@ -28,7 +28,7 @@ class Error(object):
 
     def __repr__(self):
         return "<Error(id='%s', error='%s', file='%s', start='%s', end='%s')>" % (
-        DAOUtils.valid_id(self.id), self.error, self.file, self.start, self.end)
+            DAOUtils.valid_id(self.id), self.error, self.file, self.start, self.end)
 
     def to_document(self):
         document = {"error": self.error,

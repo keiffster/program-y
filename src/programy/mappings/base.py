@@ -14,12 +14,12 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.utils.logging.ylogger import YLogger
 import re
+from programy.utils.logging.ylogger import YLogger
+from programy.utils.console.console import outputLog
 
 
-class BaseCollection(object):
+class BaseCollection:
     pass
 
 
@@ -57,6 +57,7 @@ class DoubleStringCharSplitCollection(BaseCollection):
         self._pairs.clear()
 
     def remove(self, name=None):
+        del name
         self._pairs.clear()
 
     @property
@@ -199,7 +200,7 @@ class DoubleStringPatternSplitCollection(BaseCollection):
                 lhs = match.group(1)
                 rhs = match.group(2)
                 return [lhs, rhs]
-            print("Pattern is bad [%s]", line)
+            outputLog(None, "Pattern is bad [%s]", line)
         return None
 
     @staticmethod
@@ -219,7 +220,8 @@ class DoubleStringPatternSplitCollection(BaseCollection):
         return pattern
 
     @staticmethod
-    def process_key_value(key, value, id=None):
+    def process_key_value(key, value, userid=None):
+        del userid
         pattern_text = DoubleStringPatternSplitCollection.normalise_pattern(key)
         start = pattern_text.lstrip()
         middle = pattern_text

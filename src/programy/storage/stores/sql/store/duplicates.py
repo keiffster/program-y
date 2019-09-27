@@ -14,7 +14,6 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.storage.stores.sql.store.sqlstore import SQLStore
 from programy.storage.entities.duplicates import DuplicatesStore
 from programy.storage.stores.sql.dao.duplicate import Duplicate
@@ -24,6 +23,9 @@ class SQLDuplicatesStore(SQLStore, DuplicatesStore):
 
     def __init__(self, storage_engine):
         SQLStore.__init__(self, storage_engine)
+
+    def _get_all(self):
+        return self._storage_engine.session.query(Duplicate)
 
     def empty(self):
         self._get_all().delete()

@@ -14,10 +14,8 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.utils.logging.ylogger import YLogger
 import json
-
+from programy.utils.logging.ylogger import YLogger
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.exceptions import ParserException
 from programy.utils.text.text import TextUtils
@@ -114,15 +112,19 @@ class TemplateGetNode(TemplateNode):
         raw_tuples = self._tuples.resolve(client_context)
         try:
             tuples = self.decode_tuples(raw_tuples)
-        except:
+
+        except Exception as excep:
+            YLogger.exception_nostack(self, "Failed to decode tuples, returning []", excep)
             tuples = []
 
         resolved = ""
         if tuples:
 
-            if isinstance(tuples, list): # Is tuples an array of results in the form [[[subj, val],[pred, val],[obj, val]], [[subj, val],[pred, val],[obj, val]]...]
+            if isinstance(tuples,
+                          list):  # Is tuples an array of results in the form [[[subj,
+                                  # val],[pred, val],[obj, val]], [[subj, val],[pred, val],[obj, val]]...]
 
-                if variables: #If we are asking for variables, pull out the vars
+                if variables:  # If we are asking for variables, pull out the vars
                     for atuple in tuples:
                         if isinstance(atuple[0], list) is True:
                             for pair in atuple:
@@ -164,7 +166,7 @@ class TemplateGetNode(TemplateNode):
                 name = self.name.to_string()
             return "[GET [%s] - %s]" % ("Local" if self.local else "Global", name)
         else:
-            return "[GET [Tuples] - (%s)]" %self.name.to_string()
+            return "[GET [Tuples] - (%s)]" % self.name.to_string()
 
     def to_xml(self, client_context):
         if self.tuples is None:

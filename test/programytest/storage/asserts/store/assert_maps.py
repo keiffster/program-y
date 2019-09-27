@@ -90,7 +90,7 @@ class MapStoreAsserts(unittest.TestCase):
     def assert_upload_from_csv_file(self, store):
         store.empty()
 
-        store.upload_from_file(os.path.dirname(__file__) + os.sep + "data" + os.sep + "maps" + os.sep + "csv" + os.sep + "testmap.csv", format=Store.CSV_FORMAT)
+        store.upload_from_file(os.path.dirname(__file__) + os.sep + "data" + os.sep + "maps" + os.sep + "csv" + os.sep + "testmap.csv", fileformat=Store.CSV_FORMAT)
 
         map_collection = MapCollection()
         store.load(map_collection, 'TESTMAP')
@@ -105,7 +105,7 @@ class MapStoreAsserts(unittest.TestCase):
      
         store.empty()
 
-        store.upload_from_directory(os.path.dirname(__file__)+os.sep+"data"+os.sep+"maps"+os.sep+"csv", format=Store.CSV_FORMAT)
+        store.upload_from_directory(os.path.dirname(__file__)+os.sep+"data"+os.sep+"maps"+os.sep+"csv", fileformat=Store.CSV_FORMAT)
 
         map_collection = MapCollection()
         store.load_all(map_collection)

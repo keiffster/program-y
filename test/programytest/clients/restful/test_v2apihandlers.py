@@ -74,7 +74,7 @@ class APIHandler_V2_0Tests(unittest.TestCase):
 
         response = handler.process_request("Hello")
         self.assertIsNotNone(response)
-        self.assertEquals(response, ({'response': {"query": "Hello",
+        self.assertEqual(response, ({'response': {"query": "Hello",
                                                    "userId": "userid1",
                                                    "timestamp": 0,
                                                    "text": "Hi there",
@@ -109,7 +109,7 @@ class APIHandler_V2_0Tests(unittest.TestCase):
                     }
         response = handler.format_success_response("userid1", "Hello", "Hi there", metadata)
         self.assertIsNotNone(response)
-        self.assertEquals(response, {'response': {"query": "Hello",
+        self.assertEqual(response, {'response': {"query": "Hello",
                                                    "userId": "userid1",
                                                    "timestamp": 0,
                                                    "text": "Hi there",
@@ -139,7 +139,7 @@ class APIHandler_V2_0Tests(unittest.TestCase):
                     }
         response = handler.format_error_response("userid1", "Hello", "Oopsie", metadata)
         self.assertIsNotNone(response)
-        self.assertEquals(response, {'response': {"query": "Hello",
+        self.assertEqual(response, {'response': {"query": "Hello",
                                                    "userId": "userid1",
                                                    "timestamp": 0,
                                      },

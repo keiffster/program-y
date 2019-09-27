@@ -15,15 +15,14 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.utils.logging.ylogger import YLogger
-
 from programy.security.authorise.usergroups import User
 from programy.security.authorise.usergroups import Group
 from programy.storage.entities.store import Store
 
 
-class UserGroupsStore(object):
+class UserGroupsStore:
 
-    def upload_from_file(self, filename, format=Store.TEXT_FORMAT, commit=True, verbose=False):
+    def upload_from_file(self, filename, fileformat=Store.TEXT_FORMAT, commit=True, verbose=False):
         raise NotImplementedError()
 
     def load_usergroups(self, usersgroupsauthorisor):
@@ -136,4 +135,3 @@ class UserGroupsStore(object):
                 else:
                     YLogger.error(self, "Unknown user id [%s] in group [%s]", sub_user_id, group_id)
             group.add_users(new_users[:])
-

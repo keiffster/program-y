@@ -14,26 +14,29 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.utils.logging.ylogger import YLogger
 import time
 import tweepy
 from tweepy.error import RateLimitError
-
+from programy.utils.logging.ylogger import YLogger
 from programy.clients.polling.client import PollingBotClient
 from programy.clients.polling.twitter.config import TwitterConfiguration
 from programy.storage.factory import StorageFactory
+from programy.utils.console.console import outputLog
 
 
 class TwitterBotClient(PollingBotClient):
-
-    FIFTEEN_MINUTES = 15*60
+    FIFTEEN_MINUTES = 15 * 60
 
     def __init__(self, argument_parser=None):
         self._username = "unknown"
         self._username_len = 0
         self._welcome_message = None
         self._api = None
+        self._consumer_key = None
+        self._consumer_secret = None
+        self._access_token = None
+        self._access_token_secret = None
+
         PollingBotClient.__init__(self, "Twitter", argument_parser)
 
     def get_client_configuration(self):
@@ -45,7 +48,7 @@ class TwitterBotClient(PollingBotClient):
         self._consumer_secret = self.license_keys.get_key("TWITTER_CONSUMER_SECRET")
         self._access_token = self.license_keys.get_key("TWITTER_ACCESS_TOKEN")
         self._access_token_secret = self.license_keys.get_key("TWITTER_ACCESS_TOKEN_SECRET")
-        self._username_len = len(self._username) # Going to get used quite a lot
+        self._username_len = len(self._username)  # Going to get used quite a lot
 
     def _create_api(self, consumer_key, consumer_secret, access_token, access_token_secret):
         auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
@@ -146,8 +149,8 @@ class TwitterBotClient(PollingBotClient):
         if pos == -1:
             return None
 
-        pos = pos - 1   # Take into account @ sign
-        question = text[(pos+self._username_len)+1:]
+        pos = pos - 1  # Take into account @ sign
+        question = text[(pos + self._username_len) + 1:]
         return question.strip()
 
     def ask_question(self, userid, question):
@@ -167,9 +170,9 @@ class TwitterBotClient(PollingBotClient):
             response = self.ask_question(userid, question)
 
             user = self._api.get_user(userid)
-            status = "@%s %s"%(user.screen_name, response)
+            status = "@%s %s" % (user.screen_name, response)
 
-            YLogger.debug(self, "Sending status response [@%s] [%s]",user.screen_name, response)
+            YLogger.debug(self, "Sending status response [@%s] [%s]", user.screen_name, response)
 
             self._api.update_status(status)
 
@@ -180,7 +183,8 @@ class TwitterBotClient(PollingBotClient):
 
         for status in statuses:
 
-            YLogger.debug(self, "%s Received Status From[%s] - To[%s] -> [%s]", status.id, status.author.screen_name, self._username, status.text)
+            YLogger.debug(self, "%s Received Status From[%s] - To[%s] -> [%s]", status.id, status.author.screen_name,
+                          self._username, status.text)
 
             if status.author.screen_name != self._username:
                 YLogger.debug(self, "status: %s", status.text)
@@ -209,7 +213,7 @@ class TwitterBotClient(PollingBotClient):
         YLogger.debug(self, "Got Last Messaged ID: %s", last_direct_message_id)
         YLogger.debug(self, "Got Last Status ID: %s", last_status_id)
 
-        return  last_direct_message_id, last_status_id
+        return last_direct_message_id, last_status_id
 
     def _store_last_message_ids(self, last_direct_message_id, last_status_id):
 
@@ -233,7 +237,6 @@ class TwitterBotClient(PollingBotClient):
             YLogger.debug(self, "Last message id = %d", last_direct_message_id)
 
         if self._configuration.client_configuration.use_status is True:
-
             YLogger.debug(self, "Processing status messaages")
 
             last_status_id = self._process_statuses(last_status_id)
@@ -245,12 +248,21 @@ class TwitterBotClient(PollingBotClient):
         time.sleep(self._configuration.client_configuration.polling_interval)
 
     def connect(self):
-        self._welcome_message = self.configuration.client_configuration.welcome_message
-        self._api = self._create_api(self._consumer_key, self._consumer_secret, self._access_token, self._access_token_secret)
-        return True
+        if self._consumer_key is not None and \
+                self._consumer_secret is not None and \
+                self._access_token is not None and \
+                self._access_token_secret is not None:
+            self._welcome_message = self.configuration.client_configuration.welcome_message
+            self._api = self._create_api(self._consumer_key,
+                                         self._consumer_secret,
+                                         self._access_token,
+                                         self._access_token_secret)
+            return True
+
+        return False
 
     def display_connected_message(self):
-        print ("Twitter Bot connected and running...")
+        outputLog(self, "Twitter Bot connected and running...")
 
     def poll_and_answer(self):
 
@@ -281,8 +293,7 @@ class TwitterBotClient(PollingBotClient):
 
 
 if __name__ == '__main__':
-
-    print("Initiating Twitter Client...")
+    outputLog(None, "Initiating Twitter Client...")
 
     twitter_app = TwitterBotClient()
     twitter_app.run()

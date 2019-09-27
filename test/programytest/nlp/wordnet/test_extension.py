@@ -14,4 +14,4 @@ class WordNetExtensionTests(unittest.TestCase):
     def test_get_definition(self):
         extension = WordNetExtension()
         self.assertIsNotNone(extension)
-        self.assertEquals("feline mammal usually having thick soft fur and no ability to roar: domestic cats; wildcats", extension.execute(self.context, "CAT"))
+        self.assertEqual("feline mammal usually having thick soft fur and no ability to roar: domestic cats; wildcats", extension.execute(self.context, "CAT"))

@@ -15,10 +15,13 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from textblob import Word
-from textblob.wordnet import VERB, NOUN, ADJ, ADV
+from textblob.wordnet import VERB
+from textblob.wordnet import NOUN
+from textblob.wordnet import ADJ
+from textblob.wordnet import ADV
 
 
-class Synsets(object):
+class Synsets:
 
     @staticmethod
     def _get_synsets(string, pos=None):
@@ -75,8 +78,8 @@ class Synsets(object):
             for syn2 in syns2:
                 similarity = syn1.path_similarity(syn2)
                 if similarity is not None:
-                    lemma1, weight1 = Synsets._get_lemma_and_weight(syn1)
-                    lemma2, weight2 = Synsets._get_lemma_and_weight(syn2)
+                    lemma1, _ = Synsets._get_lemma_and_weight(syn1)
+                    lemma2, _ = Synsets._get_lemma_and_weight(syn2)
                     similarities.append((lemma1, lemma2, similarity))
 
         return similarities

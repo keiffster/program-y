@@ -97,10 +97,10 @@ class QuestionTests(unittest.TestCase):
         json_data = question.to_json()
         self.assertIsNotNone(json_data)
 
-        self.assertEquals(False, json_data["srai"])
-        self.assertEquals(-1, json_data["current_sentence_no"])
-        self.assertEquals({}, json_data["properties"])
-        self.assertEquals(2, len(json_data["sentences"]))
+        self.assertEqual(False, json_data["srai"])
+        self.assertEqual(-1, json_data["current_sentence_no"])
+        self.assertEqual({}, json_data["properties"])
+        self.assertEqual(2, len(json_data["sentences"]))
 
     def test_from_json(self):
 
@@ -115,7 +115,7 @@ class QuestionTests(unittest.TestCase):
         question = Question.from_json(self._client_context, json_data)
         self.assertIsNotNone(question)
 
-        self.assertEquals(False, question.srai)
-        self.assertEquals({}, question.properties)
-        self.assertEquals(-1, question._current_sentence_no)
-        self.assertEquals(2, len(question.sentences))
+        self.assertEqual(False, question.srai)
+        self.assertEqual({}, question.properties)
+        self.assertEqual(-1, question._current_sentence_no)
+        self.assertEqual(2, len(question.sentences))

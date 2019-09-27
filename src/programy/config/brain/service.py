@@ -21,7 +21,6 @@ from programy.utils.substitutions.substitues import Substitutions
 
 
 class BrainServiceConfiguration(BaseSectionConfigurationData):
-
     additionals = ['denied_srai']
 
     def __init__(self, service_name):

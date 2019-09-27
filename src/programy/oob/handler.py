@@ -22,13 +22,13 @@ from programy.utils.classes.loader import ClassLoader
 from programy.config.brain.oobs import BrainOOBSConfiguration
 
 
-class OOBHandler(object):
+class OOBHandler:
 
     def __init__(self, oob_configuration):
 
-        assert (oob_configuration is not None)
-        assert (isinstance(oob_configuration, BrainOOBSConfiguration))
-        
+        assert oob_configuration is not None
+        assert isinstance(oob_configuration, BrainOOBSConfiguration)
+
         self._configuration = oob_configuration
         self._default_oob = None
         self._oob = {}
@@ -51,7 +51,7 @@ class OOBHandler(object):
                 except Exception as excep:
                     YLogger.exception(self, "Failed to load OOB Processor", excep)
 
-            for oob_name in  self._configuration.oobs():
+            for oob_name in self._configuration.oobs():
                 try:
                     YLogger.info(self, "Loading oob: %s", oob_name)
                     classobject = ClassLoader.instantiate_class(self._configuration.oob(oob_name).classname)
@@ -96,5 +96,3 @@ class OOBHandler(object):
                 return self._default_oob.process_out_of_bounds(client_context, child)
 
         return ""
-
-

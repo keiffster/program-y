@@ -17,6 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from autocorrect import spell
 from programy.spelling.base import SpellingChecker
 
+
 class AutoCorrectSpellingChecker(SpellingChecker):
 
     def __init__(self, spelling_config=None):

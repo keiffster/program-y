@@ -16,21 +16,24 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 from programy.utils.logging.ylogger import YLogger
 
-from programy.config.container import BaseContainerConfigurationData
+from programy.config.base import BaseConfigurationData
 from programy.utils.substitutions.substitues import Substitutions
 
 
-class PingResponderConfig(BaseContainerConfigurationData):
+class PingResponderConfig(BaseConfigurationData):
 
     def __init__(self, name="responder"):
-        BaseContainerConfigurationData.__init__(self, name)
+        BaseConfigurationData.__init__(self, name)
         self._name = "Client Ping Responder"
         self._host = None
         self._port = None
         self._url = None
+        self._ssl_cert_file = None
+        self._ssl_key_file = None
         self._shutdown = None
         self._register = None
         self._unregister = None
+        self._debug = False
 
     @property
     def name(self):
@@ -43,6 +46,14 @@ class PingResponderConfig(BaseContainerConfigurationData):
     @property
     def port(self):
         return self._port
+
+    @property
+    def ssl_cert_file(self):
+        return self._ssl_cert_file
+
+    @property
+    def ssl_key_file(self):
+        return self._ssl_key_file
 
     @property
     def url(self):
@@ -60,38 +71,53 @@ class PingResponderConfig(BaseContainerConfigurationData):
     def unregister(self):
         return self._unregister
 
-    def load_config_section(self, configuration_file, section, bot_root, subs: Substitutions = None):
+    @property
+    def debug(self):
+        return self._debug
+
+    def load_config_section(self, configuration_file, section, bot_root=None, subs: Substitutions = None):
+        del bot_root
+        del subs
         triggers = configuration_file.get_section(self._section_name, section)
         if triggers is not None:
             self._name = configuration_file.get_option(triggers, "name")
             self._host = configuration_file.get_option(triggers, "host")
             self._port = configuration_file.get_option(triggers, "port")
+            self._ssl_cert_file = configuration_file.get_option(triggers, "ssl_cert_file")
+            self._ssl_key_file = configuration_file.get_option(triggers, "ssl_key_file")
             self._url = configuration_file.get_option(triggers, "url")
             self._shutdown = configuration_file.get_option(triggers, "shutdown")
             self._register = configuration_file.get_option(triggers, "register")
             self._unregister = configuration_file.get_option(triggers, "unregister")
+            self._debug = configuration_file.get_option(triggers, "debug")
 
         else:
             YLogger.warning(self, "'responder' section missing from client config, using defaults")
 
     def to_yaml(self, data, defaults=True):
 
-        assert (data is not None)
+        assert data is not None
 
         if defaults is True:
             data['name'] = "Client Ping Responder"
             data['host'] = None
             data['port'] = None
+            data['ssl_cert_file'] = None
+            data['ssl_key_file'] = None
             data['url'] = None
             data['shutdown'] = None
             data['register'] = None
             data['unregister'] = None
+            data['debug'] = False
 
         else:
             data['name'] = self._name
             data['host'] = self._host
             data['port'] = self._port
+            data['ssl_cert_file'] = self._ssl_cert_file
+            data['ssl_key_file'] = self._ssl_key_file
             data['url'] = self._url
             data['shutdown'] = self._shutdown
             data['register'] = self._register
             data['unregister'] = self._unregister
+            data['debug'] = self._debug

@@ -18,19 +18,19 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import re
 import os
 
-class TextUtils:
 
+class TextUtils:
     DEFAULT_TAB_SPACE = "  "
 
-    RE_STRIP_ALL_WHITESPACE = re.compile('[\s+]')
-    RE_STRIP_WHITESPACE = re.compile('[\n\t\r+]')
-    RE_TERMIANTORS = re.compile('[:;,.?!]')
-    RE_STRIP_NONE_TERMINATING = re.compile('[\'"\(\)\-"]')
-    RE_STRIP_ALL_PUNCTUATION1 = re.compile('[:\'";,.?!\(\)\-"]')
-    RE_STRIP_ALL_PUNCTUATION2 = re.compile('\s+')
+    RE_STRIP_ALL_WHITESPACE = re.compile(r'[\s+]')
+    RE_STRIP_WHITESPACE = re.compile(r'[\n\t\r+]')
+    RE_TERMIANTORS = re.compile(r'[:;,.?!]')
+    RE_STRIP_NONE_TERMINATING = re.compile(r'[\'"\(\)\-"]')
+    RE_STRIP_ALL_PUNCTUATION1 = re.compile(r'[:\'";,.?!\(\)\-"]')
+    RE_STRIP_ALL_PUNCTUATION2 = re.compile(r'\s+')
     RE_STRIP_HTML = re.compile(r'<.*?>')
-    RE_PATTERN_OF_TAG_AND_NAMESPACE_FROM_TEXT = re.compile("^{.*}.*$")
-    RE_MATCH_OF_TAG_AND_NAMESPACE_FROM_TEXT = re.compile("^({.*})(.*)$")
+    RE_PATTERN_OF_TAG_AND_NAMESPACE_FROM_TEXT = re.compile(r'^{.*}.*$')
+    RE_MATCH_OF_TAG_AND_NAMESPACE_FROM_TEXT = re.compile(r'^({.*})(.*)$')
 
     HTML_ESCAPE_TABLE = {
         "&": "&amp;",

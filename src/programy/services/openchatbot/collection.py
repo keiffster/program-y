@@ -14,14 +14,12 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.utils.logging.ylogger import YLogger
-
 from programy.config.brain.openchatbots import BrainOpenChatBotsConfiguration
 from programy.services.openchatbot.domain import OpenChatBotDomainHandler
 from programy.services.openchatbot.openchatbot import OpenChatBot
 
 
-class OpenChatBotCollection(object):
+class OpenChatBotCollection:
 
     def __init__(self):
         self._openchatbots = {}
@@ -32,11 +30,12 @@ class OpenChatBotCollection(object):
         names = configuration.openchatbots()
         for name in names:
             openchatbot_config = configuration.openchatbot(name)
-            self._openchatbots[name.upper()] = OpenChatBot(openchatbot_config.section_name,
-                                                           openchatbot_config.url,
-                                                           openchatbot_config.method,
-                                                           openchatbot_config.authorization,
-                                                           openchatbot_config.api_key)
+            if openchatbot_config is not None:
+                self._openchatbots[name.upper()] = OpenChatBot(openchatbot_config.section_name,
+                                                               openchatbot_config.url,
+                                                               openchatbot_config.method,
+                                                               openchatbot_config.authorization,
+                                                               openchatbot_config.api_key)
 
         self._domain_handler = OpenChatBotDomainHandler(configuration)
 

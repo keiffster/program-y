@@ -15,26 +15,30 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 import sys
-
 from flask import Flask, request
+from programy.utils.logging.ylogger import YLogger
+from programy.utils.console.console import outputLog
 
 
 def handle_trigger(json):
-    print("\nTrigger received...")
+    outputLog(None, "\nTrigger received...")
     try:
-        print(json)
-    except Exception as e:
-        print(e)
+        outputLog(None, json)
+    except Exception as excep:
+        YLogger.exception_nostack(None, "Trigger failed", excep)
+        outputLog(None, "Trigger failed [%s]" % str(excep))
+
     return 'OK'
 
 
 if __name__ == '__main__':
-
-    print("Initiating Trigger Receiver...")
+    outputLog(None, "Initiating Trigger Receiver...")
     receiver = Flask(__name__)
+
 
     @receiver.route('/api/rest/v1.0/trigger', methods=['POST'])
     def trigger():
         handle_trigger(request.json)
+
 
     receiver.run(port=sys.argv[1])

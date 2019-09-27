@@ -21,7 +21,6 @@ from programy.storage.stores.nosql.mongo.dao.linked import LinkedAccount
 
 
 class MongoLinkedAccountStore(MongoStore, LinkedAccountStore):
-
     LINKEDACCOUNTS = 'linkedaccounts'
     PRIMARY_USERID = "primary_userid"
     LINKED_USERID = "linked_userid"

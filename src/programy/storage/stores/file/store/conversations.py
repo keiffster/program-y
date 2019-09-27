@@ -14,14 +14,13 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.utils.logging.ylogger import YLogger
 import os
 import os.path
 import shutil
-
+import json
+from programy.utils.logging.ylogger import YLogger
 from programy.storage.stores.file.store.filestore import FileStore
 from programy.storage.entities.conversation import ConversationStore
-import json
 
 
 class FileConversationStore(FileStore, ConversationStore):
@@ -29,21 +28,29 @@ class FileConversationStore(FileStore, ConversationStore):
     def __init__(self, storage_engine):
         FileStore.__init__(self, storage_engine)
 
+    def _get_storage_path(self):
+        return self.storage_engine.configuration.conversation_storage.file
+
+    def get_storage(self):
+        return self.storage_engine.configuration.conversation_storage
+
     def empty(self):
         if os.path.exists(self._storage_engine.configuration.conversation_storage.dirs[0]) is True:
             shutil.rmtree(self._storage_engine.configuration.conversation_storage.dirs[0])
 
     def _conversations_filename(self, storage_dir, clientid, userid, ext="conv"):
-        return "%s%s%s_%s.%s"%(storage_dir, os.sep, clientid, userid, ext)
+        return "%s%s%s_%s.%s" % (storage_dir, os.sep, clientid, userid, ext)
 
-    def store_conversation(self, client_context, conversation):
+    def store_conversation(self, client_context, conversation, commit=True):
         self._ensure_dir_exists(self._storage_engine.configuration.conversation_storage.dirs[0])
 
-        conversation_filepath = self._conversations_filename(self._storage_engine.configuration.conversation_storage.dirs[0], client_context.client.id, client_context.userid)
+        conversation_filepath = self._conversations_filename(
+            self._storage_engine.configuration.conversation_storage.dirs[0], client_context.client.id,
+            client_context.userid)
 
         YLogger.debug(self, "Writing conversation to [%s]", conversation_filepath)
 
-        convo_json = conversation.to_json ()
+        convo_json = conversation.to_json()
         json_text = json.dumps(convo_json, indent=4)
 
         try:
@@ -54,7 +61,9 @@ class FileConversationStore(FileStore, ConversationStore):
             YLogger.exception_nostack(self, "Failed to write conversation file [%s]", excep, conversation_filepath)
 
     def load_conversation(self, client_context, conversation):
-        conversation_filepath = self._conversations_filename(self._storage_engine.configuration.conversation_storage.dirs[0], client_context.client.id, client_context.userid)
+        conversation_filepath = self._conversations_filename(
+            self._storage_engine.configuration.conversation_storage.dirs[0], client_context.client.id,
+            client_context.userid)
 
         if self._file_exists(conversation_filepath):
             try:

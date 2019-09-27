@@ -2,9 +2,9 @@
 
 import re
 from collections import Counter
-
 from programy.spelling.base import SpellingChecker
 from programy.storage.factory import StorageFactory
+
 
 class NorvigSpellingChecker(SpellingChecker):
 
@@ -21,7 +21,7 @@ class NorvigSpellingChecker(SpellingChecker):
 
     def load_corpus(self, storage_factory):
         if storage_factory.entity_storage_engine_available(StorageFactory.SPELLING_CORPUS) is True:
-            spelling_engine =  storage_factory.entity_storage_engine(StorageFactory.SPELLING_CORPUS)
+            spelling_engine = storage_factory.entity_storage_engine(StorageFactory.SPELLING_CORPUS)
             if spelling_engine:
                 store = spelling_engine.spelling_store()
                 store.load_spelling(self)
@@ -37,7 +37,7 @@ class NorvigSpellingChecker(SpellingChecker):
         # Probability of `word`.dont handle null well ...
         if self.sum_of_words == 0:
             return 0.0
-        return self.words[word] / self.sum_of_words
+        return self.words[word] // self.sum_of_words
 
     def _correction(self, word):
         # Most probable spelling _correction for word.
@@ -57,7 +57,7 @@ class NorvigSpellingChecker(SpellingChecker):
         deletes = [L + R[1:] for L, R in splits if R]
         transposes = [L + R[1] + R[0] + R[2:] for L, R in splits if len(R) > 1]
         replaces = [L + c + R[1:] for L, R in splits if R for c in NorvigSpellingChecker.DefaultLetters]
-        inserts = [L + c + R  for L, R in splits for c in NorvigSpellingChecker.DefaultLetters]
+        inserts = [L + c + R for L, R in splits for c in NorvigSpellingChecker.DefaultLetters]
         return set(deletes + transposes + replaces + inserts)
 
     def _edits2(self, word):

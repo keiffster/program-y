@@ -18,8 +18,7 @@ from programy.utils.logging.ylogger import YLogger
 from programy.clients.restful.config import RestConfiguration
 
 
-class RestAuthorizationHandler(object):
-
+class RestAuthorizationHandler:
     AUTHORIZATION = "Authorization"
 
     def __init__(self, configuration: RestConfiguration):
@@ -37,12 +36,12 @@ class RestAuthorizationHandler(object):
                 auth.initialise(client)
                 return auth
             else:
-                YLogger.error(client, "Unsupported Authentication [%s]", client.configuration.client_configuration.authorization)
+                YLogger.error(client, "Unsupported Authentication [%s]",
+                              client.configuration.client_configuration.authorization)
         return None
 
 
 class RestBasicAuthorizationHandler(RestAuthorizationHandler):
-
     BASIC = "Basic"
     BASIC_AUTH_TOKEN = 'BASIC_AUTH_TOKEN'
 
@@ -57,7 +56,8 @@ class RestBasicAuthorizationHandler(RestAuthorizationHandler):
     @staticmethod
     def add_authorisation_header(client_context, headers):
         headers[RestBasicAuthorizationHandler.AUTHORIZATION] = "Basic %s" % \
-                            client_context.client.license_keys.get_key(RestBasicAuthorizationHandler.BASIC_AUTH_TOKEN)
+                                                               client_context.client.license_keys.get_key(
+                                                                   RestBasicAuthorizationHandler.BASIC_AUTH_TOKEN)
 
     @staticmethod
     def get_license_key(client):
@@ -71,11 +71,10 @@ class RestBasicAuthorizationHandler(RestAuthorizationHandler):
             authorization = request.headers[RestBasicAuthorizationHandler.AUTHORIZATION]
             parts = authorization.split(" ")
             if len(parts) > 1:
-                type = parts[0].strip()
-                if type == RestBasicAuthorizationHandler.BASIC:
+                authtype = parts[0].strip()
+                if authtype == RestBasicAuthorizationHandler.BASIC:
                     token = " ".join(parts[1:])
                     if token == self._basic_auth_token:
                         return True
 
         return False
-

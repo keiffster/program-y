@@ -14,15 +14,15 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.utils.logging.ylogger import YLogger
 import os
 import os.path
 import shutil
-
+from programy.utils.logging.ylogger import YLogger
 from programy.storage.entities.store import Store
+from programy.utils.console.console import outputLog
+
 
 class FileStore(Store):
-
     FILE = "file"
 
     CATEGORIES_STORAGE = 'categories_storage'
@@ -97,7 +97,7 @@ class FileStore(Store):
     @staticmethod
     def _get_dir_from_path(file_path):
         splits = file_path.split(os.sep)
-        paths = splits[:len(splits)-1]
+        paths = splits[:len(splits) - 1]
         path = "/".join(paths)
         return path
 
@@ -114,7 +114,7 @@ class FileStore(Store):
     def commit(self):
         pass
 
-    def load_all(self, collection):
+    def load_all(self, collector):
         col_storage = self.get_storage()
 
         if col_storage.has_multiple_dirs():
@@ -126,36 +126,37 @@ class FileStore(Store):
                     for filename in paths:
                         if col_ext is None or filename.endswith(col_ext):
                             YLogger.debug(self, "Loading file contents from [%s]", filename)
-                            self._load_file_contents(collection, os.path.join(col_dir, filename))
+                            self._load_file_contents(collector, os.path.join(col_dir, filename))
                 else:
                     for dirpath, _, filenames in os.walk(col_dir):
                         for filename in [f for f in filenames if f.endswith(col_ext)]:
                             YLogger.debug(self, "Loading file contents from [%s]", filename)
-                            self._load_file_contents(collection, os.path.join(dirpath, filename))
+                            self._load_file_contents(collector, os.path.join(dirpath, filename))
 
         else:
-            self.load(collection)
+            self.load(collector)
 
-    def load(self, collection):
+    def load(self, collector, name=None):
+        del name
         col_storage = self.get_storage()
-        collection.empty()
-        self._load_file_contents(collection, col_storage.file)
+        collector.empty()
+        self._load_file_contents(collector, col_storage.file)
 
-    def _load_file_contents(self, processor_collection, filename):
+    def _load_file_contents(self, collection, filename):
         pass
 
     def get_storage(self):
         raise NotImplementedError("get_storage must be implemented in child class")
 
-    def upload_from_file(self, filename, format=Store.TEXT_FORMAT, commit=True, verbose=False):
+    def upload_from_file(self, filename, fileformat=Store.TEXT_FORMAT, commit=True, verbose=False):
 
         YLogger.debug(self, "Oploading from file [%s]", filename)
 
         file_processor = None
         try:
-            name = self.get_just_filename_from_filepath(filename)
+            name = FileStore.get_just_filename_from_filepath(filename)
             if verbose is True:
-                print(name)
+                outputLog(self, name)
 
             file_processor = self.get_file_processor(format, filename)
             file_processor.process_lines(name, self, verbose=verbose)
@@ -172,4 +173,3 @@ class FileStore(Store):
         finally:
             if file_processor is not None:
                 file_processor.close()
-

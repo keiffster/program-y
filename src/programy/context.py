@@ -16,11 +16,12 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 import datetime
 import uuid
-
 from programy.utils.logging.ylogger import YLogger
+from programy.utils.console.console import outputLog
 
-class ClientContext(object):
-    
+
+class ClientContext:
+
     def __init__(self, client, userid):
         self._client = client
         self._userid = userid
@@ -30,7 +31,8 @@ class ClientContext(object):
         self._question_depth = 0
         self._id = uuid.uuid1()
 
-    def ylogger_type(self):
+    @staticmethod
+    def ylogger_type():
         return "context"
 
     @property
@@ -50,16 +52,16 @@ class ClientContext(object):
         return self._bot
 
     @bot.setter
-    def bot(self, id):
-        self._bot = id
+    def bot(self, botid):
+        self._bot = botid
 
     @property
     def brain(self):
         return self._brain
 
     @brain.setter
-    def brain(self, id):
-        self._brain = id
+    def brain(self, brainid):
+        self._brain = brainid
 
     def check_max_recursion(self):
         if self.bot.configuration.max_question_recursion != -1:
@@ -76,19 +78,20 @@ class ClientContext(object):
                 raise Exception("Maximum search time limit [%d] exceeded" % self.bot.configuration.max_question_timeout)
 
     def mark_question_start(self, question):
-        YLogger.debug(self, "##########################################################################################")
+        YLogger.debug(self,
+                      "##########################################################################################")
         YLogger.debug(self, "Question (%s): %s", self._client.id, question)
 
         if self._question_depth == 0:
             self._question_start_time = datetime.datetime.now()
-            
+
         self._question_depth += 1
 
     def reset_question(self):
         self._question_depth = 0
 
     def __str__(self):
-        return "[%s] [%s] [%s] [%s] [%d]"% (
+        return "[%s] [%s] [%s] [%s] [%d]" % (
             self._client.id,
             self._userid,
             self._bot.id if self._bot else "",
@@ -105,11 +108,12 @@ class ClientContext(object):
             "depth": self._question_depth
         }
 
-    def dump(self, output_func=print, verbose=False):
+    def dump(self, output_func=outputLog, verbose=False):
         """
         Helper Function for output tree structure
         :param output_func: Function used to display output, typically print or logging function
         :param verbose: Level of detail to display
         :return: None
         """
+        del verbose
         self.brain.aiml_parser.pattern_parser.dump(output_func=output_func, verbose=False)

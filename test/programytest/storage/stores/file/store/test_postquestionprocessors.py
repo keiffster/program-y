@@ -20,7 +20,7 @@ class FilePostQuestionProcessorsStoreTests(unittest.TestCase):
 
     def test_load_postprocessors(self):
         config = FileStorageConfiguration()
-        config._postprocessors_storage = FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "data" + os.sep + "processors" + os.sep + "postquestionprocessors.conf", format="text", encoding="utf-8", delete_on_start=False)
+        config._postprocessors_storage = FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "data" + os.sep + "processors" + os.sep + "postquestionprocessors.conf", fileformat="text", encoding="utf-8", delete_on_start=False)
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FilePostQuestionProcessorsStore(engine)

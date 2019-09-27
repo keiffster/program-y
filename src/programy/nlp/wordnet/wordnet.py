@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from textblob import Word
 
 
-class WordNet(object):
+class WordNet:
 
     @staticmethod
     def get_definitions(string):

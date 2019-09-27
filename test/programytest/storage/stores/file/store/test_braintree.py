@@ -19,7 +19,7 @@ class FileBraintreeStoreTests(unittest.TestCase):
 
     def test_save_braintree(self):
         config = FileStorageConfiguration()
-        config._categories_storage = FileStoreConfiguration(dirs=[os.path.dirname(__file__) + os.sep + "data" + os.sep + "categories"], extension="aiml", subdirs=False, format="xml", encoding="utf-8", delete_on_start=False)
+        config._categories_storage = FileStoreConfiguration(dirs=[os.path.dirname(__file__) + os.sep + "data" + os.sep + "categories"], extension="aiml", subdirs=False, fileformat="xml", encoding="utf-8", delete_on_start=False)
         tmpdir = os.path.dirname(__file__) + os.sep + "braintree"
         tmpfile = tmpdir + os.sep + "braintree.xml"
         config.braintree_storage._dirs = [tmpfile]

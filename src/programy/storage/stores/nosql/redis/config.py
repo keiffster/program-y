@@ -15,7 +15,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.utils.logging.ylogger import YLogger
-
 from programy.config.base import BaseConfigurationData
 from programy.storage.stores.nosql.redis.engine import RedisStorageEngine
 from programy.utils.substitutions.substitues import Substitutions
@@ -61,6 +60,8 @@ class RedisStorageConfiguration(BaseConfigurationData):
         BaseConfigurationData.check_for_license_keys(self, license_keys)
 
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
+        del bot_root
+        del subs
         storage = configuration_file.get_section(self._section_name, configuration)
         if storage is not None:
             self._host = configuration_file.get_option(storage, "host")
@@ -73,19 +74,12 @@ class RedisStorageConfiguration(BaseConfigurationData):
             YLogger.error(None, "'config' section missing from storage config")
 
     def create_redisstorage_config(self):
-        config = {}
-
-        config['host'] = self._host
-        config['port'] = self._port
-        config['password'] = self._password
-        config['db'] = self._db
-        config['prefix'] = self._prefix
-        config['drop_all_first'] = self._drop_all_first
-
-        if len(config.keys()) > 0:
-            return config
-
-        return None
+        return {'host': self._host,
+                'port': self._port,
+                'password': self._password,
+                'db': self._db,
+                'prefix': self._prefix,
+                'drop_all_first': self._drop_all_first}
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:

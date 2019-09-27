@@ -111,7 +111,6 @@ class MatchContextTests(unittest.TestCase):
         self.assertIsNotNone(json_data)
         self.assertEquals(json_data["max_search_depth"], 100)
         self.assertEquals(json_data["max_search_timeout"], 60)
-        self.assertIsInstance(json_data["total_search_start"], datetime.datetime)
 
         self.assertEquals(3, len(json_data["matched_nodes"]))
         self.assertEquals(json_data["matched_nodes"][0], {'multi_word': True,
@@ -131,9 +130,11 @@ class MatchContextTests(unittest.TestCase):
                                                          'words': ["There"]})
 
     def test_from_json(self):
+        time1 = datetime.datetime(2019, 8, 29, 17, 25, 7, 141098).strftime("%d/%m/%Y, %H:%M:%S")
+
         json_data = {'max_search_depth': 100,
                      'max_search_timeout': 60,
-                     'total_search_start': datetime.datetime(2019, 8, 29, 17, 25, 7, 141098),
+                     'total_search_start': time1,
                      'sentence': 'Hello',
                      'response': 'Hi there',
                      'matched_nodes': [{'type': 'Topic', 'node': 'ONEORMORE [*]', 'words': [], 'multi_word': True, 'wild_card': True},
@@ -145,7 +146,8 @@ class MatchContextTests(unittest.TestCase):
         self.assertIsNotNone(match_context)
         self.assertEquals(match_context._max_search_depth, 100)
         self.assertEquals(match_context._max_search_timeout, 60)
-        self.assertIsInstance(match_context._total_search_start, datetime.datetime)
+        time2 = match_context._total_search_start.strftime("%d/%m/%Y, %H:%M:%S")
+        self.assertEquals(time1, time2)
         self.assertEquals(match_context.template_node, None)
         self.assertEquals(match_context.sentence, "Hello")
         self.assertEquals(match_context.response, "Hi there")

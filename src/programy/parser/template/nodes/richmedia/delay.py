@@ -14,11 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.utils.logging.ylogger import YLogger
-
 from programy.parser.template.nodes.base import TemplateNode
-from programy.parser.exceptions import ParserException
 from programy.utils.text.text import TextUtils
 
 
@@ -29,10 +25,7 @@ class TemplateDelayNode(TemplateNode):
         self._seconds = None
 
     def resolve_to_string(self, client_context):
-        str = "<delay>"
-        str += "<seconds>%s</seconds>" % self._seconds.resolve(client_context)
-        str += "</delay>"
-        return str
+        return "<delay>" + "<seconds>%s</seconds>" % self._seconds.resolve(client_context) + "</delay>"
 
     def to_string(self):
         return "[DELAY %d]" % (len(self._children))
@@ -61,4 +54,3 @@ class TemplateDelayNode(TemplateNode):
 
             tail_text = self.get_tail_from_element(child)
             self.parse_text(graph, tail_text)
-

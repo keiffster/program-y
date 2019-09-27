@@ -15,7 +15,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.utils.logging.ylogger import YLogger
-
 from programy.storage.stores.file.store.filestore import FileStore
 from programy.storage.entities.license import LicenseStore
 
@@ -25,22 +24,21 @@ class FileLicenseStore(FileStore, LicenseStore):
     def __init__(self, storage_engine):
         FileStore.__init__(self, storage_engine)
 
-    def _load_file_contents(self, license_collection, filename):
+    def _get_storage_path(self):
+        return self.storage_engine.configuration.license_storage.file
+
+    def get_storage(self):
+        return self.storage_engine.configuration.license_storage
+
+    def _load_file_contents(self, collection, filename):
         try:
             YLogger.info(self, "Loading license key file: [%s]", filename)
             with open(filename, "r", encoding="utf-8") as license_file:
                 for line in license_file:
-                    self._process_license_key_line(license_collection, line)
+                    self._process_license_key_line(collection, line)
 
         except Exception as excep:
             YLogger.exception_nostack(self, "Invalid license key file [%s]", excep, filename)
-
-    def load_license_key_data(self, license_key_data):
-        lines = license_key_data.split('\n')
-        for line in lines:
-            line = line.strip()
-            if line:
-                self._process_license_key_line(line)
 
     def _process_license_key_line(self, license_collection, line):
         line = line.strip()
@@ -57,4 +55,3 @@ class FileLicenseStore(FileStore, LicenseStore):
 
     def get_storage(self):
         return self.storage_engine.configuration.license_storage
-

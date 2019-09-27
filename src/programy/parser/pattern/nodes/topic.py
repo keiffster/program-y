@@ -14,9 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.utils.logging.ylogger import YLogger
-
 from programy.parser.exceptions import ParserException
 from programy.parser.pattern.nodes.base import PatternNode
 
@@ -32,7 +30,7 @@ class PatternTopicNode(PatternNode):
     def to_xml(self, client_context, include_user=False):
         string = ""
         if include_user is True:
-            string += '<topic userid="%s">'%self.userid
+            string += '<topic userid="%s">' % self.userid
         else:
             string += '<topic>'
         string += super(PatternTopicNode, self).to_xml(client_context)
@@ -58,7 +56,8 @@ class PatternTopicNode(PatternNode):
                 return True
         return False
 
-    def consume(self, client_context, context, words, word_no, match_type, depth):
+    def consume(self, client_context, context, words, word_no, match_type, depth, parent=False):
+        del parent
 
         tabs = self.get_tabs(client_context, depth)
 
@@ -68,7 +67,8 @@ class PatternTopicNode(PatternNode):
 
         if words.word(word_no) == PatternTopicNode.TOPIC:
             YLogger.debug(client_context, "%sTopic matched %s", tabs, words.word(word_no))
-            return super(PatternTopicNode, self).consume(client_context, context, words, word_no+1, match_type, depth+1)
+            return super(PatternTopicNode, self).consume(client_context, context, words, word_no + 1, match_type,
+                                                         depth + 1)
 
         YLogger.debug(client_context, "%sTopic NOT matched %s", tabs, words.word(word_no))
         return None

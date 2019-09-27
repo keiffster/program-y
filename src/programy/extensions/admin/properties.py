@@ -16,10 +16,10 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 """
 from programy.utils.logging.ylogger import YLogger
-
 from programy.extensions.base import Extension
 from programy.parser.template.nodes.get import TemplateGetNode
 from programy.parser.template.nodes.bot import TemplateBotNode
+
 
 class PropertiesAdminExtension(Extension):
 
@@ -42,7 +42,7 @@ class PropertiesAdminExtension(Extension):
         elif splits[0] == 'BOT':
             properties += "Properties:<br /><ul>"
             for pair in client_context.brain.properties.pairs:
-                properties += "<li>%s = %s</li>"%(pair[0], pair[1])
+                properties += "<li>%s = %s</li>" % (pair[0], pair[1])
             properties += "</ul>"
             properties += "<br />"
 
@@ -52,7 +52,7 @@ class PropertiesAdminExtension(Extension):
 
                 properties += "Properties:<br /><ul>"
                 for name, value in conversation.properties.items():
-                    properties += "<li>%s = %s</li>"%(name, value)
+                    properties += "<li>%s = %s</li>" % (name, value)
                 properties += "</ul>"
                 properties += "<br />"
 

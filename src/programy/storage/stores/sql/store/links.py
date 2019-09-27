@@ -14,47 +14,58 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
+from sqlalchemy import and_
 from programy.storage.stores.sql.store.sqlstore import SQLStore
 from programy.storage.entities.link import LinkStore
 from programy.storage.stores.sql.dao.link import Link
-from sqlalchemy import and_
+from programy.utils.logging.ylogger import YLogger
+
 
 class SQLLinkStore(SQLStore, LinkStore):
 
     def __init__(self, storage_engine):
         SQLStore.__init__(self, storage_engine)
 
+    def _get_all(self):
+        return self._storage_engine.session.query(Link)
+
     def empty(self):
         self._storage_engine.session.query(Link).delete()
 
     def create_link(self, primary_userid, provided_key, generated_key, expires, expired=False, retry_count=0):
-        link = Link(primary_user=primary_userid, generated_key=generated_key, provided_key=provided_key, expires=expires, expired=expired, retry_count=retry_count)
+        link = Link(primary_user=primary_userid, generated_key=generated_key, provided_key=provided_key,
+                    expires=expires, expired=expired, retry_count=retry_count)
         self._storage_engine.session.add(link)
         return link
 
-    def get_link(self, primary_userid):
+    def get_link(self, userid):
         try:
-            link = self._storage_engine.session.query(Link).filter(Link.primary_user == primary_userid).one()
+            link = self._storage_engine.session.query(Link).filter(Link.primary_user == userid).one()
             return link
+
         except Exception as e:
-            print(e)
+            YLogger.exception_nostack(self, "Failed to get link", e)
+
         return None
 
-    def remove_link(self, primary_userid):
+    def remove_link(self, userid):
         try:
-            self._storage_engine.session.query(Link).filter(Link.primary_user == primary_userid).delete()
+            self._storage_engine.session.query(Link).filter(Link.primary_user == userid).delete()
             return True
-        except Exception as e:
+
+        except Exception as excep:
+            YLogger.exception_nostack(self, "Failed to remove link", excep)
             return False
 
-    def link_exists(self, primary_userid, provided_key, generated_key):
+    def link_exists(self, userid, provided_key, generated_key):
         try:
-            self._storage_engine.session.query(Link).filter(Link.primary_user == primary_userid,
+            self._storage_engine.session.query(Link).filter(Link.primary_user == userid,
                                                             Link.provided_key == provided_key,
                                                             Link.generated_key == generated_key).one()
             return True
-        except Exception as e:
+
+        except Exception as excep:
+            YLogger.exception_nostack(self, "Failed to check link exists", excep)
             return False
 
     def update_link(self, link):

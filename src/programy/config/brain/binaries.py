@@ -48,7 +48,8 @@ class BrainBinariesConfiguration(BaseSectionConfigurationData):
         if binaries is not None:
             self._save_binary = configuration_file.get_option(binaries, "save_binary", missing_value=None, subs=subs)
             self._load_binary = configuration_file.get_option(binaries, "load_binary", missing_value=None, subs=subs)
-            self._load_aiml_on_binary_fail = configuration_file.get_option(binaries, "load_aiml_on_binary_fail", missing_value=None, subs=subs)
+            self._load_aiml_on_binary_fail = configuration_file.get_option(binaries, "load_aiml_on_binary_fail",
+                                                                           missing_value=None, subs=subs)
         else:
             YLogger.warning(self, "'binaries' section missing from bot config, using to defaults")
 

@@ -20,11 +20,12 @@ from programy.storage.factory import StorageFactory
 from programy.config.bot.conversations import BotConversationsConfiguration
 
 
-class ConversationManager(object):
+class ConversationManager:
 
     def __init__(self, conversation_configuration):
-        assert (conversation_configuration is not None)
-        assert (isinstance(conversation_configuration, BotConversationsConfiguration))
+
+        assert conversation_configuration is not None
+        assert isinstance(conversation_configuration, BotConversationsConfiguration)
 
         self._configuration = conversation_configuration
         self._conversation_storage = None
@@ -47,7 +48,7 @@ class ConversationManager(object):
 
     def initialise(self, storage_factory):
         if storage_factory.entity_storage_engine_available(StorageFactory.CONVERSATIONS) is True:
-            converstion_engine =  storage_factory.entity_storage_engine(StorageFactory.CONVERSATIONS)
+            converstion_engine = storage_factory.entity_storage_engine(StorageFactory.CONVERSATIONS)
             if converstion_engine:
                 self._conversation_storage = converstion_engine.conversation_store()
 
@@ -63,8 +64,8 @@ class ConversationManager(object):
 
     def get_conversation(self, client_context):
 
-        assert (client_context is not None)
-        assert (client_context.userid  is not None)
+        assert client_context is not None
+        assert client_context.userid is not None
 
         if client_context.userid in self._conversations:
             YLogger.debug(client_context, "Retrieving conversation for client %s", client_context.userid)
@@ -92,4 +93,3 @@ class ConversationManager(object):
                 pass
 
         return conversation
-

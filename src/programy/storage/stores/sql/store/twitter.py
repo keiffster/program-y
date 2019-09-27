@@ -14,10 +14,8 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.orm.exc import MultipleResultsFound
-
 from programy.storage.stores.sql.store.sqlstore import SQLStore
 from programy.storage.entities.twitter import TwitterStore
 from programy.storage.stores.sql.dao.twitter import Twitter
@@ -27,6 +25,9 @@ class SQLTwitterStore(SQLStore, TwitterStore):
 
     def __init__(self, storage_engine):
         SQLStore.__init__(self, storage_engine)
+
+    def _get_all(self):
+        return self._storage_engine.session.query(Twitter)
 
     def empty(self):
         self._storage_engine.session.query(Twitter).delete()
@@ -40,11 +41,12 @@ class SQLTwitterStore(SQLStore, TwitterStore):
         twitter = self._storage_engine.session.query(Twitter)
         try:
             ids = twitter.one()
-
             return ids.last_direct_message_id, ids.last_status_id
-        except MultipleResultsFound as mrf:
+
+        except MultipleResultsFound:
             pass
-        except NoResultFound as nrf:
+
+        except NoResultFound:
             pass
 
         return "-1", "-1"

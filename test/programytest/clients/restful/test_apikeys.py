@@ -14,6 +14,15 @@ class MockRequest(object):
         self.args = {}
 
 
+class MockRestBotClient(RestBotClient):
+
+    def server_abort(self, message, status_code):
+        return # No need to do anything
+
+    def create_response(self, response_data, status_code, version=1.0):
+        return "response"
+
+
 class APIKeysHandlerTests(unittest.TestCase):
 
     def test_init(self):
@@ -27,7 +36,7 @@ class APIKeysHandlerTests(unittest.TestCase):
 
     def test_api_keys(self):
         arguments = MockArgumentParser()
-        client = RestBotClient("testrest", arguments)
+        client = MockRestBotClient("testrest", arguments)
         self.assertIsNotNone(client)
 
         client.configuration.client_configuration._use_api_keys = True
@@ -51,11 +60,11 @@ class APIKeysHandlerTests(unittest.TestCase):
         request = MockRequest()
         request.args['apikey'] = '11111111'
 
-        self.assertEquals('11111111', handler.get_api_key(request))
+        self.assertEqual('11111111', handler.get_api_key(request))
 
     def test_verify_api_key_usage(self):
         arguments = MockArgumentParser()
-        client = RestBotClient("testrest", arguments)
+        client = MockRestBotClient("testrest", arguments)
         self.assertIsNotNone(client)
 
         client.configuration.client_configuration._use_api_keys = True

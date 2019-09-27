@@ -68,7 +68,7 @@ class TemplateGraphRequestTests(TemplateGraphTestClient):
         self.assertIsNotNone(req_node.index)
         self.assertIsInstance(req_node.index, TemplateNode)
 
-        self.assertEquals(1, len(req_node.index.children))
+        self.assertEqual(1, len(req_node.index.children))
         self.assertIsInstance(req_node.index.children[0], TemplateGetNode)
 
     def test_request_with_children(self):

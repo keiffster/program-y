@@ -40,10 +40,13 @@ class BotSentimentAnalyserConfiguration(BaseConfigurationData):
         BaseConfigurationData.check_for_license_keys(self, license_keys)
 
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
+        del bot_root
         sentiment = configuration_file.get_section(self._section_name, configuration)
         if sentiment is not None:
             self._classname = configuration_file.get_option(sentiment, "classname", missing_value=None, subs=subs)
-            self._scores = configuration_file.get_option(sentiment, "scores", missing_value="programy.nlp.sentiment.scores.SentimentScores", subs=subs)
+            self._scores = configuration_file.get_option(sentiment, "scores",
+                                                         missing_value="programy.nlp.sentiment.scores.SentimentScores",
+                                                         subs=subs)
         else:
             YLogger.warning(self, "'sentiment' section missing from bot config, using defaults")
 

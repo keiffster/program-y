@@ -14,26 +14,26 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.utils.logging.ylogger import YLogger
-
-from pymessenger.bot import Bot
 from flask import Flask, request
-
+from pymessenger.bot import Bot
+from programy.utils.logging.ylogger import YLogger
 from programy.clients.restful.flask.client import FlaskRestBotClient
 from programy.clients.restful.flask.facebook.config import FacebookConfiguration
 from programy.clients.restful.flask.facebook.renderer import FacebookRenderer
+from programy.utils.console.console import outputLog
 
 
 class FacebookBotClient(FlaskRestBotClient):
     
     def __init__(self, argument_parser=None):
+        self._access_token = None
         FlaskRestBotClient.__init__(self, 'facebook', argument_parser)
 
         YLogger.debug(self, "Facebook Client is running....")
 
         self._facebook_bot = self.create_facebook_bot()
 
-        print("Facebook Client loaded")
+        outputLog(self, "Facebook Client loaded")
 
     @property
     def facebook_bot(self):
@@ -50,7 +50,11 @@ class FacebookBotClient(FlaskRestBotClient):
         return FacebookRenderer(self)
 
     def create_facebook_bot(self):
-        return Bot(self._access_token)
+        if self._access_token is not None:
+            return Bot(self._access_token)
+
+        YLogger.error(self, "Facebook access token missing, unable to create facebook bot")
+        return None
 
     def get_hub_challenge(self, request):
         return request.args.get("hub.challenge")
@@ -126,8 +130,9 @@ class FacebookBotClient(FlaskRestBotClient):
             elif message.get('postback'):
                 self.handle_postback(message)
 
-    def ask_question(self, client_context, question):
+    def ask_question(self, userid, question, metadata=None):
         response = ""
+        client_context = self.create_client_context(userid)
         try:
             self._questions += 1
             response = client_context.bot.ask_question(client_context, question, responselogger=self)
@@ -237,7 +242,7 @@ class FacebookBotClient(FlaskRestBotClient):
 
 if __name__ == "__main__":
 
-    print("Initiating Facebook Client...")
+    outputLog(None, "Initiating Facebook Client...")
 
     FACEBOOK_CLIENT = FacebookBotClient()
 
@@ -251,4 +256,3 @@ if __name__ == "__main__":
             YLogger.exception(None, "Facebook Error", e)
 
     FACEBOOK_CLIENT.run(APP)
-

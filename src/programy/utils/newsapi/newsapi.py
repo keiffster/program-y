@@ -1,13 +1,31 @@
-from programy.utils.logging.ylogger import YLogger
+"""
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions
+of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+"""
 import json
 import requests
+from programy.utils.logging.ylogger import YLogger
 
-class NewsApiApi(object):
+
+class NewsApiApi:
 
     def get_news(self, url):
-        return  requests.get(url)
+        return requests.get(url)
 
-class NewsArticle(object):
+
+class NewsArticle:
 
     def __init__(self):
         self.title = None
@@ -42,10 +60,9 @@ class NewsArticle(object):
         data["urlToImage"] = self.url_to_image
         return data
 
+
 # https://newsapi.org/bbc-news-api
-
-class NewsAPI(object):
-
+class NewsAPI:
     BASE_URL = "https://newsapi.org/v1/articles?source=%s&sortBy=%s&apiKey=%s"
 
     # Single news feeds
@@ -182,7 +199,7 @@ class NewsAPI(object):
             NewsAPI.TIME: NewsAPI.time,
             NewsAPI.USA_TODAY: NewsAPI.usa_today,
             NewsAPI.BUSINESS: NewsAPI.business,
-            NewsAPI.ENTERTAINMENT: NewsAPI. entertainment,
+            NewsAPI.ENTERTAINMENT: NewsAPI.entertainment,
             NewsAPI.GAMING: NewsAPI.gaming,
             NewsAPI.MUSIC: NewsAPI.music,
             NewsAPI.SCIENCE_AND_NATURE: NewsAPI.science_and_nature,
@@ -202,7 +219,7 @@ class NewsAPI(object):
 
     @staticmethod
     def _format_url(service, api_key, sort_by="top"):
-        return NewsAPI.BASE_URL%(service, sort_by, api_key)
+        return NewsAPI.BASE_URL % (service, sort_by, api_key)
 
     @staticmethod
     def _get_data(url_str, api_key, max_articles, sort, reverse):

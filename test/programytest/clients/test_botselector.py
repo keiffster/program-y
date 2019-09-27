@@ -34,12 +34,12 @@ class DefaultBotSelectorTests(unittest.TestCase):
         selected = selector.select_bot()
 
         self.assertIsNotNone(selected)
-        self.assertEquals(selected, bot1)
+        self.assertEqual(selected, bot1)
 
         selected = selector.select_bot()
 
         self.assertIsNotNone(selected)
-        self.assertEquals(selected, bot1)
+        self.assertEqual(selected, bot1)
 
     def test_selection_multi_bot(self):
         config_file, logging_file = MockConfigFiles.get_config_files(self)
@@ -56,16 +56,16 @@ class DefaultBotSelectorTests(unittest.TestCase):
 
         selected = selector.select_bot()
         self.assertIsNotNone(selected)
-        self.assertEquals(selected, bot1)
+        self.assertEqual(selected, bot1)
 
         selected = selector.select_bot()
         self.assertIsNotNone(selected)
-        self.assertEquals(selected, bot2)
+        self.assertEqual(selected, bot2)
 
         selected = selector.select_bot()
         self.assertIsNotNone(selected)
-        self.assertEquals(selected, bot3)
+        self.assertEqual(selected, bot3)
 
         selected = selector.select_bot()
         self.assertIsNotNone(selected)
-        self.assertEquals(selected, bot1)
+        self.assertEqual(selected, bot1)

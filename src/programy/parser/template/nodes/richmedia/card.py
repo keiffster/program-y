@@ -14,12 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.utils.logging.ylogger import YLogger
-
 from programy.parser.template.nodes.base import TemplateNode
-from programy.parser.template.nodes.richmedia.button import TemplateButtonNode
-from programy.parser.exceptions import ParserException
 from programy.utils.text.text import TextUtils
 
 
@@ -33,14 +28,14 @@ class TemplateCardNode(TemplateNode):
         self._buttons = []
 
     def resolve_to_string(self, client_context):
-        str = "<card>"
-        str += "<image>%s</image>" % self._image.resolve(client_context)
-        str += "<title>%s</title>" % self._title.resolve(client_context)
-        str += "<subtitle>%s</subtitle>" % self._subtitle.resolve(client_context)
+        resolved = "<card>"
+        resolved += "<image>%s</image>" % self._image.resolve(client_context)
+        resolved += "<title>%s</title>" % self._title.resolve(client_context)
+        resolved += "<subtitle>%s</subtitle>" % self._subtitle.resolve(client_context)
         for button in self._buttons:
-            str += button.resolve_to_string(client_context)
-        str += "</card>"
-        return str
+            resolved += button.resolve_to_string(client_context)
+        resolved += "</card>"
+        return resolved
 
     def to_string(self):
         return "[CARD %d]" % (len(self._buttons))
@@ -83,4 +78,3 @@ class TemplateCardNode(TemplateNode):
 
             tail_text = self.get_tail_from_element(child)
             self.parse_text(graph, tail_text)
-

@@ -14,23 +14,22 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from abc import ABCMeta, abstractmethod
+from abc import ABC
+from abc import abstractmethod
 from programy.utils.substitutions.substitues import Substitutions
 
 
-class BaseConfigurationFile(object):
-    __metaclass__ = ABCMeta
+class BaseConfigurationFile(ABC):
 
     @abstractmethod
-    def load_from_text(self, text, client_configuration, bot_root):
+    def load_from_text(self, text, client_configuration, bot_root, subs: Substitutions = None):
         """
         Never Implemented
         """
         raise NotImplementedError()
 
     @abstractmethod
-    def load_from_file(self, filename, client_configuration, bot_root):
+    def load_from_file(self, filename, client_configuration, bot_root, subs: Substitutions = None):
         """
         Never Implemented
         """
@@ -107,10 +106,10 @@ class BaseConfigurationFile(object):
         elif value.upper() == 'FALSE':
             return False
         else:
-            raise Exception("Invalid boolean config value [%s]"%value)
+            raise Exception("Invalid boolean config value [%s]" % value)
 
     def convert_to_int(self, value):
         if value.isdigit():
             return int(value)
         else:
-            raise Exception("Invalid integer config value [%s]"%value)
+            raise Exception("Invalid integer config value [%s]" % value)

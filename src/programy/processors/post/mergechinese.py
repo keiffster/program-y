@@ -14,13 +14,11 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-
-from programy.utils.logging.ylogger import YLogger
 import re
-
+from programy.utils.logging.ylogger import YLogger
 from programy.processors.processing import PostProcessor
 from programy.utils.language.chinese import ChineseLanguage
+
 
 class MergeChinesePostProcessor(PostProcessor):
 
@@ -31,12 +29,11 @@ class MergeChinesePostProcessor(PostProcessor):
         YLogger.debug(context, "Merging Chinese into understandable words...")
 
         words = word_string.split(" ")
-        str = ""
+        processed = ""
         for word in words:
             if ChineseLanguage.is_language(word):
-                str += word
+                processed += word
             else:
-                str += " " + word + " "
-        str = re.sub(r'\s+', ' ', str)
-        return str.strip()
-
+                processed += " " + word + " "
+        processed = re.sub(r'\s+', ' ', processed)
+        return processed.strip()

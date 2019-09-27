@@ -29,21 +29,21 @@ class MongoNodeStore(MongoStore, NodesStore):
     def __init__(self, storage_engine):
         MongoStore.__init__(self, storage_engine)
 
-    def load(self, node_factory):
+    def load(self, collector, name=None):
         YLogger.info(self, "Loading %s nodes from Mongo", self.collection_name())
         nodes = self.get_all_nodes()
         for node in nodes:
             try:
-                node_factory.add_node(node['name'], ClassLoader.instantiate_class(node['node_class']))
+                collector.add_node(node['name'], ClassLoader.instantiate_class(node['node_class']))
 
             except Exception as e:
-                YLogger.exception(self, "Failed pre-instantiating %s Node [%s]", e, node_factory.type, node['node_class'])
+                YLogger.exception(self, "Failed pre-instantiating %s Node [%s]", e, collector.type, node['node_class'])
 
     def get_all_nodes(self):
         collection = self.collection()
         return collection.find()
 
-    def upload_from_file(self, filename, format=Store.TEXT_FORMAT, commit=True, verbose=False):
+    def upload_from_file(self, filename, fileformat=Store.TEXT_FORMAT, commit=True, verbose=False):
 
         YLogger.info(self, "Uploading %s to Mongo from file [%s]", self.collection_name(), filename)
         count = 0
@@ -82,7 +82,6 @@ class MongoNodeStore(MongoStore, NodesStore):
 
 
 class MongoPatternNodeStore(MongoNodeStore):
-
     PATTERN_NODES = 'pattern_nodes'
 
     def __init__(self, storage_engine):
@@ -96,7 +95,6 @@ class MongoPatternNodeStore(MongoNodeStore):
 
 
 class MongoTemplateNodeStore(MongoNodeStore):
-
     TEMPLATE_NODES = 'template_nodes'
 
     def __init__(self, storage_engine):

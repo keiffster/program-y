@@ -18,7 +18,7 @@ from programy.utils.logging.ylogger import YLogger
 from programy.utils.classes.loader import ClassLoader
 
 
-class BaseSentimentAnalyser(object):
+class BaseSentimentAnalyser:
 
     def initialise(self, storage_factory=None):
         pass

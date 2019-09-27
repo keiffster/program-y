@@ -15,7 +15,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.utils.logging.ylogger import YLogger
-
 from programy.dialog.question import Question
 from programy.dialog.sentence import Sentence
 from programy.dialog.convo_mgr import ConversationManager
@@ -28,12 +27,12 @@ from programy.triggers.system import SystemTriggers
 from programy.brainfactory import BrainFactory
 
 
-class Bot(object):
+class Bot:
 
     def __init__(self, config, client):
 
-        assert (config is not None)
-        assert (client is not None)
+        assert config is not None
+        assert client is not None
 
         self._questions = 0
 
@@ -65,7 +64,8 @@ class Bot(object):
         self._conversation_mgr = ConversationManager(config.conversations)
         self._conversation_mgr.initialise(self._client.storage_factory)
 
-    def ylogger_type(self):
+    @staticmethod
+    def ylogger_type():
         return "bot"
 
     @property
@@ -182,7 +182,7 @@ class Bot(object):
 
     def get_version_string(self, client_context):
 
-        assert (client_context is not None)
+        assert client_context is not None
 
         if client_context.brain.properties.has_property("version"):
             # The old version of returning the version string, did not distinquish
@@ -201,13 +201,13 @@ class Bot(object):
 
     def has_conversation(self, client_context):
 
-        assert (self._conversation_mgr is not None)
+        assert self._conversation_mgr is not None
 
         return self._conversation_mgr.has_conversation(client_context)
 
     def get_conversation(self, client_context):
 
-        assert (self._conversation_mgr is not None)
+        assert self._conversation_mgr is not None
 
         return self._conversation_mgr.get_conversation(client_context)
 
@@ -222,7 +222,7 @@ class Bot(object):
 
     def get_default_response(self, client_context):
 
-        assert (client_context is not None)
+        assert client_context is not None
 
         if self.default_response_srai is not None:
             sentence = Sentence(client_context, self.default_response_srai)
@@ -235,7 +235,7 @@ class Bot(object):
 
     def get_initial_question(self, client_context):
 
-        assert (client_context is not None)
+        assert client_context is not None
 
         if self.initial_question_srai is not None:
             sentence = Sentence(client_context, self.initial_question_srai)
@@ -248,7 +248,7 @@ class Bot(object):
 
     def get_exit_response(self, client_context):
 
-        assert (client_context is not None)
+        assert client_context is not None
 
         if self.exit_response_srai is not None:
             sentence = Sentence(client_context, self.exit_response_srai)
@@ -263,8 +263,8 @@ class Bot(object):
 
     def pre_process_text(self, client_context, text, srai):
 
-        assert (client_context is not None)
-        assert (client_context.brain is not None)
+        assert client_context is not None
+        assert client_context.brain is not None
 
         if srai is False:
             pre_processed = client_context.brain.pre_process_question(client_context, text)
@@ -274,7 +274,7 @@ class Bot(object):
             pre_processed = text
 
         if pre_processed is None or pre_processed == "":
-            assert (self.configuration is not None)
+            assert self.configuration is not None
 
             pre_processed = self.configuration.empty_string
 
@@ -288,15 +288,15 @@ class Bot(object):
 
     def combine_answers(self, answers, srai):
 
-        assert (answers is not None)
-        assert (self._sentence_joiner is not None)
+        assert answers is not None
+        assert self._sentence_joiner is not None
 
         return self._sentence_joiner.combine_answers(answers, srai)
 
     def post_process_response(self, client_context, response, srai):
         if srai is False:
 
-            assert (client_context is not None)
+            assert client_context is not None
 
             answer = client_context.brain.post_process_response(client_context, response).strip()
             if not answer:
@@ -309,10 +309,13 @@ class Bot(object):
 
     def post_process_question(self, client_context, question, srai):
         if srai is False:
-            assert (client_context is not None)
+
+            assert client_context is not None
+
             answer = client_context.brain.post_process_question(client_context, question)
             if not answer:
                 answer = self.get_default_response(client_context)
+
         else:
             answer = question
 
@@ -326,14 +329,14 @@ class Bot(object):
 
     def ask_question(self, client_context, text, srai=False, responselogger=None):
 
-        assert (client_context is not None)
+        assert client_context is not None
 
         if srai is False:
             client_context.bot = self
             client_context.brain = client_context.bot.brain
 
-        assert (client_context.bot is not None)
-        assert (client_context.brain is not None)
+        assert client_context.bot is not None
+        assert client_context.brain is not None
 
         self._questions += 1
 
@@ -348,7 +351,7 @@ class Bot(object):
             if self.client.trigger_manager is not None:
                 self.client.trigger_manager.trigger(SystemTriggers.CONVERSATION_START, client_context)
 
-        assert (conversation is not None)
+        assert conversation is not None
 
         conversation.record_dialog(question)
 
@@ -372,7 +375,7 @@ class Bot(object):
         answers = []
         sentence_no = 0
         for sentence in question.sentences:
-            question.set_current_sentence_no(sentence_no)
+            question.current_sentence_no = sentence_no
             answer = self.process_sentence(client_context, sentence, srai, responselogger)
             answers.append(answer)
             sentence_no += 1
@@ -381,8 +384,8 @@ class Bot(object):
 
     def process_sentence(self, client_context, sentence, srai, responselogger):
 
-        assert (client_context is not None)
-        assert (client_context.brain is not None)
+        assert client_context is not None
+        assert client_context.brain is not None
 
         client_context.check_max_recursion()
         client_context.check_max_timeout()
@@ -402,7 +405,7 @@ class Bot(object):
 
     def handle_response(self, client_context, sentence, response, srai, responselogger):
 
-        assert (sentence is not None)
+        assert sentence is not None
 
         YLogger.debug(client_context, "Raw Response (%s): %s", client_context.userid, response)
         sentence.response = response
@@ -415,7 +418,8 @@ class Bot(object):
 
     def handle_none_response(self, client_context, sentence, responselogger):
 
-        assert (sentence is not None)
+        assert sentence is not None
+
         sentence.response = self.post_process_question(client_context, sentence.text(client_context), False)
         if sentence.response is None:
             sentence.response = self.get_default_response(client_context)

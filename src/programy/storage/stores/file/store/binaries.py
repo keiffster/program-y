@@ -14,26 +14,27 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.utils.logging.ylogger import YLogger
-import os
-import os.path
-
-from programy.storage.stores.file.store.filestore import FileStore
-from programy.storage.entities.binaries import BinariesStore
-try:
-    import _pickle as pickle
-except:
-    import pickle
+import pickle
 import gc
 import datetime
+from programy.utils.logging.ylogger import YLogger
+from programy.storage.stores.file.store.filestore import FileStore
+from programy.storage.entities.binaries import BinariesStore
+
 
 class FileBinariesStore(FileStore, BinariesStore):
 
     def __init__(self, storage_engine):
         FileStore.__init__(self, storage_engine)
 
+    def _get_all(self):
+        return self._storage_engine.session.query(De)
+
     def _get_storage_path(self):
         return self.storage_engine.configuration.binaries_storage.file
+
+    def get_storage(self):
+        return self.storage_engine.configuration.binaries_storage
 
     def save_binary(self, aiml_parser):
         try:
@@ -77,4 +78,3 @@ class FileBinariesStore(FileStore, BinariesStore):
         except Exception as excep:
             YLogger.exception_nostack(self, "Failed to load binary file", excep)
             return None
-

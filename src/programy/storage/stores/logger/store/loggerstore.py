@@ -16,8 +16,8 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 from programy.storage.entities.store import Store
 
-class LoggerStore(Store):
 
+class LoggerStore(Store):
     LOGGER = "logger"
 
     def __init__(self, storage_engine):

@@ -21,7 +21,6 @@ from programy.storage.stores.nosql.mongo.dao.user import User
 
 
 class MongoUserStore(MongoStore, UserStore):
-
     USERS = 'users'
     USERID = 'userid'
     CLIENT = 'client'
@@ -32,9 +31,9 @@ class MongoUserStore(MongoStore, UserStore):
     def collection_name(self):
         return MongoUserStore.USERS
 
-    def add_user(self, userid, client):
-        YLogger.info(self, "Adding user [%s] for client [%s]", userid, client)
-        user = User(userid, client)
+    def add_user(self, userid, clientid):
+        YLogger.info(self, "Adding user [%s] for client [%s]", userid, clientid)
+        user = User(userid, clientid)
         self.add_document(user)
         return True
 

@@ -46,6 +46,15 @@ class MockTwilioBotClient(TwilioBotClient):
             return self.test_twilio_client
         return super(MockTwilioBotClient,self).create_twilio_client()
 
+    def make_response_v1(self, data, status_code):
+        return '<?xml version="1.0" encoding="UTF-8"?><Response><Message to="+447777777777">Hi There</Message></Response>'
+
+    def make_response_v2(self, data, status_code):
+        return '<?xml version="1.0" encoding="UTF-8"?><Response><Message to="+447777777777">Hi There</Message></Response>'
+
+    def make_response_other(self, data, status_code):
+        return data
+
 
 class TwilioBotClientTests(unittest.TestCase):
 

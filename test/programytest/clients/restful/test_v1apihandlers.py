@@ -52,7 +52,7 @@ class APIHandler_V1_0Tests(unittest.TestCase):
 
         response = handler.process_request("Hello")
         self.assertIsNotNone(response)
-        self.assertEquals(response, ({'response': {'question': 'question', 'answer': "Hello", 'userid': 'userid'}}, 200))
+        self.assertEqual(response, ({'response': {'question': 'question', 'answer': "Hello", 'userid': 'userid'}}, 200))
 
     def test_format_success_response(self):
         mock_bot_client = MockBotClient()
@@ -63,7 +63,7 @@ class APIHandler_V1_0Tests(unittest.TestCase):
 
         response = handler.format_success_response("userid1", "Hello", "Hi there")
         self.assertIsNotNone(response)
-        self.assertEquals(response, {'response': {"question": "Hello", "answer": "Hi there", "userid": "userid1"}})
+        self.assertEqual(response, {'response': {"question": "Hello", "answer": "Hi there", "userid": "userid1"}})
 
     def test_format_error_response(self):
         mock_bot_client = MockBotClient()
@@ -74,4 +74,4 @@ class APIHandler_V1_0Tests(unittest.TestCase):
 
         response = handler.format_error_response("userid1", "Hello", "Oopsie")
         self.assertIsNotNone(response)
-        self.assertEquals(response, {'response': {"question": "Hello", "answer": "default response", "userid": "userid1", "error": "Oopsie"}})
+        self.assertEqual(response, {'response': {"question": "Hello", "answer": "default response", "userid": "userid1", "error": "Oopsie"}})

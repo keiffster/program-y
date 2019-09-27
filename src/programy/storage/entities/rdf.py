@@ -14,17 +14,18 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from programy.storage.entities.store import Store
 
 
-class RDFStore(object):
+class RDFReadOnlyStore(Store):
 
-    def add_rdf(self, name, subject, predicate, objct):
-        raise NotImplementedError("add_rdf missing from RDF Store")
+    def __init__(self):
+        Store.__init__(self)
 
-    def load_all(self, set_collection, subdir=True, set_ext=".txt"):
+    def load_all(self, collector):
         raise NotImplementedError("load_all_rds missing from RDF Store")
 
-    def load(self, rdf_collection, rdf_name):
+    def load(self, collector, name=None):
         raise NotImplementedError("load missing from RDF Store")
 
     def split_into_fields(self, line):
@@ -40,7 +41,7 @@ class RDFStore(object):
         splits = line.split(self.get_split_char())
         return splits
 
-    def process_line(self, name, fields, id=None):
+    def process_line(self, name, fields, verbose=False):
         if len(fields) == 3:
             subject = fields[0].strip().strip('"')
             predicate = fields[1].strip().strip('"')
@@ -48,3 +49,12 @@ class RDFStore(object):
 
             return self.add_rdf(name, subject, predicate, obj)
         return False
+
+
+class RDFReadWriteStore(RDFReadOnlyStore):
+
+    def __init__(self):
+        RDFReadOnlyStore.__init__(self)
+
+    def add_rdf(self, name, subject, predicate, objct, replace_existing=True):
+        raise NotImplementedError("add_rdf missing from RDF Store")

@@ -19,7 +19,7 @@ class FileSpellingStoreTests(unittest.TestCase):
 
     def test_load_spelling(self):
         config = FileStorageConfiguration()
-        config._spelling_storage =  FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "data" + os.sep + "spelling" + os.sep + "corpus.txt", format="text", encoding="utf-8", delete_on_start=False)
+        config._spelling_storage =  FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "data" + os.sep + "spelling" + os.sep + "corpus.txt", fileformat="text", encoding="utf-8", delete_on_start=False)
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileSpellingStore(engine)

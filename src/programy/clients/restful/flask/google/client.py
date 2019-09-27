@@ -14,13 +14,12 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.utils.logging.ylogger import YLogger
-
-from flask import Flask, request, jsonify
 import json
-
+from flask import Flask, request
+from programy.utils.logging.ylogger import YLogger
 from programy.clients.restful.flask.client import FlaskRestBotClient
 from programy.clients.restful.flask.google.config import GoogleConfiguration
+from programy.utils.console.console import outputLog
 
 
 class GoogleBotClient(FlaskRestBotClient):
@@ -30,7 +29,7 @@ class GoogleBotClient(FlaskRestBotClient):
 
         YLogger.debug(self, "Google Client is running....")
 
-        print("Google Client loaded")
+        outputLog(self, "Google Client loaded")
 
     def _to_json(self, data):
         return self._to_json(data)
@@ -99,7 +98,7 @@ class GoogleBotClient(FlaskRestBotClient):
     def receive_message(self, http_request):
 
         skill_data = json.loads(http_request.data)
-        #print(json.dumps(skill_data, indent=4))
+        #output(json.dumps(skill_data, indent=4))
 
         if 'queryResult' not in skill_data:
             raise Exception("Invalid http request, queryResult missing!")
@@ -132,17 +131,16 @@ class GoogleBotClient(FlaskRestBotClient):
                 return self._handle_help_intent(client_context)
 
             else:
-                raise Exception("Invalid intent name [%s]!", intent_name)
+                raise Exception("Invalid intent name [%s]!" % intent_name)
 
         except Exception as e:
-            print(e)
             YLogger.exception(client_context, "Unknown/Unhandled intent [%s]", e, intent_name)
             return self._handle_error(client_context)
 
 
 if __name__ == "__main__":
 
-    print("Initiating Google Client...")
+    outputLog(None, "Initiating Google Client...")
 
     GOOGLE_CLIENT = GoogleBotClient()
 
@@ -152,8 +150,9 @@ if __name__ == "__main__":
     def receive_message():
         try:
             return GOOGLE_CLIENT.receive_message(request)
+
         except Exception as e:
-            print(e)
+            outputLog(None, "Failure receiving message", e)
             YLogger.exception(None, "Google Error", e)
 
     GOOGLE_CLIENT.run(APP)

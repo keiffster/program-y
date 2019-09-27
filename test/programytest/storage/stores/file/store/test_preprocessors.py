@@ -20,7 +20,7 @@ class FilePreProcessorsStoreTests(unittest.TestCase):
 
     def test_load_variables(self):
         config = FileStorageConfiguration()
-        config._preprocessors_storage = FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "data" + os.sep + "processors" + os.sep + "preprocessors.conf", format="text", encoding="utf-8", delete_on_start=False)
+        config._preprocessors_storage = FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "data" + os.sep + "processors" + os.sep + "preprocessors.conf", fileformat="text", encoding="utf-8", delete_on_start=False)
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FilePreProcessorsStore(engine)

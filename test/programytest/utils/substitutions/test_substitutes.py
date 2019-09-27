@@ -17,9 +17,9 @@ class SubstitutionsTests(unittest.TestCase):
         self.assertTrue(sub.has_substitute("$FIRSTNAME"))
         self.assertFalse(sub.has_substitute("$FRED"))
 
-        self.assertEquals("Fred", sub.get_substitute("$FIRSTNAME"))
-        self.assertEquals("West", sub.get_substitute("$SURNAME"))
-        self.assertEquals("Mary", sub.get_substitute("$WIFE"))
+        self.assertEqual("Fred", sub.get_substitute("$FIRSTNAME"))
+        self.assertEqual("West", sub.get_substitute("$SURNAME"))
+        self.assertEqual("Mary", sub.get_substitute("$WIFE"))
 
         with self.assertRaises(ValueError):
             sub.get_substitute("$NUMBER")
@@ -36,9 +36,9 @@ class SubstitutionsTests(unittest.TestCase):
 
         sub.load_substitutions(os.path.dirname(__file__) + os.sep + "subs.txt")
 
-        self.assertEquals("Fred", sub.get_substitute("$FIRSTNAME"))
-        self.assertEquals("West", sub.get_substitute("$SURNAME"))
-        self.assertEquals("Mary", sub.get_substitute("$WIFE"))
+        self.assertEqual("Fred", sub.get_substitute("$FIRSTNAME"))
+        self.assertEqual("West", sub.get_substitute("$SURNAME"))
+        self.assertEqual("Mary", sub.get_substitute("$WIFE"))
 
         with self.assertRaises(ValueError):
             sub.get_substitute("$NUMBER")
@@ -49,6 +49,6 @@ class SubstitutionsTests(unittest.TestCase):
 
         sub.load_substitutions(os.path.dirname(__file__) + os.sep + "subs.txt")
 
-        self.assertEquals("My name is Fred West", sub.replace("My name is $FIRSTNAME $SURNAME"))
-        self.assertEquals("My name is FredWest", sub.replace("My name is $FIRSTNAME$SURNAME"))
+        self.assertEqual("My name is Fred West", sub.replace("My name is $FIRSTNAME $SURNAME"))
+        self.assertEqual("My name is FredWest", sub.replace("My name is $FIRSTNAME$SURNAME"))
 

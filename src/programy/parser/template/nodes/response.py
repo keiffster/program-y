@@ -14,10 +14,8 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.utils.logging.ylogger import YLogger
 from programy.parser.template.nodes.indexed import TemplateIndexedNode
-
 
 
 ######################################################################################################################
@@ -57,4 +55,6 @@ class TemplateResponseNode(TemplateIndexedNode):
     def parse_expression(self, graph, expression):
         self._parse_node_with_attrib(graph, expression, "index", "1")
         if self.children:
-            YLogger.warning(self, "<response> node should not contain child text, use <response /> or <response></response> only")
+            YLogger.warning(self,
+                            "<response> node should not contain child text, use <response /> "
+                            "or <response></response> only")

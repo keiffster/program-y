@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import requests
 
 
-class RequestsAPI(object):
+class RequestsAPI:
 
     def get(self, url, params):
         return requests.get(url, params=params)

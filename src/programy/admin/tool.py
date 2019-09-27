@@ -17,10 +17,11 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import os
 import sys
 import zipfile
-import wget
 import shutil
+import wget
 import nltk
 import textblob.download_corpora as download_corpora
+from programy.utils.console.console import outputLog
 
 bots = {
     'alice2-y': "https://github.com/keiffster/alice2-y/archive/master.zip",
@@ -34,7 +35,7 @@ bots = {
 }
 
 
-class AdminTool(object):
+class AdminTool:
 
     @staticmethod
     def recursive_copy(src, dest):
@@ -66,7 +67,7 @@ class AdminTool(object):
     def create_sub_folder(root, folder):
         fullpath = root + os.sep + folder
         if os.path.exists(fullpath) is False:
-            print("Creating sub folder: [%s]" % fullpath)
+            outputLog(None, "Creating sub folder: [%s]" % fullpath)
             os.mkdir(fullpath)
 
     @staticmethod
@@ -82,7 +83,7 @@ class AdminTool(object):
         os.chmod(path, mode)
 
     @staticmethod
-    def list_bots(display=print):
+    def list_bots(display=outputLog):
         display("Available bots are:\n")
         for bot in bots:
             display("\t%s" % bot)
@@ -100,7 +101,7 @@ class AdminTool(object):
         display()
 
     @staticmethod
-    def download_bot(bot_name, display=print):
+    def download_bot(bot_name, display=outputLog):
         url = bots[bot_name]
         display("Downloading [%s] from [%s]" % (bot_name, url))
         filename = wget.download(url, bar=wget.bar_thermometer)
@@ -120,7 +121,7 @@ class AdminTool(object):
         return filename.split(".")[0]
 
     @staticmethod
-    def install_bot(words, display=print):
+    def install_bot(words, display=outputLog):
 
         if len(words) < 2:
             raise Exception("Missing bot name from download command")
@@ -145,14 +146,14 @@ class AdminTool(object):
         AdminTool.show_execute_help(bot_name, display)
 
     @staticmethod
-    def install_additional(words, display=print):
+    def install_additional(words, display=outputLog):
 
         if len(words) < 2:
             raise Exception("Missing additional element from install command")
         additional = words[1]
 
-        if additional=='textblob':
-            display("Installing additional components for %s"%additional)
+        if additional == 'textblob':
+            display("Installing additional components for %s" % additional)
 
             nltk.download('punkt')
             nltk.download('stopwords')
@@ -162,7 +163,7 @@ class AdminTool(object):
             raise Exception("Missing additional component from install command ['textblob']")
 
     @staticmethod
-    def show_execute_help(bot_name, display=print):
+    def show_execute_help(bot_name, display=outputLog):
         display("\nTo run %s bot in console mode, use the following commands" % bot_name)
         if os.name == 'posix':
             display("\n\tcd scripts/xnix")
@@ -172,15 +173,16 @@ class AdminTool(object):
             display("\t%s.cmd" % bot_name)
 
     @staticmethod
-    def show_help(words, display=print):
-        display ("Available commands are:\n")
+    def show_help(words, display=outputLog):
+        del words
+        display("Available commands are:\n")
         display("\thelp")
         display("\tlist")
         display("\tdownload <bot-name>")
         display("\tinstall <component>")
         display("")
 
-    def run(self, words, display=print):
+    def run(self, words, display=outputLog):
         try:
             num_words = len(words)
             if num_words > 0:
@@ -204,6 +206,5 @@ class AdminTool(object):
 
 
 if __name__ == '__main__':
-
     tool = AdminTool()
     tool.run(sys.argv[1:])

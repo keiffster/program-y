@@ -21,10 +21,14 @@ from programy.utils.logging.ylogger import YLogger
 from programy.utils.geo.latlong import LatLong
 
 
-class GeoNamesApi(object):
-
+class GeoNamesApi:
     POSTALCODESEARCH = "http://api.geonames.org/postalCodeSearchJSON?postalcode={0}&country={1}&maxRows=10&username={2}"
     get_latlong_for_postcode_response_file = None
+
+    def __init__(self):
+        self.latlong_response_file = None
+        self.account_name = None
+        self.country = None
 
     def check_for_license_keys(self, license_keys):
 
@@ -38,10 +42,8 @@ class GeoNamesApi(object):
         else:
             raise Exception("No valid license key GEO_NAMES_COUNTRY")
 
-        self.latlong_response_file = None
         if license_keys.has_key('GEONAMES_LATLONG'):
             self.country = license_keys.get_key('GEONAMES_LATLONG')
-
 
     def _get_latlong_for_postcode_response(self, postcode):
 

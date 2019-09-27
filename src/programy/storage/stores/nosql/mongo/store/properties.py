@@ -14,11 +14,10 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.utils.logging.ylogger import YLogger
 import re
 import os
 import os.path
-
+from programy.utils.logging.ylogger import YLogger
 from programy.storage.stores.nosql.mongo.store.mongostore import MongoStore
 from programy.storage.entities.property import PropertyStore
 from programy.storage.stores.nosql.mongo.dao.property import Property
@@ -27,7 +26,6 @@ from programy.storage.entities.store import Store
 
 
 class MongoPropertyStore(PropertyStore, MongoStore):
-
     PROPERTIES = 'properties'
     SPLIT_CHAR = ':'
     COMMENT = '#'
@@ -45,14 +43,14 @@ class MongoPropertyStore(PropertyStore, MongoStore):
 
     def add_property(self, name, value):
         collection = self.collection()
-        property = collection.find_one({MongoPropertyStore.NAME: name})
-        if property is not None:
-            property.value = value
-            collection.replace_document(property)
+        prop = collection.find_one({MongoPropertyStore.NAME: name})
+        if prop is not None:
+            prop.value = value
+            collection.replace_document(prop)
             YLogger.info(self, "Replacing property [%s] = [%s]", name, value)
         else:
-            property = Property(name, value)
-            self.add_document(property)
+            prop = Property(name, value)
+            self.add_document(prop)
             YLogger.info(self, "Adding property [%s] = [%s]", name, value)
         return True
 
@@ -65,26 +63,28 @@ class MongoPropertyStore(PropertyStore, MongoStore):
         props_colleciton = collection.find()
         properties = {}
         if props_colleciton is not None:
-            for property in props_colleciton:
-                properties[property[MongoPropertyStore.NAME]] = property[MongoPropertyStore.VALUE]
+            for prop in props_colleciton:
+                properties[prop[MongoPropertyStore.NAME]] = prop[MongoPropertyStore.VALUE]
         return properties
 
-    def load(self, property_collection):
+    def load(self, collector, name=None):
+        del name
         YLogger.info(self, "Loading properties from Mongo")
-        self.load_all(property_collection)
+        self.load_all(collector)
 
-    def load_all(self, property_collection):
+    def load_all(self, collector):
         YLogger.info(self, "Loading all properties from Mongo")
-        property_collection.empty()
+        collector.empty()
         collection = self.collection()
         db_propertys = collection.find()
         for db_property in db_propertys:
-            self.add_to_collection(property_collection, db_property[MongoPropertyStore.NAME],  db_property[MongoPropertyStore.VALUE])
+            self.add_to_collection(collector, db_property[MongoPropertyStore.NAME],
+                                   db_property[MongoPropertyStore.VALUE])
 
     def add_to_collection(self, collection, name, value):
         collection.add_property(name, value)
 
-    def upload_from_file(self, filename, format=Store.TEXT_FORMAT, commit=True, verbose=False):
+    def upload_from_file(self, filename, fileformat=Store.TEXT_FORMAT, commit=True, verbose=False):
 
         YLogger.info(self, "Uploading %s to Mongo from [%s]", filename, self.collection_name())
 
@@ -98,7 +98,7 @@ class MongoPropertyStore(PropertyStore, MongoStore):
                         if line:
                             if line.startswith(MongoPropertyStore.COMMENT) is False:
                                 splits = line.split(MongoPropertyStore.SPLIT_CHAR)
-                                if len(splits)>1:
+                                if len(splits) > 1:
                                     key = splits[0].strip()
                                     val = ":".join(splits[1:]).strip()
                                     if verbose is True:
@@ -117,11 +117,12 @@ class MongoPropertyStore(PropertyStore, MongoStore):
         return count, success
 
     def split_into_fields(self, line):
-        return DoubleStringPatternSplitCollection.split_line_by_pattern(line, DoubleStringPatternSplitCollection.RE_OF_SPLIT_PATTERN)
+        return DoubleStringPatternSplitCollection.split_line_by_pattern(line,
+                                                                        DoubleStringPatternSplitCollection.
+                                                                        RE_OF_SPLIT_PATTERN)
 
 
 class MongoDefaultVariablesStore(MongoPropertyStore):
-
     DEFAULTS = 'defaults'
 
     def __init__(self, storage_engine):
@@ -141,7 +142,6 @@ class MongoDefaultVariablesStore(MongoPropertyStore):
 
 
 class MongoRegexesStore(MongoPropertyStore):
-
     REGEXES = 'regexes'
 
     def __init__(self, storage_engine):
@@ -164,4 +164,3 @@ class MongoRegexesStore(MongoPropertyStore):
             collection.add_property(name, re.compile(value, re.IGNORECASE))
         except Exception as excep:
             YLogger.exception(self, "Error adding regex to collection: [%s]", excep, value)
-

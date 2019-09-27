@@ -21,10 +21,10 @@ def get_os_specific_path():
 
 class MockFileWriterConfig(object):
 
-    def __init__(self, name, delete=True, format='txt', encoding='utf-8'):
+    def __init__(self, name, delete=True, fileformat='txt', encoding='utf-8'):
         self.filename = name
         self.delete_on_start = delete
-        self.file_format = format
+        self.file_format = fileformat
         self.encoding = encoding
 
 
@@ -95,13 +95,13 @@ class FileWriterTests(unittest.TestCase):
         filename = get_os_specific_path()+'writefile.tmp'
 
         with self.assertRaises(Exception):
-            filewriter = FileWriter(MockFileWriterConfig(filename, format="unknown"))
+            filewriter = FileWriter(MockFileWriterConfig(filename, fileformat="unknown"))
 
 
 class ConversationFileWriterTests(unittest.TestCase):
 
     def test_init(self):
-        config =FileWriterConfiguration(filename="filename.test", file_format="txt", mode="a", encoding="utf-8", delete_on_start=False)
+        config = FileWriterConfiguration(filename="filename.test", fileformat="txt", mode="a", encoding="utf-8", delete_on_start=False)
 
         writer = ConversationFileWriter(config)
         self.assertIsNotNone(writer)
@@ -114,7 +114,7 @@ class ConversationFileWriterTests(unittest.TestCase):
 class ContentFileWriterTests(unittest.TestCase):
 
     def test_init(self):
-        config = FileWriterConfiguration(filename="filename.test", file_format="txt", mode="a", encoding="utf-8", delete_on_start=False)
+        config = FileWriterConfiguration(filename="filename.test", fileformat="txt", mode="a", encoding="utf-8", delete_on_start=False)
 
         writer = ContentFileWriter(config, content_type="txt")
         self.assertIsNotNone(writer)
@@ -127,7 +127,7 @@ class ContentFileWriterTests(unittest.TestCase):
 class ErrorsFileWriterTests(unittest.TestCase):
 
     def test_init(self):
-        config = FileWriterConfiguration(filename="filename.test", file_format="txt", mode="a", encoding="utf-8", delete_on_start=False)
+        config = FileWriterConfiguration(filename="filename.test", fileformat="txt", mode="a", encoding="utf-8", delete_on_start=False)
 
         writer = ErrorsFileWriter(config)
         self.assertIsNotNone(writer)
@@ -140,7 +140,7 @@ class ErrorsFileWriterTests(unittest.TestCase):
 class DuplicatesFileWriterTests(unittest.TestCase):
 
     def test_init(self):
-        config = FileWriterConfiguration(filename="filename.test", file_format="txt", mode="a", encoding="utf-8", delete_on_start=False)
+        config = FileWriterConfiguration(filename="filename.test", fileformat="txt", mode="a", encoding="utf-8", delete_on_start=False)
 
         writer = DuplicatesFileWriter(config)
         self.assertIsNotNone(writer)

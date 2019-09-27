@@ -14,13 +14,11 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.utils.logging.ylogger import YLogger
 # Ignore pylint warning, this import from Programy must be before ElementTree
 # Which ensures that the class LineNumberingParser is injected into the code
 from programy.utils.parsing.linenumxml import LineNumberingParser
-import xml.etree.ElementTree as ET
-
+import xml.etree.ElementTree as ET  # pylint: disable=wrong-import-order
+from programy.utils.logging.ylogger import YLogger
 from programy.config.file.file import BaseConfigurationFile
 from programy.config.programy import ProgramyConfiguration
 from programy.utils.substitutions.substitues import Substitutions
@@ -32,21 +30,21 @@ class XMLConfigurationFile(BaseConfigurationFile):
         BaseConfigurationFile.__init__(self)
         self.xml_data = None
 
-    def load_from_text(self, text, client_configuration, bot_root):
+    def load_from_text(self, text, client_configuration, bot_root, subs: Substitutions = None):
         tree = ET.fromstring(text)
         self.xml_data = tree
         configuration = ProgramyConfiguration(client_configuration)
-        configuration.load_config_data(self, bot_root)
+        configuration.load_config_data(self, bot_root, subs)
         return configuration
 
-    def load_from_file(self, filename, client_configuration, bot_root):
+    def load_from_file(self, filename, client_configuration, bot_root, subs: Substitutions = None):
         configuration = ProgramyConfiguration(client_configuration)
 
         try:
             with open(filename, 'r+', encoding="utf-8") as xml_data_file:
                 tree = ET.parse(xml_data_file, parser=LineNumberingParser())
                 self.xml_data = tree.getroot()
-                configuration.load_config_data(self, bot_root)
+                configuration.load_config_data(self, bot_root, subs)
 
         except Exception as excep:
             YLogger.exception(self, "Failed to open xml config file [%s]", excep, filename)
@@ -54,7 +52,7 @@ class XMLConfigurationFile(BaseConfigurationFile):
         return configuration
 
     def is_string(self, section):
-        if section._children:
+        if section._children:  # pylint: disable=protected-access
             return False
         return True
 
@@ -81,16 +79,16 @@ class XMLConfigurationFile(BaseConfigurationFile):
     def get_option(self, section, option_name, missing_value=None, subs=None):
         child = section.find(option_name)
         if child is not None:
-                has_children = False
-                for x in child:
-                    has_children = True
-                    break
+            has_children = False
+            for _ in child:
+                has_children = True
+                break
 
-                if has_children is False:
-                    value = self._replace_subs(subs, child.text)
-                    return self._infer_type_from_string(value)
+            if has_children is False:
+                value = self._replace_subs(subs, child.text)
+                return self._infer_type_from_string(value)
 
-                return child
+            return child
 
         if missing_value is not None:
             YLogger.warning(self, "Missing value for [%s] in config, return default value %s", option_name,
@@ -122,7 +120,8 @@ class XMLConfigurationFile(BaseConfigurationFile):
             return self.convert_to_int(value)
 
         if missing_value is not None:
-            YLogger.warning(self, "Missing value for [%s] in config, return default value %d", option_name, missing_value)
+            YLogger.warning(self, "Missing value for [%s] in config, return default value %d", option_name,
+                            missing_value)
         else:
             YLogger.warning(self, "Missing value for [%s] in config, return default value None", option_name)
 
@@ -164,9 +163,10 @@ class XMLConfigurationFile(BaseConfigurationFile):
 
         else:
             values = []
-            for child in value._children:
-                if child.tag == "dir":
-                    values.append(self._replace_subs(subs, child.text))
+            if value and value._children:  # pylint: disable=protected-access
+                for child in value._children:  # pylint: disable=protected-access
+                    if child.tag == "dir":
+                        values.append(self._replace_subs(subs, child.text))
 
         multis = []
         for value in values:

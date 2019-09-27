@@ -14,14 +14,13 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.utils.logging.ylogger import YLogger
-
-from flask import Flask, request, jsonify
 import json
 import os
-
+from flask import Flask, request, jsonify
+from programy.utils.logging.ylogger import YLogger
 from programy.clients.restful.flask.client import FlaskRestBotClient
 from programy.clients.restful.flask.alexa.config import AlexaConfiguration
+from programy.utils.console.console import outputLog
 
 
 class AlexaBotClient(FlaskRestBotClient):
@@ -33,7 +32,7 @@ class AlexaBotClient(FlaskRestBotClient):
 
         self._load_intent_mappings()
 
-        print("Alexa Client loaded")
+        outputLog(self, "Alexa Client loaded")
 
     def _load_intent_mappings(self):
         try:
@@ -47,8 +46,8 @@ class AlexaBotClient(FlaskRestBotClient):
 
             self._intent_mappings = json.loads(data)
 
-        except Exception as e:
-            print(e)
+        except Exception as excep:
+            YLogger.exception_nostack(self, "Failed to load intent mappings", excep)
             self._intent_mappings = {}
 
     def get_client_configuration(self):
@@ -68,14 +67,15 @@ class AlexaBotClient(FlaskRestBotClient):
     def _to_json(self, data):
         return jsonify(data)
 
-    def _create_response(self, response, type="PlainText", playBehavior="REPLACE_ENQUEUED", shouldEndSession=False):
+    def _create_response(self, response, responsetype="PlainText", playBehavior="REPLACE_ENQUEUED",
+                         shouldEndSession=False):
         reply = {}
         reply["version"] = "1.0"
         reply["response"] = {}
         if reply is not None:
             ssml_reply = "<speak>%s</speak>" % response
             reply["response"]["outputSpeech"] = {}
-            reply["response"]["outputSpeech"]["type"] = type
+            reply["response"]["outputSpeech"]["type"] = responsetype
             reply["response"]["outputSpeech"]["text"] = response
             reply["response"]["outputSpeech"]["ssml"] = ssml_reply
             reply["response"]["outputSpeech"]["playBehavior"] = playBehavior
@@ -90,7 +90,7 @@ class AlexaBotClient(FlaskRestBotClient):
                 text_slot = slots['text']
 
                 if 'value' in text_slot:
-                   return text_slot['value']
+                    return text_slot['value']
 
         return ""
 
@@ -116,7 +116,7 @@ class AlexaBotClient(FlaskRestBotClient):
         return reply
 
     def _handle_launch_request(self, client_context):
-        print("Handling launch...")
+        outputLog(self, "Handling launch...")
         if self.configuration.client_configuration.launch_srai is not None:
             reply = self._ask_question(client_context, self.configuration.client_configuration.launch_srai)
 
@@ -128,16 +128,16 @@ class AlexaBotClient(FlaskRestBotClient):
     def _handle_intent_request(self, client_context, request):
 
         if 'intent' not in request:
-            raise Exception ("Invalid request, intent missing!")
+            raise Exception("Invalid request, intent missing!")
 
         intent = request['intent']
 
         if 'name' not in intent:
-            raise Exception ("Invalid intent, name missing!")
+            raise Exception("Invalid intent, name missing!")
 
         intent_name = intent['name']
 
-        print("Handling [%s] intent..."%intent_name)
+        outputLog(self, "Handling [%s] intent..." % intent_name)
 
         if intent_name == 'AMAZON.CancelIntent':
             return self._handle_cancel_request(client_context, self._should_leave(intent_name))
@@ -164,33 +164,33 @@ class AlexaBotClient(FlaskRestBotClient):
 
     def _handle_cancel_request(self, client_context, shouldEndSession=False):
         reply = self.get_reply_from_bot(client_context, self.configuration.client_configuration.cancel_text,
-                                         self.configuration.client_configuration.cancel_srai)
+                                        self.configuration.client_configuration.cancel_srai)
         return self._create_response(reply, shouldEndSession=shouldEndSession)
 
     def _handle_stop_request(self, client_context, shouldEndSession=False):
         reply = self.get_reply_from_bot(client_context, self.configuration.client_configuration.stop_text,
-                                         self.configuration.client_configuration.stop_srai)
+                                        self.configuration.client_configuration.stop_srai)
         return self._create_response(reply, shouldEndSession=shouldEndSession)
 
     def _handle_help_request(self, client_context):
         reply = self.get_reply_from_bot(client_context, self.configuration.client_configuration.help_text,
-                                         self.configuration.client_configuration.help_srai)
+                                        self.configuration.client_configuration.help_srai)
         return self._create_response(reply)
 
     def _handle_error(self, client_context):
         reply = self.get_reply_from_bot(client_context, self.configuration.client_configuration.error_text,
-                                         self.configuration.client_configuration.error_srai)
+                                        self.configuration.client_configuration.error_srai)
         return self._create_response(reply)
 
     def _get_userid(self, request):
         if 'session' not in request:
-            raise Exception ("Invalid request, session missing")
+            raise Exception("Invalid request, session missing")
 
         if "user" not in request['session']:
-            raise Exception ("Invalid session, user missing")
+            raise Exception("Invalid session, user missing")
 
         if "userId" not in request['session']['user']:
-            raise Exception ("Invalid user, userId missing")
+            raise Exception("Invalid user, userId missing")
 
         return request['session']['user']['userId']
 
@@ -201,12 +201,12 @@ class AlexaBotClient(FlaskRestBotClient):
         recipient_id = self._get_userid(skill_json)
 
         if 'request' not in skill_json:
-            raise Exception ("Invalid HTTP request, request missing!")
+            raise Exception("Invalid HTTP request, request missing!")
 
         skill_request = skill_json['request']
 
         if 'type' not in skill_request:
-            raise Exception ("Invalid skill request, type missing!")
+            raise Exception("Invalid skill request, type missing!")
 
         request_type = skill_request['type']
 
@@ -225,25 +225,28 @@ class AlexaBotClient(FlaskRestBotClient):
             else:
                 raise Exception("Unknown/Unhandled request")
 
-        except Exception as e:
-            YLogger.exception(client_context, "Unknown/Unhandled request [%s]", e, request_type)
+        except Exception as excep:
+            YLogger.exception(client_context, "Unknown/Unhandled request [%s]", request_type, excep)
             return self._handle_error(client_context)
 
 
 if __name__ == "__main__":
 
-    print("Initiating Alexa Client...")
+    outputLog(None, "Initiating Alexa Client...")
 
     ALEXA_CLIENT = AlexaBotClient()
 
     APP = Flask(__name__)
 
+
     @APP.route(ALEXA_CLIENT.configuration.client_configuration.api, methods=['GET', 'POST'])
     def receive_message():
         try:
             return ALEXA_CLIENT.receive_message(request)
+
         except Exception as e:
-            print(e)
+            outputLog(None, "Alexa failed receiving message", e)
             YLogger.exception(None, "Alexa Error", e)
+
 
     ALEXA_CLIENT.run(APP)

@@ -17,6 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.clients.config import ClientConfigurationData
 from programy.utils.substitutions.substitues import Substitutions
 
+
 class ConsoleConfiguration(ClientConfigurationData):
 
     def __init__(self):
@@ -35,11 +36,13 @@ class ConsoleConfiguration(ClientConfigurationData):
     def check_for_license_keys(self, license_keys):
         ClientConfigurationData.check_for_license_keys(self, license_keys)
 
-    def load_configuration_section(self, configuration_file, console, bot_root, subs: Substitutions = None):
-        if console is not None:
-            self._default_userid = configuration_file.get_option(console, "default_userid", missing_value="Console", subs=subs)
-            self._prompt = configuration_file.get_option(console, "prompt", missing_value=">>>", subs=subs)
-            super(ConsoleConfiguration, self).load_configuration_section(configuration_file, console, bot_root, subs=subs)
+    def load_configuration_section(self, configuration_file, section, bot_root, subs: Substitutions = None):
+        if section is not None:
+            self._default_userid = configuration_file.get_option(section, "default_userid", missing_value="Console",
+                                                                 subs=subs)
+            self._prompt = configuration_file.get_option(section, "prompt", missing_value=">>>", subs=subs)
+            super(ConsoleConfiguration, self).load_configuration_section(configuration_file, section, bot_root,
+                                                                         subs=subs)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:

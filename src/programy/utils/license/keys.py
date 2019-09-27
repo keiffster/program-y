@@ -15,10 +15,9 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.utils.logging.ylogger import YLogger
-from programy.storage.stores.file.store.licensekeys import FileLicenseStore
 
 
-class LicenseKeys(object):
+class LicenseKeys:
 
     def __init__(self):
         self._keys = {}
@@ -38,4 +37,4 @@ class LicenseKeys(object):
         if name in self._keys:
             return self._keys[name]
         else:
-            raise ValueError("No license key named [%s]"%name)
+            raise ValueError("No license key named [%s]" % name)

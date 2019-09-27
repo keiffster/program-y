@@ -16,8 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 
-class Match(object):
-
+class Match:
     WORD = 0
     TOPIC = 2
     THAT = 3
@@ -31,11 +30,11 @@ class Match(object):
         self._matched_node_words = []
 
         if node is not None and \
-           (node.is_wildcard() or \
-           node.is_set() or \
-           node.is_iset() or \
-           node.is_bot() or \
-           node.is_regex()):
+                (node.is_wildcard() or \
+                 node.is_set() or \
+                 node.is_iset() or \
+                 node.is_bot() or \
+                 node.is_regex()):
             self._matched_node_multi_word = True
         else:
             self._matched_node_multi_word = False
@@ -55,21 +54,41 @@ class Match(object):
     def matched_node_type(self):
         return self._matched_node_type
 
+    @matched_node_type.setter
+    def matched_node_type(self, node_type):
+        self._matched_node_type = node_type
+
     @property
     def matched_node_str(self):
         return self._matched_node_str
+
+    @matched_node_str.setter
+    def matched_node_str(self, node_str):
+        self._matched_node_str = node_str
 
     @property
     def matched_node_multi_word(self):
         return self._matched_node_multi_word
 
+    @matched_node_multi_word.setter
+    def matched_node_multi_word(self, multi_word):
+        self._matched_node_multi_word = multi_word
+
     @property
     def matched_node_wildcard(self):
         return self._matched_node_wildcard
 
+    @matched_node_wildcard.setter
+    def matched_node_wildcard(self, wildcard):
+        self._matched_node_wildcard = wildcard
+
     @property
     def matched_node_words(self):
         return self._matched_node_words
+
+    @matched_node_words.setter
+    def matched_node_words(self, words):
+        self._matched_node_words = words[:]
 
     def joined_words(self, client_context):
         return client_context.brain.tokenizer.words_to_texts(self._matched_node_words)
@@ -95,27 +114,25 @@ class Match(object):
         return -1
 
     def to_string(self, client_context):
-        return "Match=(%s) Node=(%s) Matched=(%s)"%(Match.type_to_string(self._matched_node_type),
-                                                    self._matched_node_str,
-                                                    self.joined_words(client_context))
+        return "Match=(%s) Node=(%s) Matched=(%s)" % (Match.type_to_string(self.matched_node_type),
+                                                      self.matched_node_str,
+                                                      self.joined_words(client_context))
 
     def to_json(self):
-        return {"type": Match.type_to_string(self._matched_node_type),
-                "node": self._matched_node_str,
-                "words": self._matched_node_words,
-                "multi_word": self._matched_node_multi_word,
-                "wild_card": self._matched_node_wildcard}
-
+        return {"type": Match.type_to_string(self.matched_node_type),
+                "node": self.matched_node_str,
+                "words": self.matched_node_words,
+                "multi_word": self.matched_node_multi_word,
+                "wild_card": self.matched_node_wildcard}
 
     @staticmethod
     def from_json(json_data):
         match = Match(0, None, None)
 
-        match._matched_node_type = Match.string_to_type(json_data["type"])
-        match._matched_node_str = json_data["node"]
-        match._matched_node_words = json_data["words"]
-        match._matched_node_multi_word = json_data["multi_word"]
-        match._matched_node_wildcard = json_data["wild_card"]
+        match.matched_node_type = Match.string_to_type(json_data["type"])
+        match.matched_node_str = json_data["node"]
+        match.matched_node_words = json_data["words"]
+        match.matched_node_multi_word = json_data["multi_word"]
+        match.matched_node_wildcard = json_data["wild_card"]
 
         return match
-

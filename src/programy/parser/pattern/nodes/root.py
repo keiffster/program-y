@@ -14,9 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.parser.exceptions import ParserException
-
 from programy.parser.pattern.match import Match
 from programy.parser.pattern.nodes.base import PatternNode
 
@@ -39,15 +37,15 @@ class PatternRootNode(PatternNode):
         if new_node.is_template():
             raise ParserException("Cannot add template node to root node")
 
-    def equivalent(self, other: PatternNode)->bool:
+    def equivalent(self, other: PatternNode) -> bool:
         if other.is_root():
             if self.userid == other.userid:
                 return True
         return False
 
-    def to_string(self, verbose: bool = True)->str:
+    def to_string(self, verbose: bool = True) -> str:
         if verbose is True:
-            return "ROOT [%s] [%s]" %(self.userid, self._child_count(verbose))
+            return "ROOT [%s] [%s]" % (self.userid, self._child_count(verbose))
         return "ROOT "
 
     def match(self, client_context, context, words):
@@ -102,5 +100,3 @@ class PatternRootNode(PatternNode):
         self._remove_0ormore_arrow(userid)
 
         self._remove_1ormore_star(userid)
-
-

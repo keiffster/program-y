@@ -17,11 +17,13 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.utils.logging.ylogger import YLogger
 from programy.storage.factory import StorageFactory
 
-class BinariesManager(object):
+
+class BinariesManager:
 
     def __init__(self, binaries_configuration):
+        self._aiml_parser = None
 
-        assert (binaries_configuration is not None)
+        assert binaries_configuration is not None
 
         self._configuration = binaries_configuration
 
@@ -33,12 +35,12 @@ class BinariesManager(object):
             binaries_storage = storage_engine.binaries_storage()
             self._aiml_parser = binaries_storage.load_binary()
 
-            return False   # Tell caller, load succeeded and skip aiml load
+            return False  # Tell caller, load succeeded and skip aiml load
 
         except Exception as excep:
             YLogger.exception(self, "Failed to load binary file", excep)
             if self._configuration.load_aiml_on_binary_fail is True:
-                return True   # Tell caller, load failed and to load aiml directly
+                return True  # Tell caller, load failed and to load aiml directly
             else:
                 raise excep
 
@@ -53,4 +55,3 @@ class BinariesManager(object):
 
         except Exception as failure:
             YLogger.info(self, "Failed to save binary [%s]", failure)
-

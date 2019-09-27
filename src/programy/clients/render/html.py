@@ -14,11 +14,6 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.utils.logging.ylogger import YLogger
-
-import time
-import urllib.parse
-
 from programy.clients.render.text import TextRenderer
 
 
@@ -31,115 +26,115 @@ class HtmlRenderer(TextRenderer):
         return "#"
 
     def handle_text(self, client_context, text):
-        str = "%s"%text['text']
+        rendered = "%s" % text['text']
         if self._client:
-            self._client.process_response(client_context, str)
-        return str
+            self._client.process_response(client_context, rendered)
+        return rendered
 
     def handle_url_button(self, client_context, button):
-        str = '<a href="%s">%s</a>'%(button['url'], button['text'])
+        rendered = '<a href="%s">%s</a>' % (button['url'], button['text'])
         if self._client:
-            self._client.process_response(client_context, str)
-        return str
+            self._client.process_response(client_context, rendered)
+        return rendered
 
     def handle_postback_button(self, client_context, button):
-        str = '<a class="postback" postback="%s" href="#">%s</a>' % (button['postback'], button['text'])
+        rendered = '<a class="postback" postback="%s" href="#">%s</a>' % (button['postback'], button['text'])
         if self._client:
-            self._client.process_response(client_context, str)
-        return str
+            self._client.process_response(client_context, rendered)
+        return rendered
 
     def handle_link(self, client_context, link):
-        str = '<a href="%s">%s</a>'%(link['url'], link['text'])
+        rendered = '<a href="%s">%s</a>' % (link['url'], link['text'])
         if self._client:
-            self._client.process_response(client_context, str)
-        return str
+            self._client.process_response(client_context, rendered)
+        return rendered
 
     def handle_image(self, client_context, image):
-        str = '<img src="%s" />'%image['url']
+        rendered = '<img src="%s" />' % image['url']
         if self._client:
-            self._client.process_response(client_context, str)
-        return str
+            self._client.process_response(client_context, rendered)
+        return rendered
 
     def handle_video(self, client_context, video):
-        str = """<video src="%s">
+        rendered = """<video src="%s">
 Sorry, your browser doesn't support embedded videos, 
 but don't worry, you can <a href="%s">download it</a>
 and watch it with your favorite video player!
-</video>"""%(video['url'], video['url'])
+</video>""" % (video['url'], video['url'])
         if self._client:
-            self._client.process_response(client_context, str)
-        return str
+            self._client.process_response(client_context, rendered)
+        return rendered
 
-    def _format_card(self, card):
-        str = '<div class="card" >'
-        str += '<img src="%s" />' % card['image']
-        str += '<h1>%s</h1>' % card['title']
-        str += '<h2>%s</h2>' % card['subtitle']
+    def _format_card(self, client_context, card):
+        rendered = '<div class="card" >'
+        rendered += '<img src="%s" />' % card['image']
+        rendered += '<h1>%s</h1>' % card['title']
+        rendered += '<h2>%s</h2>' % card['subtitle']
         for button in card['buttons']:
             if button['url'] is not None:
-                str += '<a href="%s">%s</a>' % (button['url'], button['text'])
+                rendered += '<a href="%s">%s</a>' % (button['url'], button['text'])
             else:
-                str += '<a class="postback" postback="%s" href="#">%s</a>' % (button['postback'], button['text'])
-        str += '</div>'
-        return str
+                rendered += '<a class="postback" postback="%s" href="#">%s</a>' % (button['postback'], button['text'])
+        rendered += '</div>'
+        return rendered
 
     def handle_card(self, client_context, card):
-        str = self._format_card(card)
+        rendered = self._format_card(client_context, card)
         if self._client:
-            self._client.process_response(client_context, str)
-        return str
+            self._client.process_response(client_context, rendered)
+        return rendered
 
     def handle_carousel(self, client_context, carousel):
-        str = '<div class="carousel">'
+        rendered = '<div class="carousel">'
         for card in carousel['cards']:
-            str += self._format_card(card)
-        str += "</div>"
+            rendered += self._format_card(client_context, card)
+        rendered += "</div>"
         if self._client:
-            self._client.process_response(client_context, str)
-        return str
+            self._client.process_response(client_context, rendered)
+        return rendered
 
     def handle_reply(self, client_context, reply):
-        str = ''
+        rendered = ''
         if reply['postback'] is not None:
-            str += '<a class="postback" postback="%s" href="#">%s</a>' % (reply['postback'], reply['text'])
+            rendered += '<a class="postback" postback="%s" href="#">%s</a>' % (reply['postback'], reply['text'])
         else:
-            str += '<a class="postback" postback="%s" href="#">%s</a>' % (reply['text'], reply['text'])
+            rendered += '<a class="postback" postback="%s" href="#">%s</a>' % (reply['text'], reply['text'])
         if self._client:
-            self._client.process_response(client_context, str)
-        return str
+            self._client.process_response(client_context, rendered)
+        return rendered
 
     def handle_delay(self, client_context, delay):
-        str = '<div class="delay">...</div>'
+        rendered = '<div class="delay">...</div>'
         if self._client:
-            self._client.process_response(client_context, str)
-        return str
+            self._client.process_response(client_context, rendered)
+        return rendered
 
     def handle_split(self, client_context, split):
-        str = "<br />"
+        rendered = "<br />"
         if self._client:
-            self._client.process_response(client_context, str)
-        return str
+            self._client.process_response(client_context, rendered)
+        return rendered
 
-    def handle_list(self, client_context, rcs_list):
-        str = "<ul>"
-        for item in rcs_list['items']:
-            str += "<li>%s</li>"%item['text']
-        str += "</ul>"
+    def handle_list(self, client_context, lst):
+        rendered = "<ul>"
+        for item in lst.get('items', []):
+            rendered += "<li>%s</li>" % item['text']
+        rendered += "</ul>"
         if self._client:
-            self._client.process_response(client_context, str)
-        return str
+            self._client.process_response(client_context, rendered)
+        return rendered
 
-    def handle_ordered_list(self, client_context, rcs_list):
-        str = "<ol>"
-        for item in rcs_list['items']:
-            str += "<li>%s</li>" % item['text']
-        str += "</ol>"
+    def handle_ordered_list(self, client_context, lst):
+        rendered = "<ol>"
+        for item in lst.get('items', []):
+            rendered += "<li>%s</li>" % item['text']
+        rendered += "</ol>"
         if self._client:
-            self._client.process_response(client_context, str)
-        return str
+            self._client.process_response(client_context, rendered)
+        return rendered
 
     def handle_location(self, client_context, location):
-        str = ""
+        rendered = ""
         if self._client:
-            self._client.process_response(client_context, str)
-        return str
+            self._client.process_response(client_context, rendered)
+        return rendered

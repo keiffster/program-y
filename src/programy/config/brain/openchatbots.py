@@ -46,7 +46,7 @@ class BrainOpenChatBotsConfiguration(BaseSectionConfigurationData):
         return None
 
     def openchatbots(self):
-        return self._openchatbots.keys()
+        return list(self._openchatbots.keys())
 
     def check_for_license_keys(self, license_keys):
         BaseSectionConfigurationData.check_for_license_keys(self, license_keys)
@@ -58,7 +58,8 @@ class BrainOpenChatBotsConfiguration(BaseSectionConfigurationData):
 
             for name in openchatbot_keys:
                 if name == 'protocols':
-                    protocols = configuration_file.get_option(openchatbots, "protocols", missing_value=['http'], subs=subs)
+                    protocols = configuration_file.get_option(openchatbots, "protocols", missing_value=['http'],
+                                                              subs=subs)
                     self._protocols = [x.strip() for x in protocols.split(",")]
                 elif name == 'domains':
                     domains = configuration_file.get_option(openchatbots, "domains", missing_value=[], subs=subs)

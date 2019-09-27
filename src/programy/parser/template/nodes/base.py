@@ -14,13 +14,14 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.utils.logging.ylogger import YLogger
 import xml.etree.ElementTree as ET
+from programy.utils.logging.ylogger import YLogger
+from programy.utils.console.console import outputLog
+
 
 ######################################################################################################################
 #
-class TemplateNode(object):
+class TemplateNode:
 
     def __init__(self):
         self._children = []
@@ -36,11 +37,12 @@ class TemplateNode(object):
         self.output(tabs, output_func, eol, verbose)
 
     def output(self, tabs, output_func, eol, verbose):
+        del verbose
         self.output_child(self, tabs, eol, output_func)
 
     def output_child(self, node, tabs, eol, output_func):
         for child in node.children:
-            if output_func == print:
+            if output_func == outputLog:    #pylint: disable=comparison-with-callable
                 output_func("{0}{1}{2}".format(tabs, child.to_string(), eol))
             else:
                 output_func(self, "{0}{1}{2}".format(tabs, child.to_string(), eol))
@@ -73,7 +75,7 @@ class TemplateNode(object):
 
     def xml_tree(self, client_context):
         xml = "<template>"
-        value =  self.children_to_xml(client_context)
+        value = self.children_to_xml(client_context)
         xml += value
         xml += "</template>"
         return ET.fromstring(xml)
@@ -135,8 +137,8 @@ class TemplateNode(object):
         if head_result is False and found_sub is False:
             if hasattr(pattern, '_end_line_number'):
                 YLogger.warning(self, "No context in template tag at [line(%d), column(%d)]",
-                                    pattern._end_line_number,
-                                    pattern._end_column_number)
+                                pattern._end_line_number,  # pylint: disable=protected-access
+                                pattern._end_column_number)  # pylint: disable=protected-access
             else:
                 YLogger.warning(self, "No context in template tag")
 

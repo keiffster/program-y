@@ -15,16 +15,16 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.utils.logging.ylogger import YLogger
-
-from programy.config.bot.joiner import BotSentenceJoinerConfiguration
 from programy.utils.classes.loader import ClassLoader
+from programy.config.bot.joiner import BotSentenceJoinerConfiguration
 
-class SentenceJoiner(object):
-    
+
+class SentenceJoiner:
+
     def __init__(self, joiner_config):
 
-        assert (joiner_config is not None)
-        assert (isinstance(joiner_config, BotSentenceJoinerConfiguration))
+        assert joiner_config is not None
+        assert isinstance(joiner_config, BotSentenceJoinerConfiguration)
 
         self._configuration = joiner_config
 
@@ -42,7 +42,7 @@ class SentenceJoiner(object):
                     final_sentences.append(sentence)
                 else:
                     if srai is False:
-                        final_sentences.append(sentence+self._configuration.terminator)
+                        final_sentences.append(sentence + self._configuration.terminator)
                     else:
                         final_sentences.append(sentence)
 

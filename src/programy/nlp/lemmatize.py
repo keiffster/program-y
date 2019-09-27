@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from textblob import Word
 
 
-class Lemmatizer(object):
+class Lemmatizer:
 
     @staticmethod
     def lemmatize(string, pos=None):

@@ -42,7 +42,8 @@ class BrainBraintreeConfiguration(BaseSectionConfigurationData):
         braintree = configuration_file.get_section("braintree", configuration)
         if braintree is not None:
             self._create = configuration_file.get_option(braintree, "create", missing_value=None, subs=subs)
-            self._save_as_user = configuration_file.get_option(braintree, "save_as_user", missing_value="system", subs=subs)
+            self._save_as_user = configuration_file.get_option(braintree, "save_as_user", missing_value="system",
+                                                               subs=subs)
         else:
             YLogger.warning(self, "'braintree' section missing from bot config, using to defaults")
 

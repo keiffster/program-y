@@ -14,11 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.utils.logging.ylogger import YLogger
-
 from programy.parser.template.nodes.base import TemplateNode
-from programy.parser.exceptions import ParserException
 from programy.utils.text.text import TextUtils
 
 
@@ -30,12 +26,12 @@ class TemplateLinkNode(TemplateNode):
         self._url = None
 
     def resolve_to_string(self, client_context):
-        str = "<link>"
-        str += "<text>%s</text>" % self._text.resolve(client_context)
+        resolved = "<link>"
+        resolved += "<text>%s</text>" % self._text.resolve(client_context)
         if self._url is not None:
-            str += "<url>%s</url>" % self._url.resolve(client_context)
-        str += "</link>"
-        return str
+            resolved += "<url>%s</url>" % self._url.resolve(client_context)
+        resolved += "</link>"
+        return resolved
 
     def to_string(self):
         return "[LINK %d]" % (len(self._children))
@@ -68,4 +64,3 @@ class TemplateLinkNode(TemplateNode):
 
             tail_text = self.get_tail_from_element(child)
             self.parse_text(graph, tail_text)
-

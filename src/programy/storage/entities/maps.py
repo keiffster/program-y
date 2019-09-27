@@ -14,32 +14,56 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.storage.entities.store import Store
 
 
-class MapsStore(Store):
+class MapsReadOnlyStore(Store):
 
-    def load_all(self, map_collection, subdir=True, map_ext=".txt"):
+    def __init__(self):
+        Store.__init__(self)
+
+    def load_all(self, collector):
         raise NotImplementedError("load_all missing from Maps Store")
 
-    def load(self, map_collection, map_name):
+    def load(self, collector, name=None):
         raise NotImplementedError("load missing from Maps Store")
 
-    def add_to_map(self, name, key, value):
+    def split_into_fields(self, line):
+        splits = line.split(":")
+        key = splits[0].upper()
+        value = ":".join(splits[1:])
+        return [key, value]
+
+    def process_line(self, name, fields, verbose=False):
+        if fields:
+            return self.add_to_map(name, fields[0], fields[1])
+        return False
+
+
+class MapsReadWriteStore(MapsReadOnlyStore):
+
+    def __init__(self):
+        MapsReadOnlyStore.__init__(self)
+
+    def load_all(self, collector):
+        raise NotImplementedError("load_all missing from Maps Store")
+
+    def load(self, collector, name=None):
+        raise NotImplementedError("load missing from Maps Store")
+
+    def add_to_map(self, name, key, value, overwrite_existing=False):
         raise NotImplementedError("add_to_map missing from Maps Store")
 
     def remove_from_map(self, name, key):
         raise NotImplementedError("remove_from_map missing from Maps Store")
 
-    def split_into_fields(self, text):
-        splits = text.split(":")
+    def split_into_fields(self, line):
+        splits = line.split(":")
         key = splits[0].upper()
         value = ":".join(splits[1:])
         return [key, value]
 
-    def process_line(self, name, components):
-        if components:
-            return self.add_to_map(name, components[0], components[1])
+    def process_line(self, name, fields, verbose=False):
+        if fields:
+            return self.add_to_map(name, fields[0], fields[1])
         return False
-

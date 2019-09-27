@@ -14,22 +14,21 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import re
-
 from programy.storage.entities.store import Store
 from programy.mappings.base import DoubleStringPatternSplitCollection
 
+
 class LookupsStore(Store):
 
-    def load_all(self, lookup_collection, subdir=True, set_ext=".txt"):
+    def load_all(self, collector):
         raise NotImplementedError("load_all missing from Lookups Store")
 
-    def load(self, lookup_collection):
+    def load(self, collector, name=None):
         raise NotImplementedError("load missing from Lookups Store")
 
-    def process_key_value(self, key, value, id=None):
-        return DoubleStringPatternSplitCollection.process_key_value(key, value, id)
+    def process_key_value(self, key, value, userid=None):
+        return DoubleStringPatternSplitCollection.process_key_value(key, value, userid)
 
-    def split_into_fields(self, text):
-        return DoubleStringPatternSplitCollection.split_line_by_pattern(text, DoubleStringPatternSplitCollection.RE_OF_SPLIT_PATTERN)
-
+    def split_into_fields(self, line):
+        return DoubleStringPatternSplitCollection.\
+            split_line_by_pattern(line, DoubleStringPatternSplitCollection.RE_OF_SPLIT_PATTERN)

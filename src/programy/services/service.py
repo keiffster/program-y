@@ -14,15 +14,14 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
+from abc import ABC
+from abc import abstractmethod
 from programy.utils.logging.ylogger import YLogger
-from abc import ABCMeta, abstractmethod
 from programy.utils.classes.loader import ClassLoader
 from programy.config.brain.service import BrainServiceConfiguration
 
 
-class Service(object):
-    __metaclass__ = ABCMeta
+class Service(ABC):
 
     def __init__(self, config: BrainServiceConfiguration):
         self._config = config
@@ -41,8 +40,7 @@ class Service(object):
         """
 
 
-class ServiceFactory(object):
-
+class ServiceFactory:
     services = {}
 
     @classmethod

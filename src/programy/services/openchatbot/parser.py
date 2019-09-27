@@ -14,16 +14,14 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.utils.logging.ylogger import YLogger
-
 import json
-
+from programy.utils.logging.ylogger import YLogger
 from programy.services.openchatbot.response import OpenChatBotMeta
 from programy.services.openchatbot.response import OpenChatBotStatus
 from programy.services.openchatbot.response import OpenChatBotResponse
 
 
-class OpenChatBotResponseParser(object):
+class OpenChatBotResponseParser:
 
     def __init__(self):
         self.status = None

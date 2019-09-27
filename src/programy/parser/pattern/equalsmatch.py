@@ -16,7 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 
-class EqualsMatch(object):
+class EqualsMatch:
 
     def __init__(self, matched, word_no, matched_phrase=None):
         self._matched = matched
@@ -36,4 +36,6 @@ class EqualsMatch(object):
         return self._matched_phrase
 
     def to_string(self):
-        return "%s, %d, %s"%(self._matched, self._word_no, self.matched_phrase if self.matched_phrase is not None else "''")
+        return "%s, %d, %s" % (self._matched,
+                               self._word_no,
+                               self.matched_phrase if self.matched_phrase is not None else "''")

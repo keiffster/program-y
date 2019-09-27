@@ -14,9 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.utils.logging.ylogger import YLogger
-
 from programy.parser.pattern.nodes.base import PatternNode
 from programy.parser.pattern.equalsmatch import EqualsMatch
 from programy.parser.exceptions import ParserException
@@ -55,12 +53,12 @@ class PatternSetNode(PatternNode):
     def to_xml(self, client_context, include_user=False):
         string = ""
         if include_user is True:
-            string += '<set userid="%s" name="%s"'%(self.userid, self.set_name)
+            string += '<set userid="%s" name="%s"' % (self.userid, self.set_name)
         else:
             string += '<set name="%s"' % self.set_name
 
         for name, value in self._additional.items():
-            string += ' %s="%s"'%(name, value)
+            string += ' %s="%s"' % (name, value)
 
         string += ">\n"
         string += super(PatternSetNode, self).to_xml(client_context)
@@ -75,7 +73,7 @@ class PatternSetNode(PatternNode):
             string = "SET name=[%s]" % (self.set_name)
 
         for name, value in self._additional.items():
-            string += ' %s=[%s]'%(name, value)
+            string += ' %s=[%s]' % (name, value)
 
         return string
 
@@ -102,7 +100,7 @@ class PatternSetNode(PatternNode):
                     phrase_word = phrase[phrase_word_no].upper()
                     word = words.word(words_word_no).upper()
                     if phrase_word == word:
-                        if phrase_word_no+1 == len(phrase):
+                        if phrase_word_no + 1 == len(phrase):
                             return EqualsMatch(True, words_word_no, " ".join(phrase))
                     phrase_word_no += 1
                     words_word_no += 1
@@ -141,4 +139,3 @@ class PatternSetNode(PatternNode):
             else:
                 YLogger.error(client_context, "No set named [%s] in sets collection", self.set_name)
                 return EqualsMatch(False, word_no)
-

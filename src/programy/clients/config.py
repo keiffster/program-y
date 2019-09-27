@@ -93,7 +93,7 @@ class ClientConfigurationData(BaseContainerConfigurationData):
 
     def load_configuration_section(self, configuration_file, section, bot_root, subs: Substitutions = None):
 
-        assert(configuration_file is not None)
+        assert configuration_file is not None
 
         if section is not None:
             self._description = configuration_file.get_option(section, "description",
@@ -112,9 +112,10 @@ class ClientConfigurationData(BaseContainerConfigurationData):
 
                 config.load_configuration(configuration_file, bot_root, subs=subs)
 
-            self._bot_selector = configuration_file.get_option(section, "bot_selector",
-                                                               missing_value="programy.clients.client.DefaultBotSelector",
-                                                               subs=subs)
+            self._bot_selector = configuration_file.\
+                get_option(section, "bot_selector",
+                           missing_value="programy.clients.client.DefaultBotSelector",
+                           subs=subs)
 
             self._scheduler.load_config_section(configuration_file, section, bot_root, subs=subs)
 
@@ -130,12 +131,11 @@ class ClientConfigurationData(BaseContainerConfigurationData):
 
         else:
             YLogger.warning(self, "No bot name defined for client [%s], defaulting to 'bot'.", self.section_name)
-            self._bot_configs[0]._section_name = "bot"
             self._bot_configs[0].load_configuration(configuration_file, bot_root, subs=subs)
 
     def to_yaml(self, data, defaults=True):
 
-        assert (data is not None)
+        assert data is not None
 
         if defaults is True:
             data['description'] = 'ProgramY AIML2.0 Client'

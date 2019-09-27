@@ -15,17 +15,16 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.utils.logging.ylogger import YLogger
-
 from programy.storage.stores.file.store.filestore import FileStore
+from programy.storage.entities.maps import MapsReadOnlyStore
 
-from programy.storage.entities.maps import MapsStore
 
-class FileMapsStore(FileStore, MapsStore):
+class FileMapsStore(FileStore, MapsReadOnlyStore):
 
     def __init__(self, storage_engine):
         FileStore.__init__(self, storage_engine)
 
-    def _load_file_contents(self, map_collection, filename):
+    def _load_file_contents(self, collection, filename):
         YLogger.debug(self, "Loading map [%s]", filename)
 
         the_map = {}
@@ -40,18 +39,21 @@ class FileMapsStore(FileStore, MapsStore):
         except Exception as excep:
             YLogger.exception_nostack(self, "Failed to load map [%s]", excep, filename)
 
-        map_name = self.get_just_filename_from_filepath(filename)
-        map_collection.add_map(map_name, the_map, filename)
+        map_name = FileStore.get_just_filename_from_filepath(filename)
+        collection.add_map(map_name, the_map, filename)
 
         return self.storage_engine.configuration.maps_storage
+
+    def _get_storage_path(self):
+        return self.storage_engine.configuration.maps_storage.dir
 
     def get_storage(self):
         return self.storage_engine.configuration.maps_storage
 
-    def load(self, collection):
+    def load(self, collector, name=None):
         col_store = self.get_storage()
-        collection.empty()
-        self._load_file_contents(collection, col_store.file)
+        collector.empty()
+        self._load_file_contents(collector, col_store.file)
 
     def reload(self, collection, map_name):
         filename = collection.storename(map_name)

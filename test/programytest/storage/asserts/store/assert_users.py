@@ -18,10 +18,10 @@ class UserStoreAsserts(unittest.TestCase):
         self.assertFalse(store.exists('2', "facebook"))
 
         links = store.get_links('1')
-        self.assertEquals(['console', "facebook"], links)
+        self.assertEqual(['console', "facebook"], links)
 
         links = store.get_links('999')
-        self.assertEquals([], links)
+        self.assertEqual([], links)
 
         store.remove_user('1', "console")
         self.assertFalse(store.exists('1', "console"))

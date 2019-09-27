@@ -18,7 +18,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import re
 
 
-class DefaultLangauge(object):
+class DefaultLangauge:
     SENTENCE_SPLIT_CHARS = r'[\.?!;:]'
     WORD_SPLIT_CHARS = r'\s+'
 
@@ -31,5 +31,3 @@ class DefaultLangauge(object):
     def split_into_words(sentence):
         raw = re.split(DefaultLangauge.WORD_SPLIT_CHARS, sentence)
         return [word.strip() for word in raw if word]
-
-

@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.dialog.sentence import Sentence
 
 
-class Question(object):
+class Question:
 
     @staticmethod
     def create_from_text(client_context, text, split=True, srai=False):
@@ -64,13 +64,25 @@ class Question(object):
     def srai(self):
         return self._srai
 
+    @srai.setter
+    def srai(self, srai):
+        self._srai = srai
+
     @property
     def sentences(self):
         return self._sentences
 
+    @sentences.setter
+    def sentences(self, sentences):
+        self._sentences = sentences[:]
+
     @property
     def properties(self):
         return self._properties
+
+    @properties.setter
+    def properties(self, properties):
+        self._properties = dict(properties)
 
     def has_response(self):
         for sentence in self._sentences:
@@ -78,8 +90,13 @@ class Question(object):
                 return True
         return False
 
-    def set_current_sentence_no(self, sentence_no):
-        self._current_sentence_no = sentence_no
+    @property
+    def current_sentence_no(self):
+        return self._current_sentence_no
+
+    @current_sentence_no.setter
+    def current_sentence_no(self, current_sentence_no):
+        self._current_sentence_no = current_sentence_no
 
     def set_property(self, name: str, value: str):
         self._properties[name] = value
@@ -102,7 +119,7 @@ class Question(object):
     def previous_nth_sentence(self, num):
         if len(self._sentences) < num:
             raise Exception("Num sentence array violation !")
-        previous = -1 -num
+        previous = -1 - num
         return self._sentences[previous]
 
     def combine_sentences(self, client_context):
@@ -162,9 +179,9 @@ class Question(object):
 
         question = Question()
 
-        question._srai = json_data["srai"]
-        question._current_sentence_no = json_data["current_sentence_no"]
-        question._properties = json_data["properties"]
+        question.srai = json_data["srai"]
+        question.current_sentence_no = json_data["current_sentence_no"]
+        question.properties = json_data["properties"]
 
         for sentence in json_data["sentences"]:
             question.sentences.append(Sentence.from_json(client_context, sentence))

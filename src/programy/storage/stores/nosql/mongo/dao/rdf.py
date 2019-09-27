@@ -14,18 +14,25 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from programy.storage.stores.utils import DAOUtils
 
-class RDF(object):
 
-    def __init__(self, name, subject, predicate, object):
+class RDF:
+
+    def __init__(self, name, subject, predicate, obj):
         self.id = None
         self.name = name
         self.subject = subject
         self.predicate = predicate
-        self.object = object
+        self.object = obj
 
     def __repr__(self):
-        return "<RDF(id='%d', name='%s', subject='%s', predicate='%s', object='%s')>" % (self.id, self.name, self.subject, self.predicate, self.object)
+        return "<RDF(id='%d', name='%s', subject='%s', predicate='%s', object='%s')>" % \
+               (DAOUtils.valid_id(self.id),
+                self.name,
+                self.subject,
+                self.predicate,
+                self.object)
 
     def to_document(self):
         document = {"name": self.name,

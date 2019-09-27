@@ -14,16 +14,15 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.utils.logging.ylogger import YLogger
-
 from programy.utils.text.text import TextUtils
 from programy.parser.pattern.match import Match
 from programy.parser.pattern.equalsmatch import EqualsMatch
+from programy.utils.console.console import outputLog
+
 
 #######################################################################################################################
 #
-
 class MultiValueDict(dict):
 
     def __setitem__(self, key, value):
@@ -39,8 +38,7 @@ class MultiValueDict(dict):
                 del self[key]
 
 
-class PatternNode(object):
-
+class PatternNode:
     THAT = "__THAT__"
     TOPIC = "__TOPIC__"
 
@@ -237,9 +235,12 @@ class PatternNode(object):
     ########################################################################
     #
     def equivalent(self, other):
+        del other
         return False
 
     def equals(self, client_context, words, word_no):
+        del words
+        del client_context
         return EqualsMatch(False, word_no)
 
     def equals_ignore_case(self, word1, word2):
@@ -278,16 +279,19 @@ class PatternNode(object):
         return None
 
     def _topic_node_exist(self, new_node):
+        del new_node
         if self._topic is not None:
             return self._topic
         return None
 
     def _that_node_exist(self, new_node):
+        del new_node
         if self._that is not None:
             return self._that
         return None
 
     def _template_node_exist(self, new_node):
+        del new_node
         if self._template is not None:
             return self._template
         return None
@@ -374,7 +378,7 @@ class PatternNode(object):
 
         # Otherwise use the new node, and return that to maintain consistence
         # And allow child node to be chained, but supports duplicates
-        if new_node.is_priority()  is True:
+        if new_node.is_priority() is True:
             self._priority_words.append(new_node)
 
         elif new_node.is_zero_or_more() is True:
@@ -425,7 +429,7 @@ class PatternNode(object):
     def _remove_node(self, current_node):
         YLogger.debug(None, "Removing %s" % current_node.to_string())
 
-        if current_node.is_priority()  is True:
+        if current_node.is_priority() is True:
             self._priority_words.remove(current_node)
 
         elif current_node.is_zero_or_more() is True:
@@ -502,7 +506,7 @@ class PatternNode(object):
 
     def to_string(self, verbose=True):
         if verbose is True:
-            return "NODE [%s] [%s]"%(self.userid, self._child_count(verbose))
+            return "NODE [%s] [%s]" % (self.userid, self._child_count(verbose))
         return "NODE"
 
     def get_tabs(self, client_context, depth):
@@ -513,37 +517,37 @@ class PatternNode(object):
     def dump(self, tabs, output_func=YLogger.debug, eol="", verbose=True):
 
         string = "{0}{1}{2}".format(tabs, self.to_string(verbose), eol)
-        if output_func == print:
+        if output_func == outputLog: #pylint: disable=comparison-with-callable
             output_func(string)
         else:
             output_func(self, string)
 
         for priority in self._priority_words:
-            priority.dump(tabs+"\t", output_func, eol, verbose)
+            priority.dump(tabs + "\t", output_func, eol, verbose)
 
         if self._0ormore_arrow is not None:
-            self._0ormore_arrow.dump(tabs+"\t", output_func, eol, verbose)
+            self._0ormore_arrow.dump(tabs + "\t", output_func, eol, verbose)
 
         if self._0ormore_hash is not None:
-            self._0ormore_hash.dump(tabs+"\t", output_func, eol, verbose)
+            self._0ormore_hash.dump(tabs + "\t", output_func, eol, verbose)
 
         if self._1ormore_underline is not None:
-            self._1ormore_underline.dump(tabs+"\t", output_func, eol, verbose)
+            self._1ormore_underline.dump(tabs + "\t", output_func, eol, verbose)
 
         if self._1ormore_star is not None:
-            self._1ormore_star.dump(tabs+"\t", output_func, eol, verbose)
+            self._1ormore_star.dump(tabs + "\t", output_func, eol, verbose)
 
         if self._topic is not None:
-            self._topic.dump(tabs+"\t", output_func, eol, verbose)
+            self._topic.dump(tabs + "\t", output_func, eol, verbose)
 
         if self._that is not None:
-            self._that.dump(tabs+"\t", output_func, eol, verbose)
+            self._that.dump(tabs + "\t", output_func, eol, verbose)
 
         if self._template is not None:
-            self._template.dump(tabs+"\t", output_func, eol, verbose)
+            self._template.dump(tabs + "\t", output_func, eol, verbose)
 
         for child in self.children:
-            child.dump(tabs+"\t", output_func, eol, verbose)
+            child.dump(tabs + "\t", output_func, eol, verbose)
 
     def to_xml(self, client_context, include_user=False):
         string = ""
@@ -591,7 +595,7 @@ class PatternNode(object):
                 match_node = Match(match_type, child, result.matched_phrase)
                 context.add_match(match_node)
 
-                match = child.consume(client_context, context, words, word_no + 1, match_type, depth+1)
+                match = child.consume(client_context, context, words, word_no + 1, match_type, depth + 1)
                 if match is not None:
                     YLogger.debug(client_context, "%sMatched %s child, success!", tabs, child_type)
                     return match, word_no
@@ -600,7 +604,8 @@ class PatternNode(object):
 
         return None, word_no
 
-    def consume(self, client_context, context, words, word_no, match_type, depth):
+    def consume(self, client_context, context, words, word_no, match_type, depth, parent=False):
+        del parent
 
         tabs = self.get_tabs(client_context, depth)
 
@@ -621,16 +626,17 @@ class PatternNode(object):
                 return None
 
         if self._topic is not None:
-            match = self._topic.consume(client_context, context, words, word_no, Match.TOPIC, depth+1)
+            match = self._topic.consume(client_context, context, words, word_no, Match.TOPIC, depth + 1)
             if match is not None:
                 YLogger.debug(client_context, "%sMatched topic, success!", tabs)
                 return match
             if words.word(word_no) == PatternNode.TOPIC:
-                YLogger.debug(client_context, "%s Looking for a %s, none give, no match found!", tabs, PatternNode.TOPIC)
+                YLogger.debug(client_context, "%s Looking for a %s, none give, no match found!", tabs,
+                              PatternNode.TOPIC)
                 return None
 
         if self._that is not None:
-            match = self._that.consume(client_context, context, words, word_no, Match.THAT, depth+1)
+            match = self._that.consume(client_context, context, words, word_no, Match.THAT, depth + 1)
             if match is not None:
                 YLogger.debug(client_context, "%sMatched that, success!", tabs)
                 return match
@@ -638,34 +644,36 @@ class PatternNode(object):
                 YLogger.debug(client_context, "%s Looking for a %s, none give, no match found!", tabs, PatternNode.THAT)
                 return None
 
-        match, word_no = self.match_children(client_context, self._priority_words, "Priority", words, word_no, context, match_type, depth)
+        match, word_no = self.match_children(client_context, self._priority_words, "Priority", words, word_no, context,
+                                             match_type, depth)
         if match is not None:
             return match
 
         if self._0ormore_hash is not None:
-            match = self._0ormore_hash.consume(client_context, context, words, word_no, match_type, depth+1)
+            match = self._0ormore_hash.consume(client_context, context, words, word_no, match_type, depth + 1)
             if match is not None:
                 YLogger.debug(client_context, "%sMatched 0 or more hash, success!", tabs)
                 return match
 
         if self._1ormore_underline is not None:
-            match = self._1ormore_underline.consume(client_context, context, words, word_no, match_type, depth+1)
+            match = self._1ormore_underline.consume(client_context, context, words, word_no, match_type, depth + 1)
             if match is not None:
                 YLogger.debug(client_context, "%sMatched 1 or more underline, success!", tabs)
                 return match
 
-        match, word_no = self.match_children(client_context, self._children, "Word", words, word_no, context, match_type, depth)
+        match, word_no = self.match_children(client_context, self._children, "Word", words, word_no, context,
+                                             match_type, depth)
         if match is not None:
             return match
 
         if self._0ormore_arrow is not None:
-            match = self._0ormore_arrow.consume(client_context, context, words, word_no, match_type, depth+1)
+            match = self._0ormore_arrow.consume(client_context, context, words, word_no, match_type, depth + 1)
             if match is not None:
                 YLogger.debug(client_context, "%sMatched 0 or more arrow, success!", tabs)
                 return match
 
         if self._1ormore_star is not None:
-            match = self._1ormore_star.consume(client_context, context, words, word_no, match_type, depth+1)
+            match = self._1ormore_star.consume(client_context, context, words, word_no, match_type, depth + 1)
             if match is not None:
                 YLogger.debug(client_context, "%sMatched 1 or more star, success!", tabs)
                 return match

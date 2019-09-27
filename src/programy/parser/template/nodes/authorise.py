@@ -14,11 +14,10 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.utils.logging.ylogger import YLogger
-
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.exceptions import ParserException
+
 
 class TemplateAuthoriseNode(TemplateNode):
 
@@ -64,9 +63,9 @@ class TemplateAuthoriseNode(TemplateNode):
 
     def to_string(self):
         text = "[AUTHORISE ("
-        text += "role=%s"%self._role
+        text += "role=%s" % self._role
         if self._denied_srai is not None:
-            text += ", denied_srai=%s"%self._denied_srai
+            text += ", denied_srai=%s" % self._denied_srai
         text += ")]"
         return text
 

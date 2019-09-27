@@ -14,17 +14,16 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from typing import Dict
+from abc import ABC
+from abc import abstractmethod
 from programy.utils.logging.ylogger import YLogger
-
-from abc import ABCMeta, abstractmethod
-
 from programy.triggers.config import TriggerConfiguration
 from programy.context import ClientContext
 from programy.utils.classes.loader import ClassLoader
 
 
-class TriggerManager(object):
-    __metaclass__ = ABCMeta
+class TriggerManager(ABC):
 
     def __init__(self, config: TriggerConfiguration):
 
@@ -33,11 +32,11 @@ class TriggerManager(object):
         self._config = config
 
     @abstractmethod
-    def trigger(self, event: str, client_context: ClientContext = None, additional: {} = None) -> bool:
+    def trigger(self, event: str, client_context: ClientContext = None, additional: Dict[str, str] = None) -> bool:
         raise NotImplementedError()
 
     @staticmethod
-    def load_trigger_manager( config: TriggerConfiguration):
+    def load_trigger_manager(config: TriggerConfiguration):
         if config.manager is not None:
             try:
                 return ClassLoader.instantiate_class(config.manager)(config)

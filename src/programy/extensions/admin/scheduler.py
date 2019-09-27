@@ -16,7 +16,6 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 """
 from programy.utils.logging.ylogger import YLogger
-
 from programy.extensions.base import Extension
 
 
@@ -39,8 +38,10 @@ class SchedulerAdminExtension(Extension):
                     jobs = client_context.client.scheduler.list_jobs()
                     if jobs:
                         response = ""
-                        for id, job in jobs.items():
-                            response += "> Job ID:%s, Next Run: %s, Args: %s\n"%(id, job.next_run_time, str(job.args))
+                        for jobid, job in jobs.items():
+                            response += "> Job ID:%s, Next Run: %s, Args: %s\n" % (jobid,
+                                                                                   job.next_run_time,
+                                                                                   str(job.args))
                         return response
 
                     return "No job information available"
@@ -48,8 +49,7 @@ class SchedulerAdminExtension(Extension):
             elif commands[0] == 'KILL':
 
                 if commands[1] == 'JOB':
-                    id = commands[2]
-                    client_context.client.scheduler.remove_existing_job(id)
+                    client_context.client.scheduler.remove_existing_job(commands[2])
                     return "Job removed"
 
             elif commands[0] == 'PAUSE':

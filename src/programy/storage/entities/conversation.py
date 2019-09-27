@@ -14,10 +14,12 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from programy.storage.entities.store import Store
 
-class ConversationStore(object):
 
-    def store_conversation(self, client_context, conversation):
+class ConversationStore(Store):
+
+    def store_conversation(self, client_context, conversation, commit=True):
         raise NotImplementedError("store_conversation missing from Conversation Store")
 
     def load_conversation(self, client_context, conversation):

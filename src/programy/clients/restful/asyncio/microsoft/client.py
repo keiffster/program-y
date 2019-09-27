@@ -14,17 +14,16 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.utils.logging.ylogger import YLogger
-
 import http.server
 import json
 import asyncio
 from botbuilder.schema import (Activity, ActivityTypes)
 from botframework.connector import ConnectorClient
 from botframework.connector.auth import (MicrosoftAppCredentials, JwtTokenValidation, SimpleCredentialProvider)
-
+from programy.utils.logging.ylogger import YLogger
 from programy.clients.restful.flask.client import FlaskRestBotClient
 from programy.clients.restful.asyncio.microsoft.config import MicrosoftConfiguration
+from programy.utils.console.console import outputLog
 
 
 class MicrosoftBotClient(FlaskRestBotClient):
@@ -34,7 +33,7 @@ class MicrosoftBotClient(FlaskRestBotClient):
 
         YLogger.debug(self, "Microsoft Client is running....")
 
-        print("Microsoft Client loaded")
+        outputLog(None, "Microsoft Client loaded")
 
     def get_client_configuration(self):
         return MicrosoftConfiguration()
@@ -51,7 +50,7 @@ class MicrosoftBotClient(FlaskRestBotClient):
 
         return self.configuration.client_configuration.new_user_text
 
-    def ask_question(self, question):
+    def ask_question(self, userid, question, metadata=None):
         reply = ""
         try:
             client_context = self.create_client_context("microsoft")
@@ -59,12 +58,12 @@ class MicrosoftBotClient(FlaskRestBotClient):
             reply = client_context.bot.ask_question(client_context, question, responselogger=self)
 
         except Exception as e:
-            YLogger.exception(client_context, "Error getting reply from bot", e)
+            YLogger.exception(self, "Error getting reply from bot", e)
 
         return reply
 
 
-MICROSOFT_CLIENT = MicrosoftBotClient ()
+MICROSOFT_CLIENT = MicrosoftBotClient()
 
 
 class BotRequestHandler(http.server.BaseHTTPRequestHandler):
@@ -101,7 +100,7 @@ class BotRequestHandler(http.server.BaseHTTPRequestHandler):
                                               MICROSOFT_CLIENT.get_microsoft_app_password())
         connector = ConnectorClient(credentials, base_url=activity.service_url)
 
-        response = MICROSOFT_CLIENT.ask_question(activity.text)
+        response = MICROSOFT_CLIENT.ask_question(activity.recipient.id, activity.text)
         reply = BotRequestHandler.__create_reply_activity(activity, response)
 
         connector.conversations.send_to_conversation(reply.conversation.id, reply)
@@ -144,7 +143,7 @@ class BotRequestHandler(http.server.BaseHTTPRequestHandler):
 
 if __name__ == '__main__':
 
-    print("Initiating Microsoft Client...")
+    outputLog(None, "Initiating Microsoft Client...")
 
     SERVER = None
     try:
@@ -152,11 +151,10 @@ if __name__ == '__main__':
         port = MICROSOFT_CLIENT.configuration.client_configuration.port
 
         SERVER = http.server.HTTPServer((host, port), BotRequestHandler)
-        print('Started http server')
+        outputLog(None, 'Started http server')
         SERVER.serve_forever()
 
     except KeyboardInterrupt:
-        print('Ctrl received, shutting down server')
+        outputLog(None, 'Ctrl received, shutting down server')
         if SERVER is not None:
             SERVER.socket.close()
-

@@ -88,7 +88,7 @@ class RDFStoreAsserts(unittest.TestCase):
 
         store.empty()
 
-        store.upload_from_file(os.path.dirname(__file__)+os.sep+"data"+os.sep+"rdfs"+os.sep+"csv"+os.sep+"activity.csv", format=Store.CSV_FORMAT)
+        store.upload_from_file(os.path.dirname(__file__)+os.sep+"data"+os.sep+"rdfs"+os.sep+"csv"+os.sep+"activity.csv", fileformat=Store.CSV_FORMAT)
 
         rdf_collection = RDFCollection()
         store.load(rdf_collection, "ACTIVITY")
@@ -102,7 +102,7 @@ class RDFStoreAsserts(unittest.TestCase):
 
         store.empty()
 
-        store.upload_from_directory(os.path.dirname(__file__)+os.sep+"data"+os.sep+"rdfs"+os.sep+"csv", subdir=True, format=Store.CSV_FORMAT)
+        store.upload_from_directory(os.path.dirname(__file__)+os.sep+"data"+os.sep+"rdfs"+os.sep+"csv", subdir=True, fileformat=Store.CSV_FORMAT)
 
         rdf_collection = RDFCollection()
         store.load_all(rdf_collection)

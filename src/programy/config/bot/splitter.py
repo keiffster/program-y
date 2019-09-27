@@ -21,7 +21,6 @@ from programy.utils.substitutions.substitues import Substitutions
 
 
 class BotSentenceSplitterConfiguration(BaseConfigurationData):
-
     DEFAULT_CLASSNAME = "programy.dialog.splitter.regex.RegexSentenceSplitter"
     DEFAULT_SPLITCHARS = '[:;,.?!]'
     JAPANESE_SPLITTERS = "。"
@@ -45,10 +44,15 @@ class BotSentenceSplitterConfiguration(BaseConfigurationData):
         BaseConfigurationData.check_for_license_keys(self, license_keys)
 
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
+        del bot_root
         splitter = configuration_file.get_section(self._section_name, configuration)
         if splitter is not None:
-            self._classname = configuration_file.get_option(splitter, "classname", missing_value=BotSentenceSplitterConfiguration.DEFAULT_CLASSNAME, subs=subs)
-            self._split_chars = configuration_file.get_option(splitter, "split_chars", missing_value=BotSentenceSplitterConfiguration.DEFAULT_SPLITCHARS, subs=subs)
+            self._classname = configuration_file.\
+                get_option(splitter, "classname", missing_value=BotSentenceSplitterConfiguration.DEFAULT_CLASSNAME,
+                           subs=subs)
+            self._split_chars = configuration_file.\
+                get_option(splitter, "split_chars",
+                           missing_value=BotSentenceSplitterConfiguration.DEFAULT_SPLITCHARS, subs=subs)
         else:
             YLogger.warning(self, "'splitter' section missing from bot config, using defaults")
 

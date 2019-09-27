@@ -19,11 +19,6 @@ from programy.dynamic.maps.map import DynamicMap
 
 # Code stolen from http://code.activestate.com/recipes/81611-roman-numerals/
 
-NUMERAL_MAP = zip(
-    (1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1),
-    ('M', 'CM', 'D', 'CD', 'C', 'XC', 'L', 'XL', 'X', 'IX', 'V', 'IV', 'I')
-)
-
 
 class MapRomanToDecimal(DynamicMap):
 
@@ -78,7 +73,10 @@ class MapDecimalToRoman(DynamicMap):
         result = ""
         num = 0
         for num_str in nums:
-            count = int(input_value / ints[num])
+            if ints[num] != 0:
+                count = input_value // ints[num]
+            else:
+                count = 1
             result += num_str * count
             input_value -= ints[num] * count
             num += 1

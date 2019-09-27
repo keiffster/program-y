@@ -14,12 +14,13 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 # This code was pulled from another AIML processor in Github
 # https://github.com/Decalogue/aiml3/blob/master/aiml/LangSupport.py
 # Thanks to Benny Shang for the info and help supporting chinese
+from programy.utils.logging.ylogger import YLogger
 
-class ChineseLanguage (object):
+
+class ChineseLanguage:
 
     @staticmethod
     def is_language(c):
@@ -43,7 +44,7 @@ class ChineseLanguage (object):
             (0x31C0, 0x31EF)]
 
         return any(s <= ord(c) <= e for s, e in r)
-    
+
     @staticmethod
     def split_language(s):
         result = []
@@ -54,7 +55,7 @@ class ChineseLanguage (object):
                 result.append(c)
         ret = ''.join(result)
         return ret.split()
-    
+
     @staticmethod
     def split_unicode(s):
         segs = s.split()
@@ -65,7 +66,7 @@ class ChineseLanguage (object):
             else:
                 result.append(seg)
         return result
-    
+
     @staticmethod
     def split_with_spaces(s):
         segs = ChineseLanguage.split_language(s)
@@ -75,11 +76,18 @@ class ChineseLanguage (object):
             if seg[0] not in ".,?!":
                 try:
                     str(seg[0]) and result.append(" ")
-                except:
-                    pass
+
+                except ValueError as ve:
+                    YLogger.exception_nostack(None, "Invalid string segment in Chinese.split_with_spaces [%s]",
+                                              ve, seg[0])
+
             result.append(seg)
+
             try:
                 str(seg[-1]) and result.append(" ")
-            except:
-                pass
+
+            except ValueError as ve:
+                YLogger.exception_nostack(None, "Invalid string segment in Chinese.split_with_spaces [%s]",
+                                          ve, seg[-1])
+
         return ''.join(result).strip()

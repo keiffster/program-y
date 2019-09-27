@@ -37,19 +37,25 @@ To deploy program-y to PyPi, there are a number of checks to be made
 
 8. Run all unit tests and ensure pass rate of > 80%, although currently 84%
 
-9. Check in to git any changes that you made
+9. Run pytype.sh and make sure it reports "Success: no errors found"
+
+10. Run pylintsh and make sure it reports no errors, the code quality should be atleast 8.5
+    Currently pylint reports: Your code has been rated at 8.64/10
+
+
+11. Check in to git any changes that you made
 
         git add .
         git commit -m "Updates follow"
 
-10. Push all changes to github
+12. Push all changes to github
 
         github push github master
 
-11. Run pypi_create.sh X.Y
+13. Run pypi_create.sh X.Y
 
-12. Run pypi_upload.sh
+14. Run pypi_upload.sh
 
-13. Run pypi_check.sh
+15. Run pypi_check.sh
 
 

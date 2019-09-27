@@ -15,19 +15,23 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.utils.logging.ylogger import YLogger
-import os
-import os.path
-
 from programy.storage.stores.file.store.filestore import FileStore
 from programy.storage.entities.nodes import NodesStore
 from programy.utils.classes.loader import ClassLoader
+
 
 class FileNodeStore(FileStore, NodesStore):
 
     def __init__(self, storage_engine):
         FileStore.__init__(self, storage_engine)
 
-    def _load_file_contents(self, node_factory, filename):
+    def _get_storage_path(self):
+        raise NotImplementedError()
+
+    def get_storage(self):
+        raise NotImplementedError()
+
+    def _load_file_contents(self, collection, filename):
         YLogger.debug(self, "Loading nodes from file [%s]", filename)
         count = 0
         try:
@@ -35,7 +39,7 @@ class FileNodeStore(FileStore, NodesStore):
                 for line in file:
                     line = line.strip()
                     if line:
-                        self.process_config_line(node_factory, line, filename)
+                        self.process_config_line(collection, line, filename)
         except FileNotFoundError:
             YLogger.error(self, "File not found [%s]", filename)
 
@@ -53,7 +57,8 @@ class FileNodeStore(FileStore, NodesStore):
             try:
                 node_factory.add_node(node_name, ClassLoader.instantiate_class(class_name))
             except Exception as e:
-                YLogger.exception_nostack(self, "Failed pre-instantiating %s Node [%s]"%(node_factory.type, class_name), e)
+                YLogger.exception_nostack(self,
+                                          "Failed pre-instantiating %s Node [%s]" % (node_factory.type, class_name), e)
 
     def valid_config_line(self, line, filename):
 
@@ -75,6 +80,9 @@ class FilePatternNodeStore(FileNodeStore):
     def __init__(self, storage_engine):
         FileNodeStore.__init__(self, storage_engine)
 
+    def _get_storage_path(self):
+        return self.storage_engine.configuration.pattern_nodes_storage.file
+
     def get_storage(self):
         return self.storage_engine.configuration.pattern_nodes_storage
 
@@ -83,6 +91,9 @@ class FileTemplateNodeStore(FileNodeStore):
 
     def __init__(self, storage_engine):
         FileNodeStore.__init__(self, storage_engine)
+
+    def _get_storage_path(self):
+        return self.storage_engine.configuration.pattern_nodes_storage.file
 
     def get_storage(self):
         return self.storage_engine.configuration.template_nodes_storage

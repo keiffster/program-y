@@ -14,13 +14,11 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.utils.logging.ylogger import YLogger
-
 from programy.storage.factory import StorageFactory
 
 
-class SetCollection(object):
+class SetCollection:
 
     def __init__(self):
         self._sets = {}
@@ -78,7 +76,7 @@ class SetCollection(object):
 
     def count_words_in_sets(self):
         count = 0
-        for name, aset in self._sets.items():
+        for _, aset in self._sets.items():
             for value in aset:
                 for variant in value:
                     count += len(variant)
@@ -105,4 +103,3 @@ class SetCollection(object):
                     sets_store.reload(self, set_name)
                 except Exception as e:
                     YLogger.exception(self, "Failed to load set from storage", e)
-

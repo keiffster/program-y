@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.storage.stores.utils import DAOUtils
 
 
-class Node(object):
+class Node():
 
     def __init__(self, name, node_class):
         self.id = None
@@ -32,7 +32,6 @@ class Node(object):
         return document
 
 
-
 class PatternNode(Node):
 
     def __init__(self, name, node_class):
@@ -40,8 +39,9 @@ class PatternNode(Node):
 
     def __repr__(self):
         return "<PatternNode(id='%s', name='%s', node_class='%s')>" % (
-        DAOUtils.valid_id(self.id), self.name, self.node_class)
+            DAOUtils.valid_id(self.id), self.name, self.node_class)
 
+    @staticmethod
     def from_document(data):
         node = PatternNode(None, None)
         if '_id' in data:
@@ -60,8 +60,9 @@ class TemplateNode(Node):
 
     def __repr__(self):
         return "<TemplateNode(id='%s', name='%s', node_class='%s')>" % (
-        DAOUtils.valid_id(self.id), self.name, self.node_class)
+            DAOUtils.valid_id(self.id), self.name, self.node_class)
 
+    @staticmethod
     def from_document(data):
         node = PatternNode(None, None)
         if '_id' in data:

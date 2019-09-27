@@ -35,7 +35,7 @@ class BrainServicesConfiguration(BaseSectionConfigurationData):
         return None
 
     def services(self):
-        return self._services.keys()
+        return list(self._services.keys())
 
     def check_for_license_keys(self, license_keys):
         BaseSectionConfigurationData.check_for_license_keys(self, license_keys)

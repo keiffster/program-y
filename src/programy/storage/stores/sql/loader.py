@@ -15,18 +15,13 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 import argparse
-
 from programy.storage.entities.store import Store
-
 from programy.storage.stores.sql.engine import SQLStorageEngine
 from programy.storage.stores.sql.config import SQLStorageConfiguration
-
 from programy.storage.stores.sql.store.categories import SQLCategoryStore
-
 from programy.storage.stores.sql.store.maps import SQLMapsStore
 from programy.storage.stores.sql.store.sets import SQLSetsStore
 from programy.storage.stores.sql.store.rdfs import SQLRDFsStore
-
 from programy.storage.stores.sql.store.properties import SQLPropertyStore
 from programy.storage.stores.sql.store.properties import SQLDefaultVariableStore
 from programy.storage.stores.sql.store.properties import SQLRegexStore
@@ -38,103 +33,103 @@ from programy.storage.stores.sql.store.lookups import SQLPerson2Store
 from programy.storage.stores.sql.store.spelling import SQLSpellingStore
 from programy.storage.stores.sql.store.licensekeys import SQLLicenseKeysStore
 from programy.storage.stores.sql.store.usergroups import SQLUserGroupStore
-
 from programy.storage.stores.sql.store.nodes import SQLTemplateNodesStore
 from programy.storage.stores.sql.store.nodes import SQLPatternNodesStore
-
 from programy.storage.stores.sql.store.processors import SQLPreProcessorsStore
 from programy.storage.stores.sql.store.processors import SQLPostProcessorsStore
 from programy.storage.stores.sql.store.processors import SQLPostQuestionProcessorsStore
+from programy.utils.console.console import outputLog
 
 
-class Uploader(object):
+class Uploader:
 
     @staticmethod
-    def upload(type, url, filename, dirname, subdir, extension, create=False, drop_all=False, verbose=False):
-        print ()
+    def upload(storetype, url, filename, dirname, subdir, extension, create=False, drop_all=False, verbose=False):
+        outputLog(None, "")
         config = SQLStorageConfiguration()
-        config._url = url
-        config._create_db = create
-        config._drop_all_first = drop_all
+        config.url = url
+        config.create_db = create
+        config.drop_all_first = drop_all
         engine = SQLStorageEngine(config)
         engine.initialise()
-        store = Uploader._get_store(type, engine)
+        store = Uploader._get_store(storetype, engine)
 
-        print("Emptying [%s]"%type)
+        outputLog(None, "Emptying [%s]" % storetype)
         store.empty()
 
-        print("Loading [%s]"%type)
+        outputLog(None, "Loading [%s]" % storetype)
         if filename is not None:
             count, success = store.upload_from_file(filename, commit=True, verbose=verbose)
-            print("Lines processed ", count)
-            print("Entities successful", success)
+            outputLog(None, "Lines processed ", count)
+            outputLog(None, "Entities successful", success)
         elif dirname is not None:
-            count, success = store.upload_from_directory(dirname, format=Store.TEXT_FORMAT, extension=extension, subdir=subdir, commit=True, verbose=verbose)
-            print("Lines processed ", count)
-            print("Entities successful", success)
+            count, success = store.upload_from_directory(dirname, format=Store.TEXT_FORMAT, extension=extension,
+                                                         subdir=subdir, commit=True, verbose=verbose)
+            outputLog(None, "Lines processed ", count)
+            outputLog(None, "Entities successful", success)
         else:
             raise Exception("You must specify either --file or --dir")
 
     @staticmethod
-    def _get_store(type, engine):
-        if type == 'categories':
+    def _get_store(storetype, engine):
+        if storetype == 'categories':
             return SQLCategoryStore(engine)
-        if type == 'maps':
+        if storetype == 'maps':
             return SQLMapsStore(engine)
-        if type == 'sets':
+        if storetype == 'sets':
             return SQLSetsStore(engine)
-        if type == 'rdfs':
+        if storetype == 'rdfs':
             return SQLRDFsStore(engine)
-        if type == 'preprocessors':
+        if storetype == 'preprocessors':
             return SQLPreProcessorsStore(engine)
-        if type == 'postprocessors':
+        if storetype == 'postprocessors':
             return SQLPostProcessorsStore(engine)
-        if type == 'postquestionprocessors':
+        if storetype == 'postquestionprocessors':
             return SQLPostQuestionProcessorsStore(engine)
-        if type == 'templatenodes':
+        if storetype == 'templatenodes':
             return SQLTemplateNodesStore(engine)
-        if type == 'patternnodes':
+        if storetype == 'patternnodes':
             return SQLPatternNodesStore(engine)
-        if type == 'properties':
-            return  SQLPropertyStore(engine)
-        if type == 'defaults':
+        if storetype == 'properties':
+            return SQLPropertyStore(engine)
+        if storetype == 'defaults':
             return SQLDefaultVariableStore(engine)
-        if type == 'regexes':
+        if storetype == 'regexes':
             return SQLRegexStore(engine)
-        if type == 'denormals':
+        if storetype == 'denormals':
             return SQLDenormalStore(engine)
-        if type == 'normals':
+        if storetype == 'normals':
             return SQLNormalStore(engine)
-        if type == 'genders':
+        if storetype == 'genders':
             return SQLGenderStore(engine)
-        if type == 'persons':
+        if storetype == 'persons':
             return SQLPersonStore(engine)
-        if type == 'person2s':
+        if storetype == 'person2s':
             return SQLPerson2Store(engine)
-        if type == 'spelling':
+        if storetype == 'spelling':
             return SQLSpellingStore(engine)
-        if type == 'licenses':
+        if storetype == 'licenses':
             return SQLLicenseKeysStore(engine)
-        if type == 'usergroups':
+        if storetype == 'usergroups':
             return SQLUserGroupStore(engine)
 
-        raise Exception("Unknone entity type [%s]"%type)
+        raise Exception("Unknown entity storetype [%s]" % storetype)
 
     @staticmethod
     def create_arguments():
-        arguments = argparse.ArgumentParser(description='Program-Y Set SQL Loader')
+        loader_args = argparse.ArgumentParser(description='Program-Y Set SQL Loader')
 
-        arguments.add_argument('-e', '--entity', help="Name of entity to load")
-        arguments.add_argument('-u', '--url', help="SQL Alchemy connection url")
-        arguments.add_argument('-f', '--file', help="File to load")
-        arguments.add_argument('-d', '--dir', help="Directory to load files from")
-        arguments.add_argument('-x', '--extension', help="Extension of file to load (dir only)")
-        arguments.add_argument('-s', '--subdir', action='store_true', help="Recurse into all subdirectories")
-        arguments.add_argument('-c', '--create', action='store_true', help="Create database")
-        arguments.add_argument('-a', '--drop', action='store_true', help="Drop all table first")
-        arguments.add_argument('-v', '--verbose', action='store_true', help="Verbose output of loading process")
+        loader_args.add_argument('-e', '--entity', help="Name of entity to load")
+        loader_args.add_argument('-u', '--url', help="SQL Alchemy connection url")
+        loader_args.add_argument('-f', '--file', help="File to load")
+        loader_args.add_argument('-d', '--dir', help="Directory to load files from")
+        loader_args.add_argument('-x', '--extension', help="Extension of file to load (dir only)")
+        loader_args.add_argument('-s', '--subdir', action='store_true', help="Recurse into all subdirectories")
+        loader_args.add_argument('-c', '--create', action='store_true', help="Create database")
+        loader_args.add_argument('-a', '--drop', action='store_true', help="Drop all table first")
+        loader_args.add_argument('-v', '--verbose', action='store_true', help="Verbose output of loading process")
 
-        return arguments
+        return loader_args
 
 
 if __name__ == '__main__':
@@ -142,8 +137,9 @@ if __name__ == '__main__':
     arguments = Uploader.create_arguments()
     try:
         args = arguments.parse_args()
-        Uploader.upload(args.entity, args.url, args.file, args.dir, args.subdir, args.extension, create=args.create, drop_all=args.drop, verbose=args.verbose)
+        Uploader.upload(args.entity, args.url, args.file, args.dir, args.subdir, args.extension, create=args.create,
+                        drop_all=args.drop, verbose=args.verbose)
 
-    except Exception as e:
-        print("An error occured - %s"%e)
-        arguments.print_help()
+    except Exception as excep:
+        outputLog(None, "SQL Loader error occured - %s" % excep)
+        arguments.output_help()

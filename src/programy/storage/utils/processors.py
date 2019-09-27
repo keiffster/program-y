@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import csv
 
 
-class FileProcessor(object):
+class FileProcessor:
 
     READ = "r"
     WRITE = "w"
@@ -43,6 +43,7 @@ class TextFile(FileProcessor):
         self._file.close()
 
     def process_lines(self, set_name, processor, verbose=False):
+        del verbose
         count = 0
         success = 0
         for line in self._file:
@@ -72,7 +73,8 @@ class CSVFileProcessor(FileProcessor):
 
 class CSVFileWriter(CSVFileProcessor):
 
-    def __init__(self, filename, mode=FileProcessor.WRITE, encoding=FileProcessor.UTF8, delimiter=CSVFileProcessor.DELIMITER, quotechar=CSVFileProcessor.QUOTECHAR, quoting=csv.QUOTE_ALL):
+    def __init__(self, filename, mode=FileProcessor.WRITE, encoding=FileProcessor.UTF8,
+                 delimiter=CSVFileProcessor.DELIMITER, quotechar=CSVFileProcessor.QUOTECHAR, quoting=csv.QUOTE_ALL):
         CSVFileProcessor.__init__(self, filename, mode, encoding)
         self._file = open(self._filename, self._mode, encoding=self._encoding)
         self._csv_writer = csv.writer(self._file, delimiter=delimiter, quotechar=quotechar, quoting=quoting)
@@ -86,7 +88,8 @@ class CSVFileWriter(CSVFileProcessor):
 
 class CSVFileReader(CSVFileProcessor):
 
-    def __init__(self, filename, mode=FileProcessor.READ, encoding=FileProcessor.UTF8, delimiter=CSVFileProcessor.DELIMITER, quotechar=CSVFileProcessor.QUOTECHAR, quoting=csv.QUOTE_ALL):
+    def __init__(self, filename, mode=FileProcessor.READ, encoding=FileProcessor.UTF8,
+                 delimiter=CSVFileProcessor.DELIMITER, quotechar=CSVFileProcessor.QUOTECHAR, quoting=csv.QUOTE_ALL):
         CSVFileProcessor.__init__(self, filename, mode, encoding)
         self._file = open(self._filename, self._mode, encoding=self._encoding)
         self._csv_reader = csv.reader(self._file, delimiter=delimiter, quotechar=quotechar, quoting=quoting)

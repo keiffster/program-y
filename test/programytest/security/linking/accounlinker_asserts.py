@@ -32,7 +32,7 @@ class AccountLinkerAsserts(unittest.TestCase):
 
         primary = linkerservice.primary_account("testuser2")
         self.assertTrue(primary)
-        self.assertEquals(primary_user, primary)
+        self.assertEqual(primary_user, primary)
 
     def assert_user_client_link_already_exists(self, linkerservice):
         primary_user = "testuser1"
@@ -42,15 +42,15 @@ class AccountLinkerAsserts(unittest.TestCase):
         self.assertTrue(result)
         links = linkerservice.linked_accounts(primary_user)
         self.assertIsNotNone(links)
-        self.assertEquals(1, len(links))
-        self.assertEquals(primary_client, links[0])
+        self.assertEqual(1, len(links))
+        self.assertEqual(primary_client, links[0])
 
         result = linkerservice.link_user_to_client(primary_user, primary_client)
         self.assertTrue(result)
         links = linkerservice.linked_accounts(primary_user)
         self.assertIsNotNone(links)
-        self.assertEquals(1, len(links))
-        self.assertEquals(primary_client, links[0])
+        self.assertEqual(1, len(links))
+        self.assertEqual(primary_client, links[0])
 
     def assert_provided_key_not_matched(self, linkerservice):
         primary_user = "testuser1"

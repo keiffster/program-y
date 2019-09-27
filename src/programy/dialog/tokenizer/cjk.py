@@ -112,4 +112,3 @@ class CjkTokenizer(Tokenizer):
         cjk_value1 = self.words_to_texts(self.texts_to_words(value1.upper()))
         cjk_value2 = self.words_to_texts(self.texts_to_words(value2.upper()))
         return cjk_value1 == cjk_value2
-

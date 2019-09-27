@@ -21,7 +21,6 @@ from programy.utils.substitutions.substitues import Substitutions
 
 
 class BrainSecurityConfiguration(BaseSectionConfigurationData):
-
     DEFAULT_ACCESS_DENIED = "Access denied!"
 
     def __init__(self, service_name):
@@ -50,8 +49,9 @@ class BrainSecurityConfiguration(BaseSectionConfigurationData):
         if service is not None:
             self._classname = configuration_file.get_option(service, "classname", missing_value=None, subs=subs)
             self._denied_srai = configuration_file.get_option(service, "denied_srai", missing_value=None, subs=subs)
-            self._denied_text = configuration_file.get_option(service, "denied_text",
-                                                              missing_value=BrainSecurityConfiguration.DEFAULT_ACCESS_DENIED, subs=subs)
+            self._denied_text = configuration_file. \
+                get_option(service, "denied_text", missing_value=BrainSecurityConfiguration.DEFAULT_ACCESS_DENIED,
+                           subs=subs)
         else:
             YLogger.warning(self, "'security' section missing from bot config, using to defaults")
 
@@ -60,7 +60,7 @@ class BrainSecurityAuthenticationConfiguration(BrainSecurityConfiguration):
 
     def __init__(self, service_name="authentication"):
         BrainSecurityConfiguration.__init__(self, service_name)
-        self._classname =  "programy.security.authenticate.passthrough.BasicPassThroughAuthenticationService"
+        self._classname = "programy.security.authenticate.passthrough.BasicPassThroughAuthenticationService"
         self._denied_srai = "AUTHENTICATION_FAILED"
         self._denied_text = "Access Denied!"
 
@@ -90,7 +90,8 @@ class BrainSecurityAuthorisationConfiguration(BrainSecurityConfiguration):
         BrainSecurityConfiguration.check_for_license_keys(self, license_keys)
 
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
-        super(BrainSecurityAuthorisationConfiguration, self).load_config_section(configuration_file, configuration, bot_root, subs=subs)
+        super(BrainSecurityAuthorisationConfiguration, self).load_config_section(configuration_file, configuration,
+                                                                                 bot_root, subs=subs)
         service = configuration_file.get_section(self.section_name, configuration)
         self.load_additional_key_values(configuration_file, service)
 
@@ -117,7 +118,8 @@ class BrainSecurityAccountLinkerConfiguration(BrainSecurityConfiguration):
         BrainSecurityConfiguration.check_for_license_keys(self, license_keys)
 
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
-        super(BrainSecurityAccountLinkerConfiguration, self).load_config_section(configuration_file, configuration, bot_root, subs=subs)
+        super(BrainSecurityAccountLinkerConfiguration, self).load_config_section(configuration_file, configuration,
+                                                                                 bot_root, subs=subs)
         service = configuration_file.get_section(self.section_name, configuration)
         self.load_additional_key_values(configuration_file, service)
 
@@ -130,4 +132,3 @@ class BrainSecurityAccountLinkerConfiguration(BrainSecurityConfiguration):
             data['classname'] = self._classname
             data['denied_srai'] = self._denied_srai
             data['denied_text'] = self._denied_text
-

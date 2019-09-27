@@ -14,14 +14,12 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from abc import ABCMeta, abstractmethod
-
+from abc import abstractmethod
 from programy.config.base import BaseConfigurationData
 from programy.utils.substitutions.substitues import Substitutions
 
 
 class BaseContainerConfigurationData(BaseConfigurationData):
-    __metaclass__ = ABCMeta
 
     def __init__(self, name):
         BaseConfigurationData.__init__(self, name)
@@ -32,4 +30,3 @@ class BaseContainerConfigurationData(BaseConfigurationData):
         Never Implemented
         """
         raise NotImplementedError()
-

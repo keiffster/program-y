@@ -1,9 +1,8 @@
 import unittest
-
 from programy.bot import Bot
-from programytest.custom import CustomAssertions
 from programy.config.bot.bot import BotConfiguration
 from programy.context import ClientContext
+from programytest.custom import CustomAssertions
 from programytest.client import TestClient
 
 
@@ -22,6 +21,7 @@ class TestBot(Bot):
         self._response = text
 
     def ask_question(self, clientid, text, srai=False):
+        del clientid
         return self._response
 
 

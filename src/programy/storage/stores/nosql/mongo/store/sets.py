@@ -16,15 +16,15 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 from programy.utils.logging.ylogger import YLogger
 from programy.storage.stores.nosql.mongo.store.mongostore import MongoStore
-from programy.storage.entities.sets import SetsStore
+from programy.storage.entities.sets import SetsReadWriteStore
 from programy.storage.stores.nosql.mongo.dao.set import Set
 
-class MongoSetsStore(MongoStore, SetsStore):
 
+class MongoSetsStore(MongoStore, SetsReadWriteStore):
     SETS = 'sets'
     NAME = 'name'
     VALUES = 'values'
-    
+
     def __init__(self, storage_engine):
         MongoStore.__init__(self, storage_engine)
 
@@ -33,7 +33,7 @@ class MongoSetsStore(MongoStore, SetsStore):
 
     def empty_named(self, name):
         YLogger.info(self, "Empting set [%s]", name)
-        collection = self.collection ()
+        collection = self.collection()
         collection.remove({MongoSetsStore.NAME: name})
 
     def add_to_set(self, name, value, replace_existing=False):
@@ -73,24 +73,24 @@ class MongoSetsStore(MongoStore, SetsStore):
                 else:
                     collection.delete_one({MongoSetsStore.NAME: name})
 
-    def load_all(self, set_collection):
+    def load_all(self, collector):
         YLogger.info(self, "Loading all sets from Mongo")
-        collection = self.collection ()
-        set_collection.empty()
+        collection = self.collection()
+        collector.empty()
         sets = collection.find({})
         for aset in sets:
-            self.load(set_collection, aset[MongoSetsStore.NAME])
+            self.load(collector, aset[MongoSetsStore.NAME])
 
-    def load(self, set_collection, set_name):
-        YLogger.info(self, "Loading set [%s] from Mongo", set_name)
-        collection = self.collection ()
-        aset = collection.find_one({MongoSetsStore.NAME: set_name})
+    def load(self, collector, name=None):
+        YLogger.info(self, "Loading set [%s] from Mongo", name)
+        collection = self.collection()
+        aset = collection.find_one({MongoSetsStore.NAME: name})
         if aset is not None:
             the_set = {}
-            for value in  aset[MongoSetsStore.VALUES]:
+            for value in aset[MongoSetsStore.VALUES]:
                 value = value.strip()
                 if value:
                     self.add_set_values(the_set, value)
 
-            set_collection.remove(set_name)
-            set_collection.add_set(set_name, the_set, MongoStore.MONGO)
+            collector.remove(name)
+            collector.add_set(name, the_set, MongoStore.MONGO)

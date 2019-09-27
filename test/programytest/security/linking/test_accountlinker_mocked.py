@@ -1,7 +1,4 @@
-import unittest
-
 from programy.security.linking.accountlinker import BasicAccountLinkerService
-
 from programytest.security.linking.accounlinker_asserts import AccountLinkerAsserts
 
 

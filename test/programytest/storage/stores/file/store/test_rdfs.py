@@ -20,7 +20,7 @@ class FileRDFStoreTests(RDFStoreAsserts):
 
     def test_load_from_test_dir_no_subdir(self):
         config = FileStorageConfiguration()
-        config._rdf_storage = FileStoreConfiguration(dirs=[os.path.dirname(__file__) + os.sep + "data" + os.sep + "rdfs" + os.sep + "text"], extension="rdf", subdirs=False, format="text", encoding="utf-8", delete_on_start=False)
+        config._rdf_storage = FileStoreConfiguration(dirs=[os.path.dirname(__file__) + os.sep + "data" + os.sep + "rdfs" + os.sep + "text"], extension="rdf", subdirs=False, fileformat="text", encoding="utf-8", delete_on_start=False)
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileRDFStore(engine)
@@ -32,7 +32,7 @@ class FileRDFStoreTests(RDFStoreAsserts):
 
     def test_load_from_test_dir_with_subdir(self):
         config = FileStorageConfiguration()
-        config._rdf_storage = FileStoreConfiguration(dirs=[os.path.dirname(__file__) + os.sep + "data" + os.sep + "rdfs" + os.sep + "text"], extension="rdf", subdirs=True, format="text", encoding="utf-8", delete_on_start=False)
+        config._rdf_storage = FileStoreConfiguration(dirs=[os.path.dirname(__file__) + os.sep + "data" + os.sep + "rdfs" + os.sep + "text"], extension="rdf", subdirs=True, fileformat="text", encoding="utf-8", delete_on_start=False)
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileRDFStore(engine)

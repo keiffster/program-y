@@ -22,6 +22,6 @@ class SentenceSplitterTests(unittest.TestCase):
         splitter = SentenceSplitter.initiate_sentence_splitter(config)
         self.assertIsNotNone(splitter)
 
-        self.assertEquals("", splitter.remove_punctuation(""))
-        self.assertEquals("", splitter.remove_punctuation("()"))
-        self.assertEquals("Hello world", splitter.remove_punctuation("(Hello, world)"))
+        self.assertEqual("", splitter.remove_punctuation(""))
+        self.assertEqual("", splitter.remove_punctuation("()"))
+        self.assertEqual("Hello world", splitter.remove_punctuation("(Hello, world)"))

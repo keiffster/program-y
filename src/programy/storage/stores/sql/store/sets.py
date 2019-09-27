@@ -14,40 +14,45 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.storage.stores.sql.store.sqlstore import SQLStore
-from programy.storage.entities.sets import SetsStore
+from programy.storage.entities.sets import SetsReadWriteStore
 from programy.storage.stores.sql.dao.set import Set
 
 
-class SQLSetsStore(SQLStore, SetsStore):
+class SQLSetsStore(SQLStore, SetsReadWriteStore):
+
+    def __init__(self, storage_engine):
+        SQLStore.__init__(self, storage_engine)
+
+    def _get_all(self):
+        return self._storage_engine.session.query(Set)
 
     def empty(self):
         self._storage_engine.session.query(Set).delete()
 
     def empty_named(self, name):
-        self._storage_engine.session.query(Set).filter(Set.name==name).delete()
+        self._storage_engine.session.query(Set).filter(Set.name == name).delete()
 
-    def add_to_set(self, name, value):
+    def add_to_set(self, name, value, replace_existing=False):
         aset = Set(name=name, value=value.upper())
         self._storage_engine.session.add(aset)
         return True
 
     def remove_from_set(self, name, value):
-        self._storage_engine.session.query(Set).filter(Set.name==name, Set.value==value.upper()).delete()
+        self._storage_engine.session.query(Set).filter(Set.name == name, Set.value == value.upper()).delete()
 
-    def load_all(self, set_collection):
-        set_collection.empty()
+    def load_all(self, collector):
+        collector.empty()
         names = self._storage_engine.session.query(Set.name).distinct()
         for name in names:
-            self.load(set_collection, name[0])
+            self.load(collector, name[0])
 
-    def load(self, set_collection, set_name):
-        set_collection.remove(set_name)
-        values = self._storage_engine.session.query(Set).filter(Set.name==set_name)
+    def load(self, collector, name=None):
+        collector.remove(name)
+        values = self._storage_engine.session.query(Set).filter(Set.name == name)
         the_set = {}
         for pair in values:
             value = pair.value.strip()
             if value:
                 self.add_set_values(the_set, value)
-        set_collection.add_set(set_name, the_set, SQLStore.SQL)
+        collector.add_set(name, the_set, SQLStore.SQL)

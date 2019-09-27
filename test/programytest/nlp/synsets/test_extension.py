@@ -14,19 +14,19 @@ class SynsetsExtensionTests(unittest.TestCase):
     def test_is_similar_default_weight(self):
         extension = SynsetsExtension()
         self.assertIsNotNone(extension)
-        self.assertEquals("TRUE", extension.execute(self.context, "SIMILAR OCTOPUS SHRIMP"))
+        self.assertEqual("TRUE", extension.execute(self.context, "SIMILAR OCTOPUS SHRIMP"))
 
     def test_is_similar_low_weight(self):
         extension = SynsetsExtension()
         self.assertIsNotNone(extension)
-        self.assertEquals("TRUE", extension.execute(self.context, "SIMILAR OCTOPUS SHRIMP 0 DOT 1"))
+        self.assertEqual("TRUE", extension.execute(self.context, "SIMILAR OCTOPUS SHRIMP 0 DOT 1"))
 
     def test_is_similar_height_weight(self):
         extension = SynsetsExtension()
         self.assertIsNotNone(extension)
-        self.assertEquals("FALSE", extension.execute(self.context, "SIMILAR OCTOPUS SHRIMP 0 DOT 9"))
+        self.assertEqual("FALSE", extension.execute(self.context, "SIMILAR OCTOPUS SHRIMP 0 DOT 9"))
 
     def test_is_similars_words(self):
         extension = SynsetsExtension()
         self.assertIsNotNone(extension)
-        self.assertEquals("TRUE HACK MACHINE_POLITICIAN CAB CHOP", extension.execute(self.context, "SIMILARS WORDS HACK"))
+        self.assertEqual("TRUE HACK MACHINE_POLITICIAN CAB CHOP", extension.execute(self.context, "SIMILARS WORDS HACK"))

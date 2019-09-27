@@ -19,10 +19,10 @@ from programy.storage.entities.store import Store
 from programy.storage.stores.nosql.mongo.store.mongostore import MongoStore
 from programy.storage.entities.spelling import SpellingStore
 from programy.storage.stores.nosql.mongo.dao.corpus import Corpus
+from programy.utils.console.console import outputLog
 
 
 class MongoSpellingStore(MongoStore, SpellingStore):
-
     SPELLING = 'spelling'
 
     def __init__(self, storage_engine):
@@ -31,7 +31,7 @@ class MongoSpellingStore(MongoStore, SpellingStore):
     def collection_name(self):
         return MongoSpellingStore.SPELLING
 
-    def upload_from_file(self, filename, format=Store.TEXT_FORMAT, commit=True, verbose=False):
+    def upload_from_file(self, filename, fileformat=Store.TEXT_FORMAT, commit=True, verbose=False):
 
         YLogger.info(self, "Uplading spelling corpus file [%s] to Mongo", filename)
 
@@ -48,7 +48,7 @@ class MongoSpellingStore(MongoStore, SpellingStore):
             self.add_document(corpus)
 
             if verbose is True:
-                print(corpus_words)
+                outputLog(self, corpus_words)
 
             if commit is True:
                 self.commit()
@@ -56,7 +56,7 @@ class MongoSpellingStore(MongoStore, SpellingStore):
             count = len(corpus_words)
 
         except Exception as excep:
-            YLogger.expception(self, "Failed to load spelling corpus from [%s]", excep, filename)
+            YLogger.exception(self, "Failed to load spelling corpus from [%s]", excep, filename)
 
         # Assume all words loaded are success, no need for additional count
         return count, count

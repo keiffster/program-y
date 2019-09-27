@@ -48,4 +48,4 @@ class ProgramyRESTServiceTests(unittest.TestCase):
         config._url = "/api/v1.0/ask"
 
         service = ProgramyRESTService(config, api=None)
-        self.assertEqual("Hello", service._parse_response('[{"response": {"answer": "Hello"}}]'))
+        self.assertEqual("Hello", service._parse_response(client_context, '[{"response": {"answer": "Hello"}}]'))

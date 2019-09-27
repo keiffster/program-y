@@ -14,11 +14,9 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.utils.logging.ylogger import YLogger
 import datetime
 import locale
-
+from programy.utils.logging.ylogger import YLogger
 from programy.parser.exceptions import ParserException
 from programy.parser.template.nodes.attrib import TemplateAttribNode
 from programy.parser.template.nodes.word import TemplateWordNode
@@ -61,9 +59,9 @@ class TemplateDateNode(TemplateAttribNode):
 
     def to_string(self):
         if self._locale is None:
-            return "[DATE format=%s]" %self._format.to_string()
+            return "[DATE format=%s]" % self._format.to_string()
         else:
-            return "[DATE format=%s locale=%s]"%(self._format.to_string(), self._locale.to_string())
+            return "[DATE format=%s locale=%s]" % (self._format.to_string(), self._locale.to_string())
 
     def set_attrib(self, attrib_name, attrib_value):
         if attrib_name == 'format':
@@ -84,7 +82,8 @@ class TemplateDateNode(TemplateAttribNode):
         if self._locale is None:
             xml = '<date format="%s" >' % self._format.to_xml(client_context)
         else:
-            xml = '<date format="%s" locale="%s">'%(self._formatto_xml(client_context), self._localeto_xml(client_context))
+            xml = '<date format="%s" locale="%s">' % (self._format.to_xml(client_context),
+                                                      self._locale.to_xml(client_context))
 
         xml += self.children_to_xml(client_context)
         xml += "</date>"
