@@ -101,7 +101,7 @@ class ConfigurationWriter:
         self.write_yaml(args.file, config_data)
 
     def write_yaml(self, filename, data):
-        outputLog(self, "Writing new config file to", filename)
+        outputLog(self, "Writing new config file to [%s]" % filename)
         try:
             with open(filename, 'w') as outfile:
                 yaml.dump(data, outfile, default_flow_style=False)
@@ -130,7 +130,7 @@ class ConfigurationWriter:
 
         except Exception as excep:
             outputLog(None, "Error: [%s]" % str(excep))
-            parser.output_help()
+            parser.print_help()
 
 
 if __name__ == '__main__':

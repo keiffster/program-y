@@ -34,11 +34,6 @@ class MapsReadOnlyStore(Store):
         value = ":".join(splits[1:])
         return [key, value]
 
-    def process_line(self, name, fields, verbose=False):
-        if fields:
-            return self.add_to_map(name, fields[0], fields[1])
-        return False
-
 
 class MapsReadWriteStore(MapsReadOnlyStore):
 
@@ -50,6 +45,11 @@ class MapsReadWriteStore(MapsReadOnlyStore):
 
     def load(self, collector, name=None):
         raise NotImplementedError("load missing from Maps Store")
+
+    def process_line(self, name, fields, verbose=False):
+        if fields:
+            return self.add_to_map(name, fields[0], fields[1])
+        return False
 
     def add_to_map(self, name, key, value, overwrite_existing=False):
         raise NotImplementedError("add_to_map missing from Maps Store")

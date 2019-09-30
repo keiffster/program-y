@@ -25,7 +25,7 @@ class Lookup():
         self.value = value
 
     def __repr__(self):
-        return "<Lookup(id='%d', key='%s', value='%s')>" % (DAOUtils(self.id), self.key, self.value)
+        return "<Lookup(id='%d', key='%s', value='%s')>" % (DAOUtils.valid_id(self.id), self.key, self.value)
 
     def to_document(self):
         document = {"key": self.key,

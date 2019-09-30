@@ -98,6 +98,9 @@ ENV/
 # Pylint output
 pylint.log
 
+# Pytype outout
+pytype.log
+
 # Ignore license key files
 license.keys
 /bots/y-bot/output/

@@ -31,11 +31,6 @@ class SetsReadOnlyStore(Store):
     def split_into_fields(self, line):
         return [line]
 
-    def process_line(self, name, fields, verbose=False):
-        if fields:
-            return self.add_to_set(name, fields[0])
-        return False
-
     def add_set_values(self, the_set, value):
         splits = value.split()
         key = splits[0].upper()
@@ -48,6 +43,11 @@ class SetsReadWriteStore(SetsReadOnlyStore):
 
     def __init__(self):
         SetsReadOnlyStore.__init__(self)
+
+    def process_line(self, name, fields, verbose=False):
+        if fields:
+            return self.add_to_set(name, fields[0])
+        return False
 
     def add_to_set(self, name, value, replace_existing=False):
         raise NotImplementedError("add_to_set missing from Sets Store")

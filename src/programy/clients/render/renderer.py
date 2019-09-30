@@ -32,7 +32,7 @@ class RichMediaRenderer():
     def _concat_result(self, first, second) -> str:
         del first
         del second
-        return {}
+        return ""
 
     def render(self, client_context, message):
         if message:

@@ -14,13 +14,14 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from abc import ABC
 from abc import abstractmethod
 from programy.utils.logging.ylogger import YLogger
 from programy.utils.classes.loader import ClassLoader
 from programy.activate import Activatable
 
 
-class SpellingChecker(Activatable):
+class SpellingChecker(Activatable, ABC):
 
     def __init__(self, spelling_config=None):
         Activatable.__init__(self)

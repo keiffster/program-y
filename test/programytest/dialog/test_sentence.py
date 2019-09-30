@@ -7,6 +7,7 @@ from programy.parser.pattern.matchcontext import MatchContext
 from programy.parser.pattern.match import Match
 from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
 from programy.parser.pattern.nodes.word import PatternWordNode
+from programy.parser.pattern.nodes.template import PatternTemplateNode
 from programy.parser.template.nodes.word import TemplateWordNode
 
 from programytest.client import TestClient
@@ -88,7 +89,7 @@ class SentenceTests(unittest.TestCase):
         word1 = PatternWordNode("Hi")
         word2 = PatternWordNode("There")
         context = MatchContext(max_search_depth=100, max_search_timeout=60,
-                               template_node=TemplateWordNode("Hello"))
+                               template_node=PatternTemplateNode(TemplateWordNode("Hello")))
         context.add_match(Match(Match.TOPIC, topic, None))
         context.add_match(Match(Match.WORD, word1, "Hi"))
         context.add_match(Match(Match.WORD, word2, "There"))

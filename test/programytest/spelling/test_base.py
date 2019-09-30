@@ -28,13 +28,6 @@ class MockBrain(object):
 
 class SpellingCheckerTests(unittest.TestCase):
 
-    def test_ensure_not_implemented(self):
-
-        checker = SpellingChecker()
-        self.assertIsNotNone(checker)
-        with self.assertRaises(Exception):
-            checker.correct("Test This")
-
     def test_initiate_spellchecker(self):
 
         spelling_config = BotSpellingConfiguration()

@@ -50,4 +50,4 @@ if __name__ == '__main__':
 
     response = my_bot.process_question(client_context, "Hello")
 
-    outputLog(None, "Response = ", response)
+    outputLog(None, "Response = %s" % response)

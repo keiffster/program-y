@@ -27,9 +27,6 @@ class FileBinariesStore(FileStore, BinariesStore):
     def __init__(self, storage_engine):
         FileStore.__init__(self, storage_engine)
 
-    def _get_all(self):
-        return self._storage_engine.session.query(De)
-
     def _get_storage_path(self):
         return self.storage_engine.configuration.binaries_storage.file
 

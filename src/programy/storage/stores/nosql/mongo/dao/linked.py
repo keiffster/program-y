@@ -25,7 +25,7 @@ class LinkedAccount():
         self.linked_userid = linked_userid
 
     def __repr__(self):
-        return "<Linked(id='%d', primary='%s', linked='%s')>" % (DAOUtils(self.id),
+        return "<Linked(id='%d', primary='%s', linked='%s')>" % (DAOUtils.valid_id(self.id),
                                                                  self.primary_userid,
                                                                  self.linked_userid)
 

@@ -150,4 +150,4 @@ if __name__ == '__main__':
 
     except Exception as excep:
         outputLog(None, "Mongo loader error - %s" % excep)
-        arguments.output_help()
+        arguments.print_help()

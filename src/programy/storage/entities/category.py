@@ -89,6 +89,12 @@ class CategoryReadOnlyStore(Store):
         except Exception as excep:
             YLogger.exception_nostack(self, "Error loading category from db", excep)
 
+
+class CategoryReadWriteStore(CategoryReadOnlyStore):
+
+    def __init__(self):
+        CategoryReadOnlyStore.__init__(self)
+
     def upload_from_file(self, filename, fileformat=Store.XML_FORMAT, commit=True, verbose=False):
         count = 0
         success = 0
@@ -125,12 +131,6 @@ class CategoryReadOnlyStore(Store):
             YLogger.exception(self, "Failed to load contents of AIML file from [%s]", excep, filename)
 
         return count, success
-
-
-class CategoryReadWriteStore(CategoryReadOnlyStore):
-
-    def __init__(self):
-        CategoryReadOnlyStore.__init__(self)
 
     def store_category(self, groupid, userid, topic, that, pattern, template):
         raise NotImplementedError("store_category missing from Category Store")

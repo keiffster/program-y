@@ -41,15 +41,6 @@ class RDFReadOnlyStore(Store):
         splits = line.split(self.get_split_char())
         return splits
 
-    def process_line(self, name, fields, verbose=False):
-        if len(fields) == 3:
-            subject = fields[0].strip().strip('"')
-            predicate = fields[1].strip().strip('"')
-            obj = fields[2].strip().strip('"')
-
-            return self.add_rdf(name, subject, predicate, obj)
-        return False
-
 
 class RDFReadWriteStore(RDFReadOnlyStore):
 
@@ -58,3 +49,12 @@ class RDFReadWriteStore(RDFReadOnlyStore):
 
     def add_rdf(self, name, subject, predicate, objct, replace_existing=True):
         raise NotImplementedError("add_rdf missing from RDF Store")
+
+    def process_line(self, name, fields, verbose=False):
+        if len(fields) == 3:
+            subject = fields[0].strip().strip('"')
+            predicate = fields[1].strip().strip('"')
+            obj = fields[2].strip().strip('"')
+
+            return self.add_rdf(name, subject, predicate, obj)
+        return False

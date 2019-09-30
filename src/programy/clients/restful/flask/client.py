@@ -52,7 +52,7 @@ class FlaskRestBotClient(RestBotClient):
     def run(self, app=None):
 
         outputLog(self, "%s Client running on http://%s:%s" % (self.id, self.configuration.client_configuration.host,
-                                                               åself.configuration.client_configuration.port))
+                                                               self.configuration.client_configuration.port))
 
         self.startup()
 

@@ -133,7 +133,7 @@ class PatternSetNode(PatternNode):
                     return match
 
                 else:
-                    YLogger.error(client_context, "No word [%s] found in set [%s]", word, self.set_name)
+                    YLogger.debug(client_context, "No word [%s] found in set [%s]", word, self.set_name)
                     return EqualsMatch(False, word_no)
 
             else:

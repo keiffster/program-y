@@ -37,6 +37,6 @@ class NGramsPostQuestionProcessor(PostQuestionProcessor):
                     return response
 
         except Exception as excep:
-            YLogger.exceptione(self, "Failed to create NGrams", excep)
+            YLogger.exception(self, "Failed to create NGrams", excep)
 
         return None

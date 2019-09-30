@@ -60,15 +60,16 @@ class Uploader:
         outputLog(None, "Loading [%s]" % storetype)
         if filename is not None:
             count, success = store.upload_from_file(filename, commit=True, verbose=verbose)
-            outputLog(None, "Lines processed ", count)
-            outputLog(None, "Entities successful", success)
+
         elif dirname is not None:
-            count, success = store.upload_from_directory(dirname, format=Store.TEXT_FORMAT, extension=extension,
+            count, success = store.upload_from_directory(dirname, fileformat=Store.TEXT_FORMAT, extension=extension,
                                                          subdir=subdir, commit=True, verbose=verbose)
-            outputLog(None, "Lines processed ", count)
-            outputLog(None, "Entities successful", success)
+
         else:
             raise Exception("You must specify either --file or --dir")
+
+        outputLog(None, "Lines processed [%d]" % count)
+        outputLog(None, "Entities successful [%s]" % success)
 
     @staticmethod
     def _get_store(storetype, engine):
@@ -142,4 +143,4 @@ if __name__ == '__main__':
 
     except Exception as excep:
         outputLog(None, "SQL Loader error occured - %s" % excep)
-        arguments.output_help()
+        arguments.print_help()

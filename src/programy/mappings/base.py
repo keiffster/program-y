@@ -200,7 +200,7 @@ class DoubleStringPatternSplitCollection(BaseCollection):
                 lhs = match.group(1)
                 rhs = match.group(2)
                 return [lhs, rhs]
-            outputLog(None, "Pattern is bad [%s]", line)
+            outputLog(None, "Pattern is bad [%s]" % line)
         return None
 
     @staticmethod

@@ -15,11 +15,14 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from typing import List
+from typing import NewType
 
 import datetime
 from programy.utils.logging.ylogger import YLogger
 from programy.parser.pattern.match import Match
-from programy.parser.template.nodes.base import TemplateNode
+from programy.parser.pattern.nodes.template import PatternTemplateNode
+
+dt = NewType('dt', datetime.datetime)
 
 
 class MatchContext:
@@ -28,7 +31,7 @@ class MatchContext:
                  max_search_depth: int,
                  max_search_timeout: int,
                  matched_nodes: List = None,
-                 template_node: TemplateNode = None,
+                 template_node: PatternTemplateNode = None,
                  sentence: str = None,
                  response: str = None):
         self._max_search_depth = max_search_depth
@@ -37,6 +40,8 @@ class MatchContext:
         self._matched_nodes = []
         if matched_nodes is not None:
             self._matched_nodes = matched_nodes.copy()
+        if template_node is not None:
+            assert isinstance(template_node, PatternTemplateNode)
         self._template_node = template_node
         self._sentence = sentence
         self._response = response
@@ -46,15 +51,16 @@ class MatchContext:
         return self._matched_nodes
 
     @matched_nodes.setter
-    def matched_nodes(self, matched_nodes: List) -> List:
+    def matched_nodes(self, matched_nodes: List):
         self._matched_nodes = matched_nodes[:]
 
     @property
-    def template_node(self) -> TemplateNode:
+    def template_node(self) -> PatternTemplateNode:
         return self._template_node
 
     @template_node.setter
-    def template_node(self, template_node: TemplateNode):
+    def template_node(self, template_node: PatternTemplateNode):
+        assert isinstance(template_node, PatternTemplateNode)
         self._template_node = template_node
 
     @property
@@ -82,19 +88,19 @@ class MatchContext:
         self._max_search_depth = depth
 
     @property
-    def total_search_start(self) -> datetime:
+    def total_search_start(self) -> dt:
         return self._total_search_start
 
     @total_search_start.setter
-    def total_search_start(self, start: datetime):
+    def total_search_start(self, start: dt):
         self._total_search_start = start
 
     @property
-    def max_search_timeout(self) -> datetime:
+    def max_search_timeout(self) -> dt:
         return self._max_search_timeout
 
     @max_search_timeout.setter
-    def max_search_timeout(self, timeout: datetime):
+    def max_search_timeout(self, timeout: dt):
         self._max_search_timeout = timeout
 
     def search_depth_exceeded(self, depth: int) -> bool:
@@ -105,7 +111,7 @@ class MatchContext:
 
     def total_search_time(self) -> int:
         delta = datetime.datetime.now() - self._total_search_start
-        return abs(delta.total_seconds())
+        return int(abs(delta.total_seconds()))
 
     def search_time_exceeded(self) -> bool:
         if self._max_search_timeout == -1:

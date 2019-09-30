@@ -31,15 +31,15 @@ class TemplateIntervalNode(TemplateNode):
         self._interval_to = None
 
     @property
-    def interval_format(self):
+    def interval_format(self) -> TemplateNode:
         return self._interval_format
 
     @interval_format.setter
-    def interval_format(self, interval_format):
+    def interval_format(self, interval_format: TemplateNode):
         self._interval_format = interval_format
 
     @property
-    def interval_from(self):
+    def interval_from(self) -> TemplateNode:
         return self._interval_from
 
     @interval_from.setter
@@ -47,7 +47,7 @@ class TemplateIntervalNode(TemplateNode):
         self._interval_from = interval_from
 
     @property
-    def interval_to(self):
+    def interval_to(self) -> TemplateNode:
         return self._interval_to
 
     @interval_to.setter
@@ -55,7 +55,7 @@ class TemplateIntervalNode(TemplateNode):
         self._interval_to = interval_to
 
     @property
-    def style(self):
+    def style(self) -> TemplateNode:
         return self._style
 
     @style.setter
@@ -63,48 +63,59 @@ class TemplateIntervalNode(TemplateNode):
         self._style = style
 
     def resolve_to_string(self, client_context):
-        format_str = self._interval_format.resolve(client_context)
-
-        from_str = self.interval_from.resolve(client_context)
-        from_time = datetime.datetime.strptime(from_str, format_str)
-
-        to_str = self.interval_to.resolve(client_context)
-        to_time = datetime.datetime.strptime(to_str, format_str)
-
-        style = self._style.resolve(client_context)
-
-        diff = to_time - from_time
-        difference = relativedelta(to_time, from_time)
-
-        if style == "years":
-            resolved = str(difference.years)
-        elif style == "months":
-            resolved = str(difference.months)
-        elif style == "weeks":
-            resolved = str(difference.weeks)
-        elif style == "days":
-            resolved = str(diff.days)
-        elif style == "hours":
-            resolved = str(difference.hours)
-        elif style == "minutes":
-            resolved = str(difference.minutes)
-        elif style == "seconds":
-            resolved = str(difference.seconds)
-        elif style == "microseconds":
-            resolved = str(difference.microseconds)
-        elif style == "ymd":
-            resolved = "%d years, %d months, %d days" % \
-                       (difference.years, difference.months, difference.days)
-        elif style == "hms":
-            resolved = "%d hours, %d minutes, %d seconds" % \
-                       (difference.hours, difference.minutes, difference.seconds)
-        elif style == "ymdhms":
-            resolved = "%d years, %d months, %d days, %d hours, %d minutes, %d seconds" % \
-                       (difference.years, difference.months, difference.days,
-                        difference.hours, difference.minutes, difference.seconds)
+        if self.interval_format is not None:
+            format_str = self.interval_format.resolve(client_context)
         else:
-            YLogger.error(client_context, "Unknown interval style [%s]", style)
-            resolved = ""
+            format_str = "%C"
+
+        from_time = None
+        if self.interval_from is not None:
+            from_str = self.interval_from.resolve(client_context)
+            from_time = datetime.datetime.strptime(from_str, format_str)
+
+        to_time = None
+        if self.interval_to is not None:
+            to_str = self.interval_to.resolve(client_context)
+            to_time = datetime.datetime.strptime(to_str, format_str)
+
+        difference = None
+        if from_time is not None and to_time is not None:
+            diff = to_time - from_time
+            difference = relativedelta(to_time, from_time)
+
+        resolved = ""
+        if difference is not None and self.style is not None:
+            style = self.style.resolve(client_context)
+
+            if style == "years":
+                resolved = str(difference.years)
+            elif style == "months":
+                resolved = str(difference.months)
+            elif style == "weeks":
+                resolved = str(difference.weeks)
+            elif style == "days":
+                resolved = str(diff.days)
+            elif style == "hours":
+                resolved = str(difference.hours)
+            elif style == "minutes":
+                resolved = str(difference.minutes)
+            elif style == "seconds":
+                resolved = str(difference.seconds)
+            elif style == "microseconds":
+                resolved = str(difference.microseconds)
+            elif style == "ymd":
+                resolved = "%d years, %d months, %d days" % \
+                           (difference.years, difference.months, difference.days)
+            elif style == "hms":
+                resolved = "%d hours, %d minutes, %d seconds" % \
+                           (difference.hours, difference.minutes, difference.seconds)
+            elif style == "ymdhms":
+                resolved = "%d years, %d months, %d days, %d hours, %d minutes, %d seconds" % \
+                           (difference.years, difference.months, difference.days,
+                            difference.hours, difference.minutes, difference.seconds)
+            else:
+                YLogger.error(client_context, "Unknown interval style [%s]", style)
+                resolved = ""
 
         YLogger.debug(client_context, "[INTERVAL] resolved to [%s]", resolved)
         return resolved
@@ -114,15 +125,19 @@ class TemplateIntervalNode(TemplateNode):
 
     def to_xml(self, client_context):
         xml = '<interval'
-        xml += ' format="%s"' % self._interval_format.to_xml(client_context)
-        xml += ' style="%s"' % self._style.to_xml(client_context)
+        if self.interval_format is not None:
+            xml += ' format="%s"' % self.interval_format.to_xml(client_context)
+        if self.style is not None:
+            xml += ' style="%s"' % self.style.to_xml(client_context)
         xml += '>'
-        xml += '<from>'
-        xml += self._interval_from.to_xml(client_context)
-        xml += '</from>'
-        xml += '<to>'
-        xml += self._interval_to.to_xml(client_context)
-        xml += '</to>'
+        if self.interval_from is not None:
+            xml += '<from>'
+            xml += self.interval_from.to_xml(client_context)
+            xml += '</from>'
+        if self.interval_to is not None:
+            xml += '<to>'
+            xml += self.interval_to.to_xml(client_context)
+            xml += '</to>'
         xml += '</interval>'
         return xml
 

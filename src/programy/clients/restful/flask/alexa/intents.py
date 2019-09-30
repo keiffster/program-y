@@ -210,7 +210,6 @@ if __name__ == '__main__':
         outputLog(None, "\nGenerated [%s]" % args.intents_json)
         outputLog(None, "Generated [%s]" % args.intents_maps)
 
-
-    except Exception as e:
-        outputLog(None, "Error generating Alexa intents", e)
-        parser.output_help()
+    except Exception as excep:
+        outputLog(None, "Error generating Alexa intents [%s]" % excep)
+        parser.print_help()

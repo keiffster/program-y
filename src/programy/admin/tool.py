@@ -64,13 +64,6 @@ class AdminTool:
                 shutil.rmtree(os.path.join(root, d))
 
     @staticmethod
-    def create_sub_folder(root, folder):
-        fullpath = root + os.sep + folder
-        if os.path.exists(fullpath) is False:
-            outputLog(None, "Creating sub folder: [%s]" % fullpath)
-            os.mkdir(fullpath)
-
-    @staticmethod
     def make_all_executable(path):
         for item in os.listdir(path):
             file_path = os.path.join(path, item)
@@ -82,30 +75,28 @@ class AdminTool:
         mode |= (mode & 0o444) >> 2  # copy R bits to X
         os.chmod(path, mode)
 
-    @staticmethod
-    def list_bots(display=outputLog):
-        display("Available bots are:\n")
+    def list_bots(self):
+        self.display("Available bots are:\n")
         for bot in bots:
-            display("\t%s" % bot)
+            self.display("\t%s" % bot)
         if os.name == 'posix':
-            display("\n\tTo download use 'python3 -m programy.admin.tool download <bot-name>'")
+            self.display("\n\tTo download use 'python3 -m programy.admin.tool download <bot-name>'")
         else:
-            display("\n\tTo download use 'python -m programy.admin.tool download <bot-name>'")
+            self.display("\n\tTo download use 'python -m programy.admin.tool download <bot-name>'")
 
-        display("\nAdditional components are:\n")
-        display("\ttextblob")
+        self.display("\nAdditional components are:\n")
+        self.display("\ttextblob")
         if os.name == 'posix':
-            display("\n\tTo install use 'python3 -m programy.admin.tool install <component>'")
+            self.display("\n\tTo install use 'python3 -m programy.admin.tool install <component>'")
         else:
-            display("\n\tTo install use 'python -m programy.admin.tool install <component>'")
-        display()
+            self.display("\n\tTo install use 'python -m programy.admin.tool install <component>'")
+        self.display("")
 
-    @staticmethod
-    def download_bot(bot_name, display=outputLog):
+    def download_bot(self, bot_name):
         url = bots[bot_name]
-        display("Downloading [%s] from [%s]" % (bot_name, url))
+        self.display("Downloading [%s] from [%s]" % (bot_name, url))
         filename = wget.download(url, bar=wget.bar_thermometer)
-        display("\nDownload complete")
+        self.display("\nDownload complete")
         return filename
 
     @staticmethod
@@ -120,8 +111,7 @@ class AdminTool:
     def zip_dir_name_from_filename(filename):
         return filename.split(".")[0]
 
-    @staticmethod
-    def install_bot(words, display=outputLog):
+    def install_bot(self, words):
 
         if len(words) < 2:
             raise Exception("Missing bot name from download command")
@@ -130,7 +120,7 @@ class AdminTool:
         if bot_name not in bots:
             raise Exception("Unknown bot [%s]" % bot_name)
 
-        filename = AdminTool.download_bot(bot_name, display)
+        filename = self.download_bot(bot_name)
 
         AdminTool.extract_bot(filename)
 
@@ -143,17 +133,16 @@ class AdminTool:
 
         shutil.rmtree(master_dir)
 
-        AdminTool.show_execute_help(bot_name, display)
+        self.show_execute_help(bot_name)
 
-    @staticmethod
-    def install_additional(words, display=outputLog):
+    def install_additional(self, words):
 
         if len(words) < 2:
             raise Exception("Missing additional element from install command")
         additional = words[1]
 
         if additional == 'textblob':
-            display("Installing additional components for %s" % additional)
+            self.display("Installing additional components for %s" % additional)
 
             nltk.download('punkt')
             nltk.download('stopwords')
@@ -162,47 +151,47 @@ class AdminTool:
         else:
             raise Exception("Missing additional component from install command ['textblob']")
 
-    @staticmethod
-    def show_execute_help(bot_name, display=outputLog):
-        display("\nTo run %s bot in console mode, use the following commands" % bot_name)
+    def show_execute_help(self, bot_name):
+        self.display("\nTo run %s bot in console mode, use the following commands" % bot_name)
         if os.name == 'posix':
-            display("\n\tcd scripts/xnix")
-            display("\t./%s.sh" % bot_name)
+            self.display("\n\tcd scripts/xnix")
+            self.display("\t./%s.sh" % bot_name)
         else:
-            display("\n\tcd scripts\\windows")
-            display("\t%s.cmd" % bot_name)
+            self.display("\n\tcd scripts\\windows")
+            self.display("\t%s.cmd" % bot_name)
 
-    @staticmethod
-    def show_help(words, display=outputLog):
-        del words
-        display("Available commands are:\n")
-        display("\thelp")
-        display("\tlist")
-        display("\tdownload <bot-name>")
-        display("\tinstall <component>")
-        display("")
+    def show_help(self):
+        self.display("Available commands are:\n")
+        self.display("\thelp")
+        self.display("\tlist")
+        self.display("\tdownload <bot-name>")
+        self.display("\tinstall <component>")
+        self.display("")
 
-    def run(self, words, display=outputLog):
+    def run(self, words):
         try:
             num_words = len(words)
             if num_words > 0:
                 primary = words[0]
                 if primary == 'list':
-                    AdminTool.list_bots(display)
+                    self.list_bots()
                 elif primary == 'download':
-                    AdminTool.install_bot(words, display)
+                    self.install_bot(words)
                 elif primary == 'install':
-                    AdminTool.install_additional(words, display)
+                    self.install_additional(words)
                 elif primary == 'help':
-                    AdminTool.show_help(words, display)
+                    self.show_help()
                 else:
                     raise Exception("Unknown primary command [%s]" % words[0])
             else:
-                AdminTool.show_help(words, display)
+                self.show_help()
 
-        except Exception as e:
-            display(str(e))
-            AdminTool.show_help(words, display)
+        except Exception as excep:
+            self.display(str(excep))
+            self.show_help()
+
+    def display(self, text):
+        outputLog(self, text)
 
 
 if __name__ == '__main__':

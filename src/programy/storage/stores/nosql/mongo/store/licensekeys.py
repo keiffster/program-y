@@ -75,7 +75,7 @@ class MongoLicenseKeysStore(MongoStore, LicenseStore):
                     # If key has = signs in it, then combine all elements past the first
                     key = "".join(splits[1:]).strip()
                     if verbose is True:
-                        outputLog(self, key_name, "=", key)
+                        outputLog(self, "%s = %s" % (key_name, key))
 
                     licensekey = LicenseKey(name=key_name, key=key)
                     self.add_document(licensekey)
