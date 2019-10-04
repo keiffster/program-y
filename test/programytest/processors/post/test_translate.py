@@ -37,4 +37,5 @@ class TranslatorPostProcessorTest(unittest.TestCase):
 
         context = MockClientContext(self.bot)
 
-        self.assertEqual("Bonjour", processor.process(context, "Hello"))
+        # Depends if running during the day or the evening !
+        self.assertIn(processor.process(context, "Hello"), ["Bonjour", "Salut"])

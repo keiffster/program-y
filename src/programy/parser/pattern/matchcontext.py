@@ -181,7 +181,7 @@ class MatchContext(object):
 
         match_context._max_search_depth = json_data["max_search_depth"]
         match_context._max_search_timeout = json_data["max_search_timeout"]
-        match_context._total_search_start = datetime.strptime(json_data["total_search_start"], "%d/%m/%Y, %H:%M:%S")
+        match_context._total_search_start = datetime.datetime.strptime(json_data["total_search_start"], "%d/%m/%Y, %H:%M:%S")
         match_context._sentence = json_data["sentence"]
         match_context._response = json_data["response"]
 

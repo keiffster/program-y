@@ -159,7 +159,9 @@ class ConversationTests(unittest.TestCase):
                 self.assertEquals(mc1.template_node, mc2.template_node)
                 self.assertEquals(mc1.max_search_depth, mc2.max_search_depth)
                 self.assertEquals(mc1.max_search_timeout, mc2.max_search_timeout)
-                self.assertEquals(mc1._total_search_start, mc2._total_search_start)
+                time1 = mc1._total_search_start.strftime("%d/%m/%Y, %H:%M:%S")
+                time2 = mc2._total_search_start.strftime("%d/%m/%Y, %H:%M:%S")
+                self.assertEquals(time1, time2)
 
                 self.assertNotEquals(0, len(mc1.matched_nodes))
                 self.assertNotEquals(0, len(mc2.matched_nodes))
