@@ -47,6 +47,22 @@ class KikConfigurationTests(unittest.TestCase):
         self.assertEqual(80, kik_config.port)
         self.assertEqual(False, kik_config.debug)
 
+    def test_init_no_data(self):
+        yaml = YamlConfigurationFile()
+        self.assertIsNotNone(yaml)
+        yaml.load_from_text("""
+        client:
+        """, ConsoleConfiguration(), ".")
+
+        kik_config = KikConfiguration()
+        kik_config.load_configuration(yaml, ".")
+
+        self.assertEqual("program-y", kik_config.bot_name)
+        self.assertEqual("https://localhost:5000", kik_config.webhook)
+        self.assertEqual("0.0.0.0", kik_config.host)
+        self.assertEqual(80, kik_config.port)
+        self.assertEqual(False, kik_config.debug)
+
     def test_to_yaml_with_defaults(self):
         config = KikConfiguration()
 

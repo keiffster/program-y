@@ -3,6 +3,7 @@ import unittest
 from programy.config.file.yaml_file import YamlConfigurationFile
 from programy.config.bot.spelling import BotSpellingConfiguration
 from programy.clients.events.console.config import ConsoleConfiguration
+from programy.utils.license.keys import LicenseKeys
 
 
 class BotSpellingConfigurationTests(unittest.TestCase):
@@ -23,6 +24,9 @@ class BotSpellingConfigurationTests(unittest.TestCase):
 
         spelling_config = BotSpellingConfiguration()
         spelling_config.load_config_section(yaml, bot_config, ".")
+
+        license_keys = LicenseKeys()
+        spelling_config.check_for_license_keys(license_keys)
 
         self.assertEqual("programy.spelling.norvig.NorvigSpellingChecker", spelling_config.classname)
         self.assertEqual("abcdefghijklmnopqrstuvwxyz", spelling_config.alphabet)

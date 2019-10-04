@@ -1,10 +1,8 @@
 import unittest
-import os
 import json
-
-from programy.utils.license.keys import LicenseKeys
 from programy.utils.newsapi.newsapi import NewsAPI
 from programytest.client import TestClient
+
 
 class MockResponse(object):
 
@@ -15,6 +13,7 @@ class MockResponse(object):
 
     def json(self):
         return self.data
+
 
 class MockNewsApiApi(object):
 
@@ -32,17 +31,18 @@ class MockNewsApiApi(object):
     def get_news(self, url):
         return self._repsonse
 
+
 class NewsAPITests(unittest.TestCase):
 
     def test_missing_license_keys(self):
         with self.assertRaises(Exception):
-            newsapi = NewsAPI(None)
+            _ = NewsAPI(None)
 
     def test_missing_keys(self):
         client = TestClient()
 
         with self.assertRaises(Exception):
-            newsapi = NewsAPI(client.license_keys)
+            _ = NewsAPI(client.license_keys)
 
     def test_format_url(self):
         self.assertEqual("https://newsapi.org/v1/articles?source=testservice&sortBy=top&apiKey=key", NewsAPI._format_url("testservice", "key"))

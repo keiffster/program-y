@@ -25,6 +25,8 @@ class RDFAdminExtension(Extension):
     def execute(self, client_context, data):
         YLogger.debug(client_context, "RDF Admin - [%s]", data)
 
+        #TODO Add better parsing protextion to the splits
+
         rdf = ""
         segments = data.split()
         if segments[0] == 'SUBJECTS':
@@ -54,5 +56,8 @@ class RDFAdminExtension(Extension):
                 for obj in anobject:
                     rdf += "<li>%s</li>" % obj
             rdf += "</ul>"
+
+        else:
+            YLogger.error(client_context, "Invalid RDF Admin command [%s]" % segments[0])
 
         return rdf

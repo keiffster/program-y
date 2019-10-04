@@ -58,6 +58,18 @@ class PatternPriorityWordNodeTests(ParserTestsBaseClass):
         self.assertEqual("PWORD [test2]", word2.to_string(verbose=False))
         self.assertEqual("PWORD [testid] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] word=[test2]", word2.to_string(verbose=True))
 
+    def test_not_equivalent_different_nodes(self):
+        word1 = PatternPriorityWordNode("word")
+        word2 = PatternWordNode("word")
+
+        self.assertFalse(word1.equivalent(word2))
+
+    def test_not_equivalent_same_type(self):
+        word1 = PatternPriorityWordNode("word")
+        word2 = PatternPriorityWordNode("word2")
+
+        self.assertFalse(word1.equivalent(word2))
+
     def test_equivalent_userid(self):
         word1 = PatternPriorityWordNode("word")
         word2 = PatternPriorityWordNode("word")

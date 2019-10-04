@@ -42,10 +42,8 @@ class TemplateMapNode(TemplateNode):
     def get_default_value(self, client_context):
         value = client_context.brain.properties.property("default-map")
         if value is None:
-            value = client_context.brain.properties.property("default-map")
-            if value is None:
-                YLogger.error(client_context, "No value for default-map defined, empty string returned")
-                value = ""
+            YLogger.error(client_context, "No value for default-map defined, empty string returned")
+            value = ""
         return value
 
     def resolve_to_string(self, client_context):

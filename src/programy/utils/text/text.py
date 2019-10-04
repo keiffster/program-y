@@ -29,8 +29,8 @@ class TextUtils:
     RE_STRIP_ALL_PUNCTUATION1 = re.compile(r'[:\'";,.?!\(\)\-"]')
     RE_STRIP_ALL_PUNCTUATION2 = re.compile(r'\s+')
     RE_STRIP_HTML = re.compile(r'<.*?>')
-    RE_PATTERN_OF_TAG_AND_NAMESPACE_FROM_TEXT = re.compile(r'^{.*}.*$')
-    RE_MATCH_OF_TAG_AND_NAMESPACE_FROM_TEXT = re.compile(r'^({.*})(.*)$')
+    RE_PATTERN_OF_TAG_AND_NAMESPACE_FROM_TEXT = re.compile(r'^{.+}.+$')
+    RE_MATCH_OF_TAG_AND_NAMESPACE_FROM_TEXT = re.compile(r'^({.+})(.+)$')
 
     HTML_ESCAPE_TABLE = {
         "&": "&amp;",
@@ -90,11 +90,9 @@ class TextUtils:
 
         # Otherwise, extract namespace and tag name
         groupings = TextUtils.RE_MATCH_OF_TAG_AND_NAMESPACE_FROM_TEXT.match(text)
-        if groupings is not None:
-            namespace = groupings.group(1).strip()
-            tag_name = groupings.group(2).strip()
-            return tag_name, namespace
-        return None, None
+        namespace = groupings.group(1).strip()
+        tag_name = groupings.group(2).strip()
+        return tag_name, namespace
 
     @staticmethod
     def tag_from_text(text):

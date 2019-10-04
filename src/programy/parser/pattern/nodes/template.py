@@ -31,15 +31,21 @@ class PatternTemplateNode(PatternNode):
     def is_template(self):
         return True
 
-    def can_add(self, new_node):
+    def can_add(self, new_node: PatternNode):
+        if new_node is None:
+            raise ParserException("Empty node, cannot add")
+
         if new_node.is_root():
-            raise ParserException("Cannot add root node to template node")
+            raise ParserException("Cannot add 'root' node to template node")
+
         elif new_node.is_topic():
-            raise ParserException("Cannot add topic node to template node")
+            raise ParserException("Cannot add 'topic' node to template node")
+
         elif new_node.is_that():
-            raise ParserException("Cannot add that node to template node")
+            raise ParserException("Cannot add 'that' node to template node")
+
         elif new_node.is_template():
-            raise ParserException("Cannot add template node to template node")
+            raise ParserException("Cannot add 'template' node to template node")
 
     def to_xml(self, client_context, include_user=False):
         string = ""

@@ -76,3 +76,26 @@ class SocketConfigurationTests(unittest.TestCase):
         self.assertEqual(data['bot'], 'bot')
         self.assertEqual(data['bot_selector'], "programy.clients.client.DefaultBotSelector")
         self.assertEqual(data['renderer'], "programy.clients.render.text.TextRenderer")
+
+    def test_to_yaml_no_data(self):
+        yaml = YamlConfigurationFile()
+        self.assertIsNotNone(yaml)
+        yaml.load_from_text("""
+        other:
+        """, ConsoleConfiguration(), ".")
+
+        config = SocketConfiguration()
+        config.load_configuration(yaml, ".")
+
+        data = {}
+        config.to_yaml(data, False)
+
+        self.assertEqual("0.0.0.0", data['host'])
+        self.assertEqual(80, data['port'])
+        self.assertEqual(5, data['queue'])
+        self.assertEqual(1024, data['max_buffer'])
+        self.assertEqual(False, data['debug'])
+
+        self.assertEqual(data['bot'], 'bot')
+        self.assertEqual(data['bot_selector'], "programy.clients.client.DefaultBotSelector")
+        self.assertEqual(data['renderer'], "programy.clients.render.text.TextRenderer")

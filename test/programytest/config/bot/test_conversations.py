@@ -1,8 +1,8 @@
 import unittest
-
 from programy.config.bot.conversations import BotConversationsConfiguration
 from programy.clients.events.console.config import ConsoleConfiguration
 from programy.config.file.yaml_file import YamlConfigurationFile
+from programy.utils.license.keys import LicenseKeys
 
 
 class BotConversationsConfigurationTests(unittest.TestCase):
@@ -24,6 +24,9 @@ class BotConversationsConfigurationTests(unittest.TestCase):
 
         convo_config = BotConversationsConfiguration()
         convo_config.load_config_section(yaml, bot_config, ".")
+
+        license_keys = LicenseKeys()
+        convo_config.check_for_license_keys(license_keys)
 
         self.assertEqual(convo_config.section_name, "conversations")
 

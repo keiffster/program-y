@@ -4,6 +4,7 @@ from programy.config.file.yaml_file import YamlConfigurationFile
 from programy.clients.polling.xmpp.config import XmppConfiguration
 from programy.clients.events.console.config import ConsoleConfiguration
 
+
 class XmppConfigurationTests(unittest.TestCase):
 
     def test_init(self):

@@ -33,8 +33,8 @@ class ClientConfigurationData(BaseContainerConfigurationData):
         self._description = 'ProgramY AIML2.0 Client'
         self._bot_configs = []
         self._bot_configs.append(BotConfiguration("bot"))
-        self._bot_selector = None
-        self._renderer = None
+        self._renderer = "programy.clients.render.text.TextRenderer"
+        self._bot_selector = "programy.clients.client.DefaultBotSelector"
         self._scheduler = SchedulerConfiguration()
         self._storage = StorageConfiguration()
         self._email = EmailConfiguration()
@@ -132,6 +132,8 @@ class ClientConfigurationData(BaseContainerConfigurationData):
         else:
             YLogger.warning(self, "No bot name defined for client [%s], defaulting to 'bot'.", self.section_name)
             self._bot_configs[0].load_configuration(configuration_file, bot_root, subs=subs)
+            self._renderer = "programy.clients.render.text.TextRenderer"
+            self._bot_selector = "programy.clients.client.DefaultBotSelector"
 
     def to_yaml(self, data, defaults=True):
 

@@ -15,6 +15,8 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 import re
+from typing import List
+from programy.context import ClientContext
 from programy.utils.logging.ylogger import YLogger
 from programy.processors.processing import PostProcessor
 
@@ -23,7 +25,7 @@ class FormatPunctuationProcessor(PostProcessor):
     def __init__(self):
         PostProcessor.__init__(self)
 
-    def space_split(self, string):
+    def space_split(self, string: str) -> List[str]:
         last = 0
         splits = []
         in_quote = None
@@ -44,7 +46,7 @@ class FormatPunctuationProcessor(PostProcessor):
 
         return splits
 
-    def process(self, context, word_string):
+    def process(self, context: ClientContext, word_string: str) -> str:
         YLogger.debug(context, "Formatting punctuation...")
 
         word_list = self.space_split(word_string)

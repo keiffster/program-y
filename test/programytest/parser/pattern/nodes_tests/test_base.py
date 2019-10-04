@@ -17,7 +17,6 @@ from programy.parser.pattern.nodes.regex import PatternRegexNode
 from programy.parser.pattern.nodes.template import PatternTemplateNode
 
 
-
 class PatternBotNodeTests(ParserTestsBaseClass):
 
     def test_init(self):

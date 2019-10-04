@@ -1,9 +1,9 @@
 import unittest
-import os
-
 from programy.config.file.yaml_file import YamlConfigurationFile
 from programy.config.bot.joiner import BotSentenceJoinerConfiguration
 from programy.clients.events.console.config import ConsoleConfiguration
+from programy.utils.license.keys import LicenseKeys
+
 
 class BotSentenceJoinerConfigurationTests(unittest.TestCase):
 
@@ -20,6 +20,9 @@ class BotSentenceJoinerConfigurationTests(unittest.TestCase):
 
         joiner_config = BotSentenceJoinerConfiguration()
         joiner_config.load_config_section(yaml, bot_config, ".")
+
+        license_keys = LicenseKeys()
+        joiner_config.check_for_license_keys(license_keys)
 
         self.assertEqual("programy.dialog.joiner.SentenceJoiner", joiner_config.classname)
         self.assertEqual('.?!', joiner_config.join_chars)

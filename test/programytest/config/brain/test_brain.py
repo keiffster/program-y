@@ -152,3 +152,48 @@ brain:
 
         self.assertIsNotNone(brain_configuration.dynamics.dynamic_maps)
         self.assertIsNotNone(brain_configuration.dynamics.dynamic_vars)
+
+    def test_with_no_data(self):
+        yaml = YamlConfigurationFile()
+        self.assertIsNotNone(yaml)
+        yaml.load_from_text("""
+brain:
+       """, ConsoleConfiguration(), ".")
+
+        brain_configuration = BrainConfiguration()
+        brain_configuration.load_configuration(yaml, ".")
+
+        self.assertFalse(brain_configuration.overrides.allow_system_aiml)
+        self.assertFalse(brain_configuration.overrides.allow_learn_aiml)
+        self.assertFalse(brain_configuration.overrides.allow_learnf_aiml)
+
+        self.assertIsNotNone(brain_configuration.defaults)
+        self.assertEqual(brain_configuration.defaults.default_get, "unknown")
+        self.assertEqual(brain_configuration.defaults.default_property, "unknown")
+        self.assertEqual(brain_configuration.defaults.default_map, "unknown")
+
+        self.assertIsNotNone(brain_configuration.binaries)
+        self.assertFalse(brain_configuration.binaries.save_binary)
+        self.assertFalse(brain_configuration.binaries.load_binary)
+        self.assertFalse(brain_configuration.binaries.load_aiml_on_binary_fail)
+
+        self.assertIsNotNone(brain_configuration.braintree)
+        self.assertFalse(brain_configuration.braintree.create)
+
+        self.assertIsNotNone(brain_configuration.services)
+
+        self.assertFalse(brain_configuration.services.exists('OPENCHAT'))
+
+        self.assertFalse(brain_configuration.services.exists('REST'))
+
+        self.assertIsNotNone(brain_configuration.security)
+        self.assertIsNone(brain_configuration.security.authorisation)
+        self.assertIsNone(brain_configuration.security.authentication)
+
+        self.assertIsNotNone(brain_configuration.oob)
+
+        self.assertIsNotNone(brain_configuration.dynamics)
+        self.assertIsNotNone(brain_configuration.dynamics.dynamic_sets)
+
+        self.assertIsNotNone(brain_configuration.dynamics.dynamic_maps)
+        self.assertIsNotNone(brain_configuration.dynamics.dynamic_vars)

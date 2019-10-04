@@ -180,3 +180,4 @@ class TemplateMapNodeTests(ParserTestsBaseClass):
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEqual("", result)
+

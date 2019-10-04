@@ -99,7 +99,7 @@ class Sentence:
 
     @staticmethod
     def _split_into_words(tokenizer, text):
-        if text is None:
+        if text is None or tokenizer is None:
             return []
         return tokenizer.texts_to_words(text)
 

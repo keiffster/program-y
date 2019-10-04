@@ -71,3 +71,17 @@ class RDFAdminExtensionTests(unittest.TestCase):
         result = extension.execute(client_context, "OBJECT MONKEY LEGS")
         self.assertIsNotNone(result)
         self.assertEqual("<ul><li>2</li></ul>", result)
+
+    def test_invalid_command(self):
+
+        client = RDFAdminExtensionClient()
+        client_context = client.create_client_context("testid")
+
+        client_context.brain.rdf.add_entity("MONKEY", "LEGS", "2", "ANIMAL")
+
+        extension = RDFAdminExtension()
+        self.assertIsNotNone(extension)
+
+        result = extension.execute(client_context, "OTHER MONKEY LEGS")
+        self.assertIsNotNone(result)
+        self.assertEqual("", result)

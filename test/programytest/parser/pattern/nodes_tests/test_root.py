@@ -100,7 +100,7 @@ class PatternRootNodeTests(ParserTestsBaseClass):
 
         with self.assertRaises(ParserException) as raised:
             node1.can_add(node2)
-        self.assertEqual(str(raised.exception), "Cannot add template node to template node")
+        self.assertEqual(str(raised.exception), "Cannot add 'template' node to template node")
 
     def test_to_string(self):
         node1 = PatternRootNode()

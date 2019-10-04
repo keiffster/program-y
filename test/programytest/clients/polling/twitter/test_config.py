@@ -46,3 +46,23 @@ class TwitterConfigurationTests(unittest.TestCase):
         self.assertEqual(data['bot'], 'bot')
         self.assertEqual(data['bot_selector'], "programy.clients.client.DefaultBotSelector")
         self.assertEqual(data['renderer'], "programy.clients.render.text.TextRenderer")
+
+    def test_to_yaml_no_data(self):
+        yaml = YamlConfigurationFile()
+        self.assertIsNotNone(yaml)
+        yaml.load_from_text("""
+            other:
+        """, ConsoleConfiguration(), ".")
+
+        twitter_config = TwitterConfiguration()
+        twitter_config.load_configuration(yaml, ".")
+
+        twitter_config = TwitterConfiguration()
+        twitter_config.load_configuration(yaml, ".")
+
+        self.assertEqual(0, twitter_config.polling_interval)
+        self.assertEqual(-1, twitter_config.rate_limit_sleep)
+        self.assertFalse(twitter_config.use_status)
+        self.assertFalse(twitter_config.use_direct_message)
+        self.assertFalse(twitter_config.auto_follow)
+        self.assertEqual("Thanks for following me.", twitter_config.welcome_message)

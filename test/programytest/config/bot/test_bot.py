@@ -3,6 +3,7 @@ import unittest
 from programy.config.bot.bot import BotConfiguration
 from programy.clients.events.console.config import ConsoleConfiguration
 from programy.config.file.yaml_file import YamlConfigurationFile
+from programy.utils.license.keys import LicenseKeys
 
 
 class BotConfigurationTests(unittest.TestCase):
@@ -68,6 +69,9 @@ class BotConfigurationTests(unittest.TestCase):
         bot_config = BotConfiguration()
         bot_config.load_configuration(yaml, ".")
 
+        license_keys = LicenseKeys()
+        bot_config.check_for_license_keys(license_keys)
+
         self.assertEqual("programy.bot.DefaultBrainSelector", bot_config.brain_selector)
 
         self.assertEqual("Hi, how can I help you today?", bot_config.initial_question)
@@ -114,6 +118,33 @@ class BotConfigurationTests(unittest.TestCase):
         self.assertEqual("programy.nlp.sentiment.textblob_sentiment.TextBlobSentimentAnalyser", bot_config.sentiment_analyser.classname)
         self.assertEqual("programy.nlp.sentiment.scores.SentimentScores", bot_config.sentiment_analyser.scores)
 
+    def tets_getters_and_setters(self):
+        bot_config = BotConfiguration()
+
+        bot_config.default_response = "Default response"
+        self.assertEquals(bot_config.default_response, "Default response")
+
+        bot_config.default_response_srai = "DEFAULT_RESPONSE"
+        self.assertEquals(bot_config.default_response_srai, "DEFAULT_RESPONSE")
+
+        bot_config.empty_string = "Empty String"
+        self.assertEquals(bot_config.empty_string, "Empty String")
+
+        bot_config.exit_response = "Exit String"
+        self.assertEquals(bot_config.exit_response, "Exit String")
+
+        bot_config.exit_response_srai = "EXITSRAI"
+        self.assertEquals(bot_config.exit_response_srai, "EXITSRAI")
+
+        bot_config.initial_question = "EXITSRAI"
+        self.assertEquals(bot_config.initial_question, "EXITSRAI")
+
+        bot_config.initial_question_srai = "EXITSRAI"
+        self.assertEquals(bot_config.initial_question_srai, "EXITSRAI")
+
+        bot_config.override_properties = True
+        self.assertEquals(bot_config.override_properties, True)
+
     def test_without_data(self):
         yaml = YamlConfigurationFile()
         self.assertIsNotNone(yaml)
@@ -157,6 +188,40 @@ class BotConfigurationTests(unittest.TestCase):
     def test_with_no_data(self):
         yaml = YamlConfigurationFile()
         self.assertIsNotNone(yaml)
-        with self.assertRaises(Exception):
-            yaml.load_from_text("""
-            """, ConsoleConfiguration(), ".")
+
+        yaml.load_from_text("""
+        other:
+        """, ConsoleConfiguration(), ".")
+
+        bot_config = BotConfiguration()
+        bot_config.load_configuration(yaml, ".")
+
+        self.assertIsNone(bot_config.brain_selector)
+        self.assertEqual("Hello", bot_config.initial_question)
+        self.assertEqual("", bot_config.initial_question_srai)
+        self.assertEqual("", bot_config.default_response)
+        self.assertEqual("", bot_config.default_response_srai)
+        self.assertEqual("Bye!", bot_config.exit_response)
+        self.assertEqual("", bot_config.exit_response_srai)
+        self.assertEqual("", bot_config.empty_string)
+        self.assertEqual(bot_config.max_question_recursion, 100)
+        self.assertEqual(bot_config.max_question_timeout, -1)
+        self.assertEqual(bot_config.max_search_depth, 100)
+        self.assertEqual(bot_config.max_search_timeout, -1)
+        self.assertTrue(bot_config.override_properties)
+
+        self.assertIsNotNone(bot_config.spelling)
+
+        self.assertIsNotNone(bot_config.splitter)
+        self.assertEqual("programy.dialog.splitter.regex.RegexSentenceSplitter", bot_config.splitter.classname)
+        self.assertEqual('[:;,.?!]', bot_config.splitter.split_chars)
+
+        self.assertIsNotNone(bot_config.joiner)
+        self.assertEqual("programy.dialog.joiner.joiner.SentenceJoiner", bot_config.joiner.classname)
+        self.assertEqual('.?!', bot_config.joiner.join_chars)
+
+        self.assertIsNotNone(bot_config.conversations)
+
+        self.assertIsNotNone(bot_config.from_translator)
+        self.assertIsNotNone(bot_config.to_translator)
+        self.assertIsNotNone(bot_config.sentiment_analyser)

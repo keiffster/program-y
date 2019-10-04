@@ -80,8 +80,19 @@ class TextUtilsTests(unittest.TestCase):
         self.assertEqual("text", tag)
         self.assertIsNone(name)
 
-        tag, name = TextUtils.tag_and_namespace_from_text("{http://alicebot.org/2001/AIML}aiml ")
+        tag, name = TextUtils.tag_and_namespace_from_text("{}")
+        self.assertIsNotNone(tag)
+        self.assertEqual("{}", tag)
+        self.assertIsNone(name)
+
+        tag, name = TextUtils.tag_and_namespace_from_text("{http://alicebot.org/2001/AIML}")
+        self.assertIsNotNone(tag)
+        self.assertEqual("{http://alicebot.org/2001/AIML}", tag)
+        self.assertIsNone(name)
+
+        tag, name = TextUtils.tag_and_namespace_from_text("{http://alicebot.org/2001/AIML}aiml")
         self.assertIsNotNone(tag)
         self.assertEqual("aiml", tag)
         self.assertIsNotNone(name)
         self.assertEqual("{http://alicebot.org/2001/AIML}", name)
+

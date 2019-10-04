@@ -27,6 +27,16 @@ class DiscordConfigurationTests(unittest.TestCase):
         discord_config = DiscordConfiguration()
         discord_config.load_configuration(yaml, ".")
 
+    def test_init_no_data(self):
+        yaml = YamlConfigurationFile()
+        self.assertIsNotNone(yaml)
+        yaml.load_from_text("""
+        other:
+        """, ConsoleConfiguration(), ".")
+
+        discord_config = DiscordConfiguration()
+        discord_config.load_configuration(yaml, ".")
+
     def test_to_yaml_with_defaults(self):
         config = DiscordConfiguration()
 

@@ -1,12 +1,8 @@
 import unittest
 import datetime
-
 from programy.utils.text.dateformat import DateFormatter
-
 from programytest.custom import CustomAssertions
 
-#############################################################################
-#
 
 class TextUtilsTests(unittest.TestCase, CustomAssertions):
 
@@ -145,7 +141,7 @@ class TextUtilsTests(unittest.TestCase, CustomAssertions):
     def test_hour_24_hour_clock(self):
         df = DateFormatter()
         self.assertIsNotNone(df)
-        result = df.hour_12_hour_clock()
+        result = df.hour_24_hour_clock()
         self.assertIsNotNone(result)
         self.assertRegex(result, "\d{1}|\d{2}")
 
@@ -187,7 +183,7 @@ class TextUtilsTests(unittest.TestCase, CustomAssertions):
     def test_decimal_week_number_sunday_as_first(self):
         df = DateFormatter()
         self.assertIsNotNone(df)
-        result = df.decimal_week_number_monday_as_first()
+        result = df.decimal_week_number_sunday_as_first()
         self.assertIsNotNone(result)
         self.assertRegex(result, "\d{1}|\d{2}")
 

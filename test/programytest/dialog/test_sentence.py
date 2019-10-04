@@ -19,6 +19,15 @@ class SentenceTests(unittest.TestCase):
         client = TestClient()
         self._client_context = client.create_client_context("test1")
 
+    def test_split_into_words(self):
+        self.assertEqual([], Sentence._split_into_words(self._client_context.brain.tokenizer, []))
+        self.assertEqual([], Sentence._split_into_words(self._client_context.brain.tokenizer, None))
+        self.assertEqual([], Sentence._split_into_words(None, "word1"))
+        self.assertEqual([], Sentence._split_into_words(None, None))
+        self.assertEqual(["word1"], Sentence._split_into_words(self._client_context.brain.tokenizer, "word1"))
+        self.assertEqual(["word1", "word2", "word3"], Sentence._split_into_words(self._client_context.brain.tokenizer,
+                                                                                 "word1 word2 word3"))
+
     def test_sentence_creation_empty(self):
         sentence = Sentence(self._client_context, "")
         self.assertIsNotNone(sentence)
