@@ -1,11 +1,11 @@
-import unittest
 import os
 import os.path
 import shutil
+import unittest
 
-from programy.storage.stores.file.store.filestore import FileStore
-from programy.storage.stores.file.engine import FileStorageEngine
 from programy.storage.stores.file.config import FileStorageConfiguration
+from programy.storage.stores.file.engine import FileStorageEngine
+from programy.storage.stores.file.store.filestore import FileStore
 
 
 class MockFileStore(FileStore):

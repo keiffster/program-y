@@ -1,12 +1,10 @@
 import unittest
 
-from programy.dialog.sentence import Sentence
-from programy.dialog.question import Question
-from programy.dialog.conversation import Conversation
-from programy.dialog.tokenizer.tokenizer import Tokenizer
 from programy.bot import Bot
 from programy.config.bot.bot import BotConfiguration
-
+from programy.dialog.conversation import Conversation
+from programy.dialog.question import Question
+from programy.dialog.sentence import Sentence
 from programytest.client import TestClient
 
 

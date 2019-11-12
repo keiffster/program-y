@@ -47,10 +47,10 @@ class ProcessorCollection:
             processor_store.load(self)
 
     def _get_storage_name(self):
-        raise NotImplementedError("Override this in derived class, return StorageFactory.XXX name")
+        raise NotImplementedError("Override this in derived class, return StorageFactory.XXX name")  # pragma: no cover
 
     def _get_store(self, storage_engine):
-        raise NotImplementedError("Override this in derived class, return Store from StorageEngine")
+        raise NotImplementedError("Override this in derived class, return Store from StorageEngine")  # pragma: no cover
 
 
 class PreProcessorCollection(ProcessorCollection):
@@ -98,7 +98,7 @@ class Processor(ABC):
 
     @abstractmethod
     def process(self, context, word_string):
-        pass
+        raise NotImplementedError()     # pragma: no cover
 
 
 ##################################################################
@@ -110,7 +110,7 @@ class PreProcessor(Processor):
 
     @abstractmethod
     def process(self, context, word_string):
-        pass
+        raise NotImplementedError()     # pragma: no cover
 
 
 ##################################################################
@@ -121,7 +121,7 @@ class PostProcessor(Processor):
 
     @abstractmethod
     def process(self, context, word_string):
-        pass
+        raise NotImplementedError()     # pragma: no cover
 
 
 ##################################################################
@@ -132,4 +132,4 @@ class PostQuestionProcessor(Processor):
 
     @abstractmethod
     def process(self, context, word_string):
-        pass
+        raise NotImplementedError()     # pragma: no cover

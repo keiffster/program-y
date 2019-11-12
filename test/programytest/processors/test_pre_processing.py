@@ -1,12 +1,12 @@
 import unittest
-from programy.processors.pre.removepunctuation import RemovePunctuationPreProcessor
-from programy.processors.pre.toupper import ToUpperPreProcessor
-from programy.processors.pre.normalize import NormalizePreProcessor
-from programy.processors.pre.demojize import DemojizePreProcessor
+
 from programy.bot import Bot
 from programy.config.bot.bot import BotConfiguration
 from programy.context import ClientContext
-
+from programy.processors.pre.demojize import DemojizePreProcessor
+from programy.processors.pre.normalize import NormalizePreProcessor
+from programy.processors.pre.removepunctuation import RemovePunctuationPreProcessor
+from programy.processors.pre.toupper import ToUpperPreProcessor
 from programytest.client import TestClient
 
 

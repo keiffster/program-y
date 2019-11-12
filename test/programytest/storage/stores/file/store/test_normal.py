@@ -1,13 +1,13 @@
-from programytest.storage.asserts.store.assert_normals import NormalsStoreAsserts
 import os
 import os.path
 import re
 
-from programy.storage.stores.file.store.lookups import FileNormalStore
-from programy.storage.stores.file.engine import FileStorageEngine
-from programy.storage.stores.file.config import FileStorageConfiguration
 from programy.mappings.normal import NormalCollection
+from programy.storage.stores.file.config import FileStorageConfiguration
 from programy.storage.stores.file.config import FileStoreConfiguration
+from programy.storage.stores.file.engine import FileStorageEngine
+from programy.storage.stores.file.store.lookups import FileNormalStore
+from programytest.storage.asserts.store.assert_normals import NormalsStoreAsserts
 
 
 class FileNormalStoreTests(NormalsStoreAsserts):

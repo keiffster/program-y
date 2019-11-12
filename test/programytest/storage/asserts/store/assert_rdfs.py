@@ -1,6 +1,6 @@
-import unittest
 import os
 import os.path
+import unittest
 
 from programy.rdf.collection import RDFCollection
 from programy.storage.entities.store import Store

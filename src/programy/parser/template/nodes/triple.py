@@ -16,6 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 from programy.parser.template.nodes.base import TemplateNode
 from programy.utils.text.text import TextUtils
+from programy.parser.exceptions import ParserException
 
 
 class TemplateTripleNode(TemplateNode):
@@ -36,12 +37,15 @@ class TemplateTripleNode(TemplateNode):
         if self._subj is not None:
             subj = self._subj.resolve(client_context)
             xml += "<subj>" + subj + "</subj>"
+
         if self._pred is not None:
             pred = self._pred.resolve(client_context)
             xml += "<pred>" + pred + "</pred>"
+
         if self._obj is not None:
             obj = self._obj.resolve(client_context)
             xml += "<obj>" + obj + "</obj>"
+
         return xml
 
     def parse_expression(self, graph, expression):
@@ -63,12 +67,15 @@ class TemplateTripleNode(TemplateNode):
 
             if tag_name == 'subj':
                 self._subj = self.parse_children_as_word_node(graph, child)
+
             elif tag_name == 'pred':
                 self._pred = self.parse_children_as_word_node(graph, child)
+
             elif tag_name == 'obj':
                 self._obj = self.parse_children_as_word_node(graph, child)
+
             else:
-                graph.parse_tag_expression(child, self)
+                raise ParserException("Invalid child item in triple")
 
             tail_text = self.get_tail_from_element(child)
             self.parse_text(graph, tail_text)

@@ -51,33 +51,23 @@ class TwitterConfiguration(ClientConfigurationData):
         return self._auto_follow
 
     @property
-    def storage(self):
-        return self._storage
-
-    @property
-    def storage_location(self):
-        return self._storage_location
-
-    @property
     def welcome_message(self):
         return self._welcome_message
 
-    def check_for_license_keys(self, license_keys):
-        ClientConfigurationData.check_for_license_keys(self, license_keys)
-
     def load_configuration_section(self, configuration_file, section, bot_root, subs: Substitutions = None):
-        if section is not None:
-            self._polling_interval = configuration_file.get_int_option(section, "polling_interval", subs=subs)
-            self._rate_limit_sleep = configuration_file.get_int_option(section, "rate_limit_sleep", missing_value=-1,
-                                                                       subs=subs)
-            self._use_status = configuration_file.get_bool_option(section, "use_status", subs=subs)
-            self._use_direct_message = configuration_file.get_bool_option(section, "use_direct_message", subs=subs)
-            if self._use_direct_message is True:
-                self._auto_follow = configuration_file.get_bool_option(section, "auto_follow", subs=subs)
+        assert section is not None
 
-            self._welcome_message = configuration_file.get_option(section, "welcome_message", subs=subs)
-            super(TwitterConfiguration, self).load_configuration_section(configuration_file, section, bot_root,
-                                                                         subs=subs)
+        self._polling_interval = configuration_file.get_int_option(section, "polling_interval", subs=subs)
+        self._rate_limit_sleep = configuration_file.get_int_option(section, "rate_limit_sleep", missing_value=-1,
+                                                                   subs=subs)
+        self._use_status = configuration_file.get_bool_option(section, "use_status", subs=subs)
+        self._use_direct_message = configuration_file.get_bool_option(section, "use_direct_message", subs=subs)
+        if self._use_direct_message is True:
+            self._auto_follow = configuration_file.get_bool_option(section, "auto_follow", subs=subs)
+
+        self._welcome_message = configuration_file.get_option(section, "welcome_message", subs=subs)
+        super(TwitterConfiguration, self).load_configuration_section(configuration_file, section, bot_root,
+                                                                     subs=subs)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:

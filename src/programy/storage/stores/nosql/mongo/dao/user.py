@@ -25,7 +25,7 @@ class User:
         self.client = client
 
     def __repr__(self):
-        return "<User(id='%d', userid='%s', clientid='%s')>" % (DAOUtils.valid_id(self.id), self.userid, self.client)
+        return "<User(id='%s', userid='%s', clientid='%s')>" % (DAOUtils.valid_id(self.id), self.userid, self.client)
 
     def to_document(self):
         document = {"userid": self.userid,
@@ -37,10 +37,7 @@ class User:
     @staticmethod
     def from_document(data):
         user = User(None, None)
-        if '_id' in data:
-            user.id = data['_id']
-        if 'userid' in data:
-            user.userid = data['userid']
-        if 'client' in data:
-            user.client = data['client']
+        user.id = DAOUtils.get_value_from_data(data, '_id')
+        user.userid = DAOUtils.get_value_from_data(data, 'userid')
+        user.client = DAOUtils.get_value_from_data(data, 'client')
         return user

@@ -30,6 +30,7 @@ class MongoCategoryStore(CategoryReadWriteStore, MongoStore):
 
     def __init__(self, storage_engine):
         MongoStore.__init__(self, storage_engine)
+        CategoryReadWriteStore.__init__(self)
 
     def collection_name(self):
         return MongoCategoryStore.CATEGORIES

@@ -1,7 +1,7 @@
 import unittest
 
-from programy.dynamic.sets.set import DynamicSet
 from programy.config.brain.brain import BrainDynamicsConfiguration
+from programy.dynamic.sets.set import DynamicSet
 
 
 class MockDynamicSet(DynamicSet):

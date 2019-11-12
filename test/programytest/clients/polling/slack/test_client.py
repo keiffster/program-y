@@ -4,7 +4,6 @@ from slackclient import SlackClient
 
 from programy.clients.polling.slack.client import SlackBotClient
 from programy.clients.polling.slack.config import SlackConfiguration
-
 from programytest.clients.arguments import MockArgumentParser
 
 

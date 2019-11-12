@@ -1,9 +1,9 @@
 import unittest
-
-from programy.oob.defaults.default import DefaultOutOfBandProcessor
 import xml.etree.ElementTree as ET
 
+from programy.oob.defaults.default import DefaultOutOfBandProcessor
 from programytest.client import TestClient
+
 
 class DefaultOutOfBandProcessorTests(unittest.TestCase):
 

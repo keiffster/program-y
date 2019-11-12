@@ -33,13 +33,19 @@ class ClientConfigurationData(BaseContainerConfigurationData):
         self._description = 'ProgramY AIML2.0 Client'
         self._bot_configs = []
         self._bot_configs.append(BotConfiguration("bot"))
-        self._renderer = "programy.clients.render.text.TextRenderer"
-        self._bot_selector = "programy.clients.client.DefaultBotSelector"
+        self._renderer = self._get_renderer_class()
+        self._bot_selector = self._get_bot_selector_class()
         self._scheduler = SchedulerConfiguration()
         self._storage = StorageConfiguration()
         self._email = EmailConfiguration()
         self._triggers = TriggerConfiguration()
         self._responder = PingResponderConfig()
+
+    def _get_renderer_class(self):
+        return "programy.clients.render.text.TextRenderer"
+
+    def _get_bot_selector_class(self):
+        return "programy.clients.botfactory.DefaultBotSelector"
 
     @property
     def description(self):
@@ -77,9 +83,6 @@ class ClientConfigurationData(BaseContainerConfigurationData):
     def responder(self):
         return self._responder
 
-    def check_for_license_keys(self, license_keys):
-        BaseContainerConfigurationData.check_for_license_keys(self, license_keys)
-
     def load_configuration(self, configuration_file, bot_root, subs: Substitutions = None):
         client = configuration_file.get_section(self.section_name)
         if client is None:
@@ -94,46 +97,40 @@ class ClientConfigurationData(BaseContainerConfigurationData):
     def load_configuration_section(self, configuration_file, section, bot_root, subs: Substitutions = None):
 
         assert configuration_file is not None
+        assert section is not None
 
-        if section is not None:
-            self._description = configuration_file.get_option(section, "description",
-                                                              missing_value='ProgramY AIML2.0 Client', subs=subs)
+        self._description = configuration_file.get_option(section, "description",
+                                                          missing_value='ProgramY AIML2.0 Client', subs=subs)
 
-            bot_names = configuration_file.get_multi_option(section, "bot", missing_value="bot", subs=subs)
-            first = True
-            for name in bot_names:
-                if first is True:
-                    config = self._bot_configs[0]
-                    first = False
+        bot_names = configuration_file.get_multi_option(section, "bot", missing_value="bot", subs=subs)
+        first = True
+        for name in bot_names:
+            if first is True:
+                config = self._bot_configs[0]
+                first = False
 
-                else:
-                    config = BotConfiguration(name)
-                    self._bot_configs.append(config)
+            else:
+                config = BotConfiguration(name)
+                self._bot_configs.append(config)
 
-                config.load_configuration(configuration_file, bot_root, subs=subs)
+            config.load_configuration(configuration_file, bot_root, subs=subs)
 
-            self._bot_selector = configuration_file.\
-                get_option(section, "bot_selector",
-                           missing_value="programy.clients.client.DefaultBotSelector",
-                           subs=subs)
+        self._bot_selector = configuration_file.\
+            get_option(section, "bot_selector",
+                       missing_value="programy.clients.botfactory.DefaultBotSelector",
+                       subs=subs)
 
-            self._scheduler.load_config_section(configuration_file, section, bot_root, subs=subs)
+        self._scheduler.load_config_section(configuration_file, section, bot_root, subs=subs)
 
-            self._storage.load_config_section(configuration_file, section, bot_root, subs=subs)
+        self._storage.load_config_section(configuration_file, section, bot_root, subs=subs)
 
-            self._renderer = configuration_file.get_option(section, "renderer", subs=subs)
+        self._renderer = configuration_file.get_option(section, "renderer", subs=subs)
 
-            self._email.load_config_section(configuration_file, section, bot_root, subs=subs)
+        self._email.load_config_section(configuration_file, section, bot_root, subs=subs)
 
-            self._triggers.load_config_section(configuration_file, section, bot_root, subs=subs)
+        self._triggers.load_config_section(configuration_file, section, bot_root, subs=subs)
 
-            self._responder.load_config_section(configuration_file, section, bot_root, subs=subs)
-
-        else:
-            YLogger.warning(self, "No bot name defined for client [%s], defaulting to 'bot'.", self.section_name)
-            self._bot_configs[0].load_configuration(configuration_file, bot_root, subs=subs)
-            self._renderer = "programy.clients.render.text.TextRenderer"
-            self._bot_selector = "programy.clients.client.DefaultBotSelector"
+        self._responder.load_config_section(configuration_file, section, bot_root, subs=subs)
 
     def to_yaml(self, data, defaults=True):
 
@@ -142,7 +139,7 @@ class ClientConfigurationData(BaseContainerConfigurationData):
         if defaults is True:
             data['description'] = 'ProgramY AIML2.0 Client'
             data['bot'] = 'bot'
-            data['bot_selector'] = "programy.clients.client.DefaultBotSelector"
+            data['bot_selector'] = "programy.clients.botfactory.DefaultBotSelector"
 
             data[self._scheduler.id] = {}
             self._scheduler.to_yaml(data[self._scheduler.id], defaults)

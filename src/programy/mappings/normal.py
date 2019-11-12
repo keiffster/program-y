@@ -35,12 +35,11 @@ class NormalCollection(DoubleStringPatternSplitCollection):
     def load(self, storage_factory):
         if storage_factory.entity_storage_engine_available(StorageFactory.NORMAL) is True:
             lookups_engine = storage_factory.entity_storage_engine(StorageFactory.NORMAL)
-            if lookups_engine:
-                try:
-                    lookups_store = lookups_engine.normal_store()
-                    lookups_store.load_all(self)
-                except Exception as e:
-                    YLogger.exception(self, "Failed to load lookups from storage", e)
+            try:
+                lookups_store = lookups_engine.normal_store()
+                lookups_store.load_all(self)
+            except Exception as e:
+                YLogger.exception(self, "Failed to load lookups from storage", e)
 
     def reload(self, storage_factory):
         self.load(storage_factory)

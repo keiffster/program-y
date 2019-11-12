@@ -33,16 +33,14 @@ class LineConfiguration(RestConfiguration):
     def unknown_command_srai(self):
         return self._unknown_command_srai
 
-    def check_for_license_keys(self, license_keys):
-        RestConfiguration.check_for_license_keys(self, license_keys)
-
     def load_configuration_section(self, configuration_file, section, bot_root, subs: Substitutions = None):
-        if section is not None:
-            self._unknown_command = configuration_file.get_option(section, "unknown_command",
+        assert section is not None
+
+        self._unknown_command = configuration_file.get_option(section, "unknown_command",
                                                                   missing_value="Unknown command", subs=subs)
-            self._unknown_command_srai = configuration_file.get_option(section, "unknown_command_srai",
-                                                                       missing_value=None, subs=subs)
-            super(LineConfiguration, self).load_configuration_section(configuration_file, section, bot_root, subs=subs)
+        self._unknown_command_srai = configuration_file.get_option(section, "unknown_command_srai",
+                                                                   missing_value=None, subs=subs)
+        super(LineConfiguration, self).load_configuration_section(configuration_file, section, bot_root, subs=subs)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:

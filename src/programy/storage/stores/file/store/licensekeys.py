@@ -23,6 +23,7 @@ class FileLicenseStore(FileStore, LicenseStore):
 
     def __init__(self, storage_engine):
         FileStore.__init__(self, storage_engine)
+        LicenseStore.__init__(self)
 
     def _get_storage_path(self):
         return self.storage_engine.configuration.license_storage.file

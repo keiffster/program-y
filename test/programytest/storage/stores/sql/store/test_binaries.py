@@ -1,9 +1,9 @@
 import unittest
 
-from programy.storage.stores.sql.engine import SQLStorageEngine
-from programy.storage.stores.sql.config import SQLStorageConfiguration
-
 import programytest.storage.engines as Engines
+from programy.storage.engine import StorageEngineException
+from programy.storage.stores.sql.config import SQLStorageConfiguration
+from programy.storage.stores.sql.engine import SQLStorageEngine
 
 
 class SQLBinariesStoreTests(unittest.TestCase):
@@ -14,6 +14,6 @@ class SQLBinariesStoreTests(unittest.TestCase):
         config = SQLStorageConfiguration()
         engine = SQLStorageEngine(config)
         engine.initialise()
-        with self.assertRaises(NotImplementedError):
+        with self.assertRaises(StorageEngineException):
             engine.binaries_store()
 

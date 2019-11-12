@@ -16,6 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 from programy.parser.template.nodes.base import TemplateNode
 from programy.utils.text.text import TextUtils
+from programy.parser.exceptions import ParserException
 
 
 class TemplateLinkNode(TemplateNode):
@@ -60,7 +61,10 @@ class TemplateLinkNode(TemplateNode):
             elif tag_name == 'url':
                 self._url = self.parse_children_as_word_node(graph, child)
             else:
-                graph.parse_tag_expression(child, self)
+                raise ParserException("Invalid child nodes in link")
 
             tail_text = self.get_tail_from_element(child)
             self.parse_text(graph, tail_text)
+
+        if self._text is None:
+            raise ParserException("Missing text from link")

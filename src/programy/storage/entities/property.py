@@ -19,14 +19,17 @@ from programy.storage.entities.store import Store
 
 class PropertyStore(Store):
 
+    def __init__(self):
+        Store.__init__(self)
+
     def empty_properties(self):
-        raise NotImplementedError("empty_properties missing from User Store")
+        raise NotImplementedError("empty_properties missing from User Store")  # pragma: no cover
 
     def add_property(self, name, value):
-        raise NotImplementedError("add_property missing from User Store")
+        raise NotImplementedError("add_property missing from User Store")  # pragma: no cover
 
     def add_properties(self, properties):
-        raise NotImplementedError("add_properties missing from User Store")
+        raise NotImplementedError("add_properties missing from User Store")  # pragma: no cover
 
     def get_properties(self):
-        raise NotImplementedError("get_properties missing from Property Store")
+        raise NotImplementedError("get_properties missing from Property Store")  # pragma: no cover

@@ -38,17 +38,15 @@ class ViberConfiguration(RestConfiguration):
     def webhook(self):
         return self._webhook
 
-    def check_for_license_keys(self, license_keys):
-        RestConfiguration.check_for_license_keys(self, license_keys)
-
     def load_configuration_section(self, configuration_file, section, bot_root, subs: Substitutions = None):
-        if section is not None:
-            self._name = configuration_file.get_option(section, "name", missing_value="Program-y", subs=subs)
-            self._avatar = configuration_file.get_option(section, "avatar", missing_value="http://viber.com/avatar.jpg",
-                                                         subs=subs)
-            self._webhook = configuration_file.get_option(section, "webhook",
-                                                          missing_value="https://localhost:443/incoming", subs=subs)
-            super(ViberConfiguration, self).load_configuration_section(configuration_file, section, bot_root, subs=subs)
+        assert section is not None
+
+        self._name = configuration_file.get_option(section, "name", missing_value="Program-y", subs=subs)
+        self._avatar = configuration_file.get_option(section, "avatar", missing_value="http://viber.com/avatar.jpg",
+                                                 subs=subs)
+        self._webhook = configuration_file.get_option(section, "webhook",
+                                                  missing_value="https://localhost:443/incoming", subs=subs)
+        super(ViberConfiguration, self).load_configuration_section(configuration_file, section, bot_root, subs=subs)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:

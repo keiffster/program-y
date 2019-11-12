@@ -1,7 +1,6 @@
 import unittest
 
 from programy.nlp.wordnet.extension import WordNetExtension
-
 from programytest.client import TestClient
 
 

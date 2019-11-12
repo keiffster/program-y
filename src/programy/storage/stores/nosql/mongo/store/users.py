@@ -27,6 +27,7 @@ class MongoUserStore(MongoStore, UserStore):
 
     def __init__(self, storage_engine):
         MongoStore.__init__(self, storage_engine)
+        UserStore.__init__(self)
 
     def collection_name(self):
         return MongoUserStore.USERS

@@ -35,6 +35,9 @@ from programy.utils.console.console import outputLog
 
 class ConfigurationWriter:
 
+    def __init__(self):
+        pass    # pragma: no cover
+
     def add_to_config(self, config_data, configuration, defaults=True):
         config_data[configuration.id] = {}
         configuration.to_yaml(config_data[configuration.id], defaults)
@@ -122,16 +125,21 @@ class ConfigurationWriter:
         return parser
 
     @staticmethod
-    def run():
-        parser = ConfigurationWriter.create_arguments()
+    def run(args=None):
         try:
             app = ConfigurationWriter()
-            app.execute(parser.parse_args())
+
+            if args is None:
+                parser = ConfigurationWriter.create_arguments()
+                app.execute(parser.parse_args())
+
+            else:
+                app.execute(args)
 
         except Exception as excep:
             outputLog(None, "Error: [%s]" % str(excep))
             parser.print_help()
 
 
-if __name__ == '__main__':
-    ConfigurationWriter.run()
+if __name__ == '__main__':      # pragma: no cover
+    ConfigurationWriter.run()   # pragma: no cover

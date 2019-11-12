@@ -78,13 +78,18 @@ class DailyForecastDayDataPoint(DataPoint):
         self._weather_type_code = None  # W
         self._weather_type_text = None
 
+
+    @property
+    def type(self):
+        return self._type
+
     #
     # Matches an AIML Pattern of
     # <pattern></pattern>
     #
     def to_program_y_text(self):
-        return "WEATHER TYPE %s WINDDIR %s WINDSPEED %s WINDGUST %s TEMP %s FEELS %s HUMID %s " \
-               "RAINPROB %s UVINDEX %s UVGUIDE %s VIS %s WEATHER %s" % (
+        text = "WEATHER TYPE %s WINDDIR %s WINDSPEED %s WINDGUST %s TEMP %s FEELS %s HUMID %s" \
+               "RAINPROB %s" % (
                    self._type,
                    self._wind_direction,
                    self._wind_speed,
@@ -92,12 +97,21 @@ class DailyForecastDayDataPoint(DataPoint):
                    self._temp_max,
                    self._temperature_feels_like_max,
                    self._screen_relative_humidity_noon,
-                   self._precipitation_probability,
-                   self._uv_index_max,
-                   self._uv_guidance,
-                   self._visibility_text,
-                   self._weather_type_text
-               )
+                   self._precipitation_probability)
+
+        if self._uv_index_max is not None:
+            text += " UVINDEX %s" % self._uv_index_max
+
+        if self._uv_guidance is not None:
+            text += " UVGUIDE %s" % self._uv_guidance
+
+        if self._visibility_text is not None:
+            text += " VIS %s" % self._visibility_text
+
+        if self._weather_type_text is not None:
+            text += " WEATHER %s" % self._weather_type_text
+
+        return text
 
     def parse_json(self, json_data, data_type, time_period):
         self._type = self.extract_attribute(json_data, '$', data_type, time_period)
@@ -135,24 +149,36 @@ class DailyForecastNightDataPoint(DataPoint):
         self._weather_type_code = None  # W
         self._weather_type_text = None
 
+    @property
+    def type(self):
+        return self._type
+
     #
     # Matches an AIML Pattern of
     # <pattern></pattern>
     #
     def to_program_y_text(self):
-        return "WEATHER TYPE %s WINDDIR %s WINDGUST %s WINDSPEED %s TEMP %s FEELS %s HUMID %s " \
-               "RAINPROB %s VISTEXT %s WEATHER %s" % (
-                   self._weather_type_text,
+        text = "WEATHER"
+
+        if self._weather_type_text is not None:
+            text += " TYPE %s" % self._weather_type_text
+
+        text += " WINDDIR %s WINDGUST %s WINDSPEED %s TEMP %s FEELS %s HUMID %s RAINPROB %s" % (
                    self._wind_direction,
                    self._wind_gust_midnight,
                    self._wind_speed,
                    self._temp_min,
                    self._temperature_feels_like_min,
                    self._screen_relative_humidity_midnight,
-                   self._precipitation_probability,
-                   self._visibility_text,
-                   self._weather_type_text
-               )
+                   self._precipitation_probability)
+
+        if self._visibility_text is not None:
+            text += " VISTEXT %s" % self._visibility_text
+
+        if self._weather_type_text is not None:
+            text += " WEATHER %s" % self._weather_type_text
+
+        return text
 
     def parse_json(self, json_data, data_type, time_period):
         self._type = self.extract_attribute(json_data, '$', data_type, time_period)
@@ -229,20 +255,31 @@ class ThreeHourlyForecastDataPoint(DataPoint):
     # <pattern></pattern>
     #
     def to_program_y_text(self):
-        return "WEATHER %s TEMP %s FEELS %s WINDDIR %s WINDDIRFULL %s WINDSPEED %s VIS %s " \
-               "UVINDEX %s UVGUIDE %s RAINPROB %s HUMIDITY %s" % (
-                   self._weather_type_text,
+        text = "WEATHER"
+
+        if self._weather_type_text is not None:
+            text += " %s" % self._weather_type_text
+
+        text += " TEMP %s FEELS %s WINDSPEED %s UVINDEX %s UVGUIDE %s RAINPROB %s HUMIDITY %s" % (
                    self._temperature,
                    self._temperature_feels_like,
-                   self._wind_direction,
-                   self._wind_direction_full,
                    self._wind_speed,
-                   self._visibility_text,
                    self._uv_index_max,
                    self._uv_guidance,
                    self._precipitation_probability,
                    self._screen_relative_humidity
                )
+
+        if self._wind_direction is not None:
+            text += " WINDDIR %s" % self._wind_direction
+
+        if self._wind_direction_full is not None:
+            text += " WINDDIRFULL %s" % self._wind_direction_full
+
+        if self._visibility_text is not None:
+            text += " VIS %s" % self._visibility_text
+
+        return text
 
 
 class ObservationDataPoint(DataPoint):
@@ -269,21 +306,33 @@ class ObservationDataPoint(DataPoint):
 
     #
     # Matches an AIML Pattern of
-    # <pattern>TEMP * VISIBILITY C * T * WIND D * DF * S * WEATHER * PRESSURE * T * TF * HUMIDITY *</pattern>
+    # <pattern>WEATHER TEMP * * HUMIDITY * * VISIBILITY V * VF * PRESSURE P * PT * PTF * WIND D * DF * S *</pattern>
     #
     def to_program_y_text(self):
         temp = self._temperature.split(".")
         humid = self._screen_relative_humidity.split(".")
 
-        return "WEATHER %s TEMP %s %s VISIBILITY V %s VF %s WIND D %s DF %s S %s PRESSURE P %s " \
-               "PT %s PTF %s HUMIDITY %s %s" % (
-                   self._weather_type_text,
-                   temp[0], temp[1],
-                   self._visibility, self._visibility_text,
-                   self._wind_direction, self._wind_direction_full, self._wind_speed,
-                   self._pressure, self._pressure_tendancy, self._pressure_tendancy_full,
-                   humid[0], humid[1]
-               )
+        text = "WEATHER"
+        if self._weather_type_text is not None:
+            text += " %s" % self._weather_type_text
+
+        text += " TEMP %s %s" % (temp[0], temp[1])
+
+        text += " HUMIDITY %s %s" % (humid[0], humid[1])
+
+        if self._visibility is not None:
+            text += " VISIBILITY V %s VF %s" % (self._visibility, self._visibility_text)
+
+        text += " PRESSURE P %s" % self._pressure
+        if self._pressure_tendancy is not None:
+            text += " PT %s PTF %s" % (self._pressure_tendancy, self._pressure_tendancy_full)
+
+        if self._wind_direction is not None:
+            text += " WIND D %s DF %s" % (self._wind_direction, self._wind_direction_full)
+
+        text += " S %s" % self._wind_speed
+
+        return text
 
     def parse_json(self, json_data, data_type, time_period):
         self._time = self.extract_attribute(json_data, '$', data_type, time_period)
@@ -309,15 +358,15 @@ class ObservationDataPoint(DataPoint):
         distance_in_kms = int(code) // 1000
         if distance_in_kms < 1:
             return "Very poor"
-        if distance_in_kms >= 1 and distance_in_kms < 4:
+        elif distance_in_kms > 0 and distance_in_kms < 4:
             return "Poor"
-        if distance_in_kms >= 4 and distance_in_kms < 10:
+        elif distance_in_kms > 3 and distance_in_kms < 10:
             return "Moderate"
-        if distance_in_kms >= 10 and distance_in_kms < 20:
+        elif distance_in_kms > 9 and distance_in_kms < 20:
             return "Good"
-        if distance_in_kms >= 20 and distance_in_kms < 40:
+        elif distance_in_kms > 19 and distance_in_kms < 40:
             return "Very Good"
-        if distance_in_kms >= 40:
+        else: # > 39:
             return "Excellent"
 
     def parse_pressure_tendancy(self, tendancy):
@@ -382,8 +431,7 @@ class Report:
             self._time_periods.append(period)
 
         if self._data_type == MetOfficeWeatherReport.OBSERVATION or self._time_period == metoffer.THREE_HOURLY:
-            if self._time_periods:
-                self._time_periods.sort(key=lambda period: int(period.time))
+            self._time_periods.sort(key=lambda period: int(period.time))
 
         if 'type' in json_data:
             self._type = json_data['type']
@@ -529,7 +577,9 @@ class DV:
             try:
                 self._date = datetime.datetime.strptime(json_data['dataDate'], "%Y-%m-%dT%H:%M:%SZ")
             except:
-                raise ValueError("dataDate missing from DV data")
+                raise ValueError("Invalid date format for dataDate in DV data")
+        else:
+            raise ValueError("dataDate missing from DV data")
 
         if 'type' in json_data:
             self._type = json_data['type']
@@ -575,7 +625,7 @@ class MetOfficeWeatherReport:
         self.cache_time_periods()
 
     def cache_time_periods(self):
-        pass
+        pass                        # pragam: no cover
 
 
 class MetOfficeObservation(MetOfficeWeatherReport):
@@ -598,16 +648,13 @@ class MetOfficeObservation(MetOfficeWeatherReport):
         return items[-1][1]
 
     def get_last_n_observations(self, n):
-        return self._time_periods[-n]
+        return list(self._time_periods.items())[-n:]
 
 
 class MetOfficeForecast(MetOfficeWeatherReport):
 
     def __init__(self, time_period):
         MetOfficeWeatherReport.__init__(self, MetOfficeWeatherReport.FORECAST, time_period)
-
-    def get_forecasts(self):
-        return self._time_periods
 
     def get_forecasts(self):
         return self._time_periods
@@ -630,11 +677,16 @@ class MetOffice5DayForecast(MetOfficeForecast):
             nighttime = report.report_date + datetime.timedelta(hours=18)
             self._time_periods[nighttime] = report.time_periods[1]
 
+    def _calc_date_n_days_ahead(self, days):
+        return datetime.datetime.now() + datetime.timedelta(days=days)
+
     def get_forecast_for_n_days_ahead(self, days):
-        search_date = datetime.datetime.now() + datetime.timedelta(days=days)
+        search_date = self._calc_date_n_days_ahead(days)
+
         for day_forecast in self._time_periods.keys():
             if day_forecast > search_date:
                 return self._time_periods[day_forecast].to_program_y_text()
+
         return None
 
 
@@ -650,11 +702,16 @@ class MetOffice24HourForecast(MetOfficeForecast):
                 period_datetime = report.report_date + datetime.timedelta(minutes=int(time_period.time))
                 self._time_periods[period_datetime] = time_period
 
+    def _calc_date_n_hours_ahead(self, hours):
+        return datetime.datetime.now() + datetime.timedelta(hours=hours)
+
     def get_forecast_for_n_hours_ahead(self, hours):
-        search_date = datetime.datetime.now() + datetime.timedelta(hours=hours)
+        search_date = self._calc_date_n_hours_ahead(hours)
+
         for hour_forecast in self._time_periods.keys():
             if hour_forecast > search_date:
                 return self._time_periods[hour_forecast].to_program_y_text()
+
         return None
 
 
@@ -673,10 +730,10 @@ class MetOffice:
         self._met_office_api = metoffer.MetOffer(api_key)
 
     def get_forecast_data(self, lat, lon, forecast_type):
-        return self._met_office_api.nearest_loc_forecast(lat, lon, forecast_type)
+        return self._met_office_api.nearest_loc_forecast(lat, lon, forecast_type)       # pragma: no cover
 
     def get_observation_data(self, lat, lon):
-        return self._met_office_api.nearest_loc_obs(lat, lon)
+        return self._met_office_api.nearest_loc_obs(lat, lon)                           # pragma: no cover
 
     def nearest_location_forecast(self, lat, lon, forecast_type):
         if forecast_type == metoffer.THREE_HOURLY:
@@ -686,7 +743,7 @@ class MetOffice:
             forecast = MetOffice5DayForecast()
 
         else:
-            raise Exception("Unsupported forecast_type: [%s]" % forecast_type)
+            raise ValueError("Unsupported forecast_type: [%s]" % forecast_type)
 
         json_data = self.get_forecast_data(lat, lon, forecast_type)
         forecast.parse_json(json_data)

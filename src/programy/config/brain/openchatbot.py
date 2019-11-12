@@ -45,9 +45,6 @@ class BrainOpenChatBotConfiguration(BaseSectionConfigurationData):
     def api_key(self):
         return self._api_key
 
-    def check_for_license_keys(self, license_keys):
-        BaseSectionConfigurationData.check_for_license_keys(self, license_keys)
-
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         openchatbot = configuration_file.get_section(self.section_name, configuration)
         if openchatbot is not None:
@@ -60,7 +57,7 @@ class BrainOpenChatBotConfiguration(BaseSectionConfigurationData):
             YLogger.warning(self, "'openchatbot' section missing from brain config, using to defaults")
 
     def to_yaml(self, data, defaults=True):
-        if defaults is True:
+        if defaults is False:
             data['url'] = self._url
             data['method'] = self._method
             data['authorization'] = self._authorization

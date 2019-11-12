@@ -22,7 +22,13 @@ class MatchTests(unittest.TestCase):
     def setUp(self):
         client = MatcherTestClient()
         self._client_context = client.create_client_context("testid")
-        
+
+    def test_string_to_type(self):
+        self.assertEquals(0, Match.string_to_type("Word"))
+        self.assertEquals(2, Match.string_to_type("Topic"))
+        self.assertEquals(3, Match.string_to_type("That"))
+        self.assertEquals(-1, Match.string_to_type("Other"))
+
     def test_match_no_word(self):
         topic = PatternOneOrMoreWildCardNode("*")
         match = Match(Match.TOPIC, topic, None)

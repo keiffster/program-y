@@ -26,6 +26,7 @@ class FileTwitterStore(FileStore, TwitterStore):
 
     def __init__(self, storage_engine):
         FileStore.__init__(self, storage_engine)
+        TwitterStore.__init__(self)
 
     def get_storage(self):
         return self.storage_engine.configuration.triggers_storage

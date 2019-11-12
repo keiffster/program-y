@@ -14,7 +14,6 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import logging
 import datetime
 import re
 from programy.utils.parsing.linenumxml import LineNumberingParser
@@ -29,6 +28,7 @@ from programy.dialog.sentence import Sentence
 from programy.parser.pattern.matchcontext import MatchContext
 from programy.storage.factory import StorageFactory
 from programy.utils.console.console import outputLog
+from programy.utils.text.text import TextUtils
 
 
 class AIMLLoader(FileFinder):
@@ -37,17 +37,18 @@ class AIMLLoader(FileFinder):
         FileFinder.__init__(self)
         self._aiml_parser = aiml_parser
 
+    @property
+    def parser(self):
+        return self._aiml_parser
+
     def load_file_contents(self, fileid, filename, userid="*"):
         del fileid
-        try:
-            return self._aiml_parser.parse_from_file(filename, userid=userid)
-        except Exception as excep:
-            YLogger.exception(self, "Failed to load contents of file from [%s]", excep, filename)
+        return self._aiml_parser.parse_from_file(filename, userid=userid)
 
 
 class AIMLParser:
-    RE_PATTERN_OF_TAG_AND_NAMESPACE_FROM_TEXT = re.compile("^{.*}.*$")
-    RE_MATCH_OF_TAG_AND_NAMESPACE_FROM_TEXT = re.compile("^({.*})(.*)$")
+    RE_PATTERN_OF_TAG_AND_NAMESPACE_FROM_TEXT = re.compile(r"^\{.*\}.*$")
+    RE_MATCH_OF_TAG_AND_NAMESPACE_FROM_TEXT = re.compile(r"^(\{.*\})(.*)$")
 
     def __init__(self, brain):
         self._brain = brain
@@ -95,46 +96,6 @@ class AIMLParser:
     def template_parser(self):
         return self._template_parser
 
-    def load_files_from_directory(self, configuration):
-
-        start = datetime.datetime.now()
-        total_aimls_loaded = 0
-
-        for file in configuration.files.aiml_files.files:
-            aimls_loaded = self._aiml_loader.load_dir_contents(file,
-                                                               configuration.files.aiml_files.directories,
-                                                               configuration.files.aiml_files.extension,
-                                                               filename_as_userid=False)
-            total_aimls_loaded = len(aimls_loaded)
-
-        stop = datetime.datetime.now()
-        diff = stop - start
-
-        YLogger.info(self, "Total processing time %.6f secs", diff.total_seconds())
-        YLogger.info(self, "Loaded a total of %d aiml files with %d categories", total_aimls_loaded,
-                     self.num_categories)
-        if diff.total_seconds() > 0:
-            YLogger.info(self, "Thats approx %f aiml files per sec", total_aimls_loaded // diff.total_seconds())
-
-    def load_learnf_files_from_directory(self, configuration):
-
-        if configuration.defaults.learnf_path is not None:
-            aimls_loaded = self._aiml_loader.load_dir_contents(configuration.defaults.learnf_path,
-                                                               False,
-                                                               configuration.files.aiml_files.extension,
-                                                               filename_as_userid=True)
-            total_aimls_loaded = len(aimls_loaded)
-
-            YLogger.info(self, "Loaded a total of %d learnf aiml files", total_aimls_loaded)
-
-    def load_single_file(self, configuration):
-        start = datetime.datetime.now()
-        self._aiml_loader.load_single_file_contents(configuration.files.aiml_files.file)
-        stop = datetime.datetime.now()
-        diff = stop - start
-        YLogger.info(self, "Total processing time %.6f secs", diff.total_seconds())
-        YLogger.info(self, "Loaded a single aiml file with %d categories", self.num_categories)
-
     def empty(self):
         self._pattern_parser.empty()
 
@@ -153,28 +114,12 @@ class AIMLParser:
         self.display_debug_info()
 
     @staticmethod
-    def tag_and_namespace_from_text(text):
-        # If there is a namespace, then it looks something like
-        # {http://alicebot.org/2001/AIML}aiml
-        if AIMLParser.RE_PATTERN_OF_TAG_AND_NAMESPACE_FROM_TEXT.match(text) is None:
-            # If that pattern does not exist, assume that the text is the tag name
-            return text, None
-
-        # Otherwise, extract namespace and tag name
-        groupings = AIMLParser.RE_MATCH_OF_TAG_AND_NAMESPACE_FROM_TEXT.match(text)
-        if groupings is not None:
-            namespace = groupings.group(1).strip()
-            tag_name = groupings.group(2).strip()
-            return tag_name, namespace
-        return None, None
-
-    @staticmethod
     def check_aiml_tag(aiml, filename=None):
         # Null check just to be sure
         if aiml is None:
             raise ParserException("Null root tag", filename=filename)
 
-        tag_name, namespace = AIMLParser.tag_and_namespace_from_text(aiml.tag)
+        tag_name, namespace = TextUtils.tag_and_namespace_from_text(aiml.tag)
 
         # Then if check is just <aiml>, thats OK
         if tag_name != 'aiml':
@@ -214,21 +159,6 @@ class AIMLParser:
 
         self.parse_aiml(aiml, namespace)
 
-    #########################################################################################
-    #
-    #   <?xml version = "1.0" encoding = "UTF-8"?>
-    #   <aiml>
-    #       <category>
-    #           :
-    #       </category>
-    #       <topic>
-    #           <category>
-    #           :
-    #           </category>
-    #       </topic>
-    #   </aiml>
-    #
-
     def create_debug_storage(self):
         if self.brain.configuration.debugfiles.save_errors is True:
             self._errors = []
@@ -257,10 +187,9 @@ class AIMLParser:
 
     def handle_aiml_duplicate(self, dupe_excep, filename, expression):
         if self._duplicates is not None:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                dupe_excep.filename = filename
-                msg = dupe_excep.format_message()
-                YLogger.error(self, msg)
+            dupe_excep.filename = filename
+            msg = dupe_excep.format_message()
+            YLogger.error(self, msg)
 
             startline = None
             endline = None
@@ -275,10 +204,9 @@ class AIMLParser:
 
     def handle_aiml_error(self, parser_excep, filename, expression):
         if self._errors is not None:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                parser_excep.filename = filename
-                msg = parser_excep.format_message()
-                YLogger.error(self, msg)
+            parser_excep.filename = filename
+            msg = parser_excep.format_message()
+            YLogger.error(self, msg)
 
             startline = None
             endline = None
@@ -299,7 +227,7 @@ class AIMLParser:
         categories_found = False
         num_category = 0
         for expression in aiml_xml:
-            tag_name, namespace = self.tag_and_namespace_from_text(expression.tag)
+            tag_name, namespace = TextUtils.tag_and_namespace_from_text(expression.tag)
             if tag_name == 'topic':
                 try:
                     num_topic_categories = self.parse_topic(expression, namespace)
@@ -332,11 +260,6 @@ class AIMLParser:
 
         return num_category
 
-    #########################################################################################
-    #
-    # AIML_VERSION ::== 0.9 | 1.0 | 1.1 | 2.0
-    #
-
     def parse_version(self, aiml):
         if 'version' in aiml.attrib:
             version = aiml.attrib['version']
@@ -346,22 +269,6 @@ class AIMLParser:
             YLogger.warning(self, "No version info, defaulting to 2.0")
             version = "2.0"
         return version
-
-    #########################################################################################
-    #
-    # TOPIC_EXPRESSION:: == <topic name = "PATTERN_EXPRESSION" > (CATEGORY_EXPRESSION) + < / topic >
-    #
-    # PATTERN_EXPRESSION:: == WORD | PRIORITY_WORD | WILDCARD | SET_STATEMENT | PATTERN_SIDE_BOT_PROPERTY_EXPRESSION
-    # PATTERN_EXPRESSION:: == PATTERN_EXPRESSION PATTERN_EXPRESSION
-    #
-    # This means both topic and that can also be a set of words, stars, hash, sets and bots
-    #
-    # CATEGORY_EXPRESSION:: == <category>
-    #                               <pattern> PATTERN_EXPRESSION </pattern>
-    #                              (<that> PATTERN_EXPRESSION </that>)
-    #                              (<topic> PATTERN_EXPRESSION </topic>)
-    #                              < template > TEMPLATE_EXPRESSION < / template >
-    #                          </category>
 
     def parse_topic(self, topic_element, namespace):
 
@@ -378,7 +285,7 @@ class AIMLParser:
         category_found = False
         num_category = 0
         for child in topic_element:
-            tag_name, _ = self.tag_and_namespace_from_text(child.tag)
+            tag_name, _ = TextUtils.tag_and_namespace_from_text(child.tag)
             if tag_name == 'category':
                 self.parse_category(child, namespace, topic_pattern)
                 category_found = True

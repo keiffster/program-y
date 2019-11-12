@@ -53,8 +53,10 @@ class MongoStorageConfiguration(BaseConfigurationData):
     def drop_all_first(self, drop_all):
         self._drop_all_first = drop_all
 
-    def check_for_license_keys(self, license_keys):
-        BaseConfigurationData.check_for_license_keys(self, license_keys)
+    def create_mongostorage_config(self):
+        return {'url': self._url,
+                'database': self._database,
+                'drop_all_first': self._drop_all_first}
 
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         del bot_root
@@ -66,11 +68,6 @@ class MongoStorageConfiguration(BaseConfigurationData):
             self._drop_all_first = configuration_file.get_option(storage, "drop_all_first")
         else:
             YLogger.error(None, "'config' section missing from storage config")
-
-    def create_mongostorage_config(self):
-        return {'url': self._url,
-                'databse': self._database,
-                'drop_all_first': self._drop_all_first}
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:

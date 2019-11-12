@@ -3,8 +3,8 @@ import xml.etree.ElementTree as ET
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.bot import TemplateBotNode
 from programy.parser.template.nodes.word import TemplateWordNode
-
 from programytest.parser.base import ParserTestsBaseClass
+
 
 class MockTemplateBotNode(TemplateBotNode):
 
@@ -51,6 +51,18 @@ class TemplateBotNodeTests(ParserTestsBaseClass):
         result = node.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEqual("unknown", result)
+
+    def test_node_no_default_get(self):
+        self._client_context.brain.configuration.defaults._default_get = None
+
+        root = TemplateNode()
+        node = TemplateBotNode()
+        node.name = TemplateWordNode("location")
+        root.append(node)
+
+        result = node.resolve(self._client_context)
+        self.assertIsNotNone(result)
+        self.assertEquals("unknown", result)
 
     def test_to_xml(self):
         root = TemplateNode()

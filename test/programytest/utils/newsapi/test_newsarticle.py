@@ -1,7 +1,8 @@
-import unittest
 import json
+import unittest
 
 from programy.utils.newsapi.newsapi import NewsArticle
+
 
 class NewsArticleTests(unittest.TestCase):
 

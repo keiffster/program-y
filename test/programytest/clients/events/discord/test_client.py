@@ -1,9 +1,8 @@
 import unittest
 
-from programy.clients.events.discord.client import DiscordClient
 from programy.clients.events.discord.client import DiscordBotClient
+from programy.clients.events.discord.client import DiscordClient
 from programy.clients.events.discord.config import DiscordConfiguration
-
 from programytest.clients.arguments import MockArgumentParser
 
 

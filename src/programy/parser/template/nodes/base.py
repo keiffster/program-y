@@ -14,9 +14,9 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import xml.etree.ElementTree as ET
+from programy.utils.parsing.linenumxml import LineNumberingParser
+import xml.etree.ElementTree as ET  # pylint: disable=wrong-import-order
 from programy.utils.logging.ylogger import YLogger
-from programy.utils.console.console import outputLog
 
 
 ######################################################################################################################
@@ -42,7 +42,7 @@ class TemplateNode:
 
     def output_child(self, node, tabs, eol, output_func):
         for child in node.children:
-            if output_func == outputLog:    #pylint: disable=comparison-with-callable
+            if output_func == print:    #pylint: disable=comparison-with-callable
                 output_func("{0}{1}{2}".format(tabs, child.to_string(), eol))
             else:
                 output_func(self, "{0}{1}{2}".format(tabs, child.to_string(), eol))
@@ -135,8 +135,8 @@ class TemplateNode:
             found_sub = True
 
         if head_result is False and found_sub is False:
-            if hasattr(pattern, '_end_line_number'):
-                YLogger.warning(self, "No context in template tag at [line(%d), column(%d)]",
+            if hasattr(pattern, '_end_line_number'):  # pragma: no cover
+                YLogger.warning(self, "No context in template tag at [line(%d), column(%d)]",  # pragma: no cover
                                 pattern._end_line_number,  # pylint: disable=protected-access
                                 pattern._end_column_number)  # pylint: disable=protected-access
             else:
@@ -180,4 +180,4 @@ class TemplateNode:
         return node
 
     def parse_expression(self, graph, expression):
-        raise NotImplementedError("Never call this directly, call the subclass instead!")
+        raise NotImplementedError("Never call this directly, call the subclass instead!")  # pragma: no cover

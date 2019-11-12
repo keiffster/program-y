@@ -1,7 +1,7 @@
 import unittest
 
-from programy.dynamic.maps.map import DynamicMap
 from programy.config.brain.brain import BrainDynamicsConfiguration
+from programy.dynamic.maps.map import DynamicMap
 
 
 class MockDynamicMap(DynamicMap):

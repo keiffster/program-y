@@ -20,6 +20,9 @@ from programy.mappings.base import DoubleStringPatternSplitCollection
 
 class LookupsStore(Store):
 
+    def __init__(self):
+        Store.__init__(self)
+
     def load_all(self, collector):
         raise NotImplementedError("load_all missing from Lookups Store")
 

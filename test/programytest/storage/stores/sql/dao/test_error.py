@@ -3,6 +3,7 @@ import unittest
 
 from programy.storage.stores.sql.dao.error import Error
 
+
 class ErrorTests(unittest.TestCase):
     
     def test_init(self):

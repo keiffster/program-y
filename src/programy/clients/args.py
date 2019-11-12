@@ -32,7 +32,7 @@ class ClientArguments():
         self._substitutions = None
 
     def parse_args(self, client):
-        pass
+        pass    # pragma: no cover
 
     @property
     def bot_root(self):

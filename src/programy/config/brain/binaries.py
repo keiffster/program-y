@@ -40,9 +40,6 @@ class BrainBinariesConfiguration(BaseSectionConfigurationData):
     def load_aiml_on_binary_fail(self):
         return self._load_aiml_on_binary_fail
 
-    def check_for_license_keys(self, license_keys):
-        BaseSectionConfigurationData.check_for_license_keys(self, license_keys)
-
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         binaries = configuration_file.get_section("binaries", configuration)
         if binaries is not None:

@@ -135,10 +135,6 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
                     if match is not None:
                         return match
 
-                    if self.invalid_topic_or_that(tabs, client_context, word, context, matches_added) is True:
-                        context.pop_matches(matches_added)
-                        return None
-
             YLogger.debug(client_context, "%sWildcard %s matched %s", tabs, self._wildcard, word)
             context_match.add_word(word)
 
@@ -163,9 +159,6 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
                 return match
 
             word_no += 1
-            if word_no >= words.num_words():
-                context.pop_matches(matches_added)
-                return None
             word = words.word(word_no)
 
         YLogger.debug(client_context, "%sNo children, consume words until next break point", tabs)

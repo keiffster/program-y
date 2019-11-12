@@ -27,7 +27,7 @@ class RDF:
         self.object = obj
 
     def __repr__(self):
-        return "<RDF(id='%d', name='%s', subject='%s', predicate='%s', object='%s')>" % \
+        return "<RDF(id='%s', name='%s', subject='%s', predicate='%s', object='%s')>" % \
                (DAOUtils.valid_id(self.id),
                 self.name,
                 self.subject,
@@ -46,14 +46,9 @@ class RDF:
     @staticmethod
     def from_document(data):
         rdf = RDF(None, None, None, None)
-        if '_id' in data:
-            rdf.id = data['_id']
-        if 'name' in data:
-            rdf.name = data['name']
-        if 'subject' in data:
-            rdf.subject = data['subject']
-        if 'predicate' in data:
-            rdf.predicate = data['predicate']
-        if 'object' in data:
-            rdf.object = data['object']
+        rdf.id = DAOUtils.get_value_from_data(data, '_id')
+        rdf.name = DAOUtils.get_value_from_data(data, 'name')
+        rdf.subject = DAOUtils.get_value_from_data(data, 'subject')
+        rdf.predicate = DAOUtils.get_value_from_data(data, 'predicate')
+        rdf.object = DAOUtils.get_value_from_data(data, 'object')
         return rdf

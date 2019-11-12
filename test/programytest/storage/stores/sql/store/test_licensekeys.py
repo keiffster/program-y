@@ -1,12 +1,10 @@
 import unittest
 
-from programytest.storage.asserts.store.assert_licensekeys import LicenseKeyStoreAsserts
-
-from programy.storage.stores.sql.store.licensekeys import SQLLicenseKeysStore
-from programy.storage.stores.sql.engine import SQLStorageEngine
-from programy.storage.stores.sql.config import SQLStorageConfiguration
-
 import programytest.storage.engines as Engines
+from programy.storage.stores.sql.config import SQLStorageConfiguration
+from programy.storage.stores.sql.engine import SQLStorageEngine
+from programy.storage.stores.sql.store.licensekeys import SQLLicenseKeysStore
+from programytest.storage.asserts.store.assert_licensekeys import LicenseKeyStoreAsserts
 
 
 class SQLLicenseKeysStoreTests(LicenseKeyStoreAsserts):

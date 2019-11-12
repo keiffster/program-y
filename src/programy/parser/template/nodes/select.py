@@ -41,10 +41,9 @@ class QueryBase:
         return self._obj
 
     def to_xml(self, client_context):
-        del client_context
-        xml = "<subj>%s</subj>" % self._subj
-        xml += "<pred>%s</pred>" % self._pred
-        xml += "<obj>%s</obj>" % self._obj
+        xml = "<subj>%s</subj>" % self._subj.resolve(client_context)
+        xml += "<pred>%s</pred>" % self._pred.resolve(client_context)
+        xml += "<obj>%s</obj>" % self._obj.resolve(client_context)
         return xml
 
     def execute(self, client_context, variables=None):
@@ -68,16 +67,22 @@ class Query(QueryBase):
     def __init__(self, subj, pred, obj):
         QueryBase.__init__(self, subj, pred, obj)
 
+    def get_xml_type(self):
+        return "q"
+
     def to_xml(self, client_context):
         xml = "<q>"
         xml += super(Query, self).to_xml(client_context)
         xml += "</q>"
         return xml
 
+    def _get_matched_tuples(self, client_context, subj, pred, obj):
+        return client_context.brain.rdf.matched_as_tuples(subj, pred, obj)
+
     def execute(self, client_context, variables=None):
         subj, pred, obj = self.get_rdf(client_context)
         if variables is None:
-            tuples = client_context.brain.rdf.matched_as_tuples(subj, pred, obj)
+            tuples = self._get_matched_tuples(client_context, subj, pred, obj)
             results = []
             for atuple in tuples:
                 results.append([["subj", atuple[0]], ["pred", atuple[1]], ["obj", atuple[2]]])
@@ -101,10 +106,13 @@ class NotQuery(QueryBase):
         xml += "</notq>"
         return xml
 
+    def _get_unmatched_tuples(self, client_context, subj, pred, obj):
+        return client_context.brain.rdf.not_matched_as_tuples(subj, pred, obj)
+
     def execute(self, client_context, variables=None):
         subj, pred, obj = self.get_rdf(client_context)
         if variables is None:
-            tuples = client_context.brain.rdf.not_matched_as_tuples(subj, pred, obj)
+            tuples = self._get_unmatched_tuples(client_context, subj, pred, obj)
             results = []
             for atuple in tuples:
                 results.append([["subj", atuple[0]], ["pred", atuple[1]], ["obj", atuple[2]]])
@@ -122,6 +130,7 @@ class TemplateSelectNode(TemplateNode):
             self._queries = []
         else:
             self._queries = queries[:]
+
         if variables is None:
             self._vars = []
         else:
@@ -142,7 +151,6 @@ class TemplateSelectNode(TemplateNode):
         return json.dumps(results)
 
     def resolve_to_string(self, client_context):
-
         resolved = ""
         if self._queries:
             results = []
@@ -184,6 +192,10 @@ class TemplateSelectNode(TemplateNode):
 
     def parse_query(self, graph, query_name, query):
 
+        subj = None
+        pred = None
+        obj = None
+
         for child in query:
             tag_name = TextUtils.tag_from_text(child.tag)
 
@@ -215,7 +227,7 @@ class TemplateSelectNode(TemplateNode):
                 obj = self.parse_children_as_word_node(graph, child)
 
             else:
-                YLogger.warning(self, "Unknown tag name [%s] in select query", tag_name)
+                raise ParserException("Unknown query node [%s]" % tag_name)
 
         if subj is None:
             raise ParserException("<subj> element missing from select query")
@@ -245,7 +257,3 @@ class TemplateSelectNode(TemplateNode):
             tag_name = TextUtils.tag_from_text(query.tag)
             if tag_name == 'q' or tag_name == 'notq':
                 self.parse_query(graph, tag_name, query)
-
-        if self.children:
-            raise ParserException("<select> node should not contain child text, use <select><vars>"
-                                  "</vars><q></q></select> only")

@@ -212,6 +212,16 @@ class RDFCollection(BaseCollection):
                                 tuples.append([entity_subject, entity_predicate, entity_obj])
         return tuples
 
+    def not_matched_as_tuples(self, subject=None, predicate=None, obj=None):
+        matched_tuples = self.matched_as_tuples(subject, predicate, obj)
+        all_tuples = self.all_as_tuples()
+        not_matched = []
+        for atuple in all_tuples:
+            if atuple not in matched_tuples:
+                not_matched.append(atuple)
+
+        return not_matched
+
     def remove(self, entities, subject=None, predicate=None, obj=None):
         if predicate is None and obj is None:
             YLogger.debug(self, "Removing subject=[%s]", subject)
@@ -319,8 +329,10 @@ class RDFCollection(BaseCollection):
     def match_to_vars(self, subject=None, predicate=None, obj=None):
         if predicate is None and obj is None:
             YLogger.debug(self, "Matching subject=[%s]", subject)
+
         elif obj is None:
             YLogger.debug(self, "Matching subject=[%s], predicate=[%s]", subject, predicate)
+
         else:
             YLogger.debug(self, "Matching subject=[%s], predicate=[%s], object=[%s]", subject, predicate, obj)
 

@@ -1,13 +1,14 @@
-import unittest
 import os
 import os.path
 import re
+import unittest
 
-from programy.storage.stores.file.store.properties import FileRegexStore
-from programy.storage.stores.file.engine import FileStorageEngine
-from programy.storage.stores.file.config import FileStorageConfiguration
 from programy.mappings.properties import RegexTemplatesCollection
+from programy.storage.stores.file.config import FileStorageConfiguration
 from programy.storage.stores.file.config import FileStoreConfiguration
+from programy.storage.stores.file.engine import FileStorageEngine
+from programy.storage.stores.file.store.properties import FileRegexStore
+
 
 class FileRegexStoreTests(unittest.TestCase):
 

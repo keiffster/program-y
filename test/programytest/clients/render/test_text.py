@@ -1,7 +1,7 @@
-import unittest
 import unittest.mock
 
 from programy.clients.render.text import TextRenderer
+
 
 class MockConsoleBotClient(object):
 

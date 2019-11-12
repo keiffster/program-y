@@ -21,13 +21,13 @@ from programy.utils.classes.loader import ClassLoader
 class BaseSentimentAnalyser:
 
     def initialise(self, storage_factory=None):
-        pass
+        pass    # pragma: no cover
 
     def analyse_each(self, text):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     def analyse_all(self, text):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     @staticmethod
     def initiate_sentiment_analyser(sentiment_config):

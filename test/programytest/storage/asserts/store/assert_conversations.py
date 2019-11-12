@@ -1,8 +1,7 @@
 import unittest
 
-from programy.dialog.question import Question
 from programy.dialog.conversation import Conversation
-
+from programy.dialog.question import Question
 from programytest.client import TestClient
 
 

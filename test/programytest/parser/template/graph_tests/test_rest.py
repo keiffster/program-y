@@ -25,4 +25,3 @@ class TemplateGraphRestTests(TemplateGraphTestClient):
 
         self.assertIsNotNone(ast)
         self.assertEqual(ast.resolve(self._client_context), "two three four")
-

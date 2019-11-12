@@ -1,8 +1,7 @@
 import unittest
 
-from programy.dynamic.sets.stopword import IsStopWord
 from programy.context import ClientContext
-
+from programy.dynamic.sets.stopword import IsStopWord
 from programytest.client import TestClient
 
 

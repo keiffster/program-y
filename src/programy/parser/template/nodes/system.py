@@ -27,6 +27,14 @@ class TemplateSystemNode(TemplateAttribNode):
         TemplateAttribNode.__init__(self)
         self._timeout = TemplateWordNode("0")
 
+    @property
+    def timeout(self):
+        return self._timeout
+
+    @timeout.setter
+    def timeout(self, timeout):
+        self._timeout = TemplateWordNode(str(timeout))
+
     def resolve_to_string(self, client_context):
         if client_context.brain.configuration.overrides.allow_system_aiml is True:
             command = self.resolve_children_to_string(client_context)

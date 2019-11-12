@@ -32,6 +32,8 @@ class SentimentScoresTests(TestCase):
 
         self.assertEqual("EXTREMELY POSITIVE", scorer.positivity(1.0))
 
+        self.assertEqual("UNKNOWN", scorer.positivity(2.0))
+
     def test_subjectivity(self):
         scorer = SentimentScores()
 
@@ -58,3 +60,5 @@ class SentimentScoresTests(TestCase):
         self.assertEqual("MOSTLY SUBJECTIVE", scorer.subjectivity(0.99))
 
         self.assertEqual("COMPLETELY SUBJECTIVE", scorer.subjectivity(1.0))
+
+        self.assertEqual("UNKNOWN", scorer.subjectivity(2.0))

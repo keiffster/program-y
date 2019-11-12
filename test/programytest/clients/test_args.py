@@ -1,5 +1,5 @@
-import unittest
 import os
+import unittest
 
 from programy.clients.args import ClientArguments
 from programy.clients.args import CommandLineClientArguments

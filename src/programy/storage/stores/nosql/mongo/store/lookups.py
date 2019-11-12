@@ -25,9 +25,10 @@ class MongoLookupStore(MongoStore, LookupsStore):
 
     def __init__(self, storage_engine):
         MongoStore.__init__(self, storage_engine)
+        LookupsStore.__init__(self)
 
     def collection_name(self):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     def add_to_lookup(self, key, value, overwrite_existing=False):
         collection = self.collection()

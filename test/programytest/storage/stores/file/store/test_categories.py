@@ -1,11 +1,11 @@
 import os
 import os.path
 
-from programytest.storage.asserts.store.assert_category import CategoryStoreAsserts
-from programy.storage.stores.file.store.categories import FileCategoryStore
-from programy.storage.stores.file.engine import FileStorageEngine
 from programy.storage.stores.file.config import FileStorageConfiguration
+from programy.storage.stores.file.engine import FileStorageEngine
+from programy.storage.stores.file.store.categories import FileCategoryStore
 from programy.storage.stores.file.store.config import FileStoreConfiguration
+from programytest.storage.asserts.store.assert_category import CategoryStoreAsserts
 
 
 class MockAIMLParser(object):

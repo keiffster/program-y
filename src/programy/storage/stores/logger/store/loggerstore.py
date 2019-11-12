@@ -21,17 +21,15 @@ class LoggerStore(Store):
     LOGGER = "logger"
 
     def __init__(self, storage_engine):
+        Store.__init__(self)
         self._storage_engine = storage_engine
-
-    def store_name(self):
-        return LoggerStore.LOGGER
 
     @property
     def storage_engine(self):
         return self._storage_engine
 
     def drop(self):
-        pass
+        pass    # pragma: no cover
 
     def commit(self):
-        pass
+        pass    # pragma: no cover

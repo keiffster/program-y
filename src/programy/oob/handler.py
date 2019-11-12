@@ -15,8 +15,8 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 import re
-import xml.etree.ElementTree as ET
-
+from programy.utils.parsing.linenumxml import LineNumberingParser
+import xml.etree.ElementTree as ET  # pylint: disable=wrong-import-order
 from programy.utils.logging.ylogger import YLogger
 from programy.utils.classes.loader import ClassLoader
 from programy.config.brain.oobs import BrainOOBSConfiguration
@@ -42,34 +42,35 @@ class OOBHandler:
         return self._oob
 
     def load_oob_processors(self):
-        if self._configuration is not None:
-            if self._configuration.default() is not None:
-                try:
-                    YLogger.info(self, "Loading default oob")
-                    classobject = ClassLoader.instantiate_class(self._configuration.default().classname)
-                    self._default_oob = classobject()
-                except Exception as excep:
-                    YLogger.exception(self, "Failed to load OOB Processor", excep)
+        if self._configuration.default() is not None:
+            try:
+                YLogger.info(self, "Loading default oob")
+                classobject = ClassLoader.instantiate_class(self._configuration.default().classname)
+                self._default_oob = classobject()
 
-            for oob_name in self._configuration.oobs():
-                try:
-                    YLogger.info(self, "Loading oob: %s", oob_name)
-                    classobject = ClassLoader.instantiate_class(self._configuration.oob(oob_name).classname)
-                    self._oob[oob_name] = classobject()
-                except Exception as excep:
-                    YLogger.exception(self, "Failed to load OOB", excep)
+            except Exception as excep:
+                YLogger.exception(self, "Failed to load OOB Processor", excep)
+
+        for oob_name in self._configuration.oobs():
+            try:
+                YLogger.info(self, "Loading oob: %s", oob_name)
+                classobject = ClassLoader.instantiate_class(self._configuration.oob(oob_name).classname)
+                self._oob[oob_name] = classobject()
+
+            except Exception as excep:
+                YLogger.exception(self, "Failed to load OOB", excep)
 
     def oob_in_response(self, response):
-        return "<oob>" in response
+        if response is not None:
+            return "<oob>" in response
 
     def handle(self, client_context, response):
         if "<oob>" in response:
             response, oob = self.strip_oob(response)
-            if oob is not None:
-                oob_response = self.process_oob(client_context, oob)
-                response = response + " " + oob_response
+            oob_response = self.process_oob(client_context, oob)
+            response = response + " " + oob_response
 
-        return response
+        return response.strip()
 
     def strip_oob(self, response):
         match = re.compile(r"(.*)(<\s*oob\s*>.*<\/\s*oob\s*>)(.*)")
@@ -80,9 +81,11 @@ class OOBHandler:
             response = ""
             if front != "":
                 response = front + " "
+
             response += back
             oob = groupings.group(2)
             return response, oob
+
         return response, None
 
     def process_oob(self, client_context, oob_command):
@@ -93,6 +96,8 @@ class OOBHandler:
                 if child.tag in self._oob:
                     oob_class = self._oob[child.tag]
                     return oob_class.process_out_of_bounds(client_context, child)
-                return self._default_oob.process_out_of_bounds(client_context, child)
+
+                if self._default_oob is not None:
+                    return self._default_oob.process_out_of_bounds(client_context, child)
 
         return ""

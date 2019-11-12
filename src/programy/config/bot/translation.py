@@ -41,9 +41,6 @@ class BotTranslatorConfiguration(BaseConfigurationData):
     def to_lang(self):
         return self._to_lang
 
-    def check_for_license_keys(self, license_keys):
-        BaseConfigurationData.check_for_license_keys(self, license_keys)
-
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         del bot_root
         translation = configuration_file.get_section(self._section_name, configuration)

@@ -1,10 +1,10 @@
 import unittest
 import unittest.mock
 
-from programy.storage.stores.logger.engine import LoggerStorageEngine
 from programy.storage.stores.logger.config import LoggerStorageConfiguration
-
+from programy.storage.stores.logger.engine import LoggerStorageEngine
 from programytest.storage.test_utils import StorageEngineTestUtils
+
 
 class LoggerStorageEngineTests(StorageEngineTestUtils):
 

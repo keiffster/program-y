@@ -1,8 +1,9 @@
 import unittest
 
-from programy.services.service import Service, ServiceFactory
 from programy.config.brain.brain import BrainConfiguration
 from programy.config.brain.service import BrainServiceConfiguration
+from programy.services.service import Service, ServiceFactory
+
 
 class MockService(Service):
 

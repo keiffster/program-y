@@ -1,10 +1,11 @@
-from programytest.storage.asserts.store.assert_conversations import ConverstionStoreAsserts
-
-from programy.storage.stores.file.store.conversations import FileConversationStore
-from programy.storage.stores.file.engine import FileStorageEngine
-from programy.storage.stores.file.config import FileStorageConfiguration
 import os.path
 import shutil
+
+from programy.storage.stores.file.config import FileStorageConfiguration
+from programy.storage.stores.file.engine import FileStorageEngine
+from programy.storage.stores.file.store.conversations import FileConversationStore
+from programytest.storage.asserts.store.assert_conversations import ConverstionStoreAsserts
+
 
 class FileConversationStoreTests(ConverstionStoreAsserts):
 

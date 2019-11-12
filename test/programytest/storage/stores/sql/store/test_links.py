@@ -1,12 +1,10 @@
 import unittest
 
-from programytest.storage.asserts.store.assert_links import LinkStoreAsserts
-
-from programy.storage.stores.sql.store.links import SQLLinkStore
-from programy.storage.stores.sql.engine import SQLStorageEngine
-from programy.storage.stores.sql.config import SQLStorageConfiguration
-
 import programytest.storage.engines as Engines
+from programy.storage.stores.sql.config import SQLStorageConfiguration
+from programy.storage.stores.sql.engine import SQLStorageEngine
+from programy.storage.stores.sql.store.links import SQLLinkStore
+from programytest.storage.asserts.store.assert_links import LinkStoreAsserts
 
 
 class SQLLinkStoreTests(LinkStoreAsserts):

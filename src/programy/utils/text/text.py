@@ -81,18 +81,28 @@ class TextUtils:
         return path
 
     @staticmethod
-    def tag_and_namespace_from_text(text):
+    def _is_not_tag(text):
         # If there is a namespace, then it looks something like
         # {http://alicebot.org/2001/AIML}aiml
-        if TextUtils.RE_PATTERN_OF_TAG_AND_NAMESPACE_FROM_TEXT.match(text) is None:
-            # If that pattern does not exist, assume that the text is the tag name
-            return text, None
+        return bool(TextUtils.RE_PATTERN_OF_TAG_AND_NAMESPACE_FROM_TEXT.match(text) is None)
 
+    @staticmethod
+    def _extract_namespace_and_tag(text):
         # Otherwise, extract namespace and tag name
         groupings = TextUtils.RE_MATCH_OF_TAG_AND_NAMESPACE_FROM_TEXT.match(text)
-        namespace = groupings.group(1).strip()
-        tag_name = groupings.group(2).strip()
-        return tag_name, namespace
+        if groupings is not None:
+            namespace = groupings.group(1).strip()
+            tag_name = groupings.group(2).strip()
+            return tag_name, namespace
+
+        return None, None
+
+    @staticmethod
+    def tag_and_namespace_from_text(text):
+        if TextUtils._is_not_tag(text):
+            return text, None
+
+        return TextUtils._extract_namespace_and_tag(text)
 
     @staticmethod
     def tag_from_text(text):

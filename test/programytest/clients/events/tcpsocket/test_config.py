@@ -1,8 +1,8 @@
 import unittest
 
+from programy.clients.events.console.config import ConsoleConfiguration
 from programy.clients.events.tcpsocket.config import SocketConfiguration
 from programy.config.file.yaml_file import YamlConfigurationFile
-from programy.clients.events.console.config import ConsoleConfiguration
 
 
 class SocketConfigurationTests(unittest.TestCase):
@@ -41,7 +41,7 @@ class SocketConfigurationTests(unittest.TestCase):
         self.assertEqual(False, data['debug'])
 
         self.assertEqual(data['bot'], 'bot')
-        self.assertEqual(data['bot_selector'], "programy.clients.client.DefaultBotSelector")
+        self.assertEqual(data['bot_selector'], "programy.clients.botfactory.DefaultBotSelector")
         self.assertEqual(data['renderer'], "programy.clients.render.text.TextRenderer")
 
     def test_to_yaml_without_defaults(self):
@@ -57,7 +57,7 @@ class SocketConfigurationTests(unittest.TestCase):
           bot: bot
           default_userid: console
           prompt: $
-          bot_selector: programy.clients.client.DefaultBotSelector
+          bot_selector: programy.clients.botfactory.DefaultBotSelector
           renderer: programy.clients.render.text.TextRenderer
         """, ConsoleConfiguration(), ".")
 
@@ -74,7 +74,7 @@ class SocketConfigurationTests(unittest.TestCase):
         self.assertEqual(True, data['debug'])
 
         self.assertEqual(data['bot'], 'bot')
-        self.assertEqual(data['bot_selector'], "programy.clients.client.DefaultBotSelector")
+        self.assertEqual(data['bot_selector'], "programy.clients.botfactory.DefaultBotSelector")
         self.assertEqual(data['renderer'], "programy.clients.render.text.TextRenderer")
 
     def test_to_yaml_no_data(self):
@@ -97,5 +97,5 @@ class SocketConfigurationTests(unittest.TestCase):
         self.assertEqual(False, data['debug'])
 
         self.assertEqual(data['bot'], 'bot')
-        self.assertEqual(data['bot_selector'], "programy.clients.client.DefaultBotSelector")
+        self.assertEqual(data['bot_selector'], "programy.clients.botfactory.DefaultBotSelector")
         self.assertEqual(data['renderer'], "programy.clients.render.text.TextRenderer")

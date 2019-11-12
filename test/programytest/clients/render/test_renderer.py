@@ -3,6 +3,7 @@ import unittest.mock
 
 from programy.clients.render.renderer import RichMediaRenderer
 
+
 class MockRichMediaRenderer(RichMediaRenderer):
 
     def __init__(self, config):

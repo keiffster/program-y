@@ -1,12 +1,10 @@
 import unittest
 
-from programytest.storage.asserts.store.assert_licensekeys import LicenseKeyStoreAsserts
-
-from programy.storage.stores.nosql.mongo.store.licensekeys import MongoLicenseKeysStore
-from programy.storage.stores.nosql.mongo.engine import MongoStorageEngine
-from programy.storage.stores.nosql.mongo.config import MongoStorageConfiguration
-
 import programytest.storage.engines as Engines
+from programy.storage.stores.nosql.mongo.config import MongoStorageConfiguration
+from programy.storage.stores.nosql.mongo.engine import MongoStorageEngine
+from programy.storage.stores.nosql.mongo.store.licensekeys import MongoLicenseKeysStore
+from programytest.storage.asserts.store.assert_licensekeys import LicenseKeyStoreAsserts
 
 
 class MongoLicenseKeysStoreTests(LicenseKeyStoreAsserts):

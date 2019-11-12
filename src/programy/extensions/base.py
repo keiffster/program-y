@@ -22,7 +22,7 @@ class Extension(ABC):
 
     @abstractmethod
     def execute(self, client_context, data):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     @staticmethod
     def split_into_commands(data):

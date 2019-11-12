@@ -16,6 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 from programy.utils.logging.ylogger import YLogger
 from programy.parser.template.nodes.triple import TemplateTripleNode
+from typing import List
 
 
 class TemplateUniqNode(TemplateTripleNode):
@@ -23,18 +24,34 @@ class TemplateUniqNode(TemplateTripleNode):
     def __init__(self, subj=None, pred=None, obj=None):
         TemplateTripleNode.__init__(self, node_name="uniq", subj=subj, pred=pred, obj=obj)
 
-    def resolve_to_string(self, client_context):
-        rdf_subject = self._subj.resolve(client_context).upper()
-        rdf_predicate = self._pred.resolve(client_context).upper()
-        rdf_object = self._obj.resolve(client_context)
-
-        results = client_context.brain.rdf.match_only_vars(rdf_subject, rdf_predicate, rdf_object)
-
+    @staticmethod
+    def _filter_results(results):
         values = []
         for result in results:
             for pair in result:
                 if pair[1] not in values:
                     values.append(pair[1])
+        return values
+
+    @staticmethod
+    def _match_only_vars(client_context, rdf_subject, rdf_predicate, rdf_object) -> List:
+
+        assert client_context
+
+        if client_context.brain is not None:
+            if client_context.brain.rdf is not None:
+                return client_context.brain.rdf.match_only_vars(rdf_subject, rdf_predicate, rdf_object)
+
+        return []
+
+    def resolve_to_string(self, client_context):
+        rdf_subject = self._subj.resolve(client_context).upper()
+        rdf_predicate = self._pred.resolve(client_context).upper()
+        rdf_object = self._obj.resolve(client_context)
+
+        results = TemplateUniqNode._match_only_vars(client_context, rdf_subject, rdf_predicate, rdf_object)
+
+        values = TemplateUniqNode._filter_results(results)
 
         resolved = ""
         if values:

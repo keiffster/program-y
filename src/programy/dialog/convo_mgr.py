@@ -56,10 +56,9 @@ class ConversationManager:
         if self._conversation_storage is not None:
             if client_context.userid in self._conversations:
                 conversation = self._conversations[client_context.userid]
-                if conversation is not None:
-                    self._conversation_storage.store_conversation(client_context, conversation)
+                self._conversation_storage.store_conversation(client_context, conversation)
 
-    def has_conversation(self, client_context):
+    def has_conversation(self, client_context) -> bool:
         return bool(client_context.userid in self._conversations)
 
     def get_conversation(self, client_context):

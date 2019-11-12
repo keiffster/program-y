@@ -1,6 +1,6 @@
-import unittest
 import os
 import os.path
+import unittest
 
 from programy.parser.pattern.factory import PatternNodeFactory
 

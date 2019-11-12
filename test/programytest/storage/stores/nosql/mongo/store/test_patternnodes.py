@@ -1,12 +1,10 @@
 import unittest
 
-from programytest.storage.asserts.store.assert_patternnodes import PatternNodesStoreAsserts
-
-from programy.storage.stores.nosql.mongo.store.nodes import MongoPatternNodeStore
-from programy.storage.stores.nosql.mongo.engine import MongoStorageEngine
-from programy.storage.stores.nosql.mongo.config import MongoStorageConfiguration
-
 import programytest.storage.engines as Engines
+from programy.storage.stores.nosql.mongo.config import MongoStorageConfiguration
+from programy.storage.stores.nosql.mongo.engine import MongoStorageEngine
+from programy.storage.stores.nosql.mongo.store.nodes import MongoPatternNodeStore
+from programytest.storage.asserts.store.assert_patternnodes import PatternNodesStoreAsserts
 
 
 class MongoPatternNodeStoreTests(PatternNodesStoreAsserts):

@@ -1,10 +1,10 @@
 import unittest
 
+from programy.config.bot.spelling import BotSpellingConfiguration
 from programy.spelling.base import SpellingChecker
 from programy.spelling.norvig import NorvigSpellingChecker
-from programy.config.bot.spelling import BotSpellingConfiguration
-
 from programytest.client import TestClient
+
 
 class NorvigSpellingCheckerTests(unittest.TestCase):
 

@@ -1,17 +1,16 @@
-import unittest.mock
 import logging
+import unittest.mock
 
 from viberbot import Api
-
-from programy.clients.restful.flask.viber.client import ViberBotClient
-from programy.clients.restful.flask.viber.config import ViberConfiguration
+from viberbot.api.user_profile import UserProfile
 from viberbot.api.viber_requests import ViberConversationStartedRequest
 from viberbot.api.viber_requests import ViberFailedRequest
 from viberbot.api.viber_requests import ViberMessageRequest
 from viberbot.api.viber_requests import ViberSubscribedRequest
 from viberbot.api.viber_requests import ViberUnsubscribedRequest
-from viberbot.api.user_profile import UserProfile
 
+from programy.clients.restful.flask.viber.client import ViberBotClient
+from programy.clients.restful.flask.viber.config import ViberConfiguration
 from programytest.clients.arguments import MockArgumentParser
 
 

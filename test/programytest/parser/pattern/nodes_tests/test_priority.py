@@ -1,8 +1,7 @@
-from programytest.parser.base import ParserTestsBaseClass
-
-from programy.parser.pattern.nodes.word import PatternWordNode
-from programy.parser.pattern.nodes.priority import PatternPriorityWordNode
 from programy.dialog.sentence import Sentence
+from programy.parser.pattern.nodes.priority import PatternPriorityWordNode
+from programy.parser.pattern.nodes.word import PatternWordNode
+from programytest.parser.base import ParserTestsBaseClass
 
 
 class PatternPriorityWordNodeTests(ParserTestsBaseClass):

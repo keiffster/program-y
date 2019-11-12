@@ -1,10 +1,10 @@
-import unittest
 import os.path
 import shutil
+import unittest
 
-from programy.storage.stores.file.store.errors import FileErrorsStore
-from programy.storage.stores.file.engine import FileStorageEngine
 from programy.storage.stores.file.config import FileStorageConfiguration
+from programy.storage.stores.file.engine import FileStorageEngine
+from programy.storage.stores.file.store.errors import FileErrorsStore
 
 
 class FileErrorsStoreTests(unittest.TestCase):

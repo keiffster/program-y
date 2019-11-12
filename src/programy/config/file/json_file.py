@@ -60,6 +60,7 @@ class JSONConfigurationFile(BaseConfigurationFile):
     def get_child_section_keys(self, child_section_name, parent_section):
         if child_section_name in parent_section:
             return parent_section[child_section_name].keys()
+
         return None
 
     def get_option(self, section, option_name, missing_value=None, subs: Substitutions = None):
@@ -75,6 +76,7 @@ class JSONConfigurationFile(BaseConfigurationFile):
             option_value = section[option_name]
             if isinstance(option_value, bool):
                 return option_value
+
             return bool(self._replace_subs(subs, option_value))
 
         YLogger.warning(self, "Missing value for [%s] in config, return default value %s", option_name, missing_value)
@@ -84,8 +86,7 @@ class JSONConfigurationFile(BaseConfigurationFile):
         if option_name in section:
             option_value = section[option_name]
             if isinstance(option_value, int):
-                return option_value
-            return int(self._replace_subs(subs, option_value))
+                return int(option_value)
 
         if missing_value is not None:
             YLogger.warning(self, "Missing value for [%s] in config, return default value %d", option_name,
@@ -125,7 +126,8 @@ class JSONConfigurationFile(BaseConfigurationFile):
 
         multis = []
         for value in values:
-            value = self._replace_subs(subs, value)
-            multis.append(value.replace('$BOT_ROOT', bot_root))
+            if isinstance(value, str):
+                value = self._replace_subs(subs, value)
+                multis.append(value.replace('$BOT_ROOT', bot_root))
 
         return multis

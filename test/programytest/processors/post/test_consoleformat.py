@@ -1,9 +1,8 @@
-import unittest
 import os
+import unittest
 
-from programy.processors.post.consoleformat import ConsoleFormatPostProcessor
 from programy.context import ClientContext
-
+from programy.processors.post.consoleformat import ConsoleFormatPostProcessor
 from programytest.client import TestClient
 
 

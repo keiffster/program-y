@@ -15,15 +15,17 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 import sys
+import json
 from flask import Flask, request
 from programy.utils.logging.ylogger import YLogger
 from programy.utils.console.console import outputLog
 
 
-def handle_trigger(json):
+def handle_trigger(json_data):
     outputLog(None, "\nTrigger received...")
     try:
-        outputLog(None, json)
+        outputLog(None, json.dumps(json.loads(json_data), indent=4))
+
     except Exception as excep:
         YLogger.exception_nostack(None, "Trigger failed", excep)
         outputLog(None, "Trigger failed [%s]" % str(excep))
@@ -31,14 +33,12 @@ def handle_trigger(json):
     return 'OK'
 
 
-if __name__ == '__main__':
-    outputLog(None, "Initiating Trigger Receiver...")
-    receiver = Flask(__name__)
+if __name__ == '__main__':                                          # pragma: no cover
+    outputLog(None, "Initiating Trigger Receiver...")               # pragma: no cover
+    receiver = Flask(__name__)                                      # pragma: no cover
 
+    @receiver.route('/api/rest/v1.0/trigger', methods=['POST'])     # pragma: no cover
+    def trigger():                                                  # pragma: no cover
+        handle_trigger(request.json)                                # pragma: no cover
 
-    @receiver.route('/api/rest/v1.0/trigger', methods=['POST'])
-    def trigger():
-        handle_trigger(request.json)
-
-
-    receiver.run(port=sys.argv[1])
+    receiver.run(port=sys.argv[1])                                  # pragma: no cover

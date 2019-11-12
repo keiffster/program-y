@@ -1,8 +1,9 @@
 import unittest
 from typing import Dict
-from programy.triggers.manager import TriggerManager
-from programy.triggers.config import TriggerConfiguration
+
 from programy.context import ClientContext
+from programy.triggers.config import TriggerConfiguration
+from programy.triggers.manager import TriggerManager
 
 
 class MockTriggerManager(TriggerManager):
@@ -17,12 +18,10 @@ class MockTriggerManager(TriggerManager):
 class TriggerManagerTests(unittest.TestCase):
 
     def test_init(self):
-
         mgr = MockTriggerManager(TriggerConfiguration())
         self.assertIsNotNone(mgr)
 
     def test_init_with_events(self):
-
         config = TriggerConfiguration()
         config._manager = TriggerConfiguration.LOCAL_MANAGER
 

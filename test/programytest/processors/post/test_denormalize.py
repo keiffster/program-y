@@ -1,11 +1,10 @@
-import unittest
 import re
+import unittest
 
-from programy.processors.post.denormalize import DenormalizePostProcessor
 from programy.bot import Bot
 from programy.config.bot.bot import BotConfiguration
 from programy.context import ClientContext
-
+from programy.processors.post.denormalize import DenormalizePostProcessor
 from programytest.client import TestClient
 
 

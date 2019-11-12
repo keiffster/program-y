@@ -1,14 +1,14 @@
 import unittest
 
-from programy.services.openchatbot.response import OpenchatBotReponseObject
-from programy.services.openchatbot.response import OpenChatBotMediaDefaultAction
-from programy.services.openchatbot.response import OpenChatBotMediaButton
 from programy.services.openchatbot.response import OpenChatBotMedia
-from programy.services.openchatbot.response import OpenChatBotTTS
-from programy.services.openchatbot.response import OpenChatBotSuggestion
+from programy.services.openchatbot.response import OpenChatBotMediaButton
+from programy.services.openchatbot.response import OpenChatBotMediaDefaultAction
+from programy.services.openchatbot.response import OpenChatBotMeta
 from programy.services.openchatbot.response import OpenChatBotResponse
 from programy.services.openchatbot.response import OpenChatBotStatus
-from programy.services.openchatbot.response import OpenChatBotMeta
+from programy.services.openchatbot.response import OpenChatBotSuggestion
+from programy.services.openchatbot.response import OpenChatBotTTS
+from programy.services.openchatbot.response import OpenchatBotReponseObject
 
 
 class OpenchatBotReponseObjectTests(unittest.TestCase):

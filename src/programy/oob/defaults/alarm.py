@@ -49,6 +49,7 @@ class AlarmOutOfBandProcessor(OutOfBandProcessor):
 
             if self._hour is not None and self._min is not None:
                 return True
+
             if self._message is not None:
                 return True
 
@@ -58,6 +59,8 @@ class AlarmOutOfBandProcessor(OutOfBandProcessor):
     def execute_oob_command(self, client_context):
         if self._message is not None:
             YLogger.info(client_context, "AlarmOutOfBandProcessor: Showing alarm=%s", self._message)
+
         elif self._hour is not None and self._min is not None:
             YLogger.info(client_context, "AlarmOutOfBandProcessor: Setting alarm for %s:%s", self._hour, self._min)
+
         return "ALARM"

@@ -1,9 +1,11 @@
-from programytest.parser.base import ParserTestsBaseClass
-
+from programy.dialog.sentence import Sentence
 from programy.parser.exceptions import ParserException
+from programy.parser.pattern.match import Match
+from programy.parser.pattern.matchcontext import MatchContext
+from programy.parser.pattern.nodes.root import PatternRootNode
 from programy.parser.pattern.nodes.that import PatternThatNode
 from programy.parser.pattern.nodes.topic import PatternTopicNode
-from programy.parser.pattern.nodes.root import PatternRootNode
+from programytest.parser.base import ParserTestsBaseClass
 
 
 class PatternThatNodeTests(ParserTestsBaseClass):
@@ -84,3 +86,24 @@ class PatternThatNodeTests(ParserTestsBaseClass):
         self.assertTrue(node1.equivalent(node2))
         self.assertFalse(node1.equivalent(node3))
         self.assertFalse(node1.equivalent(node4))
+
+    def test_consume_search_time_exceeded(self):
+        node = PatternThatNode()
+        self.assertIsNotNone(node)
+
+        match_context = MatchContext(max_search_depth=100, max_search_timeout=0)
+        words = Sentence(self._client_context)
+
+        result = node.consume(self._client_context, match_context, words, 0, Match.WORD, 1, parent=False)
+        self.assertIsNone(result)
+
+    def test_consume_search_depth_exceeded(self):
+        node = PatternThatNode()
+        self.assertIsNotNone(node)
+
+        match_context = MatchContext(max_search_depth=0, max_search_timeout=100)
+        words = Sentence(self._client_context)
+
+        result = node.consume(self._client_context, match_context, words, 0, Match.WORD, 1, parent=False)
+        self.assertIsNone(result)
+

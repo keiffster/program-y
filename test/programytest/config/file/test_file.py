@@ -42,6 +42,12 @@ class MockBaseConfigurationFile(BaseConfigurationFile):
 
 class BaseConfigurationFileTests(unittest.TestCase):
 
+    def test_replace_subs(self):
+        config = MockBaseConfigurationFile()
+        subs = Substitutions()
+        subs.add_substitute("TEST", "VALUE")
+        self.assertEquals("VALUE", config._replace_subs(subs, "TEST"))
+
     def test_convert_to_bool(self):
         config = MockBaseConfigurationFile()
 

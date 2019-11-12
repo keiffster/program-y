@@ -15,6 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.dialog.conversation import Conversation as Convo
+from programy.storage.stores.utils import DAOUtils
 
 
 class Conversation():
@@ -37,7 +38,7 @@ class Conversation():
 
     def __repr__(self):
         return "<Conversation(id='%s', client='%s', user='%s', bot='%s', brain='%s')" % \
-               (self.id, self.clientid, self.userid, self.botid, self.brainid)
+               ((DAOUtils.valid_id(self.id)), self.clientid, self.userid, self.botid, self.brainid)
 
     def to_document(self):
         document = {"clientid": self.clientid,
@@ -52,16 +53,11 @@ class Conversation():
     @staticmethod
     def from_document(client_context, data):
         conversation = Conversation(client_context, None)
-        if '_id' in data:
-            conversation.id = data['_id']
-        if 'clientid' in data:
-            conversation.clientid = data['clientid']
-        if 'userid' in data:
-            conversation.userid = data['userid']
-        if 'botid' in data:
-            conversation.botid = data['botid']
-        if 'brainid' in data:
-            conversation.brainid = data['brainid']
+        conversation.id = DAOUtils.get_value_from_data(data, '_id')
+        conversation.clientid = DAOUtils.get_value_from_data(data, 'clientid', client_context.client.id)
+        conversation.userid = DAOUtils.get_value_from_data(data, 'userid', client_context.userid)
+        conversation.botid = DAOUtils.get_value_from_data(data, 'botid', client_context.bot.id)
+        conversation.brainid = DAOUtils.get_value_from_data(data, 'brainid', client_context.brain.id)
 
         if 'conversation' in data:
             conversation.conversation = Convo(client_context)

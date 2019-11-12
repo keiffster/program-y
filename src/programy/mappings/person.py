@@ -27,25 +27,25 @@ class BasePersonCollection(DoubleStringPatternSplitCollection):
     def person(self, gender):
         if self.has_key(gender):
             return self.value(gender)
+        return None
 
     def personalise_string(self, string):
         return self.replace_by_pattern(string)
 
     def get_storage_name(self):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     def get_lookups_store(self, lookups_engine):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     def load(self, storage_factory):
         if storage_factory.entity_storage_engine_available(self.get_storage_name()) is True:
             lookups_engine = storage_factory.entity_storage_engine(self.get_storage_name())
-            if lookups_engine:
-                try:
-                    lookups_store = self.get_lookups_store(lookups_engine)
-                    lookups_store.load_all(self)
-                except Exception as e:
-                    YLogger.exception(self, "Failed to load lookups from storage", e)
+            try:
+                lookups_store = self.get_lookups_store(lookups_engine)
+                lookups_store.load_all(self)
+            except Exception as e:
+                YLogger.exception(self, "Failed to load lookups from storage", e)
 
     def reload(self, storage_factory):
         self.load(storage_factory)

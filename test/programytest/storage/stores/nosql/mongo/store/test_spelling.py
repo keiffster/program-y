@@ -1,12 +1,10 @@
 import unittest
 
-from programytest.storage.asserts.store.assert_spelling import SpellingStoreAsserts
-
-from programy.storage.stores.nosql.mongo.store.spelling import MongoSpellingStore
-from programy.storage.stores.nosql.mongo.engine import MongoStorageEngine
-from programy.storage.stores.nosql.mongo.config import MongoStorageConfiguration
-
 import programytest.storage.engines as Engines
+from programy.storage.stores.nosql.mongo.config import MongoStorageConfiguration
+from programy.storage.stores.nosql.mongo.engine import MongoStorageEngine
+from programy.storage.stores.nosql.mongo.store.spelling import MongoSpellingStore
+from programytest.storage.asserts.store.assert_spelling import SpellingStoreAsserts
 
 
 class MongoSpellingStoreTests(SpellingStoreAsserts):

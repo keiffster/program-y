@@ -25,7 +25,7 @@ class LinkedAccount():
         self.linked_userid = linked_userid
 
     def __repr__(self):
-        return "<Linked(id='%d', primary='%s', linked='%s')>" % (DAOUtils.valid_id(self.id),
+        return "<Linked(id='%s', primary='%s', linked='%s')>" % (DAOUtils.valid_id(self.id),
                                                                  self.primary_userid,
                                                                  self.linked_userid)
 
@@ -39,10 +39,7 @@ class LinkedAccount():
     @staticmethod
     def from_document(data):
         linked = LinkedAccount(None, None)
-        if '_id' in data:
-            linked.id = data['_id']
-        if 'primary_userid' in data:
-            linked.primary_userid = data['primary_userid']
-        if 'linked_userid' in data:
-            linked.linked_userid = data['linked_userid']
+        linked.id = DAOUtils.get_value_from_data(data, '_id')
+        linked.primary_userid = DAOUtils.get_value_from_data(data, 'primary_userid')
+        linked.linked_userid = DAOUtils.get_value_from_data(data, 'linked_userid')
         return linked

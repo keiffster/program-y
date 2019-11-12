@@ -1,32 +1,27 @@
 import unittest
 import os
-import json
-
 from programy.extensions.weather.weather import WeatherExtension
-from programy.utils.weather.metoffice import MetOffice
 from programy.utils.geo.google import GoogleMaps
-
+from programy.utils.weather.metoffice import MetOffice
 from programytest.client import TestClient
+from programytest.extensions.weather.payloads.google_latlong import latlong_payload
+from programytest.extensions.weather.payloads.observation import observation_payload
 
 
 class MockGoogleMaps(GoogleMaps):
 
-    def __init__(self, response_file):
-        self._response_file = response_file
+    response = None
 
     def _get_response_as_json(self, url):
-        with open(self._response_file) as response_data:
-            return json.load(response_data)
+        return MockGoogleMaps.response
 
 
 class MockMetOffice(MetOffice):
 
-    def __init__(self, response_file):
-        self._response_file = response_file
+    response = None
 
     def _get_response_as_json(self):
-        with open(self._response_file) as response_data:
-            return json.load(response_data)
+        return MockMetOffice.response
 
     def get_forecast_data(self, lat, lon, forecast_type):
         return self._get_response_as_json()
@@ -38,10 +33,10 @@ class MockMetOffice(MetOffice):
 class MockWeatherExtension(WeatherExtension):
 
     def get_geo_locator(self):
-        return MockGoogleMaps(WeathersAIMLTests.maps_file)
+        return MockGoogleMaps()
 
     def get_met_office(self):
-        return MockMetOffice(WeathersAIMLTests.weather_file)
+        return MockMetOffice()
 
 
 class WeathersTestsClient(TestClient):
@@ -57,18 +52,13 @@ class WeathersTestsClient(TestClient):
 
 class WeathersAIMLTests(unittest.TestCase):
 
-    maps_file = None
-    weather_file = None
-
     def setUp (self):
         client = WeathersTestsClient()
         self._client_context = client.create_client_context("testid")
 
     def test_weather(self):
-        WeathersAIMLTests.maps_file = os.path.dirname(__file__) + os.sep + "google_latlong.json"
-        WeathersAIMLTests.weather_file = os.path.dirname(__file__) + os.sep + "observation.json"
-        #WeathersAIMLTests.weather_file = os.path.dirname(__file__) + os.sep + "forecast_3hourly.json"
-        #WeathersAIMLTests.weather_file = os.path.dirname(__file__) + os.sep + "forecast_daily.json"
+        MockGoogleMaps.response = latlong_payload
+        MockMetOffice.response = observation_payload
 
         response = self._client_context.bot.ask_question(self._client_context, "WEATHER LOCATION KY39UR WHEN TODAY")
         self.assertIsNotNone(response)

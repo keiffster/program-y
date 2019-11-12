@@ -23,28 +23,25 @@ from programy.utils.logging.ylogger import YLogger
 class FileFinder(ABC):
 
     def __init__(self):
-        pass
+        pass    # pragma: no cover
 
     @abstractmethod
     def load_file_contents(self, fileid, filename, userid="*"):
-        """
-        Never Implemented
-        """
+        raise NotImplementedError()     # pragma: no cover
 
     def find_files(self, path, subdir=False, extension=None):
         found_files = []
-        try:
-            if subdir is False:
-                paths = os.listdir(path)
-                for filename in paths:
-                    if filename.endswith(extension):
-                        found_files.append((filename, os.path.join(path, filename)))
-            else:
-                for dirpath, _, filenames in os.walk(path):
-                    for filename in [f for f in filenames if f.endswith(extension)]:
-                        found_files.append((filename, os.path.join(dirpath, filename)))
-        except FileNotFoundError:
-            YLogger.error(self, "No directory found [%s]", path)
+
+        if subdir is False:
+            paths = os.listdir(path)
+            for filename in paths:
+                if filename.endswith(extension):
+                    found_files.append((filename, os.path.join(path, filename)))
+
+        else:
+            for dirpath, _, filenames in os.walk(path):
+                for filename in [f for f in filenames if f.endswith(extension)]:
+                    found_files.append((filename, os.path.join(dirpath, filename)))
 
         return sorted(found_files, key=lambda element: (element[1], element[0]))
 
@@ -59,10 +56,13 @@ class FileFinder(ABC):
             try:
                 if filename_as_userid is True:
                     userid = just_filename
+
                 else:
                     userid = "*"
+
                 collection[just_filename.upper()] = self.load_file_contents(just_filename, file[1], userid=userid)
                 file_maps[just_filename.upper()] = file[1]
+
             except Exception as excep:
                 YLogger.exception(self, "Failed to load file contents for file [%s]", excep, file[1])
 
@@ -74,6 +74,7 @@ class FileFinder(ABC):
         collection = {}
         try:
             collection[just_filename] = self.load_file_contents(just_filename, filename)
+
         except Exception as excep:
             YLogger.exception(self, "Failed to load file contents for file [%s]", excep, filename)
 

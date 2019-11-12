@@ -1,12 +1,13 @@
-from programytest.storage.asserts.store.assert_maps import MapStoreAsserts
 import os
 import os.path
 
-from programy.storage.stores.file.store.maps import FileMapsStore
-from programy.storage.stores.file.engine import FileStorageEngine
-from programy.storage.stores.file.config import FileStorageConfiguration
 from programy.mappings.maps import MapCollection
+from programy.storage.stores.file.config import FileStorageConfiguration
 from programy.storage.stores.file.config import FileStoreConfiguration
+from programy.storage.stores.file.engine import FileStorageEngine
+from programy.storage.stores.file.store.maps import FileMapsStore
+from programytest.storage.asserts.store.assert_maps import MapStoreAsserts
+
 
 class FileMapsStoreTests(MapStoreAsserts):
 

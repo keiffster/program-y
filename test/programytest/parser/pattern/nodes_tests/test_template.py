@@ -1,12 +1,11 @@
-from programytest.parser.base import ParserTestsBaseClass
-
 from programy.parser.exceptions import ParserException
-from programy.parser.template.nodes.base import TemplateNode
-from programy.parser.pattern.nodes.template import PatternTemplateNode
 from programy.parser.pattern.nodes.root import PatternRootNode
-from programy.parser.pattern.nodes.topic import PatternTopicNode
+from programy.parser.pattern.nodes.template import PatternTemplateNode
 from programy.parser.pattern.nodes.that import PatternThatNode
+from programy.parser.pattern.nodes.topic import PatternTopicNode
 from programy.parser.pattern.nodes.word import PatternWordNode
+from programy.parser.template.nodes.base import TemplateNode
+from programytest.parser.base import ParserTestsBaseClass
 
 
 class PatternTemplateNodeTests(ParserTestsBaseClass):

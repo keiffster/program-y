@@ -19,5 +19,8 @@ from programy.storage.entities.store import Store
 
 class ProcessorStore(Store):
 
+    def __init__(self):
+        Store.__init__(self)
+
     def load(self, collector, name=None):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover

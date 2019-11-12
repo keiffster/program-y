@@ -1,8 +1,8 @@
-import unittest
 import os
 import os.path
-import xml.etree.ElementTree as ET
 import shutil
+import unittest
+import xml.etree.ElementTree as ET
 
 from programytest.client import TestClient
 

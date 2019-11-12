@@ -35,8 +35,6 @@ class UserGroups:
     @staticmethod
     def from_document(data):
         usergroups = UserGroups(None)
-        if '_id' in data:
-            usergroups.id = data['_id']
-        if 'usergroups' in data:
-            usergroups.usergroups = data['usergroups']
+        usergroups.id = DAOUtils.get_value_from_data(data, '_id')
+        usergroups.usergroups = DAOUtils.get_value_from_data(data, 'usergroups', {})
         return usergroups

@@ -28,15 +28,15 @@ class APIHandler(ABC):
 
     @abstractmethod
     def process_request(self, request, method='GET'):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     @abstractmethod
     def format_success_response(self, userid, question, answer, metadata=None):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     @abstractmethod
     def format_error_response(self, userid, question, error, metadata=None):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
 
 class APIHandler_V1_0(APIHandler):

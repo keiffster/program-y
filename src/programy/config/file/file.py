@@ -26,35 +26,35 @@ class BaseConfigurationFile(ABC):
         """
         Never Implemented
         """
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     @abstractmethod
     def load_from_file(self, filename, client_configuration, bot_root, subs: Substitutions = None):
         """
         Never Implemented
         """
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     @abstractmethod
     def get_section(self, section_name, parent_section=None):
         """
         Never Implemented
         """
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     @abstractmethod
     def get_keys(self, section):
         """
         Never Implemented
         """
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     @abstractmethod
     def get_child_section_keys(self, child_section_name, parent_section):
         """
         Never Implemented
         """
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     def _replace_subs(self, subs: Substitutions, value):
         if subs is not None:
@@ -67,38 +67,35 @@ class BaseConfigurationFile(ABC):
         """
         Never Implemented
         """
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     @abstractmethod
     def get_bool_option(self, section, option_name, missing_value=False, subs: Substitutions = None):
         """
         Never Implemented
         """
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     @abstractmethod
     def get_int_option(self, section, option_name, missing_value=0, subs: Substitutions = None):
         """
         Never Implemented
         """
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     @abstractmethod
     def get_multi_option(self, section, option_name, missing_value=None, subs: Substitutions = None):
         """
         Never Implemented
         """
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     @abstractmethod
     def get_multi_file_option(self, section, option_name, bot_root, missing_value=None, subs: Substitutions = None):
         """
         Never Implemented
         """
-        raise NotImplementedError()
-
-    def is_string(self, section):
-        return bool(isinstance(section, str))
+        raise NotImplementedError()  # pragma: no cover
 
     def convert_to_bool(self, value):
         if value.upper() == 'TRUE':

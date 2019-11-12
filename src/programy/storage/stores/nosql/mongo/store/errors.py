@@ -25,6 +25,7 @@ class MongoErrorsStore(MongoStore, ErrorsStore):
 
     def __init__(self, storage_engine):
         MongoStore.__init__(self, storage_engine)
+        ErrorsStore.__init__(self)
 
     def collection_name(self):
         return MongoErrorsStore.ERRORS

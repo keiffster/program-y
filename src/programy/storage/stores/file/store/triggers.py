@@ -28,6 +28,7 @@ class FileTriggersStore(FileStore, TriggersStore):
 
     def __init__(self, storage_engine):
         FileStore.__init__(self, storage_engine)
+        TriggersStore.__init__(self)
 
     def _get_storage_path(self):
         return self._storage_engine.configuration.triggers_storage.dirs[0]

@@ -1,8 +1,8 @@
 import unittest
 
-from programy.config.file.yaml_file import YamlConfigurationFile
-from programy.clients.restful.flask.facebook.config import FacebookConfiguration
 from programy.clients.events.console.config import ConsoleConfiguration
+from programy.clients.restful.flask.facebook.config import FacebookConfiguration
+from programy.config.file.yaml_file import YamlConfigurationFile
 
 
 class FacebookConfigurationTests(unittest.TestCase):
@@ -45,5 +45,5 @@ class FacebookConfigurationTests(unittest.TestCase):
         config.to_yaml(data, True)
 
         self.assertEqual(data['bot'], 'bot')
-        self.assertEqual(data['bot_selector'], "programy.clients.client.DefaultBotSelector")
+        self.assertEqual(data['bot_selector'], "programy.clients.botfactory.DefaultBotSelector")
         self.assertEqual(data['renderer'], "programy.clients.render.text.TextRenderer")

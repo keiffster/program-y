@@ -42,9 +42,6 @@ class StorageConfiguration(BaseConfigurationData):
     def storage_configurations(self):
         return self._store_configs
 
-    def check_for_license_keys(self, license_keys):
-        BaseConfigurationData.check_for_license_keys(self, license_keys)
-
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         storage = configuration_file.get_section(self._section_name, configuration)
         if storage is not None:

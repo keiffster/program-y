@@ -1,12 +1,10 @@
 import unittest
 
-from programytest.storage.asserts.store.assert_rdfs import RDFStoreAsserts
-
-from programy.storage.stores.nosql.mongo.store.rdfs import MongoRDFsStore
-from programy.storage.stores.nosql.mongo.engine import MongoStorageEngine
-from programy.storage.stores.nosql.mongo.config import MongoStorageConfiguration
-
 import programytest.storage.engines as Engines
+from programy.storage.stores.nosql.mongo.config import MongoStorageConfiguration
+from programy.storage.stores.nosql.mongo.engine import MongoStorageEngine
+from programy.storage.stores.nosql.mongo.store.rdfs import MongoRDFsStore
+from programytest.storage.asserts.store.assert_rdfs import RDFStoreAsserts
 
 
 class MongoRDFsStoreTests(RDFStoreAsserts):

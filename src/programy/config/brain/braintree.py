@@ -35,9 +35,6 @@ class BrainBraintreeConfiguration(BaseSectionConfigurationData):
     def save_as_user(self):
         return self._save_as_user
 
-    def check_for_license_keys(self, license_keys):
-        BaseSectionConfigurationData.check_for_license_keys(self, license_keys)
-
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         braintree = configuration_file.get_section("braintree", configuration)
         if braintree is not None:

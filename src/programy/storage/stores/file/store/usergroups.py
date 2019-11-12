@@ -24,6 +24,7 @@ class FileUserGroupStore(FileStore, UserGroupsStore):
 
     def __init__(self, storage_engine):
         FileStore.__init__(self, storage_engine)
+        UserGroupsStore.__init__(self)
 
     def load_usergroups(self, usersgroupsauthorisor):
         filename = self.get_storage().file

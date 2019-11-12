@@ -29,4 +29,4 @@ class BaseSectionConfigurationData(BaseConfigurationData):
         """
         Never Implemented
         """
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover

@@ -1,12 +1,12 @@
-import unittest
-import re
 import os
+import re
+import unittest
 
 from programy.mappings.gender import GenderCollection
 from programy.storage.factory import StorageFactory
 from programy.storage.stores.file.config import FileStorageConfiguration
-from programy.storage.stores.file.engine import FileStorageEngine
 from programy.storage.stores.file.config import FileStoreConfiguration
+from programy.storage.stores.file.engine import FileStorageEngine
 
 
 class GenderiseTests(unittest.TestCase):
@@ -64,6 +64,7 @@ class GenderiseTests(unittest.TestCase):
 
         self.assertEqual(collection.gender(" WITH HIM "), [re.compile('(^WITH HIM | WITH HIM | WITH HIM$)', re.IGNORECASE), ' WITH HER '])
         self.assertEqual(collection.genderise_string("This is with him "), "This is with her")
+        self.assertEqual(collection.gender(" WITH XXX "), None)
 
         collection.reload(storage_factory)
 

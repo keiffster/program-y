@@ -25,7 +25,7 @@ class Map():
         self.key_values = key_values
 
     def __repr__(self):
-        return "<Map(id='%d', name='%s')>" % (DAOUtils.valid_id(self.id), self.name)
+        return "<Map(id='%s', name='%s', values='%s')>" % (DAOUtils.valid_id(self.id), self.name, ", ".join(self.key_values))
 
     def to_document(self):
         document = {"name": self.name,
@@ -37,10 +37,7 @@ class Map():
     @staticmethod
     def from_document(data):
         amap = Map(None, None)
-        if '_id' in data:
-            amap.id = data['_id']
-        if 'name' in data:
-            amap.name = data['name']
-        if 'key_values' in data:
-            amap.key_values = data['key_values']
+        amap.id = DAOUtils.get_value_from_data(data, '_id')
+        amap.name = DAOUtils.get_value_from_data(data, 'name')
+        amap.key_values = DAOUtils.get_value_from_data(data, 'key_values', [])
         return amap

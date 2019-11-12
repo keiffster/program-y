@@ -1,11 +1,11 @@
-from programytest.storage.asserts.store.assert_sets import SetStoreAsserts
 import os
 
-from programy.storage.stores.file.store.sets import FileSetsStore
-from programy.storage.stores.file.engine import FileStorageEngine
-from programy.storage.stores.file.config import FileStorageConfiguration
 from programy.mappings.sets import SetCollection
+from programy.storage.stores.file.config import FileStorageConfiguration
 from programy.storage.stores.file.config import FileStoreConfiguration
+from programy.storage.stores.file.engine import FileStorageEngine
+from programy.storage.stores.file.store.sets import FileSetsStore
+from programytest.storage.asserts.store.assert_sets import SetStoreAsserts
 
 
 class FileSetsStoreTests(SetStoreAsserts):

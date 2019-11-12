@@ -1,7 +1,7 @@
 import unittest
 
-from programy.dialog.splitter.regex import RegexSentenceSplitter
 from programy.config.bot.splitter import BotSentenceSplitterConfiguration
+from programy.dialog.splitter.regex import RegexSentenceSplitter
 
 
 class RegexSentenceSplitterTests(unittest.TestCase):
@@ -42,22 +42,9 @@ class RegexSentenceSplitterTests(unittest.TestCase):
 
         self.assertEqual(["Is this the first sentence",  "This is the second"], splitter.split("Is this the first sentence? This is the second"))
 
-    """
-    def test_abbreviation(self):
+    def test_not_active(self):
         splitter = RegexSentenceSplitter(BotSentenceSplitterConfiguration())
         self.assertIsNotNone(splitter)
+        splitter.active = RegexSentenceSplitter.OFF
 
-        self.assertEqual(["Dr Smith is busy",  "Mr Jones is not"], splitter.split("Dr. Smith is busy. Mr. Jones is not"))
-
-    def test_conjunction_and(self):
-        splitter = RegexSentenceSplitter(BotSentenceSplitterConfiguration())
-        self.assertIsNotNone(splitter)
-
-        self.assertEqual(["The cow is black", "the horse is brown"], splitter.split("The cow is black and the horse is brown"))
-
-    def test_conjunction_or(self):
-        splitter = RegexSentenceSplitter(BotSentenceSplitterConfiguration())
-        self.assertIsNotNone(splitter)
-
-        self.assertEqual(["Is it towards the left", "towards the right"], splitter.split("Is it towards the left or towards the right"))
-    """
+        self.assertEqual(["This is a basic sentence"], splitter.split("This is a basic sentence"))

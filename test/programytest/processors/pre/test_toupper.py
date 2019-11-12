@@ -1,7 +1,7 @@
 import unittest
-from programy.processors.pre.toupper import ToUpperPreProcessor
-from programy.context import ClientContext
 
+from programy.context import ClientContext
+from programy.processors.pre.toupper import ToUpperPreProcessor
 from programytest.client import TestClient
 
 

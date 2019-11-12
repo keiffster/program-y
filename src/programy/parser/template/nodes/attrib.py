@@ -26,7 +26,7 @@ class TemplateAttribNode(TemplateNode):
         TemplateNode.__init__(self)
 
     def set_attrib(self, attrib_name: str, attrib_value):
-        raise NotImplementedError("Should not call this base method, implementation missing")
+        raise NotImplementedError("Should not call this base method, implementation missing")  # pragma: no cover
 
     #######################################################################################################
 

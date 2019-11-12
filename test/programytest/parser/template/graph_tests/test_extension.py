@@ -1,9 +1,8 @@
 import xml.etree.ElementTree as ET
-import unittest
 
+from programy.parser.exceptions import ParserException
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.extension import TemplateExtensionNode
-
 from programytest.parser.template.graph_tests.graph_test_client import TemplateGraphTestClient
 
 
@@ -60,3 +59,13 @@ class TemplateGraphBotTests(TemplateGraphTestClient):
         self.assertEqual(len(ext_node.children), 3)
         self.assertEqual("executed", ext_node.resolve(self._client_context))
 
+    def test_extension_no_path(self):
+        template = ET.fromstring("""
+            <template>
+                <extension>
+                    1 2 3
+                </extension>
+            </template>
+            """)
+        with self.assertRaises(ParserException):
+            _ = self._graph.parse_template_expression(template)

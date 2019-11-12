@@ -1,9 +1,9 @@
 import unittest
 
-from programy.dynamic.variables.datetime import GetTime
 from programy.context import ClientContext
-
+from programy.dynamic.variables.datetime import GetTime
 from programytest.client import TestClient
+
 
 class GetTimeDynamicVarTests(unittest.TestCase):
 

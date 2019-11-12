@@ -85,21 +85,19 @@ class SetCollection:
     def load(self, storage_factory):
         if storage_factory.entity_storage_engine_available(StorageFactory.SETS) is True:
             sets_store_engine = storage_factory.entity_storage_engine(StorageFactory.SETS)
-            if sets_store_engine:
-                try:
-                    sets_store = sets_store_engine.sets_store()
-                    sets_store.load_all(self)
-                except Exception as e:
-                    YLogger.exception(self, "Failed to load set from storage", e)
+            try:
+                sets_store = sets_store_engine.sets_store()
+                sets_store.load_all(self)
+            except Exception as e:
+                YLogger.exception(self, "Failed to load set from storage", e)
 
         return len(self._sets)
 
     def reload(self, storage_factory, set_name):
         if storage_factory.entity_storage_engine_available(StorageFactory.SETS) is True:
             set_engine = storage_factory.entity_storage_engine(StorageFactory.SETS)
-            if set_engine:
-                try:
-                    sets_store = set_engine.sets_store()
-                    sets_store.reload(self, set_name)
-                except Exception as e:
-                    YLogger.exception(self, "Failed to load set from storage", e)
+            try:
+                sets_store = set_engine.sets_store()
+                sets_store.reload(self, set_name)
+            except Exception as e:
+                YLogger.exception(self, "Failed to load set from storage", e)

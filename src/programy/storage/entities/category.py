@@ -22,6 +22,7 @@ from programy.storage.entities.store import Store
 from programy.parser.aiml_parser import AIMLParser
 from programy.parser.exceptions import ParserException
 from programy.parser.exceptions import DuplicateGrammarException
+from programy.utils.text.text import TextUtils
 
 
 class CategoryReadOnlyStore(Store):
@@ -31,10 +32,10 @@ class CategoryReadOnlyStore(Store):
         Store.__init__(self)
 
     def load_all(self, collector):
-        raise NotImplementedError("load_all missing from Category Store")
+        raise NotImplementedError("load_all missing from Category Store")  # pragma: no cover
 
     def load(self, collector, name=None):
-        raise NotImplementedError("load missing from Category Store")
+        raise NotImplementedError("load missing from Category Store")  # pragma: no cover
 
     @staticmethod
     def extract_content(name, element):
@@ -107,7 +108,7 @@ class CategoryReadWriteStore(CategoryReadOnlyStore):
             aiml = tree.getroot()
 
             for expression in aiml:
-                tag_name, namespace = AIMLParser.tag_and_namespace_from_text(expression.tag)
+                tag_name, namespace = TextUtils.tag_and_namespace_from_text(expression.tag)
                 if tag_name == 'topic':
                     topic = expression.attrib['name']
                     for topic_expression in expression:
@@ -128,9 +129,10 @@ class CategoryReadWriteStore(CategoryReadOnlyStore):
                     count += 1
 
         except Exception as excep:
-            YLogger.exception(self, "Failed to load contents of AIML file from [%s]", excep, filename)
+            YLogger.exception(self, "Failed to load contents of AIML file from [%s]",
+                              excep, filename)  # pragma: no cover
 
         return count, success
 
     def store_category(self, groupid, userid, topic, that, pattern, template):
-        raise NotImplementedError("store_category missing from Category Store")
+        raise NotImplementedError("store_category missing from Category Store")  # pragma: no cover

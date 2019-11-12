@@ -1,7 +1,8 @@
 import unittest
-from programy.config.file.yaml_file import YamlConfigurationFile
+
 from programy.clients.events.console.config import ConsoleConfiguration
 from programy.config.bot.bot import BotConfiguration
+from programy.config.file.yaml_file import YamlConfigurationFile
 
 
 class ConsoleConfigurationTests(unittest.TestCase):
@@ -49,7 +50,7 @@ class ConsoleConfigurationTests(unittest.TestCase):
         self.assertEqual('>>>', data['prompt'])
 
         self.assertEqual(data['bot'], 'bot')
-        self.assertEqual(data['bot_selector'], "programy.clients.client.DefaultBotSelector")
+        self.assertEqual(data['bot_selector'], "programy.clients.botfactory.DefaultBotSelector")
         self.assertEqual(data['renderer'], "programy.clients.render.text.TextRenderer")
 
     def test_to_yaml_without_defaults(self):
@@ -60,7 +61,7 @@ class ConsoleConfigurationTests(unittest.TestCase):
           bot: bot
           default_userid: console
           prompt: $
-          bot_selector: programy.clients.client.DefaultBotSelector
+          bot_selector: programy.clients.botfactory.DefaultBotSelector
           renderer: programy.clients.render.text.TextRenderer
         """, ConsoleConfiguration(), ".")
 
@@ -74,7 +75,7 @@ class ConsoleConfigurationTests(unittest.TestCase):
         self.assertEqual('$', data['prompt'])
 
         self.assertEqual(data['bot'], 'bot')
-        self.assertEqual(data['bot_selector'], "programy.clients.client.DefaultBotSelector")
+        self.assertEqual(data['bot_selector'], "programy.clients.botfactory.DefaultBotSelector")
         self.assertEqual(data['renderer'], "programy.clients.render.text.TextRenderer")
 
     def test_to_yaml_no_data(self):

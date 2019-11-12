@@ -1,14 +1,14 @@
-import unittest
 import os
 import os.path
 import shutil
+import unittest
 
-from programy.storage.stores.file.store.triggers import FileTriggersStore
-from programy.storage.stores.file.engine import FileStorageEngine
 from programy.storage.stores.file.config import FileStorageConfiguration
 from programy.storage.stores.file.config import FileStoreConfiguration
-from programy.triggers.manager import TriggerManager
+from programy.storage.stores.file.engine import FileStorageEngine
+from programy.storage.stores.file.store.triggers import FileTriggersStore
 from programy.triggers.config import TriggerConfiguration
+from programy.triggers.manager import TriggerManager
 
 
 class FileTriggersStoreTests(unittest.TestCase):

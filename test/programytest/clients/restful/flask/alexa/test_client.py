@@ -1,10 +1,9 @@
-import unittest.mock
-import os
 import json
+import os
+import unittest.mock
 
 from programy.clients.restful.flask.alexa.client import AlexaBotClient
 from programy.clients.restful.flask.alexa.config import AlexaConfiguration
-
 from programytest.clients.arguments import MockArgumentParser
 
 

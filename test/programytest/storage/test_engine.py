@@ -178,6 +178,12 @@ class StorageEngineTests(unittest.TestCase):
         with self.assertRaises(StorageEngineException):
             _ = engine.postprocessors_store()
 
+    def test_postquestionprocessors_store_not_implemented(self):
+        config = unittest.mock.Mock()
+        engine = StorageEngine(config)
+        with self.assertRaises(StorageEngineException):
+            _ = engine.postquestionprocessors_store()
+
     def test_usergroups_store_not_implemented(self):
         config = unittest.mock.Mock()
         engine = StorageEngine(config)
@@ -189,3 +195,15 @@ class StorageEngineTests(unittest.TestCase):
         engine = StorageEngine(config)
         with self.assertRaises(StorageEngineException):
             _ = engine.triggers_store()
+
+    def test_defaults_store_not_implemented(self):
+        config = unittest.mock.Mock()
+        engine = StorageEngine(config)
+        with self.assertRaises(StorageEngineException):
+            _ = engine.defaults_store()
+
+    def test_variables_store_not_implemented(self):
+        config = unittest.mock.Mock()
+        engine = StorageEngine(config)
+        with self.assertRaises(StorageEngineException):
+            _ = engine.variables_store()

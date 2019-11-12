@@ -19,6 +19,8 @@ from dateutil.relativedelta import relativedelta
 from programy.utils.logging.ylogger import YLogger
 from programy.parser.template.nodes.base import TemplateNode
 from programy.utils.text.text import TextUtils
+from programy.parser.template.nodes.word import TemplateWordNode
+from programy.parser.exceptions import ParserException
 
 
 class TemplateIntervalNode(TemplateNode):
@@ -36,7 +38,10 @@ class TemplateIntervalNode(TemplateNode):
 
     @interval_format.setter
     def interval_format(self, interval_format: TemplateNode):
-        self._interval_format = interval_format
+        if isinstance(interval_format, TemplateNode):
+           self._interval_format = interval_format
+        else:
+            self._interval_format = TemplateWordNode(interval_format)
 
     @property
     def interval_from(self) -> TemplateNode:
@@ -44,7 +49,10 @@ class TemplateIntervalNode(TemplateNode):
 
     @interval_from.setter
     def interval_from(self, interval_from):
-        self._interval_from = interval_from
+        if isinstance(interval_from, TemplateNode):
+            self._interval_from = interval_from
+        else:
+            self._interval_from = TemplateWordNode(interval_from)
 
     @property
     def interval_to(self) -> TemplateNode:
@@ -52,7 +60,10 @@ class TemplateIntervalNode(TemplateNode):
 
     @interval_to.setter
     def interval_to(self, interval_to):
-        self._interval_to = interval_to
+        if isinstance(interval_to, TemplateNode):
+            self._interval_to = interval_to
+        else:
+            self._interval_to = TemplateWordNode(interval_to)
 
     @property
     def style(self) -> TemplateNode:
@@ -60,62 +71,58 @@ class TemplateIntervalNode(TemplateNode):
 
     @style.setter
     def style(self, style):
-        self._style = style
+        if isinstance(style, TemplateNode):
+            self._style = style
+        else:
+            self._style = TemplateWordNode(style)
 
     def resolve_to_string(self, client_context):
         if self.interval_format is not None:
             format_str = self.interval_format.resolve(client_context)
         else:
-            format_str = "%C"
+            format_str = "%c"
 
-        from_time = None
-        if self.interval_from is not None:
-            from_str = self.interval_from.resolve(client_context)
-            from_time = datetime.datetime.strptime(from_str, format_str)
+        from_str = self.interval_from.resolve(client_context)
+        from_time = datetime.datetime.strptime(from_str, format_str)
 
-        to_time = None
-        if self.interval_to is not None:
-            to_str = self.interval_to.resolve(client_context)
-            to_time = datetime.datetime.strptime(to_str, format_str)
+        to_str = self.interval_to.resolve(client_context)
+        to_time = datetime.datetime.strptime(to_str, format_str)
 
-        difference = None
-        if from_time is not None and to_time is not None:
-            diff = to_time - from_time
-            difference = relativedelta(to_time, from_time)
+        diff = to_time - from_time
+        difference = relativedelta(to_time, from_time)
 
         resolved = ""
-        if difference is not None and self.style is not None:
-            style = self.style.resolve(client_context)
+        style = self.style.resolve(client_context)
 
-            if style == "years":
-                resolved = str(difference.years)
-            elif style == "months":
-                resolved = str(difference.months)
-            elif style == "weeks":
-                resolved = str(difference.weeks)
-            elif style == "days":
-                resolved = str(diff.days)
-            elif style == "hours":
-                resolved = str(difference.hours)
-            elif style == "minutes":
-                resolved = str(difference.minutes)
-            elif style == "seconds":
-                resolved = str(difference.seconds)
-            elif style == "microseconds":
-                resolved = str(difference.microseconds)
-            elif style == "ymd":
-                resolved = "%d years, %d months, %d days" % \
-                           (difference.years, difference.months, difference.days)
-            elif style == "hms":
-                resolved = "%d hours, %d minutes, %d seconds" % \
-                           (difference.hours, difference.minutes, difference.seconds)
-            elif style == "ymdhms":
-                resolved = "%d years, %d months, %d days, %d hours, %d minutes, %d seconds" % \
-                           (difference.years, difference.months, difference.days,
-                            difference.hours, difference.minutes, difference.seconds)
-            else:
-                YLogger.error(client_context, "Unknown interval style [%s]", style)
-                resolved = ""
+        if style == "years":
+            resolved = str(difference.years)
+        elif style == "months":
+            resolved = str(difference.months)
+        elif style == "weeks":
+            resolved = str(difference.weeks)
+        elif style == "days":
+            resolved = str(diff.days)
+        elif style == "hours":
+            resolved = str(difference.hours)
+        elif style == "minutes":
+            resolved = str(difference.minutes)
+        elif style == "seconds":
+            resolved = str(difference.seconds)
+        elif style == "microseconds":
+            resolved = str(difference.microseconds)
+        elif style == "ymd":
+            resolved = "%d years, %d months, %d days" % \
+                       (difference.years, difference.months, difference.days)
+        elif style == "hms":
+            resolved = "%d hours, %d minutes, %d seconds" % \
+                       (difference.hours, difference.minutes, difference.seconds)
+        elif style == "ymdhms":
+            resolved = "%d years, %d months, %d days, %d hours, %d minutes, %d seconds" % \
+                       (difference.years, difference.months, difference.days,
+                        difference.hours, difference.minutes, difference.seconds)
+        else:
+            YLogger.error(client_context, "Unknown interval style [%s]", style)
+            resolved = ""
 
         YLogger.debug(client_context, "[INTERVAL] resolved to [%s]", resolved)
         return resolved
@@ -154,6 +161,15 @@ class TemplateIntervalNode(TemplateNode):
         if 'format' in expression.attrib:
             self._interval_format = graph.get_word_node(expression.attrib['format'])
 
+        if 'style' in expression.attrib:
+            self._style = graph.get_word_node(expression.attrib['style'])
+
+        if 'from' in expression.attrib:
+            self._interval_from = graph.get_word_node(expression.attrib['from'])
+
+        if 'to' in expression.attrib:
+            self._interval_to = graph.get_word_node(expression.attrib['to'])
+
         head_text = self.get_text_from_element(expression)
         self.parse_text(graph, head_text)
 
@@ -187,21 +203,21 @@ class TemplateIntervalNode(TemplateNode):
                     node.parse_text(graph, self.get_text_from_element(child))
                 self._interval_to = node
             else:
-                graph.parse_tag_expression(child, self)
+                raise ParserException("No children allows in interval")
 
             tail_text = self.get_tail_from_element(child)
             self.parse_text(graph, tail_text)
 
         if self.interval_format is None:
             YLogger.warning(self, "Interval node, format missing, defaulting to '%c'!")
-            self._interval_format = "%c"
+            self._interval_format = TemplateWordNode("%c")
 
         if self.style is None:
             YLogger.warning(self, "style node, format missing, defaulting to 'days'!")
-            self._style = "days"
+            self._style = TemplateWordNode("days")
 
         if self.interval_from is None:
-            YLogger.warning(self, "interval_from node, format missing !")
+            raise ParserException("interval_from node, format missing !")
 
         if self.interval_to is None:
-            YLogger.warning(self, "interval_to node, format missing !")
+            raise ParserException(self, "interval_to node, format missing !")

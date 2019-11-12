@@ -1,5 +1,5 @@
-import unittest
 import json
+import unittest
 
 from programy.services.openchatbot.openchatbot import OpenChatBot
 

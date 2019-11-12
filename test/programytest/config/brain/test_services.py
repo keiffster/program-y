@@ -1,8 +1,9 @@
 import unittest
 
-from programy.config.file.yaml_file import YamlConfigurationFile
-from programy.config.brain.services import BrainServicesConfiguration
 from programy.clients.events.console.config import ConsoleConfiguration
+from programy.config.brain.services import BrainServicesConfiguration
+from programy.config.file.yaml_file import YamlConfigurationFile
+
 
 class BrainServicesConfigurationTests(unittest.TestCase):
 
@@ -36,6 +37,9 @@ class BrainServicesConfigurationTests(unittest.TestCase):
         self.assertTrue(services_config.exists("Pandora"))
         self.assertTrue(services_config.exists("Wikipedia"))
         self.assertFalse(services_config.exists("Other"))
+
+        self.assertIsNotNone(services_config.service("REST"))
+        self.assertIsNone(services_config.service("REST2"))
 
     def test_without_data(self):
         yaml = YamlConfigurationFile()

@@ -58,16 +58,6 @@ class BaseConfigurationData(ABC):
     def id(self):
         return self._section_name
 
-    def _get_file_option(self, config_file, option_name, section, bot_root, subs: Substitutions = None):
-
-        assert config_file is not None
-        assert option_name is not None
-
-        option = config_file.get_option(section, option_name, subs=subs)
-        if option is not None:
-            option = self.sub_bot_root(option, bot_root)
-        return option
-
     def sub_bot_root(self, text, root):
 
         assert text is not None
@@ -79,18 +69,20 @@ class BaseConfigurationData(ABC):
         return []
 
     def load_additional_key_values(self, configuration, section, subs: Substitutions = None):
-        if configuration:
-            if section is not None:
-                for key in configuration.get_keys(section):
-                    if key in self.additionals_to_add():
-                        value = configuration.get_option(section, key, subs=subs)
-                        self._additionals[key] = value
+        if section is not None:
+            for key in configuration.get_keys(section):
+                if key in self.additionals_to_add():
+                    value = configuration.get_option(section, key, subs=subs)
+                    self._additionals[key] = value
 
     def _extract_license_key(self, attr, license_keys):
         if attr is not None:
             if "LICENSE:" in attr:
                 if license_keys.has_key(attr[8:]):
                     return license_keys.get_key(attr[8:])
+                else:
+                    return None
+
         return attr
 
     def check_for_license_keys(self, license_keys):
@@ -106,4 +98,5 @@ class BaseConfigurationData(ABC):
         config.to_yaml(data[config.id], defaults)
 
     def to_yaml(self, data, defaults=True):
-        pass
+        pass  # pragma: no cover
+

@@ -1,12 +1,10 @@
 import unittest
 
-from programytest.storage.asserts.store.assert_preprocessors import PreProcessorsStoreAsserts
-
-from programy.storage.stores.nosql.mongo.store.processors import MongoPreProcessorStore
-from programy.storage.stores.nosql.mongo.engine import MongoStorageEngine
-from programy.storage.stores.nosql.mongo.config import MongoStorageConfiguration
-
 import programytest.storage.engines as Engines
+from programy.storage.stores.nosql.mongo.config import MongoStorageConfiguration
+from programy.storage.stores.nosql.mongo.engine import MongoStorageEngine
+from programy.storage.stores.nosql.mongo.store.processors import MongoPreProcessorStore
+from programytest.storage.asserts.store.assert_preprocessors import PreProcessorsStoreAsserts
 
 
 class MongoPreProcessorStoreTests(PreProcessorsStoreAsserts):

@@ -1,5 +1,5 @@
-import unittest
 import os
+import unittest
 
 from programy.utils.substitutions.substitues import Substitutions
 
@@ -43,12 +43,46 @@ class SubstitutionsTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             sub.get_substitute("$NUMBER")
 
+    def test_load_bad_subs(self):
+
+        sub = Substitutions()
+
+        sub.load_substitutions(os.path.dirname(__file__) + os.sep + "bad_subs.txt")
+
+        with self.assertRaises(ValueError):
+            _ = sub.get_substitute("$FIRSTNAME")
+
     def test_substitutions(self):
 
         sub = Substitutions()
 
         sub.load_substitutions(os.path.dirname(__file__) + os.sep + "subs.txt")
 
+        self.assertEquals("Two words", sub.get_substitute("$MULTIPLE"))
+
         self.assertEqual("My name is Fred West", sub.replace("My name is $FIRSTNAME $SURNAME"))
         self.assertEqual("My name is FredWest", sub.replace("My name is $FIRSTNAME$SURNAME"))
 
+    def test_substitutions_no_file(self):
+
+        sub = Substitutions()
+
+        sub.load_substitutions(None)
+
+    def test_add_duplicate(self):
+
+        sub = Substitutions()
+
+        sub.add_substitute("$FIRSTNAME", "Fred")
+        sub.add_substitute("$FIRSTNAME", "Fred")
+
+        self.assertTrue(sub.has_substitute("$FIRSTNAME"))
+
+    def test_add_duplicate(self):
+
+        sub = Substitutions()
+
+        sub.add_substitute("$FIRSTNAME", "Fred")
+        sub.add_substitute("$FIRSTNAME", "Fred")
+
+        self.assertTrue(sub.has_substitute("$FIRSTNAME"))

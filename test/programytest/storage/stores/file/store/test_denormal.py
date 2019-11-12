@@ -1,13 +1,13 @@
-from programytest.storage.asserts.store.assert_denormals import DenormalStoreAsserts
 import os
 import os.path
 import re
 
-from programy.storage.stores.file.store.lookups import FileDenormalStore
-from programy.storage.stores.file.engine import FileStorageEngine
-from programy.storage.stores.file.config import FileStorageConfiguration
 from programy.mappings.denormal import DenormalCollection
+from programy.storage.stores.file.config import FileStorageConfiguration
 from programy.storage.stores.file.config import FileStoreConfiguration
+from programy.storage.stores.file.engine import FileStorageEngine
+from programy.storage.stores.file.store.lookups import FileDenormalStore
+from programytest.storage.asserts.store.assert_denormals import DenormalStoreAsserts
 
 
 class FileDenormalStoreTests(DenormalStoreAsserts):

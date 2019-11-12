@@ -1,8 +1,7 @@
 import unittest
 
-from programy.dynamic.sets.roman import IsRomanNumeral
 from programy.context import ClientContext
-
+from programy.dynamic.sets.roman import IsRomanNumeral
 from programytest.client import TestClient
 
 

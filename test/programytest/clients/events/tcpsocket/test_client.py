@@ -1,10 +1,9 @@
-import unittest
 import socket
+import unittest
 
-from programy.clients.events.tcpsocket.client import SocketConnection
 from programy.clients.events.tcpsocket.client import SocketBotClient
+from programy.clients.events.tcpsocket.client import SocketConnection
 from programy.clients.events.tcpsocket.config import SocketConfiguration
-
 from programytest.clients.arguments import MockArgumentParser
 
 

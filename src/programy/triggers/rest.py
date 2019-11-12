@@ -28,7 +28,7 @@ class RestTriggerManager(TriggerManager):
         TriggerManager.__init__(self, config)
 
     def post_data(self, api_url_base, headers, payload):
-        return requests.post(api_url_base, headers=headers, json=payload)
+        return requests.post(api_url_base, headers=headers, json=payload)   # pragma: no cover
 
     def trigger(self, event: str, client_context: ClientContext = None, additional: Dict[str, str] = None) -> bool:
 
@@ -55,11 +55,15 @@ class RestTriggerManager(TriggerManager):
             headers['Authorisation'] = 'Bearer %s' % api_token
 
         if api_method is None or api_method.upper() == 'POST':
-            response = self.post_data(api_url_base, headers=headers, payload=payload)
+            try:
+                response = self.post_data(api_url_base, headers=headers, payload=payload)
 
-            if response.status_code == 200:
-                return True
+                if response.status_code == 200:
+                    return True
 
-            YLogger.error(None, "Failed to send trigger info via REST [%d]", response.status_code)
+                YLogger.error(None, "Failed to send trigger info via REST [%d]", response.status_code)
+
+            except Exception as error:
+                YLogger.exception(client_context, "Failed to post data", error)
 
         return False

@@ -25,16 +25,25 @@ class SetTests(unittest.TestCase):
         self.assertEqual(["val1", "val2", "val3"], aset.values)
         self.assertEqual({'_id': '666', 'values': ["val1", "val2", "val3"], 'name': 'TEST'}, aset.to_document())
 
-    def test_from_document(self):
+    def test_from_document_no_id(self):
         aset1 = Set.from_document({'values': ["val1", "val2", "val3"], 'name': 'TEST'})
         self.assertIsNotNone(aset1)
         self.assertIsNone(aset1.id)
         self.assertEqual("TEST", aset1.name)
         self.assertEqual(["val1", "val2", "val3"], aset1.values)
 
+    def test_from_document_with_id(self):
         aset2 = Set.from_document({'_id': '666', 'values': ["val1", "val2", "val3"], 'name': 'TEST'})
         self.assertIsNotNone(aset2)
         self.assertIsNotNone(aset2.id)
         self.assertEqual('666', aset2.id)
         self.assertEqual("TEST", aset2.name)
         self.assertEqual(["val1", "val2", "val3"], aset2.values)
+
+    def test_repr_no_id(self):
+        aset1 = Set.from_document({'values': ["val1", "val2", "val3"], 'name': 'TEST'})
+        self.assertEquals("<Set(id='n/a', name='TEST', values='val1, val2, val3')>", str(aset1))
+
+    def test_repr_with_id(self):
+        aset2 = Set.from_document({'_id': '666', 'values': ["val1", "val2", "val3"], 'name': 'TEST'})
+        self.assertEquals("<Set(id='666', name='TEST', values='val1, val2, val3')>", str(aset2))

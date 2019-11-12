@@ -1,13 +1,14 @@
 import logging
 import os
 import os.path
+
 from programy.clients.client import BotClient
-from programy.config.programy import ProgramyConfiguration
 from programy.clients.events.console.config import ConsoleConfiguration
-from programy.storage.stores.file.config import FileStorageConfiguration
-from programy.storage.stores.file.store.config import FileStoreConfiguration
-from programy.storage.stores.file.engine import FileStorageEngine
+from programy.config.programy import ProgramyConfiguration
 from programy.storage.factory import StorageFactory
+from programy.storage.stores.file.config import FileStorageConfiguration
+from programy.storage.stores.file.engine import FileStorageEngine
+from programy.storage.stores.file.store.config import FileStoreConfiguration
 from programytest.clients.arguments import MockArguments
 
 
@@ -151,6 +152,20 @@ class TestClient(BotClient):
         self._file_store_config._conversation_storage = FileStoreConfiguration(dirs=dir, fileformat="text", extension="txt", encoding="utf-8", delete_on_start=False)
         self.storage_factory._storage_engines[StorageFactory.CONVERSATIONS] = self._storage_engine
         self.storage_factory._store_to_engine_map[StorageFactory.CONVERSATIONS] = self._storage_engine
+
+    def add_debug_stores(self, errors_file, duplicates_file):
+        self._file_store_config._errors_storage = FileStoreConfiguration(file=errors_file, fileformat="text",encoding="utf-8", delete_on_start=False)
+        self.storage_factory._storage_engines[StorageFactory.ERRORS] = self._storage_engine
+        self.storage_factory._store_to_engine_map[StorageFactory.ERRORS] = self._storage_engine
+
+        self._file_store_config._duplicates_storage = FileStoreConfiguration(file=duplicates_file, fileformat="text",encoding="utf-8", delete_on_start=False)
+        self.storage_factory._storage_engines[StorageFactory.DUPLICATES] = self._storage_engine
+        self.storage_factory._store_to_engine_map[StorageFactory.DUPLICATES] = self._storage_engine
+
+    def add_braintree_store(self, brainfile):
+        self._file_store_config._braintree_storage = FileStoreConfiguration(file=brainfile, fileformat="text",encoding="utf-8", delete_on_start=False)
+        self.storage_factory._storage_engines[StorageFactory.BRAINTREE] = self._storage_engine
+        self.storage_factory._store_to_engine_map[StorageFactory.BRAINTREE] = self._storage_engine
 
     def add_default_stores(self):
         self.add_license_keys_store()

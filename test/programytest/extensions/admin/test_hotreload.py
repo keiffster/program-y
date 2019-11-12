@@ -4,7 +4,6 @@ import unittest.mock
 
 from programy.extensions.admin.hotreload import HotReloadAdminExtension
 from programy.storage.factory import StorageFactory
-
 from programytest.client import TestClient
 
 

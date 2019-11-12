@@ -1,14 +1,14 @@
-import unittest
 import os
+import unittest
 
-from programy.clients.restful.flask.alexa.intents import QueryIntent
-from programy.clients.restful.flask.alexa.intents import StopIntent
 from programy.clients.restful.flask.alexa.intents import CancelIntent
 from programy.clients.restful.flask.alexa.intents import HelpIntent
+from programy.clients.restful.flask.alexa.intents import IntentGenerator
 from programy.clients.restful.flask.alexa.intents import Intents
 from programy.clients.restful.flask.alexa.intents import InteractionModel
 from programy.clients.restful.flask.alexa.intents import LanguageModel
-from programy.clients.restful.flask.alexa.intents import IntentGenerator
+from programy.clients.restful.flask.alexa.intents import QueryIntent
+from programy.clients.restful.flask.alexa.intents import StopIntent
 
 
 class CancelIntentTests(unittest.TestCase):

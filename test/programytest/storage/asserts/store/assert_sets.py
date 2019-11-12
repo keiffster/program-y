@@ -1,9 +1,9 @@
-import unittest
 import os
 import os.path
+import unittest
 
-from programy.storage.entities.store import Store
 from programy.mappings.sets import SetCollection
+from programy.storage.entities.store import Store
 
 
 class MockSetCollection(object):

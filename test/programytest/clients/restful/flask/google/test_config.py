@@ -1,8 +1,8 @@
 import unittest
 
-from programy.config.file.yaml_file import YamlConfigurationFile
-from programy.clients.restful.flask.google.config import GoogleConfiguration
 from programy.clients.events.console.config import ConsoleConfiguration
+from programy.clients.restful.flask.google.config import GoogleConfiguration
+from programy.config.file.yaml_file import YamlConfigurationFile
 
 
 class GoogleConfigurationTests(unittest.TestCase):

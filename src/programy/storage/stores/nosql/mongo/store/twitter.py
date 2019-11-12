@@ -25,6 +25,7 @@ class MongoTwitterStore(MongoStore, TwitterStore):
 
     def __init__(self, storage_engine):
         MongoStore.__init__(self, storage_engine)
+        TwitterStore.__init__(self)
 
     def collection_name(self):
         return MongoTwitterStore.TWITTER

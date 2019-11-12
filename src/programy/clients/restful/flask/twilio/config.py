@@ -21,6 +21,3 @@ class TwilioConfiguration(RestConfiguration):
 
     def __init__(self):
         RestConfiguration.__init__(self, "twilio")
-
-    def check_for_license_keys(self, license_keys):
-        RestConfiguration.check_for_license_keys(self, license_keys)

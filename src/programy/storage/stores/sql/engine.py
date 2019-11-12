@@ -42,6 +42,7 @@ from programy.storage.stores.sql.store.nodes import SQLPatternNodesStore
 from programy.storage.stores.sql.store.nodes import SQLTemplateNodesStore
 from programy.storage.stores.sql.store.processors import SQLPreProcessorsStore
 from programy.storage.stores.sql.store.processors import SQLPostProcessorsStore
+from programy.storage.stores.sql.store.processors import SQLPostQuestionProcessorsStore
 from programy.storage.stores.sql.store.usergroups import SQLUserGroupStore
 from programy.storage.engine import StorageEngine
 from programy.storage.stores.sql.base import Base
@@ -54,18 +55,27 @@ class SQLStorageEngine(StorageEngine):
         self._session = None
         self._engine = None
 
+    def _drop_all(self):
+        Base.metadata.drop_all(self._engine)
+
+    def _create_all(self):
+        Base.metadata.create_all(self._engine)
+
+    def _create_session(self):
+        Session = sessionmaker(bind=self._engine)
+        self._session = Session()
+
     def initialise(self):
         self._engine = create_engine(self.configuration.url, encoding=self.configuration.encoding,
                                      echo=self.configuration.echo)
 
         if self.configuration.drop_all_first is True:
-            Base.metadata.drop_all(self._engine)
+            self._drop_all()
 
         if self.configuration.create_db is True:
-            Base.metadata.create_all(self._engine)
+            self._create_all()
 
-        Session = sessionmaker(bind=self._engine)
-        self._session = Session()
+        self._create_session()
         return True
 
     @property
@@ -149,6 +159,9 @@ class SQLStorageEngine(StorageEngine):
 
     def postprocessors_store(self):
         return SQLPostProcessorsStore(self)
+
+    def postquestionprocessors_store(self):
+        return SQLPostQuestionProcessorsStore(self)
 
     def usergroups_store(self):
         return SQLUserGroupStore(self)

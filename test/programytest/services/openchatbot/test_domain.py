@@ -1,8 +1,8 @@
-import unittest
 import json
+import unittest
 
-from programy.services.openchatbot.domain import OpenChatBotDomainHandler
 from programy.config.brain.openchatbots import BrainOpenChatBotsConfiguration
+from programy.services.openchatbot.domain import OpenChatBotDomainHandler
 
 
 class MockHTTPResponse(object):

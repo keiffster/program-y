@@ -33,7 +33,7 @@ class SentenceSplitter(Activatable):
         self._configuration = splitter_config
 
     def split(self, text):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     def remove_punctuation(self, text):
         return SentenceSplitter.ALL_PUNCTUATION.sub('', text)
@@ -46,8 +46,10 @@ class SentenceSplitter(Activatable):
                 splitter_class = ClassLoader.instantiate_class(splitter_config.classname)
                 sentence_splitter = splitter_class(splitter_config)
                 return sentence_splitter
+
             except Exception as excep:
                 YLogger.exception(None, "Failed to initiate sentence splitter", excep)
+
         else:
             YLogger.warning(None, "No configuration setting for sentence splitter!")
 

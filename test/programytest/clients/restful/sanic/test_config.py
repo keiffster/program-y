@@ -1,8 +1,9 @@
 import unittest
 
-from programy.config.file.yaml_file import YamlConfigurationFile
-from programy.clients.restful.sanic.config import SanicRestConfiguration
 from programy.clients.events.console.config import ConsoleConfiguration
+from programy.clients.restful.sanic.config import SanicRestConfiguration
+from programy.config.file.yaml_file import YamlConfigurationFile
+
 
 class SanicRestConfigurationTests(unittest.TestCase):
 
@@ -54,5 +55,5 @@ class SanicRestConfigurationTests(unittest.TestCase):
         self.assertEqual(data['workers'], 4)
 
         self.assertEqual(data['bot'], 'bot')
-        self.assertEqual(data['bot_selector'], "programy.clients.client.DefaultBotSelector")
+        self.assertEqual(data['bot_selector'], "programy.clients.botfactory.DefaultBotSelector")
         self.assertEqual(data['renderer'], "programy.clients.render.text.TextRenderer")

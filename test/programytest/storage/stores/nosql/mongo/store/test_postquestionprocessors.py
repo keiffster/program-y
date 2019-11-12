@@ -1,12 +1,10 @@
 import unittest
 
-from programytest.storage.asserts.store.assert_postquestionprocessors import PostQuestionProcessorsStoreAsserts
-
-from programy.storage.stores.nosql.mongo.store.processors import MongoPostQuestionProcessorStore
-from programy.storage.stores.nosql.mongo.engine import MongoStorageEngine
-from programy.storage.stores.nosql.mongo.config import MongoStorageConfiguration
-
 import programytest.storage.engines as Engines
+from programy.storage.stores.nosql.mongo.config import MongoStorageConfiguration
+from programy.storage.stores.nosql.mongo.engine import MongoStorageEngine
+from programy.storage.stores.nosql.mongo.store.processors import MongoPostQuestionProcessorStore
+from programytest.storage.asserts.store.assert_postquestionprocessors import PostQuestionProcessorsStoreAsserts
 
 
 class MongoPostQuestionProcessorStoreTests(PostQuestionProcessorsStoreAsserts):

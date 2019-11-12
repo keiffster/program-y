@@ -1,8 +1,7 @@
-import unittest
 import os
+import unittest
 
 from programy.utils.text.dateformat import DateFormatter
-
 from programytest.client import TestClient
 
 

@@ -1,6 +1,6 @@
 import unittest
-from programy.processors.postquestion.ngrams import NGramsPostQuestionProcessor
 
+from programy.processors.postquestion.ngrams import NGramsPostQuestionProcessor
 from programytest.client import TestClient
 
 

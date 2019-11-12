@@ -58,11 +58,15 @@ class WeatherExtension(Extension):
             return None
 
         if obvtype == 'OBSERVATION':
-            return self.current_observation(client_context, postcode)
+            result = self.current_observation(client_context, postcode)
         elif obvtype == 'FORECAST5DAY':
-            return self.five_day_forecast(client_context, postcode, when)
+            result =  self.five_day_forecast(client_context, postcode, when)
         elif obvtype == 'FORECAST24HOUR':
-            return self.twentyfour_hour_forecast(client_context, postcode, when)
+            result = self.twentyfour_hour_forecast(client_context, postcode, when)
+        else:
+            result = "UNAVAILABLE"
+
+        return result
 
     def current_observation(self, context, postcode):
         YLogger.debug(context, "Getting weather observation for [%s]", postcode)

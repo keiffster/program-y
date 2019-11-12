@@ -1,14 +1,16 @@
 import os
-import xml.etree.ElementTree as ET
 
-from programy.config.file.xml_file import XMLConfigurationFile
 from programy.clients.events.console.config import ConsoleConfiguration
+from programy.config.file.xml_file import XMLConfigurationFile
 from programy.utils.substitutions.substitues import Substitutions
-
 from programytest.config.file.base_file_tests import ConfigurationBaseFileTests
 
 
 class XMLConfigurationFileTests(ConfigurationBaseFileTests):
+
+    def test_invalid_file(self):
+        config = XMLConfigurationFile()
+        self.assertIsNotNone(config.load_from_file("unknown.xml", ConsoleConfiguration(), "."))
 
     def test_get_methods(self):
         config_data = XMLConfigurationFile()
@@ -72,16 +74,21 @@ class XMLConfigurationFileTests(ConfigurationBaseFileTests):
         configuration = xml.load_from_text("""<?xml version="1.0" encoding="UTF-8" ?>
 <root>
 	<console>
-		<bot>bot</bot>
+		<bot>bot1</bot>
+		<bot>bot2</bot>
 	</console>
-	<bot>
-		<brain>bot1</brain>
-		<brain>bot2</brain>
-	</bot>
+	<bot1>
+		<brain>brain1</brain>
+		<brain>brain2</brain>
+	</bot1>
+	<bot2>
+		<brain>brain1</brain>
+		<brain>brain2</brain>
+	</bot2>
 </root>""", ConsoleConfiguration(), ".")
         self.assertIsNotNone(configuration)
 
-        self.assertEqual(2, len(configuration.client_configuration.configurations[0].configurations))
+        self.assertEqual(1, len(configuration.client_configuration.configurations[0].configurations))
 
     def test_load_from_text(self):
         xml = XMLConfigurationFile()
@@ -533,3 +540,201 @@ class XMLConfigurationFileTests(ConfigurationBaseFileTests):
         self.assertEqual(True, config_data.get_option(child_section, "allow_system_aiml"))
         self.assertEqual(True, config_data.get_bool_option(child_section, "allow_system_aiml"))
         self.assertEqual(False, config_data.get_bool_option(child_section, "other_value"))
+
+    def test_get_invalid_values(self):
+        config_data = XMLConfigurationFile()
+        self.assertIsNotNone(config_data)
+        configuration = config_data.load_from_text("""
+        <console>
+            <section1>
+                <section2>
+                    <boolvalue>true</boolvalue>
+                    <intvalue>23</intvalue>
+                    <strvalue>hello</strvalue>
+                    <multivalue>
+                        <dir>one</dir>
+                        <dir>two</dir>
+                        <dir>three</dir>
+                    </multivalue>
+                </section2>
+            </section1>
+        </console>
+                  """, ConsoleConfiguration(), ".")
+        self.assertIsNotNone(configuration)
+
+        section = config_data.get_section("section1")
+        self.assertIsNotNone(section)
+
+        child_section = config_data.get_section("section2", section)
+        self.assertIsNotNone(child_section)
+
+        self.assertEquals(0, config_data.get_int_option(child_section, "boolvalue"))
+        self.assertEquals(23, config_data.get_int_option(child_section, "intvalue"))
+        self.assertEquals(0, config_data.get_int_option(child_section, "strvalue"))
+
+        self.assertTrue(config_data.get_bool_option(child_section, "boolvalue"))
+        self.assertFalse(config_data.get_bool_option(child_section, "intvalue"))
+        self.assertFalse(config_data.get_bool_option(child_section, "strvalue"))
+
+        self.assertEquals([], config_data.get_multi_option(child_section, "multivalue2"))
+        self.assertEquals([], config_data.get_multi_file_option(child_section, "multivalue2", "."))
+
+    def test_get_multi_option(self):
+        config_data = XMLConfigurationFile()
+        self.assertIsNotNone(config_data)
+        configuration = config_data.load_from_text("""
+        <console>
+            <section1>
+                <multivalue>
+                    <dir>one</dir>
+                    <dir>two</dir>
+                    <dir>three</dir>
+                    <dir></dir>
+                </multivalue>
+            </section1>
+        </console>
+                  """, ConsoleConfiguration(), ".")
+        self.assertIsNotNone(configuration)
+
+        section1 = config_data.get_section("section1")
+        self.assertIsNotNone(section1)
+
+        multivalue = config_data.get_section("multivalue", section1)
+        self.assertIsNotNone(section1)
+
+        self.assertEquals(['one', 'two', 'three'], config_data.get_multi_option(multivalue, "dir"))
+
+    def test_get_multi_option_no_missing_values(self):
+        config_data = XMLConfigurationFile()
+        self.assertIsNotNone(config_data)
+        configuration = config_data.load_from_text("""
+        <console>
+            <section1>
+                <multivalue>
+                    <dir>one</dir>
+                    <dir>two</dir>
+                    <dir>three</dir>
+                    <dir></dir>
+                    <other>value</other>
+                    <other></other>
+                </multivalue>
+            </section1>
+        </console>
+                  """, ConsoleConfiguration(), ".")
+        self.assertIsNotNone(configuration)
+
+        section1 = config_data.get_section("section1")
+        self.assertIsNotNone(section1)
+
+        multivalue = config_data.get_section("multivalue", section1)
+        self.assertIsNotNone(section1)
+
+        self.assertEquals([], config_data.get_multi_option(multivalue, "dirX"))
+
+    def test_get_multi_option_with_missing_values(self):
+        config_data = XMLConfigurationFile()
+        self.assertIsNotNone(config_data)
+        configuration = config_data.load_from_text("""
+        <console>
+            <section1>
+                <multivalue>
+                    <dir>one</dir>
+                    <dir>two</dir>
+                    <dir>three</dir>
+                </multivalue>
+            </section1>
+        </console>
+                  """, ConsoleConfiguration(), ".")
+        self.assertIsNotNone(configuration)
+
+        section1 = config_data.get_section("section1")
+        self.assertIsNotNone(section1)
+
+        multivalue = config_data.get_section("multivalue", section1)
+        self.assertIsNotNone(section1)
+
+        self.assertEquals(["X", "Y", "Z"], config_data.get_multi_option(multivalue, "dirX", missing_value=["X", "Y", "Z"]))
+
+    def test_get_multi_file_option(self):
+        config_data = XMLConfigurationFile()
+        self.assertIsNotNone(config_data)
+        configuration = config_data.load_from_text("""
+        <console>
+            <section1>
+                <multivalue>
+                    <dir>one</dir>
+                    <dir>two</dir>
+                    <dir>three</dir>
+                </multivalue>
+            </section1>
+        </console>
+                  """, ConsoleConfiguration(), ".")
+        self.assertIsNotNone(configuration)
+
+        section1 = config_data.get_section("section1")
+        self.assertIsNotNone(section1)
+
+        self.assertEquals(['one', 'two', 'three'], config_data.get_multi_file_option(section1, "multivalue", "."))
+
+    def test_get_multi_file_option_no_missing_value(self):
+        config_data = XMLConfigurationFile()
+        self.assertIsNotNone(config_data)
+        configuration = config_data.load_from_text("""
+        <console>
+            <section1>
+                <multivalue>
+                    <dir>one</dir>
+                    <dir>two</dir>
+                    <dir>three</dir>
+                </multivalue>
+            </section1>
+        </console>
+                  """, ConsoleConfiguration(), ".")
+        self.assertIsNotNone(configuration)
+
+        section1 = config_data.get_section("section1")
+        self.assertIsNotNone(section1)
+
+        self.assertEquals([], config_data.get_multi_file_option(section1, "multivalue2", "."))
+
+    def test_get_multi_file_option_with_missing_value(self):
+        config_data = XMLConfigurationFile()
+        self.assertIsNotNone(config_data)
+        configuration = config_data.load_from_text("""
+        <console>
+            <section1>
+                <multivalue>
+                    <dir>one</dir>
+                    <dir>two</dir>
+                    <dir>three</dir>
+                </multivalue>
+            </section1>
+        </console>
+                  """, ConsoleConfiguration(), ".")
+        self.assertIsNotNone(configuration)
+
+        section1 = config_data.get_section("section1")
+        self.assertIsNotNone(section1)
+
+        self.assertEquals(["file1", "file2", "file3"], config_data.get_multi_file_option(section1, "multivalue2", ".", missing_value=["file1", "file2", "file3"]))
+
+    def test_get_multi_file_option_with_missing_value_as_string(self):
+        config_data = XMLConfigurationFile()
+        self.assertIsNotNone(config_data)
+        configuration = config_data.load_from_text("""
+        <console>
+            <section1>
+                <multivalue>
+                    <dir>one</dir>
+                    <dir>two</dir>
+                    <dir>three</dir>
+                </multivalue>
+            </section1>
+        </console>
+                  """, ConsoleConfiguration(), ".")
+        self.assertIsNotNone(configuration)
+
+        section1 = config_data.get_section("section1")
+        self.assertIsNotNone(section1)
+
+        self.assertEquals(["file1"], config_data.get_multi_file_option(section1, "multivalue2", ".", missing_value="file1"))

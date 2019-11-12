@@ -1,9 +1,9 @@
 import unittest
-import os
 
 from programy.parser.pattern.factory import PatternNodeFactory
 from programy.parser.pattern.nodes.root import PatternRootNode
 from programy.parser.pattern.nodes.word import PatternWordNode
+
 
 class PatternFactoryTests(unittest.TestCase):
 
@@ -12,6 +12,10 @@ class PatternFactoryTests(unittest.TestCase):
         self.assertIsNotNone(factory)
         self.assertEqual({}, factory._nodes_config)
         self.assertEqual("Pattern", factory._type)
+
+    def test_default_config_file(self):
+        factory = PatternNodeFactory()
+        self.assertTrue(factory.default_config_file().endswith("/programy/parser/pattern/pattern_nodes.conf"))
 
     def assert_nodes(self, factory):
         self.assertEqual(12, len(factory._nodes_config))

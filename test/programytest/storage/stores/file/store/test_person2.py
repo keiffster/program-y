@@ -1,13 +1,13 @@
-from programytest.storage.asserts.store.assert_person2s import Person2sStoreAsserts
 import os
 import os.path
 import re
 
-from programy.storage.stores.file.store.lookups import FilePerson2Store
-from programy.storage.stores.file.engine import FileStorageEngine
-from programy.storage.stores.file.config import FileStorageConfiguration
 from programy.mappings.person import PersonCollection
+from programy.storage.stores.file.config import FileStorageConfiguration
 from programy.storage.stores.file.config import FileStoreConfiguration
+from programy.storage.stores.file.engine import FileStorageEngine
+from programy.storage.stores.file.store.lookups import FilePerson2Store
+from programytest.storage.asserts.store.assert_person2s import Person2sStoreAsserts
 
 
 class FilePerson2StoreTests(Person2sStoreAsserts):

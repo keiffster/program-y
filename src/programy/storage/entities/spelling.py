@@ -19,5 +19,8 @@ from programy.storage.entities.store import Store
 
 class SpellingStore(Store):
 
+    def __init__(self):
+        Store.__init__(self)
+
     def load_spelling(self, spell_checker):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover

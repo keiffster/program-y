@@ -19,5 +19,8 @@ from programy.storage.entities.store import Store
 
 class DuplicatesStore(Store):
 
+    def __init__(self):
+        Store.__init__(self)
+
     def save_duplicates(self, duplicates, commit=True):
-        raise NotImplementedError("save_duplicates missing from Duplicates Store")
+        raise NotImplementedError("save_duplicates missing from Duplicates Store")  # pragma: no cover

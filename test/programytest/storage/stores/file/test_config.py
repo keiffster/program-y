@@ -1,10 +1,9 @@
-import unittest
 import os
-
+import unittest
+from programy.clients.events.console.config import ConsoleConfiguration
 from programy.config.file.yaml_file import YamlConfigurationFile
 from programy.storage.stores.file.config import FileStorageConfiguration
-from programy.clients.events.console.config import ConsoleConfiguration
-
+from programy.storage.stores.file.store.filestore import FileStore
 import programytest.storage.engines as Engines
 
 
@@ -33,6 +32,7 @@ class FileStorageConfigurationTests(unittest.TestCase):
         self.assertIsNotNone(config.regex_storage)
 
         self.assertIsNotNone(config.properties_storage)
+        self.assertIsNotNone(config.variables_storage)
         self.assertIsNotNone(config.defaults_storage)
 
         self.assertIsNotNone(config.twitter_storage)
@@ -303,6 +303,56 @@ class FileStorageConfigurationTests(unittest.TestCase):
 
         self.assert_config(config.usergroups_storage, file=tmpdir + os.sep + "security/usergroups.yaml", fileformat="yaml", encoding="utf-8", delete_on_start=False)
 
+    def test_initialise_without_config_no_data(self):
+        yaml = YamlConfigurationFile()
+        self.assertIsNotNone(yaml)
+        yaml.load_from_text("""
+                other:
+                """, ConsoleConfiguration(), ".")
+
+        file_config = yaml.get_section("files")
+
+        config = FileStorageConfiguration()
+        config.load_config_section(yaml, file_config, ".")
+
+        tmpdir = FileStorageConfiguration.get_temp_dir()
+
+        self.assert_config(config.categories_storage, dirs=[tmpdir + os.sep + "categories"], extension="aiml", subdirs=True, fileformat="xml", encoding="utf-8", delete_on_start=False)
+        self.assert_config(config.learnf_storage, dirs=[tmpdir + os.sep + "categories/learnf"], extension="aiml", subdirs=False, fileformat="xml", encoding="utf-8", delete_on_start=False)
+
+        self.assert_config(config.conversation_storage, dirs=[tmpdir + os.sep + "conversations"], extension="txt", subdirs=False, fileformat="text", encoding="utf-8", delete_on_start=False)
+
+        self.assert_config(config.sets_storage, dirs=[tmpdir + os.sep + "sets"], extension="txt", subdirs=False, fileformat="text", encoding="utf-8", delete_on_start=False)
+        self.assert_config(config.maps_storage, dirs=[tmpdir + os.sep + "maps"], extension="txt", subdirs=False, fileformat="text", encoding="utf-8", delete_on_start=False)
+        self.assert_config(config.rdf_storage, dirs=[tmpdir + os.sep + "rdfs"], extension="txt", subdirs=True, fileformat="text", encoding="utf-8", delete_on_start=False)
+
+        self.assert_config(config.denormal_storage, file=tmpdir + os.sep + "lookups/denormal.txt", fileformat="text", encoding="utf-8", delete_on_start=False)
+        self.assert_config(config.normal_storage, file=tmpdir + os.sep + "lookups/normal.txt", fileformat="text", encoding="utf-8", delete_on_start=False)
+        self.assert_config(config.gender_storage, file=tmpdir + os.sep + "lookups/gender.txt", fileformat="text", encoding="utf-8", delete_on_start=False)
+        self.assert_config(config.person_storage, file=tmpdir + os.sep + "lookups/person.txt", fileformat="text", encoding="utf-8", delete_on_start=False)
+        self.assert_config(config.person2_storage, file=tmpdir + os.sep + "lookups/person2.txt", fileformat="text", encoding="utf-8", delete_on_start=False)
+        self.assert_config(config.regex_storage, file=tmpdir + os.sep + "lookups/regex.txt", fileformat="text", encoding="utf-8", delete_on_start=False)
+
+        self.assert_config(config.properties_storage, file=tmpdir + os.sep + "properties.txt", fileformat="text", encoding="utf-8", delete_on_start=False)
+        self.assert_config(config.defaults_storage, file=tmpdir + os.sep + "defaults.txt", fileformat="text", encoding="utf-8", delete_on_start=False)
+
+        self.assert_config(config.twitter_storage, dirs=[tmpdir + os.sep + "twitter"], extension="txt", subdirs=False, fileformat="text", encoding="utf-8", delete_on_start=False)
+
+        self.assert_config(config.spelling_storage, file=tmpdir + os.sep + "spelling/corpus.txt", fileformat="text", encoding="utf-8", delete_on_start=False)
+
+        self.assert_config(config.license_storage, file=tmpdir + os.sep + "licenses/license.keys", fileformat="text", encoding="utf-8", delete_on_start=False)
+
+        self.assert_config(config.pattern_nodes_storage, file=tmpdir + os.sep + "nodes/pattern_nodes.txt", fileformat="text", encoding="utf-8", delete_on_start=False)
+        self.assert_config(config.template_nodes_storage, file=tmpdir + os.sep + "nodes/template_nodes.txt", fileformat="text", encoding="utf-8", delete_on_start=False)
+
+        self.assert_config(config.binaries_storage, file=tmpdir + os.sep + "braintree/braintree.bin", fileformat="binary", encoding="utf-8", delete_on_start=False)
+        self.assert_config(config.braintree_storage, file=tmpdir + os.sep + "braintree/braintree.xml", fileformat="xml", encoding="utf-8", delete_on_start=False)
+
+        self.assert_config(config.preprocessors_storage, file=tmpdir + os.sep + "processing/preprocessors.txt", fileformat="text", encoding="utf-8", delete_on_start=False)
+        self.assert_config(config.postprocessors_storage, file=tmpdir + os.sep + "processing/postprocessors.txt", fileformat="text", encoding="utf-8", delete_on_start=False)
+
+        self.assert_config(config.usergroups_storage, file=tmpdir + os.sep + "security/usergroups.yaml", fileformat="yaml", encoding="utf-8", delete_on_start=False)
+
     def test_create_storage_defaults(self):
         amap = {}
 
@@ -359,3 +409,68 @@ class FileStorageConfigurationTests(unittest.TestCase):
         self.assertEqual(fileformat, config.format)
         self.assertEqual(encoding, config.encoding)
         self.assertEqual(delete_on_start, config.delete_on_start)
+
+    def _assert_storage_map(self, amap, config):
+        self.assertEquals(29, len(amap.keys()))
+
+        self.assertEquals(amap[FileStore.CATEGORIES_STORAGE], config._categories_storage)
+        self.assertEquals(amap[FileStore.ERRORS_STORAGE], config._errors_storage)
+        self.assertEquals(amap[FileStore.DUPLICATES_STORAGE], config._duplicates_storage)
+        self.assertEquals(amap[FileStore.LEARNF_STORAGE], config._learnf_storage)
+        self.assertEquals(amap[FileStore.CONVERSATION_STORAGE], config._conversation_storage)
+        self.assertEquals(amap[FileStore.SETS_STORAGE], config._sets_storage)
+        self.assertEquals(amap[FileStore.MAPS_STORAGE], config._maps_storage)
+        self.assertEquals(amap[FileStore.RDF_STORAGE], config._rdf_storage)
+        self.assertEquals(amap[FileStore.DENORMAL_STORAGE], config._denormal_storage)
+        self.assertEquals(amap[FileStore.NORMAL_STORAGE], config._normal_storage)
+        self.assertEquals(amap[FileStore.GENDER_STORAGE], config._gender_storage)
+        self.assertEquals(amap[FileStore.PERSON_STORAGE], config._person_storage)
+        self.assertEquals(amap[FileStore.PERSON2_STORAGE], config._person2_storage)
+        self.assertEquals(amap[FileStore.REGEX_STORAGE], config._regex_storage)
+        self.assertEquals(amap[FileStore.PROPERTIES_STORAGE], config._properties_storage)
+        self.assertEquals(amap[FileStore.VARIABLES_STORAGE], config._variables_storage)
+        self.assertEquals(amap[FileStore.DEFAULTS_STORAGE], config._defaults_storage)
+        self.assertEquals(amap[FileStore.TWITTER_STORAGE], config._twitter_storage)
+        self.assertEquals(amap[FileStore.SPELLING_STORAGE], config._spelling_storage)
+        self.assertEquals(amap[FileStore.LICENSE_STORAGE], config._license_storage)
+        self.assertEquals(amap[FileStore.PATTERN_NODES_STORAGE], config._pattern_nodes_storage)
+        self.assertEquals(amap[FileStore.TEMPLATE_NODES_STORAGE], config._template_nodes_storage)
+        self.assertEquals(amap[FileStore.BINARIES_STORAGE], config._binaries_storage)
+        self.assertEquals(amap[FileStore.BRAINTREE_STORAGE], config._braintree_storage)
+        self.assertEquals(amap[FileStore.PREPROCESSORS_STORAGE], config._preprocessors_storage)
+        self.assertEquals(amap[FileStore.POSTPROCESSORS_STORAGE], config._postprocessors_storage)
+        self.assertEquals(amap[FileStore.POSTQUESTIONPROCESSORS_STORAGE], config._postquestionprocessors_storage)
+        self.assertEquals(amap[FileStore.USERGROUPS_STORAGE], config._usergroups_storage)
+        self.assertEquals(amap[FileStore.TRIGGERS_STORAGE], config._triggers_storage)
+
+    def test_create_storage_map(self):
+        amap = {}
+        config = FileStorageConfiguration()
+        config._create_storage_map(amap)
+
+        self._assert_storage_map(amap, config)
+
+    def test_create_filestorage_config(self):
+        config = FileStorageConfiguration()
+        amap = config.create_filestorage_config()
+
+        self._assert_storage_map(amap, config)
+
+    def test_to_yaml_with_defaults(self):
+
+        config = FileStorageConfiguration()
+
+        data = {}
+        config.to_yaml(data, defaults=True)
+
+        self.assertEquals(29, len(data.keys()))
+
+    def test_to_yaml_no_defaults(self):
+
+        config = FileStorageConfiguration()
+
+        data = {}
+        config.to_yaml(data, defaults=False)
+
+        self.assertEquals(29, len(data.keys()))
+        self._assert_storage_map(data, config)

@@ -19,11 +19,14 @@ from programy.storage.entities.store import Store
 
 class LinkedAccountStore(Store):
 
+    def __init__(self):
+        Store.__init__(self)
+
     def link_accounts(self, primary_userid, linked_userid):
-        raise NotImplementedError("link_accounts missing from Link Store")
+        raise NotImplementedError("link_accounts missing from Link Store")  # pragma: no cover
 
     def unlink_accounts(self, primary_userid):
-        raise NotImplementedError("unlink_accounts missing from Link Store")
+        raise NotImplementedError("unlink_accounts missing from Link Store") # pragma: no cover
 
     def primary_account(self, linked_userid):
-        raise NotImplementedError("primary_account missing from Link Store")
+        raise NotImplementedError("primary_account missing from Link Store") # pragma: no cover

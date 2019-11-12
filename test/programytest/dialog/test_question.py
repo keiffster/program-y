@@ -1,9 +1,10 @@
 import unittest
 
-from programy.dialog.sentence import Sentence
 from programy.dialog.question import Question
-
+from programy.dialog.sentence import Sentence
 from programytest.client import TestClient
+from programy.dialog.splitter.regex import RegexSentenceSplitter
+from programy.config.bot.splitter import BotSentenceSplitterConfiguration
 
 
 class QuestionTests(unittest.TestCase):
@@ -58,14 +59,14 @@ class QuestionTests(unittest.TestCase):
         question = Question()
         sentence1 = Sentence(self._client_context, "Hi")
         sentence1._response = "Hello"
-        question._sentences.append(sentence1)
+        question.sentences.append(sentence1)
         sentence2 = Sentence(self._client_context, "Hi Again")
-        question._sentences.append(sentence2)
+        question.sentences.append(sentence2)
         sentence2._response = "World"
 
-        self.assertEqual(2, len(question._sentences))
-        self.assertEqual(question._sentences[0]._response, "Hello")
-        self.assertEqual(question._sentences[1]._response, "World")
+        self.assertEqual(2, len(question.sentences))
+        self.assertEqual(question.sentences[0]._response, "Hello")
+        self.assertEqual(question.sentences[1]._response, "World")
 
         sentences = question.combine_sentences(self._client_context)
         self.assertEqual("Hi. Hi Again", sentences)
@@ -73,6 +74,8 @@ class QuestionTests(unittest.TestCase):
         combined = question.combine_answers()
         self.assertIsNotNone(combined)
         self.assertEqual(combined, "Hello. World")
+
+        self.assertEquals("Hi = Hello, Hi Again = World, ", question.debug_info(self._client_context))
 
     def test_next_previous_sentences(self):
         question = Question.create_from_text(self._client_context, "Hello There. How Are you")
@@ -89,9 +92,9 @@ class QuestionTests(unittest.TestCase):
         question = Question()
         sentence1 = Sentence(self._client_context, "Hi")
         sentence1._response = "Hello"
-        question._sentences.append(sentence1)
+        question.sentences.append(sentence1)
         sentence2 = Sentence(self._client_context, "Hi Again")
-        question._sentences.append(sentence2)
+        question.sentences.append(sentence2)
         sentence2._response = "World"
 
         json_data = question.to_json()
@@ -119,3 +122,7 @@ class QuestionTests(unittest.TestCase):
         self.assertEqual({}, question.properties)
         self.assertEqual(-1, question._current_sentence_no)
         self.assertEqual(2, len(question.sentences))
+        splitter = RegexSentenceSplitter(BotSentenceSplitterConfiguration())
+        self.assertIsNotNone(splitter)
+
+        self.assertEqual(["This is a basic sentence"], splitter.split("This is a basic sentence"))

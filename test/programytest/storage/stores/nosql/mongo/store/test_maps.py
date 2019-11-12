@@ -1,12 +1,10 @@
 import unittest
 
-from programytest.storage.asserts.store.assert_maps import MapStoreAsserts
-
-from programy.storage.stores.nosql.mongo.store.maps import MongoMapsStore
-from programy.storage.stores.nosql.mongo.engine import MongoStorageEngine
-from programy.storage.stores.nosql.mongo.config import MongoStorageConfiguration
-
 import programytest.storage.engines as Engines
+from programy.storage.stores.nosql.mongo.config import MongoStorageConfiguration
+from programy.storage.stores.nosql.mongo.engine import MongoStorageEngine
+from programy.storage.stores.nosql.mongo.store.maps import MongoMapsStore
+from programytest.storage.asserts.store.assert_maps import MapStoreAsserts
 
 
 class MongoMapsStoreTests(MapStoreAsserts):

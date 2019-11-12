@@ -1,7 +1,7 @@
-from programy.parser.template.nodes.resetlearn import TemplateResetLearnNode
 from programy.parser.template.nodes.base import TemplateNode
-
+from programy.parser.template.nodes.resetlearn import TemplateResetLearnNode
 from programytest.parser.base import ParserTestsBaseClass
+
 
 class MockTemplateResetLearnNode(TemplateResetLearnNode):
     def __init__(self):

@@ -23,6 +23,7 @@ class FileSetsStore(FileStore, SetsReadOnlyStore):
 
     def __init__(self, storage_engine):
         FileStore.__init__(self, storage_engine)
+        SetsReadOnlyStore.__init__(self)
 
     def _load_file_contents(self, collection, filename):
         YLogger.debug(self, "Loading set [%s]", filename)

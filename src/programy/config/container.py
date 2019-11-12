@@ -26,7 +26,4 @@ class BaseContainerConfigurationData(BaseConfigurationData):
 
     @abstractmethod
     def load_configuration(self, configuration_file, bot_root, subs: Substitutions = None):
-        """
-        Never Implemented
-        """
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover

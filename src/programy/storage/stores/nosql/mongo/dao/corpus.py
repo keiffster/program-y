@@ -24,7 +24,7 @@ class Corpus():
         self.words = words
 
     def __repr__(self):
-        return "<Corpus(id='%d')>" % (DAOUtils.valid_id(self.id))
+        return "<Corpus(id='%s')>" % (DAOUtils.valid_id(self.id))
 
     def to_document(self):
         document = {"words": self.words}
@@ -35,8 +35,6 @@ class Corpus():
     @staticmethod
     def from_document(data):
         lookup = Corpus(None)
-        if '_id' in data:
-            lookup.id = data['_id']
-        if 'words' in data:
-            lookup.words = data['words']
+        lookup.id = DAOUtils.get_value_from_data(data, '_id')
+        lookup.words = DAOUtils.get_value_from_data(data, 'words', default=[])
         return lookup

@@ -1,11 +1,11 @@
 import unittest
-from programy.storage.stores.sql.engine import SQLStorageEngine
-from programy.storage.stores.sql.config import SQLStorageConfiguration
-from programy.security.linking.accountlinker import BasicAccountLinkerService
 
+import programytest.storage.engines as Engines
+from programy.security.linking.accountlinker import BasicAccountLinkerService
+from programy.storage.stores.sql.config import SQLStorageConfiguration
+from programy.storage.stores.sql.engine import SQLStorageEngine
 from programytest.client import TestClient
 from programytest.security.linking.extension_asserts import AccountLinkerExtensionAsserts
-import programytest.storage.engines as Engines
 
 
 class SQLAccountLinkerExtensionTests(AccountLinkerExtensionAsserts):

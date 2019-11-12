@@ -2,8 +2,6 @@ import xml.etree.ElementTree as ET
 
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.program import TemplateProgramNode
-
-
 from programytest.parser.base import ParserTestsBaseClass
 
 

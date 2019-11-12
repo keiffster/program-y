@@ -27,7 +27,7 @@ class Authenticator:
     def configuration(self):
         return self._configuration
 
-    def initialise(self, brain):
+    def initialise(self, client):
         pass
 
     def get_default_denied_srai(self):

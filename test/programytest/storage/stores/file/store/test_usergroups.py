@@ -1,12 +1,13 @@
-import unittest.mock
 import os
 import os.path
+import unittest.mock
 
-from programy.storage.stores.file.store.usergroups import FileUserGroupStore
-from programy.storage.stores.file.engine import FileStorageEngine
-from programy.storage.stores.file.config import FileStorageConfiguration
 from programy.security.authorise.usergroupsauthorisor import BasicUserGroupAuthorisationService
+from programy.storage.stores.file.config import FileStorageConfiguration
 from programy.storage.stores.file.config import FileStoreConfiguration
+from programy.storage.stores.file.engine import FileStorageEngine
+from programy.storage.stores.file.store.usergroups import FileUserGroupStore
+
 
 class FileSpellingStoreTests(unittest.TestCase):
 

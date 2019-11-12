@@ -53,7 +53,4 @@ class BasicUserGroupAuthorisationService(Authoriser):
         if userid not in self._users:
             raise AuthorisationException("User [%s] unknown to system!" % userid)
 
-        if userid in self._users:
-            user = self._users[userid]
-            return user.has_role(role)
-        return False
+        return self._users[userid].has_role(role)

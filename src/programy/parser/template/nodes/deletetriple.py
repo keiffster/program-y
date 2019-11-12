@@ -50,10 +50,10 @@ class TemplateDeleteTripleNode(TemplateTripleNode):
         super(TemplateDeleteTripleNode, self).parse_expression(graph, expression)
 
         if self._subj is None:
-            raise ParserException("<%s> node missing subject attribue/element" % self.node_name)
+            raise ParserException("<%s> node missing subject attribute/element" % self.node_name)
 
         if self._pred is None:
-            YLogger.debug(self, "<%s> node missing predicate attribue/element", self.node_name)
+            YLogger.debug(self, "<%s> node missing predicate attribute/element", self.node_name)
 
         if self._obj is None:
-            YLogger.debug(self, "<%s> node missing object attribue/element", self.node_name)
+            YLogger.debug(self, "<%s> node missing object attribute/element", self.node_name)

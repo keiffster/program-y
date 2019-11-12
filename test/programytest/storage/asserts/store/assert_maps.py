@@ -1,9 +1,10 @@
-import unittest
 import os
 import os.path
+import unittest
 
 from programy.mappings.maps import MapCollection
 from programy.storage.entities.store import Store
+
 
 class MockMapCollection(object):
 

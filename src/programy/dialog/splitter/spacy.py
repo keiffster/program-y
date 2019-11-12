@@ -23,4 +23,4 @@ class SpacySentenceSplitter(SentenceSplitter):
         SentenceSplitter.__init__(self, config)
 
     def split(self, text):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover

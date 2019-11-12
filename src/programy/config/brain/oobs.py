@@ -43,9 +43,6 @@ class BrainOOBSConfiguration(BaseSectionConfigurationData):
     def oobs(self):
         return list(self._oobs.keys())
 
-    def check_for_license_keys(self, license_keys):
-        BaseSectionConfigurationData.check_for_license_keys(self, license_keys)
-
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         oobs = configuration_file.get_section("oob", configuration)
         if oobs is not None:
@@ -80,5 +77,5 @@ class BrainOOBSConfiguration(BaseSectionConfigurationData):
         else:
             if self._default is not None:
                 self.config_to_yaml(data, self._default, defaults)
-            for oob in self._oobs:
-                self.config_to_yaml(data, oob, defaults)
+            for _, config in self._oobs.items():
+                self.config_to_yaml(data, config, defaults)

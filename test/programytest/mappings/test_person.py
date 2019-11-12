@@ -1,11 +1,12 @@
-import unittest
 import os
-
+import unittest
+import re
 from programy.mappings.person import PersonCollection
 from programy.storage.factory import StorageFactory
 from programy.storage.stores.file.config import FileStorageConfiguration
-from programy.storage.stores.file.engine import FileStorageEngine
 from programy.storage.stores.file.config import FileStoreConfiguration
+from programy.storage.stores.file.engine import FileStorageEngine
+
 
 class PersonTests(unittest.TestCase):
 
@@ -51,6 +52,9 @@ class PersonTests(unittest.TestCase):
 
         self.assertEqual(collection.personalise_string(" with me "), "with you2")
         self.assertEqual(collection.personalise_string("Hello are you with me"), "Hello am i2 with you2")
+
+        self.assertEqual([re.compile('(^WITH YOU | WITH YOU | WITH YOU$)', re.IGNORECASE), ' WITH ME2 '], collection.person(" WITH YOU "))
+        self.assertEqual(None, collection.person(" WITH XXX "))
 
     def test_reload(self):
         storage_factory = StorageFactory()

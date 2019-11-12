@@ -3,6 +3,7 @@ import unittest
 
 from programy.storage.stores.sql.dao.duplicate import Duplicate
 
+
 class CategoryTests(unittest.TestCase):
     
     def test_init(self):

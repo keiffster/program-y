@@ -1,9 +1,9 @@
-import unittest
 import os
+import unittest
 
 from programy.config.brain.oob import BrainOOBConfiguration
-
 from programytest.client import TestClient
+
 
 class OOBTestClient(TestClient):
 

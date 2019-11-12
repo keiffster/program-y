@@ -19,5 +19,8 @@ from programy.storage.entities.store import Store
 
 class BraintreeStore(Store):
 
+    def __init__(self):
+        Store.__init__(self)
+
     def save_braintree(self, client_context, pattern_graph):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover

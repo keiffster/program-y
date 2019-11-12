@@ -57,7 +57,7 @@ class Brain:
 
         self._binaries = BinariesManager(configuration.binaries)
         self._braintree = BraintreeManager(configuration.braintree)
-        self._tokenizer = Tokenizer.load_tokenizer(configuration)
+        self._tokenizer = Tokenizer.load_tokenizer(configuration.tokenizer)
 
         self._denormal_collection = DenormalCollection()
         self._normal_collection = NormalCollection()
@@ -213,7 +213,7 @@ class Brain:
 
         load_aiml = True
         if self.configuration.binaries.load_binary is True:
-            load_aiml = self._binaries.load_binary(self.bot.client.storage_factory)
+            load_aiml = self._binaries.load_binary(self.bot.client.storage_factory, self._aiml_parser)
 
         if load_aiml is True:
             self.load_aiml()

@@ -1,7 +1,7 @@
 import unittest
-import os
 
 from programy.utils.license.keys import LicenseKeys
+
 
 #############################################################################
 #

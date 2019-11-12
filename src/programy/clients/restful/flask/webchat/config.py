@@ -25,6 +25,9 @@ class WebChatConfiguration(RestConfiguration):
         self._cookie_id = "ProgramYSession"
         self._cookie_expires = 90
 
+    def _get_renderer_class(self):
+        return "programy.clients.render.html.HtmlRenderer"
+
     @property
     def cookie_id(self):
         return self._cookie_id
@@ -33,17 +36,16 @@ class WebChatConfiguration(RestConfiguration):
     def cookie_expires(self):
         return self._cookie_expires
 
-    def check_for_license_keys(self, license_keys):
-        RestConfiguration.check_for_license_keys(self, license_keys)
-
     def load_configuration_section(self, configuration_file, section, bot_root, subs: Substitutions = None):
-        if section is not None:
-            self._cookie_id = configuration_file.get_option(section, "cookie_id", missing_value="ProgramYSession",
-                                                            subs=subs)
-            self._cookie_expires = configuration_file.get_int_option(section, "cookie_expires", missing_value=90,
+
+        assert section is not None
+
+        self._cookie_id = configuration_file.get_option(section, "cookie_id", missing_value="ProgramYSession",
+                                                        subs=subs)
+        self._cookie_expires = configuration_file.get_int_option(section, "cookie_expires", missing_value=90,
+                                                                 subs=subs)
+        super(WebChatConfiguration, self).load_configuration_section(configuration_file, section, bot_root,
                                                                      subs=subs)
-            super(WebChatConfiguration, self).load_configuration_section(configuration_file, section, bot_root,
-                                                                         subs=subs)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:

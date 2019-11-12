@@ -1,11 +1,8 @@
 import xml.etree.ElementTree as ET
 
-import os
-
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.learn import LearnCategory
 from programy.parser.template.nodes.learnf import TemplateLearnfNode
-
 from programytest.parser.template.graph_tests.graph_test_client import TemplateGraphTestClient
 
 

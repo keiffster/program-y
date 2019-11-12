@@ -1,11 +1,9 @@
 import unittest
-
 import unittest.mock
 
-from programy.storage.stores.sql.store.sqlstore import SQLStore
-from programy.storage.stores.sql.engine import SQLStorageEngine
-
 import programytest.storage.engines as Engines
+from programy.storage.stores.sql.engine import SQLStorageEngine
+from programy.storage.stores.sql.store.sqlstore import SQLStore
 
 
 class SQLStoreTests(unittest.TestCase):

@@ -26,7 +26,7 @@ class EventBotClient(BotClient):
         BotClient.__init__(self, botid, argument_parser=argument_parser)
 
     def prior_to_run_loop(self):
-        pass
+        pass    # pragma: no cover
 
     def run_loop(self):
         self._running = True
@@ -34,11 +34,11 @@ class EventBotClient(BotClient):
             self._running = self.wait_and_answer()
 
     def wait_and_answer(self):
-        raise NotImplementedError(
-            "You must override this and implement the logic wait for a question and send an answer back")
+        raise NotImplementedError("You must override this and implement the "
+                                  "logic wait for a question and send an answer back")  # pragma: no cover
 
     def post_run_loop(self):
-        pass
+        pass    # pragma: no cover
 
     def run(self, app=None):
         del app

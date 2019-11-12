@@ -87,7 +87,6 @@ class YamlConfigurationFile(BaseConfigurationFile):
             option_value = section[option_name]
             if isinstance(option_value, int):
                 return option_value
-            return int(self._replace_subs(subs, option_value))
 
         if missing_value is None:
             YLogger.warning(self, "Missing value for [%s] in config, return None", option_name)
@@ -103,15 +102,16 @@ class YamlConfigurationFile(BaseConfigurationFile):
 
         if option_name in section:
             values = section[option_name]
-            splits = values.split('\n')
-            multis = []
-            for value in splits:
-                if value is not None and value != '':
-                    multis.append(self._replace_subs(subs, value))
-            return multis
+            if isinstance(values, str):
+                splits = values.split('\n')
+                multis = []
+                for value in splits:
+                    if value is not None and value != '':
+                        multis.append(self._replace_subs(subs, value))
+                return multis
 
         YLogger.warning(self, "Missing value for [%s] in config, return default value", option_name)
-        return [missing_value]
+        return missing_value
 
     def get_multi_file_option(self, section, option_name, bot_root, missing_value=None, subs: Substitutions = None):
 
@@ -120,13 +120,14 @@ class YamlConfigurationFile(BaseConfigurationFile):
 
         if option_name in section:
             values = section[option_name]
-            splits = values.split('\n')
-            multis = []
-            for value in splits:
-                if value is not None and value != '':
-                    value = self._replace_subs(subs, value)
-                    multis.append(value.replace('$BOT_ROOT', bot_root))
-            return multis
+            if isinstance(values, str):
+                splits = values.split('\n')
+                multis = []
+                for value in splits:
+                    if value is not None and value != '':
+                        value = self._replace_subs(subs, value)
+                        multis.append(value.replace('$BOT_ROOT', bot_root))
+                return multis
 
         YLogger.warning(self, "Missing value for [%s] in config, return default value", option_name)
         return missing_value

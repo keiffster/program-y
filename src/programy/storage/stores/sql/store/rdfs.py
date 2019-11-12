@@ -15,15 +15,16 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.storage.stores.sql.store.sqlstore import SQLStore
-from programy.storage.entities.rdf import RDFReadOnlyStore
+from programy.storage.entities.rdf import RDFReadWriteStore
 from programy.storage.stores.sql.dao.rdf import RDF
 from programy.utils.console.console import outputLog
 
 
-class SQLRDFsStore(RDFReadOnlyStore, SQLStore):
+class SQLRDFsStore(RDFReadWriteStore, SQLStore):
 
     def __init__(self, storage_engine):
         SQLStore.__init__(self, storage_engine)
+        RDFReadWriteStore.__init__(self)
 
     def empty(self):
         self._storage_engine.session.query(RDF).delete()

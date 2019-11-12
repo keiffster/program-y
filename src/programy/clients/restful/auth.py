@@ -25,7 +25,7 @@ class RestAuthorizationHandler:
         self._configuration = configuration
 
     def initialise(self, client):
-        pass
+        pass    # pragma: no cover
 
     @staticmethod
     def load_authorisation(client):

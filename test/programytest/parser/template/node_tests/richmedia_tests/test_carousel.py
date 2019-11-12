@@ -1,12 +1,10 @@
-import xml.etree.ElementTree as ET
-
 from programy.parser.template.nodes.base import TemplateNode
-from programy.parser.template.nodes.richmedia.carousel import TemplateCarouselNode
-from programy.parser.template.nodes.richmedia.card import TemplateCardNode
 from programy.parser.template.nodes.richmedia.button import TemplateButtonNode
+from programy.parser.template.nodes.richmedia.card import TemplateCardNode
+from programy.parser.template.nodes.richmedia.carousel import TemplateCarouselNode
 from programy.parser.template.nodes.word import TemplateWordNode
-
 from programytest.parser.base import ParserTestsBaseClass
+
 
 class TemplateCarouselNodeTests(ParserTestsBaseClass):
 
@@ -33,9 +31,10 @@ class TemplateCarouselNodeTests(ParserTestsBaseClass):
         root.append(carousel)
 
         resolved = root.resolve(self._client_context)
-
         self.assertIsNotNone(resolved)
-        self.assertEqual("<carousel><card><image>http://Servusai.com</image><title>Servusai.com</title><subtitle>The home of ProgramY</subtitle><button><text>More...</text><url>http://Servusai.com/aiml</url></button></card></carousel>", resolved)
+        self.assertEqual("<carousel><card><title>Servusai.com</title><subtitle>The home of ProgramY</subtitle><image>http://Servusai.com</image><button><text>More...</text><url>http://Servusai.com/aiml</url></button></card></carousel>", resolved)
 
-        self.assertEqual("<carousel><card><image>http://Servusai.com</image><title>Servusai.com</title><subtitle>The home of ProgramY</subtitle><button><text>More...</text><url>http://Servusai.com/aiml</url></button></card></carousel>", root.to_xml(self._client_context))
+        xml = root.to_xml(self._client_context)
+        self.assertIsNotNone(xml)
+        self.assertEqual("<carousel><card><title>Servusai.com</title><subtitle>The home of ProgramY</subtitle><image>http://Servusai.com</image><button><text>More...</text><url>http://Servusai.com/aiml</url></button></card></carousel>", xml)
 

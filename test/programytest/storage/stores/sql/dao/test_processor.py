@@ -1,9 +1,9 @@
 
 import unittest
 
-from programy.storage.stores.sql.dao.processor import PreProcessor
 from programy.storage.stores.sql.dao.processor import PostProcessor
 from programy.storage.stores.sql.dao.processor import PostQuestionProcessor
+from programy.storage.stores.sql.dao.processor import PreProcessor
 
 
 class PreProcessorTests(unittest.TestCase):

@@ -74,9 +74,8 @@ class MapCollection:
     def reload(self, storage_factory, map_name):
         if storage_factory.entity_storage_engine_available(StorageFactory.MAPS) is True:
             map_engine = storage_factory.entity_storage_engine(StorageFactory.MAPS)
-            if map_engine:
-                try:
-                    maps_store = map_engine.maps_store()
-                    maps_store.reload(self, map_name)
-                except Exception as e:
-                    YLogger.exception(self, "Failed to load map from storage", e)
+            try:
+                maps_store = map_engine.maps_store()
+                maps_store.reload(self, map_name)
+            except Exception as e:
+                YLogger.exception(self, "Failed to load map from storage", e)

@@ -3,7 +3,6 @@ import unittest
 from programy.bot import Bot
 from programy.config.bot.bot import BotConfiguration
 from programy.nlp.sentiment.extension import SentimentExtension
-
 from programytest.client import TestClient
 
 

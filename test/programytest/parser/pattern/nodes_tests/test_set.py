@@ -1,8 +1,8 @@
-from programytest.parser.base import ParserTestsBaseClass
-
-from programy.parser.pattern.nodes.set import PatternSetNode
 from programy.dialog.sentence import Sentence
 from programy.parser.exceptions import ParserException
+from programy.parser.pattern.nodes.set import PatternSetNode
+from programy.parser.pattern.nodes.word import PatternWordNode
+from programytest.parser.base import ParserTestsBaseClass
 
 
 class PatternSetNodeTests(ParserTestsBaseClass):
@@ -11,6 +11,13 @@ class PatternSetNodeTests(ParserTestsBaseClass):
         node = PatternSetNode({}, "test1")
         self.assertIsNotNone(node)
         self.assertEqual("TEST1", node.set_name)
+
+    def test_is_numeric(self):
+        node1 = PatternSetNode({"name": "NUMBER"}, None)
+        self.assertTrue(node1.set_is_numeric())
+
+        node2 = PatternSetNode({}, "NUMBER")
+        self.assertTrue(node2.set_is_numeric())
 
     def test_init_with_attribs(self):
         node = PatternSetNode({"name": "test1"}, "")
@@ -246,7 +253,7 @@ class PatternSetNodeTests(ParserTestsBaseClass):
         self.assertIsNotNone(match3)
         self.assertFalse(match3.matched)
 
-    def test_equals_mixed(self):
+    def test_equivalent_mixed(self):
         self._client_context.brain._sets_collection.add_set("TEST1", {"VALUE1": [["VALUE1"]], "VALUE2": [["VALUE2"]], "VALUE3": [["VALUE3"]], "VALUE4": [["VALUE4"]]}, "teststore")
 
         node1 = PatternSetNode({}, "test1")
@@ -260,3 +267,51 @@ class PatternSetNodeTests(ParserTestsBaseClass):
         self.assertTrue(node1.equivalent(node4))
         self.assertTrue(node2.equivalent(node5))
         self.assertTrue(node3.equivalent(node6))
+
+    def test_equivalent_diff_nodes(self):
+        node1 = PatternSetNode({}, "test1")
+        node2 = PatternWordNode("*")
+
+        self.assertFalse(node1.equivalent(node2))
+
+    def test_equivalent_diff_set_names(self):
+        node1 = PatternSetNode({}, "test1")
+        node2 = PatternSetNode({}, "test2")
+
+        self.assertFalse(node1.equivalent(node2))
+
+    def test_words_in_set(self):
+        self._client_context.brain._sets_collection.add_set("TEST1", {"VALUE1": [["VALUE1"]], "VALUE2": [["VALUE2"]], "VALUE3": [["VALUE3"]], "VALUE4": [["VALUE4"]]}, "teststore")
+
+        node1 = PatternSetNode({}, "TEST1")
+
+        match = node1.words_in_set(self._client_context, Sentence(self._client_context, text="VALUE1"), 0)
+        self.assertIsNotNone(match)
+        self.assertTrue(match.matched)
+
+    def test_words_in_set_wrong_set(self):
+        self._client_context.brain._sets_collection.add_set("TEST1", {"VALUE1": [["VALUE1"]], "VALUE2": [["VALUE2"]], "VALUE3": [["VALUE3"]], "VALUE4": [["VALUE4"]]}, "teststore")
+
+        node1 = PatternSetNode({}, "TEST2")
+
+        match = node1.words_in_set(self._client_context, Sentence(self._client_context, text="VALUE1"), 0)
+        self.assertIsNotNone(match)
+        self.assertFalse(match.matched)
+
+    def test_words_in_set_multi_words(self):
+        self._client_context.brain._sets_collection.add_set("TEST1", {"VALUE1": [["VALUE1", "VALUE2"]]}, "teststore")
+
+        node1 = PatternSetNode({}, "TEST1")
+
+        match = node1.words_in_set(self._client_context, Sentence(self._client_context, text="VALUE1 VALUE2"), 0)
+        self.assertIsNotNone(match)
+        self.assertTrue(match.matched)
+
+    def test_words_in_set_multi_words_mismatch(self):
+        self._client_context.brain._sets_collection.add_set("TEST1", {"VALUE1": [["VALUE1", "VALUE2"]]}, "teststore")
+
+        node1 = PatternSetNode({}, "TEST1")
+
+        match = node1.words_in_set(self._client_context, Sentence(self._client_context, text="VALUE1 VALUE3"), 0)
+        self.assertIsNotNone(match)
+        self.assertFalse(match.matched)

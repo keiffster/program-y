@@ -24,22 +24,26 @@ class LoggerConversationStore(LoggerStore, ConversationStore):
 
     def __init__(self, storage_engine):
         LoggerStore.__init__(self, storage_engine)
+        ConversationStore.__init__(self)
 
     def _get_logger(self):
         return logging.getLogger(self._storage_engine.configuration.conversation_logger)
 
+    def _log_conversation(self, convo_logger, client_context, conversation):
+        json_data = conversation.to_json()
+        json_str = json.dumps(json_data)
+
+        convo_logger.info("[%s] [%s] [%s] [%s] [%s]", client_context.client.id,
+                          client_context.userid,
+                          client_context.bot.id,
+                          client_context.brain,
+                          json_str
+                          )
+
     def store_conversation(self, client_context, conversation, commit=True):
         convo_logger = self._get_logger()
         if convo_logger:
-            json_data = conversation.to_json()
-            json_str = json.dumps(json_data)
-
-            convo_logger.info("[%s] [%s] [%s] [%s] [%s]", client_context.client.id,
-                              client_context.userid,
-                              client_context.bot.id,
-                              client_context.brain,
-                              json_str
-                              )
+            self._log_conversation(convo_logger, client_context, conversation)
 
     def load_conversation(self, client_context, conversation):
-        raise NotImplementedError("load_conversation not supported in Logger storage")
+        raise NotImplementedError("load_conversation not supported in Logger storage")  # pragma: no cover

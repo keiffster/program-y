@@ -19,17 +19,20 @@ from programy.storage.entities.store import Store
 
 class UserStore(Store):
 
+    def __init__(self):
+        Store.__init__(self)
+
     def add_user(self, userid, clientid):
-        raise NotImplementedError("add_user missing from User Store")
+        raise NotImplementedError("add_user missing from User Store")  # pragma: no cover
 
     def exists(self, userid, clientid):
-        raise NotImplementedError("exists missing from User Store")
+        raise NotImplementedError("exists missing from User Store")  # pragma: no cover
 
     def get_links(self, userid):
-        raise NotImplementedError("get_links missing from User Store")
+        raise NotImplementedError("get_links missing from User Store")  # pragma: no cover
 
     def remove_user(self, userid, clientid):
-        raise NotImplementedError("remove_user missing from User Store")
+        raise NotImplementedError("remove_user missing from User Store")  # pragma: no cover
 
     def remove_user_from_all_clients(self, userid):
-        raise NotImplementedError("remove_user_from_all_clients missing from User Store")
+        raise NotImplementedError("remove_user_from_all_clients missing from User Store")  # pragma: no cover

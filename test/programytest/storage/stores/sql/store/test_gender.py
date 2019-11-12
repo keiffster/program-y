@@ -1,12 +1,10 @@
 import unittest
 
-from programytest.storage.asserts.store.assert_genders import GenderStoreAsserts
-
-from programy.storage.stores.sql.store.lookups import SQLGenderStore
-from programy.storage.stores.sql.engine import SQLStorageEngine
-from programy.storage.stores.sql.config import SQLStorageConfiguration
-
 import programytest.storage.engines as Engines
+from programy.storage.stores.sql.config import SQLStorageConfiguration
+from programy.storage.stores.sql.engine import SQLStorageEngine
+from programy.storage.stores.sql.store.lookups import SQLGenderStore
+from programytest.storage.asserts.store.assert_genders import GenderStoreAsserts
 
 
 class SQLGenderStoreTests(GenderStoreAsserts):

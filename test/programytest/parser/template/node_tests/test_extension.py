@@ -3,7 +3,6 @@ import xml.etree.ElementTree as ET
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.extension import TemplateExtensionNode
 from programy.parser.template.nodes.word import TemplateWordNode
-
 from programytest.parser.base import ParserTestsBaseClass
 
 
@@ -70,7 +69,6 @@ class TemplateExtensionNodeTests(ParserTestsBaseClass):
         node.path = "programytest.parser.template.node_tests.test_extension.MockExtensionOther"
         root.append(node)
         self.assertEqual(root.resolve(self._client_context), "")
-
 
     def test_to_xml(self):
         root = TemplateNode()

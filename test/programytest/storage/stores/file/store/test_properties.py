@@ -1,13 +1,13 @@
-from programytest.storage.asserts.store.assert_properties import PropertyStoreAsserts
 import os
 import os.path
 import shutil
 
-from programy.storage.stores.file.store.properties import FilePropertyStore
-from programy.storage.stores.file.engine import FileStorageEngine
-from programy.storage.stores.file.config import FileStorageConfiguration
 from programy.mappings.properties import PropertiesCollection
+from programy.storage.stores.file.config import FileStorageConfiguration
 from programy.storage.stores.file.config import FileStoreConfiguration
+from programy.storage.stores.file.engine import FileStorageEngine
+from programy.storage.stores.file.store.properties import FilePropertyStore
+from programytest.storage.asserts.store.assert_properties import PropertyStoreAsserts
 
 
 class FilePropertyStoreTests(PropertyStoreAsserts):

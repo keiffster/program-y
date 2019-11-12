@@ -19,8 +19,11 @@ from programy.storage.entities.store import Store
 
 class TwitterStore(Store):
 
+    def __init__(self):
+        Store.__init__(self)
+
     def store_last_message_ids(self, last_direct_message_id, last_status_id):
-        raise NotImplementedError("store_last_message_ids missing from Twitter Store")
+        raise NotImplementedError("store_last_message_ids missing from Twitter Store")  # pragma: no cover
 
     def load_last_message_ids(self):
-        raise NotImplementedError("load_last_message_ids missing from Twitter Store")
+        raise NotImplementedError("load_last_message_ids missing from Twitter Store")  # pragma: no cover

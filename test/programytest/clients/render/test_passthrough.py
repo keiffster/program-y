@@ -1,4 +1,3 @@
-import unittest
 import unittest.mock
 
 from programy.clients.render.passthrough import PassThroughRenderer

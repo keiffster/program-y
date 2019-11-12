@@ -1,8 +1,8 @@
 import unittest
-
-from programy.mappings.base import SingleStringCollection
+import re
 from programy.mappings.base import DoubleStringCharSplitCollection
 from programy.mappings.base import DoubleStringPatternSplitCollection
+from programy.mappings.base import SingleStringCollection
 
 
 class MockSingleStringCollection(SingleStringCollection):
@@ -111,19 +111,69 @@ class TestDoubleStringPatternSplitCollection(unittest.TestCase):
         count = doubles.load_from_text("""
         "key1","val1"
         "key2","val2"
-          
         "key3","val3,val4"
-          
         """)
         self.assertEqual(count, 3)
 
         self.assertTrue(doubles.has_key("key1"))
+        self.assertEqual([re.compile('(^key1|key1|key1$)', re.IGNORECASE), 'VAL1'], doubles.value("key1"))
 
         self.assertTrue(doubles.has_key("key2"))
+        self.assertEqual([re.compile('(^key2|key2|key2$)', re.IGNORECASE), 'VAL2'], doubles.value("key2"))
 
         self.assertTrue(doubles.has_key("key3"))
+        self.assertEqual([re.compile('(^key3|key3|key3$)', re.IGNORECASE), 'VAL3,VAL4'], doubles.value("key3"))
 
         self.assertFalse(doubles.has_key("key4"))
+        self.assertEqual(None, doubles.value("key4"))
 
         doubles.empty()
         self.assertEqual(0, len(doubles.pairs))
+
+    def test_replace_by_pattern(self):
+        doubles = DoubleStringPatternSplitCollection()
+        self.assertIsNotNone(doubles)
+
+        count = doubles.load_from_text("""
+        "key1","val1"
+        "key2","val2"
+        "key3","val3,val4"
+        "key5","val5"
+        "key6","val6."
+        """)
+
+        self.assertEquals("HELLO. VAL5", doubles.replace_by_pattern("HELLO. KEY5"))
+        self.assertEquals("HELLO VAL1", doubles.replace_by_pattern("HELLO KEY1"))
+        self.assertEquals("VAL2 HELLO VAL2", doubles.replace_by_pattern("KEY2 HELLO KEY2"))
+        self.assertEquals("HELLO VAL3,VAL4", doubles.replace_by_pattern("HELLO KEY3"))
+        self.assertEquals("HELLO VAL6. HI", doubles.replace_by_pattern("HELLO KEY6 HI"))
+
+    def test_replace_bad_regex(self):
+        doubles = DoubleStringPatternSplitCollection()
+        self.assertIsNotNone(doubles)
+
+        count = doubles.load_from_text("""
+        "key1","val1"
+        """)
+
+        doubles._pairs["KEY2"] = "{)("
+        self.assertEquals("HELLO KEY2", doubles.replace_by_pattern("HELLO KEY2"))
+
+    def test_match_case(self):
+        doubles = DoubleStringPatternSplitCollection()
+
+        self.assertEquals("equal", doubles.match_case("Equal", "EQUAL"))
+        self.assertEquals("EQUAL", doubles.match_case("EQUAL", "equal"))
+        self.assertEquals("equals", doubles.match_case("Equal", "Equals"))
+        self.assertEquals("EQUALS", doubles.match_case("EQUal", "Equals"))
+
+    def test_split_line_by_pattern(self):
+        doubles = DoubleStringPatternSplitCollection()
+
+        self.assertEquals(["KEY1", "VAL1"], doubles.split_line_by_pattern('"KEY1","VAL1"', DoubleStringPatternSplitCollection.RE_OF_SPLIT_PATTERN))
+
+    def test_split_line_by_bad_pattern(self):
+        doubles = DoubleStringPatternSplitCollection()
+
+        self.assertEquals(None, doubles.split_line_by_pattern('"KEY1", "VAL1"',
+                                                                          re.compile('\"(.*?)\",\"(.*?)\"')))

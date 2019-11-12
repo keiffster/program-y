@@ -48,17 +48,15 @@ class SocketConfiguration(ClientConfigurationData):
     def max_buffer(self):
         return self._max_buffer
 
-    def check_for_license_keys(self, license_keys):
-        ClientConfigurationData.check_for_license_keys(self, license_keys)
-
     def load_configuration_section(self, configuration_file, section, bot_root, subs: Substitutions = None):
-        if section is not None:
-            self._host = configuration_file.get_option(section, "host", missing_value="0.0.0.0", subs=subs)
-            self._port = configuration_file.get_option(section, "port", missing_value=80, subs=subs)
-            self._debug = configuration_file.get_bool_option(section, "debug", missing_value=False, subs=subs)
-            self._max_buffer = configuration_file.get_option(section, "max_buffer", missing_value=1024, subs=subs)
-            super(SocketConfiguration, self).load_configuration_section(configuration_file, section, bot_root,
-                                                                        subs=subs)
+        assert section is not None
+
+        self._host = configuration_file.get_option(section, "host", missing_value="0.0.0.0", subs=subs)
+        self._port = configuration_file.get_option(section, "port", missing_value=80, subs=subs)
+        self._debug = configuration_file.get_bool_option(section, "debug", missing_value=False, subs=subs)
+        self._max_buffer = configuration_file.get_option(section, "max_buffer", missing_value=1024, subs=subs)
+        super(SocketConfiguration, self).load_configuration_section(configuration_file, section, bot_root,
+                                                                    subs=subs)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:

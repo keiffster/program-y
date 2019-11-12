@@ -28,6 +28,7 @@ class FilePropertyStore(FileStore, PropertyStore):
 
     def __init__(self, storage_engine):
         FileStore.__init__(self, storage_engine)
+        PropertyStore.__init__(self)
 
     def _get_storage_path(self):
         return self._storage_engine.configuration.properties_storage.file

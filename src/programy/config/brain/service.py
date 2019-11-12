@@ -54,9 +54,6 @@ class BrainServiceConfiguration(BaseSectionConfigurationData):
     def additionals_to_add(self):
         return BrainServiceConfiguration.additionals
 
-    def check_for_license_keys(self, license_keys):
-        BaseSectionConfigurationData.check_for_license_keys(self, license_keys)
-
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         service = configuration_file.get_section(self.section_name, configuration)
         if service is not None:

@@ -1,12 +1,10 @@
 import unittest
 
-from programytest.storage.asserts.store.assert_maps import MapStoreAsserts
-
-from programy.storage.stores.sql.store.maps import SQLMapsStore
-from programy.storage.stores.sql.engine import SQLStorageEngine
-from programy.storage.stores.sql.config import SQLStorageConfiguration
-
 import programytest.storage.engines as Engines
+from programy.storage.stores.sql.config import SQLStorageConfiguration
+from programy.storage.stores.sql.engine import SQLStorageEngine
+from programy.storage.stores.sql.store.maps import SQLMapsStore
+from programytest.storage.asserts.store.assert_maps import MapStoreAsserts
 
 
 class SQLMapsStoreTests(MapStoreAsserts):

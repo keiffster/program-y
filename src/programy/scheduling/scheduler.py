@@ -38,25 +38,28 @@ class ProgramyScheduler:
 
     def __init__(self, client, configuration):
         self._client = client
-
+        self._scheduler = None
         self._configuration = configuration
 
-        if self._configuration.debug_level is not None:
-            self.set_debug_level(self._configuration.debug_level)
+        if self._configuration:
+            if self._configuration.debug_level is not None:
+                self.set_debug_level(self._configuration.debug_level)
 
-        self._scheduler = self._create_scheduler()
+            self._scheduler = self._create_scheduler(self._configuration)
 
-        self.register_schedulder(self, self._configuration.name)
+            self.register_schedulder(self, self._configuration.name)
 
-        if self._configuration.add_listeners is True:
-            YLogger.debug(None, "Scheduler registering listeners")
-            self.register_listeners()
+            if self._configuration.add_listeners is True:
+                YLogger.debug(None, "Scheduler registering listeners")
+                self.register_listeners()
 
-        if self._configuration.remove_all_jobs is True:
-            YLogger.debug(None, "Scheduler removing all existing jobs")
-            self._scheduler.remove_all_jobs()
+            if self._configuration.remove_all_jobs is True:
+                YLogger.debug(None, "Scheduler removing all existing jobs")
+                self._scheduler.remove_all_jobs()
 
-        YLogger.debug(None, "Scheduler initiated...")
+            YLogger.debug(None, "Scheduler initiated...")
+        else:
+            YLogger.debug(None, "Scheduler not initiated...")
 
     @property
     def name(self):
@@ -74,23 +77,26 @@ class ProgramyScheduler:
     def register_listeners(self):
         self._scheduler.add_listener(scheduler_listener, EVENT_ALL)
 
-    def _create_scheduler(self):
-        if self._configuration is not None:
-            config = self._configuration.create_scheduler_config()
-            if self._configuration.blocking is True:
-                if config is not None:
-                    YLogger.debug(None, "Creating Blocking Scheduler WITH config")
-                    return BlockingScheduler(config)
-                else:
-                    YLogger.debug(None, "Creating Blocking Scheduler WITHOUT config")
-                    return BlockingScheduler()
-            else:
-                if config is not None:
-                    YLogger.debug(None, "Creating Background Scheduler WITH config")
-                    return BackgroundScheduler(config)
+    def _create_scheduler(self, configuration):
+        config = configuration.create_scheduler_config()
+        if configuration.blocking is True:
 
-        YLogger.debug(None, "Creating Background Scheduler WITHOUT config")
-        return BackgroundScheduler()
+            if config is not None:
+                YLogger.debug(None, "Creating Blocking Scheduler WITH config")
+                return BlockingScheduler(config)
+
+            else:
+                YLogger.debug(None, "Creating Blocking Scheduler WITHOUT config")
+                return BlockingScheduler()
+
+        else:
+            if config is not None:
+                YLogger.debug(None, "Creating Background Scheduler WITH config")
+                return BackgroundScheduler(config)
+
+            else:
+                YLogger.debug(None, "Creating Background Scheduler WITHOUT config")
+                return BackgroundScheduler()
 
     def start(self):
         YLogger.debug(None, "Scheduler starting...")
@@ -244,6 +250,7 @@ class ProgramyScheduler:
             if event.exception:
                 return "JobExecutionEvent [%s] [%s] [%s] [%s] [%s] [%s]" % (
                     event.code, event.job_id, event.jobstore, event.scheduled_run_time, event.retval, event.exception)
+
             else:
                 return "JobExecutionEvent [%s] [%s] [%s] [%s] [%s]" % (
                     event.code, event.job_id, event.jobstore, event.scheduled_run_time, event.retval)
@@ -266,6 +273,7 @@ class ProgramyScheduler:
             message = ProgramyScheduler.get_event_str(event)
             if message is not None:
                 YLogger.debug(None, message)
+
             else:
                 YLogger.error(None, "Unknown APSchedulerEvent! %s", str(event))
 
@@ -277,23 +285,27 @@ class ProgramyScheduler:
 
     @staticmethod
     def scheduled_event(name, userid, clientid, action, text):
-        YLogger.debug(None, "Received Scheduled Event [%s] [%s] [%s] [%s] [%s]", name, userid, clientid, action, text)
+        YLogger.debug(None, "Received Scheduled Event [%s] [%s] [%s] [%s] [%s]",
+                      name, userid, clientid, action, text)
 
         if name in ProgramyScheduler.schedulers:
             scheduler = ProgramyScheduler.schedulers[name]
             scheduler.scheduled(userid, clientid, action, text)
+
         else:
             YLogger.error(None, "Unknown scheduler [%s]", name)
 
     def scheduled(self, userid, clientid, action, text):
-        YLogger.debug(None, "Processing Scheduled Event [%s] [%s] [%s] [%s] [%s]", self.name, userid, clientid, action,
-                      text)
+        YLogger.debug(None, "Processing Scheduled Event [%s] [%s] [%s] [%s] [%s]",
+                      self.name, userid, clientid, action, text)
 
         client_context = self._client.create_client_context(userid)
         if action == 'TEXT':
             self._client.render_response(client_context, text)
+
         elif action == 'SRAI':
             response = client_context.bot.ask_question(client_context, text)
             self._client.render_response(client_context, response)
+
         else:
             YLogger.error(client_context, "Unknown scheduler command [%s]", action)

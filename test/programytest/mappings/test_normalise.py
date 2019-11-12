@@ -1,12 +1,12 @@
-import unittest
-import re
 import os
+import re
+import unittest
 
 from programy.mappings.normal import NormalCollection
 from programy.storage.factory import StorageFactory
 from programy.storage.stores.file.config import FileStorageConfiguration
-from programy.storage.stores.file.engine import FileStorageEngine
 from programy.storage.stores.file.config import FileStoreConfiguration
+from programy.storage.stores.file.engine import FileStorageEngine
 
 
 class NormaliseTests(unittest.TestCase):
@@ -43,6 +43,9 @@ class NormaliseTests(unittest.TestCase):
         collection.load(storage_factory)
 
         self.assertEqual(collection.normalise_string("keithsterling.COM"), "keithsterling dot com")
+
+        self.assertEquals([re.compile('(^\\.COM|\\.COM|\\.COM$)', re.IGNORECASE), ' DOT COM '], collection.normalise(".COM"))
+        self.assertEquals(None, collection.normalise(".XXX"))
 
     def test_reload(self):
         storage_factory = StorageFactory()

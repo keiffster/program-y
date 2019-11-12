@@ -1,7 +1,7 @@
 import unittest
 
-from programy.dynamic.variables.variable import DynamicVariable
 from programy.config.brain.brain import BrainDynamicsConfiguration
+from programy.dynamic.variables.variable import DynamicVariable
 
 
 class MockDynamicVariable(DynamicVariable):

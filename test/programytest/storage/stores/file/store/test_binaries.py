@@ -1,11 +1,11 @@
-import unittest
 import os.path
 import shutil
+import unittest
 
-from programy.storage.stores.file.store.binaries import FileBinariesStore
-from programy.storage.stores.file.engine import FileStorageEngine
 from programy.storage.stores.file.config import FileStorageConfiguration
-import shutil
+from programy.storage.stores.file.engine import FileStorageEngine
+from programy.storage.stores.file.store.binaries import FileBinariesStore
+
 
 class PretendAimlParser(object):
 

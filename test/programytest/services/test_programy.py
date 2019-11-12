@@ -1,8 +1,7 @@
 import unittest
 
-from programy.services.programy import ProgramyRESTService
 from programy.config.brain.service import BrainServiceConfiguration
-
+from programy.services.programy import ProgramyRESTService
 from programytest.client import TestClient
 
 

@@ -1,12 +1,10 @@
 import unittest
 
-from programytest.storage.asserts.store.assert_category import CategoryStoreAsserts
-
-from programy.storage.stores.nosql.mongo.store.categories import MongoCategoryStore
-from programy.storage.stores.nosql.mongo.engine import MongoStorageEngine
-from programy.storage.stores.nosql.mongo.config import MongoStorageConfiguration
-
 import programytest.storage.engines as Engines
+from programy.storage.stores.nosql.mongo.config import MongoStorageConfiguration
+from programy.storage.stores.nosql.mongo.engine import MongoStorageEngine
+from programy.storage.stores.nosql.mongo.store.categories import MongoCategoryStore
+from programytest.storage.asserts.store.assert_category import CategoryStoreAsserts
 
 
 class MongoCategoryStoreTests(CategoryStoreAsserts):

@@ -153,3 +153,8 @@ class YLogger:
         YLogger.DEBUGS += 1
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug(YLogger.format_message(caller, message), *args, **kwargs)
+
+    @staticmethod
+    def is_ylogger_method(method):
+        return bool(method in [YLogger.critical, YLogger.fatal, YLogger.error, YLogger.exception,
+                               YLogger.exception_nostack, YLogger.warning, YLogger.info, YLogger.debug])

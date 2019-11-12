@@ -16,6 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 from programy.parser.template.nodes.base import TemplateNode
 from programy.utils.text.text import TextUtils
+from programy.parser.exceptions import ParserException
 
 
 class TemplateListNode(TemplateNode):
@@ -56,7 +57,10 @@ class TemplateListNode(TemplateNode):
                 item = self.parse_children_as_word_node(graph, child)
                 self._items.append(item)
             else:
-                graph.parse_tag_expression(child, self)
+                raise ParserException("Invalid child node in list")
 
             tail_text = self.get_tail_from_element(child)
             self.parse_text(graph, tail_text)
+
+        if len(self._items) == 0:
+            raise ParserException("No items in list")

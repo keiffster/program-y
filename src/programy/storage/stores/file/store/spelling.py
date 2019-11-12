@@ -25,6 +25,7 @@ class FileSpellingStore(FileStore, SpellingStore):
 
     def __init__(self, storage_engine):
         FileStore.__init__(self, storage_engine)
+        SpellingStore.__init__(self)
 
     def load_spelling(self, spell_checker):
         corpus_filename = self.get_storage().file

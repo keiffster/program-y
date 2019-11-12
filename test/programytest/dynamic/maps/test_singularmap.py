@@ -1,8 +1,7 @@
 import unittest
 
-from programy.dynamic.maps.singular import SingularMap
 from programy.context import ClientContext
-
+from programy.dynamic.maps.singular import SingularMap
 from programytest.client import TestClient
 
 

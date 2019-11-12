@@ -19,14 +19,17 @@ from programy.storage.entities.store import Store
 
 class DefaultStore(Store):
 
+    def __init__(self):
+        Store.__init__(self)
+
     def empty_defaults(self):
-        raise NotImplementedError("empty_defaults missing from Defaults Store")
+        raise NotImplementedError("empty_defaults missing from Defaults Store")  # pragma: no cover
 
     def add_default(self, name, value):
-        raise NotImplementedError("add_default missing from Defaults Store")
+        raise NotImplementedError("add_default missing from Defaults Store")  # pragma: no cover
 
     def add_defaults(self, defaults):
-        raise NotImplementedError("add_defaults missing from Defaults Store")
+        raise NotImplementedError("add_defaults missing from Defaults Store")  # pragma: no cover
 
     def get_defaults(self):
-        raise NotImplementedError("get_defaults missing from Default Store")
+        raise NotImplementedError("get_defaults missing from Default Store")  # pragma: no cover

@@ -1,10 +1,10 @@
+import os
 import unittest
 import unittest.mock
-import os
 
 from programy.clients.restful.flask.client import FlaskRestBotClient
-
 from programytest.clients.arguments import MockArgumentParser
+
 
 class MockFlaskRestBotClient(FlaskRestBotClient):
 

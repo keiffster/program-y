@@ -37,9 +37,6 @@ class BrainServicesConfiguration(BaseSectionConfigurationData):
     def services(self):
         return list(self._services.keys())
 
-    def check_for_license_keys(self, license_keys):
-        BaseSectionConfigurationData.check_for_license_keys(self, license_keys)
-
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         services = configuration_file.get_section(self.section_name, configuration)
         if services is not None:

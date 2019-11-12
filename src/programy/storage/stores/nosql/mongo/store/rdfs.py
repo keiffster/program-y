@@ -16,11 +16,11 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 from programy.utils.logging.ylogger import YLogger
 from programy.storage.stores.nosql.mongo.store.mongostore import MongoStore
-from programy.storage.entities.rdf import RDFReadOnlyStore
+from programy.storage.entities.rdf import RDFReadWriteStore
 from programy.storage.stores.nosql.mongo.dao.rdf import RDF
 
 
-class MongoRDFsStore(RDFReadOnlyStore, MongoStore):
+class MongoRDFsStore(RDFReadWriteStore, MongoStore):
     RDFS = 'rdfs'
     SUBJECT = 'subject'
     PREDICATE = 'predicate'
@@ -29,6 +29,7 @@ class MongoRDFsStore(RDFReadOnlyStore, MongoStore):
 
     def __init__(self, storage_engine):
         MongoStore.__init__(self, storage_engine)
+        RDFReadWriteStore.__init__(self)
 
     def collection_name(self):
         return MongoRDFsStore.RDFS

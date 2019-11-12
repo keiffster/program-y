@@ -1,7 +1,7 @@
-import unittest
 import os
 import os.path
 import re
+import unittest
 
 from programy.mappings.gender import GenderCollection
 from programy.storage.entities.store import Store

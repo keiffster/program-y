@@ -1,14 +1,30 @@
 import unittest
 
-from programy.storage.stores.nosql.redis.store.conversations import RedisConversationStore
-from programy.storage.stores.nosql.redis.engine import RedisStorageEngine
-from programy.storage.stores.nosql.redis.config import RedisStorageConfiguration
+import programytest.storage.engines as Engines
 from programy.dialog.conversation import Conversation
 from programy.dialog.question import Question
-
-import programytest.storage.engines as Engines
-
+from programy.storage.stores.nosql.redis.config import RedisStorageConfiguration
+from programy.storage.stores.nosql.redis.engine import RedisStorageEngine
+from programy.storage.stores.nosql.redis.store.conversations import RedisConversationStore
 from programytest.client import TestClient
+
+
+class MockRedisConversationStore(RedisConversationStore):
+
+    def __init__(self, storage_engine, fail_write=False, fail_read=False):
+        RedisConversationStore.__init__(self, storage_engine)
+        self._fail_write = fail_write
+        self._fail_read = fail_read
+
+    def _write_conversation(self, client_context, conversation):
+        if self._fail_write is True:
+            raise Exception("Mock exception")
+        super(MockRedisConversationStore)._write_conversation(client_context, conversation)
+
+    def _read_conversation(self, client_context, conversation):
+        if self._fail_read is True:
+            raise Exception("Mock exception")
+        super(MockRedisConversationStore)._read_conversation(client_context, conversation)
 
 
 class RedisConversationStoreTests(unittest.TestCase):
@@ -63,3 +79,21 @@ class RedisConversationStoreTests(unittest.TestCase):
         self.assertEqual(conversation2.questions[0].properties['qkey2'], "qvalue2")
 
         store.empty()
+
+    @unittest.skipIf(Engines.redis is False, Engines.redis_disabled)
+    def test_conversations_storage_exception_on_save_load(self):
+        config = RedisStorageConfiguration()
+        engine = RedisStorageEngine(config)
+        engine.initialise()
+        store = MockRedisConversationStore(engine, fail_write=False, fail_read=False)
+
+        client = TestClient()
+        client_context = client.create_client_context("user1")
+
+        conversation1 = Conversation(client_context)
+
+        store.store_conversation(client_context, conversation1)
+
+        conversation2 = Conversation(client_context)
+
+        store.load_conversation(client_context, conversation2)

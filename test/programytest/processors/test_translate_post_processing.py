@@ -1,18 +1,17 @@
-import unittest
 import re
-from programy.processors.post.denormalize import DenormalizePostProcessor
-from programy.processors.post.formatpunctuation import FormatPunctuationProcessor
-from programy.processors.post.formatnumbers import FormatNumbersPostProcessor
-from programy.processors.post.multispaces import RemoveMultiSpacePostProcessor
-from programy.processors.post.emojize import EmojizePostProcessor
-from programy.processors.post.translate import TranslatorPostProcessor
+import unittest
+
+import programytest.externals as Externals
 from programy.bot import Bot
 from programy.config.bot.bot import BotConfiguration
 from programy.context import ClientContext
-
+from programy.processors.post.denormalize import DenormalizePostProcessor
+from programy.processors.post.emojize import EmojizePostProcessor
+from programy.processors.post.formatnumbers import FormatNumbersPostProcessor
+from programy.processors.post.formatpunctuation import FormatPunctuationProcessor
+from programy.processors.post.multispaces import RemoveMultiSpacePostProcessor
+from programy.processors.post.translate import TranslatorPostProcessor
 from programytest.client import TestClient
-
-import programytest.externals as Externals
 
 
 class PostProcessingTests(unittest.TestCase):
@@ -53,7 +52,7 @@ class PostProcessingTests(unittest.TestCase):
 
         return output_str
 
-    @unittest.skipIf(Externals.google_translate is False, Externals.google_translate_disabled)
+    @unittest.skipIf(Externals.google_translate is False or Externals.all_externals is False, Externals.google_translate_disabled)
     def test_post_cleanup(self):
 
         result = self.post_process("Hello World")

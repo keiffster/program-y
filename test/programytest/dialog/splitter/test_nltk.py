@@ -1,7 +1,7 @@
 import unittest
 
-from programy.dialog.splitter.nltk import NLTKSentenceSplitter
 from programy.config.bot.splitter import BotSentenceSplitterConfiguration
+from programy.dialog.splitter.nltk import NLTKSentenceSplitter
 
 
 class NLTKSentenceSplitterTests(unittest.TestCase):

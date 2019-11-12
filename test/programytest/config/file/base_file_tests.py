@@ -1,5 +1,6 @@
 import unittest
 
+
 class ConfigurationBaseFileTests(unittest.TestCase):
 
     def assert_configuration(self, configuration):

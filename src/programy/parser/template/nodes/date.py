@@ -37,6 +37,33 @@ class TemplateDateNode(TemplateAttribNode):
         if locale is not None:
             self._locale = TemplateWordNode(locale)
 
+    @property
+    def date_format(self):
+        return self._format
+
+    @date_format.setter
+    def date_format(self, fmt):
+        if isinstance(fmt, TemplateNode):
+            self._format = fmt
+        else:
+            self._format = TemplateWordNode(str(fmt))
+
+    @property
+    def locale(self):
+        return self._locale
+
+    @locale.setter
+    def locale(self, lcl):
+        if isinstance(lcl, TemplateNode):
+            self._locale = lcl
+        else:
+            self._locale = TemplateWordNode(str(lcl))
+
+    def _set_locate(self, client_context):
+        local_locale = self._locale.resolve_to_string(client_context)
+        locale.setlocale(locale.LC_TIME, local_locale)
+        return local_locale
+
     def resolve_to_string(self, client_context):
         time_now = datetime.datetime.now()
 
@@ -44,11 +71,17 @@ class TemplateDateNode(TemplateAttribNode):
         if self._locale is not None:
             local_time = locale.setlocale(locale.LC_TIME)
 
+        local_locale = ""
+        resolved = ""
         try:
             if self._locale is not None:
-                locale.setlocale(locale.LC_TIME, self._locale.resolve_to_string(client_context))
+                local_locale = self._set_locate(client_context)
+
             resolved_format = self._format.resolve_to_string(client_context)
             resolved = time_now.strftime(resolved_format)
+
+        except Exception as exep:
+            YLogger.exception(self, "Failed to set locale to [%s]", exep, local_locale)
 
         finally:
             if local_time is not None:
@@ -64,6 +97,7 @@ class TemplateDateNode(TemplateAttribNode):
             return "[DATE format=%s locale=%s]" % (self._format.to_string(), self._locale.to_string())
 
     def set_attrib(self, attrib_name, attrib_value):
+
         if attrib_name == 'format':
             if isinstance(attrib_value, TemplateNode):
                 self._format = attrib_value
@@ -75,6 +109,7 @@ class TemplateDateNode(TemplateAttribNode):
                 self._locale = attrib_value
             else:
                 self._locale = TemplateWordNode(attrib_value)
+
         else:
             raise ParserException("Invalid attribute name %s for this node" % (attrib_name))
 

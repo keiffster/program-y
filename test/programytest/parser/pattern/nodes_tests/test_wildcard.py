@@ -1,17 +1,16 @@
-from programytest.parser.base import ParserTestsBaseClass
-
-from programy.parser.exceptions import ParserException
-from programy.parser.pattern.nodes.wildcard import PatternWildCardNode
-from programy.parser.pattern.nodes.zeroormore import PatternZeroOrMoreWildCardNode
-from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
-from programy.parser.pattern.nodes.word import PatternWordNode
-from programy.parser.pattern.nodes.root import PatternRootNode
-from programy.parser.pattern.nodes.topic import PatternTopicNode
-from programy.parser.template.nodes.base import TemplateNode
-from programy.parser.pattern.nodes.template import PatternTemplateNode
-from programy.parser.pattern.matchcontext import MatchContext
-from programy.parser.pattern.match import Match
 from programy.dialog.sentence import Sentence
+from programy.parser.exceptions import ParserException
+from programy.parser.pattern.match import Match
+from programy.parser.pattern.matchcontext import MatchContext
+from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
+from programy.parser.pattern.nodes.root import PatternRootNode
+from programy.parser.pattern.nodes.template import PatternTemplateNode
+from programy.parser.pattern.nodes.topic import PatternTopicNode
+from programy.parser.pattern.nodes.wildcard import PatternWildCardNode
+from programy.parser.pattern.nodes.word import PatternWordNode
+from programy.parser.pattern.nodes.zeroormore import PatternZeroOrMoreWildCardNode
+from programy.parser.template.nodes.base import TemplateNode
+from programytest.parser.base import ParserTestsBaseClass
 
 
 class MockPatternWildCardNode(PatternWildCardNode):
@@ -24,6 +23,10 @@ class MockPatternWildCardNode(PatternWildCardNode):
 
 
 class PatternWildCardNodeTests(ParserTestsBaseClass):
+
+    def test_init(self):
+        with self.assertRaises(ParserException):
+            _ = PatternWildCardNode("*")
 
     def test_wildcard(self):
 
@@ -68,6 +71,11 @@ class PatternWildCardNodeTests(ParserTestsBaseClass):
         self.assertIsNotNone(wildcard)
         wildcard._0ormore_hash = PatternZeroOrMoreWildCardNode('#')
         wildcard._0ormore_hash._template = PatternTemplateNode(TemplateNode())
+
+        context = MatchContext(max_search_depth=100, max_search_timeout=-1)
+        sentence = Sentence(self._client_context, "")
+        match = wildcard.check_child_is_wildcard("", self._client_context, context, sentence, 0,  Match.WORD, 0)
+        self.assertIsNotNone(match)
 
         context = MatchContext(max_search_depth=100, max_search_timeout=-1)
         sentence = Sentence(self._client_context, "TEST SENTENCE")

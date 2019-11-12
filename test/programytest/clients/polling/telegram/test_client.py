@@ -1,12 +1,13 @@
 import unittest.mock
+
 from telegram.ext import CommandHandler
 from telegram.ext import MessageHandler
 
 from programy.clients.polling.telegram.client import TelegramBotClient
 from programy.clients.polling.telegram.client import start, message, unknown
 from programy.clients.polling.telegram.config import TelegramConfiguration
-
 from programytest.clients.arguments import MockArgumentParser
+
 
 class MockBot(object):
 

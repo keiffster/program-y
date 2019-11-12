@@ -28,6 +28,7 @@ class MongoConversationStore(MongoStore, ConversationStore):
 
     def __init__(self, storage_engine):
         MongoStore.__init__(self, storage_engine)
+        ConversationStore.__init__(self)
 
     def collection_name(self):
         return MongoConversationStore.CONVERSATIONS

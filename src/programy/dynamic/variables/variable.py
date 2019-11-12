@@ -29,7 +29,7 @@ class DynamicVariable(ABC):
 
     @abstractmethod
     def get_value(self, client_context, value):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
 
 class DynamicSettableVariable(DynamicVariable):
@@ -38,4 +38,4 @@ class DynamicSettableVariable(DynamicVariable):
         DynamicVariable.__init__(self, config)
 
     def set_value(self, client_context, value):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover

@@ -3,8 +3,8 @@ import unittest.mock
 from datetime import datetime
 
 from programy.extensions.admin.scheduler import SchedulerAdminExtension
-
 from programytest.client import TestClient
+
 
 class MockScheduler(object):
 

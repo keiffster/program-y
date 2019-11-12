@@ -1,7 +1,7 @@
 import unittest
 
-from programy.config.bot.bot import BotConfiguration
 from programy.clients.events.console.config import ConsoleConfiguration
+from programy.config.bot.bot import BotConfiguration
 from programy.config.file.yaml_file import YamlConfigurationFile
 from programy.utils.license.keys import LicenseKeys
 
@@ -118,7 +118,7 @@ class BotConfigurationTests(unittest.TestCase):
         self.assertEqual("programy.nlp.sentiment.textblob_sentiment.TextBlobSentimentAnalyser", bot_config.sentiment_analyser.classname)
         self.assertEqual("programy.nlp.sentiment.scores.SentimentScores", bot_config.sentiment_analyser.scores)
 
-    def tets_getters_and_setters(self):
+    def test_getters_and_setters(self):
         bot_config = BotConfiguration()
 
         bot_config.default_response = "Default response"

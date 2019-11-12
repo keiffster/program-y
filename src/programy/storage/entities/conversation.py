@@ -19,8 +19,11 @@ from programy.storage.entities.store import Store
 
 class ConversationStore(Store):
 
+    def __init__(self):
+        Store.__init__(self)
+
     def store_conversation(self, client_context, conversation, commit=True):
-        raise NotImplementedError("store_conversation missing from Conversation Store")
+        raise NotImplementedError("store_conversation missing from Conversation Store")  # pragma: no cover
 
     def load_conversation(self, client_context, conversation):
-        raise NotImplementedError("load_conversation missing from Conversation Store")
+        raise NotImplementedError("load_conversation missing from Conversation Store")  # pragma: no cover

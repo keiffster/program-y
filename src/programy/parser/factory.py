@@ -37,7 +37,7 @@ class NodeFactory(ABC):
 
     @abstractmethod
     def default_config_file(self):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     def add_node(self, name, instance):
         self._nodes_config[name] = instance

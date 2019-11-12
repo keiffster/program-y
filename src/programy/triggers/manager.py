@@ -33,7 +33,7 @@ class TriggerManager(ABC):
 
     @abstractmethod
     def trigger(self, event: str, client_context: ClientContext = None, additional: Dict[str, str] = None) -> bool:
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     @staticmethod
     def load_trigger_manager(config: TriggerConfiguration):

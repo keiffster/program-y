@@ -1,7 +1,7 @@
 import unittest
-from programy.processors.pre.splitchinese import SplitChinesePreProcessor
-from programy.context import ClientContext
 
+from programy.context import ClientContext
+from programy.processors.pre.splitchinese import SplitChinesePreProcessor
 from programytest.client import TestClient
 
 

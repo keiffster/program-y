@@ -1,0 +1,4 @@
+SYSTEM_STARTUP:programytest.triggers.trigger1.Trigger1XXX
+SYSTEM_SHUTDOWN:programytest.triggers.trigger1.Trigger1XXX
+CONVERSATION_START:programytest.triggers.trigger1.Trigger1XXX
+

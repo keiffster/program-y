@@ -1,9 +1,8 @@
 import unittest
 
-from programy.spelling.textblob_spelling import TextBlobSpellingChecker
-from programy.spelling.base import SpellingChecker
 from programy.config.bot.spelling import BotSpellingConfiguration
-
+from programy.spelling.base import SpellingChecker
+from programy.spelling.textblob_spelling import TextBlobSpellingChecker
 from programytest.client import TestClient
 
 

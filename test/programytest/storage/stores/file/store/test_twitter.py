@@ -1,11 +1,10 @@
 import os.path
 import shutil
 
-from programytest.storage.asserts.store.assert_twitter import TwitterStoreAsserts
-
-from programy.storage.stores.file.store.twitter import FileTwitterStore
-from programy.storage.stores.file.engine import FileStorageEngine
 from programy.storage.stores.file.config import FileStorageConfiguration
+from programy.storage.stores.file.engine import FileStorageEngine
+from programy.storage.stores.file.store.twitter import FileTwitterStore
+from programytest.storage.asserts.store.assert_twitter import TwitterStoreAsserts
 
 
 class FileTwitterStoreTests(TwitterStoreAsserts):

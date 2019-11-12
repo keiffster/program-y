@@ -1,11 +1,12 @@
-import unittest
 import os
+import unittest
 
 from programy.mappings.properties import PropertiesCollection
 from programy.storage.factory import StorageFactory
 from programy.storage.stores.file.config import FileStorageConfiguration
-from programy.storage.stores.file.engine import FileStorageEngine
 from programy.storage.stores.file.config import FileStoreConfiguration
+from programy.storage.stores.file.engine import FileStorageEngine
+
 
 class PropertysTests(unittest.TestCase):
 

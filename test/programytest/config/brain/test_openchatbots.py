@@ -1,8 +1,8 @@
 import unittest
 
-from programy.config.file.yaml_file import YamlConfigurationFile
-from programy.config.brain.openchatbots import BrainOpenChatBotsConfiguration
 from programy.clients.events.console.config import ConsoleConfiguration
+from programy.config.brain.openchatbots import BrainOpenChatBotsConfiguration
+from programy.config.file.yaml_file import YamlConfigurationFile
 
 
 class BrainOpenChatBotsConfigurationTests(unittest.TestCase):
@@ -40,6 +40,9 @@ class BrainOpenChatBotsConfigurationTests(unittest.TestCase):
         self.assertTrue(openchatbots_config.exists("chatbot2"))
         self.assertTrue(openchatbots_config.exists("chatbot3"))
         self.assertFalse(openchatbots_config.exists("chatbot4"))
+
+        self.assertIsNotNone(openchatbots_config.openchatbot("chatbot1"))
+        self.assertIsNone(openchatbots_config.openchatbot("chatbot66"))
 
     def test_without_data(self):
         yaml = YamlConfigurationFile()

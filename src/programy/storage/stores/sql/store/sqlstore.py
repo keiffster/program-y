@@ -24,15 +24,12 @@ class SQLStore(Store):
         Store.__init__(self)
         self._storage_engine = storage_engine
 
-    def store_name(self):
-        return SQLStore.SQL
-
     @property
     def storage_engine(self):
         return self._storage_engine
 
     def _get_all(self):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     def commit(self):
         self._storage_engine.session.commit()

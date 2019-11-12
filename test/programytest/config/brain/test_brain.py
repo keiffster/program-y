@@ -1,8 +1,9 @@
 import unittest
 
+from programy.clients.events.console.config import ConsoleConfiguration
 from programy.config.brain.brain import BrainConfiguration
 from programy.config.file.yaml_file import YamlConfigurationFile
-from programy.clients.events.console.config import ConsoleConfiguration
+from programy.utils.license.keys import LicenseKeys
 
 
 class BrainConfigurationTests(unittest.TestCase):
@@ -197,3 +198,17 @@ brain:
 
         self.assertIsNotNone(brain_configuration.dynamics.dynamic_maps)
         self.assertIsNotNone(brain_configuration.dynamics.dynamic_vars)
+
+    def test_check_for_license_keys(self):
+        yaml = YamlConfigurationFile()
+        self.assertIsNotNone(yaml)
+        yaml.load_from_text("""
+        brain:
+               """, ConsoleConfiguration(), ".")
+
+        brain_configuration = BrainConfiguration()
+        brain_configuration.load_configuration(yaml, ".")
+
+        license_keys = LicenseKeys()
+
+        brain_configuration.check_for_license_keys(license_keys)

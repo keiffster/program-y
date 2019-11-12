@@ -2,6 +2,7 @@ import unittest
 
 from programy.clients.restful.apihandlers import APIHandler_V2_0
 
+
 class MockBot(object):
 
     def __init__(self):

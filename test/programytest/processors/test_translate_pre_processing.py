@@ -1,21 +1,20 @@
 import unittest
-from programy.processors.pre.removepunctuation import RemovePunctuationPreProcessor
-from programy.processors.pre.toupper import ToUpperPreProcessor
-from programy.processors.pre.normalize import NormalizePreProcessor
-from programy.processors.pre.demojize import DemojizePreProcessor
-from programy.processors.pre.translate import TranslatorPreProcessor
+
+import programytest.externals as Externals
 from programy.bot import Bot
 from programy.config.bot.bot import BotConfiguration
 from programy.context import ClientContext
-
+from programy.processors.pre.demojize import DemojizePreProcessor
+from programy.processors.pre.normalize import NormalizePreProcessor
+from programy.processors.pre.removepunctuation import RemovePunctuationPreProcessor
+from programy.processors.pre.toupper import ToUpperPreProcessor
+from programy.processors.pre.translate import TranslatorPreProcessor
 from programytest.client import TestClient
-
-import programytest.externals as Externals
 
 
 class PreProcessingTests(unittest.TestCase):
 
-    @unittest.skipIf(Externals.google_translate is False, Externals.google_translate_disabled)
+    @unittest.skipIf(Externals.google_translate is False or Externals.all_externals is False, Externals.google_translate_disabled)
     def test_pre_cleanup(self):
         self.client = TestClient()
 

@@ -25,7 +25,7 @@ class Set():
         self.values = values
 
     def __repr__(self):
-        return "<Set(id='%d', name='%s')>" % (DAOUtils.valid_id(self.id), self.name)
+        return "<Set(id='%s', name='%s', values='%s')>" % (DAOUtils.valid_id(self.id), self.name, ", ".join(self.values))
 
     def to_document(self):
         document = {"name": self.name,
@@ -36,11 +36,8 @@ class Set():
 
     @staticmethod
     def from_document(data):
-        lookup = Set(None, None)
-        if '_id' in data:
-            lookup.id = data['_id']
-        if 'name' in data:
-            lookup.name = data['name']
-        if 'values' in data:
-            lookup.values = data['values']
-        return lookup
+        aset = Set(None, None)
+        aset.id = DAOUtils.get_value_from_data(data, '_id')
+        aset.name = DAOUtils.get_value_from_data(data, 'name')
+        aset.values = DAOUtils.get_value_from_data(data, 'values', [])
+        return aset

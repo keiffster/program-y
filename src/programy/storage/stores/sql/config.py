@@ -63,9 +63,6 @@ class SQLStorageConfiguration(BaseConfigurationData):
     def drop_all_first(self, drop_all):
         self._drop_all_first = drop_all
 
-    def check_for_license_keys(self, license_keys):
-        BaseConfigurationData.check_for_license_keys(self, license_keys)
-
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         del bot_root
         storage = configuration_file.get_section(self._section_name, configuration)

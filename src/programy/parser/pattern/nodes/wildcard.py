@@ -61,8 +61,9 @@ class PatternWildCardNode(PatternNode):
             YLogger.debug(client_context, "%sWildcard # is next node, moving on!", tabs)
             match = self._0ormore_hash.consume(client_context, context, words, word_no + 1, match_type, depth + 1,
                                                parent=True)
-            if match is not None:
-                return match
+            #if match is not None:
+            #    return match
+            return match
 
         if self._1ormore_underline is not None:
             YLogger.debug(client_context, "%sWildcard _ is next node, moving on!", tabs)
@@ -74,8 +75,9 @@ class PatternWildCardNode(PatternNode):
             YLogger.debug(client_context, "%sWildcard ^ is next node, moving on!", tabs)
             match = self._0ormore_arrow.consume(client_context, context, words, word_no + 1, match_type, depth + 1,
                                                 parent=True)
-            if match is not None:
-                return match
+            #if match is not None:
+            #    return match
+            return match
 
         if self._1ormore_star is not None:
             YLogger.debug(client_context, "%sWildcard * is next node, moving on!", tabs)

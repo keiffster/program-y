@@ -25,4 +25,8 @@ class NullTrigger(Trigger):
         Trigger.__init__(self)
 
     def trigger(self, client_context: ClientContext = None, additional=None):
-        outputLog(self, "%s Trigger fired, no action..." % additional["event"])
+        if additional is not None:
+            if 'event' in additional:
+                outputLog(self, "%s Trigger fired, no action..." % additional["event"])
+
+        outputLog(self, "%s Trigger fired, no action...")

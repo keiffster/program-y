@@ -1,10 +1,9 @@
-import unittest
 import os
+import unittest
 
 from programy.clients.restful.apikeys import APIKeysHandler
 from programy.clients.restful.client import RestBotClient
 from programy.clients.restful.config import RestConfiguration
-
 from programytest.clients.arguments import MockArgumentParser
 
 

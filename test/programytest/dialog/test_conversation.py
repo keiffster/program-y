@@ -1,15 +1,14 @@
 import unittest
 
-from programy.dialog.sentence import Sentence
-from programy.dialog.question import Question
-from programy.dialog.conversation import Conversation
-from programy.parser.pattern.matchcontext import MatchContext
-from programy.parser.pattern.match import Match
-from programy.parser.pattern.nodes.word import PatternWordNode
 from programy.bot import Bot
 from programy.config.bot.bot import BotConfiguration
 from programy.context import ClientContext
-
+from programy.dialog.conversation import Conversation
+from programy.dialog.question import Question
+from programy.dialog.sentence import Sentence
+from programy.parser.pattern.match import Match
+from programy.parser.pattern.matchcontext import MatchContext
+from programy.parser.pattern.nodes.word import PatternWordNode
 from programytest.client import TestClient
 
 

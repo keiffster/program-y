@@ -32,6 +32,7 @@ class SQLLookupsStore(SQLStore, LookupsStore):
 
     def __init__(self, storage_engine):
         SQLStore.__init__(self, storage_engine)
+        LookupsStore.__init__(self)
 
     def load_all(self, collector):
         self.load(collector)
@@ -43,10 +44,10 @@ class SQLLookupsStore(SQLStore, LookupsStore):
             collector.add_to_lookup(key, value)
 
     def _get_entity(self, key, value):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     def _exists(self, key):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     def add(self, key, value, overwrite_existing=False):
         lookup = self._get_entity(key=key, value=value)

@@ -1,15 +1,15 @@
+import os
 import unittest
 import unittest.mock
-import os
 
+from programy.bot import Bot
 from programy.clients.polling.twitter.client import TwitterBotClient
 from programy.clients.polling.twitter.config import TwitterConfiguration
-from programy.bot import Bot
-from programytest.clients.arguments import MockArgumentParser
 from programy.storage.config import FileStorageConfiguration
+from programy.storage.factory import StorageFactory
 from programy.storage.stores.file.config import FileStoreConfiguration
 from programy.storage.stores.file.engine import FileStorageEngine
-from programy.storage.factory import StorageFactory
+from programytest.clients.arguments import MockArgumentParser
 
 
 class MockMessage(object):

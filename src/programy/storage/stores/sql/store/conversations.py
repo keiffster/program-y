@@ -33,6 +33,7 @@ class SQLConversationStore(SQLStore, ConversationStore):
 
     def __init__(self, storage_engine):
         SQLStore.__init__(self, storage_engine)
+        ConversationStore.__init__(self)
 
     def _get_all(self):
         return self._storage_engine.session.query(ConversationDAO)

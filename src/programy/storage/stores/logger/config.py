@@ -31,9 +31,6 @@ class LoggerStorageConfiguration(BaseConfigurationData):
     def conversation_logger(self):
         return self._conversation_logger
 
-    def check_for_license_keys(self, license_keys):
-        BaseConfigurationData.check_for_license_keys(self, license_keys)
-
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         del bot_root
         storage = configuration_file.get_section(self._section_name, configuration)

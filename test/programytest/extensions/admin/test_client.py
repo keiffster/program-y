@@ -1,7 +1,6 @@
 import unittest.mock
 
 from programy.extensions.admin.client import ClientAdminExtension
-
 from programytest.client import TestClient
 
 

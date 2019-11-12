@@ -64,23 +64,23 @@
 
     <category>
         <pattern>
-            SHOW OBSERVATION WEATHER * TEMP * * VISIBILITY V * VF * WIND D * DF * S * PRESSURE P * PT * PTF * HUMIDITY * *
+            SHOW OBSERVATION WEATHER * TEMP * * HUMIDITY * * VISIBILITY V * VF * PRESSURE P * PT * PTF * WIND D * DF * S *
         </pattern>
         <template>
             <think>
                 <set name="weather"><star index="1" /></set>
                 <set name="temp_dec"><star index="2" /></set>
                 <set name="temp_frac"><star index="3" /></set>
-                <set name="vis"><star index="4" /></set>
-                <set name="vis_full"><star index="5" /></set>
-                <set name="wind_dir"><star index="6" /></set>
-                <set name="wind_dir_full"><star index="7" /></set>
-                <set name="wind_speed"><star index="8" /></set>
-                <set name="pressure"><star index="9" /></set>
-                <set name="press_tend"><star index="10" /></set>
-                <set name="press_tend_full"><star index="11" /></set>
-                <set name="humid_dec"><star index="12" /></set>
-                <set name="humid_frac"><star index="13" /></set>
+                <set name="humid_dec"><star index="4" /></set>
+                <set name="humid_frac"><star index="5" /></set>
+                <set name="vis"><star index="6" /></set>
+                <set name="vis_full"><star index="7" /></set>
+                <set name="pressure"><star index="8" /></set>
+                <set name="press_tend"><star index="9" /></set>
+                <set name="press_tend_full"><star index="10" /></set>
+                <set name="wind_dir"><star index="11" /></set>
+                <set name="wind_dir_full"><star index="12" /></set>
+                <set name="wind_speed"><star index="13" /></set>
             </think>
                 According to the UK Met Office, this <lowercase><srai>DAY PHASE</srai> it is <get name="weather" />,</lowercase>
                 with a temperature of around <implode><denormalize><get name="temp_dec"/>dot<get name="temp_frac"/>'C</denormalize></implode>,

@@ -1,8 +1,8 @@
 import unittest
 
-from programy.services.openchatbot.collection import OpenChatBotCollection
-from programy.config.brain.openchatbots import BrainOpenChatBotsConfiguration
 from programy.config.brain.openchatbot import BrainOpenChatBotConfiguration
+from programy.config.brain.openchatbots import BrainOpenChatBotsConfiguration
+from programy.services.openchatbot.collection import OpenChatBotCollection
 
 
 class OpenChatBotCollectionTests(unittest.TestCase):

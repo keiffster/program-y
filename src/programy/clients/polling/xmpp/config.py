@@ -53,18 +53,16 @@ class XmppConfiguration(ClientConfigurationData):
     def xep_0199(self):
         return self._xep_0199
 
-    def check_for_license_keys(self, license_keys):
-        ClientConfigurationData.check_for_license_keys(self, license_keys)
-
     def load_configuration_section(self, configuration_file, section, bot_root, subs: Substitutions = None):
-        if section is not None:
-            self._server = configuration_file.get_option(section, "server", subs=subs)
-            self._port = configuration_file.get_int_option(section, "port", missing_value=5222, subs=subs)
-            self._xep_0030 = configuration_file.get_bool_option(section, "xep_0030", subs=subs)
-            self._xep_0004 = configuration_file.get_bool_option(section, "xep_0004", subs=subs)
-            self._xep_0060 = configuration_file.get_bool_option(section, "xep_0060", subs=subs)
-            self._xep_0199 = configuration_file.get_bool_option(section, "xep_0199", subs=subs)
-            super(XmppConfiguration, self).load_configuration_section(configuration_file, section, bot_root, subs=subs)
+        assert section is not None
+
+        self._server = configuration_file.get_option(section, "server", subs=subs)
+        self._port = configuration_file.get_int_option(section, "port", missing_value=5222, subs=subs)
+        self._xep_0030 = configuration_file.get_bool_option(section, "xep_0030", subs=subs)
+        self._xep_0004 = configuration_file.get_bool_option(section, "xep_0004", subs=subs)
+        self._xep_0060 = configuration_file.get_bool_option(section, "xep_0060", subs=subs)
+        self._xep_0199 = configuration_file.get_bool_option(section, "xep_0199", subs=subs)
+        super(XmppConfiguration, self).load_configuration_section(configuration_file, section, bot_root, subs=subs)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:

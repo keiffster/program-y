@@ -1,8 +1,9 @@
 import unittest
-from programy.processors.post.formatnumbers import FormatNumbersPostProcessor
-from programy.context import ClientContext
 
+from programy.context import ClientContext
+from programy.processors.post.formatnumbers import FormatNumbersPostProcessor
 from programytest.client import TestClient
+
 
 class FormatNmbersTests(unittest.TestCase):
 

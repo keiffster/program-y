@@ -3,7 +3,7 @@ import unittest
 from programy.storage.stores.nosql.mongo.dao.category import Category
 
 
-class CategoryTests(unittest.TestCase):
+class CategoryReadOnlyTests(unittest.TestCase):
 
     def test_init(self):
         category1 = Category("groupid", "userid", "topic", "that", "pattern", "template")

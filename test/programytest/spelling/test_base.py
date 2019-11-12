@@ -1,9 +1,8 @@
 import unittest
 
-from programy.spelling.base import SpellingChecker
 from programy.config.bot.spelling import BotSpellingConfiguration
 from programy.dialog.sentence import Sentence
-
+from programy.spelling.base import SpellingChecker
 from programytest.client import TestClient
 
 

@@ -1,5 +1,6 @@
-import unittest
 import datetime
+import unittest
+
 
 class LinkStoreAsserts(unittest.TestCase):
 

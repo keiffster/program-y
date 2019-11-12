@@ -1,11 +1,10 @@
 import unittest
-from programy.processors.post.translate import TranslatorPostProcessor
-from programy.bot import Bot
-from programy.config.bot.bot import BotConfiguration
-
-from programytest.client import TestClient
 
 import programytest.externals as Externals
+from programy.bot import Bot
+from programy.config.bot.bot import BotConfiguration
+from programy.processors.post.translate import TranslatorPostProcessor
+from programytest.client import TestClient
 
 
 class MockClientContext(object):
@@ -31,10 +30,10 @@ class TranslatorPostProcessorTest(unittest.TestCase):
         self.bot = Bot(config=config, client=self.client)
         self.bot.initiate_translator()
 
-    @unittest.skipIf(Externals.google_translate is False, Externals.google_translate_disabled)
+    @unittest.skipIf(Externals.google_translate is False or Externals.all_externals is False, Externals.google_translate_disabled)
     def test_post_process_translate(self):
         processor = TranslatorPostProcessor()
 
         context = MockClientContext(self.bot)
 
-        self.assertEqual("Bonjour", processor.process(context, "Hello"))
+        self.assertTrue(processor.process(context, "Hello") in ["Bonjour", "Salut"])

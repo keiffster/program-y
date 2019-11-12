@@ -1,8 +1,9 @@
 import unittest
 
-from programy.config.file.yaml_file import YamlConfigurationFile
-from programy.config.brain.braintree import BrainBraintreeConfiguration
 from programy.clients.events.console.config import ConsoleConfiguration
+from programy.config.brain.braintree import BrainBraintreeConfiguration
+from programy.config.file.yaml_file import YamlConfigurationFile
+
 
 class BrainBraintreeConfigurationTests(unittest.TestCase):
 

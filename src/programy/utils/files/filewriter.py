@@ -18,7 +18,6 @@ import datetime
 import csv
 import os
 from programy.utils.logging.ylogger import YLogger
-from programy.utils.console.console import outputLog
 
 
 class TextFile:
@@ -51,6 +50,14 @@ class CSVFile:
         self._encoding = encoding
         self._file = open(self._filename, mode, encoding=self._encoding)
         self._csv_writer = csv.writer(self._file, delimiter=delimiter, quotechar=quotechar, quoting=quoting)
+
+    @property
+    def filename(self):
+        return self._filename
+
+    @property
+    def encoding(self):
+        return self._encoding
 
     def write_line(self, _, elements):
         self._csv_writer.writerow(elements)
@@ -110,7 +117,10 @@ class FileWriter:
             raise Exception("Unknown file type [%s]" % configuration.fileformat)
 
     def write_header(self):
-        pass
+        pass    # pragma: no cover
+
+    def format_row_as_text(self, row):
+        return row
 
     @staticmethod
     def get_timestamp():
@@ -121,6 +131,7 @@ class ConversationFileWriter(FileWriter):
 
     def __init__(self, configuration):
         FileWriter.__init__(self, configuration)
+        self.write_header()
 
     def log_question_and_answer(self, clientid, question, answer):
         row = [FileWriter.get_timestamp(), clientid, question, answer]
@@ -141,12 +152,13 @@ class ContentFileWriter(FileWriter):
         FileWriter.__init__(self, configuration)
         self._content_type = content_type
         self._entries = []
+        self.write_header()
 
     @property
     def entries(self):
         return self._entries
 
-    def save_entry(self, content, filename, startline, endline):
+    def save_entry(self, content, filename, startline=None, endline=None):
         timestamp = self.get_timestamp()
         if startline and endline:
             row = [timestamp, content, filename, startline, endline]
@@ -162,10 +174,6 @@ class ContentFileWriter(FileWriter):
 
         self._file.flush()
         return len(self._entries)
-
-    def print_content(self):
-        for entry in self._entries:
-            outputLog(self, entry)
 
     def format_row_as_text(self, row):
         if len(row) == 5:

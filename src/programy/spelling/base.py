@@ -32,7 +32,7 @@ class SpellingChecker(Activatable, ABC):
 
     @abstractmethod
     def correct(self, phrase):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     @staticmethod
     def initiate_spellchecker(spelling_config, storage_factory):

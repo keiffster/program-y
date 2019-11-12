@@ -44,12 +44,9 @@ class PatternNode(Node):
     @staticmethod
     def from_document(data):
         node = PatternNode(None, None)
-        if '_id' in data:
-            node.id = data['_id']
-        if 'name' in data:
-            node.name = data['name']
-        if 'node_class' in data:
-            node.node_class = data['node_class']
+        node.id = DAOUtils.get_value_from_data(data, '_id')
+        node.name = DAOUtils.get_value_from_data(data, 'name')
+        node.node_class = DAOUtils.get_value_from_data(data, 'node_class')
         return node
 
 
@@ -64,11 +61,8 @@ class TemplateNode(Node):
 
     @staticmethod
     def from_document(data):
-        node = PatternNode(None, None)
-        if '_id' in data:
-            node.id = data['_id']
-        if 'name' in data:
-            node.name = data['name']
-        if 'node_class' in data:
-            node.node_class = data['node_class']
+        node = TemplateNode(None, None)
+        node.id = DAOUtils.get_value_from_data(data, '_id')
+        node.name = DAOUtils.get_value_from_data(data, 'name')
+        node.node_class = DAOUtils.get_value_from_data(data, 'node_class')
         return node

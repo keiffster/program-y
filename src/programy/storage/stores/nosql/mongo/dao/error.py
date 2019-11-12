@@ -41,15 +41,10 @@ class Error():
 
     @staticmethod
     def from_document(data):
-        lookup = Error(None, None, None, None)
-        if '_id' in data:
-            lookup.id = data['_id']
-        if 'error' in data:
-            lookup.error = data['error']
-        if 'file' in data:
-            lookup.file = data['file']
-        if 'start' in data:
-            lookup.start = data['start']
-        if 'end' in data:
-            lookup.end = data['end']
-        return lookup
+        error = Error(None, None, None, None)
+        error.id = DAOUtils.get_value_from_data(data, '_id')
+        error.error = DAOUtils.get_value_from_data(data, 'error')
+        error.file = DAOUtils.get_value_from_data(data, 'file')
+        error.start = DAOUtils.get_value_from_data(data, 'start')
+        error.end = DAOUtils.get_value_from_data(data, 'end')
+        return error

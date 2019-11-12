@@ -1,8 +1,8 @@
 import unittest
 
-from programy.storage.stores.nosql.mongo.dao.processor import PreProcessor
 from programy.storage.stores.nosql.mongo.dao.processor import PostProcessor
 from programy.storage.stores.nosql.mongo.dao.processor import PostQuestionProcessor
+from programy.storage.stores.nosql.mongo.dao.processor import PreProcessor
 
 
 class PreProcessorTests(unittest.TestCase):
@@ -25,17 +25,26 @@ class PreProcessorTests(unittest.TestCase):
         self.assertEqual("test.processorclass", processor.classname)
         self.assertEqual({'_id': '666', 'classname': 'test.processorclass'}, processor.to_document())
 
-    def test_from_document(self):
+    def test_from_document_no_id(self):
         processor1 = PreProcessor.from_document({'classname': 'test.processorclass'})
         self.assertIsNotNone(processor1)
         self.assertIsNone(processor1.id)
         self.assertEqual("test.processorclass", processor1.classname)
 
+    def test_from_document_with_id(self):
         processor2 = PreProcessor.from_document({'_id': '666', 'classname': 'test.processorclass'})
         self.assertIsNotNone(processor2)
         self.assertIsNotNone(processor2.id)
         self.assertEqual('666', processor2.id)
         self.assertEqual("test.processorclass", processor2.classname)
+
+    def test_repr_no_id(self):
+        processor1 = PreProcessor.from_document({'classname': 'test.processorclass'})
+        self.assertEquals("<PreProcessor(id='n/a', classname='test.processorclass')>", str(processor1))
+
+    def test_repr_with_id(self):
+        processor2 = PreProcessor.from_document({'_id': '666', 'classname': 'test.processorclass'})
+        self.assertEquals("<PreProcessor(id='666', classname='test.processorclass')>", str(processor2))
 
 
 class PostProcessorTests(unittest.TestCase):
@@ -58,17 +67,26 @@ class PostProcessorTests(unittest.TestCase):
         self.assertEqual("test.processorclass", processor.classname)
         self.assertEqual({'_id': '666', 'classname': 'test.processorclass'}, processor.to_document())
 
-    def test_from_document(self):
+    def test_from_document_no_id(self):
         processor1 = PostProcessor.from_document({'classname': 'test.processorclass'})
         self.assertIsNotNone(processor1)
         self.assertIsNone(processor1.id)
         self.assertEqual("test.processorclass", processor1.classname)
 
+    def test_from_document_with_id(self):
         processor2 = PostProcessor.from_document({'_id': '666', 'classname': 'test.processorclass'})
         self.assertIsNotNone(processor2)
         self.assertIsNotNone(processor2.id)
         self.assertEqual('666', processor2.id)
         self.assertEqual("test.processorclass", processor2.classname)
+
+    def test_repr_no_id(self):
+        processor1 = PostProcessor.from_document({'classname': 'test.processorclass'})
+        self.assertEquals("<PostProcessor(id='n/a', classname='test.processorclass')>", str(processor1))
+
+    def test_repr_with_id(self):
+        processor2 = PostProcessor.from_document({'_id': '666', 'classname': 'test.processorclass'})
+        self.assertEquals("<PostProcessor(id='666', classname='test.processorclass')>", str(processor2))
 
 
 class PostQuestionProcessorTests(unittest.TestCase):
@@ -91,14 +109,23 @@ class PostQuestionProcessorTests(unittest.TestCase):
         self.assertEqual("test.processorclass", processor.classname)
         self.assertEqual({'_id': '666', 'classname': 'test.processorclass'}, processor.to_document())
 
-    def test_from_document(self):
+    def test_from_document_no_id(self):
         processor1 = PostQuestionProcessor.from_document({'classname': 'test.processorclass'})
         self.assertIsNotNone(processor1)
         self.assertIsNone(processor1.id)
         self.assertEqual("test.processorclass", processor1.classname)
 
+    def test_from_document_with_id(self):
         processor2 = PostQuestionProcessor.from_document({'_id': '666', 'classname': 'test.processorclass'})
         self.assertIsNotNone(processor2)
         self.assertIsNotNone(processor2.id)
         self.assertEqual('666', processor2.id)
         self.assertEqual("test.processorclass", processor2.classname)
+
+    def test_repr_no_id(self):
+        processor1 = PostQuestionProcessor.from_document({'classname': 'test.processorclass'})
+        self.assertEqual("<PostQuestionProcessor(id='n/a', classname='test.processorclass')>", str(processor1))
+
+    def test_repr_with_id(self):
+        processor2 = PostQuestionProcessor.from_document({'_id': '666', 'classname': 'test.processorclass'})
+        self.assertEqual("<PostQuestionProcessor(id='666', classname='test.processorclass')>", str(processor2))

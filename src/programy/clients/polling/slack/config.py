@@ -28,14 +28,12 @@ class SlackConfiguration(ClientConfigurationData):
     def polling_interval(self):
         return self._polling_interval
 
-    def check_for_license_keys(self, license_keys):
-        ClientConfigurationData.check_for_license_keys(self, license_keys)
-
     def load_configuration_section(self, configuration_file, section, bot_root, subs: Substitutions = None):
-        if section is not None:
-            self._polling_interval = configuration_file.get_int_option(section, "polling_interval", missing_value=1,
-                                                                       subs=subs)
-            super(SlackConfiguration, self).load_configuration_section(configuration_file, section, bot_root, subs=subs)
+        assert section is not None
+
+        self._polling_interval = configuration_file.get_int_option(section, "polling_interval", missing_value=1,
+                                                                   subs=subs)
+        super(SlackConfiguration, self).load_configuration_section(configuration_file, section, bot_root, subs=subs)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:

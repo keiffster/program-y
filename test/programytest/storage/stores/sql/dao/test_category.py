@@ -3,6 +3,7 @@ import unittest
 
 from programy.storage.stores.sql.dao.category import Category
 
+
 class CategoryTests(unittest.TestCase):
 
     def test_init(self):

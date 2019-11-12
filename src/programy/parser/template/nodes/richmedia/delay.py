@@ -16,6 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 from programy.parser.template.nodes.base import TemplateNode
 from programy.utils.text.text import TextUtils
+from programy.parser.exceptions import ParserException
 
 
 class TemplateDelayNode(TemplateNode):
@@ -38,7 +39,7 @@ class TemplateDelayNode(TemplateNode):
 
     def parse_expression(self, graph, expression):
         if 'seconds' in expression.attrib:
-            self._seconds = graph.get_word_node(expression.attrib['text'])
+            self._seconds = graph.get_word_node(expression.attrib['seconds'])
 
         head_text = self.get_text_from_element(expression)
         self.parse_text(graph, head_text)
@@ -50,7 +51,10 @@ class TemplateDelayNode(TemplateNode):
                 self._seconds = self.parse_children_as_word_node(graph, child)
 
             else:
-                graph.parse_tag_expression(child, self)
+                raise ParserException("Invalid child nodes found in delay")
 
             tail_text = self.get_tail_from_element(child)
             self.parse_text(graph, tail_text)
+
+        if self._seconds is None:
+            raise ParserException("Missing seconds from delay")

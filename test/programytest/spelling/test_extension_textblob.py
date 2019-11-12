@@ -3,7 +3,6 @@ import unittest
 from programy.bot import Bot
 from programy.config.bot.bot import BotConfiguration
 from programy.spelling.extension import SpellingExtension
-
 from programytest.client import TestClient
 
 

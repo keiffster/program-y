@@ -1,8 +1,7 @@
-import unittest
 import os
+import unittest
 
 from programy.extensions.newsapi.newsapi import NewsAPIExtension
-
 from programytest.client import TestClient
 
 

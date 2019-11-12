@@ -5,7 +5,6 @@ from kik.messages import TextMessage
 
 from programy.clients.restful.flask.kik.client import KikBotClient
 from programy.clients.restful.flask.kik.config import KikConfiguration
-
 from programytest.clients.arguments import MockArgumentParser
 
 

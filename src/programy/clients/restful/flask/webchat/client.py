@@ -36,6 +36,9 @@ class WebChatBotClient(FlaskRestBotClient):
         FlaskRestBotClient.__init__(self, "WebChat", argument_parser)
         self._authorization = RestAuthorizationHandler.load_authorisation(self)
 
+    def _render_callback(self):
+        return False
+
     def get_client_configuration(self):
         return WebChatConfiguration()
 

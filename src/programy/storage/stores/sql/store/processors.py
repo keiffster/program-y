@@ -30,9 +30,10 @@ class SQLProcessorsStore(SQLStore, ProcessorStore):
 
     def __init__(self, storage_engine):
         SQLStore.__init__(self, storage_engine)
+        ProcessorStore.__init__(self)
 
     def _get_storage_class(self):
-        pass
+        pass    # pragma: no cover
 
     def load(self, collector, name=None):
         processors = self.get_all_processors()
@@ -75,7 +76,7 @@ class SQLProcessorsStore(SQLStore, ProcessorStore):
         return False
 
     def _get_entity(self, classname):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     def get_all_processors(self):
         return []

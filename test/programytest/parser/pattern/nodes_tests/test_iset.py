@@ -1,8 +1,8 @@
-from programytest.parser.base import ParserTestsBaseClass
-
-from programy.parser.pattern.nodes.iset import PatternISetNode
 from programy.dialog.sentence import Sentence
 from programy.parser.exceptions import ParserException
+from programy.parser.pattern.nodes.iset import PatternISetNode
+from programytest.parser.base import ParserTestsBaseClass
+
 
 class PatternSetNodeTests(ParserTestsBaseClass):
 

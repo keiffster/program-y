@@ -1,8 +1,8 @@
 import unittest
 
 from programy.extensions.survey.survey import SurveyExtension
-
 from programytest.client import TestClient
+
 
 class SurveyExtensionTests(unittest.TestCase):
 

@@ -37,19 +37,24 @@ class TemplateWordNode(TemplateNode):
         YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), self.word)
         if self.word is not None:
             return self.word
+
         return ""
 
     def resolve(self, client_context):
         YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), self.word)
         if self.word is not None:
             return self.word
+
         return ""
 
     def to_string(self):
-        return "[WORD]" + self.word
+        if self._word is not None:
+            return "[WORD]" + self.word
+        else:
+            return "[WORD]"
 
     def to_xml(self, client_context):
         return TextUtils.html_escape(self.word)
 
     def parse_expression(self, graph, expression):
-        raise NotImplementedError("Never call this directly, call the subclass instead!")
+        raise NotImplementedError("Never call this directly, call the subclass instead!")  # pragma: no cover

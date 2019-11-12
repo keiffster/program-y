@@ -25,7 +25,7 @@ class Intent(ABC):
 
     @abstractmethod
     def generate(self):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
 
 class SystemIntent(Intent):
@@ -35,7 +35,7 @@ class SystemIntent(Intent):
 
     @abstractmethod
     def get_name(self):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     def _load_samples(self):
         samples = []

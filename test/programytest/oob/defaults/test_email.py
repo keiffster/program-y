@@ -1,10 +1,10 @@
 import unittest
 import unittest.mock
-
-from programy.oob.defaults.email import EmailOutOfBandProcessor
 import xml.etree.ElementTree as ET
 
+from programy.oob.defaults.email import EmailOutOfBandProcessor
 from programytest.client import TestClient
+
 
 class EmailOutOfBandProcessorTests(unittest.TestCase):
 
@@ -32,6 +32,64 @@ class EmailOutOfBandProcessorTests(unittest.TestCase):
         oob[2].tag = "body"
         oob[2].text = "Got any cement?"
         self.assertTrue(oob_processor.parse_oob_xml(oob))
+
+    def test_processor_xml_parsing_no_to(self):
+        oob_processor = EmailOutOfBandProcessor()
+        self.assertIsNotNone(oob_processor)
+
+        self.assertFalse(oob_processor.parse_oob_xml(None))
+
+        oob = []
+        self.assertFalse(oob_processor.parse_oob_xml(oob))
+
+        oob = []
+        oob.append(unittest.mock.Mock())
+        oob[0].tag = "subject"
+        oob[0].text = "Hello!"
+        oob.append(unittest.mock.Mock())
+        oob[1].tag = "body"
+        oob[1].text = "Got any cement?"
+
+        self.assertFalse(oob_processor.parse_oob_xml(oob))
+
+    def test_processor_xml_parsing_no_subject(self):
+        oob_processor = EmailOutOfBandProcessor()
+        self.assertIsNotNone(oob_processor)
+
+        self.assertFalse(oob_processor.parse_oob_xml(None))
+
+        oob = []
+        self.assertFalse(oob_processor.parse_oob_xml(oob))
+
+        oob = []
+        oob.append(unittest.mock.Mock())
+        oob[0].tag = "to"
+        oob[0].text = "fred@west.com"
+        oob.append(unittest.mock.Mock())
+        oob[1].tag = "body"
+        oob[1].text = "Got any cement?"
+
+        self.assertFalse(oob_processor.parse_oob_xml(oob))
+
+    def test_processor_xml_parsing_no_body(self):
+        oob_processor = EmailOutOfBandProcessor()
+        self.assertIsNotNone(oob_processor)
+
+        self.assertFalse(oob_processor.parse_oob_xml(None))
+
+        oob = []
+        self.assertFalse(oob_processor.parse_oob_xml(oob))
+
+        oob = []
+        oob.append(unittest.mock.Mock())
+        oob[0].tag = "to"
+        oob[0].text = "fred@west.com"
+        oob.append(unittest.mock.Mock())
+        oob[1].tag = "subject"
+        oob[1].text = "Hello!"
+        oob.append(unittest.mock.Mock())
+
+        self.assertFalse(oob_processor.parse_oob_xml(oob))
 
     def test_email_processor_invalid(self):
         oob_processor = EmailOutOfBandProcessor()

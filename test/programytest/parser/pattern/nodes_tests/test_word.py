@@ -1,8 +1,8 @@
+from programy.dialog.sentence import Sentence
+from programy.parser.pattern.nodes.bot import PatternBotNode
+from programy.parser.pattern.nodes.word import PatternWordNode
 from programytest.parser.base import ParserTestsBaseClass
 
-from programy.parser.pattern.nodes.word import PatternWordNode
-from programy.parser.pattern.nodes.bot import PatternBotNode
-from programy.dialog.sentence import Sentence
 
 class PatternWordNodeTests(ParserTestsBaseClass):
 

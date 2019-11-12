@@ -87,15 +87,13 @@ class CjkTokenizer(Tokenizer):
         texts = ''
 
         if words is None:
-            words = ''
+            words = ['']
 
         for word in words:
             if CjkTokenizer._is_chinese_word(word):
                 texts += word
             elif len(texts) > 0:
                 texts += ' ' + word
-            elif word is None:
-                pass
             else:
                 texts += word
 
@@ -106,7 +104,7 @@ class CjkTokenizer(Tokenizer):
     def words_from_current_pos(self, words, current_pos):
         if words:
             return self.words_to_texts(words[current_pos:])
-        raise Exception("Num word array violation !")
+        raise ValueError("Num word array violation !")
 
     def compare(self, value1, value2):
         cjk_value1 = self.words_to_texts(self.texts_to_words(value1.upper()))

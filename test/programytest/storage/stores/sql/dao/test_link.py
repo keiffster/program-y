@@ -3,6 +3,7 @@ import unittest
 
 from programy.storage.stores.sql.dao.link import Link
 
+
 class LinkTests(unittest.TestCase):
     
     def test_init(self):

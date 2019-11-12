@@ -1,15 +1,13 @@
+import datetime
 import unittest
 
-import datetime
-
 from programy.dialog.sentence import Sentence
-from programy.parser.pattern.matchcontext import MatchContext
 from programy.parser.pattern.match import Match
+from programy.parser.pattern.matchcontext import MatchContext
 from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
-from programy.parser.pattern.nodes.word import PatternWordNode
 from programy.parser.pattern.nodes.template import PatternTemplateNode
+from programy.parser.pattern.nodes.word import PatternWordNode
 from programy.parser.template.nodes.word import TemplateWordNode
-
 from programytest.client import TestClient
 
 
@@ -19,14 +17,24 @@ class SentenceTests(unittest.TestCase):
         client = TestClient()
         self._client_context = client.create_client_context("test1")
 
-    def test_split_into_words(self):
+    def test_split_into_words1(self):
         self.assertEqual([], Sentence._split_into_words(self._client_context.brain.tokenizer, []))
+
+    def test_split_into_words2(self):
         self.assertEqual([], Sentence._split_into_words(self._client_context.brain.tokenizer, None))
+
+    def test_split_into_words3(self):
         self.assertEqual([], Sentence._split_into_words(None, "word1"))
+
+    def test_split_into_words4(self):
         self.assertEqual([], Sentence._split_into_words(None, None))
+
+    def test_split_into_words5(self):
         self.assertEqual(["word1"], Sentence._split_into_words(self._client_context.brain.tokenizer, "word1"))
+
+    def test_split_into_words6(self):
         self.assertEqual(["word1", "word2", "word3"], Sentence._split_into_words(self._client_context.brain.tokenizer,
-                                                                                 "word1 word2 word3"))
+                                                                             "word1 word2 word3"))
 
     def test_sentence_creation_empty(self):
         sentence = Sentence(self._client_context, "")

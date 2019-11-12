@@ -1,7 +1,7 @@
 import unittest
 
-from programy.security.authorise.authorisor import Authoriser
 from programy.config.brain.security import BrainSecurityConfiguration
+from programy.security.authorise.authorisor import Authoriser
 
 
 class AuthorisorTests(unittest.TestCase):

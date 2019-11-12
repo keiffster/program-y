@@ -26,6 +26,7 @@ class FileDuplicatesStore(FileStore, DuplicatesStore):
 
     def __init__(self, storage_engine):
         FileStore.__init__(self, storage_engine)
+        DuplicatesStore.__init__(self)
 
     def _get_storage_path(self):
         return self.storage_engine.configuration.duplicates_storage.file

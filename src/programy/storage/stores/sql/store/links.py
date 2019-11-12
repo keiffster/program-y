@@ -25,6 +25,7 @@ class SQLLinkStore(SQLStore, LinkStore):
 
     def __init__(self, storage_engine):
         SQLStore.__init__(self, storage_engine)
+        LinkStore.__init__(self)
 
     def _get_all(self):
         return self._storage_engine.session.query(Link)

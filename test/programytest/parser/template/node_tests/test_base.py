@@ -1,14 +1,13 @@
-import xml.etree.ElementTree as ET
+import xml.etree.ElementTree as ET  # pylint: disable=wrong-import-order
 
 from programy.parser.template.nodes.base import TemplateNode
-from programy.parser.template.nodes.word import TemplateWordNode
 from programy.parser.template.nodes.id import TemplateIdNode
 from programy.parser.template.nodes.srai import TemplateSRAINode
-
+from programy.parser.template.nodes.word import TemplateWordNode
+from programy.utils.console.console import outputLog
 from programytest.parser.base import ParserTestsBaseClass
 
-######################################################################################################################
-#
+
 class TemplateNodeBasicTests(ParserTestsBaseClass):
 
     def test_node(self):
@@ -62,3 +61,26 @@ class TemplateNodeBasicTests(ParserTestsBaseClass):
         xml = node.xml_tree(self._client_context)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template>Word1 <id /> <srai>Srai1</srai> Word2</template>", xml_str)
+
+    def test_output_child(self):
+        node = TemplateNode()
+        node.append(TemplateWordNode("Word1"))
+        node.append(TemplateIdNode())
+        self.assertIsNotNone(node)
+        node.append(TemplateWordNode("Word1"))
+
+        node.output_child(node, "\t", "\n", print)
+        node.output_child(node, "\t", "\n", outputLog)
+
+    def test_parse_template_node(self):
+        node = TemplateNode()
+        pattern = ET.fromstring("<template>Test</template>")
+        node.parse_template_node(self._client_context.brain.aiml_parser.template_parser, pattern)
+        self.assertEquals(1, len(node.children))
+        self.assertEquals("Test", node.children[0].word)
+
+    def test_parse_template_node_empty(self):
+        node = TemplateNode()
+        pattern = ET.fromstring("<template></template>")
+        node.parse_template_node(self._client_context.brain.aiml_parser.template_parser, pattern)
+        self.assertEquals(0, len(node.children))

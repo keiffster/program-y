@@ -9,6 +9,7 @@ class LemmatizerTests(unittest.TestCase):
         self.assertEqual("octopus", Lemmatizer.lemmatize("octopi"))
         self.assertEqual("octopus", Lemmatizer.lemmatize("octopus"))
         self.assertEqual("", Lemmatizer.lemmatize(("")))
+        self.assertEqual("", Lemmatizer.lemmatize((None)))
 
         self.assertEqual("mouse", Lemmatizer.lemmatize('mice'))
         self.assertEqual("fish", Lemmatizer.lemmatize('fish'))

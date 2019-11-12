@@ -110,13 +110,13 @@ class ViberBotClient(FlaskRestBotClient):
             ])
 
     def handle_unsubscribed_request(self, viber_request):
-        pass
+        pass    # pragma: no cover
 
     def handle_conversation_started_request(self, viber_request):
-        pass
+        pass    # pragma: no cover
 
     def handle_failed_request(self, viber_request):
-        pass
+        pass    # pragma: no cover
 
     def handle_unknown_request(self, viber_request):
         YLogger.error(self, "client failed receiving message. failure: {0}".format(viber_request))

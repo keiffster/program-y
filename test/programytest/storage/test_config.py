@@ -1,8 +1,8 @@
 import unittest
 
+from programy.clients.events.console.config import ConsoleConfiguration
 from programy.config.file.yaml_file import YamlConfigurationFile
 from programy.storage.config import StorageConfiguration
-from programy.clients.events.console.config import ConsoleConfiguration
 from programy.storage.factory import StorageFactory
 
 
@@ -131,6 +131,25 @@ class StorageConfigurationTests(unittest.TestCase):
 
         self.assertIsNotNone(storage_config.storage_configurations)
         self.assert_storage_configurations(storage_config)
+
+    def test_with_no_data_no_config(self):
+        yaml = YamlConfigurationFile()
+        self.assertIsNotNone(yaml)
+        yaml.load_from_text("""
+        console:
+        """, ConsoleConfiguration(), ".")
+
+        bot_config = yaml.get_section("console")
+
+        storage_config = StorageConfiguration()
+        storage_config.load_config_section(yaml, bot_config, ".")
+
+        self.assertIsNotNone(storage_config.entity_store)
+        self.assert_entity_store(storage_config)
+
+        self.assertIsNotNone(storage_config.storage_configurations)
+        self.assert_storage_configurations(storage_config)
+
 
     def assert_entity_store(self, storage_config, file=True, sqllite=False):
 

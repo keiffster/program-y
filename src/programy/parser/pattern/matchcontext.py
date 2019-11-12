@@ -50,9 +50,8 @@ class MatchContext:
     def matched_nodes(self) -> List:
         return self._matched_nodes
 
-    @matched_nodes.setter
-    def matched_nodes(self, matched_nodes: List):
-        self._matched_nodes = matched_nodes[:]
+    def set_matched_nodes(self, nodes: List):
+        self._matched_nodes = nodes[:]
 
     @property
     def template_node(self) -> PatternTemplateNode:
@@ -129,10 +128,6 @@ class MatchContext:
     def pop_matches(self, matches_add):
         for _ in range(0, matches_add):
             self.pop_match()
-
-    @property
-    def matched_nodes(self):
-        return self._matched_nodes
 
     def matched(self):
         return bool(self._template_node is not None or self._response is not None)

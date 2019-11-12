@@ -41,9 +41,6 @@ class BrainSecuritiesConfiguration(BaseSectionConfigurationData):
     def account_linker(self):
         return self._account_linker
 
-    def check_for_license_keys(self, license_keys):
-        BaseSectionConfigurationData.check_for_license_keys(self, license_keys)
-
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         securities = configuration_file.get_section(self.section_name, configuration)
         if securities is not None:

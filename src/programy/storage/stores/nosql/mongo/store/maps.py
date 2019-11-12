@@ -16,17 +16,18 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 from programy.utils.logging.ylogger import YLogger
 from programy.storage.stores.nosql.mongo.store.mongostore import MongoStore
-from programy.storage.entities.maps import MapsReadOnlyStore
+from programy.storage.entities.maps import MapsReadWriteStore
 from programy.storage.stores.nosql.mongo.dao.map import Map
 
 
-class MongoMapsStore(MongoStore, MapsReadOnlyStore):
+class MongoMapsStore(MongoStore, MapsReadWriteStore):
     MAPS = 'maps'
     NAME = 'name'
     KEYVALUES = 'key_values'
 
     def __init__(self, storage_engine):
         MongoStore.__init__(self, storage_engine)
+        MapsReadWriteStore.__init__(self)
 
     def collection_name(self):
         return MongoMapsStore.MAPS

@@ -1,12 +1,10 @@
 import unittest
 
-from programytest.storage.asserts.store.assert_regex import RegexStoreAsserts
-
-from programy.storage.stores.nosql.mongo.store.properties import MongoRegexesStore
-from programy.storage.stores.nosql.mongo.engine import MongoStorageEngine
-from programy.storage.stores.nosql.mongo.config import MongoStorageConfiguration
-
 import programytest.storage.engines as Engines
+from programy.storage.stores.nosql.mongo.config import MongoStorageConfiguration
+from programy.storage.stores.nosql.mongo.engine import MongoStorageEngine
+from programy.storage.stores.nosql.mongo.store.properties import MongoRegexesStore
+from programytest.storage.asserts.store.assert_regex import RegexStoreAsserts
 
 
 class MongoRegexesStoreTests(RegexStoreAsserts):

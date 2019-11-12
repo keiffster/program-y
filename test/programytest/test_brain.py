@@ -1,14 +1,13 @@
-import unittest
 import os
+import unittest
 
 from programy.brain import Brain
+from programy.clients.events.console.config import ConsoleConfiguration
 from programy.config.brain.brain import BrainConfiguration
 from programy.config.file.yaml_file import YamlConfigurationFile
-from programy.clients.events.console.config import ConsoleConfiguration
 from programy.oob.defaults.default import DefaultOutOfBandProcessor
 from programy.oob.defaults.dial import DialOutOfBandProcessor
 from programy.oob.defaults.email import EmailOutOfBandProcessor
-
 from programytest.client import TestClient
 
 

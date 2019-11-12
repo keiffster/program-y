@@ -1,9 +1,15 @@
-from programytest.parser.base import ParserTestsBaseClass
-
-from programy.parser.exceptions import ParserException
-from programy.parser.pattern.nodes.zeroormore import PatternZeroOrMoreWildCardNode
-from programy.parser.pattern.nodes.word import PatternWordNode
 from programy.dialog.sentence import Sentence
+from programy.parser.exceptions import ParserException
+from programy.parser.pattern.match import Match
+from programy.parser.pattern.matchcontext import MatchContext
+from programy.parser.pattern.nodes.priority import PatternPriorityWordNode
+from programy.parser.pattern.nodes.template import PatternTemplateNode
+from programy.parser.pattern.nodes.that import PatternThatNode
+from programy.parser.pattern.nodes.topic import PatternTopicNode
+from programy.parser.pattern.nodes.word import PatternWordNode
+from programy.parser.pattern.nodes.zeroormore import PatternZeroOrMoreWildCardNode
+from programy.parser.template.nodes.word import TemplateWordNode
+from programytest.parser.base import ParserTestsBaseClass
 
 
 class PatternZeroOrMoreWildCardNodeTests(ParserTestsBaseClass):
@@ -94,3 +100,69 @@ class PatternZeroOrMoreWildCardNodeTests(ParserTestsBaseClass):
 
         self.assertTrue(node1.equivalent(node2))
         self.assertFalse(node1.equivalent(node3))
+
+    def test_consume_search_time_exceeded(self):
+        node = PatternZeroOrMoreWildCardNode("^")
+        self.assertIsNotNone(node)
+
+        match_context = MatchContext(max_search_depth=100, max_search_timeout=0)
+        words = Sentence(self._client_context)
+
+        result = node.consume(self._client_context, match_context, words, 0, Match.WORD, 1, parent=False)
+        self.assertIsNone(result)
+
+    def test_consume_search_depth_exceeded(self):
+        node = PatternZeroOrMoreWildCardNode("^")
+        self.assertIsNotNone(node)
+
+        match_context = MatchContext(max_search_depth=0, max_search_timeout=100)
+        words = Sentence(self._client_context)
+
+        result = node.consume(self._client_context, match_context, words, 0, Match.WORD, 1, parent=False)
+        self.assertIsNone(result)
+
+    def test_consume_topic(self):
+        node = PatternZeroOrMoreWildCardNode("^")
+        self.assertIsNotNone(node)
+        node.add_topic(PatternTopicNode())
+
+        match_context = MatchContext(max_search_depth=100, max_search_timeout=100)
+        words = Sentence(self._client_context, text="__TOPIC__")
+
+        result = node.consume(self._client_context, match_context, words, 0, Match.WORD, 1, parent=False)
+        self.assertIsNone(result)
+
+    def test_consume_that(self):
+        node = PatternZeroOrMoreWildCardNode("^")
+        self.assertIsNotNone(node)
+        node.add_that(PatternThatNode())
+
+        match_context = MatchContext(max_search_depth=100, max_search_timeout=100)
+        words = Sentence(self._client_context, text="__THAT__")
+
+        result = node.consume(self._client_context, match_context, words, 0, Match.WORD, 1, parent=False)
+        self.assertIsNone(result)
+
+    def test_consume_with_priority(self):
+        node = PatternZeroOrMoreWildCardNode("^")
+        priority = PatternPriorityWordNode("$TEST")
+        node.add_child(priority)
+        priority.add_template((PatternTemplateNode(TemplateWordNode("word"))))
+
+        match_context = MatchContext(max_search_depth=100, max_search_timeout=100)
+        words = Sentence(self._client_context, text="THIS $TEST")
+
+        result = node.consume(self._client_context, match_context, words, 0, Match.WORD, 1, parent=False)
+        self.assertIsNotNone(result)
+
+    def test_consume_with_priority_mismatch(self):
+        node = PatternZeroOrMoreWildCardNode("^")
+        priority = PatternPriorityWordNode("$TEST")
+        node.add_child(priority)
+        priority.add_template((PatternTemplateNode(TemplateWordNode("word"))))
+
+        match_context = MatchContext(max_search_depth=100, max_search_timeout=100)
+        words = Sentence(self._client_context, text="THIS $TEST2")
+
+        result = node.consume(self._client_context, match_context, words, 0, Match.WORD, 1, parent=False)
+        self.assertIsNone(result)

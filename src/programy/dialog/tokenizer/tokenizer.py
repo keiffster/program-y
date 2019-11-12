@@ -44,9 +44,12 @@ class Tokenizer:
 
     @staticmethod
     def load_tokenizer(configuration):
-        if configuration is not None and configuration.tokenizer.classname is not None:
-            YLogger.info(None, "Loading tokenizer from class [%s]", configuration.tokenizer.classname)
-            tokenizer_class = ClassLoader.instantiate_class(configuration.tokenizer.classname)
-            return tokenizer_class(configuration.tokenizer.split_chars)
-        else:
-            return Tokenizer(configuration.tokenizer.split_chars)
+        if configuration is not None and configuration.classname is not None:
+            try:
+                YLogger.info(None, "Loading tokenizer from class [%s]", configuration.classname)
+                tokenizer_class = ClassLoader.instantiate_class(configuration.classname)
+                return tokenizer_class(configuration.split_chars)
+            except Exception as error:
+                YLogger.exception(None, "Failed to load tokenizer, defaulting to default", error)
+
+        return Tokenizer(configuration.split_chars)

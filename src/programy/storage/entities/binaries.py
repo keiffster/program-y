@@ -19,8 +19,11 @@ from programy.storage.entities.store import Store
 
 class BinariesStore(Store):
 
+    def __init__(self):
+        Store.__init__(self)
+
     def save_binary(self, aiml_parser):
-        raise NotImplementedError("save_binary missing from Binaries Store")
+        raise NotImplementedError("save_binary missing from Binaries Store")  # pragma: no cover
 
     def load_binary(self):
-        raise NotImplementedError("load_binary missing from Binaries Store")
+        raise NotImplementedError("load_binary missing from Binaries Store")  # pragma: no cover

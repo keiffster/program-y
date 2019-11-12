@@ -1,9 +1,8 @@
 
 import unittest.mock
 
-from programy.clients.polling.client import PollingBotClient
 from programy.clients.config import ClientConfigurationData
-
+from programy.clients.polling.client import PollingBotClient
 from programytest.clients.arguments import MockArgumentParser
 
 

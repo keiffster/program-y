@@ -19,5 +19,8 @@ from programy.storage.entities.store import Store
 
 class ErrorsStore(Store):
 
+    def __init__(self):
+        Store.__init__(self)
+
     def save_errors(self, errors, commit=True):
-        raise NotImplementedError("save_errors missing from Errors Store")
+        raise NotImplementedError("save_errors missing from Errors Store")  # pragma: no cover

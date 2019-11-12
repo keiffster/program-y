@@ -26,6 +26,7 @@ class TemplateStarNode(TemplateIndexedNode):
     def resolve_to_string(self, client_context):
         conversation = client_context.bot.get_conversation(client_context)
 
+        resolved = ""
         if conversation.has_current_question():
 
             current_question = conversation.current_question()
@@ -35,19 +36,13 @@ class TemplateStarNode(TemplateIndexedNode):
             matched_context = current_sentence.matched_context
             if matched_context is None:
                 YLogger.error(client_context, "Star node has no matched context for clientid %s", client_context.userid)
-                resolved = ""
+
             else:
                 int_index = int(self.index.resolve(client_context))
-                try:
-                    resolved = matched_context.star(client_context, int_index)
-                    if resolved is None:
-                        YLogger.error(client_context, "Star index not in range [%d]", int_index)
-                        resolved = ""
-                except Exception:
+                resolved = matched_context.star(client_context, int_index)
+
+                if resolved is None:
                     YLogger.error(client_context, "Star index not in range [%d]", int_index)
-                    resolved = ""
-        else:
-            resolved = ""
 
         YLogger.debug(client_context, "Star Node [%s] resolved to [%s]", self.to_string(), resolved)
         return resolved

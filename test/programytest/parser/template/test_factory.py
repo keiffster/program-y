@@ -1,50 +1,49 @@
 import unittest
-import os
 
 from programy.parser.template.factory import TemplateNodeFactory
-from programy.parser.template.nodes.word import TemplateWordNode
-from programy.parser.template.nodes.rand import TemplateRandomNode
-from programy.parser.template.nodes.condition import TemplateConditionNode
-from programy.parser.template.nodes.srai import TemplateSRAINode
-from programy.parser.template.nodes.sraix import TemplateSRAIXNode
-from programy.parser.template.nodes.get import TemplateGetNode
-from programy.parser.template.nodes.set import TemplateSetNode
-from programy.parser.template.nodes.map import TemplateMapNode
 from programy.parser.template.nodes.bot import TemplateBotNode
-from programy.parser.template.nodes.think import TemplateThinkNode
-from programy.parser.template.nodes.normalise import TemplateNormalizeNode
+from programy.parser.template.nodes.condition import TemplateConditionNode
+from programy.parser.template.nodes.date import TemplateDateNode
 from programy.parser.template.nodes.denormalise import TemplateDenormalizeNode
-from programy.parser.template.nodes.person import TemplatePersonNode
-from programy.parser.template.nodes.person2 import TemplatePerson2Node
-from programy.parser.template.nodes.gender import TemplateGenderNode
-from programy.parser.template.nodes.sr import TemplateSrNode
-from programy.parser.template.nodes.id import TemplateIdNode
-from programy.parser.template.nodes.size import TemplateSizeNode
-from programy.parser.template.nodes.vocabulary import TemplateVocabularyNode
 from programy.parser.template.nodes.eval import TemplateEvalNode
 from programy.parser.template.nodes.explode import TemplateExplodeNode
-from programy.parser.template.nodes.implode import TemplateImplodeNode
-from programy.parser.template.nodes.program import TemplateProgramNode
-from programy.parser.template.nodes.lowercase import TemplateLowercaseNode
-from programy.parser.template.nodes.uppercase import TemplateUppercaseNode
-from programy.parser.template.nodes.sentence import TemplateSentenceNode
-from programy.parser.template.nodes.formal import TemplateFormalNode
-from programy.parser.template.nodes.that import TemplateThatNode
-from programy.parser.template.nodes.thatstar import TemplateThatStarNode
-from programy.parser.template.nodes.topicstar import TemplateTopicStarNode
-from programy.parser.template.nodes.star import TemplateStarNode
-from programy.parser.template.nodes.input import TemplateInputNode
-from programy.parser.template.nodes.request import TemplateRequestNode
-from programy.parser.template.nodes.response import TemplateResponseNode
-from programy.parser.template.nodes.date import TemplateDateNode
-from programy.parser.template.nodes.interval import TemplateIntervalNode
-from programy.parser.template.nodes.system import TemplateSystemNode
 from programy.parser.template.nodes.extension import TemplateExtensionNode
+from programy.parser.template.nodes.first import TemplateFirstNode
+from programy.parser.template.nodes.formal import TemplateFormalNode
+from programy.parser.template.nodes.gender import TemplateGenderNode
+from programy.parser.template.nodes.get import TemplateGetNode
+from programy.parser.template.nodes.id import TemplateIdNode
+from programy.parser.template.nodes.implode import TemplateImplodeNode
+from programy.parser.template.nodes.input import TemplateInputNode
+from programy.parser.template.nodes.interval import TemplateIntervalNode
 from programy.parser.template.nodes.learn import TemplateLearnNode
 from programy.parser.template.nodes.learnf import TemplateLearnfNode
-from programy.parser.template.nodes.first import TemplateFirstNode
-from programy.parser.template.nodes.rest import TemplateRestNode
 from programy.parser.template.nodes.log import TemplateLogNode
+from programy.parser.template.nodes.lowercase import TemplateLowercaseNode
+from programy.parser.template.nodes.map import TemplateMapNode
+from programy.parser.template.nodes.normalise import TemplateNormalizeNode
+from programy.parser.template.nodes.person import TemplatePersonNode
+from programy.parser.template.nodes.person2 import TemplatePerson2Node
+from programy.parser.template.nodes.program import TemplateProgramNode
+from programy.parser.template.nodes.rand import TemplateRandomNode
+from programy.parser.template.nodes.request import TemplateRequestNode
+from programy.parser.template.nodes.response import TemplateResponseNode
+from programy.parser.template.nodes.rest import TemplateRestNode
+from programy.parser.template.nodes.sentence import TemplateSentenceNode
+from programy.parser.template.nodes.set import TemplateSetNode
+from programy.parser.template.nodes.size import TemplateSizeNode
+from programy.parser.template.nodes.sr import TemplateSrNode
+from programy.parser.template.nodes.srai import TemplateSRAINode
+from programy.parser.template.nodes.sraix import TemplateSRAIXNode
+from programy.parser.template.nodes.star import TemplateStarNode
+from programy.parser.template.nodes.system import TemplateSystemNode
+from programy.parser.template.nodes.that import TemplateThatNode
+from programy.parser.template.nodes.thatstar import TemplateThatStarNode
+from programy.parser.template.nodes.think import TemplateThinkNode
+from programy.parser.template.nodes.topicstar import TemplateTopicStarNode
+from programy.parser.template.nodes.uppercase import TemplateUppercaseNode
+from programy.parser.template.nodes.vocabulary import TemplateVocabularyNode
+
 
 class TemplateFactoryTests(unittest.TestCase):
 
@@ -53,6 +52,10 @@ class TemplateFactoryTests(unittest.TestCase):
         self.assertIsNotNone(factory)
         self.assertEqual({}, factory._nodes_config)
         self.assertEqual("Template", factory._type)
+
+    def test_default_config_file(self):
+        factory = TemplateNodeFactory()
+        self.assertTrue(factory.default_config_file().endswith("template_nodes.conf"))
 
     def assert_node(self, factory, name, cls, *args):
         self.assertTrue(name in factory._nodes_config)

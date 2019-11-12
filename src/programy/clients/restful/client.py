@@ -64,11 +64,11 @@ class RestBotClient(BotClient, ABC):
 
     @abstractmethod
     def server_abort(self, message, status_code):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     @abstractmethod
     def create_response(self, response_data, status_code, version=1.0):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     def _get_metadata(self, client_context, metadata):
 

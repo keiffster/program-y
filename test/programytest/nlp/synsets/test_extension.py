@@ -1,7 +1,6 @@
 import unittest
 
 from programy.nlp.synsets.extension import SynsetsExtension
-
 from programytest.client import TestClient
 
 

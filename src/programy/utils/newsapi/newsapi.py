@@ -22,7 +22,7 @@ from programy.utils.logging.ylogger import YLogger
 class NewsApiApi:
 
     def get_news(self, url):
-        return requests.get(url)
+        return requests.get(url)            # pragma: no cover
 
 
 class NewsArticle:
@@ -269,32 +269,6 @@ class NewsAPI:
         else:
             YLogger.error(self, "No source available for %s", source)
             return []
-
-    @staticmethod
-    def to_json(articles):
-        data = {}
-        data['articles'] = []
-        for article in articles:
-            data['articles'].append(article.to_json())
-        return data
-
-    @staticmethod
-    def json_to_file(filename, json_data):
-        try:
-            with open(filename, 'w+', encoding="utf-8") as json_file:
-                json.dump(json_data, json_file)
-
-        except Exception as e:
-            YLogger.exception(None, "Failed to write to [%s]", e, filename)
-
-    @staticmethod
-    def json_from_file(filename):
-        try:
-            with open(filename, 'r+', encoding="utf-8") as json_file:
-                return json.load(json_file)
-
-        except Exception as e:
-            YLogger.exception(None, "Failed to read from [%s]", e, filename)
 
     @staticmethod
     def to_program_y_text(articles, break_str=" <br /> "):

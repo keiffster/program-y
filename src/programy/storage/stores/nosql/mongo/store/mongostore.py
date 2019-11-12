@@ -22,17 +22,15 @@ class MongoStore(Store):
     MONGO = "mongo"
 
     def __init__(self, storage_engine):
+        Store.__init__(self)
         self._storage_engine = storage_engine
-
-    def store_name(self):
-        return MongoStore.MONGO
 
     @property
     def storage_engine(self):
         return self._storage_engine
 
     def drop(self):
-        YLogger.info(self, "Dropping storage [%s]", self.store_name())
+        YLogger.info(self, "Dropping mongo storage")
         self.collection().drop()
 
     def commit(self):
@@ -42,7 +40,7 @@ class MongoStore(Store):
         YLogger.info(self, "Rollback collection [%s] not supported on Mongo", self.collection_name())
 
     def collection_name(self):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     def collection(self):
         return self._storage_engine.database[self.collection_name()]

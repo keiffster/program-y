@@ -1,7 +1,7 @@
 import unittest
 
-from programy.config.programy import ProgramyConfiguration
 from programy.config.base import BaseConfigurationData
+from programy.config.programy import ProgramyConfiguration
 
 
 class MockConfiguration(BaseConfigurationData):

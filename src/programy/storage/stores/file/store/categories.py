@@ -25,6 +25,7 @@ class FileCategoryStore(FileStore, CategoryReadOnlyStore):
 
     def __init__(self, storage_engine):
         FileStore.__init__(self, storage_engine)
+        CategoryReadOnlyStore.__init__(self)
 
     def _get_storage_path(self):
         return self.storage_engine.configuration.categories_storage.dir

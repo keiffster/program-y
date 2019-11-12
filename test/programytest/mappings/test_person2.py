@@ -1,11 +1,12 @@
-import unittest
 import os
-
+import unittest
+import re
 from programy.mappings.person import Person2Collection
 from programy.storage.factory import StorageFactory
 from programy.storage.stores.file.config import FileStorageConfiguration
-from programy.storage.stores.file.engine import FileStorageEngine
 from programy.storage.stores.file.config import FileStoreConfiguration
+from programy.storage.stores.file.engine import FileStorageEngine
+
 
 class Person2Tests(unittest.TestCase):
 
@@ -56,6 +57,9 @@ class Person2Tests(unittest.TestCase):
 
         self.assertEqual(collection.personalise_string("I was"), "he or she was")
         self.assertEqual(collection.personalise_string("hello he was over there"), "hello i was over there")
+
+        self.assertEquals([re.compile('(^I WAS | I WAS | I WAS$)', re.IGNORECASE), ' HE OR SHE WAS '], collection.person(" I WAS "))
+        self.assertEquals(None, collection.person(" I XXX "))
 
     def test_reload(self):
         storage_factory = StorageFactory()

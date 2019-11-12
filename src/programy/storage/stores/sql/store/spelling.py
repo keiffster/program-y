@@ -26,6 +26,7 @@ class SQLSpellingStore(SQLStore, SpellingStore):
 
     def __init__(self, storage_engine):
         SQLStore.__init__(self, storage_engine)
+        SpellingStore.__init__(self)
 
     def _get_all(self):
         return self._storage_engine.session.query(Corpus)

@@ -36,6 +36,7 @@ class SQLUserGroupStore(SQLStore, UserGroupsStore):
 
     def __init__(self, storage_engine):
         SQLStore.__init__(self, storage_engine)
+        UserGroupsStore.__init__(self)
 
     def _get_all(self):
         return self._storage_engine.session.query(UserGroup)

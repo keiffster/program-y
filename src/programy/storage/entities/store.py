@@ -28,21 +28,21 @@ class Store:
     BINARY_FORMAT = "bin"
     YAML_FORMAT = "yaml"
 
-    def store_name(self):
-        raise NotImplementedError()
+    def __init__(self):
+        pass    # pragma: no cover
 
     def empty(self):
-        return
+        return  # pragma: no cover
 
     def empty_named(self, name):
         del name
-        return
+        return  # pragma: no cover
 
     def commit(self):
-        return
+        return  # pragma: no cover
 
     def rollback(self):
-        return
+        return  # pragma: no cover
 
     def split_into_fields(self, line):
         return line.split(",")

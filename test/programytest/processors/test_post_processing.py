@@ -1,14 +1,14 @@
-import unittest
 import re
-from programy.processors.post.denormalize import DenormalizePostProcessor
-from programy.processors.post.formatpunctuation import FormatPunctuationProcessor
-from programy.processors.post.formatnumbers import FormatNumbersPostProcessor
-from programy.processors.post.multispaces import RemoveMultiSpacePostProcessor
-from programy.processors.post.emojize import EmojizePostProcessor
+import unittest
+
 from programy.bot import Bot
 from programy.config.bot.bot import BotConfiguration
 from programy.context import ClientContext
-
+from programy.processors.post.denormalize import DenormalizePostProcessor
+from programy.processors.post.emojize import EmojizePostProcessor
+from programy.processors.post.formatnumbers import FormatNumbersPostProcessor
+from programy.processors.post.formatpunctuation import FormatPunctuationProcessor
+from programy.processors.post.multispaces import RemoveMultiSpacePostProcessor
 from programytest.client import TestClient
 
 

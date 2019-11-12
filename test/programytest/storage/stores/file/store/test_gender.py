@@ -1,13 +1,13 @@
-from programytest.storage.asserts.store.assert_genders import GenderStoreAsserts
 import os
 import os.path
 import re
 
-from programy.storage.stores.file.store.lookups import FileGenderStore
-from programy.storage.stores.file.engine import FileStorageEngine
-from programy.storage.stores.file.config import FileStorageConfiguration
 from programy.mappings.gender import GenderCollection
+from programy.storage.stores.file.config import FileStorageConfiguration
 from programy.storage.stores.file.config import FileStoreConfiguration
+from programy.storage.stores.file.engine import FileStorageEngine
+from programy.storage.stores.file.store.lookups import FileGenderStore
+from programytest.storage.asserts.store.assert_genders import GenderStoreAsserts
 
 
 class FileGenderStoreTests(GenderStoreAsserts):

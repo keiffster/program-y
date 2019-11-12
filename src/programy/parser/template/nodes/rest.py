@@ -40,9 +40,8 @@ class TemplateRestNode(TemplateNode):
             except Exception as excep:
                 YLogger.exception_nostack(self, "Failed to load REST json payload", excep)
                 words = result.split(" ")
-                if words:
-                    if len(words) > 1:
-                        resolved = " ".join(words[1:])
+                if len(words) > 1:
+                    resolved = " ".join(words[1:])
 
         YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved

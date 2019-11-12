@@ -26,6 +26,7 @@ class TemplateFirstNode(TemplateNode):
 
     def resolve_to_string(self, client_context):
         result = self.resolve_children_to_string(client_context)
+        result = result.strip()
         resolved = "NIL"
         if result != "":
             try:
@@ -35,13 +36,12 @@ class TemplateFirstNode(TemplateNode):
                         resolved = json.dumps(data[0])
 
                 else:
-                    raise Exception("Not what I wanted")
+                    raise Exception("Invalid JSON, reverting to result as text")
 
             except Exception as excep:
                 YLogger.exception_nostack(self, "Failed to load JSON", excep)
                 words = result.split(" ")
-                if len(words) > 0:
-                    resolved = words[0]
+                resolved = words[0]
 
         YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
 

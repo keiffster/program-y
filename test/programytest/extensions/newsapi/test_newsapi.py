@@ -1,7 +1,8 @@
 import unittest
 import unittest.mock
-from programy.extensions.newsapi.newsapi import NewsAPIExtension
+
 from programy.extensions.newsapi.newsapi import NewsAPI
+from programy.extensions.newsapi.newsapi import NewsAPIExtension
 from programytest.client import TestClient
 
 

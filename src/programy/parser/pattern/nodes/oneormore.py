@@ -159,10 +159,6 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
             context_match.add_word(word)
 
             word_no += 1
-            if word_no >= words.num_words():
-                context.pop_matches(matches_added)
-                return None
-
             word = words.word(word_no)
 
         YLogger.debug(client_context, "%sNo children, consume words until next break point", tabs)

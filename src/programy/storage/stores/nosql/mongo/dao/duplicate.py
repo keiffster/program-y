@@ -41,15 +41,10 @@ class Duplicate():
 
     @staticmethod
     def from_document(data):
-        lookup = Duplicate(None, None, None, None)
-        if '_id' in data:
-            lookup.id = data['_id']
-        if 'duplicate' in data:
-            lookup.duplicate = data['duplicate']
-        if 'file' in data:
-            lookup.file = data['file']
-        if 'start' in data:
-            lookup.start = data['start']
-        if 'end' in data:
-            lookup.end = data['end']
-        return lookup
+        duplicate = Duplicate(None, None, None, None)
+        duplicate.id = DAOUtils.get_value_from_data(data, '_id')
+        duplicate.duplicate = DAOUtils.get_value_from_data(data, 'duplicate')
+        duplicate.file = DAOUtils.get_value_from_data(data, 'file')
+        duplicate.start = DAOUtils.get_value_from_data(data, 'start')
+        duplicate.end = DAOUtils.get_value_from_data(data, 'end')
+        return duplicate

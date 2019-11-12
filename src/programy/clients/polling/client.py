@@ -34,14 +34,14 @@ class PollingBotClient(BotClient):
         return True
 
     def poll_and_answer(self):
-        raise NotImplementedError(
-            "You must override this and implement the logic poll for messages and send answers back")
+        raise NotImplementedError("You must override this and implement the l"
+                                  "ogic poll for messages and send answers back")  # pragma: no cover
 
     def sleep(self, period):
         time.sleep(period)
 
     def display_connected_message(self):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     def run(self, app=None):
         del app

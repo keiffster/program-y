@@ -46,9 +46,6 @@ class BotSpellingConfiguration(BaseConfigurationData):
     def check_and_retry(self):
         return self._check_and_retry
 
-    def check_for_license_keys(self, license_keys):
-        BaseConfigurationData.check_for_license_keys(self, license_keys)
-
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         del bot_root
         spelling = configuration_file.get_section(self._section_name, configuration)

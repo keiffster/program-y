@@ -29,4 +29,4 @@ class DynamicMap(ABC):
 
     @abstractmethod
     def map_value(self, client_context, input_value):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover

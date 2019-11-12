@@ -29,7 +29,7 @@ class Link():
         self.retry_count = retry_count
 
     def __repr__(self):
-        return "<Linked(id='%d', primary='%s', generated='%s', provided='%s', expired='%s', expires='%s')>" % (
+        return "<Linked(id='%s', primary='%s', generated='%s', provided='%s', expired='%s', expires='%s')>" % (
             DAOUtils.valid_id(self.id),
             self.primary_user,
             self.generated_key,
@@ -53,18 +53,11 @@ class Link():
     @staticmethod
     def from_document(data):
         link = Link(None, None, None)
-        if '_id' in data:
-            link.id = data['_id']
-        if 'primary_user' in data:
-            link.primary_user = data['primary_user']
-        if 'generated_key' in data:
-            link.generated_key = data['generated_key']
-        if 'provided_key' in data:
-            link.provided_key = data['provided_key']
-        if 'expires' in data:
-            link.expires = data['expires']
-        if 'expired' in data:
-            link.expired = data['expired']
-        if 'retry_count' in data:
-            link.retry_count = data['retry_count']
+        link.id = DAOUtils.get_value_from_data(data, '_id')
+        link.primary_user = DAOUtils.get_value_from_data(data, 'primary_user')
+        link.generated_key = DAOUtils.get_value_from_data(data, 'generated_key')
+        link.provided_key = DAOUtils.get_value_from_data(data, 'provided_key')
+        link.expires = DAOUtils.get_value_from_data(data, 'expires')
+        link.expired = DAOUtils.get_value_from_data(data, 'expired')
+        link.retry_count = DAOUtils.get_value_from_data(data, 'retry_count', 0)
         return link

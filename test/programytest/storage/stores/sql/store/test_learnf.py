@@ -1,12 +1,10 @@
 import unittest
 
-from programytest.storage.asserts.store.assert_learnf import LearnfStoreAsserts
-
-from programy.storage.stores.sql.store.learnf import SQLLearnfStore
-from programy.storage.stores.sql.engine import SQLStorageEngine
-from programy.storage.stores.sql.config import SQLStorageConfiguration
-
 import programytest.storage.engines as Engines
+from programy.storage.stores.sql.config import SQLStorageConfiguration
+from programy.storage.stores.sql.engine import SQLStorageEngine
+from programy.storage.stores.sql.store.learnf import SQLLearnfStore
+from programytest.storage.asserts.store.assert_learnf import LearnfStoreAsserts
 
 
 class SQLLearnfStoreTests(LearnfStoreAsserts):

@@ -1,12 +1,12 @@
-from programytest.storage.asserts.store.assert_rdfs import RDFStoreAsserts
 import os
 import os.path
 
-from programy.storage.stores.file.store.rdfs import FileRDFStore
-from programy.storage.stores.file.engine import FileStorageEngine
-from programy.storage.stores.file.config import FileStorageConfiguration
 from programy.rdf.collection import RDFCollection
+from programy.storage.stores.file.config import FileStorageConfiguration
 from programy.storage.stores.file.config import FileStoreConfiguration
+from programy.storage.stores.file.engine import FileStorageEngine
+from programy.storage.stores.file.store.rdfs import FileRDFStore
+from programytest.storage.asserts.store.assert_rdfs import RDFStoreAsserts
 
 
 class FileRDFStoreTests(RDFStoreAsserts):

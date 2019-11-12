@@ -40,21 +40,20 @@ class BasePropertiesCollection(DoubleStringCharSplitCollection):
             self.pairs.append([key, value])
 
     def get_storage_name(self):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     def get_store(self, engine):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     def load(self, storage_factory):
         name = self.get_storage_name()
         if storage_factory.entity_storage_engine_available(name) is True:
             engine = storage_factory.entity_storage_engine(name)
-            if engine:
-                try:
-                    store = self.get_store(engine)
-                    store.load_all(self)
-                except Exception as e:
-                    YLogger.exception(self, "Failed to load %s from storage", e, name)
+            try:
+                store = self.get_store(engine)
+                store.load_all(self)
+            except Exception as e:
+                YLogger.exception(self, "Failed to load %s from storage", e, name)
 
     def reload_file(self, storage_factory):
         self.load(storage_factory)

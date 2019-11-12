@@ -27,6 +27,7 @@ class MongoUserGroupsStore(MongoStore, UserGroupsStore):
 
     def __init__(self, storage_engine):
         MongoStore.__init__(self, storage_engine)
+        UserGroupsStore.__init__(self)
 
     def collection_name(self):
         return MongoUserGroupsStore.USERGROUPS

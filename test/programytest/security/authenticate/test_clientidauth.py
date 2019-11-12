@@ -1,12 +1,12 @@
 import unittest
 
-from programy.security.authenticate.clientidauth import ClientIdAuthenticationService
-from programy.config.brain.security import BrainSecurityAuthenticationConfiguration
 from programy.bot import Bot
 from programy.config.bot.bot import BotConfiguration
+from programy.config.brain.security import BrainSecurityAuthenticationConfiguration
 from programy.context import ClientContext
-
+from programy.security.authenticate.clientidauth import ClientIdAuthenticationService
 from programytest.client import TestClient
+
 
 class MockClientIdAuthenticationService(ClientIdAuthenticationService):
 

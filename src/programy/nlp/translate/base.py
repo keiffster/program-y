@@ -21,22 +21,22 @@ from programy.utils.classes.loader import ClassLoader
 class BaseTranslator:
 
     def initialise(self):
-        pass
+        pass    # pragma: no cover
 
     def languages(self):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     def supports_language(self, language):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     def language_code(self, code):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     def detect(self, text, default='EN'):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     def translate(self, text, from_lang, to_lang="EN"):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     @staticmethod
     def initiate_translator(translator_config):

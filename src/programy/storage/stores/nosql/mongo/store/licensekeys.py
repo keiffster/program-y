@@ -27,6 +27,7 @@ class MongoLicenseKeysStore(MongoStore, LicenseStore):
 
     def __init__(self, storage_engine):
         MongoStore.__init__(self, storage_engine)
+        LicenseStore.__init__(self)
 
     def collection_name(self):
         return MongoLicenseKeysStore.LICENSEKEYS

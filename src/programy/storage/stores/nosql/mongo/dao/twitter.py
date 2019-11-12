@@ -37,11 +37,8 @@ class Twitter:
 
     @staticmethod
     def from_document(data):
-        lookup = Twitter(None, None)
-        if '_id' in data:
-            lookup.id = data['_id']
-        if 'last_direct_message_id' in data:
-            lookup.last_direct_message_id = data['last_direct_message_id']
-        if 'last_status_id' in data:
-            lookup.last_status_id = data['last_status_id']
-        return lookup
+        twitter = Twitter(None, None)
+        twitter.id = DAOUtils.get_value_from_data(data, '_id')
+        twitter.last_direct_message_id = DAOUtils.get_value_from_data(data, 'last_direct_message_id')
+        twitter.last_status_id = DAOUtils.get_value_from_data(data, 'last_status_id')
+        return twitter

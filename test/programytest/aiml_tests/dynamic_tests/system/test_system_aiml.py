@@ -1,11 +1,10 @@
-import unittest
 import os
+import unittest
 
-from programytest.client import TestClient
-from programy.spelling.base import SpellingChecker
-from programy.config.bot.spelling import BotSpellingConfiguration
-from programy.dialog.splitter.splitter import SentenceSplitter
 from programy.config.bot.splitter import BotSentenceSplitterConfiguration
+from programy.dialog.splitter.splitter import SentenceSplitter
+from programy.spelling.base import SpellingChecker
+from programytest.client import TestClient
 
 
 class MockSpellingChecker(SpellingChecker):

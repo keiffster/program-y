@@ -34,6 +34,7 @@ class MongoPropertyStore(PropertyStore, MongoStore):
 
     def __init__(self, storage_engine):
         MongoStore.__init__(self, storage_engine)
+        PropertyStore.__init__(self)
 
     def collection_name(self):
         return MongoPropertyStore.PROPERTIES

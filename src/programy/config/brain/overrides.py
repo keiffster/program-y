@@ -40,9 +40,6 @@ class BrainOverridesConfiguration(BaseSectionConfigurationData):
     def allow_learnf_aiml(self):
         return self._allow_learnf_aiml
 
-    def check_for_license_keys(self, license_keys):
-        BaseSectionConfigurationData.check_for_license_keys(self, license_keys)
-
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         overrides = configuration_file.get_section(self._section_name, configuration)
         if overrides is not None:

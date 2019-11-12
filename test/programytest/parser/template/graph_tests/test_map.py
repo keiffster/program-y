@@ -1,9 +1,8 @@
 import xml.etree.ElementTree as ET
 
+from programy.parser.exceptions import ParserException
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.map import TemplateMapNode
-from programy.parser.exceptions import ParserException
-
 from programytest.parser.template.graph_tests.graph_test_client import TemplateGraphTestClient
 
 

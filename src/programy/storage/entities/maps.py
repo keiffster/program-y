@@ -22,17 +22,17 @@ class MapsReadOnlyStore(Store):
     def __init__(self):
         Store.__init__(self)
 
-    def load_all(self, collector):
-        raise NotImplementedError("load_all missing from Maps Store")
-
-    def load(self, collector, name=None):
-        raise NotImplementedError("load missing from Maps Store")
-
     def split_into_fields(self, line):
         splits = line.split(":")
         key = splits[0].upper()
         value = ":".join(splits[1:])
         return [key, value]
+
+    def load_all(self, collector):
+        raise NotImplementedError("load_all missing from Maps Store")  # pragma: no cover
+
+    def load(self, collector, name=None):
+        raise NotImplementedError("load missing from Maps Store")  # pragma: no cover
 
 
 class MapsReadWriteStore(MapsReadOnlyStore):
@@ -41,10 +41,10 @@ class MapsReadWriteStore(MapsReadOnlyStore):
         MapsReadOnlyStore.__init__(self)
 
     def load_all(self, collector):
-        raise NotImplementedError("load_all missing from Maps Store")
+        raise NotImplementedError("load_all missing from Maps Store")  # pragma: no cover
 
     def load(self, collector, name=None):
-        raise NotImplementedError("load missing from Maps Store")
+        raise NotImplementedError("load missing from Maps Store")  # pragma: no cover
 
     def process_line(self, name, fields, verbose=False):
         if fields:
@@ -52,18 +52,13 @@ class MapsReadWriteStore(MapsReadOnlyStore):
         return False
 
     def add_to_map(self, name, key, value, overwrite_existing=False):
-        raise NotImplementedError("add_to_map missing from Maps Store")
+        raise NotImplementedError("add_to_map missing from Maps Store")  # pragma: no cover
 
     def remove_from_map(self, name, key):
-        raise NotImplementedError("remove_from_map missing from Maps Store")
+        raise NotImplementedError("remove_from_map missing from Maps Store")  # pragma: no cover
 
     def split_into_fields(self, line):
         splits = line.split(":")
         key = splits[0].upper()
         value = ":".join(splits[1:])
         return [key, value]
-
-    def process_line(self, name, fields, verbose=False):
-        if fields:
-            return self.add_to_map(name, fields[0], fields[1])
-        return False

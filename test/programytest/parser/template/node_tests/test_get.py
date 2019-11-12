@@ -1,11 +1,10 @@
 import xml.etree.ElementTree as ET
 
+from programy.dialog.question import Question
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.get import TemplateGetNode
-from programy.parser.template.nodes.word import TemplateWordNode
 from programy.parser.template.nodes.select import TemplateSelectNode
-from programy.dialog.question import Question
-
+from programy.parser.template.nodes.word import TemplateWordNode
 from programytest.parser.base import ParserTestsBaseClass
 
 
@@ -16,7 +15,36 @@ class MockTemplateGetNode(TemplateGetNode):
     def resolve_to_string(self, context):
         raise Exception("This is an error")
 
+
 class TemplateGetNodeTests(ParserTestsBaseClass):
+
+    def test_decode_tuples_as_json_list(self):
+        self.assertEqual([[["x","1"], ["y","2"], ["z", "3"]]], TemplateGetNode.decode_tuples('[[["x","1"], ["y","2"], ["z", "3"]]]'))
+
+    def test_decode_tuples_as_list(self):
+        self.assertEqual([[["x","1"], ["y","2"], ["z", "3"]]], TemplateGetNode.decode_tuples([[["x","1"], ["y","2"], ["z", "3"]]]))
+
+    def test_get_tuples(self):
+        node = TemplateGetNode()
+        node.tuples = TemplateWordNode('[[["x","1"], ["y","2"], ["z", "3"]]]')
+        self.assertEquals([[["x","1"], ["y","2"], ["z", "3"]]], node._get_tuples(self._client_context))
+
+    def test_get_tuples_invalid_json(self):
+        node = TemplateGetNode()
+        node.tuples = TemplateWordNode('"1", "2", "3"')
+        self.assertEquals([], node._get_tuples(self._client_context))
+
+    def test_default_value_properties(self):
+        self._client_context.bot.brain.properties.add_property("default-get", "test123")
+        self.assertEqual("test123", TemplateGetNode.get_default_value(self._client_context))
+
+    def test_default_value_default_get(self):
+        self._client_context.bot.brain.configuration.defaults._default_get = "test456"
+        self.assertEqual("test456", TemplateGetNode.get_default_value(self._client_context))
+
+    def test_default_value_no_value(self):
+        self._client_context.bot.brain.configuration.defaults._default_get = None
+        self.assertEqual("unknown", TemplateGetNode.get_default_value(self._client_context))
 
     def test_local_get(self):
         root = TemplateNode()
@@ -193,3 +221,38 @@ class TemplateGetNodeTests(ParserTestsBaseClass):
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEqual("", result)
+
+    def test_resolve_tuple_no_data(self):
+        node = TemplateGetNode()
+        node.name = TemplateWordNode("x")
+        node.tuples = TemplateWordNode("")
+        self.assertEqual("", node.resolve_tuple(self._client_context))
+
+    def test_resolve_tuple_as_results_no_vars(self):
+        node = TemplateGetNode()
+        node.tuples = TemplateWordNode('[[["x","1"], ["y","2"], ["z", "3"]]]')
+        self.assertEqual("1 2 3", node.resolve_tuple(self._client_context))
+
+    def test_resolve_tuple_as_results_with_vars(self):
+        node = TemplateGetNode()
+        node.name = TemplateWordNode("x")
+        node.tuples = TemplateWordNode('[[["x","1"], ["y","2"], ["z", "3"]]]')
+        self.assertEqual("1", node.resolve_tuple(self._client_context))
+
+    def test_resolve_tuple_as_data_with_vars(self):
+        node = TemplateGetNode()
+        node.name = TemplateWordNode("x")
+        node.tuples = TemplateWordNode('[["x", "1"]]')
+        self.assertEqual("1", node.resolve_tuple(self._client_context))
+
+    def test_resolve_tuple_as_data_with_vars_mismatch(self):
+        node = TemplateGetNode()
+        node.name = TemplateWordNode("y")
+        node.tuples = TemplateWordNode('[["x", "1"]]')
+        self.assertEqual("", node.resolve_tuple(self._client_context))
+
+    def test_resolve_tuple_as_results_with_vars_mismatch(self):
+        node = TemplateGetNode()
+        node.name = TemplateWordNode("a")
+        node.tuples = TemplateWordNode('[[["x","1"], ["y","2"], ["z", "3"]]]')
+        self.assertEqual("", node.resolve_tuple(self._client_context))

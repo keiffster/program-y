@@ -34,9 +34,6 @@ class BrainDebugFilesConfiguration(BaseSectionConfigurationData):
     def save_duplicates(self):
         return self._save_duplicates
 
-    def check_for_license_keys(self, license_keys):
-        BaseSectionConfigurationData.check_for_license_keys(self, license_keys)
-
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         debugfiles = configuration_file.get_section("debugfiles", configuration)
         if debugfiles is not None:

@@ -28,6 +28,7 @@ class MongoNodeStore(MongoStore, NodesStore):
 
     def __init__(self, storage_engine):
         MongoStore.__init__(self, storage_engine)
+        NodesStore.__init__(self)
 
     def load(self, collector, name=None):
         YLogger.info(self, "Loading %s nodes from Mongo", self.collection_name())
@@ -78,7 +79,7 @@ class MongoNodeStore(MongoStore, NodesStore):
         return False
 
     def _get_entity(self, name, classname):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
 
 class MongoPatternNodeStore(MongoNodeStore):

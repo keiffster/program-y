@@ -16,6 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 from programy.parser.template.nodes.base import TemplateNode
 from programy.utils.text.text import TextUtils
+from programy.parser.exceptions import ParserException
 
 
 class TemplateCarouselNode(TemplateNode):
@@ -53,7 +54,10 @@ class TemplateCarouselNode(TemplateNode):
                 card.parse_expression(graph, child)
                 self._cards.append(card)
             else:
-                graph.parse_tag_expression(child, self)
+                raise ParserException("Only card allowed in carousel")
 
             tail_text = self.get_tail_from_element(child)
             self.parse_text(graph, tail_text)
+
+        if len(self._cards) == 0:
+            raise ParserException("No cards found in in carousel")

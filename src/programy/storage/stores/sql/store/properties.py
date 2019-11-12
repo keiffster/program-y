@@ -33,6 +33,7 @@ class SQLBasePropertyStore(SQLStore, PropertyStore):
 
     def __init__(self, storage_engine):
         SQLStore.__init__(self, storage_engine)
+        PropertyStore.__init__(self)
 
     def empty(self):
         self._get_all().delete()
@@ -41,7 +42,7 @@ class SQLBasePropertyStore(SQLStore, PropertyStore):
         self._get_all().delete()
 
     def _get_entity(self, name, value):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     def add_property(self, name, value):
         prop = self._get_entity(name=name, value=value)
@@ -73,7 +74,7 @@ class SQLBasePropertyStore(SQLStore, PropertyStore):
             self.add_to_collection(collector, db_property.name, db_property.value)
 
     def add_to_collection(self, collection, name, value):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     def split_into_fields(self, line):
         return DoubleStringPatternSplitCollection.\

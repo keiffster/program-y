@@ -1,29 +1,26 @@
-import unittest
-import os
 import json
+import os
+import unittest
 
 from programy.extensions.maps.maps import GoogleMapsExtension
 from programy.utils.geo.google import GoogleMaps
-
 from programytest.client import TestClient
+from programytest.extensions.maps.payloads import directions_payload
+from programytest.extensions.maps.payloads import distance_payload
 
 
 class MockGoogleMaps(GoogleMaps):
 
-    def __init__(self, response_file):
-        self._response_file = response_file
+    response = None
 
     def _get_response_as_json(self, url):
-        with open(self._response_file) as response_data:
-            return json.load(response_data)
+        return MockGoogleMaps.response
 
 
 class MockGoogleMapsExtension(GoogleMapsExtension):
 
-    response_file = None
-
     def get_geo_locator(self):
-        return MockGoogleMaps(MockGoogleMapsExtension.response_file)
+        return MockGoogleMaps()
 
 
 class MapsTestsClient(TestClient):
@@ -44,14 +41,14 @@ class MapsAIMLTests(unittest.TestCase):
         self._client_context = client.create_client_context("testid")
 
     def test_distance(self):
-        MockGoogleMapsExtension.response_file    = os.path.dirname(__file__) +  os.sep + "distance.json"
+        MockGoogleMaps.response = distance_payload
 
         response = self._client_context.bot.ask_question(self._client_context, "DISTANCE EDINBURGH KINGHORN")
         self.assertIsNotNone(response)
         self.assertEqual(response, 'It is 25 . 1 miles.')
 
     def test_directions(self):
-        MockGoogleMapsExtension.response_file    = os.path.dirname(__file__) +  os.sep + "directions.json"
+        MockGoogleMaps.response = directions_payload
 
         response = self._client_context.bot.ask_question(self._client_context, "DIRECTIONS EDINBURGH KINGHORN")
         self.assertIsNotNone(response)

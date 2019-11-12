@@ -15,14 +15,15 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.storage.stores.sql.store.sqlstore import SQLStore
-from programy.storage.entities.maps import MapsReadOnlyStore
+from programy.storage.entities.maps import MapsReadWriteStore
 from programy.storage.stores.sql.dao.map import Map
 
 
-class SQLMapsStore(SQLStore, MapsReadOnlyStore):
+class SQLMapsStore(SQLStore, MapsReadWriteStore):
 
     def __init__(self, storage_engine):
         SQLStore.__init__(self, storage_engine)
+        MapsReadWriteStore.__init__(self)
 
     def _get_all(self):
         return self._storage_engine.session.query(Map)

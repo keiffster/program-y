@@ -23,18 +23,10 @@ class DiscordConfiguration(ClientConfigurationData):
     def __init__(self):
         ClientConfigurationData.__init__(self, "discord")
 
-    def check_for_license_keys(self, license_keys):
-        ClientConfigurationData.check_for_license_keys(self, license_keys)
-
-    def load_configuration_section(self, configuration_file, section, bot_root, subs: Substitutions = None):
-        if section is not None:
-            super(DiscordConfiguration, self).load_configuration_section(configuration_file, section, bot_root,
-                                                                         subs=subs)
-
     def to_yaml(self, data, defaults=True):
         if defaults is True:
-            pass
+            pass    # pragma: no cover
         else:
-            pass
+            pass    # pragma: no cover
 
         super(DiscordConfiguration, self).to_yaml(data, defaults)

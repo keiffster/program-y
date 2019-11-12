@@ -1,21 +1,15 @@
-from programytest.parser.base import ParserTestsBaseClass
-
 from programy.parser.exceptions import ParserException
-
 from programy.parser.pattern.nodes.base import PatternNode
-from programy.parser.template.nodes.base import TemplateNode
-from programy.parser.pattern.nodes.root import PatternRootNode
-from programy.parser.pattern.nodes.word import PatternWordNode
-from programy.parser.pattern.nodes.priority import PatternPriorityWordNode
-from programy.parser.pattern.nodes.topic import PatternTopicNode
-from programy.parser.pattern.nodes.that import PatternThatNode
 from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
-from programy.parser.pattern.nodes.zeroormore import PatternZeroOrMoreWildCardNode
-from programy.parser.pattern.nodes.set import PatternSetNode
-from programy.parser.pattern.nodes.iset import PatternISetNode
-from programy.parser.pattern.nodes.bot import PatternBotNode
-from programy.parser.pattern.nodes.regex import PatternRegexNode
+from programy.parser.pattern.nodes.priority import PatternPriorityWordNode
+from programy.parser.pattern.nodes.root import PatternRootNode
 from programy.parser.pattern.nodes.template import PatternTemplateNode
+from programy.parser.pattern.nodes.that import PatternThatNode
+from programy.parser.pattern.nodes.topic import PatternTopicNode
+from programy.parser.pattern.nodes.word import PatternWordNode
+from programy.parser.pattern.nodes.zeroormore import PatternZeroOrMoreWildCardNode
+from programy.parser.template.nodes.base import TemplateNode
+from programytest.parser.base import ParserTestsBaseClass
 
 
 class PatternRootNodeTests(ParserTestsBaseClass):
@@ -118,6 +112,102 @@ class PatternRootNodeTests(ParserTestsBaseClass):
 
         self.assertTrue(node1.equivalent(node2))
         self.assertFalse(node1.equivalent(node3))
+
+    def test_equivalent_diff_nodes(self):
+        node1 = PatternRootNode()
+        node2 = PatternWordNode("Word")
+        self.assertFalse(node1.equivalent(node2))
+
+    def test_remove_priorty(self):
+        root = PatternRootNode()
+        self.assertEqual(0, len(root.children))
+        root.add_child(PatternPriorityWordNode("WORD"))
+        self.assertEqual(1, len(root.priority_words))
+        root._remove_priority("*")
+        self.assertEqual(0, len(root.priority_words))
+
+    def test_remove_priorty_diff_users(self):
+        root = PatternRootNode()
+        self.assertEqual(0, len(root.children))
+        root.add_child(PatternPriorityWordNode("WORD", userid="*"))
+        root.add_child(PatternPriorityWordNode("WORD2", userid="2"))
+        self.assertEqual(2, len(root.priority_words))
+        root._remove_priority("2")
+        self.assertEqual(1, len(root.priority_words))
+        root._remove_priority("*")
+        self.assertEqual(0, len(root.priority_words))
+
+    def test_remove_0ormore_hash(self):
+        root = PatternRootNode()
+        self.assertEqual(0, len(root.children))
+        root.add_child(PatternZeroOrMoreWildCardNode("#"))
+        self.assertIsNotNone(root._0ormore_hash)
+        root._remove_0ormore_hash("*")
+        self.assertIsNone(root._0ormore_hash)
+
+    def test_remove_0ormore_hash_diff_users(self):
+        root = PatternRootNode()
+        self.assertEqual(0, len(root.children))
+        root.add_child(PatternZeroOrMoreWildCardNode("#", "1"))
+        self.assertIsNotNone(root._0ormore_hash)
+        root._remove_0ormore_hash("2")
+        self.assertIsNotNone(root._0ormore_hash)
+        root._remove_0ormore_hash("1")
+        self.assertIsNone(root._0ormore_hash)
+
+    def test_remove_1ormore_underline(self):
+        root = PatternRootNode()
+        self.assertEqual(0, len(root.children))
+        root.add_child(PatternOneOrMoreWildCardNode("_"))
+        self.assertIsNotNone(root._1ormore_underline)
+        root._remove_1ormore_underline("*")
+        self.assertIsNone(root._1ormore_underline)
+
+    def test_remove_1ormore_underline_diff_users(self):
+        root = PatternRootNode()
+        self.assertEqual(0, len(root.children))
+        root.add_child(PatternOneOrMoreWildCardNode("_", "1"))
+        self.assertIsNotNone(root._1ormore_underline)
+        root._remove_1ormore_underline("2")
+        self.assertIsNotNone(root._1ormore_underline)
+        root._remove_1ormore_underline("1")
+        self.assertIsNone(root._1ormore_underline)
+
+    def test_remove_0ormore_arrow(self):
+        root = PatternRootNode()
+        self.assertEqual(0, len(root.children))
+        root.add_child(PatternZeroOrMoreWildCardNode("^"))
+        self.assertIsNotNone(root._0ormore_arrow)
+        root._remove_0ormore_arrow("*")
+        self.assertIsNone(root._0ormore_arrow)
+
+    def test_remove_0ormore_arrow_diff_users(self):
+        root = PatternRootNode()
+        self.assertEqual(0, len(root.children))
+        root.add_child(PatternZeroOrMoreWildCardNode("^", "1"))
+        self.assertIsNotNone(root._0ormore_arrow)
+        root._remove_0ormore_arrow("2")
+        self.assertIsNotNone(root._0ormore_arrow)
+        root._remove_0ormore_arrow("1")
+        self.assertIsNone(root._0ormore_arrow)
+
+    def test_remove_1ormore_star(self):
+        root = PatternRootNode()
+        self.assertEqual(0, len(root.children))
+        root.add_child(PatternOneOrMoreWildCardNode("*"))
+        self.assertIsNotNone(root._1ormore_star)
+        root._remove_1ormore_star("*")
+        self.assertIsNone(root._1ormore_star)
+
+    def test_remove_1ormore_star_diff_users(self):
+        root = PatternRootNode()
+        self.assertEqual(0, len(root.children))
+        root.add_child(PatternOneOrMoreWildCardNode("*", "1"))
+        self.assertIsNotNone(root._1ormore_star)
+        root._remove_1ormore_star("2")
+        self.assertIsNotNone(root._1ormore_star)
+        root._remove_1ormore_star("1")
+        self.assertIsNone(root._1ormore_star)
 
     def test_remove_children_with_userid(self):
         root = PatternRootNode()

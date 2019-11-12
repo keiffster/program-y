@@ -1,10 +1,9 @@
 import unittest
 import unittest.mock
 
-from programy.storage.stores.nosql.mongo.store.mongostore import MongoStore
-from programy.storage.stores.nosql.mongo.engine import MongoStorageEngine
-
 import programytest.storage.engines as Engines
+from programy.storage.stores.nosql.mongo.engine import MongoStorageEngine
+from programy.storage.stores.nosql.mongo.store.mongostore import MongoStore
 
 
 class MongoStoreTests(unittest.TestCase):

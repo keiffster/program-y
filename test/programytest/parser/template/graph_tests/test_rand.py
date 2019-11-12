@@ -1,10 +1,8 @@
-import unittest
 import xml.etree.ElementTree as ET
 
 from programy.parser.exceptions import ParserException
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.rand import TemplateRandomNode
-
 from programytest.parser.template.graph_tests.graph_test_client import TemplateGraphTestClient
 
 

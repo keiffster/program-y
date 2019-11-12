@@ -1,9 +1,10 @@
 import unittest
 
-from programy.config.file.yaml_file import YamlConfigurationFile
-from programy.config.brain.security import BrainSecurityAuthorisationConfiguration
-from programy.config.brain.security import BrainSecurityAuthenticationConfiguration
 from programy.clients.events.console.config import ConsoleConfiguration
+from programy.config.brain.security import BrainSecurityAuthenticationConfiguration
+from programy.config.brain.security import BrainSecurityAuthorisationConfiguration
+from programy.config.file.yaml_file import YamlConfigurationFile
+
 
 class BrainSecurityConfigurationTests(unittest.TestCase):
 

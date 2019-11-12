@@ -1,9 +1,6 @@
 import unittest
-import os
 
 from programy.parser.factory import NodeFactory
-from programy.parser.pattern.nodes.root import PatternRootNode
-from programy.parser.pattern.nodes.word import PatternWordNode
 
 
 class MockNodeFactory(NodeFactory):

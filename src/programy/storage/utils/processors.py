@@ -30,7 +30,7 @@ class FileProcessor:
         self._mode = mode
 
     def flush(self):
-        pass
+        pass    # pragma: no cover
 
 
 class TextFile(FileProcessor):

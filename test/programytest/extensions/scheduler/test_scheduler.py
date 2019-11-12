@@ -1,7 +1,6 @@
 import unittest
 
 from programy.extensions.scheduler.scheduler import SchedulerExtension
-
 from programytest.client import TestClient
 
 

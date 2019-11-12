@@ -1,12 +1,12 @@
-import unittest
 import os
+import unittest
 from xml.etree.ElementTree import ParseError
 
 from programy.bot import Bot
 from programy.config.bot.bot import BotConfiguration
-
-from programytest.client import TestClient
 from programy.utils.classes.loader import ClassLoader
+from programytest.client import TestClient
+
 
 class AIMLParserErrorTests(unittest.TestCase):
 

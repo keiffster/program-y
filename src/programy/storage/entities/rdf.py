@@ -23,10 +23,10 @@ class RDFReadOnlyStore(Store):
         Store.__init__(self)
 
     def load_all(self, collector):
-        raise NotImplementedError("load_all_rds missing from RDF Store")
+        raise NotImplementedError("load_all_rds missing from RDF Store")  # pragma: no cover
 
     def load(self, collector, name=None):
-        raise NotImplementedError("load missing from RDF Store")
+        raise NotImplementedError("load missing from RDF Store")  # pragma: no cover
 
     def split_into_fields(self, line):
         splits = self.split_line_by_char(line)
@@ -48,7 +48,7 @@ class RDFReadWriteStore(RDFReadOnlyStore):
         RDFReadOnlyStore.__init__(self)
 
     def add_rdf(self, name, subject, predicate, objct, replace_existing=True):
-        raise NotImplementedError("add_rdf missing from RDF Store")
+        raise NotImplementedError("add_rdf missing from RDF Store")  # pragma: no cover
 
     def process_line(self, name, fields, verbose=False):
         if len(fields) == 3:

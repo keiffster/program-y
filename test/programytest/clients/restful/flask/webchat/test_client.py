@@ -3,7 +3,6 @@ import unittest.mock
 
 from programy.clients.restful.flask.webchat.client import WebChatBotClient
 from programy.clients.restful.flask.webchat.config import WebChatConfiguration
-
 from programytest.clients.arguments import MockArgumentParser
 
 

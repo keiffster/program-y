@@ -26,6 +26,7 @@ class FileErrorsStore(FileStore, ErrorsStore):
 
     def __init__(self, storage_engine):
         FileStore.__init__(self, storage_engine)
+        ErrorsStore.__init__(self)
 
     def _get_storage_path(self):
         return self.storage_engine.configuration.errors_storage.file

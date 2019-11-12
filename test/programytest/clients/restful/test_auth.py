@@ -1,10 +1,9 @@
 import unittest
 
-from programy.clients.restful.auth import RestBasicAuthorizationHandler
 from programy.clients.restful.auth import RestAuthorizationHandler
+from programy.clients.restful.auth import RestBasicAuthorizationHandler
 from programy.clients.restful.client import RestBotClient
 from programy.clients.restful.config import RestConfiguration
-
 from programytest.clients.arguments import MockArgumentParser
 
 

@@ -24,12 +24,13 @@ class FileLookupsStore(FileStore, LookupsStore):
 
     def __init__(self, storage_engine):
         FileStore.__init__(self, storage_engine)
+        LookupsStore.__init__(self)
 
     def _get_storage_path(self):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     def get_storage(self):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     def _load_file_contents(self, collection, filename):
         YLogger.debug(self, "Loading lookup [%s]", filename)

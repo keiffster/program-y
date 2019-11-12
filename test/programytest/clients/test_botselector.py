@@ -1,11 +1,9 @@
 import unittest
 
-from programy.config.bot.bot import BotConfiguration
 from programy.bot import Bot
 from programy.clients.botfactory import DefaultBotSelector
-
 from programy.clients.config import ClientConfigurationData
-
+from programy.config.bot.bot import BotConfiguration
 from programytest.clients.mocks import MockBotClient, MockConfigFiles
 
 

@@ -1,15 +1,14 @@
-import unittest
 import os.path
-import xml.etree.ElementTree as ET
 import shutil
+import unittest
+import xml.etree.ElementTree as ET
 
-from programy.storage.stores.file.store.learnf import FileLearnfStore
-from programy.storage.stores.file.engine import FileStorageEngine
-from programy.storage.stores.file.config import FileStorageConfiguration
-from programy.parser.template.nodes.learn import LearnCategory
 from programy.parser.template.nodes.base import TemplateNode
+from programy.parser.template.nodes.learn import LearnCategory
 from programy.parser.template.nodes.word import TemplateWordNode
-
+from programy.storage.stores.file.config import FileStorageConfiguration
+from programy.storage.stores.file.engine import FileStorageEngine
+from programy.storage.stores.file.store.learnf import FileLearnfStore
 from programytest.client import TestClient
 
 

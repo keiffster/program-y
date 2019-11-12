@@ -1,11 +1,10 @@
-import unittest
 import json
+import unittest
 
-from programy.services.openchatbot.service import OpenChatRESTService
-from programy.services.openchatbot.service import OpenChatMetaBotRESTService
 from programy.config.brain.service import BrainServiceConfiguration
 from programy.services.openchatbot.openchatbot import OpenChatBot
-
+from programy.services.openchatbot.service import OpenChatMetaBotRESTService
+from programy.services.openchatbot.service import OpenChatRESTService
 from programytest.client import TestClient
 
 

@@ -51,11 +51,6 @@ class XMLConfigurationFile(BaseConfigurationFile):
 
         return configuration
 
-    def is_string(self, section):
-        if section._children:  # pylint: disable=protected-access
-            return False
-        return True
-
     def get_section(self, section_name, parent_section=None):
         if parent_section is None:
             return self.xml_data.find(section_name)
@@ -107,7 +102,10 @@ class XMLConfigurationFile(BaseConfigurationFile):
         child = section.find(option_name)
         if child is not None:
             value = self._replace_subs(subs, child.text)
-            return self.convert_to_bool(value)
+            try:
+                return self.convert_to_bool(value)
+            except Exception:
+                pass
 
         YLogger.warning(self, "Missing value for [%s] in config, return default value %s", option_name,
                         missing_value)
@@ -116,8 +114,12 @@ class XMLConfigurationFile(BaseConfigurationFile):
     def get_int_option(self, section, option_name, missing_value=0, subs=None):
         child = section.find(option_name)
         if child is not None:
-            value = self._replace_subs(subs, child.text)
-            return self.convert_to_int(value)
+            try:
+                value = self._replace_subs(subs, child.text)
+                return self.convert_to_int(value)
+
+            except Exception as excep:
+                pass
 
         if missing_value is not None:
             YLogger.warning(self, "Missing value for [%s] in config, return default value %d", option_name,
@@ -129,33 +131,33 @@ class XMLConfigurationFile(BaseConfigurationFile):
 
     def get_multi_option(self, section, option_name, missing_value=None, subs: Substitutions = None):
 
+        subsections = section.findall(option_name)
+
         values = []
-        for child in section:
-            if child.tag == option_name:
-                values.append(self._replace_subs(subs, child.text))
+        for child in subsections:
+            if child.text:
+                text = child.text
+                text = text.strip()
+                if text:
+                    values.append(self._replace_subs(subs, text))
 
-        if len(values) == 0:
-            values = [self._replace_subs(subs, section.text)]
-
-        multis = []
-        for value in values:
-            multis.append(value)
-
-        if multis:
-            return multis
+        if values:
+            return values
 
         if missing_value is None:
-            missing_value = []
+            return []
+
         return missing_value
 
     def get_multi_file_option(self, section, option_name, bot_root, missing_value=None, subs: Substitutions = None):
+
         if missing_value is None:
             missing_value = []
 
         value = self.get_option(section, option_name, missing_value, subs)
 
         if isinstance(value, list):
-            if not value:
+            if value:
                 return self._replace_subs(subs, value)
 
         if isinstance(value, str):
@@ -163,8 +165,8 @@ class XMLConfigurationFile(BaseConfigurationFile):
 
         else:
             values = []
-            if value and value._children:  # pylint: disable=protected-access
-                for child in value._children:  # pylint: disable=protected-access
+            if len(value):
+                for child in value:
                     if child.tag == "dir":
                         values.append(self._replace_subs(subs, child.text))
 

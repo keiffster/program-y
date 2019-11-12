@@ -1,5 +1,5 @@
-import unittest
 import os
+import unittest
 
 from programytest.client import TestClient
 

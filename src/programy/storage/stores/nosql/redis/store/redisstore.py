@@ -18,20 +18,17 @@ from programy.storage.entities.store import Store
 
 
 class RedisStore(Store):
-    REDIS = "redis"
 
     def __init__(self, storage_engine):
+        Store.__init__(self)
         self._storage_engine = storage_engine
-
-    def store_name(self):
-        return RedisStore.REDIS
 
     @property
     def storage_engine(self):
         return self._storage_engine
 
     def commit(self):
-        pass
+        pass    # pragma: no cover
 
     def delete(self, key):
         self._storage_engine.redis.delete(key)
@@ -46,6 +43,3 @@ class RedisStore(Store):
 
     def get(self, h_key):
         return self._storage_engine.redis.get(h_key)
-
-    def remove(self, s_key, clientid):
-        self._storage_engine.redis.srem(s_key, clientid)

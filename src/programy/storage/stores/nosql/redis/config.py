@@ -56,9 +56,6 @@ class RedisStorageConfiguration(BaseConfigurationData):
     def drop_all_first(self):
         return self._drop_all_first
 
-    def check_for_license_keys(self, license_keys):
-        BaseConfigurationData.check_for_license_keys(self, license_keys)
-
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         del bot_root
         del subs

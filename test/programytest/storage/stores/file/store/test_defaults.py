@@ -1,12 +1,12 @@
-import unittest
 import os
 import os.path
+import unittest
 
-from programy.storage.stores.file.store.properties import FileDefaultVariablesStore
-from programy.storage.stores.file.engine import FileStorageEngine
-from programy.storage.stores.file.config import FileStorageConfiguration
 from programy.mappings.properties import PropertiesCollection
+from programy.storage.stores.file.config import FileStorageConfiguration
 from programy.storage.stores.file.config import FileStoreConfiguration
+from programy.storage.stores.file.engine import FileStorageEngine
+from programy.storage.stores.file.store.properties import FileDefaultVariablesStore
 
 
 class FileDefaultVariablesStoreTests(unittest.TestCase):

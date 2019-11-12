@@ -21,10 +21,10 @@ class DAOUtils:
     NOT_APPLIC = "n/a"
 
     @staticmethod
-    def get_value_from_data(data, name):
+    def get_value_from_data(data, name, default=None):
         if name in data:
             return data[name]
-        return None
+        return default
 
     @staticmethod
     def valid_id(entityid):

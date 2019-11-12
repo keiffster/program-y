@@ -14,14 +14,14 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.dynamic.sets.set import DynamicSet
-
+from programy.utils.logging.ylogger import YLogger
 from programy.nlp.synsets.synsets import Synsets
 
 
 class IsSynset(DynamicSet):
     NAME = "SYNSET"
+    SIMILAR = 'similar'
 
     def __init__(self, config):
         DynamicSet.__init__(self, config)
@@ -29,12 +29,21 @@ class IsSynset(DynamicSet):
     def is_member(self, client_context, value, additional=None):
         if value is not None:
             if additional is not None:
-                if 'similar' in additional:
-                    similar = additional['similar']
+                if IsSynset.SIMILAR in additional:
+                    similar = additional[IsSynset.SIMILAR]
 
                     similars = Synsets.get_similar_words(similar)
                     for word in similars:
                         if word.upper() == value.upper():
                             return True
+
+                else:
+                    YLogger.error(self, "Missing 'similar' attribute passed to IsSynset.is_member!")
+
+            else:
+                YLogger.error(self, "Missing additional parameters passed to IsSynset.is_member!")
+
+        else:
+            YLogger.error(self, "None value passed to IsSynset.is_member!")
 
         return False

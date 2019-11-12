@@ -36,9 +36,6 @@ class BotSentimentAnalyserConfiguration(BaseConfigurationData):
     def scores(self):
         return self._scores
 
-    def check_for_license_keys(self, license_keys):
-        BaseConfigurationData.check_for_license_keys(self, license_keys)
-
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         del bot_root
         sentiment = configuration_file.get_section(self._section_name, configuration)

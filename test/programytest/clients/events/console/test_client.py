@@ -1,7 +1,6 @@
 import unittest
 
 from programy.clients.events.console.client import ConsoleBotClient
-
 from programytest.clients.arguments import MockArgumentParser
 
 

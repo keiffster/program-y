@@ -1,7 +1,7 @@
-import unittest
-import unittest.mock
 import os
 import os.path
+import unittest
+import unittest.mock
 
 from programy.security.authorise.usergroupsauthorisor import BasicUserGroupAuthorisationService
 

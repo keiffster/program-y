@@ -1,12 +1,10 @@
 import unittest
 
-from programytest.storage.asserts.store.assert_duplicates import DuplicateStoreAsserts
-
-from programy.storage.stores.nosql.mongo.store.duplicates import MongoDuplicatesStore
-from programy.storage.stores.nosql.mongo.engine import MongoStorageEngine
-from programy.storage.stores.nosql.mongo.config import MongoStorageConfiguration
-
 import programytest.storage.engines as Engines
+from programy.storage.stores.nosql.mongo.config import MongoStorageConfiguration
+from programy.storage.stores.nosql.mongo.engine import MongoStorageEngine
+from programy.storage.stores.nosql.mongo.store.duplicates import MongoDuplicatesStore
+from programytest.storage.asserts.store.assert_duplicates import DuplicateStoreAsserts
 
 
 class MongoDuplicatesStoreTests(DuplicateStoreAsserts):

@@ -19,5 +19,8 @@ from programy.storage.entities.store import Store
 
 class LearnfStore(Store):
 
+    def __init__(self):
+        Store.__init__(self)
+
     def save_learnf(self, client_context, category):
-        raise NotImplementedError("save_learnf missing from Learnf Store")
+        raise NotImplementedError("save_learnf missing from Learnf Store")  # pragma: no cover

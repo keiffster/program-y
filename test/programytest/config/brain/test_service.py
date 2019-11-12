@@ -1,8 +1,8 @@
 import unittest
 
-from programy.config.file.yaml_file import YamlConfigurationFile
-from programy.config.brain.service import BrainServiceConfiguration
 from programy.clients.events.console.config import ConsoleConfiguration
+from programy.config.brain.service import BrainServiceConfiguration
+from programy.config.file.yaml_file import YamlConfigurationFile
 
 
 class BrainServiceConfigurationTests(unittest.TestCase):
@@ -130,4 +130,37 @@ class BrainServiceConfigurationTests(unittest.TestCase):
         self.assertIsNone(service_config.port)
         self.assertIsNone(service_config.url)
 
+    def test_to_yaml_with_defaults(self):
+        service_config = BrainServiceConfiguration("REST")
 
+        data = {}
+        service_config.to_yaml(data, defaults=True)
+
+        self.assertEquals({'classname': None, 'method': None, 'host': None, 'port': None, 'url': None}, data)
+
+    def test_to_yaml_without_defaults(self):
+        yaml = YamlConfigurationFile()
+        self.assertIsNotNone(yaml)
+        yaml.load_from_text("""
+        brain:
+            services:
+                REST:
+                    classname: programy.services.rest.GenericRESTService
+                    method: GET
+                    host: 0.0.0.0
+        """, ConsoleConfiguration(), ".")
+
+        brain_config = yaml.get_section("brain")
+        services_config = yaml.get_section("services", brain_config)
+
+        service_config = BrainServiceConfiguration("REST")
+        service_config.load_config_section(yaml, services_config, ".")
+
+        data = {}
+        service_config.to_yaml(data, defaults=False)
+
+        self.assertEquals({'classname': 'programy.services.rest.GenericRESTService',
+                           'host': '0.0.0.0',
+                           'method': 'GET',
+                           'port': None,
+                           'url': None}, data)

@@ -1,7 +1,7 @@
-import unittest
-import re
 import os
 import os.path
+import re
+import unittest
 
 from programy.mappings.normal import NormalCollection
 

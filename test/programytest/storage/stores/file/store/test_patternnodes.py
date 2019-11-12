@@ -1,12 +1,12 @@
-import unittest
 import os
 import os.path
+import unittest
 
-from programy.storage.stores.file.store.nodes import FilePatternNodeStore
-from programy.storage.stores.file.engine import FileStorageEngine
-from programy.storage.stores.file.config import FileStorageConfiguration
 from programy.parser.pattern.factory import PatternNodeFactory
+from programy.storage.stores.file.config import FileStorageConfiguration
 from programy.storage.stores.file.config import FileStoreConfiguration
+from programy.storage.stores.file.engine import FileStorageEngine
+from programy.storage.stores.file.store.nodes import FilePatternNodeStore
 
 
 class FilePatternNodeStoreTests(unittest.TestCase):

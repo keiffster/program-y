@@ -1,8 +1,8 @@
-import unittest
 import unittest.mock
 
-from programy.clients.polling.xmpp.xmpp import XmppClient
 from programy.clients.polling.xmpp.config import XmppConfiguration
+from programy.clients.polling.xmpp.xmpp import XmppClient
+
 
 class MockBotClient(object):
 

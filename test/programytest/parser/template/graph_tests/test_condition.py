@@ -1,8 +1,9 @@
 import xml.etree.ElementTree as ET
 
+from programy.parser.exceptions import ParserException
 from programy.parser.template.nodes.base import TemplateNode
-from programy.parser.template.nodes.condition import TemplateConditionNode
 from programy.parser.template.nodes.condition import TemplateConditionListItemNode
+from programy.parser.template.nodes.condition import TemplateConditionNode
 from programy.parser.template.nodes.condition import TemplateConditionVariable
 from programytest.parser.template.graph_tests.graph_test_client import TemplateGraphTestClient
 
@@ -1181,3 +1182,136 @@ class TemplateGraphConditionTests(TemplateGraphTestClient):
         self.assertTrue(node.is_default())
         self.assertEqual(len(node.children), 1)
         self.assertEqual(node.children[0].resolve(self._client_context), "Val5")
+
+    def test_get_condition_name_multi_names(self):
+        template = ET.fromstring("""
+            <template>
+                <condition>
+                    <name>name1</name>
+                    <name>name2</name>
+                </condition>
+            </template>
+            """)
+        with self.assertRaises(ParserException):
+            _ = self._graph.parse_template_expression(template)
+
+    def test_get_condition_name_multi_var(self):
+        template = ET.fromstring("""
+            <template>
+                <condition>
+                    <var>name1</var>
+                    <var>name2</var>
+                </condition>
+            </template>
+            """)
+        with self.assertRaises(ParserException):
+            _ = self._graph.parse_template_expression(template)
+
+    def test_get_condition_name_multi_bot(self):
+        template = ET.fromstring("""
+            <template>
+                <condition>
+                    <bot>name1</bot>
+                    <bot>name2</bot>
+                </condition>
+            </template>
+            """)
+        with self.assertRaises(ParserException):
+            _ = self._graph.parse_template_expression(template)
+
+    def get_condition_value_mulit_values(self):
+        template = ET.fromstring("""
+            <template>
+                <condition>
+                    <name>name1</bame>
+                    <value>value2</value>
+                    <value>value3</value>
+                </condition>
+            </template>
+            """)
+        with self.assertRaises(ParserException):
+            _ = self._graph.parse_template_expression(template)
+
+    def test_type1_with_li_children(self):
+        template = ET.fromstring("""
+            <template>
+                <condition>
+                    <name>name1</name>
+                    <value>value2</value>
+                    <li>something</li>
+                </condition>
+            </template>
+            """)
+        with self.assertRaises(ParserException):
+            _ = self._graph.parse_template_expression(template)
+
+    def test_type1_with_loop_children(self):
+        template = ET.fromstring("""
+            <template>
+                <condition>
+                    <name>name1</name>
+                    <value>value2</value>
+                    <loop />>
+                </condition>
+            </template>
+            """)
+        with self.assertRaises(ParserException):
+            _ = self._graph.parse_template_expression(template)
+
+    def test_type2_with_other_children(self):
+        template = ET.fromstring("""
+            <template>
+                <condition name="property">
+                    <li value="a">X</li>
+                    <li value="b">Y</li>
+                    <li>Z</li>	
+                    <id />			        
+                </condition>
+            </template>
+            """)
+        with self.assertRaises(ParserException):
+            _ = self._graph.parse_template_expression(template)
+
+    def test_type3_with_multi_values(self):
+        template = ET.fromstring("""
+            <template>
+                 <condition>
+                    <li><value>a</value><value>c</value>X</li>
+                    <li><value>b</value>Y</li>
+                  </condition>
+            </template>
+            """)
+        with self.assertRaises(ParserException):
+            _ = self._graph.parse_template_expression(template)
+
+    def test_type3_with_name(self):
+        template = ET.fromstring("""
+            <template>
+                 <condition>
+                    <value>Name1</value>
+                    <li name='1' value="a">X</li>
+                    <li value="b"><name>1</name>Y</li>
+                    <li name="1"><value>b</value>Z</li>
+                    <li><name>1</name><value>b</value>Z</li>
+                    <li>Z</li>	        
+                  </condition>
+            </template>
+            """)
+        with self.assertRaises(ParserException):
+            _ = self._graph.parse_template_expression(template)
+
+    def test_type3_with_other_children(self):
+        template = ET.fromstring("""
+            <template>
+                 <condition>
+                    <li name='1' value="a">X</li>
+                    <li value="b"><name>1</name>Y</li>
+                    <li name="1"><value>b</value>Z</li>
+                    <li><name>1</name><value>b</value>Z</li>
+                    <li>Z</li>		
+                    <id />		        
+                  </condition>
+            </template>
+            """)
+        with self.assertRaises(ParserException):
+            _ = self._graph.parse_template_expression(template)

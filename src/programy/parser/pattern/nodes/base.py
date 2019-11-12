@@ -31,9 +31,9 @@ class MultiValueDict(dict):
 
     def remove(self, key, value):
         if key in self:
-            for v in self[key]:
-                if v == value:
-                    self[key].remove(value)
+            if value in self[key]:
+                self[key].remove(value)
+
             if len(self[key]) == 0:
                 del self[key]
 
@@ -251,7 +251,7 @@ class PatternNode:
     ########################################################################
     #
     def can_add(self, new_node):
-        pass
+        pass    # pragma: no cover
 
     def _priority_node_exist(self, new_node):
         for priority in self._priority_words:
@@ -384,13 +384,13 @@ class PatternNode:
         elif new_node.is_zero_or_more() is True:
             if new_node.wildcard == '^':
                 self._0ormore_arrow = new_node
-            elif new_node.wildcard == '#':
+            else:
                 self._0ormore_hash = new_node
 
         elif new_node.is_one_or_more() is True:
             if new_node.wildcard == '_':
                 self._1ormore_underline = new_node
-            elif new_node.wildcard == '*':
+            else:
                 self._1ormore_star = new_node
 
         elif new_node.is_template() is True:
@@ -435,13 +435,13 @@ class PatternNode:
         elif current_node.is_zero_or_more() is True:
             if current_node.wildcard == '^':
                 self._0ormore_arrow = None
-            elif current_node.wildcard == '#':
+            else:
                 self._0ormore_hash = None
 
         elif current_node.is_one_or_more() is True:
             if current_node.wildcard == '_':
                 self._1ormore_underline = None
-            elif current_node.wildcard == '*':
+            else:
                 self._1ormore_star = None
 
         elif current_node.is_template() is True:
@@ -471,9 +471,9 @@ class PatternNode:
                 self.children.remove(current_node)
 
             else:
+                # Assumption is that node is Word Node, if none of the above
                 self.children.remove(current_node)
-                if current_node.is_word() is True:
-                    self._children_words.remove(current_node.word, current_node)
+                self._children_words.remove(current_node.word, current_node)
 
     def add_child(self, new_node, replace_existing=False):
 
@@ -517,10 +517,10 @@ class PatternNode:
     def dump(self, tabs, output_func=YLogger.debug, eol="", verbose=True):
 
         string = "{0}{1}{2}".format(tabs, self.to_string(verbose), eol)
-        if output_func == outputLog: #pylint: disable=comparison-with-callable
-            output_func(string)
-        else:
+        if output_func == outputLog or YLogger.is_ylogger_method(output_func) is True:
             output_func(self, string)
+        else:
+            output_func(string)
 
         for priority in self._priority_words:
             priority.dump(tabs + "\t", output_func, eol, verbose)
@@ -599,6 +599,7 @@ class PatternNode:
                 if match is not None:
                     YLogger.debug(client_context, "%sMatched %s child, success!", tabs, child_type)
                     return match, word_no
+
                 else:
                     context.pop_match()
 
@@ -630,6 +631,7 @@ class PatternNode:
             if match is not None:
                 YLogger.debug(client_context, "%sMatched topic, success!", tabs)
                 return match
+
             if words.word(word_no) == PatternNode.TOPIC:
                 YLogger.debug(client_context, "%s Looking for a %s, none give, no match found!", tabs,
                               PatternNode.TOPIC)
@@ -640,6 +642,7 @@ class PatternNode:
             if match is not None:
                 YLogger.debug(client_context, "%sMatched that, success!", tabs)
                 return match
+
             if words.word(word_no) == PatternNode.THAT:
                 YLogger.debug(client_context, "%s Looking for a %s, none give, no match found!", tabs, PatternNode.THAT)
                 return None
@@ -668,9 +671,8 @@ class PatternNode:
 
         if self._0ormore_arrow is not None:
             match = self._0ormore_arrow.consume(client_context, context, words, word_no, match_type, depth + 1)
-            if match is not None:
-                YLogger.debug(client_context, "%sMatched 0 or more arrow, success!", tabs)
-                return match
+            YLogger.debug(client_context, "%sMatched 0 or more arrow, success!", tabs)
+            return match
 
         if self._1ormore_star is not None:
             match = self._1ormore_star.consume(client_context, context, words, word_no, match_type, depth + 1)

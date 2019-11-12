@@ -22,6 +22,7 @@ from programy.utils.logging.ylogger import YLogger
 from programy.context import ClientContext
 from programy.extensions.base import Extension
 from programy.security.linking.accountlinker import BasicAccountLinkerService
+from programy.security.linking.accountlinker import BasicAccountLinkerService
 
 
 class AccountLinkingExtension(Extension):
@@ -46,9 +47,10 @@ class AccountLinkingExtension(Extension):
 
                 linked = self.get_account_linker_service(context)
 
-                assert isinstance(linked, BasicAccountLinkerService)
-
                 if linked is not None:
+
+                    assert isinstance(linked, BasicAccountLinkerService)
+
                     generated_key = linked.generate_link(userid, provided_key)
                     if generated_key is not None:
                         if linked.link_user_to_client(userid, account_name) is True:
@@ -72,9 +74,10 @@ class AccountLinkingExtension(Extension):
 
                 linked = self.get_account_linker_service(context)
 
-                assert isinstance(linked, BasicAccountLinkerService)
-
                 if linked is not None:
+
+                    assert isinstance(linked, BasicAccountLinkerService)
+
                     if linked.link_accounts(primary_userid, provided_key, generated_key, secondary_userid,
                                             secondary_account_name) is True:
                         return "SECONDARY ACCOUNT LINKED"

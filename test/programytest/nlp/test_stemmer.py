@@ -1,8 +1,7 @@
 import unittest
 
-from programy.nlp.stemming import Stemmer
-
 import programytest.externals as Externals
+from programy.nlp.stemming import Stemmer
 
 
 class StemmerTests(unittest.TestCase):
@@ -50,13 +49,12 @@ class StemmerTests(unittest.TestCase):
         self.assertEqual("troubl", Stemmer.stem("troubles", stemmer="snowball", language="english"))
         self.assertEqual("troubl", Stemmer.stem("troubling", stemmer="snowball", language="english"))
 
-    @unittest.skipIf(Externals.rslp_stemming is False, Externals.rslp_stemming_disabled)
+    @unittest.skipIf(Externals.rslp_stemming is False or Externals.all_externals is False, Externals.rslp_stemming_disabled)
     def test_stem_rslp(self):
 
-        self.assertEqual("troubl", Stemmer.stem("trouble", stemmer="rslp"))
-        self.assertEqual("troubl", Stemmer.stem("troubled", stemmer="rslp"))
-        self.assertEqual("troubl", Stemmer.stem("troubles", stemmer="rslp"))
-        self.assertEqual("troubl", Stemmer.stem("troubling", stemmer="rslp"))
+        self.assertEqual("avi", Stemmer.stem("avião", stemmer="rslp"))
+        self.assertEqual("avi", Stemmer.stem("aviões", stemmer="rslp"))
+        self.assertEqual("avi", Stemmer.stem("aviação", stemmer="rslp"))
 
     def test_stem_cistem(self):
 

@@ -4,6 +4,7 @@ import unittest
 from programy.storage.stores.sql.dao.node import PatternNode
 from programy.storage.stores.sql.dao.node import TemplateNode
 
+
 class PatternNodeTests(unittest.TestCase):
     
     def test_init(self):

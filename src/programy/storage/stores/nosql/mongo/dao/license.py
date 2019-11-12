@@ -37,11 +37,8 @@ class LicenseKey():
 
     @staticmethod
     def from_document(data):
-        lookup = LicenseKey(None, None)
-        if '_id' in data:
-            lookup.id = data['_id']
-        if 'name' in data:
-            lookup.name = data['name']
-        if 'key' in data:
-            lookup.key = data['key']
-        return lookup
+        license = LicenseKey(None, None)
+        license.id = DAOUtils.get_value_from_data(data, '_id')
+        license.name = DAOUtils.get_value_from_data(data, 'name')
+        license.key = DAOUtils.get_value_from_data(data, 'key')
+        return license

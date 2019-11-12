@@ -40,9 +40,6 @@ class BrainDynamicsConfiguration(BaseSectionConfigurationData):
     def dynamic_vars(self):
         return self._dynamic_vars
 
-    def check_for_license_keys(self, license_keys):
-        BaseSectionConfigurationData.check_for_license_keys(self, license_keys)
-
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         dynamic_config = configuration_file.get_section("dynamic", configuration)
         if dynamic_config is not None:
@@ -76,29 +73,29 @@ class BrainDynamicsConfiguration(BaseSectionConfigurationData):
     def to_yaml(self, data, defaults=True):
         if defaults is True:
             data['sets'] = {}
-            data['sets']['numeric'] = 'programy.dynamic.sets.numeric.IsNumeric'
-            data['sets']['roman'] = 'programy.dynamic.sets.roman.IsRomanNumeral'
-            data['sets']['stopword'] = 'programy.dynamic.sets.stopword.IsStopWord'
-            data['sets']['synsets'] = 'programy.dynamic.sets.synsets.IsSynset'
+            data['sets']['NUMBER'] = 'programy.dynamic.sets.numeric.IsNumeric'
+            data['sets']['ROMAN'] = 'programy.dynamic.sets.roman.IsRomanNumeral'
+            data['sets']['STOPWORD'] = 'programy.dynamic.sets.stopword.IsStopWord'
+            data['sets']['SYNSETS'] = 'programy.dynamic.sets.synsets.IsSynset'
 
             data['maps'] = {}
-            data['maps']['romantodec'] = 'programy.dynamic.maps.roman.MapRomanToDecimal'
-            data['maps']['dectoroman'] = 'programy.dynamic.maps.roman.MapDecimalToRoman'
-            data['maps']['lemmatize'] = 'programy.dynamic.maps.lemmatize.LemmatizeMap'
-            data['maps']['stemmer'] = 'programy.dynamic.maps.stemmer.StemmerMap'
+            data['maps']['ROMANTODDEC'] = 'programy.dynamic.maps.roman.MapRomanToDecimal'
+            data['maps']['DECTOROMAN'] = 'programy.dynamic.maps.roman.MapDecimalToRoman'
+            data['maps']['LEMMATIZE'] = 'programy.dynamic.maps.lemmatize.LemmatizeMap'
+            data['maps']['STEMMER'] = 'programy.dynamic.maps.stemmer.StemmerMap'
 
             data['variables'] = {}
-            data['variables']['gettime'] = 'programy.dynamic.variables.datetime.GetTime'
+            data['variables']['GETTIME'] = 'programy.dynamic.variables.datetime.GetTime'
 
         else:
             data['sets'] = {}
-            for dyn in self._dynamic_sets:
-                self.config_to_yaml(data['sets'], dyn, defaults)
+            for key, value in self._dynamic_sets.items():
+                data['sets'][key] = value
 
             data['maps'] = {}
-            for dyn in self._dynamic_maps:
-                self.config_to_yaml(data['maps'], dyn, defaults)
+            for key, value in self._dynamic_maps.items():
+                data['maps'][key] = value
 
             data['variables'] = {}
-            for dyn in self._dynamic_vars:
-                self.config_to_yaml(data['variables'], dyn, defaults)
+            for key, value in self._dynamic_vars.items():
+                data['variables'][key] = value

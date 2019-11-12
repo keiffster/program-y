@@ -1,10 +1,7 @@
 import unittest.mock
-import os
-import json
 
 from programy.clients.restful.flask.google.client import GoogleBotClient
 from programy.clients.restful.flask.google.config import GoogleConfiguration
-
 from programytest.clients.arguments import MockArgumentParser
 
 

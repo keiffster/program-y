@@ -1,8 +1,8 @@
 import unittest
 
-from programy.config.file.yaml_file import YamlConfigurationFile
-from programy.config.bot.spelling import BotSpellingConfiguration
 from programy.clients.events.console.config import ConsoleConfiguration
+from programy.config.bot.spelling import BotSpellingConfiguration
+from programy.config.file.yaml_file import YamlConfigurationFile
 from programy.utils.license.keys import LicenseKeys
 
 

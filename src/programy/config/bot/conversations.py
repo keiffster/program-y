@@ -51,9 +51,6 @@ class BotConversationsConfiguration(BaseConfigurationData):
     def multi_client(self):
         return self._multi_client
 
-    def check_for_license_keys(self, license_keys):
-        BaseConfigurationData.check_for_license_keys(self, license_keys)
-
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         del bot_root
         Conversations = configuration_file.get_section(self._section_name, configuration)

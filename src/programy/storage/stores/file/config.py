@@ -27,13 +27,13 @@ class FileStorageConfiguration(BaseConfigurationData):
 
     @staticmethod
     def get_temp_dir():
-        if os.name == 'posix':
-            return '/tmp'
-        elif os.name == 'nt':
-            import tempfile
-            return tempfile.gettempdir()
-        else:
-            raise Exception("Unknown operating system [%s]" % os.name)
+        if os.name == 'posix':                                                  # pragma: no cover
+            return '/tmp'                                                       # pragma: no cover
+        elif os.name == 'nt':                                                   # pragma: no cover
+            import tempfile                                                     # pragma: no cover
+            return tempfile.gettempdir()                                        # pragma: no cover
+        else:                                                                   # pragma: no cover
+            raise Exception("Unknown operating system [%s]" % os.name)          # pragma: no cover
 
     def __init__(self, name="file"):
         BaseConfigurationData.__init__(self, name=name)
@@ -240,9 +240,6 @@ class FileStorageConfiguration(BaseConfigurationData):
         storage_config_section = configuration_file.get_option(config_section, name, subs=subs)
         if storage_config_section is not None:
             storage_config.extract_configuration(configuration_file, storage_config_section, bot_root, subs=subs)
-
-    def check_for_license_keys(self, license_keys):
-        BaseConfigurationData.check_for_license_keys(self, license_keys)
 
     def load_config_section(self, configuration_file, storage, bot_root, subs: Substitutions = None):
         if storage is not None:

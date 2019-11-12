@@ -26,4 +26,4 @@ class Trigger(ABC):
 
     @abstractmethod
     def trigger(self, client_context: ClientContext = None, additional=None):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover

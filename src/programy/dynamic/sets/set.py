@@ -29,4 +29,4 @@ class DynamicSet(ABC):
 
     @abstractmethod
     def is_member(self, client_context, value, additional=None):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover

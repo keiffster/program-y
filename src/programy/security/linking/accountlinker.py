@@ -69,7 +69,7 @@ class BasicAccountLinkerService:
         self._storage_engine = storage_engine
 
     def initialise(self, client):
-        pass
+        pass    # pragma: no cover
 
     def link_user_to_client(self, userid, clientid):
 

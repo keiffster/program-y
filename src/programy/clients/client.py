@@ -195,7 +195,7 @@ class BotClient(ResponseLogger):
         and stil use the dynamic loader capabilities
         :return: Client configuration object
         """
-        raise NotImplementedError("You must override this and return a subclassed client configuration")
+        raise NotImplementedError("You must override this and return a subclassed client configuration")  # pragma: no cover
 
     def load_configuration(self, arguments, subs: Substitutions = None):
         if arguments.bot_root is None:
@@ -239,12 +239,19 @@ class BotClient(ResponseLogger):
         else:
             outputLog(self, "No storage defined!")
 
+    def _render_callback(self):
+        return True
+
     def load_renderer(self):
+        callback = self._render_callback()
         try:
             if self.get_client_configuration().renderer is not None:
                 YLogger.debug(None, "Loading Renderer")
-                clazz = ClassLoader.instantiate_class(self.get_client_configuration().renderer.renderer)
-                self._renderer = clazz(self)
+                clazz = ClassLoader.instantiate_class(self.get_client_configuration().renderer)
+                if callback is True:
+                    self._renderer = clazz(self)
+                else:
+                    self._renderer = clazz(None)
                 return
 
         except Exception as e:
@@ -252,8 +259,11 @@ class BotClient(ResponseLogger):
 
         self._renderer = self.get_default_renderer()
 
-    def get_default_renderer(self):
-        return TextRenderer(self)
+    def get_default_renderer(self, callback=True):
+        if callback is True:
+            return TextRenderer(self)
+        else:
+            return TextRenderer(None)
 
     def create_client_context(self, userid):
         client_context = ClientContext(self, userid)
@@ -283,4 +293,4 @@ class BotClient(ResponseLogger):
 
     def run(self, app=None):
         del app
-        raise NotImplementedError("You must override this and implement the logic to run the client")
+        raise NotImplementedError("You must override this and implement the logic to run the client")  # pragma: no cover

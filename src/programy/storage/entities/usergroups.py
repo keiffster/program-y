@@ -20,13 +20,16 @@ from programy.security.authorise.usergroups import Group
 from programy.storage.entities.store import Store
 
 
-class UserGroupsStore:
+class UserGroupsStore(Store):
+
+    def __init__(self):
+        Store.__init__(self)
 
     def upload_from_file(self, filename, fileformat=Store.TEXT_FORMAT, commit=True, verbose=False):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     def load_usergroups(self, usersgroupsauthorisor):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     def load_users_and_groups_from_yaml(self, yaml_data, usergroups):
         self.load_users(yaml_data, usergroups)

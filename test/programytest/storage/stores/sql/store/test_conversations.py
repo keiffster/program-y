@@ -1,20 +1,17 @@
 import unittest
 
-from programytest.storage.asserts.store.assert_conversations import ConverstionStoreAsserts
-
-from programy.storage.stores.sql.store.conversations import SQLConversationStore
-from programy.storage.stores.sql.engine import SQLStorageEngine
+import programytest.storage.engines as Engines
+from programy.dialog.conversation import Conversation
+from programy.dialog.question import Question
+from programy.parser.pattern.match import Match
+from programy.parser.pattern.matchcontext import MatchContext
+from programy.parser.pattern.nodes.word import PatternWordNode
 from programy.storage.stores.sql.config import SQLStorageConfiguration
 from programy.storage.stores.sql.dao.conversation import ConversationProperty as ConversationPropertyDAO
-
-import programytest.storage.engines as Engines
-from programy.parser.pattern.matchcontext import MatchContext
-from programy.parser.pattern.match import Match
-from programy.dialog.question import Question
-from programy.dialog.conversation import Conversation
-from programy.parser.pattern.nodes.word import PatternWordNode
-
+from programy.storage.stores.sql.engine import SQLStorageEngine
+from programy.storage.stores.sql.store.conversations import SQLConversationStore
 from programytest.client import TestClient
+from programytest.storage.asserts.store.assert_conversations import ConverstionStoreAsserts
 
 
 class SQLConversationStoreTests(ConverstionStoreAsserts):

@@ -1,9 +1,9 @@
 import unittest
-import os
 
-from programy.config.file.yaml_file import YamlConfigurationFile
-from programy.config.brain.tokenizer import BrainTokenizerConfiguration
 from programy.clients.events.console.config import ConsoleConfiguration
+from programy.config.brain.tokenizer import BrainTokenizerConfiguration
+from programy.config.file.yaml_file import YamlConfigurationFile
+
 
 class BrainTokenizerConfigurationTests(unittest.TestCase):
 

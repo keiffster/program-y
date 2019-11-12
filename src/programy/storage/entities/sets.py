@@ -23,10 +23,10 @@ class SetsReadOnlyStore(Store):
         Store.__init__(self)
 
     def load_all(self, collector):
-        raise NotImplementedError("load_all missing from Sets Store")
+        raise NotImplementedError("load_all missing from Sets Store")  # pragma: no cover
 
     def load(self, collector, name=None):
-        raise NotImplementedError("load missing from Sets Store")
+        raise NotImplementedError("load missing from Sets Store")  # pragma: no cover
 
     def split_into_fields(self, line):
         return [line]
@@ -50,7 +50,7 @@ class SetsReadWriteStore(SetsReadOnlyStore):
         return False
 
     def add_to_set(self, name, value, replace_existing=False):
-        raise NotImplementedError("add_to_set missing from Sets Store")
+        raise NotImplementedError("add_to_set missing from Sets Store")  # pragma: no cover
 
     def remove_from_set(self, name, value):
-        raise NotImplementedError("remove_from_set missing from Sets Store")
+        raise NotImplementedError("remove_from_set missing from Sets Store")  # pragma: no cover

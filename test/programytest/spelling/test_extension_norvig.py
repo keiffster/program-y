@@ -4,7 +4,6 @@ from programy.bot import Bot
 from programy.config.bot.bot import BotConfiguration
 from programy.spelling.extension import SpellingExtension
 from programy.spelling.norvig import NorvigSpellingChecker
-
 from programytest.client import TestClient
 
 

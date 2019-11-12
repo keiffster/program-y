@@ -1,8 +1,8 @@
 import unittest
 
+from programy.clients.events.console.config import ConsoleConfiguration
 from programy.config.file.yaml_file import YamlConfigurationFile
 from programy.triggers.config import TriggerConfiguration
-from programy.clients.events.console.config import ConsoleConfiguration
 
 
 class TriggersConfigurationTests(unittest.TestCase):
@@ -73,3 +73,19 @@ class TriggersConfigurationTests(unittest.TestCase):
         self.assertEqual(triggers_config.value("url"), "http://localhost:8989/api/v1.0/trigger")
         self.assertEqual(triggers_config.value("method"), "POST")
         self.assertEqual(triggers_config.value("token"), "123BC4F3D")
+
+    def test_to_yaml_no_defaults(self):
+        triggers_config = TriggerConfiguration()
+        triggers_config._manager = "programy.triggers.local.LocalTriggerManager2"
+
+        data = {}
+        triggers_config.to_yaml(data, defaults=False)
+        self.assertEquals({'manager': 'programy.triggers.local.LocalTriggerManager2'}, data)
+
+    def test_to_yaml_with_defaults(self):
+        triggers_config = TriggerConfiguration()
+        triggers_config._manager = TriggerConfiguration.LOCAL_MANAGER
+
+        data = {}
+        triggers_config.to_yaml(data, defaults=True)
+        self.assertEquals({'manager': 'programy.triggers.local.LocalTriggerManager'}, data)

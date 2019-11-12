@@ -29,12 +29,13 @@ class SQLNodesStore(SQLStore, NodesStore):
 
     def __init__(self, storage_engine):
         SQLStore.__init__(self, storage_engine)
+        NodesStore.__init__(self)
 
     def _get_storage_class(self):
-        pass
+        pass    # pragma: no cover
 
     def get_all_nodes(self):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     def load(self, collector, name=None):
         nodes = self.get_all_nodes()
@@ -81,7 +82,7 @@ class SQLNodesStore(SQLStore, NodesStore):
         return False
 
     def _get_entity(self, name, classname):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
 
 class SQLPatternNodesStore(SQLNodesStore, NodesStore):

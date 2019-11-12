@@ -1,9 +1,9 @@
-import unittest
 import os
+import unittest
 
 from programy.config.brain.security import BrainSecurityAuthorisationConfiguration
-
 from programytest.client import TestClient
+
 
 class AuthoriseTestClient(TestClient):
 

@@ -73,9 +73,6 @@ class BotConfiguration(BaseContainerConfigurationData):
         self._joiner = BotSentenceJoinerConfiguration()
         BaseContainerConfigurationData.__init__(self, section_name)
 
-    def check_for_license_keys(self, license_keys):
-        BaseContainerConfigurationData.check_for_license_keys(self, license_keys)
-
     def load_configuration(self, configuration_file, bot_root, subs: Substitutions = None):
         bot = configuration_file.get_section(self.section_name)
         if bot is not None:

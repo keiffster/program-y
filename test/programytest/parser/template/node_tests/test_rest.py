@@ -3,7 +3,6 @@ import xml.etree.ElementTree as ET
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.rest import TemplateRestNode
 from programy.parser.template.nodes.word import TemplateWordNode
-
 from programytest.parser.base import ParserTestsBaseClass
 
 
@@ -13,6 +12,16 @@ class MockTemplateRestNode(TemplateRestNode):
 
     def resolve_to_string(self, context):
         raise Exception("This is an error")
+
+
+class MockJSONTemplateRestNode(TemplateRestNode):
+    def __init__(self, json):
+        TemplateRestNode.__init__(self)
+        self._json = json
+
+    def resolve_children_to_string(self, context):
+        return self._json
+
 
 class TemplateRestNodeTests(ParserTestsBaseClass):
 
@@ -95,3 +104,28 @@ class TemplateRestNodeTests(ParserTestsBaseClass):
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEqual("", result)
+
+    def test_valid_json_not_list(self):
+        rest = MockJSONTemplateRestNode('{"test": "value"}')
+
+        self.assertEquals('"value"}', rest.resolve(self._client_context))
+
+    def test_valid_json_list(self):
+        rest = MockJSONTemplateRestNode('[{"test1": "value1"}, {"test2": "value2"}, {"test3": "value3"}]')
+
+        self.assertEquals('[{"test2": "value2"}, {"test3": "value3"}]', rest.resolve(self._client_context))
+
+    def test_invalid_json_no_value(self):
+        rest = MockJSONTemplateRestNode('test')
+
+        self.assertEquals('NIL', rest.resolve(self._client_context))
+
+    def test_invalid_json(self):
+        rest = MockJSONTemplateRestNode('test value')
+
+        self.assertEquals('value', rest.resolve(self._client_context))
+
+    def test_invalid_json_multi(self):
+        rest = MockJSONTemplateRestNode('test value value2')
+
+        self.assertEquals('value value2', rest.resolve(self._client_context))

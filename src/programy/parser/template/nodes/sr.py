@@ -27,11 +27,14 @@ class TemplateSrNode(TemplateNode):
     def resolve_to_string(self, client_context):
         sentence = client_context.bot.get_conversation(client_context).current_question().current_sentence()
         star = sentence.matched_context.star(client_context, 1)
+
         if star is not None:
             resolved = client_context.bot.ask_question(client_context, star, srai=True)
+
         else:
             YLogger.error(client_context, "Sr node has no stars available")
             resolved = ""
+
         YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 

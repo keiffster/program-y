@@ -1,8 +1,7 @@
 import unittest
 
-from programy.dynamic.maps.predecessor import PredecessorMap
 from programy.context import ClientContext
-
+from programy.dynamic.maps.predecessor import PredecessorMap
 from programytest.client import TestClient
 
 

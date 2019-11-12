@@ -30,9 +30,6 @@ class BrainOOBConfiguration(BaseSectionConfigurationData):
     def classname(self):
         return self._classname
 
-    def check_for_license_keys(self, license_keys):
-        BaseSectionConfigurationData.check_for_license_keys(self, license_keys)
-
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         oob = configuration_file.get_section(self.section_name, configuration)
         if oob is not None:
@@ -41,4 +38,7 @@ class BrainOOBConfiguration(BaseSectionConfigurationData):
             YLogger.warning(self, "'oob' section missing from brain config, using to defaults")
 
     def to_yaml(self, data, defaults=True):
-        data['classname'] = self._classname
+        if defaults is True:
+            data['classname'] = 'programy.oob.defaults.default.DefaultOutOfBandProcessor'
+        else:
+            data['classname'] = self._classname

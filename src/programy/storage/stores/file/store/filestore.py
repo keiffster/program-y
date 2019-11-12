@@ -70,21 +70,19 @@ class FileStore(Store):
     def __init__(self, storage_engine):
         self._storage_engine = storage_engine
 
-    def store_name(self):
-        return FileStore.FILE
-
     def empty(self):
-        pass
+        pass    # pragma: no cover
 
     def empty_named(self, name):
-        pass
+        pass    # pragma: no cover
 
     @property
     def storage_engine(self):
         return self._storage_engine
 
     def _get_storage_path(self):
-        raise NotImplementedError("Implement _get_storage_path to return storage specific folder from config")
+        raise NotImplementedError("Implement _get_storage_path to return storage specific "
+                                  "folder from config")  # pragma: no cover
 
     def drop(self):
         try:
@@ -112,7 +110,7 @@ class FileStore(Store):
         return os.path.exists(path)
 
     def commit(self):
-        pass
+        pass    # pragma: no cover
 
     def load_all(self, collector):
         col_storage = self.get_storage()
@@ -143,10 +141,10 @@ class FileStore(Store):
         self._load_file_contents(collector, col_storage.file)
 
     def _load_file_contents(self, collection, filename):
-        pass
+        pass    # pragma: no cover
 
     def get_storage(self):
-        raise NotImplementedError("get_storage must be implemented in child class")
+        raise NotImplementedError("get_storage must be implemented in child class")  # pragma: no cover
 
     def upload_from_file(self, filename, fileformat=Store.TEXT_FORMAT, commit=True, verbose=False):
 

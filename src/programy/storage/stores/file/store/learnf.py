@@ -16,7 +16,8 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 import os
 import os.path
-import xml.etree.ElementTree as ET
+from programy.utils.parsing.linenumxml import LineNumberingParser
+import xml.etree.ElementTree as ET  # pylint: disable=wrong-import-order
 from programy.storage.stores.file.store.filestore import FileStore
 from programy.storage.entities.learnf import LearnfStore
 from programy.utils.logging.ylogger import YLogger
@@ -26,6 +27,7 @@ class FileLearnfStore(FileStore, LearnfStore):
 
     def __init__(self, storage_engine):
         FileStore.__init__(self, storage_engine)
+        LearnfStore.__init__(self)
 
     @staticmethod
     def create_learnf_path(client_context, learnf_dir):

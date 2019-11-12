@@ -1,26 +1,26 @@
+import logging
 import unittest
 
+from programy.bot import Bot
+from programy.brain import Brain
+from programy.config.bot.bot import BotConfiguration
+from programy.config.brain.brain import BrainConfiguration
+from programy.context import ClientContext
+from programy.utils.console.console import outputLog
 from programy.utils.logging.ylogger import YLogger
-from programy.utils.logging.ylogger import YLoggerSnapshot
-
 from programytest.client import TestClient
 
-from programy.config.bot.bot import BotConfiguration
-from programy.bot import Bot
-from programy.config.brain.brain import BrainConfiguration
-from programy.brain import Brain
-from programy.context import ClientContext
 
 class YLoggerTests(unittest.TestCase):
 
     def test_ylogger(self):
         client_context = ClientContext(TestClient(), "testid")
-        
-        snapshot = YLoggerSnapshot()
-        self.assertIsNotNone(snapshot)
-        self.assertEqual(str(snapshot), "Critical(0) Fatal(0) Error(0) Exception(0) Warning(0) Info(0), Debug(0)")
 
         YLogger.reset_snapshot()
+
+        snapshot = YLogger.snapshot()
+        self.assertIsNotNone(snapshot)
+        self.assertEqual(str(snapshot), "Critical(0) Fatal(0) Error(0) Exception(0) Warning(0) Info(0), Debug(0)")
 
         YLogger.critical(client_context, "Test Message")
         snapshot = YLogger.snapshot()
@@ -42,20 +42,76 @@ class YLoggerTests(unittest.TestCase):
         self.assertIsNotNone(snapshot)
         self.assertEqual(str(snapshot), "Critical(1) Fatal(1) Error(1) Exception(1) Warning(0) Info(0), Debug(0)")
 
+        YLogger.exception_nostack(client_context, "Test Message", Exception("Test error"))
+        snapshot = YLogger.snapshot()
+        self.assertIsNotNone(snapshot)
+        self.assertEqual(str(snapshot), "Critical(1) Fatal(1) Error(1) Exception(2) Warning(0) Info(0), Debug(0)")
+
         YLogger.warning(client_context, "Test Message")
         snapshot = YLogger.snapshot()
         self.assertIsNotNone(snapshot)
-        self.assertEqual(str(snapshot), "Critical(1) Fatal(1) Error(1) Exception(1) Warning(1) Info(0), Debug(0)")
+        self.assertEqual(str(snapshot), "Critical(1) Fatal(1) Error(1) Exception(2) Warning(1) Info(0), Debug(0)")
 
         YLogger.info(client_context, "Test Message")
         snapshot = YLogger.snapshot()
         self.assertIsNotNone(snapshot)
-        self.assertEqual(str(snapshot), "Critical(1) Fatal(1) Error(1) Exception(1) Warning(1) Info(1), Debug(0)")
+        self.assertEqual(str(snapshot), "Critical(1) Fatal(1) Error(1) Exception(2) Warning(1) Info(1), Debug(0)")
 
         YLogger.debug(client_context, "Test Message")
         snapshot = YLogger.snapshot()
         self.assertIsNotNone(snapshot)
-        self.assertEqual(str(snapshot), "Critical(1) Fatal(1) Error(1) Exception(1) Warning(1) Info(1), Debug(1)")
+        self.assertEqual(str(snapshot), "Critical(1) Fatal(1) Error(1) Exception(2) Warning(1) Info(1), Debug(1)")
+
+    def test_ylogger_not_enabled(self):
+        client_context = ClientContext(TestClient(), "testid")
+
+        logging.getLogger().setLevel(logging.NOTSET)
+
+        YLogger.reset_snapshot()
+
+        snapshot = YLogger.snapshot()
+        self.assertIsNotNone(snapshot)
+        self.assertEqual(str(snapshot), "Critical(0) Fatal(0) Error(0) Exception(0) Warning(0) Info(0), Debug(0)")
+
+        YLogger.critical(client_context, "Test Message")
+        snapshot = YLogger.snapshot()
+        self.assertIsNotNone(snapshot)
+        self.assertEqual(str(snapshot), "Critical(1) Fatal(0) Error(0) Exception(0) Warning(0) Info(0), Debug(0)")
+
+        YLogger.fatal(client_context, "Test Message")
+        snapshot = YLogger.snapshot()
+        self.assertIsNotNone(snapshot)
+        self.assertEqual(str(snapshot), "Critical(1) Fatal(1) Error(0) Exception(0) Warning(0) Info(0), Debug(0)")
+
+        YLogger.error(client_context, "Test Message")
+        snapshot = YLogger.snapshot()
+        self.assertIsNotNone(snapshot)
+        self.assertEqual(str(snapshot), "Critical(1) Fatal(1) Error(1) Exception(0) Warning(0) Info(0), Debug(0)")
+
+        YLogger.exception(client_context, "Test Message", Exception("Test error"))
+        snapshot = YLogger.snapshot()
+        self.assertIsNotNone(snapshot)
+        self.assertEqual(str(snapshot), "Critical(1) Fatal(1) Error(1) Exception(1) Warning(0) Info(0), Debug(0)")
+
+        YLogger.exception_nostack(client_context, "Test Message", Exception("Test error"))
+        snapshot = YLogger.snapshot()
+        self.assertIsNotNone(snapshot)
+        self.assertEqual(str(snapshot), "Critical(1) Fatal(1) Error(1) Exception(2) Warning(0) Info(0), Debug(0)")
+
+        YLogger.warning(client_context, "Test Message")
+        snapshot = YLogger.snapshot()
+        self.assertIsNotNone(snapshot)
+        self.assertEqual(str(snapshot), "Critical(1) Fatal(1) Error(1) Exception(2) Warning(1) Info(0), Debug(0)")
+
+        YLogger.info(client_context, "Test Message")
+        snapshot = YLogger.snapshot()
+        self.assertIsNotNone(snapshot)
+        self.assertEqual(str(snapshot), "Critical(1) Fatal(1) Error(1) Exception(2) Warning(1) Info(1), Debug(0)")
+
+        YLogger.debug(client_context, "Test Message")
+        snapshot = YLogger.snapshot()
+        self.assertIsNotNone(snapshot)
+        self.assertEqual(str(snapshot), "Critical(1) Fatal(1) Error(1) Exception(2) Warning(1) Info(1), Debug(1)")
 
     def test_format_message_with_client(self):
         client = TestClient()
@@ -131,3 +187,8 @@ class YLoggerTests(unittest.TestCase):
         msg = YLogger.format_message(client_context, "Test Message")
         self.assertIsNotNone(msg)
         self.assertEqual("[testclient] [testbot] [testbrain] [testuser] - Test Message", msg)
+
+    def test_is_ylogger_method(self):
+        self.assertFalse(YLogger.is_ylogger_method(print))
+        self.assertFalse(YLogger.is_ylogger_method(outputLog))
+        self.assertTrue(YLogger.is_ylogger_method(YLogger.debug))

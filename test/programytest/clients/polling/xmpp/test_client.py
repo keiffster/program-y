@@ -1,11 +1,10 @@
 import unittest
 
-from programy.clients.polling.xmpp.xmpp import XmppClient
+from programy.bot import Bot
 from programy.clients.polling.xmpp.client import XmppBotClient
 from programy.clients.polling.xmpp.config import XmppConfiguration
-from programy.bot import Bot
+from programy.clients.polling.xmpp.xmpp import XmppClient
 from programy.config.bot.bot import BotConfiguration
-
 from programytest.clients.arguments import MockArgumentParser
 
 

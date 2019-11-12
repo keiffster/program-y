@@ -84,9 +84,6 @@ class FileStoreConfiguration(BaseSectionConfigurationData):
     def delete_on_start(self):
         return self._delete_on_start
 
-    def check_for_license_keys(self, license_keys):
-        BaseSectionConfigurationData.check_for_license_keys(self, license_keys)
-
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         dirs_config = configuration_file.get_option(configuration, self.section_name)
         if dirs_config is not None:

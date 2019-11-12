@@ -1,7 +1,6 @@
 import unittest
+
 from programy.processors.pre.wordtagger import WordTaggerPreProcessor
-
-
 from programytest.client import TestClient
 
 

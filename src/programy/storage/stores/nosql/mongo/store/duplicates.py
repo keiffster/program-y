@@ -25,6 +25,7 @@ class MongoDuplicatesStore(MongoStore, DuplicatesStore):
 
     def __init__(self, storage_engine):
         MongoStore.__init__(self, storage_engine)
+        DuplicatesStore.__init__(self)
 
     def collection_name(self):
         return MongoDuplicatesStore.DUPLICATES

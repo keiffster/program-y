@@ -20,7 +20,7 @@ from programy.utils.console.console import outputLog
 
 
 class BaseCollection:
-    pass
+    pass    # pragma: no cover
 
 
 class SingleStringCollection(BaseCollection):
@@ -147,15 +147,17 @@ class DoubleStringPatternSplitCollection(BaseCollection):
                         stripped = key.strip()
                         if stripped in already:
                             found = True
-                    if found is not True:
 
+                    if found is not True:
                         to_replace = pair[1]
                         to_replace = self.match_case(replacable, to_replace)
 
                         if pair[1].endswith("."):
                             replacable = pattern.sub(to_replace, replacable)
+
                         else:
                             replacable = pattern.sub(to_replace+" ", replacable)
+
                         alreadys.append(pair[1])
 
             except Exception as excep:
@@ -200,7 +202,7 @@ class DoubleStringPatternSplitCollection(BaseCollection):
                 lhs = match.group(1)
                 rhs = match.group(2)
                 return [lhs, rhs]
-            outputLog(None, "Pattern is bad [%s]" % line)
+            YLogger.error(None, "Pattern is bad [%s]", line)
         return None
 
     @staticmethod

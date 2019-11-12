@@ -1,10 +1,10 @@
 import xml.etree.ElementTree as ET
 
 from programy.parser.template.nodes.base import TemplateNode
-from programy.parser.template.nodes.word import TemplateWordNode
 from programy.parser.template.nodes.search import TemplateSearchNode
-
+from programy.parser.template.nodes.word import TemplateWordNode
 from programytest.parser.base import ParserTestsBaseClass
+
 
 class MockTemplateSearchNode(TemplateSearchNode):
     def __init__(self):
@@ -13,11 +13,13 @@ class MockTemplateSearchNode(TemplateSearchNode):
     def resolve_to_string(self, context):
         raise Exception("This is an error")
 
+
 class TemplateSearchNodeTests(ParserTestsBaseClass):
 
     def test_to_string(self):
         root = TemplateSearchNode()
         self.assertIsNotNone(root)
+        self.assertTrue(root.add_default_star())
         self.assertEqual("[SEARCH]", root.to_string())
 
     def test_to_xml(self):

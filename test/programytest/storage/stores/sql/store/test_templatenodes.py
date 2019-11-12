@@ -1,12 +1,10 @@
 import unittest
 
-from programytest.storage.asserts.store.assert_templatenodes import TemplateNodesStoreAsserts
-
-from programy.storage.stores.sql.store.nodes import SQLTemplateNodesStore
-from programy.storage.stores.sql.engine import SQLStorageEngine
-from programy.storage.stores.sql.config import SQLStorageConfiguration
-
 import programytest.storage.engines as Engines
+from programy.storage.stores.sql.config import SQLStorageConfiguration
+from programy.storage.stores.sql.engine import SQLStorageEngine
+from programy.storage.stores.sql.store.nodes import SQLTemplateNodesStore
+from programytest.storage.asserts.store.assert_templatenodes import TemplateNodesStoreAsserts
 
 
 class SQLTemplatesNodeStoreTests(TemplateNodesStoreAsserts):

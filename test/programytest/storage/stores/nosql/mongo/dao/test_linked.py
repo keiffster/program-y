@@ -25,16 +25,25 @@ class LinkedAccountTests(unittest.TestCase):
         self.assertEqual('user2', linked.linked_userid)
         self.assertEqual({'_id': '666', 'linked_userid': 'user2', 'primary_userid': 'user1'}, linked.to_document())
 
-    def test_from_document(self):
+    def test_from_document_no_id(self):
         linked1 = LinkedAccount.from_document({'linked_userid': 'user2', 'primary_userid': 'user1'})
         self.assertIsNotNone(linked1)
         self.assertIsNone(linked1.id)
         self.assertEqual('user1', linked1.primary_userid)
         self.assertEqual('user2', linked1.linked_userid)
 
+    def test_from_document_with_id(self):
         linked2 = LinkedAccount.from_document({'_id': '666', 'linked_userid': 'user2', 'primary_userid': 'user1'})
         self.assertIsNotNone(linked2)
         self.assertIsNotNone(linked2.id)
         self.assertEqual('666', linked2.id)
         self.assertEqual('user1', linked2.primary_userid)
         self.assertEqual('user2', linked2.linked_userid)
+
+    def test_repr_no_id(self):
+        linked1 = LinkedAccount.from_document({'linked_userid': 'user2', 'primary_userid': 'user1'})
+        self.assertEquals("<Linked(id='n/a', primary='user1', linked='user2')>", str(linked1))
+
+    def test_repr_with_id(self):
+        linked2 = LinkedAccount.from_document({'_id': '666', 'linked_userid': 'user2', 'primary_userid': 'user1'})
+        self.assertEquals("<Linked(id='666', primary='user1', linked='user2')>", str(linked2))

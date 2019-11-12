@@ -91,8 +91,14 @@ class TemplateAuthoriseNode(TemplateNode):
         if self._role is None:
             raise ParserException("AUTHORISE role attribute missing !")
 
+        if self._role == "":
+            raise ParserException("AUTHORISE role attribute empty !")
+
         if 'denied_srai' in expression.attrib:
             self._denied_srai = expression.attrib['denied_srai']
+
+            if self._denied_srai == "":
+                raise ParserException("AUTHORISE denied_srai attribute empty !")
 
         head_text = self.get_text_from_element(expression)
         self.parse_text(graph, head_text)

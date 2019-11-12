@@ -52,9 +52,15 @@ class EmailConfiguration(BaseConfigurationData):
         return self._from_addr
 
     def check_for_license_keys(self, license_keys):
-        self._username = self._extract_license_key(self._username, license_keys)
-        self._password = self._extract_license_key(self._password, license_keys)
-        self.check_for_license_keys(license_keys)
+        username = self._extract_license_key(self._username, license_keys)
+        if username is not None:
+            self._username = username
+
+        password = self._extract_license_key(self._password, license_keys)
+        if password is not None:
+            self._password = password
+
+        super(EmailConfiguration, self).check_for_license_keys(license_keys)
 
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         del bot_root

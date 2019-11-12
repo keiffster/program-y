@@ -1,12 +1,11 @@
 import unittest.mock
 
-from linebot.models import TextSendMessage
 from linebot import LineBotApi, WebhookParser
+from linebot.models import TextSendMessage
 from linebot.webhook import SignatureValidator
 
 from programy.clients.restful.flask.line.client import LineBotClient
 from programy.clients.restful.flask.line.config import LineConfiguration
-
 from programytest.clients.arguments import MockArgumentParser
 
 

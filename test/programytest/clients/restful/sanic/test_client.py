@@ -1,6 +1,6 @@
+import os
 import unittest
 import unittest.mock
-import os
 
 from programytest.clients.arguments import MockArgumentParser
 

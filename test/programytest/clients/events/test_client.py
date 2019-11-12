@@ -1,8 +1,7 @@
 import unittest.mock
 
-from programy.clients.events.client import EventBotClient
 from programy.clients.config import ClientConfigurationData
-
+from programy.clients.events.client import EventBotClient
 from programytest.clients.arguments import MockArgumentParser
 
 

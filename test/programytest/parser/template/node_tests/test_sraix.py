@@ -1,12 +1,11 @@
 import xml.etree.ElementTree as ET
 
+from programy.config.brain.brain import BrainConfiguration
+from programy.config.brain.service import BrainServiceConfiguration
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.sraix import TemplateSRAIXNode
 from programy.parser.template.nodes.word import TemplateWordNode
 from programy.services.service import Service, ServiceFactory
-from programy.config.brain.brain import BrainConfiguration
-from programy.config.brain.service import BrainServiceConfiguration
-
 from programytest.parser.base import ParserTestsBaseClass
 
 

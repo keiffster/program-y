@@ -1,9 +1,8 @@
 import unittest
 
-from programy.parser.template.nodes.learn import LearnCategory
 from programy.parser.template.nodes.base import TemplateNode
+from programy.parser.template.nodes.learn import LearnCategory
 from programy.parser.template.nodes.word import TemplateWordNode
-
 from programytest.client import TestClient
 
 

@@ -1,6 +1,7 @@
 import unittest
-from programy.config.bot.conversations import BotConversationsConfiguration
+
 from programy.clients.events.console.config import ConsoleConfiguration
+from programy.config.bot.conversations import BotConversationsConfiguration
 from programy.config.file.yaml_file import YamlConfigurationFile
 from programy.utils.license.keys import LicenseKeys
 

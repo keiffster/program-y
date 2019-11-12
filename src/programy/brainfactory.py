@@ -28,7 +28,7 @@ class BrainSelector(ABC):
 
     @abstractmethod
     def select_brain(self):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
 
 class DefaultBrainSelector(BrainSelector):

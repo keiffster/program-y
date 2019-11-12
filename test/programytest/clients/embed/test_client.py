@@ -1,8 +1,7 @@
 import unittest
 
-from programy.clients.embed.client import MyEmbeddedBot
 from programy.clients.config import ClientConfigurationData
-
+from programy.clients.embed.client import MyEmbeddedBot
 from programytest.clients.arguments import MockArgumentParser
 
 

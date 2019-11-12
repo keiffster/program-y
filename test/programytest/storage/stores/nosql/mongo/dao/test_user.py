@@ -25,16 +25,25 @@ class UserTests(unittest.TestCase):
         self.assertEqual('client1', user.client)
         self.assertEqual({'_id': '666', 'client': 'client1', 'userid': 'user1'} , user.to_document())
 
-    def test_from_document(self):
+    def test_from_document_no_id(self):
         user1 = User.from_document({'client': 'client1', 'userid': 'user1'})
         self.assertIsNotNone(user1)
         self.assertIsNone(user1.id)
         self.assertEqual('user1', user1.userid)
         self.assertEqual('client1', user1.client)
 
+    def test_from_document_with_id(self):
         user2 = User.from_document({'_id': '666', 'client': 'client1', 'userid': 'user1'})
         self.assertIsNotNone(user2)
         self.assertIsNotNone(user2.id)
         self.assertEqual('666', user2.id)
         self.assertEqual('user1', user2.userid)
         self.assertEqual('client1', user2.client)
+
+    def test_repr_no_id(self):
+        user1 = User.from_document({'client': 'client1', 'userid': 'user1'})
+        self.assertEquals("<User(id='n/a', userid='user1', clientid='client1')>", str(user1))
+
+    def test_repr_with_id(self):
+        user2 = User.from_document({'_id': '666', 'client': 'client1', 'userid': 'user1'})
+        self.assertEquals("<User(id='666', userid='user1', clientid='client1')>", str(user2))

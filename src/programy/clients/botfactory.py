@@ -28,7 +28,7 @@ class BotSelector(ABC):
 
     @abstractmethod
     def select_bot(self):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
 
 class DefaultBotSelector(BotSelector):

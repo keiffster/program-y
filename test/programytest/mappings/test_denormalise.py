@@ -1,12 +1,12 @@
-import unittest
-import re
 import os
+import re
+import unittest
 
 from programy.mappings.denormal import DenormalCollection
 from programy.storage.factory import StorageFactory
 from programy.storage.stores.file.config import FileStorageConfiguration
-from programy.storage.stores.file.engine import FileStorageEngine
 from programy.storage.stores.file.config import FileStoreConfiguration
+from programy.storage.stores.file.engine import FileStorageEngine
 
 
 class DenormaliseTests(unittest.TestCase):
@@ -55,6 +55,24 @@ class DenormaliseTests(unittest.TestCase):
         storage_engine = FileStorageEngine(file_store_config)
 
         storage_factory._storage_engines[StorageFactory.DENORMAL] = storage_engine
+        storage_factory._store_to_engine_map[StorageFactory.DENORMAL] = storage_engine
+
+        collection = DenormalCollection()
+        self.assertIsNotNone(collection)
+
+        collection.load(storage_factory)
+
+        collection.reload(storage_factory)
+
+    def test_reload_no_engine(self):
+        storage_factory = StorageFactory()
+
+        file_store_config = FileStorageConfiguration()
+        file_store_config._denormal_storage = FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "test_files" + os.sep + "denormal.txt", fileformat="text", extension="txt", encoding="utf-8", delete_on_start=False)
+
+        storage_engine = FileStorageEngine(file_store_config)
+
+        #storage_factory._storage_engines[StorageFactory.DENORMAL] = storage_engine
         storage_factory._store_to_engine_map[StorageFactory.DENORMAL] = storage_engine
 
         collection = DenormalCollection()

@@ -41,12 +41,10 @@ class PreProcessor(Processor):
 
     @staticmethod
     def from_document(data):
-        lookup = PreProcessor(None)
-        if '_id' in data:
-            lookup.id = data['_id']
-        if 'classname' in data:
-            lookup.classname = data['classname']
-        return lookup
+        processor = PreProcessor(None)
+        processor.id = DAOUtils.get_value_from_data(data, '_id')
+        processor.classname = DAOUtils.get_value_from_data(data, 'classname')
+        return processor
 
 
 class PostProcessor(Processor):
@@ -60,12 +58,10 @@ class PostProcessor(Processor):
 
     @staticmethod
     def from_document(data):
-        lookup = PostProcessor(None)
-        if '_id' in data:
-            lookup.id = data['_id']
-        if 'classname' in data:
-            lookup.classname = data['classname']
-        return lookup
+        processor = PostProcessor(None)
+        processor.id = DAOUtils.get_value_from_data(data, '_id')
+        processor.classname = DAOUtils.get_value_from_data(data, 'classname')
+        return processor
 
 
 class PostQuestionProcessor(Processor):
@@ -79,9 +75,7 @@ class PostQuestionProcessor(Processor):
 
     @staticmethod
     def from_document(data):
-        lookup = PostQuestionProcessor(None)
-        if '_id' in data:
-            lookup.id = data['_id']
-        if 'classname' in data:
-            lookup.classname = data['classname']
-        return lookup
+        processor = PostQuestionProcessor(None)
+        processor.id = DAOUtils.get_value_from_data(data, '_id')
+        processor.classname = DAOUtils.get_value_from_data(data, 'classname')
+        return processor
