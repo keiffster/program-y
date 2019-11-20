@@ -44,23 +44,27 @@ class Store:
     def rollback(self):
         return  # pragma: no cover
 
+    def get_split_char(self):
+        return ","
+
     def split_into_fields(self, line):
         return line.split(",")
 
     def process_line(self, name, fields, verbose=False):
-        del name
-        del fields
-        del verbose
-        return
+        del name            # pragma: no cover
+        del fields          # pragma: no cover
+        del verbose         # pragma: no cover
+        return False
 
     def upload_from_text(self, name, text, commit=True):
         try:
             lines = text.split('\n')
             for line in lines:
                 line = line.strip()
-                if line:
+                if line and len(line)>0:
                     fields = self.split_into_fields(line)
-                    self.process_line(name, fields)
+                    if fields:
+                        self.process_line(name, fields)
 
             if commit is True:
                 self.commit()

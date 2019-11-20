@@ -7,13 +7,30 @@ from programy.storage.entities.rdf import RDFReadWriteStore
 class RDFStoreTests(unittest.TestCase):
 
     def test_get_split_char(self):
-        pass
+        store = RDFReadOnlyStore()
+        self.assertEqual(":", store.get_split_char())
 
     def test_split_into_fields(self):
-        pass
+        store = RDFReadOnlyStore()
+        fields = store.split_into_fields("FIELD1")
+        self.assertEquals(["FIELD1"], fields)
+        fields = store.split_into_fields("FIELD1!FIELD2")
+        self.assertEquals(["FIELD1!FIELD2"], fields)
+        fields = store.split_into_fields("FIELD1:FIELD2")
+        self.assertEquals(["FIELD1", "FIELD2"], fields)
+        fields = store.split_into_fields("FIELD1:FIELD2:FIELD3:FIELD4")
+        self.assertEquals(["FIELD1", "FIELD2", "FIELD3:FIELD4"], fields)
 
     def test_split_line_by_char(self):
-        pass
+        store = RDFReadOnlyStore()
+        fields = store.split_line_by_char("FIELD1")
+        self.assertEquals(["FIELD1"], fields)
+        fields = store.split_line_by_char("FIELD1!FIELD2")
+        self.assertEquals(["FIELD1!FIELD2"], fields)
+        fields = store.split_line_by_char("FIELD1:FIELD2")
+        self.assertEquals(["FIELD1", "FIELD2"], fields)
+        fields = store.split_line_by_char("FIELD1:FIELD2:FIELD3:FIELD4")
+        self.assertEquals(["FIELD1", "FIELD2", "FIELD3", "FIELD4"], fields)
 
 
 class RDFReadOnlyStoreTests(unittest.TestCase):
@@ -31,10 +48,23 @@ class RDFReadOnlyStoreTests(unittest.TestCase):
             store.load(collector)
 
 
+class MockRDFReadWriteStore(RDFReadWriteStore):
+
+    def __init__(self):
+        RDFReadWriteStore.__init__(self)
+        self.added = False
+
+    def add_rdf(self, name, subject, predicate, objct, replace_existing=True):
+        self.added = True
+
+
 class RDFReadWriteStoreTests(unittest.TestCase):
 
     def test_process_line(self):
-        pass
+        store = MockRDFReadWriteStore()
+        self.assertFalse(store.added)
+        store.add_rdf("TESTRDF", "subject1", "predicate1", "object1", replace_existing=True)
+        self.assertTrue(store.added)
 
     def test_load(self):
         store = RDFReadWriteStore()

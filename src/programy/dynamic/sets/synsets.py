@@ -25,6 +25,7 @@ class IsSynset(DynamicSet):
 
     def __init__(self, config):
         DynamicSet.__init__(self, config)
+        self._synset = Synsets()
 
     def is_member(self, client_context, value, additional=None):
         if value is not None:
@@ -32,7 +33,7 @@ class IsSynset(DynamicSet):
                 if IsSynset.SIMILAR in additional:
                     similar = additional[IsSynset.SIMILAR]
 
-                    similars = Synsets.get_similar_words(similar)
+                    similars = self._synset.get_similar_words(similar)
                     for word in similars:
                         if word.upper() == value.upper():
                             return True

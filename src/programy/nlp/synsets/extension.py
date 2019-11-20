@@ -21,6 +21,17 @@ from programy.utils.logging.ylogger import YLogger
 
 class SynsetsExtension(Extension):
 
+    def __init__(self):
+        self._synsets = Synsets()
+
+    def _get_similarities(self, word1, word2, weight):
+        results = self._synsets.get_similarity(word1, word2)
+        for result in results:
+            if result[2] >= weight:
+                return True
+
+        return False
+
     # execute() is the interface that is called from the <extension> tag in the AIML
     def execute(self, client_context, data):
         del client_context
@@ -39,31 +50,31 @@ class SynsetsExtension(Extension):
                 return "FALSE"
 
             try:
-                results = Synsets.get_similarity(word1, word2)
-                for result in results:
-                    if result[2] >= weight:
-                        return "TRUE"
+                if self._get_similarities(word1, word2, weight) is True:
+                    return "TRUE"
+
             except Exception as e:
                 YLogger.exception_nostack(self, "Failed to get similarity", e)
 
         elif words[0] == 'SIMILARS':
 
-            word_type = words[1]
-            word = words[2]
+            if len(words) == 3:
+                word_type = words[1]
+                word = words[2]
 
-            if word_type == 'WORDS':
-                results = Synsets.get_similar_words(word)
-            elif word_type == 'VERBS':
-                results = Synsets.get_similar_verbs(word)
-            elif word_type == 'NOUNS':
-                results = Synsets.get_similar_nouns(word)
-            elif word_type == 'ADJECTIVES':
-                results = Synsets.get_similar_adjectives(word)
-            elif word_type == 'ADVERBS':
-                results = Synsets.get_similar_adverbs(word)
-            else:
-                return "FALSE"
+                if word_type == 'WORDS':
+                    results = self._synsets.get_similar_words(word)
+                elif word_type == 'VERBS':
+                    results = self._synsets.get_similar_verbs(word)
+                elif word_type == 'NOUNS':
+                    results = self._synsets.get_similar_nouns(word)
+                elif word_type == 'ADJECTIVES':
+                    results = self._synsets.get_similar_adjectives(word)
+                elif word_type == 'ADVERBS':
+                    results = self._synsets.get_similar_adverbs(word)
+                else:
+                    return "FALSE"
 
-            return "TRUE %s" % " ".join([word.upper() for word in results])
+                return "TRUE %s" % " ".join([word.upper() for word in results])
 
         return "FALSE"

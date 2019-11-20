@@ -26,12 +26,13 @@ class StopWords:
 
     @staticmethod
     def download_stopwords():
-        nltk.download("stopwords")
+        nltk.download("stopwords")      # pragma: no cover
 
-    @staticmethod
-    def remove(words: list, language="english"):
-        return [x for x in words if x not in stopwords.words(language)]
+    def __init__(self, language="english"):
+        self._words = stopwords.words(language)
 
-    @staticmethod
-    def is_stopword(string, language="english"):
-        return bool(string in stopwords.words(language))
+    def remove(self, words: list, language="english"):
+        return [x for x in words if x not in self._words]
+
+    def is_stopword(self, string, language="english"):
+        return bool(string in self._words)

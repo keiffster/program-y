@@ -1,6 +1,9 @@
 import unittest
 import unittest.mock
+import yaml
 from programy.storage.entities.usergroups import UserGroupsStore
+from programy.security.authorise.usergroupsauthorisor import BasicUserGroupAuthorisationService
+from programy.config.brain.security import BrainSecurityAuthorisationConfiguration
 
 
 class UserGroupsStoreTests(unittest.TestCase):
@@ -17,11 +20,58 @@ class UserGroupsStoreTests(unittest.TestCase):
             store.load_usergroups(usersgroupsauthorisor)
 
     def test_load_users(self):
-        pass
+        authorisor = BasicUserGroupAuthorisationService(BrainSecurityAuthorisationConfiguration())
+        store = UserGroupsStore()
+        yaml_data =  yaml.load("""users:
+  console:
+    roles:
+      user
+    groups:
+      sysadmin
+
+groups:
+  sysadmin:
+    roles:
+      root, admin, system
+    groups:
+      user
+
+  user:
+    roles:
+      ask""", Loader=yaml.FullLoader)
+
+        store.load_users(yaml_data, authorisor)
 
     def test_load_groups(self):
-        pass
+        authorisor = BasicUserGroupAuthorisationService(BrainSecurityAuthorisationConfiguration())
+        store = UserGroupsStore()
+        yaml_data = yaml.load("""users:
+  console:
+    roles:
+      user
+    groups:
+      sysadmin
+      
+  user:
+    roles:
+      ask""", Loader=yaml.FullLoader)
+
+        store.load_groups(yaml_data, authorisor)
 
     def test_combine_users_and_groups(self):
-        pass
+        authorisor = BasicUserGroupAuthorisationService(BrainSecurityAuthorisationConfiguration())
+        store = UserGroupsStore()
+        yaml_data = yaml.load("""groups:
+          sysadmin:
+            roles:
+              root, admin, system
+            groups:
+              user
 
+          user:
+            roles:
+              ask""", Loader=yaml.FullLoader)
+
+        store.load_users(yaml_data, authorisor)
+        store.load_groups(yaml_data, authorisor)
+        store.combine_users_and_groups(authorisor)

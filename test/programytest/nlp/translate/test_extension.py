@@ -49,9 +49,32 @@ class TranslateExtensionTests(unittest.TestCase):
         self.assertIsNotNone(result)
         self.assertEqual("TRANSLATE INVALID COMMAND", result)
 
-    @unittest.skipIf(Externals.google_translate is False or Externals.all_externals is False, Externals.google_translate_disabled)
-    def test_valid_scores_command(self):
+        result = extension.execute(self.client_context, "OTHER FROM EN TO FR HELLO I LOVE YOU")
+        self.assertIsNotNone(result)
+        self.assertEqual("TRANSLATE INVALID COMMAND", result)
 
+        result = extension.execute(self.client_context, "TRANSLATE OTHER EN TO FR HELLO I LOVE YOU")
+        self.assertIsNotNone(result)
+        self.assertEqual("TRANSLATE INVALID COMMAND", result)
+
+        result = extension.execute(self.client_context, "TRANSLATE FROM EN OTHER FR HELLO I LOVE YOU")
+        self.assertIsNotNone(result)
+        self.assertEqual("TRANSLATE INVALID COMMAND", result)
+
+    def test_enabled(self):
+        extension = TranslateExtension()
+        self.assertIsNotNone(extension)
+
+        result = extension.execute(self.client_context, "TRANSLATE ENABLED")
+        self.assertEquals("TRANSLATE ENABLED", result)
+
+        self.client_context.bot._from_translator = None
+
+        result = extension.execute(self.client_context, "TRANSLATE ENABLED")
+        self.assertEquals("TRANSLATE DISABLED", result)
+
+    @unittest.skipIf(Externals.google_translate is False or Externals.all_externals is False, Externals.google_translate_disabled)
+    def test_translate(self):
         extension = TranslateExtension()
         self.assertIsNotNone(extension)
 
@@ -62,3 +85,13 @@ class TranslateExtensionTests(unittest.TestCase):
         result = extension.execute(self.client_context, "TRANSLATE FROM EN TO FR HELLO I LOVE YOU")
         self.assertIsNotNone(result)
         self.assertEqual("TRANSLATED SALUT JE T'AIME", result)
+
+    def test_translate_disabled(self):
+        extension = TranslateExtension()
+        self.assertIsNotNone(extension)
+
+        self.client_context.bot._from_translator = None
+
+        result = extension.execute(self.client_context, "TRANSLATE FROM EN TO FR HELLO I LOVE YOU")
+        self.assertIsNotNone(result)
+        self.assertEqual("TRANSLATE DISABLED", result)

@@ -27,4 +27,5 @@ class IsStopWord(DynamicSet):
         DynamicSet.__init__(self, config)
 
     def is_member(self, client_context, value, additional=None):
-        return StopWords.is_stopword(value)
+        stopwords = StopWords()
+        return stopwords.is_stopword(value)

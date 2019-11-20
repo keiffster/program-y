@@ -27,8 +27,9 @@ class StemmingPostQuestionProcessor(PostQuestionProcessor):
 
     def process(self, context, word_string):
         YLogger.debug(context, "Stemming sentence...")
+        stemmer = Stemmer()
         unstemmed_words = context.brain.tokenizer.texts_to_words(word_string)
-        stemmed_words = [Stemmer.stem(x) for x in unstemmed_words]
+        stemmed_words = [stemmer.stem(x) for x in unstemmed_words]
         text = context.brain.tokenizer.words_to_texts(stemmed_words)
         sentence = Sentence(context, text)
         response = context.brain.ask_question(context, sentence)

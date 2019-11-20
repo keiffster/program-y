@@ -50,9 +50,11 @@ class SecurityManager:
         self.load_account_linking_service(client)
 
     def _load_authentication_class(self, client):
-        classobject = ClassLoader.instantiate_class(self._configuration.authentication.classname)
-        self._authentication = classobject(self._configuration.authentication)
-        self._authentication.initialise(client)
+        if self._configuration.authentication is not None:
+            if self._configuration.authentication.classname is not None:
+                classobject = ClassLoader.instantiate_class(self._configuration.authentication.classname)
+                self._authentication = classobject(self._configuration.authentication)
+                self._authentication.initialise(client)
 
     def load_authentication_service(self, client):
         try:
@@ -62,9 +64,11 @@ class SecurityManager:
             YLogger.exception(self, "Failed to load security services", excep)
 
     def _load_authorisation_class(self, client):
-        classobject = ClassLoader.instantiate_class(self._configuration.authorisation.classname)
-        self._authorisation = classobject(self._configuration.authorisation)
-        self._authorisation.initialise(client)
+        if self._configuration.authorisation is not None:
+            if self._configuration.authorisation.classname is not None:
+                classobject = ClassLoader.instantiate_class(self._configuration.authorisation.classname)
+                self._authorisation = classobject(self._configuration.authorisation)
+                self._authorisation.initialise(client)
 
     def load_authorisation_service(self, client):
         try:
@@ -74,9 +78,11 @@ class SecurityManager:
             YLogger.exception(self, "Failed to instatiate authorisation class", excep)
 
     def _load_account_linking_class(self, client):
-        classobject = ClassLoader.instantiate_class(self._configuration.account_linker.classname)
-        self._account_linker = classobject(self._configuration.account_linker)
-        self.account_linker.initialise(client)
+        if self._configuration.account_linker is not None:
+            if self._configuration.account_linker.classname is not None:
+                classobject = ClassLoader.instantiate_class(self._configuration.account_linker.classname)
+                self._account_linker = classobject(self._configuration.account_linker)
+                self.account_linker.initialise(client)
 
     def load_account_linking_service(self, client):
         try:

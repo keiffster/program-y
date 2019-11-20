@@ -19,7 +19,6 @@ from programy.utils.parsing.linenumxml import LineNumberingParser
 import xml.etree.ElementTree as ET  # pylint: disable=wrong-import-order
 from programy.utils.logging.ylogger import YLogger
 from programy.storage.entities.store import Store
-from programy.parser.aiml_parser import AIMLParser
 from programy.parser.exceptions import ParserException
 from programy.parser.exceptions import DuplicateGrammarException
 from programy.utils.text.text import TextUtils
@@ -48,15 +47,18 @@ class CategoryReadOnlyStore(Store):
         firstpos = content.find(start)
         lastpos = content.rfind(end)
 
+        if firstpos == -1 or lastpos == -1:
+            return None
+
         return content[firstpos + len(start):lastpos]
 
-    def find_all(self, element, name, namespace):
+    def find_all(self, element, name, namespace=None):
         if namespace is not None:
-            search = '%s%s' % (namespace, name)
-            return element.findall(search)
+            search = "%s:%s"%(list(namespace.keys())[0], name)
+            return element.findall(search, namespaces=namespace)
         return element.findall(name)
 
-    def find_element_str(self, name, xml, namespace):
+    def find_element_str(self, name, xml, namespace=None):
         elements = self.find_all(xml, name, namespace)
         if len(elements) > 1:
             raise Exception("Multiple <%s> nodes found in category" % name)
@@ -102,7 +104,6 @@ class CategoryReadWriteStore(CategoryReadOnlyStore):
 
         try:
             groupname = Store.get_just_filename_from_filepath(filename)
-            print(groupname)
 
             tree = ET.parse(filename, parser=LineNumberingParser())
             aiml = tree.getroot()

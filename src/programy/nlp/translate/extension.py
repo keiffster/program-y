@@ -30,30 +30,27 @@ class TranslateExtension(Extension):
         # TRANSLATE FROM EN TO FR <TEXT STRING>
 
         words = data.split(" ")
-        if words:
-            if len(words) > 5:
-                if words[0] == "TRANSLATE":
-                    if words[1] == "FROM":
-                        from_lang = words[2]
-                        if words[3] == "TO":
+        if len(words) > 5:
+            if words[0] == "TRANSLATE":
+                if words[1] == "FROM":
+                    from_lang = words[2]
+                    if words[3] == "TO":
 
-                            if client_context.bot.from_translator is not None:
-                                to_lang = words[4]
-                                text = " ".join(words[5:])
-
-                                translated = client_context.bot.from_translator.translate(text, from_lang, to_lang)
-
-                                return "TRANSLATED %s" % translated
+                        if client_context.bot.from_translator is not None:
+                            to_lang = words[4]
+                            text = " ".join(words[5:])
+                            translated = client_context.bot.from_translator.translate(text, from_lang, to_lang)
+                            return "TRANSLATED %s" % translated
 
                         else:
                             return "TRANSLATE DISABLED"
 
-            elif len(words) == 2:
-                if words[1] == 'ENABLED':
+        elif len(words) == 2:
+            if words[1] == 'ENABLED':
 
-                    if client_context.bot.from_translator is not None:
-                        return "TRANSLATE ENABLED"
-                    else:
-                        return "TRANSLATE DISABLED"
+                if client_context.bot.from_translator is not None:
+                    return "TRANSLATE ENABLED"
+                else:
+                    return "TRANSLATE DISABLED"
 
         return "TRANSLATE INVALID COMMAND"

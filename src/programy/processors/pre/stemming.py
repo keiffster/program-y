@@ -25,7 +25,8 @@ class StemmingPreProcessor(PreProcessor):
         PreProcessor.__init__(self)
 
     def process(self, context, word_string):
+        stemmer = Stemmer()
         YLogger.debug(context, "Stemming sentence...")
         unstemmed_words = context.brain.tokenizer.texts_to_words(word_string)
-        stemmed_words = [Stemmer.stem(x) for x in unstemmed_words]
+        stemmed_words = [stemmer.stem(x) for x in unstemmed_words]
         return context.brain.tokenizer.words_to_texts(stemmed_words)

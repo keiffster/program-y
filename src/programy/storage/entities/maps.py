@@ -22,8 +22,11 @@ class MapsReadOnlyStore(Store):
     def __init__(self):
         Store.__init__(self)
 
+    def get_split_char(self):
+        return ":"
+
     def split_into_fields(self, line):
-        splits = line.split(":")
+        splits = line.split(self.get_split_char())
         key = splits[0].upper()
         value = ":".join(splits[1:])
         return [key, value]

@@ -28,39 +28,79 @@ class Stemmer:
 
     @staticmethod
     def download_additional():
-        nltk.download('rslp')
+        nltk.download('rslp')   # pragma: no cover
 
-    @staticmethod
-    def stem(string, stemmer="porter", **kwargs):
+    def __init__(self, stemmer="porter", **kwargs):
+        self._impl = self._get_stemmer(stemmer, **kwargs)
+
+    def stem(self, string):
+        if self._impl is not None:
+            return self._impl.stem(string)
+
+        return string
+
+    def _get_porter_stemmer(self):
+        return PorterStemmer()
+
+    def _get_lancaster_stemmer(self):
+        return LancasterStemmer()
+
+    def _get_regex_stemmer(self, regexp, minimum):
+        return RegexpStemmer(regexp=regexp, min=minimum)
+
+    def _get_iris_stemmer(self):
+        return ISRIStemmer()
+
+    def _get_snowball_stemmer(self, language):
+        return SnowballStemmer(language=language)
+
+    def _get_rslp_stemmer(self):
+        return RSLPStemmer()
+
+    def _get_cis_stemmer(self, case_insensitive):
+        return Cistem(case_insensitive=case_insensitive)
+
+    def _get_stemmer(self, stemmer="porter", **kwargs):
 
         if stemmer == "porter":
-            impl = PorterStemmer()
+            return self._get_porter_stemmer()
+
         elif stemmer == "lancaster":
-            impl = LancasterStemmer()
+            return self._get_lancaster_stemmer()
+
         elif stemmer == "regex":
             regexp = kwargs['regexp']
             if 'min' in kwargs:
                 minimum = kwargs['min']
+
             else:
                 minimum = 0
-            impl = RegexpStemmer(regexp=regexp, min=minimum)
+
+            return self._get_regex_stemmer(regexp=regexp, minimum=minimum)
+
         elif stemmer == "isri":
-            impl = ISRIStemmer()
+            return self._get_iris_stemmer()
+
         elif stemmer == "snowball":
             if 'language' in kwargs:
                 language = kwargs['language']
+
             else:
                 language = 'english'
-            impl = SnowballStemmer(language=language)
+
+            return self._get_snowball_stemmer(language=language)
+
         elif stemmer == "rslp":
-            impl = RSLPStemmer()
+            return self._get_rslp_stemmer()
+
         elif stemmer == "cistem":
             if 'case_insensitive' in kwargs:
                 case_insensitive = kwargs['case_insensitive']
+
             else:
                 case_insensitive = False
-            impl = Cistem(case_insensitive=case_insensitive)
-        else:
-            return string
 
-        return impl.stem(string)
+            return self._get_cis_stemmer(case_insensitive=case_insensitive)
+
+        else:
+            raise ValueError("Unknown stemmer [%s]"%stemmer)

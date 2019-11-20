@@ -27,5 +27,6 @@ class StopWordsPreProcessor(PreProcessor):
     def process(self, context, word_string):
         YLogger.debug(context, "Removing stop words...")
         with_stopwords = context.brain.tokenizer.texts_to_words(word_string)
-        non_stopwords = StopWords.remove(with_stopwords)
+        stopwords = StopWords()
+        non_stopwords = stopwords.remove(with_stopwords)
         return context.brain.tokenizer.words_to_texts(non_stopwords)

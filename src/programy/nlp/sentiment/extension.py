@@ -26,6 +26,7 @@ class SentimentExtension(Extension):
     def _check_enabled(self, client_context):
         if client_context.bot.sentiment_analyser is not None:
             return "SENTIMENT ENABLED"
+
         else:
             return "SENTIMENT DISABLED"
 
@@ -36,15 +37,21 @@ class SentimentExtension(Extension):
             pos_str = client_context.bot.sentiment_scores.positivity(positivity)
             sub_str = client_context.bot.sentiment_scores.subjectivity(subjectivity)
             return "SENTIMENT FEELING %s AND %s" % (pos_str, sub_str)
+
         return "SENTIMENT FEELING NEUTRAL AND NEUTRAL"
 
     def _calc_question_sentiment(self, client_context, nth_question):
         conversation = client_context.bot.get_conversation(client_context)
         try:
-            sentence = conversation.previous_nth_question(nth_question)
-            pos_str = client_context.bot.sentiment_scores.positivity(sentence.positivity)
-            sub_str = client_context.bot.sentiment_scores.subjectivity(sentence.subjectivity)
+            question = conversation.previous_nth_question(nth_question)
+
+            positivity, subjectivity = question.calculate_sentinment_score()
+
+            pos_str = client_context.bot.sentiment_scores.positivity(positivity)
+            sub_str = client_context.bot.sentiment_scores.subjectivity(subjectivity)
+
             return "SENTIMENT FEELING %s AND %s" % (pos_str, sub_str)
+
         except Exception as excep:
             YLogger.exception_nostack(self, "Failed to calculate sentiment", excep)
             return "SENTIMENT FEELING NEUTRAL AND NEUTRAL"
@@ -124,27 +131,25 @@ class SentimentExtension(Extension):
         # SENTIMENT SUBJECTIVITY <VALUE>
 
         words = data.split(" ")
-        if words:
+        if words[0] == "SENTIMENT":
 
-            if words[0] == "SENTIMENT":
+            if len(words) >= 2:
+                if words[1] == "CURRENT":
+                    return self._current_score(client_context, words)
 
-                if len(words) >= 2:
-                    if words[1] == "CURRENT":
-                        return self._current_score(client_context, words)
+                if words[1] == "SCORE":
+                    return self._calc_score(client_context, words)
 
-                    if words[1] == "SCORE":
-                        return self._calc_score(client_context, words)
+                if words[1] == "FEELING":
+                    return self._calc_feeling(client_context, words)
 
-                    if words[1] == "FEELING":
-                        return self._calc_feeling(client_context, words)
+                if words[1] == 'ENABLED':
+                    return self._check_enabled(client_context)
 
-                    if words[1] == 'ENABLED':
-                        return self._check_enabled(client_context)
+                if words[1] == 'POSITIVITY':
+                    return self._get_positivity(client_context, words)
 
-                    if words[1] == 'POSITIVITY':
-                        return self._get_positivity(client_context, words)
-
-                    if words[1] == 'SUBJECTIVITY':
-                        return self._get_subjectivity(client_context, words)
+                if words[1] == 'SUBJECTIVITY':
+                    return self._get_subjectivity(client_context, words)
 
         return "SENTIMENT INVALID COMMAND"

@@ -150,8 +150,11 @@ class TextBlobTranslator(BaseTranslator):
             return languages[code]
         return "UNKNOWN"
 
+    def _get_textblob(self, text):
+        return TextBlob(text)
+
     def detect(self, text, default='EN'):
-        blob = TextBlob(text)
+        blob = self._get_textblob(text)
         try:
             return blob.detect_language().upper()
 
@@ -160,22 +163,27 @@ class TextBlobTranslator(BaseTranslator):
 
         return default
 
-    def translate(self, text, from_lang, to_lang="EN"):
+    def _do_translate(self, text, from_lang, to_lang):
+        blob = TextBlob(text)
+
+        if from_lang is not None:
+            return str(blob.translate(from_lang=from_lang, to=to_lang))
+
+        else:
+            return str(blob.translate(to=to_lang))
+
+    def translate(self, text, from_lang=None, to_lang="EN"):
 
         YLogger.debug(None, "Translating [%s] from [%s] to [%s], are they the same?", text, from_lang, to_lang)
 
-        blob = TextBlob(text)
         try:
-            if from_lang is not None:
-                translated = str(blob.translate(from_lang=from_lang, to=to_lang))
-            else:
-                translated = str(blob.translate(to=to_lang))
+            translated = self._do_translate(text, from_lang, to_lang)
             YLogger.debug(None, "Translated [%s] to [%s]", text, translated)
             return translated
 
         except NotTranslated as nte:
-            YLogger.exception(None, "Unable to translate text from [%s] to [%s], are they the same?", nte, from_lang,
-                              to_lang)
+            YLogger.exception(None, "Unable to translate text from [%s] to [%s], are they the same?",
+                              nte, from_lang, to_lang)
 
         except URLError as urle:
             YLogger.exception(None, "No connection to Google Translate", urle)

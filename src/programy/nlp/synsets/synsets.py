@@ -23,6 +23,9 @@ from textblob.wordnet import ADV
 
 class Synsets:
 
+    def __init__(self):
+        pass
+
     @staticmethod
     def _get_synsets(string, pos=None):
         if pos is None:
@@ -39,8 +42,7 @@ class Synsets:
         parts = synset.name().split(".")
         return parts[0], int(parts[2])
 
-    @staticmethod
-    def get_similar_words(string, pos=None, weight=0):
+    def get_similar_words(self, string, pos=None, weight=0):
         synsets = Synsets._get_synsets(string, pos)
 
         synset_words = []
@@ -52,24 +54,19 @@ class Synsets:
 
         return synset_words
 
-    @staticmethod
-    def get_similar_verbs(string, weight=0):
-        return Synsets.get_similar_words(string, VERB, weight=weight)
+    def get_similar_verbs(self, string, weight=0):
+        return self.get_similar_words(string, VERB, weight=weight)
 
-    @staticmethod
-    def get_similar_nouns(string, weight=0):
-        return Synsets.get_similar_words(string, NOUN, weight=weight)
+    def get_similar_nouns(self, string, weight=0):
+        return self.get_similar_words(string, NOUN, weight=weight)
 
-    @staticmethod
-    def get_similar_adjectives(string, weight=0):
-        return Synsets.get_similar_words(string, ADJ, weight=weight)
+    def get_similar_adjectives(self, string, weight=0):
+        return self.get_similar_words(string, ADJ, weight=weight)
 
-    @staticmethod
-    def get_similar_adverbs(string, weight=0):
-        return Synsets.get_similar_words(string, ADV, weight=weight)
+    def get_similar_adverbs(self, string, weight=0):
+        return self.get_similar_words(string, ADV, weight=weight)
 
-    @staticmethod
-    def get_similarity(string1, string2, pos=None):
+    def get_similarity(self, string1, string2, pos=None):
         syns1 = Synsets._get_synsets(string1, pos)
         syns2 = Synsets._get_synsets(string2, pos)
 

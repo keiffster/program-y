@@ -6,8 +6,20 @@ from programy.storage.entities.maps import MapsReadWriteStore
 
 class MapsStoreTests(unittest.TestCase):
 
+    def test_get_split_char(self):
+        store = MapsReadOnlyStore()
+        self.assertEqual(":", store.get_split_char())
+
     def test_split_into_fields(self):
-        pass
+        store = MapsReadOnlyStore()
+        fields = store.split_into_fields("FIELD1")
+        self.assertEquals(["FIELD1", ''], fields)
+        fields = store.split_into_fields("FIELD1!FIELD2")
+        self.assertEquals(["FIELD1!FIELD2", ''], fields)
+        fields = store.split_into_fields("FIELD1:FIELD2")
+        self.assertEquals(["FIELD1", "FIELD2"], fields)
+        fields = store.split_into_fields("FIELD1:FIELD2:FIELD3:FIELD4")
+        self.assertEquals(["FIELD1", "FIELD2:FIELD3:FIELD4"], fields)
 
 
 class MapsReadOnlyStoreTests(unittest.TestCase):
@@ -25,10 +37,22 @@ class MapsReadOnlyStoreTests(unittest.TestCase):
             store.load(collector)
 
 
+class MockMapsReadWriteStore(MapsReadWriteStore):
+
+    def __init__(self):
+        MapsReadWriteStore.__init__(self)
+        self.added = False
+
+    def add_to_map(self, name, key, value, overwrite_existing=False):
+        self.added = True
+
+
 class MapsReadWriteStoreTests(unittest.TestCase):
 
     def test_process_line(self):
-        pass
+        store = MockMapsReadWriteStore()
+        store.process_line("MAP1", ["NAME", "VALUE"])
+        self.assertTrue(store.added)
 
     def test_load(self):
         store = MapsReadWriteStore()
