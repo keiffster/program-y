@@ -24,17 +24,20 @@ class WordTaggerPreProcessor(PreProcessor):
     def __init__(self):
         PreProcessor.__init__(self)
 
+    def _word_tag(self, context, word_string):
+        tagged = PartsOfSpeechTagger.tag_string(word_string)
+
+        words = []
+        for tag in tagged:
+            words.append(tag[0])
+            words.append(tag[1])
+
+        return context.brain.tokenizer.words_to_texts(words)
+
     def process(self, context, word_string):
 
         try:
-            tagged = PartsOfSpeechTagger.tag_string(word_string)
-
-            words = []
-            for tag in tagged:
-                words.append(tag[0])
-                words.append(tag[1])
-
-            return context.brain.tokenizer.words_to_texts(words)
+            return self._word_tag(context, word_string)
 
         except Exception as e:
             YLogger.exception(context, "Failed to word tag [%s]", e, word_string)

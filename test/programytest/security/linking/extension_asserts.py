@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import patch
 
 from programy.security.linking.extension import AccountLinkingExtension
 
@@ -32,6 +33,22 @@ class AccountLinkerExtensionAsserts(unittest.TestCase):
         self.assertTrue(result.startswith("PRIMARY ACCOUNT LINKED"))
         words = result.split(" ")
         self.assertEqual(4, len(words))
+
+    def assert_primary_account_link_no_service(self, context):
+        extension = AccountLinkingExtension()
+        self.assertIsNotNone(extension)
+
+        command = "LINK PRIMARY ACCOUNT TESTUSER CONSOLE PASSWORD123"
+        result = extension.execute(context, command)
+        self.assertEquals("INVALID PRIMARY ACCOUNT COMMAND", result)
+
+    def assert_primary_account_link_user_to_client_fails(self, context):
+        extension = AccountLinkingExtension()
+        self.assertIsNotNone(extension)
+
+        command = "LINK PRIMARY ACCOUNT TESTUSER CONSOLE PASSWORD123"
+        result = extension.execute(context, command)
+        self.assertEquals("INVALID PRIMARY ACCOUNT COMMAND", result)
 
     def assert_primary_account_link_failures(self, context):
 
@@ -71,6 +88,21 @@ class AccountLinkerExtensionAsserts(unittest.TestCase):
         self.assertEqual("INVALID SECONDARY ACCOUNT COMMAND", extension.execute(context, "LINK SECONDARY ACCOUNT PRIMARY_USER SECONDARY_CLIENT PRIMARY_USER"))
         self.assertEqual("INVALID SECONDARY ACCOUNT COMMAND", extension.execute(context, "LINK SECONDARY ACCOUNT PRIMARY_USER SECONDARY_CLIENT PRIMARY_USER"))
         self.assertEqual("INVALID SECONDARY ACCOUNT COMMAND", extension.execute(context, "LINK SECONDARY ACCOUNT PRIMARY_USER SECONDARY_CLIENT PRIMARY_USER GIVEN_TOKEN"))
+
+    def assert_secondary_account_link_no_service(self, context):
+
+        extension = AccountLinkingExtension()
+        self.assertIsNotNone(extension)
+
+        command = "LINK PRIMARY ACCOUNT TESTUSER CONSOLE PASSWORD123"
+        result = extension.execute(context, command)
+        words = result.split(" ")
+        self.assertEqual(4, len(words))
+
+        command = "LINK SECONDARY ACCOUNT TESTUSER TESTUSER2 FACEBOOK PASSWORD123 %s"%words[3]
+
+        result = extension.execute(context, command)
+        self.assertEquals("INVALID SECONDARY ACCOUNT COMMAND", result)
 
     def assert_account_linker_none(self, context):
 

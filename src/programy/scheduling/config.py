@@ -159,8 +159,7 @@ class SchedulerThreadPoolConfiguration(BaseConfigurationData):
         del bot_root
         del subs
         threadpool = configuration_file.get_section(self._section_name, configuration)
-        if threadpool is not None:
-            self._max_workers = configuration_file.get_option(threadpool, "max_workers", missing_value=None)
+        self._max_workers = configuration_file.get_option(threadpool, "max_workers", missing_value=None)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:
@@ -183,8 +182,7 @@ class SchedulerProcessPoolConfiguration(BaseConfigurationData):
         del bot_root
         del subs
         processpool = configuration_file.get_section(self._section_name, configuration)
-        if processpool is not None:
-            self._max_workers = configuration_file.get_option(processpool, "max_workers", missing_value=None)
+        self._max_workers = configuration_file.get_option(processpool, "max_workers", missing_value=None)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:
@@ -212,9 +210,8 @@ class SchedulerJobDefaultsConfiguration(BaseConfigurationData):
         del bot_root
         del subs
         job_defaults = configuration_file.get_section(self._section_name, configuration)
-        if job_defaults is not None:
-            self._coalesce = configuration_file.get_option(job_defaults, "coalesce", missing_value=None)
-            self._max_instances = configuration_file.get_option(job_defaults, "max_instances", missing_value=None)
+        self._coalesce = configuration_file.get_option(job_defaults, "coalesce", missing_value=None)
+        self._max_instances = configuration_file.get_option(job_defaults, "max_instances", missing_value=None)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:
@@ -328,8 +325,7 @@ class SchedulerConfiguration(BaseConfigurationData):
         config['apscheduler.jobstores.mongo'] = {'type': 'mongodb'}
         if self.jobstore is not None:
             if self.jobstore.storage:
-                if self.jobstore.storage.collection is not None:
-                    config['apscheduler.jobstores.mongo']['collection'] = self.jobstore.storage.collection
+                config['apscheduler.jobstores.mongo']['collection'] = self.jobstore.storage.collection
 
     def _create_redis_jobstore_config(self, config):
         config['apscheduler.jobstores.redis'] = {'type': 'redis'}

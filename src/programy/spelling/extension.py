@@ -31,31 +31,29 @@ class SpellingExtension(Extension):
         # SPELLING ENABLED
 
         words = data.split(" ")
-        if words:
+        if words[0] == "SPELLING":
 
-            if words[0] == "SPELLING":
+            if len(words) > 2:
 
-                if len(words) > 2:
+                if words[1] == "CORRECT":
 
-                    if words[1] == "CORRECT":
+                    text = " ".join(words[2:])
 
-                        text = " ".join(words[2:])
+                    if client_context.bot.spell_checker is not None:
+                        corrected = client_context.bot.spell_checker.correct(text)
 
-                        if client_context.bot.spell_checker is not None:
-                            corrected = client_context.bot.spell_checker.correct(text)
+                        return "SPELLING CORRECTED %s"%corrected
 
-                            return "SPELLING CORRECTED %s"%corrected
+                    else:
+                        return "SPELLING UNCORRECTED %s" % text
 
-                        else:
-                            return "SPELLING UNCORRECTED %s" % text
+            elif len(words) == 2:
 
-                elif len(words) == 2:
+                if words[1] == 'ENABLED':
 
-                    if words[1] == 'ENABLED':
-
-                        if client_context.bot.spell_checker is not None:
-                            return "SPELLING ENABLED"
-                        else:
-                            return "SPELLING DISABLED"
+                    if client_context.bot.spell_checker is not None:
+                        return "SPELLING ENABLED"
+                    else:
+                        return "SPELLING DISABLED"
 
         return "SPELLING CORRECT INVALID COMMAND"

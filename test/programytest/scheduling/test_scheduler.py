@@ -582,3 +582,10 @@ class ProgramySchedulerTests(unittest.TestCase):
         scheduler1 = ProgramyScheduler(client, SchedulerConfiguration())
         scheduler1.scheduled("user1", "client1", "UNKNOWN", "Hello")
         self.assertIsNone(client._response)
+
+    def test_listener_event(self):
+        event = JobEvent("code1", "id1", "mock")
+        ProgramyScheduler.listener_event(event)
+
+    def test_listener_event_none_event(self):
+        ProgramyScheduler.listener_event("Mock Event")

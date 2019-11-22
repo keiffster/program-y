@@ -1,3 +1,4 @@
+from unittest.mock import patch
 from programy.security.linking.accountlinker import BasicAccountLinkerService
 from programytest.security.linking.accounlinker_asserts import AccountLinkerAsserts
 
@@ -41,6 +42,8 @@ class MockUserStore(object):
     def remove_user_from_all_clients(self, userid):
         if userid in self.users:
             del self.users[userid]
+            return True
+        return False
 
 
 class MockLink(object):
@@ -164,6 +167,14 @@ class BasicAccountLinkerServiceTests(AccountLinkerAsserts):
         mgr = BasicAccountLinkerService(self.storage_engine)
         self.assert_happy_path(mgr)
 
+    def patch_add_user(self, userid, clientid):
+        return None
+
+    @patch('programytest.security.linking.test_accountlinker_mocked.MockUserStore.add_user', patch_add_user)
+    def test_link_user_to_client_add_user_fails(self):
+        mgr = BasicAccountLinkerService(self.storage_engine)
+        self.assert_link_user_to_client_add_user_fails(mgr)
+
     def test_user_client_link_already_exists(self):
         mgr = BasicAccountLinkerService(self.storage_engine)
         self.assert_user_client_link_already_exists(mgr)
@@ -187,3 +198,96 @@ class BasicAccountLinkerServiceTests(AccountLinkerAsserts):
     def test_unlink_user_from_client(self):
         mgr = BasicAccountLinkerService(self.storage_engine)
         self.assert_unlink_user_from_client(mgr)
+
+    def patch_remove_user(self, userid, clientid):
+        return False
+
+    @patch('programytest.security.linking.test_accountlinker_mocked.MockUserStore.remove_user', patch_remove_user)
+    def test_unlink_user_from_client_remove_user_fails1(self):
+        mgr = BasicAccountLinkerService(self.storage_engine)
+        self.assert_unlink_user_from_client_fails(mgr)
+
+    def patch_remove_link(self, userid):
+        return False
+
+    @patch('programytest.security.linking.test_accountlinker_mocked.MockLinkStore.remove_link', patch_remove_link)
+    def test_unlink_user_from_client_remove_user_fails2(self):
+        mgr = BasicAccountLinkerService(self.storage_engine)
+        self.assert_unlink_user_from_client_fails(mgr)
+
+    def patch_unlink_accounts(self, userid):
+        return False
+
+    @patch('programytest.security.linking.test_accountlinker_mocked.MockLinkedAccount.unlink_accounts', patch_unlink_accounts)
+    def test_unlink_user_from_client_remove_user_fails3(self):
+        mgr = BasicAccountLinkerService(self.storage_engine)
+        self.assert_unlink_user_from_client_fails(mgr)
+
+    def test_unlink_user_from_all_clients(self):
+        mgr = BasicAccountLinkerService(self.storage_engine)
+        self.assert_unlink_user_from_all_clients(mgr)
+
+    def patch_remove_user_from_all_clients(self, userid):
+        return False
+
+    @patch('programytest.security.linking.test_accountlinker_mocked.MockUserStore.remove_user_from_all_clients', patch_remove_user_from_all_clients)
+    def test_unlink_user_from_all_clients_remove_user_from_all_clients_fails(self):
+        mgr = BasicAccountLinkerService(self.storage_engine)
+        self.assert_unlink_user_from_all_clients_fails(mgr)
+
+    @patch('programytest.security.linking.test_accountlinker_mocked.MockLinkStore.remove_link', patch_remove_link)
+    def test_unlink_user_from_all_clients_remove_link_fails(self):
+        mgr = BasicAccountLinkerService(self.storage_engine)
+        self.assert_unlink_user_from_all_clients_fails(mgr)
+
+    @patch('programytest.security.linking.test_accountlinker_mocked.MockLinkedAccount.unlink_accounts', patch_unlink_accounts)
+    def test_unlink_user_from_all_clients_unlink_accounts_fails(self):
+        mgr = BasicAccountLinkerService(self.storage_engine)
+        self.assert_unlink_user_from_all_clients_fails(mgr)
+
+    def test_generate_link(self):
+        mgr = BasicAccountLinkerService(self.storage_engine)
+        self.assert_generate_link(mgr)
+
+    def patch_create_link(self, userid, provided_key, generated_key, expires):
+        return None
+
+    @patch('programytest.security.linking.test_accountlinker_mocked.MockLinkStore.create_link', patch_create_link)
+    def test_generate_link_create_link_fails(self):
+        mgr = BasicAccountLinkerService(self.storage_engine)
+        self.assert_generate_link_create_link_fails(mgr)
+
+    def patch_get_link(self, userid):
+        return None
+
+    @patch('programytest.security.linking.test_accountlinker_mocked.MockLinkStore.get_link', patch_get_link)
+    def test_reset_link_get_link_fails(self):
+        mgr = BasicAccountLinkerService(self.storage_engine)
+        self.assert_reset_link_get_link_fails(mgr)
+
+    def test_link_accounts(self):
+        mgr = BasicAccountLinkerService(self.storage_engine)
+        self.assert_link_accounts_success(mgr)
+
+    def patch_get_link(self, userid):
+        return MockLink("userid", "password1", "xxxxxxxx", True, True, 1)
+
+    @patch('programytest.security.linking.test_accountlinker_mocked.MockLinkStore.get_link', patch_get_link)
+    def test_link_accounts_link_expired(self):
+        mgr = BasicAccountLinkerService(self.storage_engine)
+        self.assert_link_accounts_failure(mgr)
+
+    @patch('programytest.security.linking.test_accountlinker_mocked.MockUserStore.add_user', patch_add_user)
+    def test_link_accounts_add_user_fails(self):
+        mgr = BasicAccountLinkerService(self.storage_engine)
+        self.assert_link_accounts_failure(mgr)
+
+    def patch_link_accounts(self, userid, linked_userid):
+        return None
+
+    # linked_account_store().link_accounts(userid, linked_userid) -> None
+    @patch('programytest.security.linking.test_accountlinker_mocked.MockLinkedAccount.link_accounts', patch_link_accounts)
+    def test_link_accounts_link_accounts_fails(self):
+        mgr = BasicAccountLinkerService(self.storage_engine)
+        self.assert_link_accounts_failure(mgr)
+

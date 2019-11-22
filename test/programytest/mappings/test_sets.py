@@ -1,6 +1,6 @@
 import os
 import unittest
-
+from unittest.mock import patch
 from programy.mappings.sets import SetCollection
 from programy.storage.factory import StorageFactory
 from programy.storage.stores.file.config import FileStorageConfiguration
@@ -27,7 +27,9 @@ class SetTests(unittest.TestCase):
         self.assertTrue(collection.contains("TESTSET"))
         self.assertTrue(collection.contains("TESTSET2"))
         self.assertFalse(collection.contains("TESTSET3"))
-        self.assertEqual(collection.store_name("TESTSET"), "teststore")
+
+        self.assertEqual("teststore", collection.storename("TESTSET"))
+        self.assertIsNone(collection.storename("TESTMAP4"))
 
         aset = collection.set("TESTSET")
         self.assertIsNotNone(aset)
@@ -46,7 +48,13 @@ class SetTests(unittest.TestCase):
 
         self.assertFalse(collection.contains("TESTSET"))
         self.assertIsNone(collection.set("TESTSET"))
-        self.assertNotEquals(collection.store_name("TESTSET"), "teststore")
+        self.assertNotEquals(collection.storename("TESTSET"), "teststore")
+
+    def test_add_set_exists(self):
+        collection = SetCollection()
+        collection.add_set("TESTSET", {"A": [["A", "B", "C"]], "D": [["D"]], "E": [["E", "F"]]}, "teststore")
+        with self.assertRaises(Exception):
+            collection.add_set("TESTSET", {"1": [["1", "2", "3"]], "4": [["4"]], "5": [["5", "6"]]}, "teststore")
 
     def test_load_from_file(self):
         storage_factory = StorageFactory()
@@ -61,7 +69,7 @@ class SetTests(unittest.TestCase):
         collection = SetCollection()
         self.assertIsNotNone(collection)
 
-        collection.load(storage_factory)
+        self.assertTrue(collection.load(storage_factory) > 0 )
 
         self.assertIsNotNone(collection._sets)
         self.assertEqual(len(collection._sets), 1)
@@ -93,7 +101,7 @@ class SetTests(unittest.TestCase):
         collection = SetCollection()
         self.assertIsNotNone(collection)
 
-        collection.load(storage_factory)
+        self.assertTrue(collection.load(storage_factory) > 0 )
 
         self.assertIsNotNone(collection._sets)
         self.assertEqual(len(collection._sets), 1)
@@ -110,7 +118,7 @@ class SetTests(unittest.TestCase):
         self.assertIsNotNone(aset)
         self.assertTrue(['Air', 'Force', 'blue'] in aset['AIR'])
 
-        collection.reload(storage_factory, "TEST_SET" )
+        self.assertTrue(collection.reload(storage_factory, "TEST_SET" ) > 0)
 
         self.assertIsNotNone(collection._sets)
         self.assertEqual(len(collection._sets), 1)
@@ -126,3 +134,53 @@ class SetTests(unittest.TestCase):
         self.assertIsNotNone(collection.set('TEST_SET'))
         self.assertTrue(['Air', 'Force', 'blue'] in collection.set('TEST_SET')['AIR'])
 
+    def patch_load_collection(self, lookups_engine):
+        raise Exception("Mock Exception")
+
+    @patch("programy.mappings.sets.SetCollection._load_collection", patch_load_collection)
+    def test_load_with_exception(self):
+        storage_factory = StorageFactory()
+
+        file_store_config = FileStorageConfiguration()
+        file_store_config._sets_storage = FileStoreConfiguration(dirs=[os.path.dirname(__file__) + os.sep + "test_files" + os.sep + "sets"])
+        storage_engine = FileStorageEngine(file_store_config)
+
+        storage_factory._storage_engines[StorageFactory.SETS] = storage_engine
+        storage_factory._store_to_engine_map[StorageFactory.SETS] = storage_engine
+
+        collection = SetCollection()
+        self.assertIsNotNone(collection)
+
+        self.assertTrue(collection.load(storage_factory) == 0 )
+
+    def patch_reload_collection(self, lookups_engine, set_name):
+        raise Exception("Mock Exception")
+
+    @patch("programy.mappings.sets.SetCollection._reload_collection", patch_reload_collection)
+    def test_reload_with_exception(self):
+        storage_factory = StorageFactory()
+
+        file_store_config = FileStorageConfiguration()
+        file_store_config._sets_storage = FileStoreConfiguration(dirs=[os.path.dirname(__file__) + os.sep + "test_files" + os.sep + "sets"])
+        storage_engine = FileStorageEngine(file_store_config)
+
+        storage_factory._storage_engines[StorageFactory.SETS] = storage_engine
+        storage_factory._store_to_engine_map[StorageFactory.SETS] = storage_engine
+
+        collection = SetCollection()
+        self.assertIsNotNone(collection)
+
+        self.assertTrue(collection.load(storage_factory) > 0 )
+
+        self.assertTrue(collection.reload(storage_factory, "TEST_SET") > 0)
+
+    def test_reload_no_storage(self):
+        storage_factory = StorageFactory()
+
+        file_store_config = FileStorageConfiguration()
+        file_store_config._sets_storage = FileStoreConfiguration(dirs=[os.path.dirname(__file__) + os.sep + "test_files" + os.sep + "sets"])
+
+        collection = SetCollection()
+        self.assertIsNotNone(collection)
+
+        self.assertTrue(collection.reload(storage_factory, "TEST_SET") == 0)

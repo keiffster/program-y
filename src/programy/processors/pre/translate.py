@@ -23,19 +23,23 @@ class TranslatorPreProcessor(PreProcessor):
     def __init__(self):
         PreProcessor.__init__(self)
 
+    def _translate(self, context, translator, translator_config, word_string):
+        trans_string = translator.translate(word_string,
+                                            from_lang=translator_config.from_lang,
+                                            to_lang=translator_config.to_lang)
+
+        YLogger.debug(context, "Pre translated [%s](%s) to [%s](%s)", word_string, translator_config.from_lang,
+                      trans_string, translator_config.to_lang)
+        return trans_string
+
+
     def process(self, context, word_string):
         translator_config = context.bot.configuration.from_translator
         translator = context.bot.from_translator
 
         try:
             if translator is not None:
-                trans_string = translator.translate(word_string,
-                                                    from_lang=translator_config.from_lang,
-                                                    to_lang=translator_config.to_lang)
-
-                YLogger.debug(context, "Pre translated [%s](%s) to [%s](%s)", word_string, translator_config.from_lang,
-                              trans_string, translator_config.to_lang)
-                return trans_string
+                return self._translate(context, translator, translator_config, word_string)
 
         except Exception as e:
             YLogger.exception(context, "Failed to translate [%s] from [%s] to [%s]", e, word_string,

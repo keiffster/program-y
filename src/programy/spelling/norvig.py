@@ -22,9 +22,8 @@ class NorvigSpellingChecker(SpellingChecker):
     def load_corpus(self, storage_factory):
         if storage_factory.entity_storage_engine_available(StorageFactory.SPELLING_CORPUS) is True:
             spelling_engine = storage_factory.entity_storage_engine(StorageFactory.SPELLING_CORPUS)
-            if spelling_engine:
-                store = spelling_engine.spelling_store()
-                store.load_spelling(self)
+            store = spelling_engine.spelling_store()
+            store.load_spelling(self)
 
     def add_corpus(self, all_words):
         self.words = Counter(self._all_words(all_words))

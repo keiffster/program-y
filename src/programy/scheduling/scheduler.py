@@ -269,16 +269,12 @@ class ProgramyScheduler:
 
     @staticmethod
     def listener_event(event):
-        try:
-            message = ProgramyScheduler.get_event_str(event)
-            if message is not None:
-                YLogger.debug(None, message)
+        message = ProgramyScheduler.get_event_str(event)
+        if message is not None:
+            YLogger.debug(None, message)
 
-            else:
-                YLogger.error(None, "Unknown APSchedulerEvent! %s", str(event))
-
-        except Exception as e:
-            YLogger.exception(None, "APScheduler Listener Error", e)
+        else:
+            YLogger.error(None, "Unknown APSchedulerEvent! %s", str(event))
 
     #################################################################################################################
     # Admin/Debug Functions

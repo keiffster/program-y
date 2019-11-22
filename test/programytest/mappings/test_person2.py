@@ -1,6 +1,7 @@
 import os
-import unittest
 import re
+import unittest
+from unittest.mock import patch
 from programy.mappings.person import Person2Collection
 from programy.storage.factory import StorageFactory
 from programy.storage.stores.file.config import FileStorageConfiguration
@@ -53,7 +54,7 @@ class Person2Tests(unittest.TestCase):
         collection = Person2Collection()
         self.assertIsNotNone(collection)
 
-        collection.load(storage_factory)
+        self.assertTrue(collection.load(storage_factory))
 
         self.assertEqual(collection.personalise_string("I was"), "he or she was")
         self.assertEqual(collection.personalise_string("hello he was over there"), "hello i was over there")
@@ -75,12 +76,32 @@ class Person2Tests(unittest.TestCase):
         collection = Person2Collection()
         self.assertIsNotNone(collection)
 
-        collection.load(storage_factory)
+        self.assertTrue(collection.load(storage_factory))
 
         self.assertEqual(collection.personalise_string("I was"), "he or she was")
         self.assertEqual(collection.personalise_string("hello he was over there"), "hello i was over there")
 
-        collection.reload(storage_factory)
+        self.assertTrue(collection.reload(storage_factory))
 
         self.assertEqual(collection.personalise_string("I was"), "he or she was")
         self.assertEqual(collection.personalise_string("hello he was over there"), "hello i was over there")
+
+    def patch_load_collection(self, lookups_engine):
+        raise Exception("Mock Exception")
+
+    @patch("programy.mappings.person.Person2Collection._load_collection", patch_load_collection)
+    def test_load_with_exception(self):
+        storage_factory = StorageFactory()
+
+        file_store_config = FileStorageConfiguration()
+        file_store_config._person_storage = FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "test_files" + os.sep + "person.txt", fileformat="text", extension="txt", encoding="utf-8", delete_on_start=False)
+
+        storage_engine = FileStorageEngine(file_store_config)
+
+        storage_factory._storage_engines[StorageFactory.PERSON] = storage_engine
+        storage_factory._store_to_engine_map[StorageFactory.PERSON] = storage_engine
+
+        collection = Person2Collection()
+        self.assertIsNotNone(collection)
+
+        self.assertFalse(collection.load(storage_factory))

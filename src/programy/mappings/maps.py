@@ -59,23 +59,32 @@ class MapCollection:
         map_name = name.upper()
         return bool(map_name in self._maps)
 
+    def _load_collection(self, maps_store_engine):
+        maps_store = maps_store_engine.maps_store()
+        maps_store.load_all(self)
+
     def load(self, storage_factory):
         if storage_factory.entity_storage_engine_available(StorageFactory.MAPS) is True:
             maps_store_engine = storage_factory.entity_storage_engine(StorageFactory.MAPS)
-            if maps_store_engine:
-                try:
-                    maps_store = maps_store_engine.maps_store()
-                    maps_store.load_all(self)
-                except Exception as e:
-                    YLogger.exception(self, "Failed to load map from storage", e)
+            try:
+                self._load_collection(maps_store_engine)
+
+            except Exception as e:
+                YLogger.exception(self, "Failed to load map from storage", e)
 
         return len(self._maps)
 
+    def _reload_collection(self, maps_store_engine, map_name):
+        maps_store = maps_store_engine.maps_store()
+        maps_store.reload(self, map_name)
+
     def reload(self, storage_factory, map_name):
         if storage_factory.entity_storage_engine_available(StorageFactory.MAPS) is True:
-            map_engine = storage_factory.entity_storage_engine(StorageFactory.MAPS)
+            maps_store_engine = storage_factory.entity_storage_engine(StorageFactory.MAPS)
             try:
-                maps_store = map_engine.maps_store()
-                maps_store.reload(self, map_name)
+                self._reload_collection(maps_store_engine, map_name)
+
             except Exception as e:
                 YLogger.exception(self, "Failed to load map from storage", e)
+
+        return len(self._maps)

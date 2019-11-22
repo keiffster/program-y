@@ -38,17 +38,25 @@ class BasePersonCollection(DoubleStringPatternSplitCollection):
     def get_lookups_store(self, lookups_engine):
         raise NotImplementedError()  # pragma: no cover
 
+    def _load_collection(self, lookups_engine):
+        lookups_store = self.get_lookups_store(lookups_engine)
+        lookups_store.load_all(self)
+
     def load(self, storage_factory):
         if storage_factory.entity_storage_engine_available(self.get_storage_name()) is True:
             lookups_engine = storage_factory.entity_storage_engine(self.get_storage_name())
             try:
-                lookups_store = self.get_lookups_store(lookups_engine)
-                lookups_store.load_all(self)
+                self._load_collection(lookups_engine)
+                return True
+
             except Exception as e:
                 YLogger.exception(self, "Failed to load lookups from storage", e)
 
+        return False
+
     def reload(self, storage_factory):
-        self.load(storage_factory)
+        return self.load(storage_factory)
+
 
 class PersonCollection(BasePersonCollection):
 

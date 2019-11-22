@@ -32,14 +32,21 @@ class GenderCollection(DoubleStringPatternSplitCollection):
     def genderise_string(self, string):
         return self.replace_by_pattern(string)
 
+    def _load_collection(self, lookups_engine):
+        lookups_store = lookups_engine.gender_store()
+        lookups_store.load_all(self)
+
     def load(self, storage_factory):
         if storage_factory.entity_storage_engine_available(StorageFactory.GENDER) is True:
             lookups_engine = storage_factory.entity_storage_engine(StorageFactory.GENDER)
             try:
-                lookups_store = lookups_engine.gender_store()
-                lookups_store.load_all(self)
+                self._load_collection(lookups_engine)
+                return True
+
             except Exception as e:
                 YLogger.exception(self, "Failed to load lookups from storage", e)
 
+        return False
+
     def reload(self, storage_factory):
-        self.load(storage_factory)
+        return self.load(storage_factory)

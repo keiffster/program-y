@@ -69,11 +69,6 @@ class SetCollection:
             return self._sets[set_name]
         return None
 
-    def store_name(self, set_name):
-        if set_name in self._stores:
-            return self._stores[set_name]
-        return None
-
     def count_words_in_sets(self):
         count = 0
         for _, aset in self._sets.items():
@@ -82,22 +77,32 @@ class SetCollection:
                     count += len(variant)
         return count
 
+    def _load_collection(self, storage_engine):
+        sets_store = storage_engine.sets_store()
+        sets_store.load_all(self)
+
     def load(self, storage_factory):
         if storage_factory.entity_storage_engine_available(StorageFactory.SETS) is True:
-            sets_store_engine = storage_factory.entity_storage_engine(StorageFactory.SETS)
+            storage_engine = storage_factory.entity_storage_engine(StorageFactory.SETS)
             try:
-                sets_store = sets_store_engine.sets_store()
-                sets_store.load_all(self)
+                self._load_collection(storage_engine)
+
             except Exception as e:
                 YLogger.exception(self, "Failed to load set from storage", e)
 
         return len(self._sets)
 
+    def _reload_collection(self, storage_engine, set_name):
+        sets_store = storage_engine.sets_store()
+        sets_store.reload(self, set_name)
+
     def reload(self, storage_factory, set_name):
         if storage_factory.entity_storage_engine_available(StorageFactory.SETS) is True:
-            set_engine = storage_factory.entity_storage_engine(StorageFactory.SETS)
+            storage_engine = storage_factory.entity_storage_engine(StorageFactory.SETS)
             try:
-                sets_store = set_engine.sets_store()
-                sets_store.reload(self, set_name)
+                self._reload_collection(storage_engine, set_name)
+
             except Exception as e:
                 YLogger.exception(self, "Failed to load set from storage", e)
+
+        return len(self._sets)

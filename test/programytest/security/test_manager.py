@@ -70,6 +70,23 @@ class TestSecurityManager(unittest.TestCase):
         self.assertIsNone(mgr.authentication)
         self.assertIsNotNone(mgr.account_linker)
 
+    def test_fail_load_authentication_class_missing(self):
+        config = BrainSecuritiesConfiguration()
+        config._authorisation = BrainSecurityAuthorisationConfiguration()
+        config._authentication = BrainSecurityAuthenticationConfiguration()
+        config._authentication._classname = None
+        config._account_linker = BrainSecurityAccountLinkerConfiguration()
+
+        mgr = SecurityManager(config)
+        self.assertIsNotNone(mgr)
+
+        client = TestClient()
+        mgr.load_security_services(client)
+
+        self.assertIsNotNone(mgr.authorisation)
+        self.assertIsNone(mgr.authentication)
+        self.assertIsNotNone(mgr.account_linker)
+
     def test_fail_load_authorisation_class(self):
         config = BrainSecuritiesConfiguration()
         config._authorisation = BrainSecurityAuthorisationConfiguration()
@@ -77,6 +94,23 @@ class TestSecurityManager(unittest.TestCase):
         config._account_linker = BrainSecurityAccountLinkerConfiguration()
 
         mgr = MockSecurityManager(config, fail_authorise=True)
+        self.assertIsNotNone(mgr)
+
+        client = TestClient()
+        mgr.load_security_services(client)
+
+        self.assertIsNone(mgr.authorisation)
+        self.assertIsNotNone(mgr.authentication)
+        self.assertIsNotNone(mgr.account_linker)
+
+    def test_fail_load_authorisation_class_missing(self):
+        config = BrainSecuritiesConfiguration()
+        config._authorisation = BrainSecurityAuthorisationConfiguration()
+        config._authorisation._classname = None
+        config._authentication = BrainSecurityAuthenticationConfiguration()
+        config._account_linker = BrainSecurityAccountLinkerConfiguration()
+
+        mgr = SecurityManager(config)
         self.assertIsNotNone(mgr)
 
         client = TestClient()
@@ -102,3 +136,19 @@ class TestSecurityManager(unittest.TestCase):
         self.assertIsNotNone(mgr.authentication)
         self.assertIsNone(mgr.account_linker)
 
+    def test_fail_load_account_linking_class_missing(self):
+        config = BrainSecuritiesConfiguration()
+        config._authorisation = BrainSecurityAuthorisationConfiguration()
+        config._authentication = BrainSecurityAuthenticationConfiguration()
+        config._account_linker = BrainSecurityAccountLinkerConfiguration()
+        config._account_linker._classname = None
+
+        mgr = SecurityManager(config)
+        self.assertIsNotNone(mgr)
+
+        client = TestClient()
+        mgr.load_security_services(client)
+
+        self.assertIsNotNone(mgr.authorisation)
+        self.assertIsNotNone(mgr.authentication)
+        self.assertIsNone(mgr.account_linker)

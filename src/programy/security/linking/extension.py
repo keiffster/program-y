@@ -22,7 +22,6 @@ from programy.utils.logging.ylogger import YLogger
 from programy.context import ClientContext
 from programy.extensions.base import Extension
 from programy.security.linking.accountlinker import BasicAccountLinkerService
-from programy.security.linking.accountlinker import BasicAccountLinkerService
 
 
 class AccountLinkingExtension(Extension):
@@ -94,12 +93,11 @@ class AccountLinkingExtension(Extension):
                       data)
 
         words = data.split(" ")
-        if words:
-            if words[0] == 'LINK':
-                if words[1] == 'PRIMARY':
-                    return self.handle_primary_account_link(client_context, words)
+        if words[0] == 'LINK':
+            if words[1] == 'PRIMARY':
+                return self.handle_primary_account_link(client_context, words)
 
-                elif words[1] == 'SECONDARY':
-                    return self.handle_secondary_account_link(client_context, words)
+            elif words[1] == 'SECONDARY':
+                return self.handle_secondary_account_link(client_context, words)
 
         return "ACCOUNT LINK FAILED UNKNOWN COMMAND"

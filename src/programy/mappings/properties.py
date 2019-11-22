@@ -45,18 +45,25 @@ class BasePropertiesCollection(DoubleStringCharSplitCollection):
     def get_store(self, engine):
         raise NotImplementedError()  # pragma: no cover
 
+    def _load_collection(self, storage_engine):
+        store = self.get_store(storage_engine)
+        store.load_all(self)
+
     def load(self, storage_factory):
         name = self.get_storage_name()
         if storage_factory.entity_storage_engine_available(name) is True:
             engine = storage_factory.entity_storage_engine(name)
             try:
-                store = self.get_store(engine)
-                store.load_all(self)
+                self._load_collection(engine)
+                return True
+
             except Exception as e:
                 YLogger.exception(self, "Failed to load %s from storage", e, name)
 
-    def reload_file(self, storage_factory):
-        self.load(storage_factory)
+        return False
+
+    def reload(self, storage_factory):
+        return self.load(storage_factory)
 
 
 class PropertiesCollection(BasePropertiesCollection):
