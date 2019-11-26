@@ -133,3 +133,25 @@ class BrainTests(unittest.TestCase):
         brain.reload_map("Unknown")
         brain.reload_set("Unknown")
         brain.reload_rdf("Unknown")
+
+    def test_load_save_binaries(self):
+
+        yaml = YamlConfigurationFile()
+        self.load_os_specific_configuration(yaml, "test_secure_brain.yaml", "test_secure_brain.windows.yaml")
+
+        brain_config = BrainConfiguration()
+        brain_config.load_configuration(yaml, os.path.dirname(__file__))
+        brain_config.binaries._save_binary = True
+        brain_config.binaries._load_binary = False
+
+        client = TestClient()
+        client_context = client.create_client_context("testid")
+
+        brain1 = Brain(client_context.bot, brain_config)
+        self.assertIsNotNone(brain1)
+
+        brain_config.binaries._save_binary = False
+        brain_config.binaries._load_binary = True
+
+        brain2 = Brain(client_context.bot, brain_config)
+        self.assertIsNotNone(brain2)

@@ -21,6 +21,55 @@ from programy.extensions.base import Extension
 
 class ClientAdminExtension(Extension):
 
+    def _commands(self):
+        return "LIST BOTS, LIST BRAINS, DUMP BRAIN"
+
+    def _list(self, commands, client_context):
+        if len(commands) > 1:
+
+            if commands[1] == 'BOTS':
+                ids = client_context.client.bot_factory.botids()
+                return ", ".join(ids)
+
+            elif commands[1] == 'BRAINS':
+
+                if len(commands) > 2:
+                    botid = commands[2]
+                    bot = client_context.client.bot_factory.bot(botid)
+                    if bot:
+                        ids = bot.brain_factory.brainids()
+                        return ", ".join(ids)
+
+                    else:
+                        return "Invalid Bot Id [%s]" % botid
+
+        return "Invalid LIST command, BOTS or BRAINS only"
+
+    def _dump(self, commands, client_context):
+        if commands[1] == 'BRAIN':
+
+            if len(commands) == 4:
+                botid = commands[2]
+                bot = client_context.client.bot_factory.bot(botid)
+                if bot is not None:
+                    brainid = commands[3]
+                    brain = bot.brain_factory.brain(brainid)
+                    if brain is not None:
+                        brain.dump_brain_tree(client_context)
+                        return "Brain dumped, see config for location"
+
+                    else:
+                        return "Invalid Brain Id [%s]" % brainid
+
+                else:
+                    return "Invalid Bot Id [%s]" % botid
+
+            else:
+                return "Incomplete DUMP BRAIN Command"
+
+        else:
+            return "Invalid DUMP command, BRAIN only"
+
     # execute() is the interface that is called from the <extension> tag in the AIML
     def execute(self, client_context, data):
         YLogger.debug(client_context, "Client Admin - [%s]", data)
@@ -29,35 +78,16 @@ class ClientAdminExtension(Extension):
             commands = data.split()
 
             if commands[0] == 'COMMANDS':
-                return "LIST BOTS, LIST BRAINS, DUMP BRAIN"
+                return self._commands()
 
             elif commands[0] == 'LIST':
-
-                if commands[1] == 'BOTS':
-                    ids = client_context.client.bot_factory.botids()
-                    return ", ".join(ids)
-
-                elif commands[1] == 'BRAINS':
-                    botid = commands[2]
-                    bot = client_context.client.bot_factory.bot(botid)
-                    if bot:
-                        ids = bot.brain_factory.brainids()
-                        return ", ".join(ids)
-
-                else:
-                    return "No client information available"
+                return self._list(commands, client_context)
 
             elif commands[0] == 'DUMP':
+                return self._dump(commands, client_context)
 
-                if commands[1] == 'BRAIN':
-                    botid = commands[2]
-                    bot = client_context.client.bot_factory.bot(botid)
-                    if bot is not None:
-                        brainid = commands[3]
-                        brain = bot.brain_factory.brain(brainid)
-                        if brain is not None:
-                            brain.dump_brain_tree(client_context)
-                            return "Brain dumped, see config for location"
+            else:
+                return "Invalid Admin Command, LIST or DUMP only"
 
         except Exception as e:
             YLogger.exception(client_context, "Failed to execute client admin extension", e)

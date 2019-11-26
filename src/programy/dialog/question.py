@@ -50,14 +50,17 @@ class Question:
 
     def debug_info(self, client_context):
         text = ""
+        first = True
         for sentence in self._sentences:
+            if first is False:
+                text += ", "
             text += sentence.text(client_context)
             text += " = "
             if sentence.response is not None:
                 text += sentence.response
             else:
                 text += "N/A"
-            text += ", "
+            first = False
         return text
 
     @property

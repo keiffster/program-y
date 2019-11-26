@@ -151,96 +151,104 @@ class HotReloadAdminExtension(Extension):
 
             if commands[0] == 'RELOAD':
                 entity = commands[1]
-
-                if entity in ['AIML', 'DENORMAL', 'NORMAL', 'GENDER', 'PERSON', 'PERSON2', 'PROPERTIES', 'DEFAULTS',
+                if entity in ['DENORMAL', 'NORMAL', 'GENDER', 'PERSON', 'PERSON2', 'PROPERTIES', 'DEFAULTS',
                               'REGEX', 'PATTERNS', 'TEMPLATES', 'SET', 'MAP', 'RDF']:
-
-                    if entity == 'DENORMAL':
-                        return HotReloadAdminExtension.reload_denormal(client_context)
-
-                    elif entity == 'NORMAL':
-                        return HotReloadAdminExtension.reload_normal(client_context)
-
-                    elif entity == 'GENDER':
-                        return HotReloadAdminExtension.reload_gender(client_context)
-
-                    elif entity == 'PERSON':
-                        return HotReloadAdminExtension.reload_person(client_context)
-
-                    elif entity == 'PERSON2':
-                        return HotReloadAdminExtension.reload_person2(client_context)
-
-                    elif entity == 'PROPERTIES':
-                        return HotReloadAdminExtension.reload_properties(client_context)
-
-                    elif entity == 'DEFAULTS':
-                        return HotReloadAdminExtension.reload_defaults(client_context)
-
-                    elif entity == 'REGEX':
-                        return HotReloadAdminExtension.reload_regex(client_context)
-
-                    elif entity == 'PATTERNS':
-                        return HotReloadAdminExtension.reload_patterns(client_context)
-
-                    elif entity == 'TEMPLATES':
-                        return HotReloadAdminExtension.reload_templates(client_context)
-
-                    elif entity == 'AIML':
-                        if len(commands) == 2:
-                            return HotReloadAdminExtension.reload_aimls(client_context)
-                        else:
-                            raise Exception("Missing AIML name")
-
-                    elif entity == 'SET':
-                        if len(commands) == 3:
-                            setname = commands[2]
-                            return HotReloadAdminExtension.reload_set(client_context, setname)
-                        else:
-                            raise Exception("Missing Set name")
-
-                    elif entity == 'MAP':
-                        if len(commands) == 3:
-                            mapname = commands[2]
-                            return HotReloadAdminExtension.reload_map(client_context, mapname)
-                        else:
-                            raise Exception("Missing Map name")
-
-                    elif entity == 'RDF':
-                        if len(commands) == 3:
-                            rdfname = commands[2]
-                            return HotReloadAdminExtension.reload_rdf(client_context, rdfname)
-                        else:
-                            raise Exception("Missing RDF name")
+                    return self._reload_entity(entity, commands, client_context)
 
                 elif entity == 'ALL':
-
-                    if len(commands) == 3:
-                        entities = commands[2]
-                        if entities == 'AIML':
-                            return HotReloadAdminExtension.reload_aimls(client_context)
-
-                        elif entities == 'MAPS':
-                            return HotReloadAdminExtension.reload_maps(client_context)
-
-                        elif entities == 'SETS':
-                            return HotReloadAdminExtension.reload_sets(client_context)
-
-                        elif entities == 'RDFS':
-                            return HotReloadAdminExtension.reload_rdfs(client_context)
-                    else:
-                        return HotReloadAdminExtension.reload_all(client_context)
+                    return self._reload_all(commands, client_context)
 
                 else:
-                    raise Exception("Unknonw reload entity [%s]" % entity)
+                    return "Unknown RELOAD entity [%s]" % entity
 
             elif commands[0] == 'COMMANDS':
-                return "RELOAD [DENORMAL|NORMAL|GENDER|PERSON|PERSON2|PROPERTIES|DEFAULTS|REGEX|PATTERNS|TEMPLATES]" \
-                       " | [SET|MAP|RDF] NAME | ALL [AIML|MAPS|SETS|RDFS]"
+                return self._command()
 
             else:
-                raise Exception("Unknonw reload command [%s]" % commands[0])
+                return self._unknown_command(commands[0])
 
         except Exception as e:
             YLogger.exception(client_context, "Failed to execute hot reload extension", e)
 
         return "Hot Reload Admin Error"
+
+    def _reload_entity(self, entity, commands, client_context):
+
+        if entity == 'DENORMAL':
+            return HotReloadAdminExtension.reload_denormal(client_context)
+
+        elif entity == 'NORMAL':
+            return HotReloadAdminExtension.reload_normal(client_context)
+
+        elif entity == 'GENDER':
+            return HotReloadAdminExtension.reload_gender(client_context)
+
+        elif entity == 'PERSON':
+            return HotReloadAdminExtension.reload_person(client_context)
+
+        elif entity == 'PERSON2':
+            return HotReloadAdminExtension.reload_person2(client_context)
+
+        elif entity == 'PROPERTIES':
+            return HotReloadAdminExtension.reload_properties(client_context)
+
+        elif entity == 'DEFAULTS':
+            return HotReloadAdminExtension.reload_defaults(client_context)
+
+        elif entity == 'REGEX':
+            return HotReloadAdminExtension.reload_regex(client_context)
+
+        elif entity == 'PATTERNS':
+            return HotReloadAdminExtension.reload_patterns(client_context)
+
+        elif entity == 'TEMPLATES':
+            return HotReloadAdminExtension.reload_templates(client_context)
+
+        elif entity == 'SET':
+            if len(commands) == 3:
+                setname = commands[2]
+                return HotReloadAdminExtension.reload_set(client_context, setname)
+            else:
+                return "Missing Set name"
+
+        elif entity == 'MAP':
+            if len(commands) == 3:
+                mapname = commands[2]
+                return HotReloadAdminExtension.reload_map(client_context, mapname)
+            else:
+                return "Missing Map name"
+
+        else:  # RDF
+            if len(commands) == 3:
+                rdfname = commands[2]
+                return HotReloadAdminExtension.reload_rdf(client_context, rdfname)
+            else:
+                return "Missing RDF name"
+
+    def _reload_all(self, commands, client_context):
+        if len(commands) == 3:
+            entities = commands[2]
+            if entities == 'AIML':
+                return HotReloadAdminExtension.reload_aimls(client_context)
+
+            elif entities == 'MAPS':
+                return HotReloadAdminExtension.reload_maps(client_context)
+
+            elif entities == 'SETS':
+                return HotReloadAdminExtension.reload_sets(client_context)
+
+            elif entities == 'RDFS':
+                return HotReloadAdminExtension.reload_rdfs(client_context)
+
+            else:
+                return "Unknown RELOAD ALL entity [%s]" % entities
+
+        else:
+            return HotReloadAdminExtension.reload_all(client_context)
+
+    def _command(self):
+        return "RELOAD [DENORMAL|NORMAL|GENDER|PERSON|PERSON2|PROPERTIES|DEFAULTS|REGEX|PATTERNS|TEMPLATES]" \
+               " | [SET|MAP|RDF] NAME | ALL [AIML|MAPS|SETS|RDFS]"
+
+    def _unknown_command(self, command):
+        return "Unknown reload command [%s]" % command

@@ -30,23 +30,46 @@ class PropertiesAdminExtension(Extension):
         properties = ""
 
         splits = data.split()
-        if splits[0] == 'GET':
+        command = splits[0]
+        if command == 'GET':
 
-            if splits[1] == 'BOT':
-                properties = TemplateBotNode.get_bot_variable(client_context, splits[2])
+            get_command = splits[1]
+            if get_command == 'BOT':
+                if len(splits) == 3:
+                    var_name = splits[2]
+                    properties = TemplateBotNode.get_bot_variable(client_context, var_name)
+                else:
+                    return "Missing variable name for GET BOT"
 
-            elif splits[1] == "USER":
-                local = bool(splits[2].upper == 'LOCAL')
-                properties = TemplateGetNode.get_property_value(client_context, local, splits[3])
+            elif get_command == "USER":
+                if len(splits) < 3:
+                    return "Invalid syntax for GET USER, LOCAL or GLOBAL"
 
-        elif splits[0] == 'BOT':
+                var_type = splits[2].upper()
+                if var_type not in ['LOCAL', 'GLOBAL']:
+                    return "Invalid GET USER var type [%s]" % var_type
+
+                if len(splits) < 4:
+                    return "Missing variable name for GET USER"
+                var_name = splits[3]
+
+                if var_type == 'LOCAL':
+                    properties = TemplateGetNode.get_property_value(client_context, True, var_name)
+
+                else:
+                    properties = TemplateGetNode.get_property_value(client_context, False, var_name)
+
+            else:
+                return "Unknown GET command [%s]" % get_command
+
+        elif command == 'BOT':
             properties += "Properties:<br /><ul>"
             for pair in client_context.brain.properties.pairs:
                 properties += "<li>%s = %s</li>" % (pair[0], pair[1])
             properties += "</ul>"
             properties += "<br />"
 
-        elif splits[0] == "USER":
+        elif command == "USER":
             if client_context.bot.has_conversation(client_context):
                 conversation = client_context.bot.get_conversation(client_context)
 
@@ -58,5 +81,8 @@ class PropertiesAdminExtension(Extension):
 
             else:
                 properties += "No conversation currently available"
+
+        else:
+            return "Unknown properties command [%s]" % command
 
         return properties

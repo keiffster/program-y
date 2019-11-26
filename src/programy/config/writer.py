@@ -126,11 +126,11 @@ class ConfigurationWriter:
 
     @staticmethod
     def run(args=None):
+        parser = ConfigurationWriter.create_arguments()
         try:
             app = ConfigurationWriter()
 
             if args is None:
-                parser = ConfigurationWriter.create_arguments()
                 app.execute(parser.parse_args())
 
             else:

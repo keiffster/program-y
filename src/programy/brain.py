@@ -213,13 +213,13 @@ class Brain:
 
         load_aiml = True
         if self.configuration.binaries.load_binary is True:
-            load_aiml = self._binaries.load_binary(self.bot.client.storage_factory, self._aiml_parser)
+            load_aiml = self._binaries.load_binary(self.bot.client.storage_factory)
 
         if load_aiml is True:
             self.load_aiml()
 
         if configuration.binaries.save_binary is True:
-            self._binaries.save_binary(self.bot.client.storage_factory)
+            self._binaries.save_binary(self.bot.client.storage_factory, self._aiml_parser)
 
         YLogger.info(self, "Loading collections")
         self.load_collections()
@@ -418,21 +418,19 @@ class Brain:
 
         conversation = client_context.bot.get_conversation(client_context)
 
-        if conversation is not None:
+        self._questions += 1
 
-            self._questions += 1
+        topic_pattern = conversation.get_topic_pattern(client_context)
 
-            topic_pattern = conversation.get_topic_pattern(client_context)
+        that_pattern = conversation.get_that_pattern(client_context, srai)
 
-            that_pattern = conversation.get_that_pattern(client_context, srai)
+        match_context = self._aiml_parser.match_sentence(client_context,
+                                                         sentence,
+                                                         topic_pattern=topic_pattern,
+                                                         that_pattern=that_pattern)
 
-            match_context = self._aiml_parser.match_sentence(client_context,
-                                                             sentence,
-                                                             topic_pattern=topic_pattern,
-                                                             that_pattern=that_pattern)
-
-            if match_context is not None:
-                match_context.sentence = sentence.text(client_context)
-                return self.resolve_matched_template(client_context, match_context)
+        if match_context is not None:
+            match_context.sentence = sentence.text(client_context)
+            return self.resolve_matched_template(client_context, match_context)
 
         return None

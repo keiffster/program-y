@@ -170,7 +170,8 @@ class DynamicsCollectionTests(unittest.TestCase):
 
         collection._dynamic_vars["MOCK"] = MockDynamicSettableVariable(None)
 
-        collection.set_dynamic_var(None, "MOCK", "MockValue")
+        self.assertTrue(collection.set_dynamic_var(None, "MOCK", "MockValue"))
+        self.assertFalse(collection.set_dynamic_var(None, "MOCK2", "MockValue"))
 
         self.assertIsNotNone(collection.dynamic_var(None, "MOCK"))
         self.assertIsNone(collection.dynamic_var(None, "MOCK2"))

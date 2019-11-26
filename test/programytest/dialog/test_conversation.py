@@ -14,6 +14,79 @@ from programytest.client import TestClient
 
 class ConversationTests(unittest.TestCase):
 
+    def test_pop_methods(self):
+        client = TestClient()
+        client_context = ClientContext(client, "testid")
+        client_context.bot = Bot(BotConfiguration(), client)
+        client_context.bot.configuration.conversations._max_histories = 3
+        client_context.brain = client_context.bot.brain
+
+        conversation = Conversation(client_context)
+
+        question1 = Question.create_from_text(client_context, "Hello There")
+        conversation.record_dialog(question1)
+        self.assertEquals(1, len(conversation.questions))
+
+        question2 = Question.create_from_text(client_context, "How are you")
+        conversation.record_dialog(question2)
+        self.assertEquals(2, len(conversation.questions))
+
+        conversation.pop_dialog()
+        self.assertEquals(1, len(conversation.questions))
+
+        conversation.pop_dialog()
+        self.assertEquals(0, len(conversation.questions))
+
+        conversation.pop_dialog()
+        self.assertEquals(0, len(conversation.questions))
+
+    def test_properties(self):
+        client = TestClient()
+        client_context = ClientContext(client, "testid")
+        client_context.bot = Bot(BotConfiguration(), client)
+        client_context.bot.configuration.conversations._max_histories = 3
+        client_context.brain = client_context.bot.brain
+
+        conversation = Conversation(client_context)
+
+        conversation.set_property("name1", "value1")
+        self.assertEquals("value1", conversation.property("name1"))
+        conversation.set_property("name2", "value2")
+        self.assertEquals("value2", conversation.property("name2"))
+        conversation.set_property("name2", "value3")
+        self.assertEquals("value3", conversation.property("name2"))
+        self.assertEquals(None, conversation.property("name3"))
+
+    def test_topic_pattern(self):
+        client = TestClient()
+        client_context = ClientContext(client, "testid")
+        client_context.bot = Bot(BotConfiguration(), client)
+        client_context.bot.configuration.conversations._max_histories = 3
+        client_context.brain = client_context.bot.brain
+
+        conversation = Conversation(client_context)
+
+        self.assertEquals("*", conversation.get_topic_pattern(client_context))
+
+        conversation.set_property("topic", "TOPIC1")
+
+        self.assertEquals("TOPIC1", conversation.get_topic_pattern(client_context))
+
+    def test_parse_last_sentences_from_response(self):
+        client = TestClient()
+        client_context = ClientContext(client, "testid")
+        client_context.bot = Bot(BotConfiguration(), client)
+        client_context.bot.configuration.conversations._max_histories = 3
+        client_context.brain = client_context.bot.brain
+
+        conversation = Conversation(client_context)
+
+        self.assertEquals("*", conversation.parse_last_sentences_from_response(""))
+        self.assertEquals("HELLO", conversation.parse_last_sentences_from_response("HELLO"))
+        self.assertEquals("HELLO THERE", conversation.parse_last_sentences_from_response("HELLO THERE"))
+        self.assertEquals("THERE", conversation.parse_last_sentences_from_response("HELLO. THERE"))
+        self.assertEquals("THERE", conversation.parse_last_sentences_from_response("HELLO. THERE!"))
+
     def test_conversation(self):
 
         client = TestClient()

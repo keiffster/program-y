@@ -144,13 +144,15 @@ class DynamicsCollection:
         if name in self._dynamic_vars:
             dynamic_var = self._dynamic_vars[name]
             dynamic_var.set_value(client_context, value)
+            return True
 
-    def _set_dynamic_var_value(self, client_context, name, value):
-        self._set_value(client_context, name, value)
+        return False
 
     def set_dynamic_var(self, client_context, name, value):
         try:
-            self._set_dynamic_var_value(client_context, name, value)
+            return self._set_value(client_context, name, value)
 
         except Exception as e:
             YLogger.exception(self, "Unable to set value for dynamic var %s", e, name)
+
+        return False

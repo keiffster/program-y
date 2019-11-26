@@ -1,7 +1,7 @@
 import os
 import re
 import unittest.mock
-
+from unittest.mock import patch
 from programy.extensions.admin.hotreload import HotReloadAdminExtension
 from programy.storage.factory import StorageFactory
 from programytest.client import TestClient
@@ -83,20 +83,28 @@ class ReloadTestClient(TestClient):
 
 class HotReloadAdminExtensionTests(unittest.TestCase):
 
+    def test_invalid_commands(self):
+        extension = HotReloadAdminExtension()
+        client = ReloadTestClient()
+        client_context = client.create_client_context("testid")
+        self.assertEqual("Unknown reload command [XXXXXX]" , extension.execute(client_context, "XXXXXX"))
+
     def test_hotreload_commands(self):
         extension = HotReloadAdminExtension()
         client = ReloadTestClient()
         client_context = client.create_client_context("testid")
         self.assertEqual("RELOAD [DENORMAL|NORMAL|GENDER|PERSON|PERSON2|PROPERTIES|DEFAULTS|REGEX|PATTERNS|TEMPLATES] | [SET|MAP|RDF] NAME | ALL [AIML|MAPS|SETS|RDFS]", extension.execute(client_context, "COMMANDS"))
 
-    def test_reload_all(self):
+    def test_reload_other(self):
         extension = HotReloadAdminExtension()
+
+        ReloadTestClient.denormal = os.path.dirname(__file__) + os.sep + "test_config" + os.sep + "denormal1.txt"
 
         client = ReloadTestClient()
         client_context = client.create_client_context("testid")
 
-        result = extension.execute(client_context, "RELOAD ALL")
-        self.assertEqual("HOTRELOAD OK", result)
+        result = extension.execute(client_context, "RELOAD XXX")
+        self.assertEquals("Unknown RELOAD entity [XXX]", result)
 
     def test_reload_denormal(self):
         extension = HotReloadAdminExtension()
@@ -310,19 +318,60 @@ class HotReloadAdminExtensionTests(unittest.TestCase):
         client = ReloadTestClient()
         client_context = client.create_client_context("testid")
 
-        self.assertTrue(client_context.brain.aiml_parser.pattern_parser._pattern_factory.exists("word"))
+        self.assertTrue(client_context.brain.aiml_parser.template_parser._template_factory.exists("word"))
 
-        lookups_engine = client.storage_factory.entity_storage_engine(StorageFactory.PATTERN_NODES)
-        lookups_store = lookups_engine.pattern_nodes_store()
+        lookups_engine = client.storage_factory.entity_storage_engine(StorageFactory.TEMPLATE_NODES)
+        lookups_store = lookups_engine.template_nodes_store()
         lookups_store.get_storage()._dirs = [os.path.dirname(__file__) + os.sep + "test_config" + os.sep + "template_nodes2.conf"]
 
-        result = extension.execute(client_context, "RELOAD PATTERNS")
+        result = extension.execute(client_context, "RELOAD TEMPLATES")
         self.assertEqual("HOTRELOAD OK", result)
 
-        self.assertFalse(client_context.brain.aiml_parser.pattern_parser._pattern_factory.exists("word"))
-        self.assertTrue(client_context.brain.aiml_parser.pattern_parser._pattern_factory.exists("word2"))
+        self.assertFalse(client_context.brain.aiml_parser.template_parser._template_factory.exists("word"))
+        self.assertTrue(client_context.brain.aiml_parser.template_parser._template_factory.exists("word2"))
 
-    def test_reload_maps(self):
+    def test_reload_set_missing(self):
+        extension = HotReloadAdminExtension()
+
+        ReloadTestClient.set_files = os.path.dirname(__file__) + os.sep + "test_config" + os.sep + "sets1"
+
+        client = ReloadTestClient()
+        client_context = client.create_client_context("testid")
+
+        self.assertIsNotNone(client_context.brain.sets)
+        self.assertTrue(client_context.brain.sets.contains("animal"))
+        set = client_context.brain.sets.set("animal")
+        self.assertTrue('BUFFALO' in set)
+        del set['BUFFALO']
+        self.assertFalse('BUFFALO' in set)
+
+        result = extension.execute(client_context, "RELOAD SET")
+        self.assertEqual("Missing Set name", result)
+
+    def test_reload_set(self):
+        extension = HotReloadAdminExtension()
+
+        ReloadTestClient.set_files = os.path.dirname(__file__) + os.sep + "test_config" + os.sep + "sets1"
+
+        client = ReloadTestClient()
+        client_context = client.create_client_context("testid")
+
+        self.assertIsNotNone(client_context.brain.sets)
+        self.assertTrue(client_context.brain.sets.contains("animal"))
+        set = client_context.brain.sets.set("animal")
+        self.assertTrue('BUFFALO' in set)
+        del set['BUFFALO']
+        self.assertFalse('BUFFALO' in set)
+
+        result = extension.execute(client_context, "RELOAD SET ANIMAL")
+        self.assertEqual("HOTRELOAD OK", result)
+
+        self.assertIsNotNone(client_context.brain.sets)
+        self.assertTrue(client_context.brain.sets.contains("animal"))
+        set = client_context.brain.sets.set("animal")
+        self.assertTrue('BUFFALO' in set)
+
+    def test_reload_map_missing(self):
         extension = HotReloadAdminExtension()
 
         ReloadTestClient.map_files = os.path.dirname(__file__) + os.sep + "test_config" + os.sep + "maps1"
@@ -332,22 +381,14 @@ class HotReloadAdminExtensionTests(unittest.TestCase):
 
         self.assertIsNotNone(client_context.brain.maps)
         self.assertTrue(client_context.brain.maps.contains("animallegs"))
-        self.assertTrue(client_context.brain.maps.contains("animalsounds"))
-        self.assertFalse(client_context.brain.maps.contains("state2captial"))
-        self.assertFalse(client_context.brain.maps.contains("state2largestcity"))
+        al_map = client_context.brain.maps.map("animallegs")
+        self.assertIsNotNone(al_map)
+        self.assertEqual('4', al_map['BUFFALO'])
+        al_map['BUFFALO'] = '6'
+        self.assertEqual('6', al_map['BUFFALO'])
 
-        lookups_engine = client.storage_factory.entity_storage_engine(StorageFactory.MAPS)
-        lookups_store = lookups_engine.maps_store()
-        lookups_store.get_storage()._dirs = [os.path.dirname(__file__) + os.sep + "test_config" + os.sep + "maps2"]
-
-        result = extension.execute(client_context, "RELOAD ALL MAPS")
-        self.assertEqual("HOTRELOAD OK", result)
-
-        self.assertIsNotNone(client_context.brain.maps)
-        self.assertFalse(client_context.brain.maps.contains("animallegs"))
-        self.assertFalse(client_context.brain.maps.contains("animalsounds"))
-        self.assertTrue(client_context.brain.maps.contains("state2capital"))
-        self.assertTrue(client_context.brain.maps.contains("state2largestcity"))
+        result = extension.execute(client_context, "RELOAD MAP")
+        self.assertEqual("Missing Map name", result)
 
     def test_reload_map(self):
         extension = HotReloadAdminExtension()
@@ -374,6 +415,56 @@ class HotReloadAdminExtensionTests(unittest.TestCase):
         al_map = client_context.brain.maps.map("animallegs")
         self.assertIsNotNone(al_map)
         self.assertEqual('4', al_map['BUFFALO'])
+
+    def test_reload_rdf_missing(self):
+        extension = HotReloadAdminExtension()
+
+        ReloadTestClient.rdf_files = os.path.dirname(__file__) + os.sep + "test_config" + os.sep + "rdfs1"
+
+        client = ReloadTestClient()
+        client_context = client.create_client_context("testid")
+
+        self.assertTrue(client_context.brain.rdf.has_subject('ANTEATER'))
+        client_context.brain.rdf.delete_entity('ANTEATER')
+        self.assertFalse(client_context.brain.rdf.has_subject('ANTEATER'))
+
+        result = extension.execute(client_context, "RELOAD RDF")
+        self.assertEqual("Missing RDF name", result)
+
+    def test_reload_rdf(self):
+        extension = HotReloadAdminExtension()
+
+        ReloadTestClient.rdf_files = os.path.dirname(__file__) + os.sep + "test_config" + os.sep + "rdfs1"
+
+        client = ReloadTestClient()
+        client_context = client.create_client_context("testid")
+
+        self.assertTrue(client_context.brain.rdf.has_subject('ANTEATER'))
+        client_context.brain.rdf.delete_entity('ANTEATER')
+        self.assertFalse(client_context.brain.rdf.has_subject('ANTEATER'))
+
+        result = extension.execute(client_context, "RELOAD RDF ANIMAL")
+        self.assertEqual("HOTRELOAD OK", result)
+
+        self.assertTrue(client_context.brain.rdf.has_subject('ANTEATER'))
+
+    def test_reload_all(self):
+        extension = HotReloadAdminExtension()
+
+        client = ReloadTestClient()
+        client_context = client.create_client_context("testid")
+
+        result = extension.execute(client_context, "RELOAD ALL")
+        self.assertEqual("HOTRELOAD OK", result)
+
+    def test_reload_aiml(self):
+        extension = HotReloadAdminExtension()
+
+        client = ReloadTestClient()
+        client_context = client.create_client_context("testid")
+
+        result = extension.execute(client_context, "RELOAD ALL AIML")
+        self.assertEqual("HOTRELOAD OK", result)
 
     def test_reload_sets(self):
         extension = HotReloadAdminExtension()
@@ -402,28 +493,32 @@ class HotReloadAdminExtensionTests(unittest.TestCase):
         self.assertTrue(client_context.brain.sets.contains("fastfood"))
         self.assertTrue(client_context.brain.sets.contains("food"))
 
-    def test_reload_set(self):
+    def test_reload_maps(self):
         extension = HotReloadAdminExtension()
 
-        ReloadTestClient.set_files = os.path.dirname(__file__) + os.sep + "test_config" + os.sep + "sets1"
+        ReloadTestClient.map_files = os.path.dirname(__file__) + os.sep + "test_config" + os.sep + "maps1"
 
         client = ReloadTestClient()
         client_context = client.create_client_context("testid")
 
-        self.assertIsNotNone(client_context.brain.sets)
-        self.assertTrue(client_context.brain.sets.contains("animal"))
-        set = client_context.brain.sets.set("animal")
-        self.assertTrue('BUFFALO' in set)
-        del set['BUFFALO']
-        self.assertFalse('BUFFALO' in set)
+        self.assertIsNotNone(client_context.brain.maps)
+        self.assertTrue(client_context.brain.maps.contains("animallegs"))
+        self.assertTrue(client_context.brain.maps.contains("animalsounds"))
+        self.assertFalse(client_context.brain.maps.contains("state2captial"))
+        self.assertFalse(client_context.brain.maps.contains("state2largestcity"))
 
-        result = extension.execute(client_context, "RELOAD SET ANIMAL")
+        lookups_engine = client.storage_factory.entity_storage_engine(StorageFactory.MAPS)
+        lookups_store = lookups_engine.maps_store()
+        lookups_store.get_storage()._dirs = [os.path.dirname(__file__) + os.sep + "test_config" + os.sep + "maps2"]
+
+        result = extension.execute(client_context, "RELOAD ALL MAPS")
         self.assertEqual("HOTRELOAD OK", result)
 
-        self.assertIsNotNone(client_context.brain.sets)
-        self.assertTrue(client_context.brain.sets.contains("animal"))
-        set = client_context.brain.sets.set("animal")
-        self.assertTrue('BUFFALO' in set)
+        self.assertIsNotNone(client_context.brain.maps)
+        self.assertFalse(client_context.brain.maps.contains("animallegs"))
+        self.assertFalse(client_context.brain.maps.contains("animalsounds"))
+        self.assertTrue(client_context.brain.maps.contains("state2capital"))
+        self.assertTrue(client_context.brain.maps.contains("state2largestcity"))
 
     def test_reload_rdfs(self):
         extension = HotReloadAdminExtension()
@@ -452,40 +547,21 @@ class HotReloadAdminExtensionTests(unittest.TestCase):
         self.assertTrue(client_context.brain.rdf.has_subject("SOUTH"))
         self.assertTrue(client_context.brain.rdf.has_subject("IBM"))
 
-    def test_reload_rdf(self):
+    def test_reload_all_other(self):
         extension = HotReloadAdminExtension()
-
-        ReloadTestClient.rdf_files = os.path.dirname(__file__) + os.sep + "test_config" + os.sep + "rdfs1"
 
         client = ReloadTestClient()
         client_context = client.create_client_context("testid")
 
-        self.assertTrue(client_context.brain.rdf.has_subject('ANTEATER'))
-        client_context.brain.rdf.delete_entity('ANTEATER')
-        self.assertFalse(client_context.brain.rdf.has_subject('ANTEATER'))
+        result = extension.execute(client_context, "RELOAD ALL OTHER")
+        self.assertEqual("Unknown RELOAD ALL entity [OTHER]", result)
 
-        result = extension.execute(client_context, "RELOAD RDF ANIMAL")
-        self.assertEqual("HOTRELOAD OK", result)
+    def patch_command(self):
+        raise Exception("Mock Exception")
 
-        self.assertTrue(client_context.brain.rdf.has_subject('ANTEATER'))
-
-    def test_reload_aimls(self):
+    @patch ("programy.extensions.admin.hotreload.HotReloadAdminExtension._command", patch_command)
+    def test_reload_exception(self):
         extension = HotReloadAdminExtension()
-
-        ReloadTestClient.aiml_files = os.path.dirname(__file__) + os.sep + "test_config" + os.sep + 'aimls1'
-
         client = ReloadTestClient()
         client_context = client.create_client_context("testid")
-
-        self.assertEqual("That was test 1.", client_context.bot.ask_question(client_context, "TEST1"))
-        self.assertEqual("That was test 2.", client_context.bot.ask_question(client_context, "TEST2"))
-
-        category_engine = client.storage_factory.entity_storage_engine(StorageFactory.CATEGORIES)
-        category_store = category_engine.category_store()
-        category_store.get_storage()._dirs = [os.path.dirname(__file__) + os.sep + "test_config" + os.sep + 'aimls2']
-
-        result = extension.execute(client_context, "RELOAD ALL AIML")
-        self.assertEqual("HOTRELOAD OK", result)
-
-        self.assertEqual("That was test 3.", client_context.bot.ask_question(client_context, "TEST3"))
-        self.assertEqual("That was test 4.", client_context.bot.ask_question(client_context, "TEST4"))
+        self.assertEqual("Hot Reload Admin Error", extension.execute(client_context, "COMMANDS"))

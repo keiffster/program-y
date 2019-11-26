@@ -13,6 +13,19 @@ class QuestionTests(unittest.TestCase):
         client = TestClient()
         self._client_context = client.create_client_context("test1")
 
+    def test_question_set_sentencesy(self):
+        question = Question.create_from_text(self._client_context, "")
+        self.assertIsNotNone(question)
+        self.assertEqual(0, len(question.sentences))
+
+        question.sentences = [Sentence(self._client_context, "Sentence One"), Sentence(self._client_context, "Sentence Two")]
+        self.assertEqual(2, len(question.sentences))
+        self.assertEqual("Sentence One = N/A, Sentence Two = N/A", question.debug_info(self._client_context))
+
+        self.assertEquals(-1, question.current_sentence_no)
+        question.current_sentence_no = 1
+        self.assertEquals(1, question.current_sentence_no)
+
     def test_question_no_sentences_empty(self):
         question = Question.create_from_text(self._client_context, "")
         self.assertIsNotNone(question)
@@ -75,12 +88,17 @@ class QuestionTests(unittest.TestCase):
         self.assertIsNotNone(combined)
         self.assertEqual(combined, "Hello. World")
 
-        self.assertEquals("Hi = Hello, Hi Again = World, ", question.debug_info(self._client_context))
+        self.assertEquals("Hi = Hello, Hi Again = World", question.debug_info(self._client_context))
 
     def test_next_previous_sentences(self):
         question = Question.create_from_text(self._client_context, "Hello There. How Are you")
         self.assertEqual("How Are you", question.current_sentence().text(self._client_context))
         self.assertEqual("Hello There", question.previous_nth_sentence(1).text(self._client_context))
+
+    def test_next_previous_sentences_exception(self):
+        question = Question.create_from_text(self._client_context, "Hello There. How Are you")
+        with self.assertRaises(Exception):
+            question.previous_nth_sentence(2)
 
     def test_next_previous_nth_sentences(self):
         question = Question.create_from_text(self._client_context, "Hello There. How Are you")

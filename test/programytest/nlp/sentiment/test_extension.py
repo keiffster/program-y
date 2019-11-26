@@ -78,7 +78,7 @@ class SentimentExtensionTests(unittest.TestCase):
         self.assertIsNotNone(result)
         self.assertEqual("SENTIMENT ENABLED", result)
 
-    def test_sentiment_enabled(self):
+    def test_sentiment_disabled(self):
         extension = SentimentExtension()
         self.assertIsNotNone(extension)
 

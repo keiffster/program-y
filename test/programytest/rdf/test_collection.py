@@ -3,7 +3,7 @@ import unittest
 from programy.rdf.collection import RDFCollection
 
 
-class RDFCollectionCreationTests(unittest.TestCase):
+class RDFCollectionTests(unittest.TestCase):
 
     def test_add_collection(self):
         collection = RDFCollection()

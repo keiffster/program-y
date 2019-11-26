@@ -81,28 +81,31 @@ class AdminTool:
             self.display("\t%s" % bot)
         if os.name == 'posix':
             self.display("\n\tTo download use 'python3 -m programy.admin.tool download <bot-name>'")
-        else:
-            self.display("\n\tTo download use 'python -m programy.admin.tool download <bot-name>'")
+        else:                                                                                           # pragma: no cover
+            self.display("\n\tTo download use 'python -m programy.admin.tool download <bot-name>'")     # pragma: no cover
 
         self.display("\nAdditional components are:\n")
         self.display("\ttextblob")
         if os.name == 'posix':
             self.display("\n\tTo install use 'python3 -m programy.admin.tool install <component>'")
-        else:
-            self.display("\n\tTo install use 'python -m programy.admin.tool install <component>'")
+        else:                                                                                           # pragma: no cover
+            self.display("\n\tTo install use 'python -m programy.admin.tool install <component>'")      # pragma: no cover
         self.display("")
+
+    def wget_download(self, url):
+        return wget.download(url, bar=wget.bar_thermometer)     # pragma: no cover
 
     def download_bot(self, bot_name):
         url = bots[bot_name]
         self.display("Downloading [%s] from [%s]" % (bot_name, url))
-        filename = wget.download(url, bar=wget.bar_thermometer)
+        filename = self.wget_download(url)
         self.display("\nDownload complete")
         return filename
 
     @staticmethod
-    def extract_bot(filename, remove_after=True):
+    def extract_bot(filename, path=None, remove_after=True):
         zip_ref = zipfile.ZipFile(filename, 'r')
-        zip_ref.extractall()
+        zip_ref.extractall(path=path)
         zip_ref.close()
         if remove_after is True:
             os.remove(filename)
@@ -110,6 +113,15 @@ class AdminTool:
     @staticmethod
     def zip_dir_name_from_filename(filename):
         return filename.split(".")[0]
+
+    def download_and_make_active(self, bot_name):
+        filename = self.download_bot(bot_name)                                              # pragma: no cover
+        AdminTool.extract_bot(filename)                                                     # pragma: no cover
+        master_dir = AdminTool.zip_dir_name_from_filename(filename)                         # pragma: no cover
+        AdminTool.recursive_copy(master_dir, ".")                                           # pragma: no cover
+        if os.name == 'posix':                                                              # pragma: no cover
+            AdminTool.make_all_executable("." + os.sep + "scripts" + os.sep + "xnix")       # pragma: no cover
+        shutil.rmtree(master_dir)                                                           # pragma: no cover
 
     def install_bot(self, words):
 
@@ -120,20 +132,14 @@ class AdminTool:
         if bot_name not in bots:
             raise Exception("Unknown bot [%s]" % bot_name)
 
-        filename = self.download_bot(bot_name)
-
-        AdminTool.extract_bot(filename)
-
-        master_dir = AdminTool.zip_dir_name_from_filename(filename)
-
-        AdminTool.recursive_copy(master_dir, ".")
-
-        if os.name == 'posix':
-            AdminTool.make_all_executable("." + os.sep + "scripts" + os.sep + "xnix")
-
-        shutil.rmtree(master_dir)
+        self.download_and_make_active(bot_name)
 
         self.show_execute_help(bot_name)
+
+    def install_textblob(self):
+        nltk.download('punkt')              # pragma: no cover
+        nltk.download('stopwords')          # pragma: no cover
+        download_corpora.download_all()     # pragma: no cover
 
     def install_additional(self, words):
 
@@ -143,11 +149,7 @@ class AdminTool:
 
         if additional == 'textblob':
             self.display("Installing additional components for %s" % additional)
-
-            nltk.download('punkt')
-            nltk.download('stopwords')
-
-            download_corpora.download_all()
+            self.install_textblob()
         else:
             raise Exception("Missing additional component from install command ['textblob']")
 
@@ -156,9 +158,9 @@ class AdminTool:
         if os.name == 'posix':
             self.display("\n\tcd scripts/xnix")
             self.display("\t./%s.sh" % bot_name)
-        else:
-            self.display("\n\tcd scripts\\windows")
-            self.display("\t%s.cmd" % bot_name)
+        else:                                           # pragma: no cover
+            self.display("\n\tcd scripts\\windows")     # pragma: no cover
+            self.display("\t%s.cmd" % bot_name)         # pragma: no cover
 
     def show_help(self):
         self.display("Available commands are:\n")
@@ -194,6 +196,6 @@ class AdminTool:
         outputLog(self, text)
 
 
-if __name__ == '__main__':
-    tool = AdminTool()
-    tool.run(sys.argv[1:])
+if __name__ == '__main__':      # pragma: no cover
+    tool = AdminTool()          # pragma: no cover
+    tool.run(sys.argv[1:])      # pragma: no cover

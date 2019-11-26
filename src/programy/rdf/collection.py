@@ -72,6 +72,20 @@ class RDFCollection(BaseCollection):
             return self._stores[mapname]
         return None
 
+    def subjects(self):
+        return list(self._entities.keys())
+
+    def predicates(self, subject):
+        if subject in self._entities:
+            return self._entities[subject].predicates.keys()
+        return []
+
+    def objects(self, subject, predicate):
+        if subject in self._entities:
+            if predicate in self._entities[subject].predicates:
+                return [self._entities[subject].predicates[predicate]]
+        return []
+
     def load(self, storage_factory):
         YLogger.debug(self, "Loading RDF Collection")
         if storage_factory.entity_storage_engine_available(StorageFactory.RDF) is True:
@@ -93,20 +107,6 @@ class RDFCollection(BaseCollection):
                     rdfs_store.reload(self, rdf_name)
                 except Exception as e:
                     YLogger.exception(self, "Failed to load rdf from storage", e)
-
-    def subjects(self):
-        return list(self._entities.keys())
-
-    def predicates(self, subject):
-        if subject in self._entities:
-            return self._entities[subject].predicates.keys()
-        return []
-
-    def objects(self, subject, predicate):
-        if subject in self._entities:
-            if predicate in self._entities[subject].predicates:
-                return [self._entities[subject].predicates[predicate]]
-        return []
 
     def add_entity(self, subject, predicate, obj, rdf_name, rdf_store=None, entityid=None):
         YLogger.debug(self, "Adding RDF Entity [%s] [%s] [%s] [%s]", subject, predicate, obj, rdf_name)

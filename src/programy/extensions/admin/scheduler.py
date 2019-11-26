@@ -21,6 +21,50 @@ from programy.extensions.base import Extension
 
 class SchedulerAdminExtension(Extension):
 
+    def _commands(self):
+        return "LIST JOBS, KILL JOB, PAUSE, RESUME"
+
+    def _list(self, commands, client_context):
+        if len(commands) == 2:
+            if commands[1] == 'JOBS':
+                jobs = client_context.client.scheduler.list_jobs()
+                if jobs:
+                    response = ""
+                    for jobid, job in jobs.items():
+                        response += "> Job ID:%s, Next Run: %s, Args: %s\n" % (jobid,
+                                                                               job.next_run_time,
+                                                                               str(job.args))
+                    return response
+
+                return "No job information available"
+
+            else:
+                return "Unknown LIST sub command [%s]" % commands[1]
+
+        else:
+            return "Invalid LIST commands, LIST JOBS"
+
+    def _kill(self, commands, client_context):
+        if len(commands) == 3:
+
+            if commands[1] == 'JOB':
+                client_context.client.scheduler.remove_existing_job(commands[2])
+                return "Job removed"
+
+            else:
+                return "Unknown KILL sub command [%s]" % commands[1]
+
+        else:
+            return "Invalid KILL commands, LIST JOB JOBID"
+
+    def _pause(self, client_context):
+        client_context.client.scheduler.pause()
+        return "Scheduler paused"
+
+    def _resume(self, client_context):
+        client_context.client.scheduler.resume()
+        return "Scheduler resumed"
+
     # execute() is the interface that is called from the <extension> tag in the AIML
     def execute(self, client_context, data):
         YLogger.debug(client_context, "Scheduler Admin - [%s]", data)
@@ -28,37 +72,25 @@ class SchedulerAdminExtension(Extension):
         try:
             commands = [x.upper() for x in data.split()]
 
-            if commands[0] == 'COMMANDS':
+            command = commands[0]
 
-                return "LIST JOBS, KILL JOB, PAUSE, RESUME"
+            if command == 'COMMANDS':
+                return self._commands()
 
-            elif commands[0] == 'LIST':
+            elif command == 'LIST':
+                return self._list(commands, client_context)
 
-                if commands[1] == 'JOBS':
-                    jobs = client_context.client.scheduler.list_jobs()
-                    if jobs:
-                        response = ""
-                        for jobid, job in jobs.items():
-                            response += "> Job ID:%s, Next Run: %s, Args: %s\n" % (jobid,
-                                                                                   job.next_run_time,
-                                                                                   str(job.args))
-                        return response
+            elif command == 'KILL':
+                return self._kill(commands, client_context)
 
-                    return "No job information available"
+            elif command == 'PAUSE':
+                return self._pause(client_context)
 
-            elif commands[0] == 'KILL':
+            elif command == 'RESUME':
+                return self._resume(client_context)
 
-                if commands[1] == 'JOB':
-                    client_context.client.scheduler.remove_existing_job(commands[2])
-                    return "Job removed"
-
-            elif commands[0] == 'PAUSE':
-                client_context.client.scheduler.pause()
-                return "Scheduler paused"
-
-            elif commands[0] == 'RESUME':
-                client_context.client.scheduler.resume()
-                return "Scheduler resumed"
+            else:
+                return "Invalid Scheduler Admin command [%s]" % command
 
         except Exception as e:
             YLogger.exception(client_context, "Failed to execute scheduler extension", e)

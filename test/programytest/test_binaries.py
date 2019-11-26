@@ -1,7 +1,7 @@
 import os
 import os.path
 import unittest
-
+from unittest.mock import patch
 from programy.binaries import BinariesManager
 from programy.config.brain.binaries import BrainBinariesConfiguration
 from programy.storage.factory import StorageFactory
@@ -43,15 +43,7 @@ class BinariesTests(unittest.TestCase):
         with self.assertRaises(Exception):
             manager = BinariesManager(None)
 
-    def test_save_then_load(self):
-
-        tmpdir = FileStorageConfiguration.get_temp_dir()
-
-        fullpath = tmpdir + os.sep + "braintree/braintree.bin"
-
-        if os.path.exists(fullpath):
-            os.remove(fullpath)
-
+    def create_storage_factory(self, fullpath):
         config = FileStorageConfiguration()
         config._binaries_storage = FileStoreConfiguration(file=fullpath, fileformat="binary", encoding="utf-8",
                                                           delete_on_start=False)
@@ -64,6 +56,19 @@ class BinariesTests(unittest.TestCase):
         factory._store_to_engine_map[StorageFactory.BINARIES] = storage_engine
 
         storage_engine.initialise()
+
+        return factory
+
+    def test_save_then_load(self):
+
+        tmpdir = FileStorageConfiguration.get_temp_dir()
+
+        fullpath = tmpdir + os.sep + "braintree/braintree.bin"
+
+        if os.path.exists(fullpath):
+            os.remove(fullpath)
+
+        factory = self.create_storage_factory(fullpath)
 
         config = BrainBinariesConfiguration()
         manager = BinariesManager(config)
@@ -100,33 +105,68 @@ class BinariesTests(unittest.TestCase):
 
         self.assertIsNone(manager.load_binary(factory))
 
+    def patch_save_to_storage(self, storage_factory, aiml_parser):
+        raise Exception("Mock Exception")
+
+    @patch("programy.binaries.BinariesManager._save_to_storage", patch_save_to_storage)
     def test_save_with_exception(self):
 
         config = BrainBinariesConfiguration()
-        manager = MockBinariesManager(config, except_on_save=True)
+        manager = BinariesManager(config)
         self.assertIsNotNone(manager)
 
-        config = FileStorageConfiguration()
-        factory = StorageFactory()
-        storage_engine = FileStorageEngine(config)
-        storage_engine.initialise()
+        tmpdir = FileStorageConfiguration.get_temp_dir()
+
+        fullpath = tmpdir + os.sep + "braintree/braintree.bin"
+
+        if os.path.exists(fullpath):
+            os.remove(fullpath)
+
+        factory = self.create_storage_factory(fullpath)
 
         test_client = TestClient()
         client_context = test_client.create_client_context("test1")
 
         self.assertFalse(manager.save_binary(factory, client_context.bot.brain.aiml_parser))
 
-    def test_load_with_exception(self):
+    def patch_load_from_storage(self, storage_factory):
+        raise Exception("Mock Exception")
+
+    @patch("programy.binaries.BinariesManager._load_from_storage", patch_load_from_storage)
+    def test_load_with_exception_and_raise(self):
 
         config = BrainBinariesConfiguration()
-        manager = MockBinariesManager(config, except_on_load=True)
+        config._load_aiml_on_binary_fail = False
+        manager = BinariesManager(config)
         self.assertIsNotNone(manager)
 
-        config = FileStorageConfiguration()
-        factory = StorageFactory()
-        storage_engine = FileStorageEngine(config)
-        storage_engine.initialise()
+        tmpdir = FileStorageConfiguration.get_temp_dir()
 
-        test_client = TestClient()
+        fullpath = tmpdir + os.sep + "braintree/braintree.bin"
+
+        if os.path.exists(fullpath):
+            os.remove(fullpath)
+
+        factory = self.create_storage_factory(fullpath)
+
+        with self.assertRaises(Exception):
+            manager.load_binary(factory)
+
+    @patch("programy.binaries.BinariesManager._load_from_storage", patch_load_from_storage)
+    def test_load_with_exception_and_not_raise(self):
+
+        config = BrainBinariesConfiguration()
+        config._load_aiml_on_binary_fail = True
+        manager = BinariesManager(config)
+        self.assertIsNotNone(manager)
+
+        tmpdir = FileStorageConfiguration.get_temp_dir()
+
+        fullpath = tmpdir + os.sep + "braintree/braintree.bin"
+
+        if os.path.exists(fullpath):
+            os.remove(fullpath)
+
+        factory = self.create_storage_factory(fullpath)
 
         self.assertIsNone(manager.load_binary(factory))

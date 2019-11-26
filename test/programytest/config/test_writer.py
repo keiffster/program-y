@@ -1,5 +1,6 @@
 import unittest
 import unittest.mock
+from unittest.mock import patch
 import os
 import os.path
 
@@ -215,6 +216,18 @@ class ConfigurationWriterTests(unittest.TestCase):
             writer.run()
 
     def test_run_with_args(self):
+        args = unittest.mock.Mock()
+        args.clients = ['sanic']
+        args.defaults = False
+
+        writer = ConfigurationWriter()
+        writer.run(args)
+
+    def patch_execute(self, args):
+        raise Exception("Mock Exception")
+
+    @patch("programy.config.writer.ConfigurationWriter.execute", patch_execute)
+    def test_run_exception_with_args(self):
         args = unittest.mock.Mock()
         args.clients = ['sanic']
         args.defaults = False

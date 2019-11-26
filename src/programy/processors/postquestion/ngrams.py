@@ -25,16 +25,21 @@ class NGramsPostQuestionProcessor(PostQuestionProcessor):
     def __init__(self):
         PostQuestionProcessor.__init__(self)
 
+    def _ngrams(self, context, word_string):
+        sentences = NGramsCreator.get_ngrams(word_string, 3)
+        for ngram in sentences:
+            text = context.brain.tokenizer.words_to_texts(ngram)
+            sentence = Sentence(context, text)
+            response = context.brain.ask_question(context, sentence)
+            if response is not None:
+                return response
+
+        return None
+
     def process(self, context, word_string):
         YLogger.debug(context, "Creating ngrams from sentence...")
         try:
-            sentences = NGramsCreator.get_ngrams(word_string, 3)
-            for ngram in sentences:
-                text = context.brain.tokenizer.words_to_texts(ngram)
-                sentence = Sentence(context, text)
-                response = context.brain.ask_question(context, sentence)
-                if response is not None:
-                    return response
+            return self._ngrams(context, word_string)
 
         except Exception as excep:
             YLogger.exception(self, "Failed to create NGrams", excep)
