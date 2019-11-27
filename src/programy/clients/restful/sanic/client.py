@@ -43,7 +43,6 @@ class SanicRestBotClient(RestBotClient):
     def create_response(self, response, status_code, version=1.0):
         if self.configuration.client_configuration.debug is True:
             self.dump_request(response)
-
         return json(response, status=status_code)
 
     def run(self, sanic):
@@ -87,12 +86,12 @@ if __name__ == '__main__':
     @APP.route('/api/rest/v1.0/ask', methods=['GET', 'POST'])
     async def ask(request):
         response, status = REST_CLIENT.process_request(request, version=1.0)
-        return REST_CLIENT.create_response(response, status=status, version=1.0)
+        return REST_CLIENT.create_response(response, status_code=status, version=1.0)
 
     @APP.route('/api/rest/v2.0/ask', methods=['GET', 'POST'])
     async def ask(request):
         response, status = REST_CLIENT.process_request(request, version=2.0)
-        return REST_CLIENT.create_response(response, status=status, version=2.0)
+        return REST_CLIENT.create_response(response, status_code=status, version=2.0)
 
     print("Loading, please wait...")
     REST_CLIENT = SanicRestBotClient("sanic")
