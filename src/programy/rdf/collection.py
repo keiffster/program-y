@@ -77,7 +77,7 @@ class RDFCollection(BaseCollection):
 
     def predicates(self, subject):
         if subject in self._entities:
-            return self._entities[subject].predicates.keys()
+            return list(self._entities[subject].predicates.keys())
         return []
 
     def objects(self, subject, predicate):
@@ -90,23 +90,29 @@ class RDFCollection(BaseCollection):
         YLogger.debug(self, "Loading RDF Collection")
         if storage_factory.entity_storage_engine_available(StorageFactory.RDF) is True:
             rdf_engine = storage_factory.entity_storage_engine(StorageFactory.RDF)
-            if rdf_engine:
-                try:
-                    rdfs_store = rdf_engine.rdf_store()
-                    rdfs_store.load_all(self)
-                except Exception as e:
-                    YLogger.exception(self, "Failed to load rdf from storage", e)
+            try:
+                rdfs_store = rdf_engine.rdf_store()
+                rdfs_store.load_all(self)
+                return True
+
+            except Exception as e:
+                YLogger.exception(self, "Failed to load rdf from storage", e)
+
+        return False
 
     def reload(self, storage_factory, rdf_name):
         YLogger.debug(self, "Reloading RDF [%s]", rdf_name)
         if storage_factory.entity_storage_engine_available(StorageFactory.RDF) is True:
             rdf_engine = storage_factory.entity_storage_engine(StorageFactory.RDF)
-            if rdf_engine:
-                try:
-                    rdfs_store = rdf_engine.rdf_store()
-                    rdfs_store.reload(self, rdf_name)
-                except Exception as e:
-                    YLogger.exception(self, "Failed to load rdf from storage", e)
+            try:
+                rdfs_store = rdf_engine.rdf_store()
+                rdfs_store.reload(self, rdf_name)
+                return True
+
+            except Exception as e:
+                YLogger.exception(self, "Failed to load rdf from storage", e)
+
+        return False
 
     def add_entity(self, subject, predicate, obj, rdf_name, rdf_store=None, entityid=None):
         YLogger.debug(self, "Adding RDF Entity [%s] [%s] [%s] [%s]", subject, predicate, obj, rdf_name)
@@ -183,9 +189,9 @@ class RDFCollection(BaseCollection):
                         objects = entity.predicates[predicate.upper()]
                         objects.remove(obj)
 
-                if len(entity.predicates[predicate.upper()]) == 0:
-                    YLogger.debug(None, "Removing empty predicate %s, subject %s", predicate, subject)
-                    del entity.predicates[predicate.upper()]
+                    if len(entity.predicates[predicate.upper()]) == 0:
+                        YLogger.debug(None, "Removing empty predicate %s, subject %s", predicate, subject)
+                        del entity.predicates[predicate.upper()]
 
             if len(entity.predicates.keys()) == 0:
                 YLogger.debug(None, "Removing empty subject %s", subject)
@@ -267,6 +273,9 @@ class RDFCollection(BaseCollection):
 
                 if obj == entity[2]:
                     removes.append(entity)
+
+            else:
+                YLogger.warning(None, "RDF remove, no subject, predicte or object specified, nothing removed!")
 
         return [entity for entity in entities if entity not in removes]
 
@@ -402,8 +411,7 @@ class RDFCollection(BaseCollection):
             for pair in atuple:
                 if pair[0].startswith("?"):
                     aset.append(pair)
-            if aset:
-                returns.append(aset)
+            returns.append(aset)
 
         return returns
 
@@ -422,22 +430,25 @@ class RDFCollection(BaseCollection):
     def unify(self, variables, sets):
         YLogger.debug(self, "Unifying Vars [%s]", variables)
 
+        if not sets:
+            return []
+
         unifications = []
-        if sets:
-            # For each tuple in the first set
-            for atuple in sets[0]:
-                # Check to see if there are vars thay need unifying
-                unified_vars = self.get_unify_vars(variables)
-                if unified_vars:
-                    # Get the value of the tuples which match the vars
-                    if self.unify_tuple(atuple, unified_vars) is True:
-                        # If we have more sets, keep checking that the vars are still matching
-                        unified = True
-                        if len(sets) > 1:
-                            unified = self.unify_set(1, sets, unified_vars, 0)
-                        # If we have unified all variables then we have a match
-                        if unified is True and list(unified_vars.values()):
-                            unifications.append(self.dict_to_array(unified_vars))
+        # For each tuple in the first set
+        for atuple in sets[0]:
+            # Check to see if there are vars thay need unifying
+            unified_vars = self.get_unify_vars(variables)
+            if unified_vars:
+                # Get the value of the tuples which match the vars
+                if self.unify_tuple(atuple, unified_vars) is True:
+                    # If we have more sets, keep checking that the vars are still matching
+                    unified = True
+                    if len(sets) > 1:
+                        unified = self.unify_set(1, sets, unified_vars, 0)
+                    # If we have unified all variables then we have a match
+                    if unified is True and list(unified_vars.values()):
+                        unifications.append(self.dict_to_array(unified_vars))
+
         return unifications
 
     def unify_set(self, num_set, sets, unified_vars, depth):

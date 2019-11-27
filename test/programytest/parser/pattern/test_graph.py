@@ -1042,9 +1042,6 @@ class PatternGraphTests(ParserTestsBaseClass):
             wildcard_node = word_node.underline
         self.assertIsNotNone(wildcard_node)
 
-    ##################################################################################################################
-    #
-
     def test_duplicates(self):
         graph = PatternGraph(self._client_context.brain.aiml_parser)
         topic_element = ET.fromstring('<topic>*</topic>')
@@ -1058,3 +1055,26 @@ class PatternGraphTests(ParserTestsBaseClass):
         graph.add_pattern_to_graph(element1, topic_element, that_element, template_graph_root)
         element2 = ET.fromstring(pattern2)
         graph.add_pattern_to_graph(element2, topic_element, that_element, template_graph_root)
+
+    def test_empty(self):
+        graph = PatternGraph(self._client_context.brain.aiml_parser)
+        pattern = ET.fromstring("<pattern>HELLO</pattern>")
+        topic = ET.fromstring("<topic>HELLO</topic>")
+        that = ET.fromstring("<that>HELLO</that>")
+        template = TemplateWordNode("TEST")
+        graph.add_pattern_to_graph(pattern, topic, that, template)
+
+        self.assertIsNotNone(graph.root)
+        self.assertIsNotNone(graph.root.child(0))
+        self.assertIsNotNone(graph.root.child(0).topic)
+        self.assertIsNotNone(graph.root.child(0).topic.child(0))
+        self.assertIsNotNone(graph.root.child(0).topic.child(0).that)
+        self.assertIsNotNone(graph.root.child(0).topic.child(0).that.child(0))
+        self.assertIsNotNone(graph.root.child(0).topic.child(0).that.child(0).template)
+
+        graph.empty()
+
+        self.assertIsNotNone(graph.root)
+        self.assertEquals(0, len(graph.root.children))
+
+

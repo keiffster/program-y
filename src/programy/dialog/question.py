@@ -120,7 +120,7 @@ class Question:
         return self._sentences[self._current_sentence_no]
 
     def previous_nth_sentence(self, num):
-        if len(self._sentences) < num:
+        if num >= len(self._sentences):
             raise Exception("Num sentence array violation !")
         previous = -1 - num
         return self._sentences[previous]

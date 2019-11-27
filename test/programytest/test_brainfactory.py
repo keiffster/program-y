@@ -24,7 +24,6 @@ class BrainFactoryTests(unittest.TestCase):
 
     def test_empty_config_init(self):
         configuration = BotConfiguration()
-        configuration._bot_selector = "programy.clients.client.DefaultBrainSelector"
 
         client = TestClient()
         bot = Bot(configuration, client)
@@ -36,4 +35,31 @@ class BrainFactoryTests(unittest.TestCase):
         self.assertIsNotNone(brain)
         self.assertIsInstance(brain, Brain)
 
+    def test_config_init(self):
+        configuration = BotConfiguration()
+        configuration._brain_selector = "programy.clients.client.DefaultBrainSelector"
+
+        client = TestClient()
+        bot = Bot(configuration, client)
+
+        factory = BrainFactory(bot)
+        self.assertIsNotNone(factory)
+
+        brain = factory.select_brain()
+        self.assertIsNotNone(brain)
+        self.assertIsInstance(brain, Brain)
+
+    def test_invalid_config_init(self):
+        configuration = BotConfiguration()
+        configuration._brain_selector = "programy.clients.client.DefaultBrainSelectorXXX"
+
+        client = TestClient()
+        bot = Bot(configuration, client)
+
+        factory = BrainFactory(bot)
+        self.assertIsNotNone(factory)
+
+        brain = factory.select_brain()
+        self.assertIsNotNone(brain)
+        self.assertIsInstance(brain, Brain)
 

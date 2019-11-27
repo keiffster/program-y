@@ -28,24 +28,35 @@ class GoogleMapsExtension(Extension):
     def execute(self, client_context, data):
         YLogger.debug(client_context, "GoogleMaps [%s]", data)
 
-        splits = data.split(" ")
-        command = splits[0]
-        from_place = splits[1]
-        to_place = splits[2]
+        try:
+            splits = data.split(" ")
+            if len(splits) == 3:
+                command = splits[0]
+                from_place = splits[1]
+                to_place = splits[2]
 
-        googlemaps = self.get_geo_locator()
+                googlemaps = self.get_geo_locator()
 
-        if command == "DISTANCE":
-            distance = googlemaps.get_distance_between_addresses(from_place, to_place)
-            if distance is not None:
-                return self._format_distance_for_programy(distance)
-        elif command == "DIRECTIONS":
-            directions = googlemaps.get_directions_between_addresses(from_place, to_place)
-            if directions is not None:
-                return self._format_directions_for_programy(directions)
-        else:
-            YLogger.error(client_context, "Unknown Google Maps Extension command [%s]", command)
-            return None
+                if command == "DISTANCE":
+                    distance = googlemaps.get_distance_between_addresses(from_place, to_place)
+                    if distance is not None:
+                        return self._format_distance_for_programy(distance)
+
+                elif command == "DIRECTIONS":
+                    directions = googlemaps.get_directions_between_addresses(from_place, to_place)
+                    if directions is not None:
+                        return self._format_directions_for_programy(directions)
+
+                else:
+                    YLogger.error(client_context, "Unknown Google Maps Extension command [%s]", command)
+
+            else:
+                YLogger.error(client_context, "Invalid Google Maps Extension command DISTANCE|DIRECTIONS TO FROM")
+
+        except Exception as e:
+            YLogger.exception(client_context, "Failed to execute maps extension", e)
+
+        return None
 
     def _format_distance_for_programy(self, distance):
         distance_splits = distance.distance_text.split(" ")

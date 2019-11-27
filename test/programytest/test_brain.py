@@ -1,6 +1,6 @@
 import os
 import unittest
-
+from unittest.mock import patch
 from programy.brain import Brain
 from programy.clients.events.console.config import ConsoleConfiguration
 from programy.config.brain.brain import BrainConfiguration
@@ -155,3 +155,37 @@ class BrainTests(unittest.TestCase):
 
         brain2 = Brain(client_context.bot, brain_config)
         self.assertIsNotNone(brain2)
+
+    def test_post_process_question_no_processing(self):
+        yaml = YamlConfigurationFile()
+        self.load_os_specific_configuration(yaml, "test_brain.yaml", "test_brain.windows.yaml")
+
+        brain_config = BrainConfiguration()
+        brain_config.load_configuration(yaml, ".")
+
+        client = TestClient()
+        client_context = client.create_client_context("testid")
+        brain = Brain(client_context.bot, brain_config)
+        self.assertIsNotNone(brain)
+
+        response = brain.post_process_question(client_context, "Hello")
+        self.assertIsNone(response)
+
+    def patch_process(self, client_context, question):
+        return "Other"
+
+    @patch("programy.processors.processing.ProcessorCollection.process", patch_process)
+    def test_post_process_question_with_processing(self):
+        yaml = YamlConfigurationFile()
+        self.load_os_specific_configuration(yaml, "test_brain.yaml", "test_brain.windows.yaml")
+
+        brain_config = BrainConfiguration()
+        brain_config.load_configuration(yaml, ".")
+
+        client = TestClient()
+        client_context = client.create_client_context("testid")
+        brain = Brain(client_context.bot, brain_config)
+        self.assertIsNotNone(brain)
+
+        response = brain.post_process_question(client_context, "Hello")
+        self.assertEquals("Other", response)

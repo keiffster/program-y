@@ -50,18 +50,14 @@ class AdminTool:
                 shutil.copy(file_path, dest)
 
             # else if item is a folder, recurse
-            elif os.path.isdir(file_path):
+            else: # os.path.isdir(file_path):
                 new_dest = os.path.join(dest, item)
                 os.mkdir(new_dest)
                 AdminTool.recursive_copy(file_path, new_dest)
 
     @staticmethod
     def delete_folder_contents(folder):
-        for root, dirs, files in os.walk(folder):
-            for f in files:
-                os.unlink(os.path.join(root, f))
-            for d in dirs:
-                shutil.rmtree(os.path.join(root, d))
+        shutil.rmtree(folder)
 
     @staticmethod
     def make_all_executable(path):
@@ -193,7 +189,7 @@ class AdminTool:
             self.show_help()
 
     def display(self, text):
-        outputLog(self, text)
+        outputLog(self, text)   # pragma: no cover
 
 
 if __name__ == '__main__':      # pragma: no cover

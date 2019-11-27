@@ -135,6 +135,16 @@ class SentimentExtensionTests(unittest.TestCase):
         self.assertIsNotNone(result)
         self.assertEqual("SENTIMENT SCORES POSITIVITY NEUTRAL SUBJECTIVITY COMPLETELY OBJECTIVE", result)
 
+    def test_sentiment_score_no_analyser(self):
+        extension = SentimentExtension()
+        self.assertIsNotNone(extension)
+
+        self.client_context.bot._sentiment_analyser = None
+
+        result = extension.execute(self.client_context, "SENTIMENT SCORE I LIKE PEAS")
+        self.assertIsNotNone(result)
+        self.assertEqual("SENTIMENT DISABLED", result)
+
     def test_sentiment_feeling_last(self):
         extension = SentimentExtension()
         self.assertIsNotNone(extension)
@@ -229,3 +239,4 @@ class SentimentExtensionTests(unittest.TestCase):
         result = extension.execute(self.client_context, "SENTIMENT SUBJECTIVITY 0.5")
         self.assertIsNotNone(result)
         self.assertEqual("NEUTRAL", result)
+

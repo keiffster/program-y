@@ -9,7 +9,7 @@ class MockMetOffice24HourForecast(MetOffice24HourForecast):
         def __init__(self):
             MetOffice24HourForecast.__init__(self)
 
-        def _calc_date_n_hours_ahead(self, hours):
+        def _calc_date_n_hours_ahead(self, hours, fromdate=None):
             time_then = datetime.datetime.strptime("2017-04-03Z", "%Y-%m-%dZ")
             return time_then + datetime.timedelta(hours=hours)
 

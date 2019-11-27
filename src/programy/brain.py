@@ -360,10 +360,7 @@ class Brain:
         self._security.load_security_services(self.bot.client)
 
     def load_dynamics(self):
-        if self.configuration.dynamics is not None:
-            self._dynamics_collection.load_from_configuration(self.configuration.dynamics)
-        else:
-            YLogger.debug(self, "No dynamics configuration defined...")
+        self._dynamics_collection.load_from_configuration(self.configuration.dynamics)
 
     def load_regex_templates(self):
         self._regex_templates.load(self.bot.client.storage_factory)
@@ -379,9 +376,6 @@ class Brain:
         if response == question:
             return None
         return response
-
-    def failed_authentication(self, client_context):
-        return self._security.failed_authentication(client_context)
 
     def authenticate_user(self, client_context):
         return self._security.authenticate_user(client_context)

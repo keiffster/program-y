@@ -17,7 +17,7 @@ class MockDynamicsCollection(DynamicsCollection):
     def __init__(self):
         DynamicsCollection.__init__(self)
 
-    def _set_dynamic_var_value(self, client_context, name, value):
+    def _set_value(self, client_context, name, value):
         raise Exception("Mock Exception")
 
 

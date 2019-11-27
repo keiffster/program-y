@@ -3,7 +3,6 @@ from unittest.mock import patch
 import os
 import shutil
 from programy.admin.tool import AdminTool
-import programytest.externals as Externals
 
 
 class MockAdminTool(AdminTool):
@@ -45,6 +44,8 @@ class AdminToolTests(unittest.TestCase):
         os.mkdir(src_dir)
         src_sub_dir = tmp_dir + os.sep + "src" + os.sep + "sub"
         os.mkdir(src_sub_dir)
+        src_sub_dir2 = tmp_dir + os.sep + "src" + os.sep + "sub2"
+        os.mkdir(src_sub_dir2)
         dest_dir = tmp_dir + os.sep + "dest"
         os.mkdir(dest_dir)
 
@@ -59,6 +60,7 @@ class AdminToolTests(unittest.TestCase):
         self.assertTrue(os.path.exists(src_dir + os.sep + "file2.txt"))
         self.assertTrue(os.path.exists(src_dir + os.sep + "file3.txt"))
         self.assertTrue(os.path.exists(src_dir + os.sep + "sub" + os.sep + "file4.txt"))
+        self.assertTrue(os.path.exists(src_dir + os.sep + "sub2"))
 
         if os.path.exists(tmp_dir):
             shutil.rmtree(tmp_dir)
@@ -239,6 +241,13 @@ To run y-bot bot in console mode, use the following commands
         tool.install_additional(["test", "textblob"])
         self.assertEqual("Installing additional components for textblob", tool.text)
 
+    def test_install_additional_invalid(self):
+        tool = MockAdminTool()
+        self.assertEquals("", tool.text)
+
+        with self.assertRaises(Exception):
+            tool.install_additional(["test", "xxxxxxx"])
+
     def test_show_execute_help(self):
         tool = MockAdminTool()
         self.assertEqual("", tool.text)
@@ -257,6 +266,12 @@ To run y-bot bot in console mode, use the following commands
 
         self.assertEqual("""Available commands are:
 \thelp	list	download <bot-name>	install <component>""", tool.text)
+
+    def test_run_no_words(self):
+        tool = MockAdminTool()
+        tool.run([])
+        self.assertIsNotNone(tool.text)
+        self.assertTrue(tool.text.startswith("Available commands are:"))
 
     def test_run_unknown_primary_command(self):
         tool = MockAdminTool()

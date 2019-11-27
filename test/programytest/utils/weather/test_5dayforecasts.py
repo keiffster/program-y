@@ -9,7 +9,7 @@ class MockMetOffice5DayForecast(MetOffice5DayForecast):
     def __init__(self):
         MetOffice5DayForecast.__init__(self)
 
-    def _calc_date_n_days_ahead(self, days):
+    def _calc_date_n_days_ahead(self, days, fromdate=None):
         time_then = datetime.datetime.strptime("2017-04-03Z", "%Y-%m-%dZ")
         return time_then + datetime.timedelta(days=days)
 

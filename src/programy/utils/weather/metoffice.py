@@ -677,11 +677,14 @@ class MetOffice5DayForecast(MetOfficeForecast):
             nighttime = report.report_date + datetime.timedelta(hours=18)
             self._time_periods[nighttime] = report.time_periods[1]
 
-    def _calc_date_n_days_ahead(self, days):
-        return datetime.datetime.now() + datetime.timedelta(days=days)
+    def _calc_date_n_days_ahead(self, days, fromdate=None):
+        if fromdate is None:
+            return datetime.datetime.now() + datetime.timedelta(days=days)
+        else:
+            return datetime.datetime.strptime(fromdate, '%Y-%m-%dZ') + datetime.timedelta(days=days)
 
-    def get_forecast_for_n_days_ahead(self, days):
-        search_date = self._calc_date_n_days_ahead(days)
+    def get_forecast_for_n_days_ahead(self, days, fromdate=None):
+        search_date = self._calc_date_n_days_ahead(days, fromdate=fromdate)
 
         for day_forecast in self._time_periods.keys():
             if day_forecast > search_date:
@@ -702,11 +705,14 @@ class MetOffice24HourForecast(MetOfficeForecast):
                 period_datetime = report.report_date + datetime.timedelta(minutes=int(time_period.time))
                 self._time_periods[period_datetime] = time_period
 
-    def _calc_date_n_hours_ahead(self, hours):
-        return datetime.datetime.now() + datetime.timedelta(hours=hours)
+    def _calc_date_n_hours_ahead(self, hours, fromdate=None):
+        if fromdate is None:
+            return datetime.datetime.now() + datetime.timedelta(hours=hours)
+        else:
+            return datetime.datetime.strptime(fromdate,  "%Y-%m-%dZ") + datetime.timedelta(hours=hours)
 
-    def get_forecast_for_n_hours_ahead(self, hours):
-        search_date = self._calc_date_n_hours_ahead(hours)
+    def get_forecast_for_n_hours_ahead(self, hours, fromdate=None):
+        search_date = self._calc_date_n_hours_ahead(hours, fromdate=fromdate)
 
         for hour_forecast in self._time_periods.keys():
             if hour_forecast > search_date:

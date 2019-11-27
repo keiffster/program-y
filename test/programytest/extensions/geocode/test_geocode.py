@@ -1,7 +1,5 @@
-import json
-import os
 import unittest
-
+from unittest.mock import patch
 from programy.extensions.geocode.geocode import GeoCodeExtension
 from programy.utils.geo.google import GoogleMaps
 from programytest.client import TestClient
@@ -123,6 +121,23 @@ class GeoCodeExtensionTests(unittest.TestCase):
                                               "status": "OK"
                                             }
 
+    def test_get_geo_locator(self):
+        geocode = GeoCodeExtension()
+        self.assertIsInstance(geocode.get_geo_locator(), GoogleMaps)
+
+    def test_geocode_invalid(self):
+        geo_locator = MockGoogleMaps()
+        self.assertIsNotNone(geo_locator)
+        geocode = MockGeoCodeExtension(geo_locator)
+        self.assertIsNotNone(geocode)
+
+        self.assertIsNone(geocode.execute(self.context, "POSTCODE1"))
+        self.assertIsNone(geocode.execute(self.context, "POSTCODE1 XXX YYY"))
+        self.assertIsNone(geocode.execute(self.context, "POSTCODE2 XXX"))
+        self.assertIsNone(geocode.execute(self.context, "POSTCODE2 XXX YYY ZZZ"))
+        self.assertIsNone(geocode.execute(self.context, "LOCATION"))
+        self.assertIsNone(geocode.execute(self.context, "OTHER KINGHORN"))
+
     def test_geocode_postcode1(self):
         geo_locator = MockGoogleMaps()
         self.assertIsNotNone(geo_locator)
@@ -152,3 +167,21 @@ class GeoCodeExtensionTests(unittest.TestCase):
         result = geocode.execute(self.context, "LOCATION KINGHORN")
         self.assertIsNotNone(result)
         self.assertEqual("LATITUDE DEC 56 FRAC 0720397 LONGITUDE DEC -3 FRAC 1752001", result)
+
+    def patch_get_latlong_for_location1(self, location):
+        return None
+
+    @patch("programy.utils.geo.google.GoogleMaps.get_latlong_for_location", patch_get_latlong_for_location1)
+    def test_geocode_geocode_none(self):
+        geocode = GeoCodeExtension()
+        self.assertIsNotNone(geocode)
+        self.assertIsNone(geocode.execute(self.context, "LOCATION KINGHORN"))
+
+    def patch_get_latlong_for_location2(self, location):
+        raise Exception("Mock Exception")
+
+    @patch("programy.utils.geo.google.GoogleMaps.get_latlong_for_location", patch_get_latlong_for_location2)
+    def test_geocode_geocode_exception(self):
+        geocode = GeoCodeExtension()
+        self.assertIsNotNone(geocode)
+        self.assertIsNone(geocode.execute(self.context, "LOCATION KINGHORN"))

@@ -5,6 +5,33 @@ from programy.rdf.collection import RDFCollection
 
 class RDFCollectionUnificationTests(unittest.TestCase):
 
+    def test_unify_no_sets(self):
+        collection = RDFCollection()
+        self.assertIsNotNone(collection)
+
+        collection.add_entity("MONKEY", "LEGS", "2", "ANIMAL")
+        collection.add_entity("MONKEY", "HASFUR", "true", "ANIMAL")
+        collection.add_entity("ZEBRA", "LEGS", "4", "ANIMAL")
+        collection.add_entity("BIRD", "LEGS", "2", "ANIMAL")
+        collection.add_entity("ELEPHANT", "TRUNK", "true", "ANIMAL")
+
+        self.assertEquals([], collection.unify(["?x"], []))
+
+    def test_unify_no_vars(self):
+        collection = RDFCollection()
+        self.assertIsNotNone(collection)
+
+        collection.add_entity("MONKEY", "LEGS", "2", "ANIMAL")
+        collection.add_entity("MONKEY", "HASFUR", "true", "ANIMAL")
+        collection.add_entity("ZEBRA", "LEGS", "4", "ANIMAL")
+        collection.add_entity("BIRD", "LEGS", "2", "ANIMAL")
+        collection.add_entity("ELEPHANT", "TRUNK", "true", "ANIMAL")
+
+        set1 = collection.match_to_vars("?x", "LEGS", "2")
+        set2 = collection.match_to_vars("?x", "HASFUR", "true")
+
+        self.assertEquals([], collection.unify([], [set1, set2]))
+
     def test_unify_on_single_var(self):
         collection = RDFCollection()
         self.assertIsNotNone(collection)
@@ -22,6 +49,22 @@ class RDFCollectionUnificationTests(unittest.TestCase):
         self.assertIsNotNone(unified)
         self.assertEqual(1, len(unified))
         self.assertTrue([['?x', 'MONKEY']] in unified)
+
+    def test_unify_on_single_var_different(self):
+        collection = RDFCollection()
+        self.assertIsNotNone(collection)
+
+        collection.add_entity("MONKEY", "LEGS", "2", "ANIMAL")
+        collection.add_entity("MONKEY", "HASFUR", "true", "ANIMAL")
+        collection.add_entity("ZEBRA", "LEGS", "4", "ANIMAL")
+        collection.add_entity("BIRD", "LEGS", "2", "ANIMAL")
+        collection.add_entity("ELEPHANT", "TRUNK", "true", "ANIMAL")
+
+        set1 = collection.match_to_vars("?x", "LEGS", "2")
+        set2 = collection.match_to_vars("?x", "HASFUR", "true")
+
+        unified = collection.unify(["?y"], [set1, set2])
+        self.assertEquals([[['?y', None]], [['?y', None]]], unified)
 
     def test_unify_on_single_var_with_not(self):
         collection = RDFCollection()
@@ -77,3 +120,7 @@ class RDFCollectionUnificationTests(unittest.TestCase):
         self.assertTrue([['?x', 'TEST1'], ['?y', 'TEST2'], ['?z', 'TEST3'], ['?w', 'TEST4'], ] in unified)
         self.assertTrue([['?x', 'TEST2'], ['?y', 'TEST3'], ['?z', 'TEST4'], ['?w', 'TEST5']] in unified)
 
+    def test_unify_tuple(self):
+        collection = RDFCollection()
+        tuples = (("?x", "1"), ("?y", "1"))
+        self.assertFalse(collection.unify_tuple(tuples, {"?x": "3", "?y": None}))

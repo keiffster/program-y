@@ -40,20 +40,17 @@ class DefaultBrainSelector(BrainSelector):
         self._set_iterator()
 
     def _set_iterator(self):
-        if self._brains:
-            self._iterator = iter(self._brains.values())
+        self._iterator = iter(self._brains.values())
 
     def select_brain(self):
         try:
-            if self._iterator:
-                return next(self._iterator)
+            return next(self._iterator)
 
         except StopIteration:
             self._set_iterator()
 
             try:
-                if self._iterator:
-                    return next(self._iterator)
+                return next(self._iterator)
             except StopIteration:
                 pass
 
