@@ -34,10 +34,10 @@ class MongoStore(Store):
         self.collection().drop()
 
     def commit(self):
-        YLogger.info(self, "Commit collection [%s] not supported on Mongo", self.collection_name())
+        YLogger.info(self, "Commit collection not supported on Mongo")
 
     def rollback(self):
-        YLogger.info(self, "Rollback collection [%s] not supported on Mongo", self.collection_name())
+        YLogger.info(self, "Rollback collection not supported on Mongo")
 
     def collection_name(self):
         raise NotImplementedError()  # pragma: no cover
@@ -55,10 +55,4 @@ class MongoStore(Store):
         collection = self.collection()
         result = collection.insert_one(document.to_document())
         document.id = result.inserted_id
-        return True
-
-    def replace_document(self, document):
-        YLogger.debug(self, "Replacing document in collection [%s]", self.collection_name())
-        collection = self.collection()
-        collection.replace_one({'_id': document.id}, document.to_document())
         return True

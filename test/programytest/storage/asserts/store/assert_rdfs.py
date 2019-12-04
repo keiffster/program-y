@@ -57,13 +57,26 @@ class RDFStoreAsserts(unittest.TestCase):
         self.assertTrue(rdf_collection.has_predicate('ACT', "hasPurpose"))
         self.assertTrue(rdf_collection.has_object('ACT', "hasPurpose", "to entertain by performing"))
 
-    def assert_upload_from_text_file(self, store):
+    def assert_load(self, store):
         store.empty()
 
         store.upload_from_file(os.path.dirname(__file__)+os.sep+"data"+os.sep+"rdfs"+os.sep+"text"+os.sep+"activity.rdf")
 
         rdf_collection = RDFCollection()
         store.load(rdf_collection, "ACTIVITY")
+
+        self.assertTrue(rdf_collection.contains("ACTIVITY"))
+        self.assertTrue(rdf_collection.has_subject('ACT'))
+        self.assertTrue(rdf_collection.has_predicate('ACT', "hasPurpose"))
+        self.assertTrue(rdf_collection.has_object('ACT', "hasPurpose", "to entertain by performing"))
+
+    def assert_load_all(self, store):
+        store.empty()
+
+        store.upload_from_file(os.path.dirname(__file__)+os.sep+"data"+os.sep+"rdfs"+os.sep+"text"+os.sep+"activity.rdf")
+
+        rdf_collection = RDFCollection()
+        store.load_all(rdf_collection)
 
         self.assertTrue(rdf_collection.contains("ACTIVITY"))
         self.assertTrue(rdf_collection.has_subject('ACT'))
@@ -83,6 +96,26 @@ class RDFStoreAsserts(unittest.TestCase):
         self.assertTrue(rdf_collection.has_subject('ACT'))
         self.assertTrue(rdf_collection.has_predicate('ACT', "hasPurpose"))
         self.assertTrue(rdf_collection.has_object('ACT', "hasPurpose", "to entertain by performing"))
+
+    def assert_empty_named(self, store):
+        store.empty()
+
+        store.upload_from_file(os.path.dirname(__file__)+os.sep+"data"+os.sep+"rdfs"+os.sep+"text"+os.sep+"activity.rdf")
+
+        rdf_collection = RDFCollection()
+        store.load_all(rdf_collection)
+
+        self.assertTrue(rdf_collection.contains("ACTIVITY"))
+        self.assertTrue(rdf_collection.has_subject('ACT'))
+        self.assertTrue(rdf_collection.has_predicate('ACT', "hasPurpose"))
+        self.assertTrue(rdf_collection.has_object('ACT', "hasPurpose", "to entertain by performing"))
+
+        store.empty_named("ACTIVITY")
+
+        rdf_collection2 = RDFCollection()
+        store.load_all(rdf_collection2)
+
+        self.assertFalse(rdf_collection2.contains("ACTIVITY"))
 
     def assert_upload_from_csv_file(self, store):
 

@@ -58,18 +58,22 @@ class Uploader:
         store.empty()
 
         outputLog(None, "Loading [%s]" % storetype)
+
         if filename is not None:
             count, success = store.upload_from_file(filename, commit=True, verbose=verbose)
+            outputLog(None, "Lines processed [%d]" % count)
+            outputLog(None, "Entities successful [%s]" % success)
 
         elif dirname is not None:
             count, success = store.upload_from_directory(dirname, fileformat=Store.TEXT_FORMAT, extension=extension,
                                                          subdir=subdir, commit=True, verbose=verbose)
+            outputLog(None, "Lines processed [%d]" % count)
+            outputLog(None, "Entities successful [%s]" % success)
 
         else:
             raise Exception("You must specify either --file or --dir")
 
-        outputLog(None, "Lines processed [%d]" % count)
-        outputLog(None, "Entities successful [%s]" % success)
+        return count, success
 
     @staticmethod
     def _get_store(storetype, engine):
@@ -132,15 +136,32 @@ class Uploader:
 
         return loader_args
 
+    @staticmethod
+    def get_args(arguments):
+        return arguments.parse_args()       #pragma: no cover
+
+    @staticmethod
+    def run():
+        arguments = Uploader.create_arguments()
+        try:
+            args = Uploader.get_args(arguments)
+            Uploader.upload(args.entity,
+                            args.url,
+                            args.file,
+                            args.dir,
+                            args.subdir,
+                            args.extension,
+                            create=args.create,
+                            drop_all=args.drop,
+                            verbose=args.verbose)
+
+        except Exception as excep:
+            outputLog(None, "SQL Loader error occured - %s" % excep)
+            arguments.print_help()
+        except SystemExit as excep:
+            outputLog(None, "SQL Loader error occured - %s" % excep)
+            arguments.print_help()
 
 if __name__ == '__main__':
 
-    arguments = Uploader.create_arguments()
-    try:
-        args = arguments.parse_args()
-        Uploader.upload(args.entity, args.url, args.file, args.dir, args.subdir, args.extension, create=args.create,
-                        drop_all=args.drop, verbose=args.verbose)
-
-    except Exception as excep:
-        outputLog(None, "SQL Loader error occured - %s" % excep)
-        arguments.print_help()
+    Uploader.run()                          #pragma: no cover

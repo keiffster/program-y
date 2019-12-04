@@ -70,3 +70,30 @@ class MongoSetsStoreTests(SetStoreAsserts):
         store = MongoSetsStore(engine)
 
         self.assert_upload_csv_files_from_directory_with_subdir(store)
+
+    @unittest.skipIf(Engines.mongo is False, Engines.mongo_disabled)
+    def test_empty_named(self):
+        config = MongoStorageConfiguration()
+        engine = MongoStorageEngine(config)
+        engine.initialise()
+        store = MongoSetsStore(engine)
+
+        self.assert_empty_named(store)
+
+    @unittest.skipIf(Engines.mongo is False, Engines.mongo_disabled)
+    def test_empty_named(self):
+        config = MongoStorageConfiguration()
+        engine = MongoStorageEngine(config)
+        engine.initialise()
+        store = MongoSetsStore(engine)
+
+        self.assert_empty_named(store)
+
+    @unittest.skipIf(Engines.mongo is False, Engines.mongo_disabled)
+    def test_add_to_set_duplicates(self):
+        config = MongoStorageConfiguration()
+        engine = MongoStorageEngine(config)
+        engine.initialise()
+        store = MongoSetsStore(engine)
+
+        self.assert_add_to_set_duplicates(store)

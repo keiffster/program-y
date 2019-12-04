@@ -18,6 +18,15 @@ class FileDefaultVariablesStoreTests(unittest.TestCase):
         store = FileDefaultVariablesStore(engine)
         self.assertEqual(store.storage_engine, engine)
 
+    def test_storage_path(self):
+        config = FileStorageConfiguration()
+        engine = FileStorageEngine(config)
+        engine.initialise()
+        store = FileDefaultVariablesStore(engine)
+
+        self.assertEquals('/tmp/properties/defaults.txt', store._get_storage_path())
+        self.assertIsInstance(store.get_storage(), FileStoreConfiguration)
+
     def test_load_variables(self):
         config = FileStorageConfiguration()
         config._defaults_storage = FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "data" + os.sep + "lookups" + os.sep + "text" + os.sep + "defaults.txt", fileformat="text", encoding="utf-8", delete_on_start=False)
@@ -28,6 +37,7 @@ class FileDefaultVariablesStoreTests(unittest.TestCase):
         collection = PropertiesCollection()
         store.load(collection)
 
+        self.assertIsNotNone(store.get_defaults_values())
         self.assertTrue(collection.has_property("var1"))
         self.assertTrue("val1", collection.property("var1"))
         self.assertTrue(collection.has_property("var2"))

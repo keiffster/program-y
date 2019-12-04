@@ -57,9 +57,12 @@ class SQLLinkedAccountStore(SQLStore, LinkedAccountStore):
         return accounts
 
     def primary_account(self, linked_userid):
-        db_account = self._storage_engine.session.query(LinkedAccount).filter(
-            LinkedAccount.linked_user == linked_userid).one()
-        if db_account is not None:
+        try:
+            db_account = self._storage_engine.session.query(LinkedAccount).filter(
+                LinkedAccount.linked_user == linked_userid).one()
             return db_account.primary_user
+
+        except Exception:
+            pass
 
         return None

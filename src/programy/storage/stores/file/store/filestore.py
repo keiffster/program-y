@@ -84,11 +84,13 @@ class FileStore(Store):
         raise NotImplementedError("Implement _get_storage_path to return storage specific "
                                   "folder from config")  # pragma: no cover
 
+    def _drop_folder(self, folder):
+        if os.path.exists(folder):
+            shutil.rmtree(folder)
+
     def drop(self):
         try:
-            storage_path = self._get_storage_path()
-            if os.path.exists(storage_path):
-                shutil.rmtree(storage_path)
+            self._drop_folder(self._get_storage_path())
         except Exception as e:
             YLogger.exception_nostack(self, "Error dropping storage", e)
 
@@ -145,29 +147,3 @@ class FileStore(Store):
 
     def get_storage(self):
         raise NotImplementedError("get_storage must be implemented in child class")  # pragma: no cover
-
-    def upload_from_file(self, filename, fileformat=Store.TEXT_FORMAT, commit=True, verbose=False):
-
-        YLogger.debug(self, "Oploading from file [%s]", filename)
-
-        file_processor = None
-        try:
-            name = FileStore.get_just_filename_from_filepath(filename)
-            if verbose is True:
-                outputLog(self, name)
-
-            file_processor = self.get_file_processor(format, filename)
-            file_processor.process_lines(name, self, verbose=verbose)
-
-            if commit is True:
-                self.commit()
-
-        except Exception as e:
-            YLogger.exception_nostack(self, "Error uploading from file [%s]", e, filename)
-
-            if commit is True:
-                self.rollback()
-
-        finally:
-            if file_processor is not None:
-                file_processor.close()

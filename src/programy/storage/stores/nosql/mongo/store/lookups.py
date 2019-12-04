@@ -60,12 +60,11 @@ class MongoLookupStore(MongoStore, LookupsStore):
     def get_lookup(self):
         collection = self.collection()
         lookups = collection.find()
-        if lookups is not None:
-            collection = {}
-            for lookup in lookups:
-                collection[lookup['key']] = lookup['value']
-            return collection
-        return {}
+        collection = {}
+        for lookup in lookups:
+            collection[lookup['key']] = lookup['value']
+
+        return collection
 
     def load_all(self, collector):
         self.load(collector)
@@ -74,10 +73,11 @@ class MongoLookupStore(MongoStore, LookupsStore):
         YLogger.debug(self, "Loading lookup from Mongo [%s]", self.collection_name())
         collection = self.collection()
         lookups = collection.find()
-        if lookups is not None:
-            for lookup in lookups:
-                key, value = DoubleStringPatternSplitCollection.process_key_value(lookup['key'], lookup['value'])
-                collector.add_to_lookup(key, value)
+        for lookup in lookups:
+            key, value = DoubleStringPatternSplitCollection.process_key_value(lookup['key'], lookup['value'])
+            collector.add_to_lookup(key, value)
+
+        return True
 
     def process_line(self, name, fields, verbose=False):
         if fields:

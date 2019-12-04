@@ -39,6 +39,13 @@ class FileDuplicatesStore(FileStore, DuplicatesStore):
         if os.path.exists(filename) is True:
             shutil.rmtree(filename)
 
+    def _write_duplicates_to_file(self, filename, duplicates):
+        with open(filename, "w+") as duplicates_file:
+            duplicates_file.write("Duplicate\tFile\tStart Line\tEnd Line")
+            for duplicate in duplicates:
+                duplicates_file.write("%s\t%s\t%s\t%s\n" % (duplicate[0], duplicate[1], duplicate[2], duplicate[3]))
+            duplicates_file.flush()
+
     def save_duplicates(self, duplicates, commit=True):
         filename = self._get_storage_path()
         file_dir = self._get_dir_from_path(filename)
@@ -46,12 +53,7 @@ class FileDuplicatesStore(FileStore, DuplicatesStore):
 
         try:
             YLogger.debug(self, "Saving duplicates to [%s]", filename)
-
-            with open(filename, "w+") as duplicates_file:
-                duplicates_file.write("Duplicate\tFile\tStart Line\tEnd Line")
-                for duplicate in duplicates:
-                    duplicates_file.write("%s\t%s\t%s\t%s\n" % (duplicate[0], duplicate[1], duplicate[2], duplicate[3]))
-                duplicates_file.flush()
+            self._write_duplicates_to_file(filename, duplicates)
 
         except Exception as excep:
             YLogger.exception_nostack(self, "Failed to write duplicates file [%s]", excep, filename)

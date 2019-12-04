@@ -9,6 +9,6 @@ rslp_stemming = True
 rslp_stemming_disabled = "RSLP disabled, first nltk.download('rslp'), and then enable here"
 
 admin_tool = True
-admin_tool_disabled = "Admin tool download from github siabled"
+admin_tool_disabled = "Admin tool download from github disabled"
 
 all_externals = True

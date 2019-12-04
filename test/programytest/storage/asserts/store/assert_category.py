@@ -61,3 +61,32 @@ class CategoryStoreAsserts(unittest.TestCase):
         store.load_all(mock_parser)
 
         self.assertEqual(3, len(mock_parser.aimls))
+
+    def assert_load(self, store):
+        store.empty()
+
+        store.upload_from_directory(os.path.dirname(__file__) + os.sep + "data" + os.sep + "categories", subdir=False)
+        store.commit ()
+
+        mock_parser = MockAIMLParser()
+        store.load(mock_parser)
+
+        self.assertEqual(3, len(mock_parser.aimls))
+
+    def assert_empty_name(self, store):
+        store.empty()
+
+        store.upload_from_directory(os.path.dirname(__file__) + os.sep + "data" + os.sep + "categories", subdir=False)
+        store.commit ()
+
+        mock_parser = MockAIMLParser()
+        store.load_all(mock_parser)
+
+        self.assertEqual(3, len(mock_parser.aimls))
+
+        store.empty_named("KINGHORN")
+
+        mock_parser = MockAIMLParser()
+        store.load_all(mock_parser)
+
+        self.assertEqual(0, len(mock_parser.aimls))

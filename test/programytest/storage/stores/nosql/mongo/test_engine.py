@@ -78,6 +78,14 @@ class MongoStorageEngineTests(StorageEngineTestUtils):
         #self.assertIsInstance(engine.triggers_store(), MongoTriggersStore)
 
     @unittest.skipIf(Engines.mongo is False, Engines.mongo_disabled)
+    def test_initialise_drop_all_first_false(self):
+        config = MongoStorageConfiguration()
+        config.drop_all_first = False
+        engine = MongoStorageEngine(config)
+        engine.initialise()
+        self.user_asserts(storage_engine=engine)
+
+    @unittest.skipIf(Engines.mongo is False, Engines.mongo_disabled)
     def test_users(self):
         config = MongoStorageConfiguration()
         engine = MongoStorageEngine(config)

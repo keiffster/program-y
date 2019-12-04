@@ -66,7 +66,8 @@ class SQLStorageEngine(StorageEngine):
         self._session = Session()
 
     def initialise(self):
-        self._engine = create_engine(self.configuration.url, encoding=self.configuration.encoding,
+        self._engine = create_engine(self.configuration.url,
+                                     encoding=self.configuration.encoding,
                                      echo=self.configuration.echo)
 
         if self.configuration.drop_all_first is True:

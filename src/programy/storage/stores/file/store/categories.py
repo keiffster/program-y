@@ -28,7 +28,7 @@ class FileCategoryStore(FileStore, CategoryReadOnlyStore):
         CategoryReadOnlyStore.__init__(self)
 
     def _get_storage_path(self):
-        return self.storage_engine.configuration.categories_storage.dir
+        return self.storage_engine.configuration.categories_storage.dirs
 
     def get_storage(self):
         return self.storage_engine.configuration.categories_storage
@@ -59,8 +59,8 @@ class FileCategoryStore(FileStore, CategoryReadOnlyStore):
                         for filename in [f for f in filenames if f.endswith(cat_ext)]:
                             self._load_file_contents(collector, os.path.join(dirpath, filename))
 
-    def load(self, collector, name=None):
-        self._load_file_contents(collector, name)
+    def load(self, collector, filename):
+        self._load_file_contents(collector, filename)
 
     def _load_file_contents(self, collection, filename):
         YLogger.debug(self, "Loading file contents from [%s]", filename)

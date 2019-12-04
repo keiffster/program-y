@@ -42,8 +42,10 @@ class MapStoreAsserts(unittest.TestCase):
         self.assertTrue("TESTMAP2" in map_collection.maps)
         self.assertTrue("Val1", map_collection.maps['TESTMAP2']['Key1'])
     
-        store.remove_from_map("TESTMAP1", "Key1")
-        store.remove_from_map("TESTMAP2", "Key1")
+        self.assertTrue(store.remove_from_map("TESTMAP1", "Key1"))
+        self.assertTrue(store.remove_from_map("TESTMAP2", "Key1"))
+        self.assertFalse(store.remove_from_map("TESTMAP2", "Key666"))
+        self.assertFalse(store.remove_from_map("TESTMAP3", "Key1"))
         store.commit()
     
         map_collection = MockMapCollection()
@@ -123,3 +125,26 @@ class MapStoreAsserts(unittest.TestCase):
         self.assertIsNotNone(map)
         self.assertTrue('BIRD' in map)
         self.assertEqual('fur', map['BIRD'])
+
+    def assert_empty_named(self, store):
+        store.empty()
+
+        store.upload_from_text('TESTMAP', """
+        ant:6
+        bat:2
+        bear:4
+        bee:6
+        bird:2
+        """)
+
+        map_collection = MapCollection()
+        store.load(map_collection, 'TESTMAP')
+
+        self.assertTrue(map_collection.contains('TESTMAP'))
+
+        store.empty_named('TESTMAP')
+
+        map_collection.empty()
+        store.load(map_collection, 'TESTMAP')
+
+        self.assertFalse(map_collection.contains('TESTMAP'))

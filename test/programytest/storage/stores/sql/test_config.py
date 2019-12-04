@@ -114,11 +114,33 @@ class SQLStorageConfigurationTests(unittest.TestCase):
 
         self.assertEqual({'create_db': True, 'drop_all_first': True, 'echo': False, 'encoding': 'utf-8', 'url': 'sqlite:///:memory:'}, config.create_sqlstorage_config())
 
+    def test_create_sqlstorage_config_not_memory(self):
+
+        yaml = YamlConfigurationFile()
+        self.assertIsNotNone(yaml)
+        yaml.load_from_text("""
+                sql:
+                    type:   sql
+                    config:
+                        url: sql:///:other
+                        echo: false
+                        encoding: utf-8
+                        create_db: true
+                        drop_all_first: True
+                """, ConsoleConfiguration(), ".")
+
+        mongo_config = yaml.get_section("sql")
+
+        config = SQLStorageConfiguration()
+        config.load_config_section(yaml, mongo_config, ".")
+
+        self.assertEqual({'create_db': True, 'drop_all_first': True, 'echo': False, 'encoding': 'utf-8', 'url': 'sql:///:other'}, config.create_sqlstorage_config())
+
     def test_to_yaml_with_defaults(self):
         config = SQLStorageConfiguration()
 
         data = {}
-        config.to_yaml(data, defaults=False)
+        config.to_yaml(data, defaults=True)
         self.assertEqual({'create_db': True, 'drop_all_first': True, 'echo': False, 'encoding': 'utf-8', 'url': 'sqlite:///:memory:'}, data)
 
     def test_to_yaml_no_defaults(self):

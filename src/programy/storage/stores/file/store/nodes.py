@@ -48,18 +48,24 @@ class FileNodeStore(FileStore, NodesStore):
 
     def process_config_line(self, node_factory, line, filename):
         if self.valid_config_line(line, filename):
+
             splits = line.split("=")
             node_name = splits[0].strip()
             if node_name in node_factory.nodes:
                 YLogger.error(self, "Node already exists in config [%s]", line)
-                return
+                return False
+
             class_name = splits[1].strip()
             YLogger.debug(self, "Pre-instantiating %s Node [%s]", node_factory.type, class_name)
             try:
                 node_factory.add_node(node_name, ClassLoader.instantiate_class(class_name))
+                return True
+
             except Exception as e:
                 YLogger.exception_nostack(self,
                                           "Failed pre-instantiating %s Node [%s]" % (node_factory.type, class_name), e)
+
+        return False
 
     def valid_config_line(self, line, filename):
 
@@ -94,7 +100,7 @@ class FileTemplateNodeStore(FileNodeStore):
         FileNodeStore.__init__(self, storage_engine)
 
     def _get_storage_path(self):
-        return self.storage_engine.configuration.pattern_nodes_storage.file
+        return self.storage_engine.configuration.template_nodes_storage.file
 
     def get_storage(self):
         return self.storage_engine.configuration.template_nodes_storage

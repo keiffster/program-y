@@ -32,9 +32,11 @@ class FileStoreConfiguration(BaseSectionConfigurationData):
             if isinstance(dirs, (list,)) is False:
                 self._dirs = [dirs]
                 self._has_single_file = True
+
             else:
                 self._dirs = dirs[:]
                 self._has_single_file = False
+
         elif file is not None:
             self._dirs = [file]
             self._has_single_file = True

@@ -27,6 +27,15 @@ class MongoRDFsStoreTests(RDFStoreAsserts):
         self.assert_rdf_storage(store)
 
     @unittest.skipIf(Engines.mongo is False, Engines.mongo_disabled)
+    def test_empty_named(self):
+        config = MongoStorageConfiguration()
+        engine = MongoStorageEngine(config)
+        engine.initialise()
+        store = MongoRDFsStore(engine)
+
+        self.assert_empty_named(store)
+
+    @unittest.skipIf(Engines.mongo is False, Engines.mongo_disabled)
     def test_upload_from_text(self):
         config = MongoStorageConfiguration()
         engine = MongoStorageEngine(config)
@@ -36,13 +45,22 @@ class MongoRDFsStoreTests(RDFStoreAsserts):
         self.assert_upload_from_text(store)
 
     @unittest.skipIf(Engines.mongo is False, Engines.mongo_disabled)
-    def test_upload_from_text_file(self):
+    def test_load(self):
         config = MongoStorageConfiguration()
         engine = MongoStorageEngine(config)
         engine.initialise()
         store = MongoRDFsStore(engine)
 
-        self.assert_upload_from_text_file(store)
+        self.assert_load(store)
+
+    @unittest.skipIf(Engines.mongo is False, Engines.mongo_disabled)
+    def test_load_all(self):
+        config = MongoStorageConfiguration()
+        engine = MongoStorageEngine(config)
+        engine.initialise()
+        store = MongoRDFsStore(engine)
+
+        self.assert_load_all(store)
 
     @unittest.skipIf(Engines.mongo is False, Engines.mongo_disabled)
     def test_upload_text_files_from_directory_no_subdir(self):

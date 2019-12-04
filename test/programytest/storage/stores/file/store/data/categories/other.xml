@@ -12,32 +12,27 @@
 
     <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
 
-<topic name="FIFE">
     <category>
-        <pattern>WHERE IS FIFE</pattern>
+        <pattern>WHERE IS KINGHORN</pattern>
         <template>
-            <srai>FIFE</srai>
+            <srai>KINGHORN</srai>
         </template>
     </category>
 
     <category>
-        <pattern>WHAT IS FIFE</pattern>
+        <pattern>WHAT IS KINGHORN</pattern>
         <template>
-            <srai>FIFE</srai>
+            <srai>KINGHORN</srai>
         </template>
     </category>
-
 
     <category>
-        <pattern>FIFE</pattern>
+        <pattern>KINGHORN</pattern>
         <template>
-            Fife is a council area and historic county of Scotland. It is situated between the Firth of Tay and the
-            Firth of Forth, with inland boundaries to Perth and Kinross and Clackmannanshire. By custom it is widely
-            held to have been one of the major Pictish kingdoms, known as Fib, and is still commonly known as the
-            Kingdom of Fife within Scotland. Fife is one of the six local authorities part of the Edinburgh and
-            South East Scotland city region.
+            Kinghorn is a lovely little village town Fife, Scotland. A seaside resort with two beaches, Kinghorn Beach and Pettycur Bay,
+            plus a fishing port, it stands on the north shore of the Firth of Forth, opposite Edinburgh and according to the 2008 population
+            estimate, the town has a population of 2,930
         </template>
     </category>
-</topic>
 
  </aiml>

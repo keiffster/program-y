@@ -63,8 +63,14 @@ class RDFReadWriteStoreTests(unittest.TestCase):
     def test_process_line(self):
         store = MockRDFReadWriteStore()
         self.assertFalse(store.added)
-        store.add_rdf("TESTRDF", "subject1", "predicate1", "object1", replace_existing=True)
+        store.process_line("TESTRDF",["subject1", "predicate1", "object1"])
         self.assertTrue(store.added)
+
+    def test_process_line_no_fields(self):
+        store = MockRDFReadWriteStore()
+        self.assertFalse(store.added)
+        self.assertFalse(store.process_line("TESTRDF", []))
+        self.assertFalse(store.added)
 
     def test_load(self):
         store = RDFReadWriteStore()

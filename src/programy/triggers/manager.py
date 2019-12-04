@@ -40,6 +40,7 @@ class TriggerManager(ABC):
         if config.manager is not None:
             try:
                 return ClassLoader.instantiate_class(config.manager)(config)
+
             except Exception as e:
                 YLogger.exception(None, "Failed to load trigger manager [%s]", e, config.manager)
 

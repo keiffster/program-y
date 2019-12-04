@@ -54,6 +54,11 @@ class MapsReadWriteStoreTests(unittest.TestCase):
         store.process_line("MAP1", ["NAME", "VALUE"])
         self.assertTrue(store.added)
 
+    def test_process_line_no_fields(self):
+        store = MockMapsReadWriteStore()
+        self.assertFalse(store.process_line("MAP1", []))
+        self.assertFalse(store.added)
+
     def test_load(self):
         store = MapsReadWriteStore()
         with self.assertRaises(NotImplementedError):

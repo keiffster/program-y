@@ -45,18 +45,13 @@ from programy.utils.console.console import outputLog
 class Uploader:
 
     @staticmethod
-    def upload(storetype, url, database, filename, dirname, subdir, extension, drop_all=False, verbose=False):
+    def upload(storetype, url, database, filename, dirname, subdir, extension, verbose=False):
         config = MongoStorageConfiguration()
         config.url = url
         config.database = database
-        config.drop_all_first = drop_all
         engine = MongoStorageEngine(config)
         engine.initialise()
         store = Uploader._get_store(storetype, engine)
-
-        if drop_all is True:
-            outputLog(None, "Dropped database")
-            exit(0)
 
         outputLog(None, "Emptying [%s]" % storetype)
         store.empty()
@@ -76,6 +71,8 @@ class Uploader:
             outputLog(None, "Entities successful: %d" % success)
         else:
             raise Exception("You must specify either --file or --dir")
+
+        return count, success
 
     @staticmethod
     def _get_store(storetype, engine):
@@ -133,21 +130,37 @@ class Uploader:
         loader_args.add_argument('-d', '--dir', help="Directory to load files from")
         loader_args.add_argument('-x', '--extension', help="Extension of file to load (dir only)")
         loader_args.add_argument('-s', '--subdir', action='store_true', help="Recurse into all subdirectories")
-        loader_args.add_argument('-a', '--drop', action='store_true', help="Drop all collections first")
         loader_args.add_argument('-v', '--verbose', action='store_true', help="Verbose output of loading process")
         loader_args.add_argument('-z', '--verboseX', action='store_true', help="Verbose output of loading process")
 
         return loader_args
 
+    @staticmethod
+    def get_args(arguments):
+        return arguments.parse_args()       #pragma: no cover
+
+    @staticmethod
+    def run():
+        arguments = Uploader.create_arguments()
+        try:
+            args = Uploader.get_args(arguments)
+            Uploader.upload(args.entity,
+                            args.url,
+                            args.db,
+                            args.file,
+                            args.dir,
+                            args.subdir,
+                            args.extension,
+                            verbose=args.verbose)
+
+        except Exception as excep:
+            outputLog(None, "Mongo loader error - %s" % excep)
+            arguments.print_help()
+
+        except SystemExit as excep:
+            outputLog(None, "Mongo loader error - %s" % excep)
+            arguments.print_help()
 
 if __name__ == '__main__':
 
-    arguments = Uploader.create_arguments()
-    try:
-        args = arguments.parse_args()
-        Uploader.upload(args.entity, args.url, args.db, args.file, args.dir, args.subdir,
-                        args.extension, drop_all=args.drop, verbose=args.verbose)
-
-    except Exception as excep:
-        outputLog(None, "Mongo loader error - %s" % excep)
-        arguments.print_help()
+    Uploader.run()                          #pragma: no cover

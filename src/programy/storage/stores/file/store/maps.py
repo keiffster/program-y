@@ -25,18 +25,22 @@ class FileMapsStore(FileStore, MapsReadOnlyStore):
         FileStore.__init__(self, storage_engine)
         MapsReadOnlyStore.__init__(self)
 
+    def _load_map_file(self, filename, the_map):
+        with open(filename, 'r', encoding='utf8') as my_file:
+            for line in my_file:
+                splits = line.split(":")
+                if len(splits) > 1:
+                    key = splits[0].strip().upper()
+                    value = ":".join(splits[1:]).strip()
+                    the_map[key] = value.strip()
+
     def _load_file_contents(self, collection, filename):
         YLogger.debug(self, "Loading map [%s]", filename)
 
         the_map = {}
         try:
-            with open(filename, 'r', encoding='utf8') as my_file:
-                for line in my_file:
-                    splits = line.split(":")
-                    if len(splits) > 1:
-                        key = splits[0].strip().upper()
-                        value = ":".join(splits[1:]).strip()
-                        the_map[key] = value.strip()
+            self._load_map_file(filename, the_map)
+
         except Exception as excep:
             YLogger.exception_nostack(self, "Failed to load map [%s]", excep, filename)
 
@@ -46,7 +50,7 @@ class FileMapsStore(FileStore, MapsReadOnlyStore):
         return self.storage_engine.configuration.maps_storage
 
     def _get_storage_path(self):
-        return self.storage_engine.configuration.maps_storage.dir
+        return self.storage_engine.configuration.maps_storage.dirs
 
     def get_storage(self):
         return self.storage_engine.configuration.maps_storage

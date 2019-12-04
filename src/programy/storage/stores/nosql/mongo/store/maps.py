@@ -43,7 +43,7 @@ class MongoMapsStore(MongoStore, MapsReadWriteStore):
         if amap is not None:
             if key in amap[MongoMapsStore.KEYVALUES]:
                 if overwrite_existing is True:
-                    YLogger.info(self, "Updating map in Mongo", name, key, value)
+                    YLogger.info(self, "Updating map [%s] in Mongo [%s]=[%s]", name, key, value)
                     amap[MongoMapsStore.KEYVALUES][key] = value
                     collection.replace_one({MongoMapsStore.NAME: name}, amap)
                 else:
@@ -62,12 +62,16 @@ class MongoMapsStore(MongoStore, MapsReadWriteStore):
         collection = self.collection()
         amap = collection.find_one({MongoMapsStore.NAME: name})
         if amap is not None:
-            if key in amap[MongoMapsStore.KEYVALUES]:
-                amap[MongoMapsStore.KEYVALUES].pop(key)
-                if amap[MongoMapsStore.KEYVALUES]:
-                    collection.replace_one({MongoMapsStore.NAME: name}, amap)
-                else:
-                    collection.delete_one({MongoMapsStore.NAME: name})
+            amap[MongoMapsStore.KEYVALUES].pop(key)
+            if amap[MongoMapsStore.KEYVALUES]:
+                collection.replace_one({MongoMapsStore.NAME: name}, amap)
+
+            else:
+                collection.delete_one({MongoMapsStore.NAME: name})
+
+            return True
+
+        return False
 
     def load_all(self, collector):
         YLogger.info(self, "Loading all maps from Mongo")
@@ -84,3 +88,6 @@ class MongoMapsStore(MongoStore, MapsReadWriteStore):
         if amap is not None:
             collector.remove(name)
             collector.add_map(name, amap[MongoMapsStore.KEYVALUES], MongoStore.MONGO)
+            return True
+
+        return False

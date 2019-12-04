@@ -42,6 +42,10 @@ class FileConversationStore(FileStore, ConversationStore):
     def _conversations_filename(self, storage_dir, clientid, userid, ext="conv"):
         return "%s%s%s_%s.%s" % (storage_dir, os.sep, clientid, userid, ext)
 
+    def _write_file(self, conversation_filepath, json_text):
+        with open(conversation_filepath, "w+") as convo_file:
+            convo_file.write(json_text)
+
     def store_conversation(self, client_context, conversation, commit=True):
         self._ensure_dir_exists(self._storage_engine.configuration.conversation_storage.dirs[0])
 
@@ -55,11 +59,16 @@ class FileConversationStore(FileStore, ConversationStore):
         json_text = json.dumps(convo_json, indent=4)
 
         try:
-            with open(conversation_filepath, "w+") as convo_file:
-                convo_file.write(json_text)
+            self._write_file(conversation_filepath, json_text)
 
         except Exception as excep:
             YLogger.exception_nostack(self, "Failed to write conversation file [%s]", excep, conversation_filepath)
+
+    def _read_file(self, conversation_filepath, conversation):
+        with open(conversation_filepath, "r+") as convo_file:
+            json_text = convo_file.read()
+            json_data = json.loads(json_text)
+            conversation.create_from_json(json_data)
 
     def load_conversation(self, client_context, conversation):
         conversation_filepath = self._conversations_filename(
@@ -68,10 +77,10 @@ class FileConversationStore(FileStore, ConversationStore):
 
         if self._file_exists(conversation_filepath):
             try:
-                with open(conversation_filepath, "r+") as convo_file:
-                    json_text = convo_file.read()
-                    json_data = json.loads(json_text)
-                    conversation.create_from_json(json_data)
+                self._read_file(conversation_filepath, conversation)
+                return True
 
             except Exception as excep:
                 YLogger.exception_nostack(self, "Failed to read conversation file [%s]", excep, conversation_filepath)
+
+        return False

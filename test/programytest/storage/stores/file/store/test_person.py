@@ -19,6 +19,15 @@ class FilePersonStoreTests(PersonssStoreAsserts):
         store = FilePersonStore(engine)
         self.assertEqual(store.storage_engine, engine)
 
+    def test_storage_path(self):
+        config = FileStorageConfiguration()
+        engine = FileStorageEngine(config)
+        engine.initialise()
+        store = FilePersonStore(engine)
+
+        self.assertEquals('/tmp/lookups/person.txt', store._get_storage_path())
+        self.assertIsInstance(store.get_storage(), FileStoreConfiguration)
+
     def test_load_from_file(self):
         config = FileStorageConfiguration()
         config._person_storage = FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "data" + os.sep + "lookups" + os.sep + "text" + os.sep + "person.txt", fileformat="text", encoding="utf-8", delete_on_start=False)

@@ -46,8 +46,8 @@ class MongoPropertyStore(PropertyStore, MongoStore):
         collection = self.collection()
         prop = collection.find_one({MongoPropertyStore.NAME: name})
         if prop is not None:
-            prop.value = value
-            collection.replace_document(prop)
+            prop['value'] = value
+            collection.replace_one({'_id': prop['_id']}, prop)
             YLogger.info(self, "Replacing property [%s] = [%s]", name, value)
         else:
             prop = Property(name, value)
@@ -61,11 +61,10 @@ class MongoPropertyStore(PropertyStore, MongoStore):
 
     def get_properties(self):
         collection = self.collection()
-        props_colleciton = collection.find()
+        props_collection = collection.find()
         properties = {}
-        if props_colleciton is not None:
-            for prop in props_colleciton:
-                properties[prop[MongoPropertyStore.NAME]] = prop[MongoPropertyStore.VALUE]
+        for prop in props_collection:
+            properties[prop[MongoPropertyStore.NAME]] = prop[MongoPropertyStore.VALUE]
         return properties
 
     def load(self, collector, name=None):
@@ -85,37 +84,41 @@ class MongoPropertyStore(PropertyStore, MongoStore):
     def add_to_collection(self, collection, name, value):
         collection.add_property(name, value)
 
+    def _process_line(self, line, verbose):
+        line = line.strip()
+        if line.startswith(MongoPropertyStore.COMMENT) is False:
+            splits = line.split(MongoPropertyStore.SPLIT_CHAR)
+            if len(splits) > 1:
+                key = splits[0].strip()
+                val = ":".join(splits[1:]).strip()
+                if verbose is True:
+                    YLogger.debug(self, "Adding %s property [%s=%s] to Mongo",
+                                  self.collection_name(), key, val)
+                return self.add_property(key, val)
+
+        return False
+
+    def _read_lines_from_file(self, filename, verbose):
+        count = 0
+        success = 0
+        with open(filename, "r") as vars_file:
+            for line in vars_file:
+                if self._process_line(line, verbose) is True:
+                    success += 1
+                count += 1
+        return count, success
+
     def upload_from_file(self, filename, fileformat=Store.TEXT_FORMAT, commit=True, verbose=False):
 
         YLogger.info(self, "Uploading %s to Mongo from [%s]", filename, self.collection_name())
 
-        count = 0
-        success = 0
-        if os.path.exists(filename):
-            try:
-                with open(filename, "r") as vars_file:
-                    for line in vars_file:
-                        line = line.strip()
-                        if line:
-                            if line.startswith(MongoPropertyStore.COMMENT) is False:
-                                splits = line.split(MongoPropertyStore.SPLIT_CHAR)
-                                if len(splits) > 1:
-                                    key = splits[0].strip()
-                                    val = ":".join(splits[1:]).strip()
-                                    if verbose is True:
-                                        YLogger.debug(self, "Adding %s property [%s=%s] to Mongo",
-                                                      self.collection_name(), key, val)
-                                    if self.add_property(key, val) is True:
-                                        success += 1
-                            count += 1
+        try:
+            return self._read_lines_from_file(filename, verbose)
 
-                if commit is True:
-                    self.commit()
+        except Exception as excep:
+            YLogger.exception(self, "Failed to upload %s from %s to Mongo", excep, self.collection_name(), filename)
 
-            except Exception as excep:
-                YLogger.exception(self, "Failed to upload %s from %s to Mongo", excep, self.collection_name(), filename)
-
-        return count, success
+        return 0, 0
 
     def split_into_fields(self, line):
         return DoubleStringPatternSplitCollection.split_line_by_pattern(line,
@@ -162,6 +165,6 @@ class MongoRegexesStore(MongoPropertyStore):
 
     def add_to_collection(self, collection, name, value):
         try:
-            collection.add_property(name, re.compile(value, re.IGNORECASE))
+            collection.add_regex(name, re.compile(value, re.IGNORECASE))
         except Exception as excep:
             YLogger.exception(self, "Error adding regex to collection: [%s]", excep, value)

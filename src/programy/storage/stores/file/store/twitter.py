@@ -41,28 +41,36 @@ class FileTwitterStore(FileStore, TwitterStore):
     def _twitter_filename(self, storage_dir, ext='ids'):
         return storage_dir + os.sep + "twitter." + ext
 
+    def _write_message_ids_to_file(self, twitter_ids_file, last_direct_message_id, last_status_id):
+        with open(twitter_ids_file, "w+", encoding="utf-8") as idfile:
+            idfile.write("%s\n" % last_direct_message_id)
+            idfile.write("%s\n" % last_status_id)
+
     def store_last_message_ids(self, last_direct_message_id, last_status_id):
-        self._ensure_dir_exists(self.storage_engine.configuration.twitter_storage.dirs[0])
-        twitter_ids_file = self._twitter_filename(self.storage_engine.configuration.twitter_storage.dirs[0])
         try:
-            with open(twitter_ids_file, "w+", encoding="utf-8") as idfile:
-                idfile.write("%s\n" % last_direct_message_id)
-                idfile.write("%s\n" % last_status_id)
+            self._ensure_dir_exists(self.storage_engine.configuration.twitter_storage.dirs[0])
+            twitter_ids_file = self._twitter_filename(self.storage_engine.configuration.twitter_storage.dirs[0])
+            self._write_message_ids_to_file(twitter_ids_file, last_direct_message_id, last_status_id)
+            return True
 
         except Exception as e:
             YLogger.exception_nostack(None, "Failed to store last message ids [%s]", e, twitter_ids_file)
 
+        return False
+
+    def _load_message_ids_from_file(self, twitter_ids_file):
+        with open(twitter_ids_file, "r", encoding="utf-8") as idfile:
+            last_direct_message_id = idfile.readline().strip()
+            last_status_id = idfile.readline().strip()
+            return last_direct_message_id, last_status_id
+
     def load_last_message_ids(self):
-        self._ensure_dir_exists(self.storage_engine.configuration.twitter_storage.dirs[0])
-        last_direct_message_id = "-1"
-        last_status_id = "-1"
-        twitter_ids_file = self._twitter_filename(self.storage_engine.configuration.twitter_storage.dirs[0])
         try:
-            with open(twitter_ids_file, "r", encoding="utf-8") as idfile:
-                last_direct_message_id = idfile.readline().strip()
-                last_status_id = idfile.readline().strip()
+            self._ensure_dir_exists(self.storage_engine.configuration.twitter_storage.dirs[0])
+            twitter_ids_file = self._twitter_filename(self.storage_engine.configuration.twitter_storage.dirs[0])
+            return self._load_message_ids_from_file(twitter_ids_file)
 
         except Exception as e:
             YLogger.exception_nostack(None, "Failed to load last message ids [%s]", e, twitter_ids_file)
 
-        return last_direct_message_id, last_status_id
+        return "-1", "-1"

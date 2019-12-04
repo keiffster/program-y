@@ -38,7 +38,7 @@ class MongoCategoryStore(CategoryReadWriteStore, MongoStore):
     def empty_named(self, name):
         YLogger.info(self, "Emptying Category from Mongo[%s]", name)
         collection = self.collection()
-        collection.delete_many({MongoCategoryStore.GROUPID, name})
+        collection.delete_many({MongoCategoryStore.GROUPID: name})
 
     def store_category(self, groupid, userid, topic, that, pattern, template):
         YLogger.debug(self, "Storing category in Mongo [%s] [%s] [%s] [%s] [%s]", groupid, pattern, topic, that,

@@ -33,10 +33,11 @@ class SetsReadOnlyStore(Store):
 
     def add_set_values(self, the_set, value):
         splits = value.split()
-        key = splits[0].upper()
-        if key not in the_set:
-            the_set[key] = []
-        the_set[key].append(splits)
+        if len(splits) > 0:
+            key = splits[0].upper()
+            if key not in the_set:
+                the_set[key] = []
+            the_set[key].append(splits)
 
 
 class SetsReadWriteStore(SetsReadOnlyStore):

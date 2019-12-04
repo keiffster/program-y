@@ -36,9 +36,10 @@ class MongoTwitterStore(MongoStore, TwitterStore):
         collection = self.collection()
         twitter = collection.find_one({})
         if twitter is not None:
-            twitter.last_direct_message_id = last_direct_message_id
-            twitter.last_status_id = last_status_id
-            collection.update(twitter)
+            twitter['last_direct_message_id'] = last_direct_message_id
+            twitter['last_status_id'] = last_status_id
+            collection.update({'_id': twitter['_id']}, twitter)
+
         else:
             twitter = Twitter(last_direct_message_id, last_status_id)
             self.add_document(twitter)
@@ -50,5 +51,6 @@ class MongoTwitterStore(MongoStore, TwitterStore):
         twitter = collection.find_one({})
         if twitter is not None:
             return twitter['last_direct_message_id'], twitter['last_status_id']
+
         else:
             return "-1", "-1"

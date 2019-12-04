@@ -24,4 +24,4 @@ class SQLSpellingStoreTests(SpellingStoreAsserts):
         engine.initialise()
         store = SQLSpellingStore(engine)
 
-        self.assert_upload_from_file(store)
+        self.assert_upload_from_file(store, verbose=False)

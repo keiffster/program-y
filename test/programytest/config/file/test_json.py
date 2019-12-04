@@ -264,7 +264,7 @@ class JSONConfigurationFileTests(ConfigurationBaseFileTests):
 							"format": "xml"
 						},
 						"preprocessors": {
-							"file": "./storage/processing/preprocessors.txt"
+							"file": "./storage/processing/preprocessors.conf"
 						},
 						"postprocessors": {
 							"file": "./storage/processing/postprocessing.txt"

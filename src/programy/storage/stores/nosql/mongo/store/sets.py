@@ -46,21 +46,13 @@ class MongoSetsStore(MongoStore, SetsReadWriteStore):
                 YLogger.info(self, "Adding value to set [%s] [%s]", name, uvalue)
                 aset[MongoSetsStore.VALUES].append(uvalue)
                 collection.replace_one({MongoSetsStore.NAME: name}, aset)
-                return True
-            else:
-                if replace_existing is True:
-                    YLogger.info(self, "Updating set [%s] [%s]", name, uvalue)
-                    aset[MongoSetsStore.VALUES] = uvalue
-                    collection.replace_one({MongoSetsStore.NAME: name}, aset)
-                    return True
-                else:
-                    YLogger.error(self, "Existing value in set [%s] [%s]", name, uvalue)
-                    return False
+
         else:
             YLogger.info(self, "Creating new set [%s], initial value [%s]", name, uvalue)
             aset = Set(name, [uvalue])
             self.add_document(aset)
-            return True
+
+        return True
 
     def remove_from_set(self, name, value):
         YLogger.info(self, "Remove value [%s] from set [%s]", value, name)
@@ -73,6 +65,11 @@ class MongoSetsStore(MongoStore, SetsReadWriteStore):
                     collection.replace_one({MongoSetsStore.NAME: name}, aset)
                 else:
                     collection.delete_one({MongoSetsStore.NAME: name})
+
+                return True
+
+        return False
+
 
     def load_all(self, collector):
         YLogger.info(self, "Loading all sets from Mongo")
@@ -90,8 +87,10 @@ class MongoSetsStore(MongoStore, SetsReadWriteStore):
             the_set = {}
             for value in aset[MongoSetsStore.VALUES]:
                 value = value.strip()
-                if value:
-                    self.add_set_values(the_set, value)
+                self.add_set_values(the_set, value)
 
             collector.remove(name)
             collector.add_set(name, the_set, MongoStore.MONGO)
+            return True
+
+        return False

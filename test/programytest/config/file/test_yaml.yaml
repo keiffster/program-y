@@ -109,7 +109,7 @@ console:
                   file: ./storage/braintree/braintree.xml
                   format: xml
                 preprocessors:
-                  file: ./storage/processing/preprocessors.txt
+                  file: ./storage/processing/preprocessors.conf
                 postprocessors:
                   file: ./storage/processing/postprocessing.txt
                 usergroups:

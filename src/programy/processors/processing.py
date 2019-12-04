@@ -16,6 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 from abc import ABC
 from abc import abstractmethod
+from programy.utils.logging.ylogger import YLogger
 from programy.storage.factory import StorageFactory
 
 
@@ -42,9 +43,16 @@ class ProcessorCollection:
     def load(self, storage_factory):
         storage_name = self._get_storage_name()
         if storage_factory.entity_storage_engine_available(storage_name) is True:
-            storage_engine = storage_factory.entity_storage_engine(storage_name)
-            processor_store = self._get_store(storage_engine)
-            processor_store.load(self)
+            try:
+                storage_engine = storage_factory.entity_storage_engine(storage_name)
+                processor_store = self._get_store(storage_engine)
+                processor_store.load(self)
+                return True
+
+            except Exception as e:
+                YLogger.exception(self, "Failed to load processors from storage", e)
+
+        return False
 
     def _get_storage_name(self):
         raise NotImplementedError("Override this in derived class, return StorageFactory.XXX name")  # pragma: no cover

@@ -224,7 +224,7 @@ class XMLConfigurationFileTests(ConfigurationBaseFileTests):
 							<format>xml</format>
 						</braintree>
 						<preprocessors>
-							<file>./storage/processing/preprocessors.txt</file>
+							<file>./storage/processing/preprocessors.conf</file>
 						</preprocessors>
 						<postprocessors>
 							<file>./storage/processing/postprocessing.txt</file>

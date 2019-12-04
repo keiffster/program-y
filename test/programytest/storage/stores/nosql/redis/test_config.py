@@ -133,3 +133,10 @@ class RedisStorageConfigurationTests(unittest.TestCase):
         data ={}
         config.to_yaml(data, defaults=False)
         self.assertEquals({'db': 0, 'drop_all_first': True, 'host': 'localhost', 'password': None, 'password': 'passwordX', 'port': 6379, 'prefix': 'programy'}, config.create_redisstorage_config())
+
+    def test_to_yaml_with_defaults(self):
+        config = RedisStorageConfiguration()
+
+        data ={}
+        config.to_yaml(data, defaults=True)
+        self.assertEquals({'db': 0, 'drop_all_first': True, 'host': 'localhost', 'password': None, 'port': 6379, 'prefix': 'programy'}, config.create_redisstorage_config())

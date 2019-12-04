@@ -1,5 +1,4 @@
 import unittest
-
 import programytest.storage.engines as Engines
 from programy.storage.stores.nosql.redis.config import RedisStorageConfiguration
 from programy.storage.stores.nosql.redis.engine import RedisStorageEngine
@@ -19,6 +18,14 @@ class RedisStorageEngineTests(StorageEngineTestUtils):
     @unittest.skipIf(Engines.redis is False, Engines.redis_disabled)
     def test_conversations(self):
         config = RedisStorageConfiguration()
+        engine = RedisStorageEngine(config)
+        engine.initialise()
+        self.conversation_asserts(storage_engine=engine)
+
+    @unittest.skipIf(Engines.redis is False, Engines.redis_disabled)
+    def test_conversations_without_dropapp(self):
+        config = RedisStorageConfiguration()
+        config._drop_all_first = False
         engine = RedisStorageEngine(config)
         engine.initialise()
         self.conversation_asserts(storage_engine=engine)

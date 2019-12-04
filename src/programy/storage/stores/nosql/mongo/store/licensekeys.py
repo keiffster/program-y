@@ -46,42 +46,44 @@ class MongoLicenseKeysStore(MongoStore, LicenseStore):
         for licensekey in licensekeys:
             collector.add_key(licensekey['name'], licensekey['key'])
 
-    def upload_from_file(self, filename, fileformat=Store.TEXT_FORMAT, commit=True, verbose=False):
-        YLogger.info(self, "Uploading license keys to Mongo [%s]", filename)
+    def _read_lines_from_file(self, filename, verbose):
         success = 0
         count = 0
+        with open(filename, "r", encoding="utf-8") as license_file:
+            for line in license_file:
+                if self._process_line(line, verbose) is True:
+                    success += 1
+                count += 1
+        return count, success
+
+    def _process_line(self, line, verbose=False):
+        line = line.strip()
+        if line.startswith('#') is False:
+            splits = line.split("=")
+            if len(splits) > 1:
+                key_name = splits[0].strip()
+                # If key has = signs in it, then combine all elements past the first
+                key = "".join(splits[1:]).strip()
+                if verbose is True:
+                    outputLog(self, "%s = %s" % (key_name, key))        # pragma: no cover
+
+                licensekey = LicenseKey(name=key_name, key=key)
+                self.add_document(licensekey)
+                return True
+
+            else:
+                YLogger.warning(self, "Invalid license key [%s]", line)
+
+        return False
+
+    def upload_from_file(self, filename, fileformat=Store.TEXT_FORMAT, commit=True, verbose=False):
+        YLogger.info(self, "Uploading license keys to Mongo [%s]", filename)
         try:
             YLogger.info(self, "Loading license key file: [%s]", filename)
-            with open(filename, "r", encoding="utf-8") as license_file:
-                for line in license_file:
-                    if self._process_license_key_line(line, verbose) is True:
-                        success += 1
-                    count += 1
-
-            if commit is True:
-                self.commit()
+            return self._read_lines_from_file(filename, verbose)
 
         except Exception as excep:
             YLogger.exception(self, "Invalid license key file [%s]", excep, filename)
 
-        return count, success
+        return 0, 0
 
-    def _process_license_key_line(self, line, verbose=False):
-        line = line.strip()
-        if line:
-            if line.startswith('#') is False:
-                splits = line.split("=")
-                if len(splits) > 1:
-                    key_name = splits[0].strip()
-                    # If key has = signs in it, then combine all elements past the first
-                    key = "".join(splits[1:]).strip()
-                    if verbose is True:
-                        outputLog(self, "%s = %s" % (key_name, key))
-
-                    licensekey = LicenseKey(name=key_name, key=key)
-                    self.add_document(licensekey)
-                    return True
-                else:
-                    YLogger.warning(self, "Invalid license key [%s]", line)
-
-        return False

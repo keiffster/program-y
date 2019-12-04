@@ -37,32 +37,33 @@ class MongoNodeStore(MongoStore, NodesStore):
             try:
                 collector.add_node(node['name'], ClassLoader.instantiate_class(node['node_class']))
 
-            except Exception as e:
-                YLogger.exception(self, "Failed pre-instantiating %s Node [%s]", e, collector.type, node['node_class'])
+            except Exception as excep:
+                YLogger.exception(self, "Failed pre-instantiating %s Node [%s]", excep, collector.type, node['node_class'])
 
     def get_all_nodes(self):
         collection = self.collection()
         return collection.find()
 
+    def _load_nodes_from_file(self, filename, verbose):
+        count = 0
+        success = 0
+        with open(filename, "r", encoding="utf-8") as file:
+            for line in file:
+                if self.process_config_line(line, verbose) is True:
+                    success += 1
+                count += 1
+        return count, success
+
     def upload_from_file(self, filename, fileformat=Store.TEXT_FORMAT, commit=True, verbose=False):
 
         YLogger.info(self, "Uploading %s to Mongo from file [%s]", self.collection_name(), filename)
-        count = 0
-        success = 0
         try:
-            with open(filename, "r", encoding="utf-8") as file:
-                for line in file:
-                    if self.process_config_line(line, verbose) is True:
-                        success += 1
-                    count += 1
+            return self._load_nodes_from_file(filename, verbose)
 
-        except FileNotFoundError:
-            YLogger.error(self, "File not found [%s]", filename)
+        except Exception as excep:
+            YLogger.exception(self, "Error loading file [%s]", excep, filename)
 
-        if commit is True:
-            self.commit()
-
-        return count, success
+        return 0, 0
 
     def process_config_line(self, line, verbose=False):
         line = line.strip()

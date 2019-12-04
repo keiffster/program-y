@@ -18,7 +18,7 @@ class MongoConversationStoreTests(ConverstionStoreAsserts):
         self.assertEqual(store.storage_engine, engine)
 
     @unittest.skipIf(Engines.mongo is False, Engines.mongo_disabled)
-    def tests_conversation_storage(self):
+    def test_conversation_storage(self):
         config = MongoStorageConfiguration()
         engine = MongoStorageEngine(config)
         engine.initialise()

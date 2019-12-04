@@ -37,7 +37,6 @@ class FileLookupsStore(FileStore, LookupsStore):
         try:
             with open(filename, 'r', encoding='utf8') as my_file:
                 for line in my_file:
-                    if line:
                         splits = DoubleStringPatternSplitCollection.\
                             split_line_by_pattern(line, DoubleStringPatternSplitCollection.RE_OF_SPLIT_PATTERN)
                         if splits and len(splits) > 1:

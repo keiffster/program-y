@@ -27,26 +27,28 @@ class FileSpellingStore(FileStore, SpellingStore):
         FileStore.__init__(self, storage_engine)
         SpellingStore.__init__(self)
 
-    def load_spelling(self, spell_checker):
-        corpus_filename = self.get_storage().file
-        encoding = self.get_storage().encoding
-
-        if os.path.exists(corpus_filename) is True:
-            YLogger.info(self, "Loading spelling corpus [%s]", corpus_filename)
-
-            try:
-                with open(corpus_filename, encoding=encoding) as words_file:
-                    all_words = words_file.read()
-                    spell_checker.add_corpus(all_words)
-
-            except Exception as e:
-                YLogger.exception_nostack(self, "Failed to load corpus [%s]", e, corpus_filename)
-
-        else:
-            YLogger.error(self, "No spelling corpus found[%s]", corpus_filename)
-
     def _get_storage_path(self):
         return self.storage_engine.configuration.spelling_storage.file
 
     def get_storage(self):
         return self.storage_engine.configuration.spelling_storage
+
+    def _load_corpus_from_file(self, filename, encoding, spell_checker):
+        with open(filename, encoding=encoding) as words_file:
+            all_words = words_file.read()
+            spell_checker.add_corpus(all_words)
+
+    def load_spelling(self, spell_checker):
+        corpus_filename = self.get_storage().file
+        encoding = self.get_storage().encoding
+
+        YLogger.info(self, "Loading spelling corpus [%s]", corpus_filename)
+        try:
+            self._load_corpus_from_file(corpus_filename, encoding, spell_checker)
+            return True
+
+        except Exception as e:
+            YLogger.exception_nostack(self, "Failed to load corpus [%s]", e, corpus_filename)
+
+        return False
+

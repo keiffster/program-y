@@ -217,7 +217,7 @@ class SQLConversationStore(SQLStore, ConversationStore):
 
         if conversationdao is None:
             YLogger.debug(client_context, "No matching conversation in database")
-            return
+            return False
 
         YLogger.debug(client_context, "Loaded conversation %s", conversationdao)
 
@@ -230,6 +230,8 @@ class SQLConversationStore(SQLStore, ConversationStore):
         self._read_questions_from_db(client_context,
                                      conversationdao.id,
                                      conversation)
+
+        return True
 
     def _read_questions_from_db(self, client_context, conversationid, conversation):
         questiondaos = self._storage_engine.session.query(QuestionDAO). \

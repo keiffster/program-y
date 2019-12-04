@@ -27,12 +27,19 @@ class ConverstionStoreAsserts(unittest.TestCase):
 
         if test_load is True:
             conversation2 = Conversation(client_context)
-            store.load_conversation(client_context, conversation2)
+            self.assertTrue(store.load_conversation(client_context, conversation2))
 
             self.assertEqual(1, len(conversation2.questions))
             self.assertEqual(1, len(conversation2.questions[0].sentences))
             self.assertEqual("Hello There", conversation2.questions[0].sentences[0].text(client_context))
             self.assertEqual("Hi", conversation2.questions[0].sentences[0].response)
+
+        client2 = TestClient()
+        client_context2 = client2.create_client_context("user2")
+
+        if test_load is True:
+            conversation3 = Conversation(client_context)
+            self.assertFalse(store.load_conversation(client_context2, conversation3))
 
         if can_empty is True:
             store.empty()

@@ -30,4 +30,4 @@ class LinkedAccountStoreAsserts(unittest.TestCase):
         self.assertIsNotNone(accounts)
         self.assertEqual(0, len(accounts))
 
-
+        self.assertIsNone(store.primary_account("userX"))

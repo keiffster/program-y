@@ -70,13 +70,13 @@ class CategoryReadOnlyStore(Store):
 
     def _load_category(self, groupid, pattern, topic, that, template, parser):
 
-        text = \
-            """<category>
-                <pattern>%s</pattern>
-                <topic>%s</topic>
-                <that>%s</that>
-                <template>%s</template>
-            </category>""" % (pattern, topic, that, template)
+        text = """
+<category>
+    <pattern>%s</pattern>
+    <topic>%s</topic>
+    <that>%s</that>
+    <template>%s</template>
+</category>""" % (pattern, topic, that, template)
 
         xml = None
         try:
@@ -98,42 +98,59 @@ class CategoryReadWriteStore(CategoryReadOnlyStore):
     def __init__(self):
         CategoryReadOnlyStore.__init__(self)
 
-    def upload_from_file(self, filename, fileformat=Store.XML_FORMAT, commit=True, verbose=False):
+    def _parse_topic_expression(self, expression, namespace, groupname, count, success):
+        topic = expression.attrib['name']
+        for topic_expression in expression:
+            that = self.find_element_str("that", topic_expression, namespace)
+            pattern = self.find_element_str("pattern", topic_expression, namespace)
+            template = self.find_element_str("template", topic_expression, namespace)
+            if self.store_category(groupname, "*", topic, that, pattern, template) is True:
+                success += 1
+            count += 1
+        return count, success
+
+    def _parse_category_expression(self, expression, namespace, groupname, count, success):
+        topic = self.find_element_str("topic", expression, namespace)
+        that = self.find_element_str("that", expression, namespace)
+        pattern = self.find_element_str("pattern", expression, namespace)
+        template = self.find_element_str("template", expression, namespace)
+        if self.store_category(groupname, "*", topic, that, pattern, template) is True:
+            success += 1
+        count += 1
+        return count, success
+
+    def _upload(self, filename):
         count = 0
         success = 0
+        groupname = Store.get_just_filename_from_filepath(filename)
 
+        tree = ET.parse(filename, parser=LineNumberingParser())
+        aiml = tree.getroot()
+
+        for expression in aiml:
+            tag_name, namespace = TextUtils.tag_and_namespace_from_text(expression.tag)
+
+            if tag_name == 'topic':
+                count, success = self._parse_topic_expression(expression, namespace, groupname, count, success)
+
+            elif tag_name == 'category':
+                count, success = self._parse_category_expression(expression, namespace, groupname, count, success)
+
+            else:
+                YLogger.error(self, "Invalid aiml tag type [%s]", tag_name)
+                count += 1
+
+        return count, success
+
+    def upload_from_file(self, filename, fileformat=Store.XML_FORMAT, commit=True, verbose=False):
         try:
-            groupname = Store.get_just_filename_from_filepath(filename)
-
-            tree = ET.parse(filename, parser=LineNumberingParser())
-            aiml = tree.getroot()
-
-            for expression in aiml:
-                tag_name, namespace = TextUtils.tag_and_namespace_from_text(expression.tag)
-                if tag_name == 'topic':
-                    topic = expression.attrib['name']
-                    for topic_expression in expression:
-                        that = self.find_element_str("that", topic_expression, namespace)
-                        pattern = self.find_element_str("pattern", topic_expression, namespace)
-                        template = self.find_element_str("template", topic_expression, namespace)
-                        if self.store_category(groupname, "*", topic, that, pattern, template) is True:
-                            success += 1
-                        count += 1
-
-                elif tag_name == 'category':
-                    topic = self.find_element_str("topic", expression, namespace)
-                    that = self.find_element_str("that", expression, namespace)
-                    pattern = self.find_element_str("pattern", expression, namespace)
-                    template = self.find_element_str("template", expression, namespace)
-                    if self.store_category(groupname, "*", topic, that, pattern, template) is True:
-                        success += 1
-                    count += 1
+            return self._upload(filename)
 
         except Exception as excep:
             YLogger.exception(self, "Failed to load contents of AIML file from [%s]",
                               excep, filename)  # pragma: no cover
 
-        return count, success
+        return 0, 0
 
     def store_category(self, groupid, userid, topic, that, pattern, template):
         raise NotImplementedError("store_category missing from Category Store")  # pragma: no cover

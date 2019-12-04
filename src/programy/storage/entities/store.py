@@ -29,20 +29,20 @@ class Store:
     YAML_FORMAT = "yaml"
 
     def __init__(self):
-        pass    # pragma: no cover
+        pass                # pragma: no cover
 
     def empty(self):
-        return  # pragma: no cover
+        return              # pragma: no cover
 
     def empty_named(self, name):
-        del name
-        return  # pragma: no cover
+        del name            # pragma: no cover
+        return              # pragma: no cover
 
     def commit(self):
-        return  # pragma: no cover
+        return              # pragma: no cover
 
     def rollback(self):
-        return  # pragma: no cover
+        return              # pragma: no cover
 
     def get_split_char(self):
         return ","
@@ -63,8 +63,7 @@ class Store:
                 line = line.strip()
                 if line and len(line)>0:
                     fields = self.split_into_fields(line)
-                    if fields:
-                        self.process_line(name, fields)
+                    self.process_line(name, fields)
 
             if commit is True:
                 self.commit()

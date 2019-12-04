@@ -32,109 +32,135 @@ class UserGroupsStore(Store):
         raise NotImplementedError()  # pragma: no cover
 
     def load_users_and_groups_from_yaml(self, yaml_data, usergroups):
-        self.load_users(yaml_data, usergroups)
-        self.load_groups(yaml_data, usergroups)
-        self.combine_users_and_groups(usergroups)
+        self._load_users(yaml_data, usergroups)
+        self._load_groups(yaml_data, usergroups)
+        self._combine_users_and_groups(usergroups)
 
-    def load_users(self, yaml_data, usergroups):
+    def _load_users(self, yaml_data, usergroups):
         if 'users' in yaml_data:
             for user_name in yaml_data['users'].keys():
+                self._load_users_user(yaml_data, user_name, usergroups)
 
-                user = User(user_name)
+    def _load_users_user(self, yaml_data, user_name, usergroups):
+        user = User(user_name)
 
-                yaml_obj = yaml_data['users'][user_name]
-                if 'roles' in yaml_obj:
-                    roles_list = yaml_obj['roles']
-                    splits = roles_list.split(",")
-                    for role_name in splits:
-                        role_name = role_name.strip()
-                        if role_name not in user.roles:
-                            user.roles.append(role_name)
-                        else:
-                            YLogger.debug(self, "Role [%s] already exists in user [%s]", role_name, user_name)
+        yaml_obj = yaml_data['users'][user_name]
+        if 'roles' in yaml_obj:
+            self._load_users_user_roles(yaml_obj, user, user_name)
 
-                if 'groups' in yaml_obj:
-                    groups_list = yaml_obj['groups']
-                    splits = groups_list.split(",")
-                    for group_name in splits:
-                        group_name = group_name.strip()
-                        if group_name not in user.groups:
-                            user.groups.append(group_name)
-                        else:
-                            YLogger.debug(self, "Group [%s] already exists in user [%s]", group_name, user_name)
+        if 'groups' in yaml_obj:
+            self._load_users_user_groups(yaml_obj, user, user_name)
 
-                usergroups.users[user.userid] = user
+        usergroups.users[user.userid] = user
 
-    def load_groups(self, yaml_data, usergroups):
+    def _load_users_user_roles(self, yaml_obj, user, user_name):
+        roles_list = yaml_obj['roles']
+        splits = roles_list.split(",")
+        for role_name in splits:
+            role_name = role_name.strip()
+            if role_name not in user.roles:
+                user.roles.append(role_name)
+            else:
+                YLogger.debug(self, "Role [%s] already exists in user [%s]", role_name, user_name)
+
+    def _load_users_user_groups(self, yaml_obj, user, user_name):
+        groups_list = yaml_obj['groups']
+        splits = groups_list.split(",")
+        for group_name in splits:
+            group_name = group_name.strip()
+            if group_name not in user.groups:
+                user.groups.append(group_name)
+            else:
+                YLogger.debug(self, "Group [%s] already exists in user [%s]", group_name, user_name)
+
+    def _load_groups(self, yaml_data, usergroups):
         if 'groups' in yaml_data:
             for group_name in yaml_data['groups'].keys():
+                self._load_groups_group(yaml_data, group_name, usergroups)
 
-                group = Group(group_name)
+    def _load_groups_group(self, yaml_data, group_name, usergroups):
+        group = Group(group_name)
 
-                yaml_obj = yaml_data['groups'][group_name]
-                if 'roles' in yaml_obj:
-                    roles_list = yaml_obj['roles']
-                    splits = roles_list.split(",")
-                    for role_name in splits:
-                        role_name = role_name.strip()
-                        if role_name not in group.roles:
-                            group.roles.append(role_name)
-                        else:
-                            YLogger.debug(self, "Role [%s] already exists in group [%s]", role_name, group_name)
+        yaml_obj = yaml_data['groups'][group_name]
+        if 'roles' in yaml_obj:
+            self._load_groups_group_roles(yaml_obj, group, group_name)
 
-                if 'groups' in yaml_obj:
-                    groups_list = yaml_obj['groups']
-                    splits = groups_list.split(",")
-                    for element in splits:
-                        inner_group_name = element.strip()
-                        if inner_group_name not in group.groups:
-                            group.groups.append(inner_group_name)
-                        else:
-                            YLogger.debug(self, "Group [%s] already exists in group [%s]", inner_group_name, group_name)
+        if 'groups' in yaml_obj:
+            self._load_groups_group_groups(yaml_obj, group, group_name)
 
-                if 'users' in yaml_obj:
-                    users_list = yaml_obj['groups']
-                    splits = users_list.split(",")
-                    for user_name in splits:
-                        user_name = user_name.strip()
-                        if user_name not in group.users:
-                            group.users.append(user_name)
-                        else:
-                            YLogger.debug(self, "User [%s] already exists in group [%s]", user_name, group_name)
+        if 'users' in yaml_obj:
+            self._load_groups_group_users(yaml_obj, group, group_name)
 
-                usergroups.groups[group.groupid] = group
+        usergroups.groups[group.groupid] = group
 
-    def combine_users_and_groups(self, usergroups):
+    def _load_groups_group_roles(self, yaml_obj, group, group_name):
+        roles_list = yaml_obj['roles']
+        splits = roles_list.split(",")
+        for role_name in splits:
+            role_name = role_name.strip()
+            if role_name not in group.roles:
+                group.roles.append(role_name)
+            else:
+                YLogger.debug(self, "Role [%s] already exists in group [%s]", role_name, group_name)
+
+    def _load_groups_group_groups(self, yaml_obj, group, group_name):
+        groups_list = yaml_obj['groups']
+        splits = groups_list.split(",")
+        for element in splits:
+            inner_group_name = element.strip()
+            if inner_group_name not in group.groups:
+                group.groups.append(inner_group_name)
+            else:
+                YLogger.debug(self, "Group [%s] already exists in group [%s]", inner_group_name, group_name)
+
+    def _load_groups_group_users(self, yaml_obj, group, group_name):
+        users_list = yaml_obj['users']
+        splits = users_list.split(",")
+        for user_name in splits:
+            user_name = user_name.strip()
+            if user_name not in group.users:
+                group.users.append(user_name)
+            else:
+                YLogger.debug(self, "User [%s] already exists in group [%s]", user_name, group_name)
+
+    def _combine_users_and_groups(self, usergroups):
 
         for user_id in usergroups.users.keys():
             user = usergroups.users[user_id]
-
-            new_groups = []
-            for group_id in user.groups:
-                if group_id in usergroups.groups:
-                    group = usergroups.groups[group_id]
-                    new_groups.append(group)
-                else:
-                    YLogger.error(self, "Unknown group id [%s] in user [%s]", group_id, user_id)
-            user.add_groups(new_groups[:])
+            self._combine_user_groups(usergroups, user, user_id)
 
         for group_id in usergroups.groups.keys():
             group = usergroups.groups[group_id]
+            self._combine_group_groups(usergroups, group, group_id)
+            self._combine_group_users(usergroups, group, group_id)
 
-            new_groups = []
-            for sub_group_id in group.groups:
-                if sub_group_id in usergroups.groups:
-                    new_group = usergroups.groups[sub_group_id]
-                    new_groups.append(new_group)
-                else:
-                    YLogger.error(self, "Unknown group id [%s] in group [%s]", sub_group_id, group_id)
-            group.add_groups(new_groups[:])
+    def _combine_user_groups(self, usergroups, user, user_id):
+        new_groups = []
+        for group_id in user.groups:
+            if group_id in usergroups.groups:
+                group = usergroups.groups[group_id]
+                new_groups.append(group)
+            else:
+                YLogger.error(self, "Unknown group id [%s] in user [%s]", group_id, user_id)
+        user.add_groups(new_groups[:])
 
-            new_users = []
-            for sub_user_id in group.users:
-                if sub_user_id in usergroups.users:
-                    new_user = usergroups.users[sub_user_id]
-                    new_users.append(new_user)
-                else:
-                    YLogger.error(self, "Unknown user id [%s] in group [%s]", sub_user_id, group_id)
-            group.add_users(new_users[:])
+    def _combine_group_groups(self, usergroups, group, group_id):
+        new_groups = []
+        for sub_group_id in group.groups:
+            if sub_group_id in usergroups.groups:
+                new_group = usergroups.groups[sub_group_id]
+                new_groups.append(new_group)
+            else:
+                YLogger.error(self, "Unknown group id [%s] in group [%s]", sub_group_id, group_id)
+        group.add_groups(new_groups[:])
+
+    def _combine_group_users(self, usergroups, group, group_id):
+        new_users = []
+        for sub_user_id in group.users:
+            if sub_user_id in usergroups.users:
+                new_user = usergroups.users[sub_user_id]
+                new_users.append(new_user)
+            else:
+                YLogger.error(self, "Unknown user id [%s] in group [%s]", sub_user_id, group_id)
+        group.add_users(new_users[:])
+

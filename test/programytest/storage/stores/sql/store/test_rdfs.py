@@ -36,13 +36,13 @@ class SQLRDFsStoreTests(RDFStoreAsserts):
         self.assert_upload_from_text(store)
 
     @unittest.skipIf(Engines.sql is False, Engines.sql_disabled)
-    def test_upload_from_text_file(self):
+    def test_load(self):
         config = SQLStorageConfiguration()
         engine = SQLStorageEngine(config)
         engine.initialise()
         store = SQLRDFsStore(engine)
 
-        self.assert_upload_from_text_file(store)
+        self.assert_load(store)
 
     @unittest.skipIf(Engines.sql is False, Engines.sql_disabled)
     def test_upload_text_files_from_directory_no_subdir(self):

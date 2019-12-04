@@ -96,7 +96,7 @@ class StorageConfiguration(BaseConfigurationData):
                     self._store_configs[store] = config
 
                 else:
-                    YLogger.error(self, "Unk own storage configuretion type [%s]", storage_type)
+                    YLogger.error(self, "Unknown storage configuration type [%s]", storage_type)
 
         else:
             YLogger.warning(self, "'storage' section missing from client config, using to defaults")
@@ -107,31 +107,15 @@ class StorageConfiguration(BaseConfigurationData):
             self._store_configs = {}
             StorageConfiguration.add_default_stores(self._store_configs)
 
-    def create_storage_config(self):
+    def create_storage_config(self, file=True, sqlite=False, mongo=False, redis=False, logger=False):
         config = {}
         config['entities'] = {}
-        StorageConfiguration.add_default_entities(config['entities'])
+        StorageConfiguration.add_default_entities(config['entities'], file=file, sqlite=sqlite)
 
         config['stores'] = {}
-        StorageConfiguration.add_default_stores(config['stores'])
+        StorageConfiguration.add_default_stores(config['stores'], file=file, sqlite=sqlite, mongo=mongo, redis=redis, logger=logger)
 
-    def to_yaml(self, data, defaults=True):
-
-        data['entities'] = {}
-        data['stores'] = {}
-
-        if defaults is True:
-            StorageConfiguration.add_default_entities(data['entities'])
-            StorageConfiguration.add_default_stores(data['stores'])
-
-        else:
-            data['entities'] = {}
-            for key, value in self._entity_store.items():
-                data['entities'][key] = value
-
-            for name, value in self._store_configs.items():
-                data['stores'][name] = {}
-                value.to_yaml(data['stores'][name], defaults)
+        return config
 
     @staticmethod
     def add_default_stores(store_configs, file=True, sqlite=False, mongo=False, redis=False, logger=False):
@@ -145,6 +129,33 @@ class StorageConfiguration(BaseConfigurationData):
             store_configs['file'] = FileStorageConfiguration()
         if logger is True:
             store_configs['logger'] = LoggerStorageConfiguration()
+
+    @staticmethod
+    def add_default_stores_as_yaml(store_configs, file=True, sqlite=False, mongo=False, redis=False, logger=False):
+        if sqlite is True:
+            store_configs['sqlite'] = {}
+            store = SQLStorageConfiguration()
+            store.to_yaml(store_configs['sqlite'], defaults=True)
+
+        if mongo is True:
+            store_configs['mongo'] = {}
+            store = MongoStorageConfiguration()
+            store.to_yaml(store_configs['mongo'], defaults=True)
+
+        if redis is True:
+            store_configs['redis'] = {}
+            store = RedisStorageConfiguration()
+            store.to_yaml(store_configs['redis'], defaults=True)
+
+        if file is True:
+            store_configs['file'] = {}
+            store = FileStorageConfiguration()
+            store.to_yaml(store_configs['file'], defaults=True)
+
+        if logger is True:
+            store_configs['logger'] = {}
+            store = LoggerStorageConfiguration()
+            store.to_yaml(store_configs['logger'], defaults=True)
 
     @staticmethod
     def add_default_entities(entity_store, file=True, sqlite=False):
@@ -196,3 +207,22 @@ class StorageConfiguration(BaseConfigurationData):
             entity_store[StorageFactory.USERGROUPS] = 'file'
 
             entity_store[StorageFactory.TRIGGERS] = 'file'
+
+    def to_yaml(self, data, defaults=True):
+
+        data['entities'] = {}
+        data['stores'] = {}
+
+        if defaults is True:
+            StorageConfiguration.add_default_entities(data['entities'])
+            StorageConfiguration.add_default_stores_as_yaml(data['stores'])
+
+        else:
+            data['entities'] = {}
+            for key, value in self._entity_store.items():
+                data['entities'][key] = value
+
+            for name, value in self._store_configs.items():
+                data['stores'][name] = {}
+                value.to_yaml(data['stores'][name], defaults)
+

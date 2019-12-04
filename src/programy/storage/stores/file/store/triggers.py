@@ -36,24 +36,29 @@ class FileTriggersStore(FileStore, TriggersStore):
     def get_storage(self):
         return self.storage_engine.configuration.triggers_storage
 
-    def empty(self):
-        vars_path = self._get_storage_path()
-        if os.path.exists(vars_path) is True:
-            shutil.rmtree(vars_path)
+    def _process_line(self, line, collection):
+        line = line.strip()
+        if line.startswith(FileTriggersStore.COMMENT) is False:
+            splits = line.split(FileTriggersStore.SPLIT_CHAR)
+            if len(splits) > 1:
+                event = splits[0].strip()
+                classname = splits[1].strip()
+                collection.add_trigger(event, classname)
+                return True
+
+        return False
+
+    def _load_triggers_from_file(self, filename, collection):
+        with open(filename, "r") as vars_file:
+            for line in vars_file:
+                self._process_line(line, collection)
 
     def _load_file_contents(self, collection, filename):
-        if os.path.exists(filename):
-            try:
-                with open(filename, "r") as vars_file:
-                    for line in vars_file:
-                        line = line.strip()
-                        if line:
-                            if line.startswith(FileTriggersStore.COMMENT) is False:
-                                splits = line.split(FileTriggersStore.SPLIT_CHAR)
-                                if len(splits) > 1:
-                                    event = splits[0].strip()
-                                    classname = splits[1].strip()
-                                    collection.add_trigger(event, classname)
+        try:
+            self._load_triggers_from_file(filename, collection)
+            return True
 
-            except Exception as e:
-                YLogger.exception_nostack(None, "Failed to load triggers [%s]", e, filename)
+        except Exception as e:
+            YLogger.exception_nostack(None, "Failed to load triggers [%s]", e, filename)
+
+        return False

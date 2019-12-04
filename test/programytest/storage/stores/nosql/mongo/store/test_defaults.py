@@ -27,13 +27,13 @@ class MongoDefaultVariablesStoreTests(DefaultStoreAsserts):
         self.assert_defaults_storage(store)
 
     @unittest.skipIf(Engines.mongo is False, Engines.mongo_disabled)
-    def test_property_storage(self):
+    def test_default_storage(self):
         config = MongoStorageConfiguration()
         engine = MongoStorageEngine(config)
         engine.initialise()
         store = MongoDefaultVariablesStore(engine)
 
-        self.assert_empty_defaults(store)
+        self.assert_default_storage(store)
 
     @unittest.skipIf(Engines.mongo is False, Engines.mongo_disabled)
     def test_empty_defaults(self):

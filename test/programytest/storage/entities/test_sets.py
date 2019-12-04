@@ -27,11 +27,26 @@ class SetsReadOnlyStoreTests(unittest.TestCase):
             collector = unittest.mock.Mock()
             store.load(collector)
 
+class MockSetsReadWriteStore(SetsReadWriteStore):
+
+    def __init__(self):
+        SetsReadWriteStore.__init__(self)
+        self.added = False
+
+    def add_to_set(self, name, value, replace_existing=False):
+        self.added = True
 
 class SetsReadWriteStoreTests(unittest.TestCase):
 
     def test_process_line(self):
-        pass
+        store = MockSetsReadWriteStore()
+        store.process_line("name1", ["value1"])
+        self.assertTrue(store.added)
+
+    def test_process_line_no_fields(self):
+        store = MockSetsReadWriteStore()
+        store.process_line("name1", [])
+        self.assertFalse(store.added)
 
     def test_load(self):
         store = SetsReadWriteStore()

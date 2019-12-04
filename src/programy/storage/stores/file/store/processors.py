@@ -32,22 +32,26 @@ class FileProcessorsStore(FileStore, ProcessorStore):
     def get_storage(self):
         raise NotImplementedError()  # pragma: no cover
 
+    def _process_line(self, line, collection, count):
+        line = line.strip()
+        if len(line) > 0:
+            if line[0] != '#':
+                try:
+                    new_class = ClassLoader.instantiate_class(line)
+                    collection.add_processor(new_class())
+                    count += 1
+
+                except Exception as error:
+                    YLogger.exception(self, "Failed to load processor from file [%s]", error, line)
+
+        return count
+
     def _load_file_contents(self, collection, filename):
         YLogger.debug(self, "Loading processors from file [%s]", filename)
         count = 0
-        try:
-            with open(filename, "r", encoding="utf-8") as file:
-                for line in file:
-                    line = line.strip()
-                    if line:
-                        if line[0] != '#':
-                            new_class = ClassLoader.instantiate_class(line)
-                            if new_class is not None:
-                                collection.add_processor(new_class())
-                                count += 1
-        except FileNotFoundError:
-            YLogger.error(self, "File not found [%s]", filename)
-
+        with open(filename, "r", encoding="utf-8") as file:
+            for line in file:
+                count = self._process_line(line, collection, count)
         return count
 
 

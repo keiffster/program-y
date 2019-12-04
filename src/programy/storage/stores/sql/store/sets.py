@@ -40,7 +40,11 @@ class SQLSetsStore(SQLStore, SetsReadWriteStore):
         return True
 
     def remove_from_set(self, name, value):
-        self._storage_engine.session.query(Set).filter(Set.name == name, Set.value == value.upper()).delete()
+        result = self._storage_engine.session.query(Set).filter(Set.name == name, Set.value == value.upper()).delete()
+        if result == 0:
+            return False
+
+        return True
 
     def load_all(self, collector):
         collector.empty()
@@ -56,4 +60,8 @@ class SQLSetsStore(SQLStore, SetsReadWriteStore):
             value = pair.value.strip()
             if value:
                 self.add_set_values(the_set, value)
-        collector.add_set(name, the_set, SQLStore.SQL)
+        if the_set:
+            collector.add_set(name, the_set, SQLStore.SQL)
+            return True
+
+        return False

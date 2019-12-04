@@ -38,16 +38,9 @@ class MongoUserGroupsStore(MongoStore, UserGroupsStore):
 
         usergroup_data = self._upload_usergroup_as_yaml(filename)
 
-        collection = self.collection()
-        usergroups = collection.find_one({})
-        if usergroups is not None:
-            usergroups.usergroups = usergroup_data
-            collection.update(usergroups)
-            YLogger.info(self, "Replacing existing usergroups in Mongo")
-        else:
-            usergroups = UserGroups(usergroup_data)
-            self.add_document(usergroups)
-            YLogger.info(self, "Adding new usergroups to Mongo")
+        usergroups = UserGroups(usergroup_data)
+        self.add_document(usergroups)
+        YLogger.info(self, "Adding new usergroups to Mongo")
 
         return 1, 1
 
@@ -57,14 +50,17 @@ class MongoUserGroupsStore(MongoStore, UserGroupsStore):
         if usergroups is not None:
             self.load_users_and_groups_from_yaml(usergroups['usergroups'], usersgroupsauthorisor)
 
+    def _read_yaml_from_file(self, filename):
+        with open(filename, 'r+', encoding="utf-8") as yaml_data_file:
+            yaml_data = yaml.load(yaml_data_file, Loader=yaml.FullLoader)
+            return yaml_data
+
     def _upload_usergroup_as_yaml(self, filename):
 
         try:
-            with open(filename, 'r+', encoding="utf-8") as yaml_data_file:
-                yaml_data = yaml.load(yaml_data_file, Loader=yaml.FullLoader)
-                return yaml_data
+            return self._read_yaml_from_file(filename)
 
-        except Exception as e:
-            YLogger.exception(self, "Failed to load usergroups yaml file [%s]", e, filename)
+        except Exception as excep:
+            YLogger.exception(self, "Failed to load usergroups yaml file [%s]", excep, filename)
 
         return {}

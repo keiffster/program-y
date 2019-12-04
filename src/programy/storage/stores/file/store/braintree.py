@@ -31,32 +31,36 @@ class FileBraintreeStore(FileStore, BraintreeStore):
     def get_storage(self):
         return self.storage_engine.configuration.braintree_storage
 
+    def _save(self, client_context, pattern_graph):
+
+        braintree_fullpath = self.storage_engine.configuration.braintree_storage.file
+        YLogger.info(self, "Saving braintree to %s", braintree_fullpath)
+
+        braintree_dirpath = self._get_dir_from_path(braintree_fullpath)
+        self._ensure_dir_exists(braintree_dirpath)
+
+        fileformat = self.storage_engine.configuration.braintree_storage.format
+        encoding = self.storage_engine.configuration.braintree_storage.encoding
+
+        if fileformat == FileStore.TEXT_FORMAT:
+            with open(braintree_fullpath, "w+", encoding=encoding) as dump_file:
+                pattern_graph.dump(output_func=dump_file.write, eol="\n")
+
+        elif fileformat == FileStore.XML_FORMAT:
+            braintree = '<?xml version="1.0" encoding="%s"?>\n' % encoding
+            braintree += '<aiml>\n'
+            braintree += pattern_graph.root.to_xml(client_context)
+            braintree += '</aiml>\n'
+            with open(braintree_fullpath, "w+", encoding=encoding) as dump_file:
+                dump_file.write(braintree)
+
+        else:
+            YLogger.error(client_context, "Unknown braintree content type [%s]", fileformat)
+
     def save_braintree(self, client_context, pattern_graph):
 
         try:
-            braintree_fullpath = self.storage_engine.configuration.braintree_storage.file
-            YLogger.info(self, "Saving braintree to %s", braintree_fullpath)
-
-            braintree_dirpath = self._get_dir_from_path(braintree_fullpath)
-            self._ensure_dir_exists(braintree_dirpath)
-
-            fileformat = self.storage_engine.configuration.braintree_storage.format
-            encoding = self.storage_engine.configuration.braintree_storage.encoding
-
-            if fileformat == FileStore.TEXT_FORMAT:
-                with open(braintree_fullpath, "w+", encoding=encoding) as dump_file:
-                    pattern_graph.dump(output_func=dump_file.write, eol="\n")
-
-            elif fileformat == FileStore.XML_FORMAT:
-                braintree = '<?xml version="1.0" encoding="%s"?>\n' % encoding
-                braintree += '<aiml>\n'
-                braintree += pattern_graph.root.to_xml(client_context)
-                braintree += '</aiml>\n'
-                with open(braintree_fullpath, "w+", encoding=encoding) as dump_file:
-                    dump_file.write(braintree)
-
-            else:
-                YLogger.error(client_context, "Unknown braintree content type [%s]", fileformat)
+            self._save(client_context, pattern_graph)
 
         except Exception as exc:
             YLogger.exception_nostack(client_context, "Failed to save Braintree", exc)

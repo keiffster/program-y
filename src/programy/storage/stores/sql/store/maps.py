@@ -44,7 +44,10 @@ class SQLMapsStore(SQLStore, MapsReadWriteStore):
         return True
 
     def remove_from_map(self, name, key):
-        self._storage_engine.session.query(Map).filter(Map.name == name, Map.key == key).delete()
+        if self._storage_engine.session.query(Map).filter(Map.name == name, Map.key == key).delete() > 0:
+            return True
+
+        return False
 
     def load_all(self, collector):
         collector.empty()

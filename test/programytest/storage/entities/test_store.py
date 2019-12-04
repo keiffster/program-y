@@ -1,4 +1,5 @@
 import unittest.mock
+from unittest.mock import patch
 import os
 from programy.storage.entities.store import Store
 from programy.storage.utils.processors import TextFile
@@ -52,6 +53,33 @@ class StoreTests(unittest.TestCase):
         store.upload_from_text("test", "", commit=True)
         self.assertFalse(store.processed)
         self.assertTrue(store.committed)
+        self.assertFalse(store.rolled_back)
+
+    def test_upload_from_text_no_text_with_commit_exception(self):
+        store = MockStore(throw_except=True)
+        store.upload_from_text("test", """"
+         FIELD1, FIELD2
+         FIELD3 FIELD4
+         """, commit=True)
+        self.assertFalse(store.processed)
+        self.assertFalse(store.committed)
+        self.assertTrue(store.rolled_back)
+
+    def test_upload_from_text_no_text_with_no_commit_exception(self):
+        store = MockStore(throw_except=True)
+        store.upload_from_text("test", """"
+         FIELD1, FIELD2
+         FIELD3 FIELD4
+         """, commit=False)
+        self.assertFalse(store.processed)
+        self.assertFalse(store.committed)
+        self.assertFalse(store.rolled_back)
+
+    def test_upload_from_text_no_text_with_no_commit(self):
+        store = MockStore(throw_except=False)
+        store.upload_from_text("test", "", commit=False)
+        self.assertFalse(store.processed)
+        self.assertFalse(store.committed)
         self.assertFalse(store.rolled_back)
 
     def test_upload_from_text_no_lines_with_commit(self):
@@ -111,6 +139,11 @@ class StoreTests(unittest.TestCase):
         store = Store()
         self.assertIsInstance(store.get_file_processor(Store.CSV_FORMAT, os.path.dirname(__file__) + os.sep + "test.csv"), CSVFileReader)
 
+    def test_get_file_processor_other(self):
+        store = Store()
+        with self.assertRaises(Exception):
+            self.assertIsInstance(store.get_file_processor("other", os.path.dirname(__file__) + os.sep + "test.csv"), CSVFileReader)
+
     def test_get_file_processor_unknown(self):
         store = Store()
         with self.assertRaises(Exception):
@@ -132,6 +165,15 @@ class StoreTests(unittest.TestCase):
         self.assertTrue(store.committed)
         self.assertFalse(store.rolled_back)
 
+    def test_upload_from_file_no_commit(self):
+        store = MockStore(throw_except=False)
+        final_count, final_success = store.upload_from_file( os.path.dirname(__file__) + os.sep + "test.txt", commit=False)
+        self.assertEquals(1, final_count)
+        self.assertEquals(0, final_success)
+        self.assertTrue(store.processed)
+        self.assertFalse(store.committed)
+        self.assertFalse(store.rolled_back)
+
     def test_upload_from_file_exception(self):
         store = MockStore(throw_except=True)
         final_count, final_success = store.upload_from_file( os.path.dirname(__file__) + os.sep + "test.txt")
@@ -141,9 +183,35 @@ class StoreTests(unittest.TestCase):
         self.assertFalse(store.committed)
         self.assertTrue(store.rolled_back)
 
+    def test_upload_from_file_exception_no_commit(self):
+        store = MockStore(throw_except=True)
+        final_count, final_success = store.upload_from_file( os.path.dirname(__file__) + os.sep + "test.txt", commit=False)
+        self.assertEquals(0, final_count)
+        self.assertEquals(0, final_success)
+        self.assertFalse(store.processed)
+        self.assertFalse(store.committed)
+        self.assertFalse(store.rolled_back)
+
+    @staticmethod
+    def patch_get_file_processor(fileformat, filename):
+        return None
+
+    @patch("programy.storage.entities.store.Store.get_file_processor", patch_get_file_processor)
+    def test_upload_from_file_fileprocessor_none(self):
+        store = Store()
+        final_count, final_success = store.upload_from_file(os.path.dirname(__file__) + os.sep + "testdir")
+        self.assertEquals(0, final_count)
+        self.assertEquals(0, final_success)
+
     def test_upload_from_directory_with_subdir(self):
         store = Store()
         final_count, final_success = store.upload_from_directory(os.path.dirname(__file__) + os.sep + "testdir", subdir=True)
+        self.assertEquals(5, final_count)
+        self.assertEquals(0, final_success)
+
+    def test_upload_from_directory_with_subdir_no_commit(self):
+        store = Store()
+        final_count, final_success = store.upload_from_directory(os.path.dirname(__file__) + os.sep + "testdir", subdir=True, commit=False)
         self.assertEquals(5, final_count)
         self.assertEquals(0, final_success)
 
@@ -165,3 +233,19 @@ class StoreTests(unittest.TestCase):
         self.assertEquals(2, final_count)
         self.assertEquals(0, final_success)
 
+    def patch_upload_from_file(self, filename, fileformat=Store.TEXT_FORMAT, commit=True, verbose=False):
+        raise Exception("Mock Exception")
+
+    @patch("programy.storage.entities.store.Store.upload_from_file", patch_upload_from_file)
+    def test_upload_from_directory_exception(self):
+        store = Store()
+        final_count, final_success = store.upload_from_directory(os.path.dirname(__file__) + os.sep + "testdir", subdir=False, extension=".txt", commit=True)
+        self.assertEquals(0, final_count)
+        self.assertEquals(0, final_success)
+
+    @patch("programy.storage.entities.store.Store.upload_from_file", patch_upload_from_file)
+    def test_upload_from_directory_exception_no_commit(self):
+        store = Store()
+        final_count, final_success = store.upload_from_directory(os.path.dirname(__file__) + os.sep + "testdir", subdir=False, extension=".txt", commit=False)
+        self.assertEquals(0, final_count)
+        self.assertEquals(0, final_success)

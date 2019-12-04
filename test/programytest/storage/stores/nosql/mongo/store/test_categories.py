@@ -1,5 +1,5 @@
 import unittest
-
+import os
 import programytest.storage.engines as Engines
 from programy.storage.stores.nosql.mongo.config import MongoStorageConfiguration
 from programy.storage.stores.nosql.mongo.engine import MongoStorageEngine
@@ -56,3 +56,23 @@ class MongoCategoryStoreTests(CategoryStoreAsserts):
         self.assertEqual(store.storage_engine, engine)
 
         self.assert_upload_from_directory(store)
+
+    @unittest.skipIf(Engines.mongo is False, Engines.mongo_disabled)
+    def test_empty_named(self):
+        config = MongoStorageConfiguration()
+        engine = MongoStorageEngine(config)
+        engine.initialise()
+        store = MongoCategoryStore(engine)
+        self.assertEqual(store.storage_engine, engine)
+
+        self.assert_empty_name(store)
+
+    @unittest.skipIf(Engines.mongo is False, Engines.mongo_disabled)
+    def test_load(self):
+        config = MongoStorageConfiguration()
+        engine = MongoStorageEngine(config)
+        engine.initialise()
+        store = MongoCategoryStore(engine)
+        self.assertEqual(store.storage_engine, engine)
+
+        self.assert_load(store)
