@@ -48,4 +48,4 @@ class MongoLearnfStore(MongoStore, LearnfStore):
         userid = client_context.userid
 
         category = Category(groupid=groupid, userid=userid, pattern=pattern, topic=topic, that=that, template=template)
-        self.add_document(category)
+        return self.add_document(category)

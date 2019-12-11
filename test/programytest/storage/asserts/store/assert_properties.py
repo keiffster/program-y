@@ -5,6 +5,7 @@ import os
 class PropertyStoreAsserts(unittest.TestCase):
 
     def assert_properties_storage(self, store):
+        store.empty()
 
         properties = {"name1": "val1", "name2": "val2", "name3": "val3"}
         store.add_properties(properties)
@@ -20,6 +21,7 @@ class PropertyStoreAsserts(unittest.TestCase):
         self.assertFalse("name4" in new_properties)
 
     def assert_property_storage(self, store):
+        store.empty()
 
         store.add_property("name1", "val1")
 
@@ -40,6 +42,7 @@ class PropertyStoreAsserts(unittest.TestCase):
         self.assertFalse("name3" in new_properties)
 
     def assert_duplicate_property_storage(self, store):
+        store.empty()
 
         store.add_property("name1", "val1")
 
@@ -56,6 +59,7 @@ class PropertyStoreAsserts(unittest.TestCase):
         self.assertEqual("val2", new_properties2["name1"])
 
     def assert_empty_properties(self, store):
+        store.empty()
 
         store.add_property("name1", "val1")
         store.commit()

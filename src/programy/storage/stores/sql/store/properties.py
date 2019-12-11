@@ -74,39 +74,41 @@ class SQLBasePropertyStore(SQLStore, PropertyStore):
             self.add_to_collection(collector, db_property.name, db_property.value)
 
     def add_to_collection(self, collection, name, value):
-        raise NotImplementedError()  # pragma: no cover
+        collection.add_property(name, value)
 
     def split_into_fields(self, line):
         return DoubleStringPatternSplitCollection.\
             split_line_by_pattern(line, DoubleStringPatternSplitCollection.RE_OF_SPLIT_PATTERN)
 
-    def upload_from_file(self, filename, fileformat=Store.TEXT_FORMAT, commit=True, verbose=False):
-
+    def _read_lines_from_file(self, filename, verbose):
         count = 0
-        success = 0
-
-        if os.path.exists(filename):
-            try:
-                with open(filename, "r") as vars_file:
-                    for line in vars_file:
-                        line = line.strip()
-                        if line:
-                            if line.startswith(SQLBasePropertyStore.COMMENT) is False:
-                                splits = line.split(SQLBasePropertyStore.SPLIT_CHAR)
-                                if len(splits) > 1:
-                                    key = splits[0].strip()
-                                    val = ":".join(splits[1:]).strip()
-                                    if self.add_property(key, val) is True:
-                                        success += 1
-                        count += 1
-
-                if commit is True:
-                    self.commit()
-
-            except FileNotFoundError:
-                YLogger.error(self, "File not found [%s]", filename)
+        success= 0
+        with open(filename, "r") as vars_file:
+            for line in vars_file:
+                line = line.strip()
+                if line.startswith(SQLBasePropertyStore.COMMENT) is False:
+                    splits = line.split(SQLBasePropertyStore.SPLIT_CHAR)
+                    if len(splits) > 1:
+                        key = splits[0].strip()
+                        val = ":".join(splits[1:]).strip()
+                        self.add_property(key, val)
+                        success += 1
+                count += 1
 
         return count, success
+
+    def upload_from_file(self, filename, fileformat=Store.TEXT_FORMAT, commit=True, verbose=False):
+        try:
+            count, success = self._read_lines_from_file(filename, verbose)
+
+            self.commit(commit)
+
+            return count, success
+
+        except Exception as error:
+            YLogger.exception(self, "Failed to load properties from [%s]", error, filename)
+
+        return 0, 0
 
 
 class SQLPropertyStore(SQLBasePropertyStore, PropertyStore):
@@ -119,9 +121,6 @@ class SQLPropertyStore(SQLBasePropertyStore, PropertyStore):
 
     def _get_entity(self, name, value):
         return Property(name=name, value=value)
-
-    def add_to_collection(self, collection, name, value):
-        collection.add_property(name, value)
 
 
 class SQLDefaultVariableStore(SQLBasePropertyStore, PropertyStore):
@@ -144,9 +143,6 @@ class SQLDefaultVariableStore(SQLBasePropertyStore, PropertyStore):
     def get_default_values(self):
         return self.get_properties()
 
-    def add_to_collection(self, collection, name, value):
-        collection.add_property(name, value)
-
 
 class SQLRegexStore(SQLBasePropertyStore, PropertyStore):
 
@@ -159,9 +155,18 @@ class SQLRegexStore(SQLBasePropertyStore, PropertyStore):
     def _get_entity(self, name, value):
         return Regex(name=name, value=value)
 
+    def add_regex(self, name, value):
+        return self.add_property(name, value)
+
+    def add_regexes(self, defaults):
+        self.add_properties(defaults)
+
+    def get_regexes(self):
+        return self.get_properties()
+
     def add_to_collection(self, collection, name, value):
         try:
-            collection.add_property(name, re.compile(value, re.IGNORECASE))
+            collection.add_regex(name, re.compile(value, re.IGNORECASE))
 
         except Exception as excep:
             YLogger.exception_nostack(self, "Error adding regex to collection: [%s]" % value, excep)

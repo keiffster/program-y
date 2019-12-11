@@ -29,7 +29,7 @@ class SQLMapsStore(SQLStore, MapsReadWriteStore):
         return self._storage_engine.session.query(Map)
 
     def empty(self):
-        self._storage_engine.session.query(Map).delete()
+        self._get_all().delete()
 
     def empty_named(self, name):
         self._storage_engine.session.query(Map).filter(Map.name == name).delete()
@@ -39,7 +39,7 @@ class SQLMapsStore(SQLStore, MapsReadWriteStore):
 
     def add_to_map(self, name, key, value, overwrite_existing=False):
         del overwrite_existing
-        amap = Map(name=name, key=key, value=value)
+        amap = self. _get_entity(name, key, value)
         self._storage_engine.session.add(amap)
         return True
 
@@ -54,6 +54,7 @@ class SQLMapsStore(SQLStore, MapsReadWriteStore):
         names = self._storage_engine.session.query(Map.name).distinct()
         for name in names:
             self.load(collector, name[0])
+        return True
 
     def load(self, collector, name=None):
         collector.remove(name)
@@ -61,4 +62,9 @@ class SQLMapsStore(SQLStore, MapsReadWriteStore):
         the_map = {}
         for item in values:
             the_map[item.key] = item.value
-        collector.add_map(name, the_map, 'sql')
+
+        if len(the_map):
+            collector.add_map(name, the_map, 'sql')
+            return True
+
+        return False

@@ -1,5 +1,4 @@
 import unittest
-
 import programytest.storage.engines as Engines
 from programy.storage.stores.sql.config import SQLStorageConfiguration
 from programy.storage.stores.sql.engine import SQLStorageEngine
@@ -62,3 +61,42 @@ class SQLMapsStoreTests(MapStoreAsserts):
 
         self.assert_upload_csv_files_from_directory_with_subdir(store)
 
+    @unittest.skipIf(Engines.sql is False, Engines.sql_disabled)
+    def test_empty_named(self):
+        config = SQLStorageConfiguration()
+        engine = SQLStorageEngine(config)
+        engine.initialise()
+        store = SQLMapsStore(engine)
+
+        self.assert_empty_named(store)
+
+    @unittest.skipIf(Engines.sql is False, Engines.sql_disabled)
+    def test_add_to_map_overwrite_existing(self):
+        config = SQLStorageConfiguration()
+        engine = SQLStorageEngine(config)
+        engine.initialise()
+        store = SQLMapsStore(engine)
+
+        store.add_to_map("TESTMAP", "key1", "value1", overwrite_existing=True)
+        store.add_to_map("TESTMAP", "key2", "value2", overwrite_existing=True)
+        store.add_to_map("TESTMAP", "key2", "value3", overwrite_existing=True)
+
+        self.assert_add_to_map_overwrite_existing(store)
+
+    @unittest.skipIf(Engines.sql is False, Engines.sql_disabled)
+    def test_add_to_map_no_overwrite_existing(self):
+        config = SQLStorageConfiguration()
+        engine = SQLStorageEngine(config)
+        engine.initialise()
+        store = SQLMapsStore(engine)
+
+        self.assert_add_to_map_no_overwrite_existing(store)
+
+    @unittest.skipIf(Engines.sql is False, Engines.sql_disabled)
+    def test_load_no_map_found(self):
+        config = SQLStorageConfiguration()
+        engine = SQLStorageEngine(config)
+        engine.initialise()
+        store = SQLMapsStore(engine)
+
+        self.assert_load_no_map_found(store)

@@ -31,7 +31,7 @@ class SQLLinkStore(SQLStore, LinkStore):
         return self._storage_engine.session.query(Link)
 
     def empty(self):
-        self._storage_engine.session.query(Link).delete()
+        self._get_all().delete()
 
     def create_link(self, primary_userid, provided_key, generated_key, expires, expired=False, retry_count=0):
         link = Link(primary_user=primary_userid, generated_key=generated_key, provided_key=provided_key,
@@ -49,14 +49,18 @@ class SQLLinkStore(SQLStore, LinkStore):
 
         return None
 
+    def _delete_link(self, userid):
+        result = self._storage_engine.session.query(Link).filter(Link.primary_user == userid).delete()
+        return bool(result==1)
+
     def remove_link(self, userid):
         try:
-            self._storage_engine.session.query(Link).filter(Link.primary_user == userid).delete()
-            return True
+            return self._delete_link(userid)
 
         except Exception as excep:
             YLogger.exception_nostack(self, "Failed to remove link", excep)
-            return False
+
+        return False
 
     def link_exists(self, userid, provided_key, generated_key):
         try:
@@ -69,8 +73,11 @@ class SQLLinkStore(SQLStore, LinkStore):
             YLogger.exception_nostack(self, "Failed to check link exists", excep)
             return False
 
+    def _get_link(self, id):
+        return self._storage_engine.session.query(Link).filter(and_(Link.id == id)).one()
+
     def update_link(self, link):
-        existing = self._storage_engine.session.query(Link).filter(and_(Link.id == link.id)).one()
+        existing = self._get_link(link.id)
         if existing is not None:
             existing.primary_user = link.primary_user
             existing.generated_key = link.generated_key

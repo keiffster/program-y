@@ -30,7 +30,7 @@ class SQLUserStore(SQLStore, UserStore):
         return self._storage_engine.session.query(User)
 
     def empty(self):
-        self._storage_engine.session.query(User).delete()
+        self._get_all().delete()
 
     def add_user(self, userid, clientid):
         user = User(userid=userid, client=clientid)
@@ -51,20 +51,27 @@ class SQLUserStore(SQLStore, UserStore):
             links.append(user.client)
         return links
 
+    def _remove_user_from_db(self, userid, clientid):
+        rowcount = self._storage_engine.session.query(User).filter(User.userid == userid,
+                                                                   User.client == clientid).delete()
+        return bool(rowcount > 0)
+
     def remove_user(self, userid, clientid):
         try:
-            self._storage_engine.session.query(User).filter(User.userid == userid, User.client == clientid).delete()
-            return True
+            return self._remove_user_from_db(userid, clientid)
 
         except Exception as excep:
             YLogger.exception_nostack(self, "Failed to remove user", excep)
 
         return False
 
+    def _remove_user_from_all_clients_from_db(self, userid):
+        rowcount = self._storage_engine.session.query(User).filter(User.userid == userid).delete()
+        return bool(rowcount > 0)
+
     def remove_user_from_all_clients(self, userid):
         try:
-            self._storage_engine.session.query(User).filter(User.userid == userid).delete()
-            return True
+            return self._remove_user_from_all_clients_from_db(userid)
 
         except Exception as excep:
             YLogger.exception_nostack(self, "Failed to remove user from all clients", excep)

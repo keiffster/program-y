@@ -39,7 +39,7 @@ class SQLUserGroupStore(SQLStore, UserGroupsStore):
         UserGroupsStore.__init__(self)
 
     def _get_all(self):
-        return self._storage_engine.session.query(UserGroup)
+        raise Exception("SQL User groups uses complex multi table data structure, do not call _get_all()")
 
     def empty(self):
         self._storage_engine.session.query(AuthoriseUser).delete()
@@ -49,22 +49,25 @@ class SQLUserGroupStore(SQLStore, UserGroupsStore):
         self._storage_engine.session.query(GroupUser).delete()
         self._storage_engine.session.query(GroupRole).delete()
 
+    def load_from_yaml(self, yaml_data, verbose=False):
+        self._upload_users(yaml_data, verbose)
+        self._upload_groups(yaml_data, verbose)
+
+    def _read_yaml_from_file(self, filename):
+        with open(filename, 'r+') as yml_data_file:
+            yaml_data = yaml.load(yml_data_file, Loader=yaml.FullLoader)
+            self.load_from_yaml(yaml_data)
+
     def upload_from_file(self, filename, fileformat=Store.TEXT_FORMAT, commit=True, verbose=False):
 
-        if os.path.exists(filename):
-            try:
-                with open(filename, 'r+') as yml_data_file:
-                    yaml_data = yaml.load(yml_data_file, Loader=yaml.FullLoader)
-                    self._upload_users(yaml_data, verbose)
-                    self._upload_groups(yaml_data, verbose)
-
-                if commit is True:
-                    self.commit()
-
-            except FileNotFoundError:
-                YLogger.error(self, "File not found [%s]", filename)
-
+        try:
+            self._read_yaml_from_file(filename)
+            self.commit(commit)
             return 1, 1
+
+        except Exception as error:
+            YLogger.exception(self, "Failed to load yaml file from [%s]", error, filename)
+
         return 0, 0
 
     def _upload_users(self, yaml_data, verbose=False):
@@ -72,7 +75,7 @@ class SQLUserGroupStore(SQLStore, UserGroupsStore):
             for user_name in yaml_data['users'].keys():
 
                 auth_user = AuthoriseUser(name=user_name)
-                self.storage_engine.session.add(auth_user)
+                result = self.storage_engine.session.add(auth_user)
 
                 yaml_obj = yaml_data['users'][user_name]
                 if 'roles' in yaml_obj:
@@ -99,8 +102,8 @@ class SQLUserGroupStore(SQLStore, UserGroupsStore):
         if 'groups' in yaml_data:
             for group_name in yaml_data['groups'].keys():
 
-                auth_group = AuthoriseGroup(name=group_name)
-                self.storage_engine.session.add(auth_group)
+                auth_group = AuthoriseGroup(name=group_name, parent=None)
+                result = self.storage_engine.session.add(auth_group)
 
                 yaml_obj = yaml_data['groups'][group_name]
                 if 'roles' in yaml_obj:
@@ -124,7 +127,7 @@ class SQLUserGroupStore(SQLStore, UserGroupsStore):
                         self.storage_engine.session.add(group_group)
 
                 if 'users' in yaml_obj:
-                    users_list = yaml_obj['groups']
+                    users_list = yaml_obj['users']
                     splits = users_list.split(",")
                     for user_name in splits:
                         user_name = user_name.strip()
@@ -151,7 +154,7 @@ class SQLUserGroupStore(SQLStore, UserGroupsStore):
             group = Group(dbgroup.name)
             groupusers = self._storage_engine.session.query(GroupUser).filter(GroupUser.group == dbgroup.name)
             for dbgroupuser in groupusers:
-                group.add_user(dbgroupuser.name)
+                group.add_user(dbgroupuser.user)
             groupgroups = self._storage_engine.session.query(GroupGroup).filter(GroupGroup.group == dbgroup.name)
             for dbgroupgroup in groupgroups:
                 group.add_group(dbgroupgroup.subgroup)
@@ -160,39 +163,4 @@ class SQLUserGroupStore(SQLStore, UserGroupsStore):
                 group.add_role(dbgrouprole.role)
             usersgroupsauthorisor.groups[group.groupid] = group
 
-        self.combine_users_and_groups(usersgroupsauthorisor)
-
-    def combine_users_and_groups(self, usergroups):
-
-        for user_id in usergroups.users.keys():
-            user = usergroups.users[user_id]
-
-            new_groups = []
-            for group_id in user.groups:
-                if group_id in usergroups.groups:
-                    group = usergroups.groups[group_id]
-                    new_groups.append(group)
-                else:
-                    YLogger.error(self, "Unknown group id [%s] in user [%s]", group_id, user_id)
-            user.add_groups(new_groups[:])
-
-        for group_id in usergroups.groups.keys():
-            group = usergroups.groups[group_id]
-
-            new_groups = []
-            for sub_group_id in group.groups:
-                if sub_group_id in usergroups.groups:
-                    new_group = usergroups.groups[sub_group_id]
-                    new_groups.append(new_group)
-                else:
-                    YLogger.error(self, "Unknown group id [%s] in group [%s]", sub_group_id, group_id)
-            group.add_groups(new_groups[:])
-
-            new_users = []
-            for sub_user_id in group.users:
-                if sub_user_id in usergroups.users:
-                    new_user = usergroups.users[sub_user_id]
-                    new_users.append(new_user)
-                else:
-                    YLogger.error(self, "Unknown user id [%s] in group [%s]", sub_user_id, group_id)
-            group.add_users(new_users[:])
+        self._combine_users_and_groups(usersgroupsauthorisor)

@@ -26,3 +26,5 @@ class MongoLinkStoreTests(LinkStoreAsserts):
         self.assertEqual(store.storage_engine, engine)
 
         self.assert_links_storage(store)
+
+

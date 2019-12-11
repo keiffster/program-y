@@ -125,31 +125,28 @@ class TemplateGetNode(TemplateNode):
         tuples = self._get_tuples(client_context)
 
         resolved = ""
-        if isinstance(tuples, list):  # Is tuples an array of results in the form
-                                      # [[[subj,val],[pred, val],[obj, val]], [[subj, val],[pred, val],[obj, val]]...]
-
-            if variables:  # If we are asking for variables, pull out the vars
-                for atuple in tuples:
-                    if isinstance(atuple[0], list) is True:
-                        for pair in atuple:
-                            for var in variables:
-                                if pair[0] == var:
-                                    resolved += pair[1]
-                                    resolved += " "
-                    else:
+        if variables:  # If we are asking for variables, pull out the vars
+            for atuple in tuples:
+                if isinstance(atuple[0], list) is True:
+                    for pair in atuple:
                         for var in variables:
-                            if atuple[0] == var:
-                                resolved += atuple[1]
+                            if pair[0] == var:
+                                resolved += pair[1]
                                 resolved += " "
+                else:
+                    for var in variables:
+                        if atuple[0] == var:
+                            resolved += atuple[1]
+                            resolved += " "
 
-            else:
-                for atuple in tuples:
-                    resolved += atuple[0][1]
-                    resolved += " "
-                    resolved += atuple[1][1]
-                    resolved += " "
-                    resolved += atuple[2][1]
-                    resolved += " "
+        else:
+            for atuple in tuples:
+                resolved += atuple[0][1]
+                resolved += " "
+                resolved += atuple[1][1]
+                resolved += " "
+                resolved += atuple[2][1]
+                resolved += " "
 
         YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved.strip()

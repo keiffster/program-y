@@ -1,5 +1,6 @@
 import unittest
 import unittest.mock
+from unittest.mock import patch
 import programytest.storage.engines as Engines
 from programy.storage.stores.nosql.mongo.engine import MongoStorageEngine
 from programy.storage.stores.nosql.mongo.store.mongostore import MongoStore
@@ -31,10 +32,3 @@ class MongoStoreTests(unittest.TestCase):
 
         with self.assertRaises(NotImplementedError):
             store.collection_name()
-
-    @unittest.skipIf(Engines.mongo is False, Engines.mongo_disabled)
-    def test_get_lookup_none_present(self):
-        config = unittest.mock.Mock()
-        engine = MongoStorageEngine(config)
-        store = MongoStore(engine)
-

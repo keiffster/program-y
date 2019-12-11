@@ -62,7 +62,7 @@ class MongoPostQuestionProcessorStoreTests(PostQuestionProcessorsStoreAsserts):
         raise Exception("Mock Exception")
 
     @unittest.skipIf(Engines.mongo is False, Engines.mongo_disabled)
-    @patch("programy.storage.stores.nosql.mongo.store.processors.MongoProcessorStore", patch_load_processors_from_file)
+    @patch("programy.storage.stores.nosql.mongo.store.processors.MongoProcessorStore._load_processors_from_file", patch_load_processors_from_file)
     def test_upload_from_file_exception(self):
         config = MongoStorageConfiguration()
         engine = MongoStorageEngine(config)

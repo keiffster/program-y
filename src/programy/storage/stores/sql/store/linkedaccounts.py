@@ -30,7 +30,7 @@ class SQLLinkedAccountStore(SQLStore, LinkedAccountStore):
         return self._storage_engine.session.query(LinkedAccount)
 
     def empty(self):
-        self._storage_engine.session.query(LinkedAccount).delete()
+        self._get_all().delete()
 
     def link_accounts(self, primary_userid, linked_userid):
         shared = LinkedAccount(primary_user=primary_userid, linked_user=linked_userid)
@@ -38,14 +38,9 @@ class SQLLinkedAccountStore(SQLStore, LinkedAccountStore):
         return shared
 
     def unlink_accounts(self, primary_userid):
-        try:
-            self._storage_engine.session.query(LinkedAccount).filter(
-                LinkedAccount.primary_user == primary_userid).delete()
-            return True
-
-        except Exception as excep:
-            YLogger.exception_nostack(self, "Failed to unlink accounts", excep)
-            return False
+        self._storage_engine.session.query(LinkedAccount).filter(
+            LinkedAccount.primary_user == primary_userid).delete()
+        return True
 
     def linked_accounts(self, primary_userid):
         db_accounts = self._storage_engine.session.query(LinkedAccount).filter(
@@ -62,7 +57,7 @@ class SQLLinkedAccountStore(SQLStore, LinkedAccountStore):
                 LinkedAccount.linked_user == linked_userid).one()
             return db_account.primary_user
 
-        except Exception:
-            pass
+        except Exception as excep:
+            YLogger.exception_nostack(self, "Failed to find priamry account for userid [%s]", excep, linked_userid)
 
         return None

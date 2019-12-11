@@ -44,8 +44,7 @@ class MongoCategoryStore(CategoryReadWriteStore, MongoStore):
         YLogger.debug(self, "Storing category in Mongo [%s] [%s] [%s] [%s] [%s]", groupid, pattern, topic, that,
                       template)
         category = Category(groupid=groupid, userid=userid, topic=topic, that=that, pattern=pattern, template=template)
-        self.add_document(category)
-        return True
+        return self.add_document(category)
 
     def load(self, collector, name=None):
         del name

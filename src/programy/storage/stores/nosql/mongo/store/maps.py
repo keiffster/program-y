@@ -45,17 +45,20 @@ class MongoMapsStore(MongoStore, MapsReadWriteStore):
                 if overwrite_existing is True:
                     YLogger.info(self, "Updating map [%s] in Mongo [%s]=[%s]", name, key, value)
                     amap[MongoMapsStore.KEYVALUES][key] = value
-                    collection.replace_one({MongoMapsStore.NAME: name}, amap)
+                    result = collection.replace_one({MongoMapsStore.NAME: name}, amap)
+                    return bool(result.modified_count > 0)
                 else:
                     YLogger.error(self, "Existing value in map [%s] [%s] = [%s] in Mongo", name, key, value)
-                    return False
             else:
                 amap[MongoMapsStore.KEYVALUES][key] = value
-                collection.replace_one({MongoMapsStore.NAME: name}, amap)
+                result = collection.replace_one({MongoMapsStore.NAME: name}, amap)
+                return bool(result.modified_count > 0)
+
         else:
             amap = Map(name, {key: value})
-            self.add_document(amap)
-        return True
+            return self.add_document(amap)
+
+        return False
 
     def remove_from_map(self, name, key):
         YLogger.info(self, "Removing key [%s] from map [%s] in Mongo", name, key)
@@ -64,12 +67,12 @@ class MongoMapsStore(MongoStore, MapsReadWriteStore):
         if amap is not None:
             amap[MongoMapsStore.KEYVALUES].pop(key)
             if amap[MongoMapsStore.KEYVALUES]:
-                collection.replace_one({MongoMapsStore.NAME: name}, amap)
+                result = collection.replace_one({MongoMapsStore.NAME: name}, amap)
+                return bool(result.modified_count > 0)
 
             else:
-                collection.delete_one({MongoMapsStore.NAME: name})
-
-            return True
+                result = collection.delete_one({MongoMapsStore.NAME: name})
+                return bool(result.deleted_count > 0)
 
         return False
 

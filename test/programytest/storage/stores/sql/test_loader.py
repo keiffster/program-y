@@ -44,7 +44,7 @@ class SQLUploaderTests(unittest.TestCase):
         args.verbose = False
         return args
 
-    @patch("programy.storage.stores.nosql.mongo.loader.Uploader.get_args", patch_get_args)
+    @patch("programy.storage.stores.sql.loader.Uploader.get_args", patch_get_args)
     def test_run(self):
         Uploader.run()
 
@@ -55,7 +55,7 @@ class SQLUploaderTests(unittest.TestCase):
         args.drop = True
         return args
 
-    @patch("programy.storage.stores.nosql.mongo.loader.Uploader.get_args", patch_get_args2)
+    @patch("programy.storage.stores.sql.loader.Uploader.get_args", patch_get_args2)
     def test_run(self):
         Uploader.run()
 
@@ -63,7 +63,7 @@ class SQLUploaderTests(unittest.TestCase):
     def patch_get_args3(arguments):
         raise Exception("Mock Exception")
 
-    @patch("programy.storage.stores.nosql.mongo.loader.Uploader.get_args", patch_get_args3)
+    @patch("programy.storage.stores.sql.loader.Uploader.get_args", patch_get_args3)
     def test_run_with_exception(self):
         Uploader.run()
 
@@ -78,7 +78,7 @@ class SQLUploaderTests(unittest.TestCase):
 
     def test_upload_no_dir_or_file(self):
         with self.assertRaises(Exception):
-            Uploader.upload(storetype='other',
+            Uploader.upload(storetype='categories',
                              url='mysql+pymysql://root@localhost:3306/programy',
                              filename=None,
                              dirname=None,
@@ -94,6 +94,16 @@ class SQLUploaderTests(unittest.TestCase):
                                          create=True)
         self.assertEquals(9, count)
         self.assertEquals(9, success)
+
+    def test_upload_maps(self):
+        count, success = Uploader.upload(storetype='maps',
+                                         url='mysql+pymysql://root@localhost:3306/programy',
+                                         filename=None,
+                                         dirname=self.basepath + "maps" + os.sep + "text",
+                                         subdir=True, extension=".txt",
+                                         create=True)
+        self.assertEquals(11, count)
+        self.assertEquals(11, success)
 
     def test_upload_sets(self):
         count, success = Uploader.upload(storetype='sets',
@@ -154,7 +164,7 @@ class SQLUploaderTests(unittest.TestCase):
                                          subdir=True, extension=".txt",
                                          create=True)
         self.assertEquals(57, count)
-        self.assertEquals(56, success)
+        self.assertEquals(52, success)
 
     def test_upload_person2s(self):
         count, success = Uploader.upload(storetype='person2s',
@@ -274,52 +284,3 @@ class SQLUploaderTests(unittest.TestCase):
                                          create=True)
         self.assertEquals(1, count)
         self.assertEquals(1, success)
-
-
-
-"""
-# Categories
-python3 -m programy.storage.stores.sql.loader --entity categories --url mysql+pymysql://root:Password123@localhost:3306/programy --dir ../../storage/categories --subdir --extension=.aiml --verbose
-
-# Maps
-python3 -m programy.storage.stores.sql.loader --entity maps --url mysql+pymysql://root:Password123@localhost:3306/programy --dir ../../storage/maps --subdir --extension=.txt --verbose
-
-# Sets
-python3 -m programy.storage.stores.sql.loader --entity sets --url mysql+pymysql://root:Password123@localhost:3306/programy --dir ../../storage/sets --subdir --extension=.txt --verbose
-
-# RDFs
-python3 -m programy.storage.stores.sql.loader --entity rdfs --url mysql+pymysql://root:Password123@localhost:3306/programy --dir ../../storage/rdfs --subdir --extension=.txt --verbose
-
-# Lookups
-python3 -m programy.storage.stores.sql.loader --entity denormals --url mysql+pymysql://root:Password123@localhost:3306/programy --file ../../storage/lookups/denormal.txt --verbose
-python3 -m programy.storage.stores.sql.loader --entity normals --url mysql+pymysql://root:Password123@localhost:3306/programy --file ../../storage/lookups/normal.txt --verbose
-python3 -m programy.storage.stores.sql.loader --entity genders --url mysql+pymysql://root:Password123@localhost:3306/programy --file ../../storage/lookups/gender.txt --verbose
-python3 -m programy.storage.stores.sql.loader --entity persons --url mysql+pymysql://root:Password123@localhost:3306/programy --file ../../storage/lookups/person.txt --verbose
-python3 -m programy.storage.stores.sql.loader --entity person2s --url mysql+pymysql://root:Password123@localhost:3306/programy --file ../../storage/lookups/person2.txt --verbose
-
-# Properties
-python3 -m programy.storage.stores.sql.loader --entity properties --url mysql+pymysql://root:Password123@localhost:3306/programy --file ../../storage/properties/properties.txt --verbose
-python3 -m programy.storage.stores.sql.loader --entity defaults --url mysql+pymysql://root:Password123@localhost:3306/programy --file ../../storage/properties/defaults.txt --verbose
-
-# Regex Templates
-python3 -m programy.storage.stores.sql.loader --entity regexes --url mysql+pymysql://root:Password123@localhost:3306/programy --file ../../storage/regex/regex-templates.txt --verbose
-
-# Nodes
-python3 -m programy.storage.stores.sql.loader --entity patternnodes --url mysql+pymysql://root:Password123@localhost:3306/programy --file ../../storage/nodes/pattern_nodes.conf --verbose
-python3 -m programy.storage.stores.sql.loader --entity templatenodes --url mysql+pymysql://root:Password123@localhost:3306/programy --file ../../storage/nodes/template_nodes.conf --verbose
-
-# Processors
-python3 -m programy.storage.stores.sql.loader --entity postprocessors --url mysql+pymysql://root:Password123@localhost:3306/programy --file ../../storage/processing/postprocessors.conf --verbose
-python3 -m programy.storage.stores.sql.loader --entity preprocessors --url mysql+pymysql://root:Password123@localhost:3306/programy --file ../../storage/processing/preprocessors.conf --verbose
-python3 -m programy.storage.stores.sql.loader --entity postquestionprocessors --url mysql+pymysql://root:Password123@localhost:3306/programy --file ../../storage/processing/postquestionprocessors.conf --verbose
-
-# Spelling
-python3 -m programy.storage.stores.sql.loader --entity spelling --url mysql+pymysql://root:Password123@localhost:3306/programy --file ../../storage/spelling/corpus.txt --verbose
-
-# License Keys
-python3 -m programy.storage.stores.sql.loader --entity licenses --url mysql+pymysql://root:Password123@localhost:3306/programy --file ../../storage/licenses/license.keys --verbose
-
-# UserGroups
-python3 -m programy.storage.stores.sql.loader --entity usergroups --url mysql+pymysql://root:Password123@localhost:3306/programy --file ../../storage/security/usergroups.yaml --verbose
-
-"""

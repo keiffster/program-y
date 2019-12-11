@@ -39,9 +39,6 @@ class TextFile(FileProcessor):
         FileProcessor.__init__(self, filename, mode, encoding)
         self._file = open(self._filename, self._mode, encoding=self._encoding)
 
-    def close(self):
-        self._file.close()
-
     def process_lines(self, set_name, processor, verbose=False):
         del verbose
         count = 0
@@ -54,12 +51,15 @@ class TextFile(FileProcessor):
             count += 1
         return count, success
 
-    def write_line(self, file_writer, elements):
+    def write_line(self, elements, file_writer=None):
         string = file_writer.format_row_as_text(elements)
         self._file.write(string)
 
     def flush(self):
         self._file.flush()
+
+    def close(self):
+        self._file.close()
 
 
 class CSVFileProcessor(FileProcessor):
@@ -79,7 +79,7 @@ class CSVFileWriter(CSVFileProcessor):
         self._file = open(self._filename, self._mode, encoding=self._encoding)
         self._csv_writer = csv.writer(self._file, delimiter=delimiter, quotechar=quotechar, quoting=quoting)
 
-    def write_line(self, _, elements):
+    def write_line(self, elements, filewriter=None):
         self._csv_writer.writerow(elements)
 
     def close(self):

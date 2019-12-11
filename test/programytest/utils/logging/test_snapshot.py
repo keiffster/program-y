@@ -1,15 +1,5 @@
-import logging
 import unittest
-
-from programy.bot import Bot
-from programy.brain import Brain
-from programy.config.bot.bot import BotConfiguration
-from programy.config.brain.brain import BrainConfiguration
-from programy.context import ClientContext
-from programy.utils.console.console import outputLog
-from programy.utils.logging.ylogger import YLogger
 from programy.utils.logging.ylogger import YLoggerSnapshot
-from programytest.client import TestClient
 
 
 class YLoggerSnapshotTests(unittest.TestCase):
@@ -41,3 +31,4 @@ class YLoggerSnapshotTests(unittest.TestCase):
                           'fatals': 2,
                           'infos': 6,
                           'warnings': 5}, snapshot.to_json())
+

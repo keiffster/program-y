@@ -45,14 +45,13 @@ class MongoSetsStore(MongoStore, SetsReadWriteStore):
             if uvalue not in aset[MongoSetsStore.VALUES]:
                 YLogger.info(self, "Adding value to set [%s] [%s]", name, uvalue)
                 aset[MongoSetsStore.VALUES].append(uvalue)
-                collection.replace_one({MongoSetsStore.NAME: name}, aset)
+                result = collection.replace_one({MongoSetsStore.NAME: name}, aset)
+                return bool(result.modified_count > 0)
 
         else:
             YLogger.info(self, "Creating new set [%s], initial value [%s]", name, uvalue)
             aset = Set(name, [uvalue])
-            self.add_document(aset)
-
-        return True
+            return self.add_document(aset)
 
     def remove_from_set(self, name, value):
         YLogger.info(self, "Remove value [%s] from set [%s]", value, name)
@@ -62,11 +61,12 @@ class MongoSetsStore(MongoStore, SetsReadWriteStore):
             if value.upper() in aset[MongoSetsStore.VALUES]:
                 aset[MongoSetsStore.VALUES].remove(value.upper())
                 if aset[MongoSetsStore.VALUES]:
-                    collection.replace_one({MongoSetsStore.NAME: name}, aset)
-                else:
-                    collection.delete_one({MongoSetsStore.NAME: name})
+                    result = collection.replace_one({MongoSetsStore.NAME: name}, aset)
+                    return bool(result.modified_count > 0)
 
-                return True
+                else:
+                    result = collection.delete_one({MongoSetsStore.NAME: name})
+                    return bool(result.deleted_count > 0)
 
         return False
 

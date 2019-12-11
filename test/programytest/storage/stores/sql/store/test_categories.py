@@ -56,3 +56,23 @@ class SQLCategoryStoreTests(CategoryStoreAsserts):
         self.assertEqual(store.storage_engine, engine)
 
         self.assert_upload_from_directory(store)
+
+    @unittest.skipIf(Engines.sql is False, Engines.sql_disabled)
+    def test_empty_named(self):
+        config = SQLStorageConfiguration()
+        engine = SQLStorageEngine(config)
+        engine.initialise()
+        store = SQLCategoryStore(engine)
+        self.assertEqual(store.storage_engine, engine)
+
+        self.assert_empty_name(store)
+
+    @unittest.skipIf(Engines.sql is False, Engines.sql_disabled)
+    def test_load(self):
+        config = SQLStorageConfiguration()
+        engine = SQLStorageEngine(config)
+        engine.initialise()
+        store = SQLCategoryStore(engine)
+        self.assertEqual(store.storage_engine, engine)
+
+        self.assert_load(store)

@@ -67,16 +67,16 @@ class MongoNodeStore(MongoStore, NodesStore):
 
     def process_config_line(self, line, verbose=False):
         line = line.strip()
-        if line:
-            if line.startswith('#') is False:
-                splits = line.split("=")
+        if line.startswith('#') is False:
+            splits = line.split("=")
+            if len(splits) > 1:
                 node_name = splits[0].strip()
                 class_name = splits[1].strip()
                 node = self._get_entity(node_name, class_name)
-                self.add_document(node)
                 if verbose is True:
                     YLogger.debug(self, "Loading node [%s] = [%s]", node_name, class_name)
-                return True
+                return self.add_document(node)
+
         return False
 
     def _get_entity(self, name, classname):

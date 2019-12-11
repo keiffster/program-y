@@ -2,20 +2,85 @@ import os
 import os.path
 import re
 import unittest
-
 from programy.mappings.denormal import DenormalCollection
+from programy.storage.entities.store import Store
 
 
 class DenormalStoreAsserts(unittest.TestCase):
 
-    def assert_upload_from_file(self, store):
+    def assert_lookup_storage(self, store):
 
-        denormal_collection = DenormalCollection()
+        store.empty()
+
+        store.add_to_lookup(" dot com ",".com")
+        store.add_to_lookup(" dot org ",".org")
+        store.commit()
+
+        lookups = store.get_lookup()
+        self.assertIsNotNone(lookups)
+        self.assertEqual(2, len(lookups))
+
+        store.remove_lookup_key(" dot com ")
+        store.commit()
+
+        lookups = store.get_lookup()
+        self.assertIsNotNone(lookups)
+        self.assertEqual(1, len(lookups))
+
+        store.remove_lookup()
+        store.commit()
+
+        lookup = store.get_lookup()
+        self.assertEqual({}, lookup)
+
+    def assert_upload_from_text(self, store):
+
+        store.empty()
+
+        store.upload_from_text(None, """
+                                " dot uk ",".uk"
+                                " dot net ",".net"
+                                " dot ca ",".ca"
+                                " dot de ",".de"
+                                " dot jp ",".jp"
+                                " dot fr ",".fr"
+                                " dot au ",".au"
+                                " dot us ",".us"
+                                " dot ru ",".ru"
+                                " dot ch ",".ch"
+                                " dot it ",".it"
+                                " dot nl ",".nl"
+                                " dot se ",".se"
+                                " dot no ",".no"
+                                " dot es ",".es"
+                                """)
+
+        collection = DenormalCollection()
+        store.load(collection)
+
+        self.assertEqual(collection.denormalise(" DOT UK "), [re.compile('(^DOT UK | DOT UK | DOT UK$)', re.IGNORECASE), '.UK'])
+        self.assertEqual(collection.denormalise_string("keiffster DOT UK"), "keiffster.uk")
+
+    def assert_upload_from_text_file(self, store):
+
+        store.empty()
 
         store.upload_from_file(os.path.dirname(__file__) + os.sep + "data" + os.sep + "lookups" + os.sep + "text" + os.sep + "denormal.txt")
 
-        store.load(denormal_collection)
+        collection = DenormalCollection()
+        store.load(collection)
 
-        self.assertEqual(denormal_collection.denormalise(" DOT COM "),
-                         [re.compile('(^DOT COM | DOT COM | DOT COM$)', re.IGNORECASE), '.COM'])
-        self.assertEqual(denormal_collection.denormalise_string("keith dot com"), "keith.com")
+        self.assertEqual(collection.denormalise(" DOT UK "), [re.compile('(^DOT UK | DOT UK | DOT UK$)', re.IGNORECASE), '.UK'])
+        self.assertEqual(collection.denormalise_string("keiffster DOT UK"), "keiffster.uk")
+
+    def assert_upload_csv_file(self, store, filename):
+
+        store.empty()
+
+        store.upload_from_file(filename, fileformat=Store.CSV_FORMAT)
+
+        collection = DenormalCollection()
+        store.load(collection)
+
+        self.assertEqual(collection.denormalise(" DOT UK "), [re.compile('(^DOT UK | DOT UK | DOT UK$)', re.IGNORECASE), '.UK'])
+        self.assertEqual(collection.denormalise_string("keiffster DOT UK"), "keiffster.uk")

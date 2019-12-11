@@ -71,11 +71,11 @@ class MongoProcessorStore(MongoStore, ProcessorStore):
         if line.startswith('#') is False:
             class_name = line.strip()
             node = self._get_entity(class_name)
-            self.add_document(node)
+
             if verbose is True:
                 YLogger.debug(self, "Uploading %s node [%s] to Mongo", self.collection_name(), class_name)
 
-            return True
+            return self.add_document(node)
 
         return False
 

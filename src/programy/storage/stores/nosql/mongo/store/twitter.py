@@ -38,11 +38,12 @@ class MongoTwitterStore(MongoStore, TwitterStore):
         if twitter is not None:
             twitter['last_direct_message_id'] = last_direct_message_id
             twitter['last_status_id'] = last_status_id
-            collection.update({'_id': twitter['_id']}, twitter)
+            result = collection.replace_one({'_id': twitter['_id']}, twitter)
+            return bool(result.modified_count > 0)
 
         else:
             twitter = Twitter(last_direct_message_id, last_status_id)
-            self.add_document(twitter)
+            return self.add_document(twitter)
 
     def load_last_message_ids(self):
         YLogger.info(self, "Loading last message ids from Mongo")

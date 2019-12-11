@@ -429,10 +429,8 @@ class TemplateConditionNode(TemplateConditionVariable):
         elif self._condition_type == TemplateConditionNode.SINGLE:
             return self.resolve_type2_condition(client_context)
 
-        elif self._condition_type == TemplateConditionNode.MULTIPLE:
+        else:
             return self.resolve_type3_condition(client_context)
-
-        return None
 
     def get_condition_variable_value(self, client_context, var_type, name):
         if var_type == TemplateConditionVariable.GLOBAL:
@@ -441,105 +439,121 @@ class TemplateConditionNode(TemplateConditionVariable):
         elif var_type == TemplateConditionVariable.LOCAL:
             return TemplateGetNode.get_property_value(client_context, True, name)
 
-        elif var_type == TemplateConditionVariable.BOT:
+        else:
             return TemplateBotNode.get_bot_variable(client_context, name)
 
+    def _resolve_type1_to_string(self, client_context):
+        value = self.get_condition_variable_value(client_context, self.var_type, self.name)
+        condition_value = self.value.resolve(client_context).upper()
+
+        # Condition comparison is always case insensetive
+        if value.upper() == condition_value:
+            resolved = client_context.brain.tokenizer.words_to_texts([child.resolve(client_context)
+                                                                      for child in self.children])
         else:
-            return "unknown"
+            resolved = ""
+
+        YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
+        return resolved
 
     def resolve_type1_condition(self, client_context):
         try:
-            value = self.get_condition_variable_value(client_context, self.var_type, self.name)
-            condition_value = self.value.resolve(client_context).upper()
-
-            # Condition comparison is always case insensetive
-            if value.upper() == condition_value:
-                resolved = client_context.brain.tokenizer.words_to_texts([child.resolve(client_context)
-                                                                          for child in self.children])
-            else:
-                resolved = ""
-
-            YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
-            return resolved
+            return self._resolve_type1_to_string(client_context)
 
         except Exception as excep:
             YLogger.exception(client_context, "Failed to resolve type1 condition", excep)
-            return ""
+
+        return ""
+
+    def _resolve_type2_to_string(self, client_context):
+        value = self.get_condition_variable_value(client_context, self.var_type, self.name)
+
+        for condition in self.children:
+            if condition.is_default() is False:
+                condition_value = condition.value.resolve(client_context)
+
+                # Condition comparison is always case insensetive
+                if client_context.brain.tokenizer.compare(value.upper(), condition_value.upper()):
+                    resolved = client_context.brain.tokenizer.words_to_texts([child_node.resolve(client_context)
+                                                                              for child_node in condition.children])
+                    YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
+
+                    if condition.loop is True:
+                        self._pre_condition_loop_check(client_context)
+                        resolved = resolved.strip() + " " + self.resolve(client_context)
+
+                    return resolved
+
+        default = self.get_default()
+        if default is not None:
+            resolved = client_context.brain.tokenizer.words_to_texts([child_node.resolve(client_context)
+                                                                      for child_node in default.children])
+
+            if default.loop is True:
+                resolved = resolved.strip() + " " + self.resolve(client_context)
+        else:
+            resolved = ""
+
+        YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
+        return resolved
 
     def resolve_type2_condition(self, client_context):
         try:
-            value = self.get_condition_variable_value(client_context, self.var_type, self.name)
-
-            for condition in self.children:
-                if condition.is_default() is False:
-                    condition_value = condition.value.resolve(client_context)
-
-                    # Condition comparison is always case insensetive
-                    if client_context.brain.tokenizer.compare(value.upper(), condition_value.upper()):
-                        resolved = client_context.brain.tokenizer.words_to_texts([child_node.resolve(client_context)
-                                                                                  for child_node in condition.children])
-                        YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
-
-                        if condition.loop is True:
-                            resolved = resolved.strip() + " " + self.resolve(client_context)
-
-                        return resolved
-
-            default = self.get_default()
-            if default is not None:
-                resolved = client_context.brain.tokenizer.words_to_texts([child_node.resolve(client_context)
-                                                                          for child_node in default.children])
-
-                if default.loop is True:
-                    resolved = resolved.strip() + " " + self.resolve(client_context)
-            else:
-                resolved = ""
-
-            YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
-            return resolved
+            return self._resolve_type2_to_string(client_context)
 
         except Exception as excep:
             YLogger.exception(client_context, "Failed to resolve type2 condition", excep)
-            return ""
+
+        return ""
+
+    def _resolve_type3_to_string(self, client_context):
+        for condition in self.children:
+            value = self.get_condition_variable_value(client_context, condition.var_type, condition.name)
+            if condition.value is not None:
+                condition_value = condition.value.resolve(client_context)
+
+                # Condition comparison is always case insensetive
+                if value.upper() == condition_value.upper():
+                    resolved = client_context.brain.tokenizer.words_to_texts([child_node.resolve(client_context)
+                                                                              for child_node in condition.children])
+                    YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
+
+                    if condition.loop is True:
+                        resolved = resolved.strip()
+                        self._pre_condition_loop_check(client_context)
+                        text = self.resolve(client_context)
+                        resolved += " " + text.strip()
+
+                    return resolved
+
+        default = self.get_default()
+        if default is not None:
+            resolved = client_context.brain.tokenizer.words_to_texts([child_node.resolve(client_context)
+                                                                      for child_node in default.children])
+
+            if default.loop is True:
+                resolved = resolved.strip()
+                self._pre_default_loop_check(client_context)
+                text = self.resolve(client_context)
+                resolved += " " + text.strip()
+
+        else:
+            resolved = ""
+
+        YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
+        return resolved
+
+    def _pre_condition_loop_check(self, client_context):
+        pass    #pragma: no cover
+
+    def _pre_default_loop_check(self, client_context):
+        pass    #pragma: no cover
 
     def resolve_type3_condition(self, client_context):
         try:
-            for condition in self.children:
-                value = self.get_condition_variable_value(client_context, condition.var_type, condition.name)
-                if condition.value is not None:
-                    condition_value = condition.value.resolve(client_context)
-
-                    # Condition comparison is always case insensetive
-                    if value.upper() == condition_value.upper():
-                        resolved = client_context.brain.tokenizer.words_to_texts([child_node.resolve(client_context)
-                                                                                  for child_node in condition.children])
-                        YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
-
-                        if condition.loop is True:
-                            resolved = resolved.strip()
-                            text = self.resolve(client_context)
-                            if text is not None:
-                                resolved += " " + text.strip()
-
-                        return resolved
-
-            default = self.get_default()
-            if default is not None:
-                resolved = client_context.brain.tokenizer.words_to_texts([child_node.resolve(client_context)
-                                                                          for child_node in default.children])
-
-                if default.loop is True:
-                    resolved = resolved.strip()
-                    text = self.resolve(client_context)
-                    if text is not None:
-                        resolved += " " + text.strip()
-
-            else:
-                resolved = ""
-
-            YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
-            return resolved
+            return self._resolve_type3_to_string(client_context)
 
         except Exception as excep:
             YLogger.exception(client_context, "Failed to resolve type3 condition", excep)
-            return ""
+
+        return ""

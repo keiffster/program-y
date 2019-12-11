@@ -36,19 +36,27 @@ class SQLConversationStore(SQLStore, ConversationStore):
         ConversationStore.__init__(self)
 
     def _get_all(self):
-        return self._storage_engine.session.query(ConversationDAO)
+        raise Exception("SQL Conversations uses complex multi table data structure, do not call _get_all()")
 
     def empty(self):
         self._storage_engine.session.query(ConversationDAO).delete()
+        self._storage_engine.session.query(QuestionDAO).delete()
+        self._storage_engine.session.query(SentenceDAO).delete()
+        self._storage_engine.session.query(MatchDAO).delete()
+        self._storage_engine.session.query(MatchNodeDAO).delete()
+        self._storage_engine.session.query(ConversationPropertyDAO).delete()
 
-    def store_conversation(self, client_context, conversation, commit=True):
-
-        YLogger.debug(client_context, "Storing Conversation....")
-        conversationdao = self._storage_engine.session.query(ConversationDAO). \
+    def _get_conversation_dao(self, client_context):
+         return self._storage_engine.session.query(ConversationDAO). \
             filter(ConversationDAO.clientid == client_context.client.id,
                    ConversationDAO.userid == client_context.userid,
                    ConversationDAO.botid == client_context.bot.id,
                    ConversationDAO.brainid == client_context.brain.id).first()
+
+    def store_conversation(self, client_context, conversation, commit=True):
+
+        YLogger.debug(client_context, "Storing Conversation....")
+        conversationdao = self._get_conversation_dao(client_context)
         if conversationdao is None:
             conversationdao = ConversationDAO(clientid=client_context.client.id,
                                               userid=client_context.userid,
@@ -59,6 +67,7 @@ class SQLConversationStore(SQLStore, ConversationStore):
             self._storage_engine.session.add(conversationdao)
             self._storage_engine.session.flush()
             YLogger.debug(client_context, "Wrote conversation %s", conversationdao)
+
         else:
             YLogger.debug(client_context, "Conversation already exists, %s", conversationdao)
 
@@ -69,22 +78,24 @@ class SQLConversationStore(SQLStore, ConversationStore):
 
         self._write_questions_to_db(client_context, conversationdao.id, conversation)
 
-        if commit is True:
-            self.commit()
+        self.commit(commit)
 
     def _write_questions_to_db(self, client_context, conversationid, conversation):
         question_no = 1
         for question in conversation.questions:
             self._write_question_to_db(client_context, conversationid, question, question_no)
             question_no += 1
+
         self._storage_engine.session.flush()
 
-    def _write_question_to_db(self, client_context, conversationid, question, question_no):
-
-        questiondao = self._storage_engine.session.query(QuestionDAO). \
+    def _get_question_dao(self, conversationid, question_no):
+        return self._storage_engine.session.query(QuestionDAO). \
             filter(QuestionDAO.conversationid == conversationid,
                    QuestionDAO.questionno == question_no).first()
 
+    def _write_question_to_db(self, client_context, conversationid, question, question_no):
+
+        questiondao = self._get_question_dao(conversationid, question_no)
         if questiondao is None:
             questiondao = QuestionDAO(
                 conversationid=conversationid,
@@ -95,6 +106,7 @@ class SQLConversationStore(SQLStore, ConversationStore):
             self._storage_engine.session.add(questiondao)
             self._storage_engine.session.flush()
             YLogger.debug(client_context, "Writing question %s", questiondao)
+
         else:
             YLogger.debug(client_context, "Question already exists, %s", questiondao)
 
@@ -112,12 +124,14 @@ class SQLConversationStore(SQLStore, ConversationStore):
             sentence_no += 1
         self._storage_engine.session.flush()
 
-    def _write_sentence_to_db(self, client_context, questionid, sentence, sentence_no):
-
-        sentencedao = self._storage_engine.session.query(SentenceDAO). \
+    def _get_sentence_dao(self, questionid, sentence_no):
+        return self._storage_engine.session.query(SentenceDAO). \
             filter(SentenceDAO.questionid == questionid,
                    SentenceDAO.sentenceno == sentence_no).first()
 
+    def _write_sentence_to_db(self, client_context, questionid, sentence, sentence_no):
+
+        sentencedao = self._get_sentence_dao(questionid, sentence_no)
         if sentencedao is None:
             sentencedao = SentenceDAO(questionid=questionid,
                                       sentenceno=sentence_no,
@@ -129,17 +143,20 @@ class SQLConversationStore(SQLStore, ConversationStore):
             self._storage_engine.session.add(sentencedao)
             self._storage_engine.session.flush()
             YLogger.debug(client_context, "Writing sentence %s", sentencedao)
+
         else:
             YLogger.debug(client_context, "Sentence already exists, %s", sentencedao)
 
         if sentence.matched_context is not None:
             self._write_match_context_to_db(client_context, sentencedao.id, sentence.matched_context)
 
-    def _write_match_context_to_db(self, client_context, sentenceid, matched_context):
-
-        matchdao = self._storage_engine.session.query(MatchDAO). \
+    def _get_match_dao(self, sentenceid):
+        return self._storage_engine.session.query(MatchDAO). \
             filter(MatchDAO.sentenceid == sentenceid).first()
 
+    def _write_match_context_to_db(self, client_context, sentenceid, matched_context):
+
+        matchdao = self._get_match_dao(sentenceid)
         if matchdao is None:
             matchdao = MatchDAO(sentenceid=sentenceid,
                                 max_search_depth=matched_context.max_search_depth,
@@ -151,18 +168,21 @@ class SQLConversationStore(SQLStore, ConversationStore):
             self._storage_engine.session.add(matchdao)
             self._storage_engine.session.flush()
             YLogger.debug(client_context, "Writing match %s", matchdao)
+
         else:
             YLogger.debug(client_context, "Match already exists %s", matchdao)
 
         self._write_matches_to_db(client_context, matched_context, matchdao.id)
 
+    def _get_matchnode_dao(self, matchid, match_count):
+       return self._storage_engine.session.query(MatchNodeDAO). \
+            filter(MatchNodeDAO.matchid == matchid,
+                   MatchNodeDAO.matchcount == match_count).first()
+
     def _write_matches_to_db(self, client_context, matched_context, matchid):
         match_count = 1
         for match in matched_context.matched_nodes:
-            matchnodedao = self._storage_engine.session.query(MatchNodeDAO). \
-                filter(MatchNodeDAO.matchid == matchid,
-                       MatchNodeDAO.matchcount == match_count).first()
-
+            matchnodedao = self._get_matchnode_dao(matchid, match_count)
             if matchnodedao is None:
                 matchnodedao = MatchNodeDAO(matchid=matchid,
                                             matchcount=match_count,
@@ -180,14 +200,17 @@ class SQLConversationStore(SQLStore, ConversationStore):
 
             match_count += 1
 
+    def _get_property_dao(self, conversationid, questionid, proptype, name):
+       return self._storage_engine.session.query(ConversationPropertyDAO). \
+            filter(ConversationPropertyDAO.conversationid == conversationid,
+                   ConversationPropertyDAO.questionid == questionid,
+                   ConversationPropertyDAO.type == proptype,
+                   ConversationPropertyDAO.name == name).first()
+
     def _write_properties_to_db(self, client_context, conversationid, questionid, proptype, properties):
         for name, value in properties.items():
-            propertydao = self._storage_engine.session.query(ConversationPropertyDAO). \
-                filter(ConversationPropertyDAO.conversationid == conversationid,
-                       ConversationPropertyDAO.questionid == questionid,
-                       ConversationPropertyDAO.type == proptype,
-                       ConversationPropertyDAO.name == name).first()
 
+            propertydao = self._get_property_dao(conversationid, questionid, proptype, name)
             if propertydao is None:
                 propertydao = ConversationPropertyDAO(conversationid=conversationid,
                                                       questionid=questionid,
@@ -209,12 +232,7 @@ class SQLConversationStore(SQLStore, ConversationStore):
     def load_conversation(self, client_context, conversation):
 
         YLogger.debug(client_context, "Loading conversation")
-        conversationdao = self._storage_engine.session.query(ConversationDAO). \
-            filter(ConversationDAO.clientid == client_context.client.id,
-                   ConversationDAO.userid == client_context.userid,
-                   ConversationDAO.botid == client_context.bot.id,
-                   ConversationDAO.brainid == client_context.brain.id).first()
-
+        conversationdao = self._get_conversation_dao(client_context)
         if conversationdao is None:
             YLogger.debug(client_context, "No matching conversation in database")
             return False
@@ -234,6 +252,7 @@ class SQLConversationStore(SQLStore, ConversationStore):
         return True
 
     def _read_questions_from_db(self, client_context, conversationid, conversation):
+
         questiondaos = self._storage_engine.session.query(QuestionDAO). \
             filter(QuestionDAO.conversationid == conversationid)
 

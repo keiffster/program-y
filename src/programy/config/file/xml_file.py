@@ -138,8 +138,7 @@ class XMLConfigurationFile(BaseConfigurationFile):
             if child.text:
                 text = child.text
                 text = text.strip()
-                if text:
-                    values.append(self._replace_subs(subs, text))
+                values.append(self._replace_subs(subs, text))
 
         if values:
             return values
@@ -168,7 +167,9 @@ class XMLConfigurationFile(BaseConfigurationFile):
             if len(value):
                 for child in value:
                     if child.tag == "dir":
-                        values.append(self._replace_subs(subs, child.text))
+                        replaced = self._replace_subs(subs, child.text)
+                        if replaced:
+                            values.append(replaced)
 
         multis = []
         for value in values:

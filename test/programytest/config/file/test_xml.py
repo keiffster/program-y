@@ -738,3 +738,56 @@ class XMLConfigurationFileTests(ConfigurationBaseFileTests):
         self.assertIsNotNone(section1)
 
         self.assertEquals(["file1"], config_data.get_multi_file_option(section1, "multivalue2", ".", missing_value="file1"))
+
+    def test_get_multi_option_not_dir(self):
+        config_data = XMLConfigurationFile()
+        self.assertIsNotNone(config_data)
+        configuration = config_data.load_from_text("""
+        <console>
+            <section1>
+                <multivalue>
+                    <dir>one</dir>
+                    <dir>two</dir>
+                    <dir>three</dir>
+                    <notdir>four</notdir>
+                    <dir></dir>
+                </multivalue>
+            </section1>
+        </console>
+                  """, ConsoleConfiguration(), ".")
+        self.assertIsNotNone(configuration)
+
+        section1 = config_data.get_section("section1")
+        self.assertIsNotNone(section1)
+
+        multivalue = config_data.get_section("multivalue", section1)
+        self.assertIsNotNone(section1)
+
+        self.assertEquals(['one', 'two', 'three'], config_data.get_multi_option(multivalue, "dir"))
+
+    def test_get_multi_file_option_not_dir(self):
+        config_data = XMLConfigurationFile()
+        self.assertIsNotNone(config_data)
+        configuration = config_data.load_from_text("""
+        <console>
+            <section1>
+                <multivalue>
+                    <dir>one</dir>
+                    <dir>two</dir>
+                    <dir>three</dir>
+                    <notdir>four</notdir>
+                    <dir></dir>
+                </multivalue>
+            </section1>
+        </console>
+                  """, ConsoleConfiguration(), ".")
+        self.assertIsNotNone(configuration)
+
+        section1 = config_data.get_section("section1")
+        self.assertIsNotNone(section1)
+
+        multivalue = config_data.get_section("multivalue", section1)
+        self.assertIsNotNone(section1)
+
+        self.assertEquals(['one', 'two', 'three'], config_data.get_multi_file_option(section1, "multivalue", "."))
+

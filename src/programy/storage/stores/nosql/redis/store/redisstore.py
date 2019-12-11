@@ -27,7 +27,8 @@ class RedisStore(Store):
     def storage_engine(self):
         return self._storage_engine
 
-    def commit(self):
+    def commit(self, commit=True):
+        del commit
         pass    # pragma: no cover
 
     def delete(self, key):

@@ -552,6 +552,18 @@ class TemplateGraphSelectTests(TemplateGraphTestClient):
 
         ast = self._graph.parse_template_expression(template)
 
+    def test_parse_query_obj_in_vars(self):
+        template = ET.fromstring("""
+                <template>
+                    <select>
+                        <vars>?y</vars>
+                        <q><subj>MONKEY</subj><pred>LEGS</pred><obj>?y</obj></q>
+                    </select>
+                </template>
+                """)
+
+        ast = self._graph.parse_template_expression(template)
+
     def test_parse_subj_missing(self):
         template = ET.fromstring("""
                 <template>

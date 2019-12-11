@@ -21,11 +21,11 @@ class MockStore(Store):
 
         self.processed = True
 
-    def commit(self):
-        self.committed = True
+    def commit(self, commit=True):
+        self.committed = commit
 
-    def rollback(self):
-        self.rolled_back = True
+    def rollback(self, commit=True):
+        self.rolled_back = commit
 
 
 class StoreTests(unittest.TestCase):

@@ -1,5 +1,5 @@
 import unittest
-
+from unittest.mock import patch
 import programytest.storage.engines as Engines
 from programy.storage.stores.sql.config import SQLStorageConfiguration
 from programy.storage.stores.sql.engine import SQLStorageEngine
@@ -18,10 +18,37 @@ class SQLGenderStoreTests(GenderStoreAsserts):
         self.assertEqual(store.storage_engine, engine)
 
     @unittest.skipIf(Engines.sql is False, Engines.sql_disabled)
-    def test_upload_from_file(self):
+    def test_lookup_storage(self):
+        config = SQLStorageConfiguration()
+        engine = SQLStorageEngine(config)
+        engine.initialise()
+        store = SQLGenderStore(engine)
+
+        self.assert_lookup_storage(store)
+
+    @unittest.skipIf(Engines.sql is False, Engines.sql_disabled)
+    def test_upload_from_text(self):
+        config = SQLStorageConfiguration()
+        engine = SQLStorageEngine(config)
+        engine.initialise()
+        store = SQLGenderStore(engine)
+
+        self.assert_upload_from_text(store)
+
+    @unittest.skipIf(Engines.sql is False, Engines.sql_disabled)
+    def test_upload_from_text_file(self):
         config = SQLStorageConfiguration()
         engine = SQLStorageEngine(config)
         engine.initialise()
         store = SQLGenderStore(engine)
 
         self.assert_upload_from_text_file(store)
+
+    @unittest.skip("CSV not supported yet")
+    def test_upload_csv_file(self):
+        config = SQLStorageConfiguration()
+        engine = SQLStorageEngine(config)
+        engine.initialise()
+        store = SQLGenderStore(engine)
+
+        self.assert_upload_csv_file(store)

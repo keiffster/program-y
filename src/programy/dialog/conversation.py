@@ -65,9 +65,8 @@ class Conversation():
         self._properties[name] = value
 
     def property(self, name: str):
-        if self._properties is not None:
-            if name in self._properties:
-                return self._properties[name]
+        if name in self._properties:
+            return self._properties[name]
         return None
 
     def record_dialog(self, question: Question):
@@ -103,12 +102,14 @@ class Conversation():
         response = re.sub(r'<br></br>*', ".", response)
         sentences = response.split(".")
         sentences = [x for x in sentences if x]
-        last_sentence = sentences[-1]
-        that_pattern = TextUtils.strip_all_punctuation(last_sentence)
-        that_pattern = that_pattern.strip()
-
-        if that_pattern == "":
-            that_pattern = '*'
+        if sentences:
+            last_sentence = sentences[-1]
+            that_pattern = TextUtils.strip_all_punctuation(last_sentence)
+            that_pattern = that_pattern.strip()
+            if that_pattern == "":
+                that_pattern = '*'
+        else:
+            that_pattern = "*"
 
         return that_pattern
 

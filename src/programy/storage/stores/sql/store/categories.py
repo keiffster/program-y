@@ -29,7 +29,7 @@ class SQLCategoryStore(CategoryReadWriteStore, SQLStore):
         return self._storage_engine.session.query(Category)
 
     def empty(self):
-        self._storage_engine.session.query(Category).delete()
+        self._get_all().delete()
 
     def empty_named(self, name):
         self._storage_engine.session.query(Category).filter(Category.groupid == name).delete()

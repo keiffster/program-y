@@ -4,7 +4,6 @@ import unittest
 class TwitterStoreAsserts(unittest.TestCase):
 
     def assert_twitter_storage(self, store):
-
         store.empty()
 
         last_direct_message_id, last_status_id = store.load_last_message_ids()

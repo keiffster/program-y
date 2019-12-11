@@ -29,7 +29,7 @@ class SQLSetsStore(SQLStore, SetsReadWriteStore):
         return self._storage_engine.session.query(Set)
 
     def empty(self):
-        self._storage_engine.session.query(Set).delete()
+        self._get_all().delete()
 
     def empty_named(self, name):
         self._storage_engine.session.query(Set).filter(Set.name == name).delete()
@@ -58,8 +58,8 @@ class SQLSetsStore(SQLStore, SetsReadWriteStore):
         the_set = {}
         for pair in values:
             value = pair.value.strip()
-            if value:
-                self.add_set_values(the_set, value)
+            self.add_set_values(the_set, value)
+
         if the_set:
             collector.add_set(name, the_set, SQLStore.SQL)
             return True

@@ -26,11 +26,11 @@ class SQLRDFsStore(RDFReadWriteStore, SQLStore):
         SQLStore.__init__(self, storage_engine)
         RDFReadWriteStore.__init__(self)
 
-    def empty(self):
-        self._storage_engine.session.query(RDF).delete()
-
     def _get_all(self):
         return self._storage_engine.session.query(RDF)
+
+    def empty(self):
+        self._get_all().delete()
 
     def empty_named(self, name):
         self._storage_engine.session.query(RDF).filter(RDF.name == name).delete()
@@ -51,12 +51,3 @@ class SQLRDFsStore(RDFReadWriteStore, SQLStore):
         for rdf in db_rdfs:
             collector.add_entity(rdf.subject, rdf.predicate, rdf.object, name)
 
-    def _process_upload_line(self, rdf_name, line, verbose):
-        splits = line.split(":")
-        if len(splits) > 2:
-            subj = splits[0].upper()
-            pred = splits[1].upper()
-            obj = (":".join(splits[2:])).strip()
-            anrdf = self.add_rdf(rdf_name, subj, pred, obj)
-            if verbose is True:
-                outputLog(self, anrdf)

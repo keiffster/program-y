@@ -190,7 +190,7 @@ class TemplateGetNodeTests(ParserTestsBaseClass):
         self.assertIsNotNone(result)
         self.assertEqual("", result)
 
-    def test_tuples(self):
+    def test_tuples_no_tuples(self):
         root = TemplateNode()
         self.assertIsNotNone(root)
         self.assertIsNotNone(root.children)
@@ -212,6 +212,34 @@ class TemplateGetNodeTests(ParserTestsBaseClass):
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><get var="?x ?y"><select /></get></template>', xml_str)
+
+        result = root.resolve_to_string(self._client_context)
+        self.assertEquals(result, "")
+
+    def test_tuples_string(self):
+        root = TemplateNode()
+        self.assertIsNotNone(root)
+        self.assertIsNotNone(root.children)
+        self.assertEqual(len(root.children), 0)
+
+        select = TemplateWordNode("Hello")
+        self.assertIsNotNone(select)
+
+        node = TemplateGetNode()
+        node.name = TemplateWordNode("?x ?y")
+        node.tuples = select
+
+        root.append(node)
+        self.assertEqual(len(root.children), 1)
+
+        self.assertEqual("[GET [Tuples] - ([WORD]?x ?y)]", node.to_string())
+
+        xml = root.xml_tree(self._client_context)
+        self.assertIsNotNone(xml)
+        xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
+        self.assertEqual('<template><get var="?x ?y">Hello</get></template>', xml_str)
+
+        result = root.resolve_to_string(self._client_context)
 
     def test_node_exception_handling(self):
         root = TemplateNode()

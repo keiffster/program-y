@@ -26,7 +26,7 @@ class SQLLearnfStore(SQLStore, LearnfStore):
         LearnfStore.__init__(self)
 
     def _get_all(self):
-        return self._storage_engine.session.query(LearnfStore)
+        raise Exception("Learnf _get_all not possible, call Category _get_all instead!")
 
     def save_learnf(self, client_context, category):
         pattern = category.pattern

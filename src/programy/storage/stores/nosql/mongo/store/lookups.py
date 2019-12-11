@@ -37,15 +37,18 @@ class MongoLookupStore(MongoStore, LookupsStore):
             if overwrite_existing is True:
                 YLogger.info(self, "Updating lookup in Mongo [%s] [%s]", key, value)
                 lookup['value'] = value
-                collection.replace_one({'key': key}, lookup)
+                result = collection.replace_one({'key': key}, lookup)
+                return bool(result.modified_count > 0)
+
             else:
                 YLogger.error(self, "Existing value in Mongo lookup [%s] = [%s]", key, value)
-                return False
+
         else:
             YLogger.debug(self, "Adding lookup to Mongo [%s] = [%s]", key, value)
             lookup = Lookup(key, value)
-            self.add_document(lookup)
-        return True
+            return self.add_document(lookup)
+
+        return False
 
     def remove_lookup(self):
         YLogger.debug(self, "Removing lookup from Mongo [%s]", self.collection_name())
@@ -60,11 +63,11 @@ class MongoLookupStore(MongoStore, LookupsStore):
     def get_lookup(self):
         collection = self.collection()
         lookups = collection.find()
-        collection = {}
+        data = {}
         for lookup in lookups:
-            collection[lookup['key']] = lookup['value']
+            data[lookup['key']] = lookup['value']
 
-        return collection
+        return data
 
     def load_all(self, collector):
         self.load(collector)

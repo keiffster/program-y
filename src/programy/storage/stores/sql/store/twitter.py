@@ -14,8 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from sqlalchemy.orm.exc import NoResultFound
-from sqlalchemy.orm.exc import MultipleResultsFound
+from programy.utils.logging.ylogger import YLogger
 from programy.storage.stores.sql.store.sqlstore import SQLStore
 from programy.storage.entities.twitter import TwitterStore
 from programy.storage.stores.sql.dao.twitter import Twitter
@@ -31,7 +30,7 @@ class SQLTwitterStore(SQLStore, TwitterStore):
         return self._storage_engine.session.query(Twitter)
 
     def empty(self):
-        self._storage_engine.session.query(Twitter).delete()
+        return self._get_all()
 
     def store_last_message_ids(self, last_direct_message_id, last_status_id):
         ids = Twitter(last_direct_message_id=last_direct_message_id, last_status_id=last_status_id)
@@ -44,10 +43,7 @@ class SQLTwitterStore(SQLStore, TwitterStore):
             ids = twitter.one()
             return ids.last_direct_message_id, ids.last_status_id
 
-        except MultipleResultsFound:
-            pass
-
-        except NoResultFound:
-            pass
+        except Exception as error:
+            YLogger.exception(self, "Failed to find previous message ids", error)
 
         return "-1", "-1"

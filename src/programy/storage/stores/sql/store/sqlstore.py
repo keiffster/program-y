@@ -31,8 +31,10 @@ class SQLStore(Store):
     def _get_all(self):
         raise NotImplementedError()  # pragma: no cover
 
-    def commit(self):
-        self._storage_engine.session.commit()
+    def commit(self, commit=True):
+        if commit is True:
+            self._storage_engine.session.commit()
 
-    def rollback(self):
-        self._storage_engine.session.rollback()
+    def rollback(self, commit=True):
+        if commit is True:
+            self._storage_engine.session.rollback()

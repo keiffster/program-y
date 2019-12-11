@@ -9,7 +9,6 @@ class NGramsCreatorTests(unittest.TestCase):
 
         tags = PartsOfSpeechTagger.tag_string("Python is a high-level, general-purpose programming language.")
         self.assertIsNotNone(tags)
-        print(tags)
         self.assertEqual([('Python', 'NNP'),
                            ('is', 'VBZ'),
                            ('a', 'DT'),

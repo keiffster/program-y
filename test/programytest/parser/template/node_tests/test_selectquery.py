@@ -44,6 +44,7 @@ class TemplateSelectQueryTests(ParserTestsBaseClass):
         query = Query(TemplateWordNode("subj"), TemplateWordNode("pred"), TemplateWordNode("obj"))
 
         self.assertEqual("q", query.get_xml_type())
+
         self.assertEqual("subj", query.subj.word)
         self.assertEqual("pred", query.pred.word)
         self.assertEqual("obj", query.obj.word)
@@ -67,6 +68,8 @@ class TemplateSelectQueryTests(ParserTestsBaseClass):
     def test_notquery(self):
 
         query = NotQuery(TemplateWordNode("subj"), TemplateWordNode("pred"), TemplateWordNode("obj"))
+
+        self.assertEquals("notq", query.get_xml_type())
 
         self.assertEqual("subj", query.subj.word)
         self.assertEqual("pred", query.pred.word)

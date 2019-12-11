@@ -31,5 +31,6 @@ class LoggerStore(Store):
     def drop(self):
         pass    # pragma: no cover
 
-    def commit(self):
+    def commit(self, commit=True):
+        del commit
         pass    # pragma: no cover

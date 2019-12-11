@@ -9,7 +9,6 @@ from programy.storage.entities.store import Store
 class RDFStoreAsserts(unittest.TestCase):
 
     def assert_rdf_storage(self, store):
-
         store.empty()
 
         store.add_rdf("ACTIVITY", "ACT", "hasPurpose", "to entertain by performing")
@@ -28,7 +27,6 @@ class RDFStoreAsserts(unittest.TestCase):
         self.assertTrue(rdf_collection.has_object('ACT', "hasPurpose", "to entertain by performing"))
 
     def assert_upload_from_text(self, store):
-
         store.empty()
 
         store.upload_from_text("ACTIVITY", """
@@ -84,7 +82,6 @@ class RDFStoreAsserts(unittest.TestCase):
         self.assertTrue(rdf_collection.has_object('ACT', "hasPurpose", "to entertain by performing"))
 
     def assert_upload_text_files_from_directory_no_subdir(self, store):
-
         store.empty()
 
         store.upload_from_directory(os.path.dirname(__file__)+os.sep+"data"+os.sep+"rdfs"+os.sep+"text", subdir=False)
@@ -118,7 +115,6 @@ class RDFStoreAsserts(unittest.TestCase):
         self.assertFalse(rdf_collection2.contains("ACTIVITY"))
 
     def assert_upload_from_csv_file(self, store):
-
         store.empty()
 
         store.upload_from_file(os.path.dirname(__file__)+os.sep+"data"+os.sep+"rdfs"+os.sep+"csv"+os.sep+"activity.csv", fileformat=Store.CSV_FORMAT)
@@ -132,7 +128,6 @@ class RDFStoreAsserts(unittest.TestCase):
         self.assertTrue(rdf_collection.has_object('ACT', "hasPurpose", "to entertain by performing"))
 
     def assert_upload_csv_files_from_directory_with_subdir(self, store):
-
         store.empty()
 
         store.upload_from_directory(os.path.dirname(__file__)+os.sep+"data"+os.sep+"rdfs"+os.sep+"csv", subdir=True, fileformat=Store.CSV_FORMAT)

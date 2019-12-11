@@ -130,9 +130,7 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
                     context.add_match(context_match2)
                     matches_added += 1
 
-                    match = child.consume(client_context, context, words, word_no + 1, match_type, depth + 1)
-                    if match is not None:
-                        return match
+                    return child.consume(client_context, context, words, word_no + 1, match_type, depth + 1)
 
             #########################################################################
             # Children nodes

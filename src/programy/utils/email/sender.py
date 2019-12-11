@@ -133,9 +133,8 @@ class EmailSender:
                                         msg)
 
             if result:
-                if result.items():
-                    for email, error in result.items():
-                        YLogger.error(None, "Email send failed [%s] = [%d] - [%s]" % (email, error[0], error[1]))
+                for email, error in result.items():
+                    YLogger.error(None, "Email send failed: [%d] - [%s]", email, error)
 
         except Exception as e:
             YLogger.exception(self, "Email sender failed", e)

@@ -1,5 +1,5 @@
+from unittest.mock import patch
 import xml.etree.ElementTree as ET
-
 from programy.dialog.question import Question
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.condition import TemplateConditionListItemNode
@@ -40,6 +40,41 @@ class TemplateConditionType2NodeTests(ParserTestsBaseClass):
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEqual("Word2", result)
+
+    def patch_resolve_type2_to_string(self, client_context):
+        raise Exception ("Mock Exception")
+
+    @patch("programy.parser.template.nodes.condition.TemplateConditionNode._resolve_type2_to_string", patch_resolve_type2_to_string)
+    def test_type2_exception(self):
+        root = TemplateNode()
+        self.assertIsNotNone(root)
+        self.assertIsNotNone(root.children)
+        self.assertEqual(len(root.children), 0)
+
+        node = TemplateConditionNode("cond1", condition_type=2)
+        self.assertIsNotNone(node)
+        cond1 = TemplateConditionListItemNode(value=TemplateWordNode("value1"))
+        cond1.append(TemplateWordNode("Word1"))
+        node.append(cond1)
+        cond2 = TemplateConditionListItemNode(value=TemplateWordNode("value2"))
+        cond2.append(TemplateWordNode("Word2"))
+        node.append(cond2)
+        cond3 = TemplateConditionListItemNode()
+        cond3.append(TemplateWordNode("Word3"))
+        node.append(cond3)
+
+        root.append(node)
+        self.assertEqual(len(root.children), 1)
+
+        self._client_context.bot.get_conversation(self._client_context).set_property('cond1', "value2")
+
+        question = Question.create_from_text(self._client_context, "Hello")
+        self._client_context.bot.get_conversation(self._client_context).record_dialog(question)
+        self._client_context.bot.get_conversation(self._client_context).current_question().set_property("cond1", "value2")
+
+        result = root.resolve(self._client_context)
+        self.assertIsNotNone(result)
+        self.assertEqual("", result)
 
     def test_type2_to_xml_global(self):
         root = TemplateNode()

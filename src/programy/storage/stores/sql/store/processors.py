@@ -14,7 +14,6 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import os
 from programy.utils.logging.ylogger import YLogger
 from programy.storage.stores.sql.store.sqlstore import SQLStore
 from programy.storage.entities.processors import ProcessorStore
@@ -43,43 +42,46 @@ class SQLProcessorsStore(SQLStore, ProcessorStore):
             except Exception as e:
                 YLogger.exception(self, "Failed pre-instantiating Processor [%s]", e, processor.classname)
 
-    def upload_from_file(self, filename, fileformat=Store.TEXT_FORMAT, commit=True, verbose=False):
-
+    def _load_processors_from_file(self, filename, verbose):
         count = 0
         success = 0
-
-        if os.path.exists(filename):
-            try:
-                with open(filename, "r", encoding="utf-8") as file:
-                    for line in file:
-                        if self._process_config_line(line, verbose) is True:
-                            success += 1
-                        count += 1
-
-                if commit is True:
-                    self.commit()
-
-            except FileNotFoundError:
-                YLogger.error(self, "File not found [%s]", filename)
+        with open(filename, "r", encoding="utf-8") as file:
+            for line in file:
+                if self._process_config_line(line, verbose) is True:
+                    success += 1
+                count += 1
 
         return count, success
 
+    def upload_from_file(self, filename, fileformat=Store.TEXT_FORMAT, commit=True, verbose=False):
+
+        try:
+            count, success = self._load_processors_from_file(filename, verbose)
+
+            self.commit(commit)
+
+            return count, success
+
+        except Exception as error:
+            YLogger.exception(self, "Failed to load processors from  [%s]", error, filename)
+
+        return 0, 0
+
     def _process_config_line(self, line, verbose):
         line = line.strip()
-        if line:
-            if line[0] != '#':
-                processor = self._get_entity(line)
-                self.storage_engine.session.add(processor)
-                if verbose is True:
-                    outputLog(self, line)
-                return True
+        if line[0] != '#':
+            processor = self._get_entity(line)
+            self.storage_engine.session.add(processor)
+            if verbose is True:
+                outputLog(self, line)
+            return True
         return False
 
     def _get_entity(self, classname):
         raise NotImplementedError()  # pragma: no cover
 
     def get_all_processors(self):
-        return []
+        raise NotImplementedError()  # pragma: no cover
 
 
 class SQLPreProcessorsStore(SQLProcessorsStore, ProcessorStore):
@@ -88,10 +90,10 @@ class SQLPreProcessorsStore(SQLProcessorsStore, ProcessorStore):
         SQLProcessorsStore.__init__(self, storage_engine)
 
     def _get_all(self):
-        return self._storage_engine.session.query(ProcessLookupError)
+        return self._storage_engine.session.query(PreProcessor)
 
     def empty(self):
-        self._storage_engine.session.query(PreProcessor).delete()
+       return self._get_all()
 
     def get_all_processors(self):
         return self._storage_engine.session.query(PreProcessor)
@@ -106,10 +108,10 @@ class SQLPostProcessorsStore(SQLProcessorsStore, ProcessorStore):
         SQLProcessorsStore.__init__(self, storage_engine)
 
     def _get_all(self):
-        return self._storage_engine.session.query(PostProcessor)
+        return self.storage_engine.session.query(PostProcessor)
 
     def empty(self):
-        self._storage_engine.session.query(PostProcessor).delete()
+        return self._get_all()
 
     def get_all_processors(self):
         return self._storage_engine.session.query(PostProcessor)
@@ -127,10 +129,10 @@ class SQLPostQuestionProcessorsStore(SQLProcessorsStore, ProcessorStore):
         return self._storage_engine.session.query(PostQuestionProcessor)
 
     def empty(self):
-        self._storage_engine.session.query(PostProcessor).delete()
+        return self._get_all()
 
     def get_all_processors(self):
-        return self._storage_engine.session.query(PostProcessor)
+        return self._storage_engine.session.query(PostQuestionProcessor)
 
     def _get_entity(self, classname):
-        return PostProcessor(classname=classname)
+        return PostQuestionProcessor(classname=classname)

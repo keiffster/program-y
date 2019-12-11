@@ -1,5 +1,4 @@
 import unittest
-import os
 import programytest.storage.engines as Engines
 from programy.storage.stores.nosql.mongo.config import MongoStorageConfiguration
 from programy.storage.stores.nosql.mongo.engine import MongoStorageEngine

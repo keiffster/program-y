@@ -38,10 +38,10 @@ class Store:
         del name            # pragma: no cover
         return              # pragma: no cover
 
-    def commit(self):
+    def commit(self, commit=True):
         return              # pragma: no cover
 
-    def rollback(self):
+    def rollback(self, commit=True):
         return              # pragma: no cover
 
     def get_split_char(self):
@@ -65,13 +65,11 @@ class Store:
                     fields = self.split_into_fields(line)
                     self.process_line(name, fields)
 
-            if commit is True:
-                self.commit()
+            self.commit(commit)
 
         except Exception as e:
             YLogger.exception_nostack(self, "Error loading from text", e)
-            if commit is True:
-                self.rollback()
+            self.rollback(commit)
 
     @staticmethod
     def get_file_processor(fileformat, filename):
@@ -139,13 +137,11 @@ class Store:
                             final_count += count
                             final_success += success
 
-            if commit is True:
-                self.commit()
+            self.commit(commit)
 
         except Exception as e:
             YLogger.exception_nostack(self, "Error loading from directory", e)
-            if commit is True:
-                self.rollback()
+            self.rollback(commit)
 
         return final_count, final_success
 
@@ -162,13 +158,11 @@ class Store:
             final_count += count
             final_success += success
 
-            if commit is True:
-                self.commit()
+            self.commit(commit)
 
         except Exception as e:
             YLogger.exception_nostack(self, "Error uploading from file", e)
-            if commit is True:
-                self.rollback()
+            self.rollback(commit=commit)
 
         finally:
             if file_processor is not None:

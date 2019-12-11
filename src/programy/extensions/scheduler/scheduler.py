@@ -180,8 +180,7 @@ class SchedulerExtension(Extension):
         if jobs:
             response = "OK <olist>"
             for job in jobs:
-                if client_context.userid == job.args[1]:
-                    response += "<item>" + str(job.id) + "</item>"
+                response += "<item>" + str(job.id) + "</item>"
             response += "</olist>"
             return response
 

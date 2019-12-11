@@ -38,26 +38,10 @@ class SQLLicenseKeysStore(SQLStore, LicenseStore):
     def empty(self):
         self._get_all().delete()
 
-    def empty_licensekeys(self):
-        self._get_all().delete()
-
     def add_licensekey(self, name, key):
         licensekey = self._get_entity(name=name, key=key)
         self._storage_engine.session.add(licensekey)
         return True
-
-    def add_licensekeys(self, licensekeys):
-        prop_list = []
-        for name, key in licensekeys.items():
-            prop_list.append(self._get_entity(name=name, key=key))
-        self._storage_engine.session.add_all(prop_list)
-
-    def get_licensekeys(self):
-        db_licensekeys = self._get_all()
-        licensekeys = {}
-        for licensekey in db_licensekeys:
-            licensekeys[licensekey.name] = licensekey.key
-        return licensekeys
 
     def load(self, collector, name=None):
         del name
@@ -69,42 +53,42 @@ class SQLLicenseKeysStore(SQLStore, LicenseStore):
         for db_licensekey in db_licensekeys:
             collector.add_key(db_licensekey.name, db_licensekey.key)
 
-    def upload_from_file(self, filename, fileformat=Store.TEXT_FORMAT, commit=True, verbose=False):
-
+    def _read_lines_from_file(self, filename, verbose):
         count = 0
         success = 0
-
-        if os.path.exists(filename):
-            try:
-                with open(filename, "r") as key_file:
-                    for line in key_file:
-                        if self._process_license_key_line(line, verbose) is True:
-                            success += 1
-                        count += 1
-
-                if commit is True:
-                    self.commit()
-
-            except Exception as e:
-                YLogger.exception(None, "Failed to upload license keys from file [%s]", e, filename)
+        with open(filename, "r") as key_file:
+            for line in key_file:
+                if self._process_license_key_line(line, verbose) is True:
+                    success += 1
+                count += 1
 
         return count, success
+
+    def upload_from_file(self, filename, fileformat=Store.TEXT_FORMAT, commit=True, verbose=False):
+        try:
+            count, success = self._read_lines_from_file(filename, verbose)
+            self.commit(commit)
+            return count, success
+
+        except Exception as e:
+            YLogger.exception(None, "Failed to upload license keys from file [%s]", e, filename)
+
+        return 0, 0
 
     def _process_license_key_line(self, line, verbose=False):
         line = line.strip()
         result = False
-        if line:
-            if line.startswith('#') is False:
-                splits = line.split("=")
-                if len(splits) > 1:
-                    key_name = splits[0].strip()
-                    # If key has = signs in it, then combine all elements past the first
-                    key = "".join(splits[1:]).strip()
-                    result = self.add_licensekey(key_name, key)
-                    if verbose is True:
-                        outputLog(self, "[%s] = [%s]" % (key_name, key))
+        if line.startswith('#') is False:
+            splits = line.split("=")
+            if len(splits) > 1:
+                key_name = splits[0].strip()
+                # If key has = signs in it, then combine all elements past the first
+                key = "".join(splits[1:]).strip()
+                result = self.add_licensekey(key_name, key)
+                if verbose is True:
+                    outputLog(self, "[%s] = [%s]" % (key_name, key))        # pragma: no cover
 
-                else:
-                    YLogger.warning(self, "Invalid license key [%s]", line)
+            else:
+                YLogger.warning(self, "Invalid license key [%s]", line)
 
         return result

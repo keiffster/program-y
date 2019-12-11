@@ -57,7 +57,6 @@ class SetStoreAsserts(unittest.TestCase):
         self.assertFalse('TESTSET2' in set_collection.sets)
 
     def assert_upload_from_text(self, store):
-
         store.empty ()
 
         store.upload_from_text('TESTSET', """
@@ -78,7 +77,6 @@ class SetStoreAsserts(unittest.TestCase):
         self.assertTrue('VAL4' in values)
 
     def assert_upload_from_text_file(self, store):
-
         store.empty()
 
         store.upload_from_file(os.path.dirname(__file__) + os.sep + "data" + os.sep + "sets" + os.sep + "text" + os.sep + "testset.txt")
@@ -93,7 +91,6 @@ class SetStoreAsserts(unittest.TestCase):
         self.assertTrue('VAL4' in values)
 
     def assert_upload_text_files_from_directory_no_subdir(self, store):
-
         store.empty ()
 
         store.upload_from_directory(os.path.dirname(__file__)+os.sep+"data"+os.sep+"sets"+os.sep+"text", subdir=False)
@@ -108,7 +105,6 @@ class SetStoreAsserts(unittest.TestCase):
         self.assertTrue('VAL4' in values)
 
     def assert_upload_from_csv_file(self, store):
-
         store.empty()
 
         store.upload_from_file(os.path.dirname(__file__) + os.sep + "data" + os.sep + "sets" + os.sep + "csv" + os.sep + "testset.csv", fileformat=Store.CSV_FORMAT)

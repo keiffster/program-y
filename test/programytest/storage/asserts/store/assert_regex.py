@@ -9,7 +9,6 @@ from programy.mappings.properties import RegexTemplatesCollection
 class RegexStoreAsserts(unittest.TestCase):
 
     def assert_regexes_storage(self, store):
-
         store.empty()
 
         defaults = {"anything": "^.*$",
@@ -32,7 +31,6 @@ class RegexStoreAsserts(unittest.TestCase):
         self.assertEqual(0, len(new_regexes.keys()))
 
     def assert_regex_storage(self, store):
-
         store.empty()
 
         store.add_regex("anything", "^.*$")
@@ -54,7 +52,6 @@ class RegexStoreAsserts(unittest.TestCase):
         self.assertFalse("anyinteger" in new_regexes)
 
     def assert_empty_regexes(self, store):
-
         store.empty()
 
         store.add_regex("anything", "^.*$")
@@ -90,6 +87,7 @@ class RegexStoreAsserts(unittest.TestCase):
         self.assertFalse(collection.has_regex("XXXXX"))
 
     def assert_add_to_collection(self, store):
+        store.empty()
 
         collection = RegexTemplatesCollection()
 
@@ -99,6 +97,7 @@ class RegexStoreAsserts(unittest.TestCase):
         self.assertEqual(re.compile('^.*$', re.IGNORECASE), collection.regex("anything"))
 
     def assert_add_to_collection_collection(self, store):
+        store.empty()
 
         collection = RegexTemplatesCollection()
 

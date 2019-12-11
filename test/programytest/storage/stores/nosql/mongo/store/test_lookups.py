@@ -33,7 +33,7 @@ class MongoLookupStoreTests(unittest.TestCase):
         self.assertEqual(store.storage_engine, engine)
 
     @unittest.skipIf(Engines.mongo is False, Engines.mongo_disabled)
-    def test_add_to_lookup_override_false(self):
+    def test_add_to_lookup_overwrite_false(self):
         config = MongoStorageConfiguration()
         engine = MongoStorageEngine(config)
         engine.initialise()
@@ -51,20 +51,7 @@ class MongoLookupStoreTests(unittest.TestCase):
         self.assertEqual([re.compile('(^key1|key1|key1$)', re.IGNORECASE), 'VALUE1'], collection.value("key1"))
 
     @unittest.skipIf(Engines.mongo is False, Engines.mongo_disabled)
-    def test_load_no_collection(self):
-        config = MongoStorageConfiguration()
-        engine = MongoStorageEngine(config)
-        engine.initialise()
-        store = TestMongoLookupStore(engine)
-
-        collection = TestCollection()
-
-        store.load(collection)
-
-        self.assertEquals(0, len(collection.pairs.keys()))
-
-    @unittest.skipIf(Engines.mongo is False, Engines.mongo_disabled)
-    def test_add_to_lookup_override_true(self):
+    def test_add_to_lookup_overwrite_true(self):
         config = MongoStorageConfiguration()
         engine = MongoStorageEngine(config)
         engine.initialise()
@@ -80,6 +67,19 @@ class MongoLookupStoreTests(unittest.TestCase):
         self.assertEquals(1, len(collection.pairs.keys()))
         self.assertTrue(collection.has_key("key1"))
         self.assertEqual([re.compile('(^key1|key1|key1$)', re.IGNORECASE), 'VALUE2'], collection.value("key1"))
+
+    @unittest.skipIf(Engines.mongo is False, Engines.mongo_disabled)
+    def test_load_no_collection(self):
+        config = MongoStorageConfiguration()
+        engine = MongoStorageEngine(config)
+        engine.initialise()
+        store = TestMongoLookupStore(engine)
+
+        collection = TestCollection()
+
+        store.load(collection)
+
+        self.assertEquals(0, len(collection.pairs.keys()))
 
     @unittest.skipIf(Engines.mongo is False, Engines.mongo_disabled)
     def test_load_all(self):

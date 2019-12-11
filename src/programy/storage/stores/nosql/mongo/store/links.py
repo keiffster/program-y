@@ -36,8 +36,7 @@ class MongoLinkStore(MongoStore, LinkStore):
     def create_link(self, primary_userid, provided_key, generated_key, expires, expired=False, retry_count=0):
         YLogger.info(self, "Creating link in Mongo [%s] [%s] [%s]", primary_userid, generated_key, provided_key)
         link = Link(primary_userid, provided_key, generated_key, expires, expired, retry_count)
-        self.add_document(link)
-        return True
+        return self.add_document(link)
 
     def get_link(self, userid):
         collection = self.collection()
@@ -48,8 +47,8 @@ class MongoLinkStore(MongoStore, LinkStore):
 
     def remove_link(self, userid):
         collection = self.collection()
-        collection.delete_many({MongoLinkStore.PRIMARY_USER: userid})
-        return True
+        result = collection.delete_many({MongoLinkStore.PRIMARY_USER: userid})
+        return bool(result.deleted_count > 0)
 
     def link_exists(self, userid, provided_key, generated_key):
         collection = self.collection()
@@ -59,5 +58,5 @@ class MongoLinkStore(MongoStore, LinkStore):
 
     def update_link(self, link):
         collection = self.collection()
-        collection.update({'_id': link.id}, Link.to_document(link))
-        return True
+        result = collection.replace_one({'_id': link.id}, Link.to_document(link))
+        return bool(result.modified_count > 0)

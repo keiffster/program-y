@@ -185,12 +185,12 @@ class TemplateSelectNode(TemplateNode):
     #######################################################################################################
     # SELECT_EXPRESSION ::== <person>TEMPLATE_EXPRESSION</person>
 
-    def parse_vars(self, variables):
+    def _parse_vars(self, variables):
         var_splits = variables.split(" ")
         for var_name in var_splits:
             self.vars.append(var_name)
 
-    def parse_query(self, graph, query_name, query):
+    def _parse_query(self, graph, query_name, query):
 
         subj = None
         pred = None
@@ -250,10 +250,10 @@ class TemplateSelectNode(TemplateNode):
             if len(variables) > 1:
                 YLogger.warning(self, "Multiple <vars> found in select tag, using first")
 
-            self.parse_vars(variables[0].text)
+            self._parse_vars(variables[0].text)
 
         queries = expression.findall('./*')
         for query in queries:
             tag_name = TextUtils.tag_from_text(query.tag)
             if tag_name == 'q' or tag_name == 'notq':
-                self.parse_query(graph, tag_name, query)
+                self._parse_query(graph, tag_name, query)

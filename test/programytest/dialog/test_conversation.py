@@ -72,6 +72,23 @@ class ConversationTests(unittest.TestCase):
 
         self.assertEquals("TOPIC1", conversation.get_topic_pattern(client_context))
 
+    def test_topic_pattern_topic_none(self):
+        client = TestClient()
+        client_context = ClientContext(client, "testid")
+        client_context.bot = Bot(BotConfiguration(), client)
+        client_context.bot.configuration.conversations._max_histories = 3
+        client_context.brain = client_context.bot.brain
+
+        conversation = Conversation(client_context)
+        conversation.set_property("topic", None)
+
+        self.assertEquals("*", conversation.get_topic_pattern(client_context))
+
+        conversation.set_property("topic", "TOPIC1")
+
+        self.assertEquals("TOPIC1", conversation.get_topic_pattern(client_context))
+
+
     def test_parse_last_sentences_from_response(self):
         client = TestClient()
         client_context = ClientContext(client, "testid")
@@ -82,6 +99,22 @@ class ConversationTests(unittest.TestCase):
         conversation = Conversation(client_context)
 
         self.assertEquals("*", conversation.parse_last_sentences_from_response(""))
+        self.assertEquals("HELLO", conversation.parse_last_sentences_from_response("HELLO"))
+        self.assertEquals("HELLO THERE", conversation.parse_last_sentences_from_response("HELLO THERE"))
+        self.assertEquals("THERE", conversation.parse_last_sentences_from_response("HELLO. THERE"))
+        self.assertEquals("THERE", conversation.parse_last_sentences_from_response("HELLO. THERE!"))
+
+    def test_parse_last_sentences_from_response_that_empty(self):
+        client = TestClient()
+        client_context = ClientContext(client, "testid")
+        client_context.bot = Bot(BotConfiguration(), client)
+        client_context.bot.configuration.conversations._max_histories = 3
+        client_context.brain = client_context.bot.brain
+
+        conversation = Conversation(client_context)
+
+        self.assertEquals("*", conversation.parse_last_sentences_from_response(""))
+        self.assertEquals("*", conversation.parse_last_sentences_from_response("."))
         self.assertEquals("HELLO", conversation.parse_last_sentences_from_response("HELLO"))
         self.assertEquals("HELLO THERE", conversation.parse_last_sentences_from_response("HELLO THERE"))
         self.assertEquals("THERE", conversation.parse_last_sentences_from_response("HELLO. THERE"))

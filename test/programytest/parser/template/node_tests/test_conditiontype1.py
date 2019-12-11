@@ -1,5 +1,5 @@
+from unittest.mock import patch
 import xml.etree.ElementTree as ET
-
 from programy.dialog.question import Question
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.condition import TemplateConditionNode
@@ -28,6 +28,29 @@ class TemplateConditionType1NodeTests(ParserTestsBaseClass):
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEqual(result, "Hello")
+
+    def patch_resolve_type1_to_string(self, client_context):
+        raise Exception ("Mock Exception")
+
+    @patch("programy.parser.template.nodes.condition.TemplateConditionNode._resolve_type1_to_string", patch_resolve_type1_to_string)
+    def test_type1_resolve_exception(self):
+        root = TemplateNode()
+        self.assertIsNotNone(root)
+        self.assertIsNotNone(root.children)
+        self.assertEqual(len(root.children), 0)
+
+        node = TemplateConditionNode("name1", TemplateWordNode("value1"), var_type=TemplateConditionNode.GLOBAL)
+        self.assertIsNotNone(node)
+
+        node.append(TemplateWordNode("Hello"))
+        root.append(node)
+        self.assertEqual(len(root.children), 1)
+
+        self._client_context.bot.get_conversation(self._client_context).set_property('name1', "value1")
+
+        result = root.resolve(self._client_context)
+        self.assertIsNotNone(result)
+        self.assertEqual(result, "")
 
     def test_type1_node_global_nomatch(self):
         root = TemplateNode()

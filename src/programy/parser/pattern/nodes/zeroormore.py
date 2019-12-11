@@ -74,10 +74,6 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
         context.add_match(context_match)
         matches_added = 1
 
-        match = self.check_child_is_wildcard(tabs, client_context, context, words, word_no, match_type, depth)
-        if match is not None:
-            return match
-
         if self._topic is not None:
             match = self._topic.consume(client_context, context, words, word_no, Match.TOPIC, depth + 1)
 
@@ -109,13 +105,7 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
                     context.add_match(context_match2)
                     matches_added += 1
 
-                    match = child.consume(client_context, context, words, word_no + 1, match_type, depth + 1)
-                    if match is not None:
-                        return match
-
-                    if self.invalid_topic_or_that(tabs, client_context, word, context, matches_added) is True:
-                        context.pop_matches(matches_added)
-                        return None
+                    return child.consume(client_context, context, words, word_no + 1, match_type, depth + 1)
 
             #######################################################################
             # Children nodes

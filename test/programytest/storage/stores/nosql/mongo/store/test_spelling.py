@@ -56,3 +56,16 @@ class MongoSpellingStoreTests(SpellingStoreAsserts):
         store = MongoSpellingStore(engine)
 
         self.assert_upload_from_file_exception(store, verbose=False)
+
+    def patch_add_document(self, document):
+        return False
+
+    @unittest.skipIf(Engines.mongo is False, Engines.mongo_disabled)
+    @patch("programy.storage.stores.nosql.mongo.store.mongostore.MongoStore.add_document", patch_add_document)
+    def test_upload_from_file_add_document_false(self):
+        config = MongoStorageConfiguration()
+        engine = MongoStorageEngine(config)
+        engine.initialise()
+        store = MongoSpellingStore(engine)
+
+        self.assert_upload_from_file_exception(store, verbose=False)

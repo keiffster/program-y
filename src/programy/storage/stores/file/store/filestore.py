@@ -111,7 +111,8 @@ class FileStore(Store):
     def _file_exists(path):
         return os.path.exists(path)
 
-    def commit(self):
+    def commit(self, commit=True):
+        del commit
         pass    # pragma: no cover
 
     def load_all(self, collector):

@@ -385,6 +385,16 @@ class SchedulerExtensionTests(unittest.TestCase):
         response = extension.execute(client_context, "SCHEDULE LIST")
         self.assertEquals("OK <olist><item>1</item></olist>", response)
 
+    def test_list_mulit_userids(self):
+        client = SchedulerExtensionClient()
+        client_context = client.create_client_context("testid")
+        client_context.client._scheduler = MockScheduler()
+        client_context.client._scheduler.add_jobs({1: MockJob(1, "testid"), 2: MockJob(2, "testid2"), 3: MockJob(3, "testid")})
+
+        extension = SchedulerExtension()
+        response = extension.execute(client_context, "SCHEDULE LIST")
+        self.assertEquals("OK <olist><item>1</item><item>3</item></olist>", response)
+
     def test_list_no_userid_jobs(self):
         client = SchedulerExtensionClient()
         client_context = client.create_client_context("testid")

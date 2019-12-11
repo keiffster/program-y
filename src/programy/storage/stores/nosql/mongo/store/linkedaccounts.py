@@ -35,14 +35,13 @@ class MongoLinkedAccountStore(MongoStore, LinkedAccountStore):
     def link_accounts(self, primary_userid, linked_userid):
         YLogger.info(self, "Linking accounts [%s] [%s] in Mongo", primary_userid, linked_userid)
         linked = LinkedAccount(primary_userid, linked_userid)
-        self.add_document(linked)
-        return True
+        return self.add_document(linked)
 
     def unlink_accounts(self, primary_userid):
         YLogger.info(self, "Unlinking accounts [%s] in Mongo", primary_userid)
         collection = self.collection()
-        collection.delete_many({MongoLinkedAccountStore.PRIMARY_USERID: primary_userid})
-        return True
+        result = collection.delete_many({MongoLinkedAccountStore.PRIMARY_USERID: primary_userid})
+        return bool(result.deleted_count > 0)
 
     def linked_accounts(self, primary_userid):
         collection = self.collection()

@@ -33,10 +33,12 @@ class MongoStore(Store):
         YLogger.info(self, "Dropping mongo storage")
         self.collection().drop()
 
-    def commit(self):
+    def commit(self, commit=True):
+        del commit
         YLogger.info(self, "Commit collection not supported on Mongo")
 
-    def rollback(self):
+    def rollback(self, commit=True):
+        del commit
         YLogger.info(self, "Rollback collection not supported on Mongo")
 
     def collection_name(self):
@@ -50,9 +52,12 @@ class MongoStore(Store):
         collection = self.collection()
         collection.delete_many({})
 
+    def _add_to_collection(self, collection, document):
+        result = collection.insert_one(document.to_document())
+        return result.inserted_id
+
     def add_document(self, document):
         YLogger.debug(self, "Adding document to collection [%s]", self.collection_name())
         collection = self.collection()
-        result = collection.insert_one(document.to_document())
-        document.id = result.inserted_id
-        return True
+        document.id = self._add_to_collection(collection, document)
+        return bool(document.id is not None)

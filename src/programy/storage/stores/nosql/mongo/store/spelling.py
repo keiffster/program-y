@@ -41,27 +41,25 @@ class MongoSpellingStore(MongoStore, SpellingStore):
                     corpus_words.append(word)
 
         corpus = Corpus(words=corpus_words)
-        self.add_document(corpus)
-
-        if verbose is True:
-            outputLog(self, corpus_words)
+        if self.add_document(corpus) is False:
+            return 0, 0
 
         count = len(corpus_words)
-
         return count, count
 
     def upload_from_file(self, filename, fileformat=Store.TEXT_FORMAT, commit=True, verbose=False):
 
         YLogger.info(self, "Uplading spelling corpus file [%s] to Mongo", filename)
 
+        count = success = 0
         try:
-            return self._read_corpus_from_file(filename, verbose)
+            count, success = self._read_corpus_from_file(filename, verbose)
 
         except Exception as excep:
             YLogger.exception(self, "Failed to load spelling corpus from [%s]", excep, filename)
 
         # Assume all words loaded are success, no need for additional count
-        return 0, 0
+        return count, success
 
     def load_spelling(self, spell_checker):
         YLogger.info(self, "Loading spelling corpus from Mongo")

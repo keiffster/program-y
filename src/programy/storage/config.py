@@ -224,5 +224,5 @@ class StorageConfiguration(BaseConfigurationData):
 
             for name, value in self._store_configs.items():
                 data['stores'][name] = {}
-                value.to_yaml(data['stores'][name], defaults)
+                data['stores'][name] = value
 

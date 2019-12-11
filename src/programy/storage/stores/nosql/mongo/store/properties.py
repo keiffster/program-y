@@ -47,13 +47,13 @@ class MongoPropertyStore(PropertyStore, MongoStore):
         prop = collection.find_one({MongoPropertyStore.NAME: name})
         if prop is not None:
             prop['value'] = value
-            collection.replace_one({'_id': prop['_id']}, prop)
             YLogger.info(self, "Replacing property [%s] = [%s]", name, value)
-        else:
-            prop = Property(name, value)
-            self.add_document(prop)
-            YLogger.info(self, "Adding property [%s] = [%s]", name, value)
-        return True
+            result = collection.replace_one({'_id': prop['_id']}, prop)
+            return bool(result.modified_count > 0)
+
+        prop = Property(name, value)
+        YLogger.info(self, "Adding property [%s] = [%s]", name, value)
+        return self.add_document(prop)
 
     def add_properties(self, properties):
         for name, value in properties.items():

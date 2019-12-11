@@ -39,10 +39,12 @@ class MongoUserGroupsStore(MongoStore, UserGroupsStore):
         usergroup_data = self._upload_usergroup_as_yaml(filename)
 
         usergroups = UserGroups(usergroup_data)
-        self.add_document(usergroups)
-        YLogger.info(self, "Adding new usergroups to Mongo")
 
-        return 1, 1
+        YLogger.info(self, "Adding new usergroups to Mongo")
+        if self.add_document(usergroups) is True:
+            return 1, 1
+
+        return 0, 0
 
     def load_usergroups(self, usersgroupsauthorisor):
         collection = self.collection()

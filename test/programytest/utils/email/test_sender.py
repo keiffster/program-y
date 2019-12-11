@@ -36,7 +36,7 @@ class MockResult:
         self._items = items
 
     def items(self):
-        return self._items
+        return self._items.items()
 
 
 class MockEmailSender(EmailSender):
@@ -303,14 +303,13 @@ class EmailSenderTests(unittest.TestCase):
     def test_send_message_single_result(self):
         config = EmailConfiguration()
 
-        sender = MockEmailSender(config, mock_sender=MockSMTPServer("127.0.0.1", 80), result=MockResult([["Email", 1, "Failed"]]))
+        sender = MockEmailSender(config, mock_sender=MockSMTPServer("127.0.0.1", 80), result=MockResult({1: "Failed"}))
 
         sender.send("fred@west.com", "New patio", "Do you need any help with the slabs?")
 
     def test_send_message_multi_result(self):
         config = EmailConfiguration()
 
-        sender = MockEmailSender(config, mock_sender=MockSMTPServer("127.0.0.1", 80), result=MockResult([["Email", 1, "Failed"],
-                                                                                                         ["Email", 2, "Bad"]]))
+        sender = MockEmailSender(config, mock_sender=MockSMTPServer("127.0.0.1", 80), result=MockResult({1: "Failed", 2: "Bad"}))
 
         sender.send("fred@west.com", "New patio", "Do you need any help with the slabs?")

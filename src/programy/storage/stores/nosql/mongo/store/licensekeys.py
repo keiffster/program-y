@@ -32,6 +32,10 @@ class MongoLicenseKeysStore(MongoStore, LicenseStore):
     def collection_name(self):
         return MongoLicenseKeysStore.LICENSEKEYS
 
+    def add_licensekey(self, key_name, key):
+        licensekey = LicenseKey(name=key_name, key=key)
+        return self.add_document(licensekey)
+
     def load(self, collector, name=None):
         del name
         self.load_all(collector)
@@ -58,23 +62,21 @@ class MongoLicenseKeysStore(MongoStore, LicenseStore):
 
     def _process_line(self, line, verbose=False):
         line = line.strip()
+        result = False
         if line.startswith('#') is False:
             splits = line.split("=")
             if len(splits) > 1:
                 key_name = splits[0].strip()
                 # If key has = signs in it, then combine all elements past the first
                 key = "".join(splits[1:]).strip()
+                result = self.add_licensekey(key_name, key)
                 if verbose is True:
                     outputLog(self, "%s = %s" % (key_name, key))        # pragma: no cover
-
-                licensekey = LicenseKey(name=key_name, key=key)
-                self.add_document(licensekey)
-                return True
 
             else:
                 YLogger.warning(self, "Invalid license key [%s]", line)
 
-        return False
+        return result
 
     def upload_from_file(self, filename, fileformat=Store.TEXT_FORMAT, commit=True, verbose=False):
         YLogger.info(self, "Uploading license keys to Mongo [%s]", filename)

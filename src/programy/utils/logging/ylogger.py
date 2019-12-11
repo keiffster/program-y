@@ -18,7 +18,7 @@ import logging
 import traceback
 
 
-class YLoggerSnapshot:
+class YLoggerSnapshot:  # pragma: no cover
 
     def __init__(self, criticals=0, fatals=0, errors=0, exceptions=0, warnings=0, infos=0, debugs=0):
         self._criticals = criticals
@@ -46,7 +46,7 @@ class YLoggerSnapshot:
         }
 
 
-class YLogger:
+class YLogger:  # pragma: no cover
     CRITICALS = 0
     FATALS = 0
     ERRORS = 0
@@ -82,17 +82,22 @@ class YLogger:
                 log_type = caller.ylogger_type()
                 if log_type == 'client':
                     return "[%s] - %s" % (caller.id, message)
+
                 elif log_type == 'bot':
                     return "[%s] [%s] - %s" % (caller.client.id if caller.client is not None else "",
                                                caller.id, message)
+
                 elif log_type == 'brain':
                     clientid = ""
                     botid = ""
                     if caller.bot is not None:
                         if caller.bot.client is not None:
                             clientid = caller.bot.client.id
+
                         botid = caller.bot.id
+
                     return "[%s] [%s] [%s] - %s" % (clientid, botid, caller.id, message)
+
                 elif log_type == 'context':
                     return "[%s] [%s] [%s] [%s] - %s" % (caller.client.id if caller.client is not None else "",
                                                          caller.bot.id if caller.bot is not None else "",
@@ -101,34 +106,58 @@ class YLogger:
         return message
 
     @staticmethod
+    def critical_enabled():
+        return logging.getLogger().isEnabledFor(logging.CRITICAL)
+
+    @staticmethod
+    def fatal_enabled():
+        return logging.getLogger().isEnabledFor(logging.FATAL)
+
+    @staticmethod
+    def error_enabled():
+        return logging.getLogger().isEnabledFor(logging.ERROR)
+
+    @staticmethod
+    def warning_enabled():
+        return logging.getLogger().isEnabledFor(logging.WARNING)
+
+    @staticmethod
+    def info_enabled():
+        return logging.getLogger().isEnabledFor(logging.INFO)
+
+    @staticmethod
+    def debug_enabled():
+        return logging.getLogger().isEnabledFor(logging.DEBUG)
+
+    @staticmethod
     def critical(caller, message, *args, **kwargs):
         YLogger.CRITICALS += 1
-        if logging.getLogger().isEnabledFor(logging.CRITICAL):
+        if YLogger.critical_enabled():
             logging.critical(YLogger.format_message(caller, message), *args, **kwargs)
 
     @staticmethod
     def fatal(caller, message, *args, **kwargs):
         YLogger.FATALS += 1
-        if logging.getLogger().isEnabledFor(logging.FATAL):
+        if YLogger.fatal_enabled():
             logging.fatal(YLogger.format_message(caller, message), *args, **kwargs)
 
     @staticmethod
     def error(caller, message, *args, **kwargs):
         YLogger.ERRORS += 1
-        if logging.getLogger().isEnabledFor(logging.ERROR):
+        if YLogger.error_enabled():
             logging.error(YLogger.format_message(caller, message), *args, **kwargs)
 
     @staticmethod
     def exception_nostack(caller, message, exception, *args, **kwargs):
         YLogger.EXCEPTIONS += 1
-        if logging.getLogger().isEnabledFor(logging.ERROR):
+        if YLogger.error_enabled():
             excep_msg = "%s [%s]" % (message, str(exception))
             logging.error(YLogger.format_message(caller, excep_msg), *args, **kwargs)
 
     @staticmethod
     def exception(caller, message, exception, *args, **kwargs):
         YLogger.EXCEPTIONS += 1
-        if logging.getLogger().isEnabledFor(logging.ERROR):
+        if YLogger.error_enabled():
             excep_msg = "%s [%s]" % (message, str(exception))
             logging.error(YLogger.format_message(caller, excep_msg), *args, **kwargs)
             tb_lines = [line.rstrip('\n') for line in
@@ -139,19 +168,19 @@ class YLogger:
     @staticmethod
     def warning(caller, message, *args, **kwargs):
         YLogger.WARNINGS += 1
-        if logging.getLogger().isEnabledFor(logging.WARNING):
+        if YLogger.warning_enabled():
             logging.warning(YLogger.format_message(caller, message), *args, **kwargs)
 
     @staticmethod
     def info(caller, message, *args, **kwargs):
         YLogger.INFOS += 1
-        if logging.getLogger().isEnabledFor(logging.INFO):
+        if YLogger.info_enabled():
             logging.info(YLogger.format_message(caller, message), *args, **kwargs)
 
     @staticmethod
     def debug(caller, message, *args, **kwargs):
         YLogger.DEBUGS += 1
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
+        if YLogger.debug_enabled():
             logging.debug(YLogger.format_message(caller, message), *args, **kwargs)
 
     @staticmethod

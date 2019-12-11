@@ -145,6 +145,44 @@ class MapStoreAsserts(unittest.TestCase):
         store.empty_named('TESTMAP')
 
         map_collection.empty()
-        store.load(map_collection, 'TESTMAP')
+        self.assertFalse(store.load(map_collection, 'TESTMAP'))
 
         self.assertFalse(map_collection.contains('TESTMAP'))
+
+    def assert_add_to_map_overwrite_existing(self, store):
+        store.add_to_map("TESTMAP", "key1", "value1", overwrite_existing=True)
+        store.add_to_map("TESTMAP", "key2", "value2", overwrite_existing=True)
+        store.add_to_map("TESTMAP", "key2", "value3", overwrite_existing=True)
+
+        map_collection = MapCollection()
+        store.load(map_collection, 'TESTMAP')
+
+        self.assertEqual(1, len(map_collection.maps.keys()))
+        self.assertTrue("TESTMAP" in map_collection.maps)
+        self.assertTrue("val1", map_collection.maps['TESTMAP']['key1'])
+        self.assertTrue("val3", map_collection.maps['TESTMAP']['key2'])
+
+    def assert_add_to_map_no_overwrite_existing(self, store):
+
+        store.add_to_map("TESTMAP", "key1", "value1", overwrite_existing=False)
+        store.add_to_map("TESTMAP", "key2", "value2", overwrite_existing=False)
+        store.add_to_map("TESTMAP", "key2", "value3", overwrite_existing=False)
+
+        map_collection = MapCollection()
+        store.load(map_collection, 'TESTMAP')
+
+        self.assertEqual(1, len(map_collection.maps.keys()))
+        self.assertTrue("TESTMAP" in map_collection.maps)
+        self.assertTrue("val1", map_collection.maps['TESTMAP']['key1'])
+        self.assertTrue("val2", map_collection.maps['TESTMAP']['key2'])
+
+    def assert_load_no_map_found(self, store):
+        store.add_to_map("TESTMAP", "key1", "value1", overwrite_existing=False)
+        store.add_to_map("TESTMAP", "key2", "value2", overwrite_existing=False)
+        store.add_to_map("TESTMAP", "key2", "value3", overwrite_existing=False)
+
+        map_collection = MapCollection()
+        self.assertTrue(store.load(map_collection, 'TESTMAP'))
+
+        map_collection2 = MapCollection()
+        self.assertFalse(store.load(map_collection2, 'TESTMAP2'))

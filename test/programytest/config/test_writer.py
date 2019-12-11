@@ -47,6 +47,7 @@ class ConfigurationWriterTests(unittest.TestCase):
 
     def test_execute_no_clients(self):
         args = unittest.mock.Mock()
+        args.clients = None
         with self.assertRaises(Exception):
             writer = MockConfigurationWriter()
             writer.execute(args)

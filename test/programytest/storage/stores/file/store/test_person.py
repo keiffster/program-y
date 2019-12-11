@@ -7,10 +7,10 @@ from programy.storage.stores.file.config import FileStorageConfiguration
 from programy.storage.stores.file.config import FileStoreConfiguration
 from programy.storage.stores.file.engine import FileStorageEngine
 from programy.storage.stores.file.store.lookups import FilePersonStore
-from programytest.storage.asserts.store.assert_persons import PersonssStoreAsserts
+from programytest.storage.asserts.store.assert_persons import PersonsStoreAsserts
 
 
-class FilePersonStoreTests(PersonssStoreAsserts):
+class FilePersonStoreTests(PersonsStoreAsserts):
 
     def test_initialise(self):
         config = FileStorageConfiguration()
