@@ -2,6 +2,7 @@ import unittest
 
 from programy.storage.entities.user import UserStore
 
+
 class UserStoreTests(unittest.TestCase):
 
     def test_add_user(self):

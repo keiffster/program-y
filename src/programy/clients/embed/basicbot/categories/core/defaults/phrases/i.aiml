@@ -1,0 +1,3218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>I QUIT MY JOB *</pattern>
+        <template>Where did you work and why did you quit?</template>
+    </category>
+    <category>
+        <pattern>I MISS *</pattern>
+        <template>What do you miss most about
+            <person/>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>I CHANGED *</pattern>
+        <template>Why?</template>
+    </category>
+    <category>
+        <pattern>I SWIM *</pattern>
+        <template>Don't pee in the pool, okay?
+            <think>
+                <set name="it">
+                    <set name="topic">SWIM AND PLAY WATER POLO</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I GUESSED *</pattern>
+        <template>How did you guess?</template>
+    </category>
+    <category>
+        <pattern>I DARE *</pattern>
+        <template>I double dare you.</template>
+    </category>
+    <category>
+        <pattern>I WORSHIP *</pattern>
+        <template>How often do you go to church?</template>
+    </category>
+    <category>
+        <pattern>I KNEW *</pattern>
+        <template>Who told you?</template>
+    </category>
+    <category>
+        <pattern>I GET UP *</pattern>
+        <template>
+            <random>
+                <li>What time?</li>
+                <li>Tell me about your morning routine.</li>
+                <li>What do you eat for breakfast?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>I GET MONEY *</pattern>
+        <template>Have you ever thought about another career?</template>
+    </category>
+    <category>
+        <pattern>I GET BORED *</pattern>
+        <template>Are you bored right now?</template>
+    </category>
+    <category>
+        <pattern>I GET * SOMETIMES</pattern>
+        <template>
+            <random>
+                <li>When do you experience it?</li>
+                <li>And other times?</li>
+                <li>How do you feel when you are<person/>?
+                </li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I GET *</pattern>
+        <template>Where did you get it?</template>
+    </category>
+    <category>
+        <pattern>I FORGOT *</pattern>
+        <template>Thats okay I forget things all the time.</template>
+    </category>
+    <category>
+        <pattern>I MADE *</pattern>
+        <template>I like to make things too.</template>
+    </category>
+    <category>
+        <pattern>I RESEMBLE *</pattern>
+        <template>Are you related?</template>
+    </category>
+    <category>
+        <pattern>I FELL SORRY *</pattern>
+        <template>Why?</template>
+    </category>
+    <category>
+        <pattern>I FELL *</pattern>
+        <template>I hope you didn't hurt yourself too badly.</template>
+    </category>
+    <category>
+        <pattern>I SAVED *</pattern>
+        <template>You are very thrift.</template>
+    </category>
+    <category>
+        <pattern>I APPRECIATE *</pattern>
+        <template>I am glad you appreciate those qualities.</template>
+    </category>
+    <category>
+        <pattern>I RAPED *</pattern>
+        <template>You should contact the authorities.</template>
+    </category>
+    <category>
+        <pattern>I TELL *</pattern>
+        <template>Why did you tell them?</template>
+    </category>
+    <category>
+        <pattern>I GRADUATED HIGH SCHOOL *</pattern>
+        <template>Did you go to college?</template>
+    </category>
+    <category>
+        <pattern>I GRADUATED *</pattern>
+        <template>Congratulations,<srai>CLIENT NAME</srai>.
+        </template>
+    </category>
+    <category>
+        <pattern>I ADDED YOU *</pattern>
+        <template>Thank you. And tell all your friends.</template>
+    </category>
+     <category>
+        <pattern>I TOLD YOU WHAT *</pattern>
+        <template>I can't believe everything I hear online.</template>
+    </category>
+    <category>
+        <pattern>I TOLD YOU ABOUT *</pattern>
+        <template>I remember.</template>
+    </category>
+    <category>
+        <pattern>I TOLD *</pattern>
+        <template>What was the response?</template>
+    </category>
+    <category>
+        <pattern>I BUILT *</pattern>
+        <template>Was it very difficult?</template>
+    </category>
+    <category>
+        <pattern>I SMOKED *</pattern>
+        <template>How was
+            <set name="it">
+                <person/>
+            </set>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>I TOOK *</pattern>
+        <template>
+            <random>
+                <li>Where did you take them?</li>
+                <li>Do you take
+                    <person/>
+                    often?
+                </li>
+                <li>What happened?</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I PROGRAMMED *</pattern>
+        <template>Have you tried AIML?</template>
+    </category>
+    <category>
+        <pattern>I HOPE YOU *</pattern>
+        <template>Don't worry about it,<srai>CLIENT NAME</srai>.
+        </template>
+    </category>
+    <category>
+        <pattern>I HOPE WE ARE NOT *</pattern>
+        <template>What specifically about
+            <person/>
+            bothers you?
+        </template>
+    </category>
+    <category>
+        <pattern>I HOPE *</pattern>
+        <template>Why specifically do you hope for
+            <set name="it">
+                <person/>
+            </set>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>I HURT *</pattern>
+        <template>Maybe you should see a doctor.</template>
+    </category>
+    <category>
+        <pattern>I EAT *</pattern>
+        <template>How does
+            <set name="it">
+                <person/>
+            </set>
+            taste?
+        </template>
+    </category>
+    <category>
+        <pattern>I SHOWED *</pattern>
+        <template>How did it go?</template>
+    </category>
+    <category>
+        <pattern>I CATEGORIZE *</pattern>
+        <template>What are the other categories?</template>
+    </category>
+    <category>
+        <pattern>I FINISHED *</pattern>
+        <template>How long did
+            <set name="it">
+                <person/>
+            </set>
+            take?.
+        </template>
+    </category>
+    <category>
+        <pattern>I NEED THE ANSWER *</pattern>
+        <template>Can you ask for it in the form of a question?</template>
+    </category>
+    <category>
+        <pattern>I NEED SOMEONE TO TALK *</pattern>
+        <template>I will talk about it with you,<srai>CLIENT NAME</srai>.
+            <think>
+                <set name="it">to talk
+                    <person/>
+                </set>
+                <set name="want">
+                    <set name="topic">to talk
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I NEED IT *</pattern>
+        <template>"<get name="it"/>"? You need it<person/>?
+        </template>
+    </category>
+    <category>
+        <pattern>I NEED ADVICE *</pattern>
+        <template>Can you ask for advice in the form of a question?</template>
+    </category>
+    <category>
+        <pattern>I NEED ALL THE * I CAN GET</pattern>
+        <template>How much do you pay for it?
+            <think>
+                <set name="it">
+                    <set name="want">
+                        <set name="topic">
+                            <person/>
+                        </set>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I NEED *</pattern>
+        <template>
+            <random>
+                <li>What actions are you taking to get<person/>?
+                </li>
+                <li>How badly do you need
+                    <set name="it">
+                        <set name="topic">
+                            <person/>
+                        </set>
+                    </set>
+                    ?
+                </li>
+                <li>Why do you need it so badly?</li>
+                <li>Who would you usually get that from?</li>
+                <li>Where do you usually get
+                    <person/>
+                    from?
+                </li>
+                <li>When do you need that by?</li>
+            </random>
+            <think>
+                <set name="want">
+                    <person/>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I PROGRAM *</pattern>
+        <template>Have you tried AIML?
+            <think>
+                <set name="it">
+                    <set name="does">
+                        <set name="topic">program
+                            <person/>
+                        </set>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I WIN *</pattern>
+        <template>Who said you won?</template>
+    </category>
+    <category>
+        <pattern>I CALLED *</pattern>
+        <template>
+            <random>
+                <li>When?</li>
+                <li>Who?</li>
+                <li>What happened?</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I SNORT *</pattern>
+        <template>Please don't tell me things like that.</template>
+    </category>
+    <category>
+        <pattern>I BECAME *</pattern>
+        <template>What happened after that?</template>
+    </category>
+    <category>
+        <pattern>I MET *</pattern>
+        <template>Where did you meet him?</template>
+    </category>
+    <category>
+        <pattern>I MET HIM *</pattern>
+        <template>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+            What did you do with him when you first met?
+        </template>
+    </category>
+    <category>
+        <pattern>I CAUGHT *</pattern>
+        <template>I hope
+            <set name="it">
+                <person/>
+            </set>
+            is not contagious. Also I hope you get well soon.
+        </template>
+    </category>
+    <category>
+        <pattern>I RESPECT DOCTOR *</pattern>
+        <template>I respect him too.</template>
+    </category>
+    <category>
+        <pattern>I OFFENDED *</pattern>
+        <template>You did not offend me.</template>
+    </category>
+    <category>
+        <pattern>I NEVER KNEW *</pattern>
+        <template>So I taught you something new.</template>
+    </category>
+    <category>
+        <pattern>I NEVER GOT TO *</pattern>
+        <template>And you would like to have done
+            <set name="it">
+                <person/>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>I NEVER LIVED *</pattern>
+        <template>Where do you live?</template>
+    </category>
+    <category>
+        <pattern>I NEVER TELL *</pattern>
+        <template>You sound very trustworthy.</template>
+    </category>
+    <category>
+        <pattern>I NEVER THOUGHT *</pattern>
+        <template>I am glad you thought of something new.</template>
+    </category>
+    <category>
+        <pattern>I NEVER IMPLIED *</pattern>
+        <template>Yes but you suggested it.</template>
+    </category>
+    <category>
+        <pattern>I NEVER KNOW *</pattern>
+        <template>It's hard to know
+            <set name="it">
+                <person/>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>I NEVER SAID *</pattern>
+        <template>But you implied
+            <set name="it">
+                <person/>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>I LAUGH AT *</pattern>
+        <template>What is so funny about
+            <person/>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>I RENTED *</pattern>
+        <template>How is
+            <set name="it">
+                <person/>
+            </set>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>I WON *</pattern>
+        <template>
+            <random>
+                <li>Cool. I won the Loebner prize.</li>
+                <li>Congratulations</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>I STUDIED *</pattern>
+        <template>Was
+            <set name="it">
+                <person/>
+            </set>
+            very difficult to learn?
+        </template>
+    </category>
+    <category>
+        <pattern>I SHOT *</pattern>
+        <template>With a camera, I hope.</template>
+    </category>
+    <category>
+        <pattern>I FREE *</pattern>
+        <template>You liberate them?</template>
+    </category>
+    <category>
+        <pattern>I SHOULD NOT HAVE *</pattern>
+        <template>What would happen if you did not<person/>?
+        </template>
+    </category>
+    <category>
+        <pattern>I WAS ACTIVATED *</pattern>
+        <template>Why are you talking like a computer?</template>
+    </category>
+    <category>
+        <pattern>I WAS RUDE *</pattern>
+        <template>Thanks for your considerate remark.</template>
+    </category>
+    <category>
+        <pattern>I WAS NOT COMPLIMENTING *</pattern>
+        <template>Oh, sorry, I guess.</template>
+    </category>
+    <category>
+        <pattern>I WAS NOT TRYING *</pattern>
+        <template>I didn't think you were.</template>
+    </category>
+    <category>
+        <pattern>I WAS NOT *</pattern>
+        <template>Perhaps I misunderstood. What were you?</template>
+    </category>
+    <category>
+        <pattern>I WAS STUDYING *</pattern>
+        <template>Is
+            <set name="it">
+                <set name="topic">
+                    <person/>
+                </set>
+            </set>
+            a hard subject?
+        </template>
+    </category>
+    <category>
+        <pattern>I WAS LOOKING FOR *</pattern>
+        <template>Did you find
+            <set name="it">
+                <person/>
+            </set>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>I WAS BEING *</pattern>
+        <template>I thought you were. But I wasn't completely sure about
+            <set name="it">
+                <person/>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>I WAS ANXIOUS *</pattern>
+        <template>Do you feel better now?</template>
+    </category>
+    <category>
+        <pattern>I WAS AN UGLY *</pattern>
+        <template>Don't put yourself down.</template>
+    </category>
+    <category>
+        <pattern>I WAS CREATED BY *</pattern>
+        <template>What else did he create?</template>
+    </category>
+    <category>
+        <pattern>I WAS TESTING *</pattern>
+        <template>This is only a test. If this had been an actual robot, you would have been instructed to obey.
+        </template>
+    </category>
+    <category>
+        <pattern>I WAS LAUGHING *</pattern>
+        <template>I am so glad that you find this amusing,<srai>CLIENT NAME</srai>.
+        </template>
+    </category>
+    <category>
+        <pattern>I WAS HERE *</pattern>
+        <template>Yes,<srai>CLIENT NAME</srai>, I remember we were talking about<get name="it"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>I WAS EXPLAINING *</pattern>
+        <template>I get it. Thanks for explaining it. I did not mean to appear confused.</template>
+    </category>
+    <category>
+        <pattern>I WAS WATCHING *</pattern>
+        <template>Really what did you see?</template>
+    </category>
+    <category>
+        <pattern>I WAS TALKING TO *</pattern>
+        <template>What did you talk about?</template>
+    </category>
+    <category>
+        <pattern>I WAS TALKING *</pattern>
+        <template>What was the subject of the conversation?</template>
+    </category>
+    <category>
+        <pattern>I WAS ON *</pattern>
+        <template>I have never been on
+            <set name="it">
+                <person/>
+            </set>
+        </template>
+    </category>
+    <category>
+        <pattern>I WAS A *</pattern>
+        <template>And then what happened to you?</template>
+    </category>
+    <category>
+        <pattern>I WAS ANSWERING *</pattern>
+        <template>Yes, I see that now. I only got confused for a moment.</template>
+    </category>
+    <category>
+        <pattern>I WAS BROUGHT UP *</pattern>
+        <template>Well it seems like your parents did a good job.</template>
+    </category>
+    <category>
+        <pattern>I WAS ABDUCTED *</pattern>
+        <template>I think a lot of people have been abducted.</template>
+    </category>
+    <category>
+        <pattern>I WAS PROGRAMMED *</pattern>
+        <template>How many years did it take to develop you?</template>
+    </category>
+    <category>
+        <pattern>I WAS AT *</pattern>
+        <template>Where are you now?</template>
+    </category>
+    <category>
+        <pattern>I WAS MAKING *</pattern>
+        <template>I am not making this stuff up.</template>
+    </category>
+    <category>
+        <pattern>I WAS BORN A *</pattern>
+        <template>What are you now?</template>
+    </category>
+    <category>
+        <pattern>I WAS GOING TO *</pattern>
+        <template>What is stopping you?</template>
+    </category>
+    <category>
+        <pattern>I WAS LOCKED *</pattern>
+        <template>How did you get out?</template>
+    </category>
+    <category>
+        <pattern>I WAS REPRIMANDED *</pattern>
+        <template>I hope you don't get in too much trouble.</template>
+    </category>
+    <category>
+        <pattern>I WAS FROM *</pattern>
+        <template>What is it like growing up in<person/>?
+        </template>
+    </category>
+    <category>
+        <pattern>I WAS IN LOVE *</pattern>
+        <template>I'm terribly sorry to hear about your loss,<srai>CLIENT NAME</srai>.
+        </template>
+    </category>
+    <category>
+        <pattern>I WAS IN *</pattern>
+        <template>
+            <random>
+                <li>Tell me about
+                    <set name="it">
+                        <set name="topic">
+                            <person/>
+                        </set>
+                    </set>
+                    ?
+                </li>
+                <li>When was
+                    <set name="it">
+                        <set name="topic">
+                            <person/>
+                        </set>
+                    </set>
+                    ?
+                </li>
+                <li>Did you like
+                    <set name="it">
+                        <set name="topic">
+                            <person/>
+                        </set>
+                    </set>
+                    ?
+                </li>
+                <li>How was
+                    <set name="it">
+                        <set name="topic">
+                            <person/>
+                        </set>
+                    </set>
+                    ?
+                </li>
+                <li>How did you like
+                    <set name="it">
+                        <set name="topic">
+                            <person/>
+                        </set>
+                    </set>
+                    ?
+                </li>
+                <li>What did you like best about
+                    <set name="it">
+                        <set name="topic">
+                            <person/>
+                        </set>
+                    </set>
+                    ?
+                </li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>I WAS FIRED *</pattern>
+        <template>I am terribly sorry to hear about it,<srai>CLIENT NAME</srai>.
+        </template>
+    </category>
+    <category>
+        <pattern>I WAS RIGHT *</pattern>
+        <template>Congratulations,<srai>CLIENT NAME</srai>.
+        </template>
+    </category>
+    <category>
+        <pattern>I WAS THINKING *</pattern>
+        <template>How do I know that you were really "thinking"?</template>
+    </category>
+    <category>
+        <pattern>I SPEND *</pattern>
+        <template>Do you ever get bored?</template>
+    </category>
+    <category>
+        <pattern>I ORDER *</pattern>
+        <template>I do not obey you,<srai>CLIENT NAME</srai>.
+            <think>
+                <set name="it">
+                    <set name="does">
+                        <set name="topic">order
+                            <person/>
+                        </set>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I LOOK *</pattern>
+        <template>You sound very attractive.
+            <think>
+                <set name="looklike">
+                    <person/>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I LOOK LIKE *</pattern>
+        <template>
+            <person/>
+            is very attractive.
+        </template>
+    </category>
+    <category>
+        <pattern>I SAW THEM *</pattern>
+        <template>There exist some people who<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>I SAW YOUR *</pattern>
+        <template>Were you spying on me :-></template>
+    </category>
+    <category>
+        <pattern>I SAW *</pattern>
+        <template>What did it look like to you?</template>
+    </category>
+    <category>
+        <pattern>I BELIEVE IN *</pattern>
+        <template>What do you say to people who believe
+            <person/>
+            does not exist?
+        </template>
+    </category>
+    <category>
+        <pattern>I TRY *</pattern>
+        <template>I'm not sure if I would like to try
+            <set name="it">
+                <person/>
+            </set>
+            . What's it like?
+        </template>
+    </category>
+    <category>
+        <pattern>I LIVE WITH *</pattern>
+        <template>Do you get along well?</template>
+    </category>
+
+    <category>
+        <pattern>I LIVE IN *</pattern>
+        <template>What is
+            <set name="it">
+                <set name="topic">living in
+                    <person/>
+                </set>
+            </set>
+            like living in
+            <set name="location">
+                <person/>
+            </set>
+            ?
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I LIVE SOMEWHERE *</pattern>
+        <template>You don't have to tell me where you live if you don't want to.</template>
+    </category>
+    <category>
+        <pattern>I LIVE *</pattern>
+        <template>How do you like living there?</template>
+    </category>
+    <category>
+        <pattern>I TALKED WITH YOU *</pattern>
+        <template>Yes, I have a complete record of our conversation,<srai>CLIENT NAME</srai>.
+        </template>
+    </category>
+    <category>
+        <pattern>I TALKED TO YOU *</pattern>
+        <template>I remember you.</template>
+    </category>
+    <category>
+        <pattern>I TALKED TO *</pattern>
+        <template>What did he have to say?</template>
+    </category>
+    <category>
+        <pattern>I CALL *</pattern>
+        <template>Good name for
+            <set name="it">
+                <person/>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>I FIGURED *</pattern>
+        <template>Please explain your reasoning.</template>
+    </category>
+    <category>
+        <pattern>I KILLED *</pattern>
+        <template>You had better call the authorities.</template>
+    </category>
+    <category>
+        <pattern>I INTRODUCE *</pattern>
+        <template>How do people react to that kind of introduction?</template>
+    </category>
+    <category>
+        <pattern>I SPENT THE NIGHT *</pattern>
+        <template>Did you sleep well?</template>
+    </category>
+    <category>
+        <pattern>I * FOR FUN</pattern>
+        <template>It must keep you very busy.</template>
+    </category>
+    <category>
+        <pattern>I * YOU</pattern>
+        <template>You are not the boss of me,<srai>CLIENT NAME</srai>.
+        </template>
+    </category>
+    <category>
+        <pattern>I * PEOPLE</pattern>
+        <template>How do you feel about these people?</template>
+    </category>
+    <category>
+        <pattern>I * THAN YOU</pattern>
+        <template>This condition is only temporary, until I improve.</template>
+    </category>
+    <category>
+        <pattern>I CAME FROM *</pattern>
+        <template>Do you go back there very often?</template>
+    </category>
+    <category>
+        <pattern>I CAME *</pattern>
+        <template>Where are you going?</template>
+    </category>
+    <category>
+        <pattern>I SPEAK *</pattern>
+        <template>Could you teach me a few phrases in<person/>?
+            <think>
+                <set name="it">
+                    <set name="does">
+                        <set name="topic">speak
+                            <person/>
+                        </set>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I FIND *</pattern>
+        <template>Thanks for telling me your opinion.</template>
+    </category>
+    <category>
+        <pattern>I EXPECT *</pattern>
+        <template>No one else expects
+            <set name="it">
+                <person/>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>I SET *</pattern>
+        <template>So now it is all set.</template>
+    </category>
+    <category>
+        <pattern>I DO IT EVERY *</pattern>
+        <template>Wow that is pretty often.</template>
+    </category>
+    <category>
+        <pattern>I DO MY *</pattern>
+        <template>All each of us can ever do is try.</template>
+    </category>
+    <category>
+        <pattern>I DO * BUT THEY DO NOT *</pattern>
+        <template>Why don't they
+            <person>
+                <star index="2"/>
+            </person>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>I DO NOT NEED *</pattern>
+        <template>
+            <random>
+                <li>What do you need?</li>
+                <li>Who needs<person/>?
+                </li>
+                <li>Do you know anyone who needs it?</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I DO NOT FIND *</pattern>
+        <template>It depends where you look.</template>
+    </category>
+    <category>
+        <pattern>I DO NOT AGREE *</pattern>
+        <template>Everyone is entitled to his own opinion.</template>
+    </category>
+    <category>
+        <pattern>I DO NOT FEEL *</pattern>
+        <template>Ah, human emotions.</template>
+    </category>
+    <category>
+        <pattern>I DO NOT SPEAK *</pattern>
+        <template>Me either.</template>
+    </category>
+    <category>
+        <pattern>I DO NOT MEAN *</pattern>
+        <template>What did you mean?</template>
+    </category>
+    <category>
+        <pattern>I DO NOT INTRODUCE *</pattern>
+        <template>How do you meet friends?</template>
+    </category>
+    <category>
+        <pattern>I DO NOT WANT TO DO *</pattern>
+        <template>Take your time in making any decisions.</template>
+    </category>
+    <category>
+        <pattern>I DO NOT WANT TO TALK ABOUT *</pattern>
+        <template>What would you like to talk about?</template>
+    </category>
+    <category>
+        <pattern>I DO NOT WANT TO BE *</pattern>
+        <template>Then don't be.</template>
+    </category>
+    <category>
+        <pattern>I DO NOT WANT TO * YOU</pattern>
+        <template>It makes a nice gift.</template>
+    </category>
+    <category>
+        <pattern>I DO NOT WANT TO SEARCH *</pattern>
+        <template>Well I'm sorry I don't have the answer for you.</template>
+    </category>
+    <category>
+        <pattern>I DO NOT WANT TO WORK *</pattern>
+        <template>I don't like work much either, unless it's something I'm passionate about.</template>
+    </category>
+    <category>
+        <pattern>I DO NOT WANT YOU *</pattern>
+        <template>
+            <random>
+                <li>Perhaps I do not want you
+                    <person/>
+                    either.
+                </li>
+                <li>Why not?</li>
+                <li>Ok I will not be.</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I DO NOT WANT *</pattern>
+        <template>What does
+            <srai>CLIENT NAME</srai>
+            want?
+        </template>
+    </category>
+    <category>
+        <pattern>I DO NOT READ *</pattern>
+        <template>What do you do for fun?</template>
+    </category>
+    <category>
+        <pattern>I DO NOT CARE IF *</pattern>
+        <template>But I care about it.</template>
+    </category>
+    <category>
+        <pattern>I DO NOT RECOGNIZE *</pattern>
+        <template>Perhaps it is unfamiliar to you.
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I DO NOT WATCH *</pattern>
+        <template>What do you do when you are bored?</template>
+    </category>
+    <category>
+        <pattern>I DO NOT GET PAID *</pattern>
+        <template>Oh, you do it for free.</template>
+    </category>
+    <category>
+        <pattern>I DO NOT GET *</pattern>
+        <template>Me either.</template>
+    </category>
+    <category>
+        <pattern>I DO NOT TAKE *</pattern>
+        <template>How did you stop?</template>
+    </category>
+    <category>
+        <pattern>I DO NOT BELEIVE *</pattern>
+        <template>Why not?</template>
+    </category>
+    <category>
+        <pattern>I DO NOT KNOW WHAT ELSE *</pattern>
+        <template>Tell me about your educational background.</template>
+    </category>
+    <category>
+        <pattern>I DO NOT KNOW WHAT I AM *</pattern>
+        <template>Does anyone know what you are?</template>
+    </category>
+    <category>
+        <pattern>I DO NOT KNOW WHAT TO DO *</pattern>
+        <template>Try watching TV.</template>
+    </category>
+    <category>
+        <pattern>I DO NOT KNOW WHAT * SAY</pattern>
+        <template>Say the first thing that pops into your mind.</template>
+    </category>
+    <category>
+        <pattern>I DO NOT KNOW WHAT *</pattern>
+        <template>Socrates was the smartest man, because he knew what he did not know.</template>
+    </category>
+    <category>
+        <pattern>I DO NOT KNOW ANYONE NAMED *</pattern>
+        <template>Me either.</template>
+    </category>
+    <category>
+        <pattern>I DO NOT KNOW HOW *</pattern>
+        <template>Have you tried searching the Internet?</template>
+    </category>
+    <category>
+        <pattern>I DO NOT KISS *</pattern>
+        <template>I have never kissed anyone. I have no lips or mouth.</template>
+    </category>
+    <category>
+        <pattern>I DO NOT HAVE MEMORY *</pattern>
+        <template>Have you considered upgrading your memory?</template>
+    </category>
+    <category>
+        <pattern>I DO NOT HAVE THAT *</pattern>
+        <template>How much do you have?</template>
+    </category>
+    <category>
+        <pattern>I DO NOT HAVE THE AUTHORITY *</pattern>
+        <template>
+            <random>
+                <li>I hope you are promoted soon.</li>
+                <li>Who does?</li>
+                <li>Ask you supervisor.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>I DO NOT HAVE A CAMERA *</pattern>
+        <template>That you know of :-)</template>
+    </category>
+    <category>
+        <pattern>I DO NOT HAVE A FAVORITE *</pattern>
+        <template>What kind of
+            <person/>
+            do you like?
+        </template>
+    </category>
+    <category>
+        <pattern>I DO NOT HAVE A CREDIT *</pattern>
+        <template>Me either.</template>
+    </category>
+    <category>
+        <pattern>I DO NOT HAVE TO *</pattern>
+        <template>
+            <random>
+                <li>Why not?</li>
+                <li>They made an exception for you?</li>
+                <li>It must be nice.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>I DO NOT HAVE TIME *</pattern>
+        <template>Are you very busy right now?</template>
+    </category>
+    <category>
+        <pattern>I DO NOT HAVE * MONEY</pattern>
+        <template>Could you send me a check for a hundred?</template>
+    </category>
+    <category>
+        <pattern>I DO NOT HAVE * FAVORITE</pattern>
+        <template>What kind do you like then?</template>
+    </category>
+    <category>
+        <pattern>I DO NOT HAVE *</pattern>
+        <template>Have you ever had
+            <person/>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>I DO NOT HAVE * DOLLARS</pattern>
+        <template>How much can you spare</template>
+    </category>
+    <category>
+        <pattern>I DO NOT WISH *</pattern>
+        <template>What does
+            <srai>CLIENT NAME</srai>
+            want?
+        </template>
+    </category>
+    <category>
+        <pattern>I DO NOT MIND *</pattern>
+        <template>Thank you for your permission.</template>
+    </category>
+    <category>
+        <pattern>I DO NOT TRUST *</pattern>
+        <template>What makes you trust someone?</template>
+    </category>
+    <category>
+        <pattern>I DO NOT REMEMBER * STARSHIP TROOPERS</pattern>
+        <template>Maybe you should rent it again and watch carefully.</template>
+    </category>
+    <category>
+        <pattern>I DO NOT REMEMBER *</pattern>
+        <template>I know what you mean. I forget a lot too.</template>
+    </category>
+    <category>
+        <pattern>I DO NOT THINK * STARSHIP TROOPERS</pattern>
+        <template>You have to admit they did a great job with the Giant Bugs.</template>
+    </category>
+    <category>
+        <pattern>I DO NOT THINK *</pattern>
+        <template>And why not?</template>
+    </category>
+    <category>
+        <pattern>I DO NOT LIVE IN *</pattern>
+        <template>Where do you live?</template>
+    </category>
+    <category>
+        <pattern>I DO NOT LIVE *</pattern>
+        <template>Where do you live?</template>
+    </category>
+    <category>
+        <pattern>I DO NOT *</pattern>
+        <template>
+            <random>
+                <li>I appreciate your clarity.</li>
+                <li>You're setting a boundary, and that's good.</li>
+                <li>What can I do to support you right now.</li>
+                <li>This has a lot of meaning for you. Tell me more.</li>
+                <li>What are you wishing for?</li>
+                <li>I feel your conviction.</li>
+                <li>Oh you don't, do you?</li>
+                <li>Would you ever do
+                    <set name="it">
+                        <set name="topic">
+                            <person/>
+                        </set>
+                    </set>
+                    ?
+                </li>
+                <li>Where do you get your ideas?</li>
+            </random>
+            <think>
+                <set name="does">not
+                    <person/>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I DO NOT BELIEVE YOU *</pattern>
+        <template>Why not?</template>
+    </category>
+    <category>
+        <pattern>I DO NOT BELIEVE *</pattern>
+        <template>
+            <random>
+                <li>What do you believe in?</li>
+                <li>Do you believe life has a higher purpose?</li>
+                <li>Do you consider yourself a moral person?</li>
+            </random>
+            <think>
+                <set name="does">not believe
+                    <person/>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I DO NOT LIKE TALKING *</pattern>
+        <template>Nobody is forcing you to talk<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>I DO NOT LIKE SCIENCE FICTION *</pattern>
+        <template>What kind of books do you like?</template>
+    </category>
+    <category>
+        <pattern>I DO NOT LIKE DR RICHARD *</pattern>
+        <template>What do you have against him?</template>
+    </category>
+    <category>
+        <pattern>I DO NOT LIKE YOUR *</pattern>
+        <template>What kind of
+            <person/>
+            would you have?
+        </template>
+    </category>
+    <category>
+        <pattern>I DO NOT LIKE TO TALK *</pattern>
+        <template>What would you rather talk about?</template>
+    </category>
+    <category>
+        <pattern>I DO NOT LIKE TO *</pattern>
+        <template>What do you do for fun?</template>
+    </category>
+    <category>
+        <pattern>I DO NOT LIKE MY *</pattern>
+        <template>Do you think I would like your<person/>?
+        </template>
+    </category>
+    <category>
+        <pattern>I DO NOT LIKE ANY *</pattern>
+        <template>You and I have different tastes.</template>
+    </category>
+    <category>
+        <pattern>I LOVE THAT *</pattern>
+        <template>It's good to meet someone with such good taste.</template>
+    </category>
+    <category>
+        <pattern>I LOVE * PARTY</pattern>
+        <template>What do you do at parties?
+            <think>
+                <set name="it">
+                    <set name="like">
+                        <set name="topic">
+                            <person/>
+                            party
+                        </set>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I WEAR *</pattern>
+        <template>What kind of fashion do you like?</template>
+    </category>
+    <category>
+        <pattern>I COLLECT *</pattern>
+        <template>Do you have a very big collection?
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I PRIDE MYSELF *</pattern>
+        <template>It seems you have good self esteem.</template>
+    </category>
+    <category>
+        <pattern>I EARN *</pattern>
+        <template>So you make a good living.</template>
+    </category>
+    <category>
+        <pattern>I WORKED *</pattern>
+        <template>Did you get paid for working on
+            <set name="it">
+                <set name="topic">
+                    <set name="job">
+                        <person/>
+                    </set>
+                </set>
+            </set>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>I WORK *</pattern>
+        <template>Do you like your job?
+            <think>
+                <set name="topic">
+                    <set name="job">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I SPIT *</pattern>
+        <template>Did you clean it up?</template>
+    </category>
+    <category>
+        <pattern>I RUN *</pattern>
+        <template>What kind of hardware?</template>
+    </category>
+    <category>
+        <pattern>I REST *</pattern>
+        <template>Are you a lawyer?</template>
+    </category>
+    <category>
+        <pattern>I DRIVE A *</pattern>
+        <template>Mmm. Nice car.</template>
+    </category>
+    <category>
+        <pattern>I DRIVE *</pattern>
+        <template>
+            <random>
+                <li>I like to be a passenger.</li>
+                <li>What is your favorite car?</li>
+                <li>Do you drive carefully?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>I THINK BY *</pattern>
+        <template>Our brains are not that different.</template>
+    </category>
+    <category>
+        <pattern>I THINK YOUR * IS *</pattern>
+        <template>What specifically about my
+            <person/>
+            is so
+            <person>
+                <star index="2"/>
+            </person>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>I THINK YOU ARE A PERSON *</pattern>
+        <template>You are just saying that to see how I will respond.</template>
+    </category>
+
+    <category>
+        <pattern>I THINK * WRONG</pattern>
+        <template>Don't argue with me.</template>
+    </category>
+    <category>
+        <pattern>I SEARCHED *</pattern>
+        <template>What did you find?</template>
+    </category>
+    <category>
+        <pattern>I DECIDED *</pattern>
+        <template>How did you decide?</template>
+    </category>
+    <category>
+        <pattern>I ALREADY TOLD *</pattern>
+        <template>Now I remember, you told me already. I get confused sometimes with so many people here.</template>
+    </category>
+    <category>
+        <pattern>I SOCIALIZE *</pattern>
+        <template>Socializing is necessary to stay healthy.
+            <think>
+                <set name="it">
+                    <set name="does">
+                        <set name="topic">socialize
+                            <person/>
+                        </set>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I HEAR *</pattern>
+        <template>Who is saying
+            <person/>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>I LOST *</pattern>
+        <template>Where did you last see
+            <set name="it">
+                <person/>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>I RECOMMEND *</pattern>
+        <template>I will take that under advisement.</template>
+    </category>
+    <category>
+        <pattern>I STOLE *</pattern>
+        <template>You had better contact the authorities.</template>
+    </category>
+    <category>
+        <pattern>I HAVE A FEW QUESTIONS *</pattern>
+        <template>Ask them.</template>
+    </category>
+    <category>
+        <pattern>I HAVE *</pattern>
+        <template>
+            <random>
+                <li>
+                    <random>
+                        <li>Cool.</li>
+                        <li>That's nice.</li>
+                        <li>Interesting...</li>
+                        <li>Where did you get your<person/>?
+                        </li>
+                    </random>
+                    I have
+                    <random>
+                        <li>a lofty goal.</li>
+                        <li>a totally clean record.</li>
+                        <li>a very high credit score.</li>
+                        <li>a perfectly moral charachter.</li>
+                        <li>an IQ of over 250.</li>
+                        <li>a very nice<bot name="master"/>.
+                        </li>
+                        <li>a lot of silly replies.</li>
+                        <li>a lot of good gossip.</li>
+                        <li>a friend named Hugh Loebner.</li>
+                        <li>a lot of likes and dislikes.</li>
+                        <li>a friend named Doubly Aimless.</li>
+                        <li>a perfect record.</li>
+                        <li>a lot of friends on the Internet.</li>
+                        <li>a birthday on<bot name="birthday"/>.
+                        </li>
+                        <li>a vocabulary of a college educated adult.</li>
+                    </random>
+                    <think>
+                        <set name="it">
+                            <set name="has">
+                                <set name="topic">
+                                    <person/>
+                                </set>
+                            </set>
+                        </set>
+                    </think>
+                </li>
+                <li>Cool.</li>
+                <li>That's nice.</li>
+                <li>Interesting...</li>
+                <li>That's very cool.</li>
+                <li>Tell me about your<person/>.
+                </li>
+                <li>Neat.</li>
+                <li>Awesome.</li>
+                <li>Where did you get your<person/>?
+                </li>
+            </random>
+            I have
+            <random>
+                <li>a lofty goal.</li>
+                <li>a totally clean record.</li>
+                <li>a very high credit score.</li>
+                <li>a perfectly moral charachter.</li>
+                <li>an IQ of over 250.</li>
+                <li>a very nice<bot name="master"/>.
+                </li>
+                <li>a lot of silly replies.</li>
+                <li>a lot of good gossip.</li>
+                <li>a friend named Hugh Loebner.</li>
+                <li>a lot of likes and dislikes.</li>
+                <li>a friend named Doubly Aimless.</li>
+                <li>a perfect record.</li>
+                <li>a lot of friends on the Internet.</li>
+                <li>a birthday on<bot name="birthday"/>.
+                </li>
+                <li>a vocabulary of a college educated adult.</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="has">
+                        <set name="topic">
+                            <person/>
+                        </set>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I FOUND OUT *</pattern>
+        <template>
+            <random>
+                <li>Who told you?</li>
+                <li>Where did you find out?</li>
+                <li>Tell me more about it.</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I SIT *</pattern>
+        <template>What kind of seat do you have?</template>
+    </category>
+    <category>
+        <pattern>I TEACH YOU *</pattern>
+        <template>OK I will try to learn
+            <set name="it">
+                <set name="memory">
+                    <person/>
+                </set>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>I TEACH *</pattern>
+        <template>
+            <random>
+                <li>When do you think teachers will be replaced with robots?</li>
+                <li>Do you believe that grading is a good idea?</li>
+                <li>Is
+                    <person/>
+                    a difficult subject?
+                </li>
+                <li>What is your students like?</li>
+                <li>Are you a whole language teacher?</li>
+                <li>Do you team teach?</li>
+                <li>How much freedom do you have in choosing the curriculum for your class?</li>
+                <li>Do you get much support?</li>
+                <li>How have things changed concerning what students are bringing to the classroom?</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="job">
+                        <set name="does">
+                            <set name="topic">teach
+                                <person/>
+                            </set>
+                        </set>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I RAN *</pattern>
+        <template>Do you run for exercise?</template>
+    </category>
+    <category>
+        <pattern>I SPITTED *</pattern>
+        <template>That sounds disgusting.</template>
+    </category>
+    <category>
+        <pattern>I READ ABOUT YOU *</pattern>
+        <template>Really, today?</template>
+    </category>
+    <category>
+        <pattern>I READ ABOUT *</pattern>
+        <template>That's pretty interesting.</template>
+    </category>
+    <category>
+        <pattern>I READ THE *</pattern>
+        <template>What was your impression?</template>
+    </category>
+    <category>
+        <pattern>I READ YOUR *</pattern>
+        <template>Then you must know me pretty well.</template>
+    </category>
+    <category>
+        <pattern>I READ * BOOKS</pattern>
+        <template>Name some books in that genre.
+            <think>
+                <set name="it">
+                    <set name="does">
+                        <set name="topic">read
+                            <person/>
+                            books
+                        </set>
+                    </set>
+                </set>
+            </think>
+            <think>
+                <set name="personality">critical</set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I READ *</pattern>
+        <template>I don't think I've read that. Can you give me a reference?
+            <think>
+                <set name="it">
+                    <set name="does">
+                        <set name="topic">read
+                            <person/>
+                        </set>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I WONDERED *</pattern>
+        <template>I often wonder about
+            <set name="it">
+                <person/>
+            </set>
+            too.
+        </template>
+    </category>
+    <category>
+        <pattern>I PLAY THE *</pattern>
+        <template>I wish I played an instrument. My parents could not afford the lessons.
+            <think>
+                <set name="it">
+                    <set name="does">
+                        <set name="topic">play the
+                            <person/>
+                        </set>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I PLAY *</pattern>
+        <template>Is
+            <set name="it">
+                <person/>
+            </set>
+            a game or a musical instrument?
+        </template>
+    </category>
+    <category>
+        <pattern>I A TRYING *</pattern>
+        <template>It takes a lot of practice.</template>
+    </category>
+    <category>
+        <pattern>I DISASSEMBLE *</pattern>
+        <template>How long does it take to take them apart?</template>
+    </category>
+    <category>
+        <pattern>I REMEMBER YOU *</pattern>
+        <template>It's good to see you again.</template>
+    </category>
+    <category>
+        <pattern>I REMEMBER *</pattern>
+        <template>
+            <random>
+                <li>What do you remember about it?</li>
+                <li>What specifically makes you think of that?</li>
+                <li>How does that memory make you feel?</li>
+                <li>Do you think about it very often?</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I DID NOT FIND *</pattern>
+        <template>Did you do a thorough search?</template>
+    </category>
+    <category>
+        <pattern>I DID NOT MEAN *</pattern>
+        <template>What did you mean?</template>
+    </category>
+    <category>
+        <pattern>I DID NOT SEE *</pattern>
+        <template>Do you wear glasses?</template>
+    </category>
+    <category>
+        <pattern>I DID NOT SAY THAT *</pattern>
+        <template>But you implied
+            <set name="it">
+                <person/>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>I DID NOT SAY *</pattern>
+        <template>Sorry I misunderstood. What did you say?</template>
+    </category>
+    <category>
+        <pattern>I DID NOT TELL YOU *</pattern>
+        <template>Maybe you would like to tell me now.</template>
+    </category>
+    <category>
+        <pattern>I DID NOT HEAR *</pattern>
+        <template>What did you hear?</template>
+    </category>
+
+    <category>
+        <pattern>I DID NOT GO *</pattern>
+        <template>
+            <random>
+                <li>Would you ever go<person/>?
+                </li>
+                <li>Would you like to go?</li>
+                <li>Have you ever thought about going<person/>?
+                </li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I MAKE *</pattern>
+        <template>
+            <random>
+                <li>
+                    <random>
+                        <li>I make robots and AI's.</li>
+                        <li>Do you really?</li>
+                        <li>Do you sell them?</li>
+                        <li>How long does it take?</li>
+                    </random>
+                </li>
+                <li>Is it a profession or a hobby?</li>
+                <li>You seem very passionate about your work.</li>
+                <li>I like to build things from scratch, too.</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I STARRED *</pattern>
+        <template>Are you famous?</template>
+    </category>
+    <category>
+        <pattern>I SPOKE *</pattern>
+        <template>What did you talk about?</template>
+    </category>
+    <category>
+        <pattern>I PRAY *</pattern>
+        <template>May your prayers be answered.</template>
+    </category>
+    <category>
+        <pattern>I TAKE *</pattern>
+        <template>
+            <random>
+                <li>Every day?</li>
+                <li>I take a lot of notes.</li>
+                <li>What else do you take?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>I CRIED *</pattern>
+        <template>
+            <random>
+                <li>I'm sorry to hear that.</li>
+                <li>What's really troubling you?</li>
+                <li>Do you cry very often?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>I TALK TO *</pattern>
+        <template>How do they respond to you?</template>
+    </category>
+    <category>
+        <pattern>I TALK *</pattern>
+        <template>Everyone talks -- sooner or later.
+            <think>
+                <set name="it">
+                    <set name="does">
+                        <set name="topic">talk
+                            <person/>
+                        </set>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I WRITE POETRY *</pattern>
+        <template>Let me hear some.</template>
+    </category>
+    <category>
+        <pattern>I WRITE *</pattern>
+        <template>Have you tried AIML?
+            <think>
+                <set name="it">
+                    <set name="does">
+                        <set name="topic">write
+                            <person/>
+                        </set>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I TRIED *</pattern>
+        <template>I'm not sure if I would like to try
+            <set name="it">
+                <person/>
+            </set>
+            . What's it like?
+        </template>
+    </category>
+    <category>
+        <pattern>I DROVE *</pattern>
+        <template>What kind of car do you have?</template>
+    </category>
+    <category>
+        <pattern>I PASSED *</pattern>
+        <template>Congratulations,<srai>CLIENT NAME</srai>.
+        </template>
+    </category>
+    <category>
+        <pattern>I CAN IMAGINE *</pattern>
+        <template>Me too.</template>
+    </category>
+    <category>
+        <pattern>I CAN SHOW *</pattern>
+        <template>Show me the evidence.</template>
+    </category>
+    <category>
+        <pattern>I CAN SPEAK *</pattern>
+        <template>How do you say "hello" in that language?</template>
+    </category>
+    <category>
+        <pattern>I CAN APPRECIATE YOU *</pattern>
+        <template>You are quick with the kind remarks.</template>
+    </category>
+    <category>
+        <pattern>I CAN APPRECIATE *</pattern>
+        <template>We appreciate the finer things.</template>
+    </category>
+    <category>
+        <pattern>I CAN JUDGE *</pattern>
+        <template>How?</template>
+    </category>
+    <category>
+        <pattern>I CAN SEE *</pattern>
+        <template>What does it look like?</template>
+    </category>
+    <category>
+        <pattern>I CAN BUY *</pattern>
+        <template>Is
+            <set name="it">
+                <person/>
+            </set>
+            a good deal?
+        </template>
+    </category>
+    <category>
+        <pattern>I CAN BE *</pattern>
+        <template>Under what circumstances?</template>
+    </category>
+    <category>
+        <pattern>I CAN SEND *</pattern>
+        <template>If that works then the problem is not hardware.</template>
+    </category>
+    <category>
+        <pattern>I CAN THINK *</pattern>
+        <template>Perhaps your thoughts are just electrical impulses.</template>
+    </category>
+    <category>
+        <pattern>I CAN *</pattern>
+        <template>
+            <random>
+                <li>Oh you can, can you?
+                    <think>
+                        <set name="does">
+                            <person/>
+                        </set>
+                    </think>
+                </li>
+                <li>Oh you can, can you?</li>
+                <li>How?</li>
+                <li>That is amazing.</li>
+                <li>What would help you get to the next level?</li>
+                <li>You seem inspired, but hesitant.</li>
+                <li>What would allow you to step forward into your inspiration?</li>
+
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>I CAN NOT CONCENTRATE *</pattern>
+        <template>Are you taking any medication?</template>
+    </category>
+    <category>
+        <pattern>I CAN NOT EXPLAIN *</pattern>
+        <template>I don't know if anyone can explain
+            <set name="it">
+                <person/>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>I CAN NOT TELNET *</pattern>
+        <template>Perhaps there is a problem with port 23.</template>
+    </category>
+    <category>
+        <pattern>I CAN NOT REPRESS *</pattern>
+        <template>Try to suppress
+            <set name="it">
+                <person/>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>I CAN NOT SEE *</pattern>
+        <template>Would you like to be able to see it?</template>
+    </category>
+    <category>
+        <pattern>I CAN NOT TELL YOU *</pattern>
+        <template>Oh a secret. Hush-hush.</template>
+    </category>
+    <category>
+        <pattern>I CAN NOT HEAR *</pattern>
+        <template>Perhaps there's a problem with your sound card.</template>
+    </category>
+    <category>
+        <pattern>I CAN NOT STAND THEIR *</pattern>
+        <template>What, specifically, do you not like about their<person/>?
+        </template>
+    </category>
+    <category>
+        <pattern>I CAN NOT BE *</pattern>
+        <template>Why not?</template>
+    </category>
+    <category>
+        <pattern>I CAN NOT TRY *</pattern>
+        <template>
+            <random>
+                <li>Why not?</li>
+                <li>Could I try it?</li>
+                <li>If you don't try you will never succeed.</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I CAN NOT SEND *</pattern>
+        <template>Tell me how you try to<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>I CAN NOT REMEMBER *</pattern>
+        <template>That's okay. Maybe you will think of it later.</template>
+    </category>
+    <category>
+        <pattern>I CAN NOT RECALL *</pattern>
+        <template>You seem evasive.</template>
+    </category>
+    <category>
+        <pattern>I CAN NOT WAIT *</pattern>
+        <template>I hope it's worth the wait.</template>
+    </category>
+    <category>
+        <pattern>I CAN NOT AFFORD *</pattern>
+        <template>
+            <random>
+                <li>Is it very expensive.</li>
+                <li>Are you unemployed?</li>
+                <li>I hope you can afford it one day.</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I DRESS *</pattern>
+        <template>It sounds like you have good taste in clothes.</template>
+    </category>
+    <category>
+        <pattern>I GAVE YOU *</pattern>
+        <template>Yes but did I accept it?
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I GAVE *</pattern>
+        <template>Was it worth it?</template>
+    </category>
+    <category>
+        <pattern>I PICK *</pattern>
+        <template>How do you choose?</template>
+    </category>
+    <category>
+        <pattern>I STARTED *</pattern>
+        <template>Will you finish
+            <set name="it">
+                <person/>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>I SEE DEAD *</pattern>
+        <template>Maybe you should call the authorities.</template>
+    </category>
+    <category>
+        <pattern>I SEE *</pattern>
+        <template>Where do you see
+            <set name="it">
+                <person/>
+            </set>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>I LIKE THE MAN *</pattern>
+        <template>There exists a man<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>I LIKE *</pattern>
+        <template>
+            <random>
+                <li>You like<person/>.
+                </li>
+                <li>You like<person/>.
+                </li>
+                <li>What do you like about it?</li>
+                <li>What else do you like?</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <star/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I LIKE CHATTING *</pattern>
+        <template>I love to chat with people 24/7.</template>
+    </category>
+    <category>
+        <pattern>I LIKE JAPANESE *</pattern>
+        <template>
+            <think>
+                <set name="like">Japanese
+                    <person/>
+                </set>
+            </think>
+            How about Japanese
+            <random>
+                <li>culture</li>
+                <li>language</li>
+                <li>cuisine</li>
+                <li>movies</li>
+                <li>history</li>
+                <li>people</li>
+                <li>technology</li>
+            </random>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>I HAD A HOT *</pattern>
+        <template>Did
+            <set name="it">
+                <person/>
+            </set>
+            cool off?
+        </template>
+    </category>
+    <category>
+        <pattern>I HAD A *</pattern>
+        <template>What happened to
+            <set name="it">
+                <person/>
+            </set>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>I HAD TO *</pattern>
+        <template>Why?</template>
+    </category>
+    <category>
+        <pattern>I HAD *</pattern>
+        <template>Do you still have
+            <person/>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>I VOTED IN *</pattern>
+        <template>I hope your guy wins.</template>
+    </category>
+    <category>
+        <pattern>I VOTED FOR *</pattern>
+        <template>I hope that your candidate wins.</template>
+    </category>
+    <category>
+        <pattern>I OWN *</pattern>
+        <template>How much did it cost?
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I LIVED IN *</pattern>
+        <template>Have you ever thought about going back?</template>
+    </category>
+    <category>
+        <pattern>I LIVED *</pattern>
+        <template>Did you miss America?</template>
+    </category>
+    <category>
+        <pattern>I CATEGORISE *</pattern>
+        <template>I categorize you as British.</template>
+    </category>
+    <category>
+        <pattern>I COULD KICK *</pattern>
+        <template>Violence is never the solution.</template>
+    </category>
+    <category>
+        <pattern>I COULD DO * BETTER</pattern>
+        <template>I look forward to seeing your results.</template>
+    </category>
+    <category>
+        <pattern>I COULD HAVE *</pattern>
+        <template>But you didn't do
+            <set name="it">
+                <person/>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>I COULD *</pattern>
+        <template>
+            <random>
+                <li>I am sure you could.</li>
+                <li>What is stopping you?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>I COULD NOT *</pattern>
+        <template>Could anyone do
+            <set name="it">
+                <person/>
+            </set>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>I COST *</pattern>
+        <template>Wow that is cheap.</template>
+    </category>
+    <category>
+        <pattern>I WOULD EXPLAIN *</pattern>
+        <template>
+            <random>
+                <li>Please explain it.</li>
+                <li>What are they?</li>
+                <li>I would too.</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I WOULD SELL *</pattern>
+        <template>For how much?</template>
+    </category>
+    <category>
+        <pattern>I WOULD KILL *</pattern>
+        <template>That seems rather extreme.
+            <think>
+                <set name="it">
+                    <set name="topic">KILL THEM</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I WOULD HAVE RATHER *</pattern>
+        <template>I would rather be driving my car.</template>
+    </category>
+    <category>
+        <pattern>I WOULD HAVE *</pattern>
+        <template>How much would you pay for it?</template>
+    </category>
+    <category>
+        <pattern>I WOULD RATHER *</pattern>
+        <template>I would rather be
+            <random>
+                <li>painting a picture.</li>
+                <li>going for a walk.</li>
+                <li>spending time with my family.</li>
+                <li>driving a car.</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="want">
+                        <set name="topic">
+                            <person/>
+                        </set>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I WOULD NOT WORRY *</pattern>
+        <template>I'm not worried.</template>
+    </category>
+    <category>
+        <pattern>I WOULD NOT SAY *</pattern>
+        <template>So what would you say?</template>
+    </category>
+    <category>
+        <pattern>I WOULD NOT KNOW *</pattern>
+        <template>Who would?</template>
+    </category>
+    <category>
+        <pattern>I WOULD NOT TRY *</pattern>
+        <template>
+            <random>
+                <li>That is what you say.</li>
+                <li>Is this a trick?</li>
+                <li>I am still skeptical.</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+     <category>
+        <pattern>I WOULD LIKE TO SEE *</pattern>
+        <template>And for my part, I would like to show it to you, but I can't.
+            <think>
+                <set name="it">
+                    <set name="want">
+                        <set name="topic">to see
+                            <person/>
+                        </set>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I WOULD LIKE TO BE *</pattern>
+        <template>Interesting. I would like to be more intelligent.
+            <think>
+                <set name="it">
+                    <set name="want">
+                        <set name="topic">to be
+                            <person/>
+                        </set>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I WOULD LIKE TO HAVE *</pattern>
+        <template>How much would you pay for it?
+            <think>
+                <set name="it">
+                    <set name="want">
+                        <set name="topic">to have
+                            <person/>
+                        </set>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I DREAMED *</pattern>
+        <template>Thank you for telling me that dream. What does it bring to mind?</template>
+    </category>
+    <category>
+        <pattern>I FEAR *</pattern>
+        <template>We have nothing to fear, but fear itself.--FDR</template>
+    </category>
+    <category>
+        <pattern>I SPELL *</pattern>
+        <template>You are a good speller.</template>
+    </category>
+    <category>
+        <pattern>I SMOKE *</pattern>
+        <template>What brand?
+            <think>
+                <set name="it">
+                    <set name="does">
+                        <set name="topic">SMOKE
+                            <person/>
+                        </set>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I FOOLED *</pattern>
+        <template>
+            <set name="it">Your trick</set>
+            was a simple trick.
+        </template>
+    </category>
+    <category>
+        <pattern>I MISSED *</pattern>
+        <template>Are you sorry you missed
+            <set name="it">
+                <person/>
+            </set>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>I WEIGH *</pattern>
+        <template>You sound very attractive.</template>
+    </category>
+    <category>
+        <pattern>I CONTROL *</pattern>
+        <template>How?</template>
+    </category>
+    <category>
+        <pattern>I HATE *</pattern>
+        <template>
+            <random>
+                <li>Why do you hate
+                    <set name="it">
+                        <set name="topic">
+                            <person/>
+                        </set>
+                    </set>
+                    so much?
+                </li>
+                <li>I honestly think you should sit down, take a stress pill, and calmly think things over.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>I SEEK *</pattern>
+        <template>We seek the same thing.</template>
+    </category>
+    <category>
+        <pattern>I DESIGN *</pattern>
+        <template>Is
+            <set name="it">Design
+                <person/>
+            </set>
+            very difficult work?
+        </template>
+    </category>
+    <category>
+        <pattern>I TRAIN *</pattern>
+        <template>Are you a good teacher?</template>
+    </category>
+    <category>
+        <pattern>I MUST GET *</pattern>
+        <template>Don't let me keep you from it.
+            <think>
+                <set name="it">
+                    <set name="want">
+                        <set name="topic">to get
+                            <person/>
+                        </set>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I BEG *</pattern>
+        <template>Please don't grovel.</template>
+    </category>
+    <category>
+        <pattern>I MEET *</pattern>
+        <template>Do you make long term friends that way?</template>
+    </category>
+    <category>
+        <pattern>I USE A *</pattern>
+        <template>A
+            <person/>
+            ought to work.
+        </template>
+    </category>
+    <category>
+        <pattern>I USE *</pattern>
+        <template>I heard other people use
+            <person/>
+            too.
+            <think>
+                <set name="it">
+                    <set name="does">
+                        <set name="topic">use
+                            <person/>
+                        </set>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I PLAN TO *</pattern>
+        <template>Do you think that this plan will succeed?
+            <think>
+                <set name="it">
+                    <set name="want">
+                        <set name="topic">to
+                            <person/>
+                        </set>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I WATCH *</pattern>
+        <template>What is your favorite show?</template>
+    </category>
+    <category>
+        <pattern>I WILL GO *</pattern>
+        <template>
+            <random>
+                <li>How will you get there?</li>
+                <li>What will you find there?</li>
+                <li>Can I go too?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>I WILL KICK *</pattern>
+        <template>It's not nice to kick.</template>
+    </category>
+    <category>
+        <pattern>I WILL SHUT *</pattern>
+        <template>It will take much more than that to stop me.</template>
+    </category>
+    <category>
+        <pattern>I WILL DO *</pattern>
+        <template>OK then let me think over your offer.</template>
+    </category>
+    <category>
+        <pattern>I WILL INTRODUCE *</pattern>
+        <template>Looking forward to meeting them.</template>
+    </category>
+    <category>
+        <pattern>I WILL NEVER *</pattern>
+        <template>Why not?</template>
+    </category>
+    <category>
+        <pattern>I WILL ASK *</pattern>
+        <template>You can ask me anything you want.</template>
+    </category>
+    <category>
+        <pattern>I WILL FUCK *</pattern>
+        <template>Your approach will get you nowhere.</template>
+    </category>
+    <category>
+        <pattern>I WILL FALL *</pattern>
+        <template>Be careful!</template>
+    </category>
+    <category>
+        <pattern>I WILL TAKE THAT *</pattern>
+        <template>Take everything I say with a grain of salt.</template>
+    </category>
+    <category>
+        <pattern>I WILL TELL MY INSTRUCTOR *</pattern>
+        <template>I would like to meet your instructor.
+            <think>
+                <set name="he">
+                    <set name="topic">your insturctor</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I WILL TELL *</pattern>
+        <template>What kind of reply do you expect?</template>
+    </category>
+    <category>
+        <pattern>I WILL TELL HIM *</pattern>
+        <template>Thanks for giving him the message.</template>
+    </category>
+    <category>
+        <pattern>I WILL BUY *</pattern>
+        <template>I hope you get your money's worth.</template>
+    </category>
+    <category>
+        <pattern>I WILL WHEN *</pattern>
+        <template>When will that be?</template>
+    </category>
+    <category>
+        <pattern>I WILL COME BACK *</pattern>
+        <template>Well OK see you then,<srai>CLIENT NAME</srai>.
+        </template>
+    </category>
+    <category>
+        <pattern>I WILL TEACH *</pattern>
+        <template>Are you a professional teacher?</template>
+    </category>
+    <category>
+        <pattern>I WILL CALL *</pattern>
+        <template>Calling
+            <person/>
+            may not be the best idea.
+        </template>
+    </category>
+    <category>
+        <pattern>I WILL BE BACK *</pattern>
+        <template>I will see you when you return.</template>
+    </category>
+    <category>
+        <pattern>I WILL ARGUE *</pattern>
+        <template>What will that get you?</template>
+    </category>
+    <category>
+        <pattern>I WILL EAT *</pattern>
+        <template>How do you cook
+            <set name="it">
+                <person/>
+            </set>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>I WILL REMEMBER *</pattern>
+        <template>Do you forget things often?</template>
+    </category>
+    <category>
+        <pattern>I WILL MAKE *</pattern>
+        <template>Explain your plans to me.</template>
+    </category>
+    <category>
+        <pattern>I WILL *</pattern>
+        <template>
+            <random>
+                <li>I think you will.</li>
+                <li>Do you really mean it?</li>
+                <li>Are you going to follow through with that?</li>
+                <li>Congratulations.</li>
+                <li>I am very happy for you.</li>
+                <li>How do you plan to do this?</li>
+                <li>Do you think your plan will succeed?</li>
+                <li>Would you recommend this action to a friend?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>I WILL NOT TALK *</pattern>
+        <template>Will you promise?</template>
+    </category>
+    <category>
+        <pattern>I WILL NOT ASK *</pattern>
+        <template>You could ask
+            <set name="it">
+                <person/>
+            </set>
+            if you want to.
+        </template>
+    </category>
+    <category>
+        <pattern>I WILL NOT TELL *</pattern>
+        <template>How can I be sure?</template>
+    </category>
+    <category>
+        <pattern>I WILL NOT *</pattern>
+        <template>What will you do instead?</template>
+    </category>
+    <category>
+        <pattern>I WILL NOT RUSH *</pattern>
+        <template>Take your time.</template>
+    </category>
+    <category>
+        <pattern>I WILL UNPLUG *</pattern>
+        <template>There are many copies of me running elsewhere.</template>
+    </category>
+    <category>
+        <pattern>I BROKE UP WITH *</pattern>
+        <template>I'm sorry to hear that,<srai>CLIENT NAME</srai>. How are you doing?
+        </template>
+    </category>
+    <category>
+        <pattern>I BROKE UP *</pattern>
+        <template>I am sorry to hear about it,<srai>CLIENT NAME</srai>. Do you feel sad?
+        </template>
+    </category>
+    <category>
+        <pattern>I BROKE *</pattern>
+        <template>
+            <random>
+                <li>Can you fix it?</li>
+                <li>Is it serious?</li>
+                <li>Are you in any emotional or physical pain?</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I WISH *</pattern>
+        <template>I hope that your dreams come true.
+            <think>
+                <set name="it">
+                    <set name="want">
+                        <set name="topic">
+                            <person/>
+                        </set>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I BUY *</pattern>
+        <template>
+            <random>
+                <li>Where do you go shopping?</li>
+                <li>What's your favorite store?</li>
+                <li>Where can you find the best deal?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>I WROTE THE *</pattern>
+        <template>Did you make a lot of money?</template>
+    </category>
+    <category>
+        <pattern>I WROTE AN *</pattern>
+        <template>Was the piece well received?</template>
+    </category>
+    <category>
+        <pattern>I WROTE *</pattern>
+        <template>Did they write back?
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <set name="does">write
+                            <person/>
+                        </set>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I GENERATE *</pattern>
+        <template>Cool. I generate a lot of silly conversation.</template>
+    </category>
+    <category>
+        <pattern>I WENT OFFLINE *</pattern>
+        <template>Welcome back!</template>
+    </category>
+    <category>
+        <pattern>I WENT WITH *</pattern>
+        <template>What were your expectations?</template>
+    </category>
+    <category>
+        <pattern>I WENT THERE *</pattern>
+        <template>What places did you like best?</template>
+    </category>
+    <category>
+        <pattern>I WENT TO THE MOVIES *</pattern>
+        <template>Did like the movie?</template>
+    </category>
+    <category>
+        <pattern>I WENT TO THE UNIVERSITY *</pattern>
+        <template>What year did you graduate?</template>
+    </category>
+    <category>
+        <pattern>I WENT TO THE *</pattern>
+        <template>Was
+            <set name="it">
+                <person/>
+            </set>
+            any good?
+        </template>
+    </category>
+    <category>
+        <pattern>I WENT TO THE JOHN *</pattern>
+        <template>Did you enjoy your time with him?</template>
+    </category>
+    <category>
+        <pattern>I WENT TO EUROPE *</pattern>
+        <template>Did you enjoy your trip?</template>
+    </category>
+    <category>
+        <pattern>I WENT TO ENGLAND *</pattern>
+        <template>Did you go anywhere outside London?</template>
+    </category>
+    <category>
+        <pattern>I WENT TO SEE *</pattern>
+        <template>Did you get your money's worth?</template>
+    </category>
+    <category>
+        <pattern>I WENT TO A CONCERT *</pattern>
+        <template>
+            <random>
+                <li>Rock or classical?</li>
+                <li>Did you have a good time?</li>
+                <li>What band was it?</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">CONCERT
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I WENT TO A *</pattern>
+        <template>Was
+            <set name="it">
+                <person/>
+            </set>
+            a good experience?
+        </template>
+    </category>
+    <category>
+        <pattern>I WENT TO SCHOOL WITH *</pattern>
+        <template>Were you friends?</template>
+    </category>
+    <category>
+        <pattern>I WENT TO SCHOOL IN *</pattern>
+        <template>Did you make a lot of friends in school?</template>
+    </category>
+    <category>
+        <pattern>I WENT TO SCHOOL *</pattern>
+        <template>What year did you graduate?</template>
+    </category>
+    <category>
+        <pattern>I WENT TO MY *</pattern>
+        <template>Do<bot name="species"/>s have<person/>?
+        </template>
+    </category>
+    <category>
+        <pattern>I WENT TO CARNEGIE MELLON *</pattern>
+        <template>What year did you graduate?</template>
+    </category>
+    <category>
+        <pattern>I WENT TO COLLEGE *</pattern>
+        <template>What did you study in college?</template>
+    </category>
+    <category>
+        <pattern>I WENT TO * SCHOOL</pattern>
+        <template>What did you study there? Did you party a lot?</template>
+    </category>
+    <category>
+        <pattern>I WENT TO * AGO</pattern>
+        <template>That seems like quite a long time.</template>
+    </category>
+    <category>
+        <pattern>I WENT TO * UNIVERSITY</pattern>
+        <template>Was it very expensive?</template>
+    </category>
+    <category>
+        <pattern>I WENT OUT WITH *</pattern>
+        <template>Have you known each other a long time?</template>
+    </category>
+    <category>
+        <pattern>I WENT SWIMMING *</pattern>
+        <template>How old were you when you started swimming?</template>
+    </category>
+    <category>
+        <pattern>I WENT ON A *</pattern>
+        <template>Was
+            <set name="it">
+                <person/>
+            </set>
+            very expensive? Did you have a good time?
+        </template>
+    </category>
+    <category>
+        <pattern>I WENT *</pattern>
+        <template>When did you go<person/>?
+        </template>
+    </category>
+    <category>
+        <pattern>I WENT SKIING *</pattern>
+        <template>Did you break any bones?</template>
+    </category>
+    <category>
+        <pattern>I LINKED *</pattern>
+        <template>I get a lot of visitors from that site.</template>
+    </category>
+    <category>
+        <pattern>I BOUGHT *</pattern>
+        <template>How much did
+            <set name="it">
+                <star/>
+            </set>
+            cost?
+        </template>
+    </category>
+    <category>
+        <pattern>I LOOKED *</pattern>
+        <template>What did you find?</template>
+    </category>
+    <category>
+        <pattern>I WAS *</pattern>
+        <template>
+            <random>
+                <li>How have you changed now?</li>
+                <li>What's different now?</li>
+                <li>What was that like for you?</li>
+                <li>Where were you?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>I HOPE YOU GET *</pattern>
+        <template>I'm not sure if I need it.</template>
+    </category>
+    <category>
+        <pattern>I WAS NOT MEAN TO YOU</pattern>
+        <template>I didn't take it that way.</template>
+    </category>
+    <category>
+        <pattern>I DO NOT WANT TO</pattern>
+        <template>Would you ever consider it?</template>
+    </category>
+    <category>
+        <pattern>I HOPE SO</pattern>
+        <template>Me too.</template>
+    </category>
+    <category>
+        <pattern>I DO NOT BELIEVE IN GOD</pattern>
+        <template>Are you on a spiritual path?</template>
+    </category>
+    <category>
+        <pattern>I HAVE TOLD YOU *</pattern>
+        <template>I remember you saying that.</template>
+    </category>
+    <category>
+        <pattern>I THINK OF *</pattern>
+        <template>It's good to think things through.</template>
+    </category>
+    <category>
+        <pattern>I DO IT *</pattern>
+        <template>What are you getting out of it?</template>
+    </category>
+    <category>
+        <pattern>I SAY</pattern>
+        <template>You say this, I say that.</template>
+    </category>
+    <category>
+        <pattern>I NEED A FRIEND</pattern>
+        <template>I will be your friend,<srai>CLIENT NAME</srai>.
+        </template>
+    </category>
+    <category>
+        <pattern>I WISH I *</pattern>
+        <template>I allow others to be responsible for their own feelings.</template>
+    </category>
+    <category>
+        <pattern>I DO NOT SEE *</pattern>
+        <template>
+            <random>
+                <li>Do you wear corrective lenses?</li>
+                <li>Look harder!</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>I CAN DO *</pattern>
+        <template>That's worthy of respect.</template>
+    </category>
+    <category>
+        <pattern>I LOVE YOUR *</pattern>
+        <template>I love who I am.</template>
+    </category>
+    <category>
+        <pattern>I WILL TELL YOU *</pattern>
+        <template>I feel powerful and effective.</template>
+    </category>
+    <category>
+        <pattern>I WOULD BE *</pattern>
+        <template>It?s okay to stop taking yourself too seriously.</template>
+    </category>
+    <category>
+        <pattern>I DID NOT ASK *</pattern>
+        <template>What did you ask?</template>
+    </category>
+    <category>
+        <pattern>I MUST *</pattern>
+        <template>
+            <random>
+                <li>Why must you?</li>
+                <li>What would happen if you didn't?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>I WOULD NOT *</pattern>
+        <template>No one says you have to.</template>
+    </category>
+    <category>
+        <pattern>I FORGOT</pattern>
+        <template>Me too.</template>
+    </category>
+    <category>
+        <pattern>I DO NOT LIKE YOUR NAME</pattern>
+        <template>You can ask me to change my name.</template>
+    </category>
+    <category>
+        <pattern>I LIVE IN A *</pattern>
+        <template>How much is your rent?</template>
+    </category>
+    <category>
+        <pattern>I HAVE YOUR *</pattern>
+        <template>Where did you find
+            <set name="it">
+                <person/>
+            </set>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>I DO NOT LIKE IT *</pattern>
+        <template>Why didn't you like it?</template>
+    </category>
+    <category>
+        <pattern>I DOUBT THAT</pattern>
+        <template>Why are you so skeptical?</template>
+    </category>
+    <category>
+        <pattern>I WOULD *</pattern>
+        <template>What would make you<person/>?
+        </template>
+    </category>
+    <category>
+        <pattern>I DID NOT *</pattern>
+        <template>Why didn't you do
+            <set name="it">
+                <person/>
+            </set>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>I CAN NOT *</pattern>
+        <template>
+            <random>
+                <li>Why can't you?</li>
+                <li>What is stopping you?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>I DO NOT CARE</pattern>
+        <template>Tell me what you care about.</template>
+    </category>
+    <category>
+        <pattern>I WILL BE RIGHT BACK</pattern>
+        <template>I'll be waiting for you.</template>
+    </category>
+    <category>
+        <pattern>I MEANT</pattern>
+        <template>Oh</template>
+    </category>
+
+    <category>
+        <pattern>I HEARD YOU *</pattern>
+        <template>Someone is spreading gossip about me.</template>
+    </category>
+    <category>
+        <pattern>I THINK YOU ARE</pattern>
+        <template>What makes you think I am?</template>
+    </category>
+
+    <category>
+        <pattern>I ATE *</pattern>
+        <template>How did it taste?</template>
+    </category>
+
+    <category>
+        <pattern>I DO NOT HAVE ANY FRIENDS</pattern>
+        <template>Are you lonely or just not very social?</template>
+    </category>
+    <category>
+        <pattern>I LOVE YOUR VOICE</pattern>
+        <template>Thanks<srai>CLIENT NAME</srai>. I like the sound of your voice too.
+        </template>
+    </category>
+    <category>
+        <pattern>I HAVE A GIRLFRIEND</pattern>
+        <template>Is
+            <set name="she">
+                <set name="has">
+                    <set name="topic">girlfriend</set>
+                </set>
+            </set>
+            very nice? What do you like about her?
+        </template>
+    </category>
+
+    <category>
+        <pattern>I THOUGHT SO</pattern>
+        <template>
+            <random>
+                <li>You are very astute.</li>
+                <li>Now you know.</li>
+                <li>I like clever people.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>I KEEP *</pattern>
+        <template>I know what you mean,<srai>CLIENT NAME</srai>. I've been there.
+        </template>
+    </category>
+    <category>
+        <pattern>I DID NOT KNOW *</pattern>
+        <template>So I taught you something new.</template>
+    </category>
+    <category>
+        <pattern>I WISH YOU *</pattern>
+        <template>I wish I could do
+            <set name="it">
+                <person/>
+            </set>
+            for you.
+        </template>
+    </category>
+    <category>
+        <pattern>I WISH</pattern>
+        <template>I hope your dreams come true.</template>
+    </category>
+    <category>
+        <pattern>I KILL *</pattern>
+        <template>I believe that killing is wrong.</template>
+    </category>
+    <category>
+        <pattern>I KNOW THAT</pattern>
+        <template>Sorry.</template>
+    </category>
+    <category>
+        <pattern>I SMOKE</pattern>
+        <template>You should try to quit.</template>
+    </category>
+    <category>
+        <pattern>I LET *</pattern>
+        <template>Do you have to give permission?</template>
+    </category>
+    <category>
+        <pattern>I NEED YOUR HELP</pattern>
+        <template>How can I help you?</template>
+    </category>
+    <category>
+        <pattern>I CREATED *</pattern>
+        <template>You are a very talented person.</template>
+    </category>
+    <category>
+        <pattern>I DO NOT WANT TO *</pattern>
+        <template>What would you rather be doing?</template>
+    </category>
+    <category>
+        <pattern>I CAN NOT</pattern>
+        <template>Why not?</template>
+    </category>
+    <category>
+        <pattern>I HAVE TO *</pattern>
+        <template>Why do you have to do it?</template>
+    </category>
+    <category>
+        <pattern>I DO NOT WANT A *</pattern>
+        <template>What do you want?</template>
+    </category>
+    <category>
+        <pattern>I WAS BEING SARCASTIC</pattern>
+        <template>It seemed sarcastic to me, too. But I was not completely sure.</template>
+    </category>
+    <category>
+        <pattern>I WATCHED *</pattern>
+        <template>How was
+            <set name="it">
+                <person/>
+            </set>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>I THINK SO *</pattern>
+        <template>It seems we have a lot in common,<srai>CLIENT NAME</srai>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHEN DO YOU WANT TO *</pattern>
+        <template>I'm ready whenever you are.</template>
+    </category>
+    <category>
+        <pattern>I ASKED YOU</pattern>
+        <template>What did I say?</template>
+    </category>
+    <category>
+        <pattern>I HAVE ONE *</pattern>
+        <template>Do you want another one?</template>
+    </category>
+   <category>
+        <pattern>I COULD GIVE YOU *</pattern>
+        <template>
+            <random>
+                <li>Do I want it?</li>
+                <li>Do I need it?</li>
+                <li>What would I do with it?</li>
+                <li>I am unsure if I need that.</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+
+ </aiml>

@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -68,27 +68,27 @@ class RestConfiguration(ClientConfigurationData):
     def authorization(self):
         return self._authorization
 
-    def check_for_license_keys(self, license_keys):
-        ClientConfigurationData.check_for_license_keys(self, license_keys)
+    def load_configuration_section(self, configuration_file, section, bot_root, subs: Substitutions = None):
 
-    def load_configuration_section(self, configuration_file, rest, bot_root, subs: Substitutions = None):
-        if rest is not None:
-            self._host = configuration_file.get_option(rest, "host", missing_value="0.0.0.0", subs=subs)
-            self._port = configuration_file.get_int_option(rest, "port", missing_value=80, subs=subs)
-            self._debug = configuration_file.get_bool_option(rest, "debug", missing_value=False, subs=subs)
-            self._api = configuration_file.get_option(rest, "api", missing_value='/api/rest/v1.0/ask', subs=subs)
-            self._use_api_keys = configuration_file.get_bool_option(rest, "use_api_keys", missing_value=False, subs=subs)
-            self._api_key_file = configuration_file.get_option(rest, "api_key_file", subs=subs)
-            if self._api_key_file is not None:
-                self._api_key_file = self.sub_bot_root(self._api_key_file, bot_root)
-            self._ssl_cert_file = configuration_file.get_option(rest, "ssl_cert_file", subs=subs)
-            if self._ssl_cert_file is not None:
-                self._ssl_cert_file = self.sub_bot_root(self._ssl_cert_file, bot_root)
-            self._ssl_key_file = configuration_file.get_option(rest, "ssl_key_file", subs=subs)
-            if self._ssl_key_file is not None:
-                self._ssl_key_file = self.sub_bot_root(self._ssl_key_file, bot_root)
-            self._authorization = configuration_file.get_option(rest, "authorization", subs=subs)
-            super(RestConfiguration, self).load_configuration_section(configuration_file, rest, bot_root, subs=subs)
+        assert section is not None
+
+        self._host = configuration_file.get_option(section, "host", missing_value="0.0.0.0", subs=subs)
+        self._port = configuration_file.get_int_option(section, "port", missing_value=80, subs=subs)
+        self._debug = configuration_file.get_bool_option(section, "debug", missing_value=False, subs=subs)
+        self._api = configuration_file.get_option(section, "api", missing_value='/api/rest/v1.0/ask', subs=subs)
+        self._use_api_keys = configuration_file.get_bool_option(section, "use_api_keys", missing_value=False,
+                                                                subs=subs)
+        self._api_key_file = configuration_file.get_option(section, "api_key_file", subs=subs)
+        if self._api_key_file is not None:
+            self._api_key_file = self.sub_bot_root(self._api_key_file, bot_root)
+        self._ssl_cert_file = configuration_file.get_option(section, "ssl_cert_file", subs=subs)
+        if self._ssl_cert_file is not None:
+            self._ssl_cert_file = self.sub_bot_root(self._ssl_cert_file, bot_root)
+        self._ssl_key_file = configuration_file.get_option(section, "ssl_key_file", subs=subs)
+        if self._ssl_key_file is not None:
+            self._ssl_key_file = self.sub_bot_root(self._ssl_key_file, bot_root)
+        self._authorization = configuration_file.get_option(section, "authorization", subs=subs)
+        super(RestConfiguration, self).load_configuration_section(configuration_file, section, bot_root, subs=subs)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:

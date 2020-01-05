@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -36,14 +36,14 @@ class BotSentimentAnalyserConfiguration(BaseConfigurationData):
     def scores(self):
         return self._scores
 
-    def check_for_license_keys(self, license_keys):
-        BaseConfigurationData.check_for_license_keys(self, license_keys)
-
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
+        del bot_root
         sentiment = configuration_file.get_section(self._section_name, configuration)
         if sentiment is not None:
             self._classname = configuration_file.get_option(sentiment, "classname", missing_value=None, subs=subs)
-            self._scores = configuration_file.get_option(sentiment, "scores", missing_value="programy.nlp.sentiment.scores.SentimentScores", subs=subs)
+            self._scores = configuration_file.get_option(sentiment, "scores",
+                                                         missing_value="programy.nlp.sentiment.scores.SentimentScores",
+                                                         subs=subs)
         else:
             YLogger.warning(self, "'sentiment' section missing from bot config, using defaults")
 
@@ -51,6 +51,7 @@ class BotSentimentAnalyserConfiguration(BaseConfigurationData):
         if defaults is True:
             data['classname'] = "programy.nlp.sentiment.textblob_sentiment.TextBlobSentimentAnalyser"
             data['scores'] = "programy.nlp.sentiment.scores.SentimentScores"
+
         else:
             data['classname'] = self._classname
             data['scores'] = self._scores

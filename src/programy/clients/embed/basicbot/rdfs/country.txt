@@ -1,0 +1,312 @@
+COUNTRY:hasPurpose:to form a nation
+COUNTRY:hasSize:11
+COUNTRY:hasSyllables:2
+Country:isa:Geographic Location
+COUNTRY:isa:Poltical Unit
+COUNTRY:lifeArea:Social
+AMERICA:hasPurpose:to form a more perfect union
+AMERICA:hasSize:11
+AMERICA:hasSyllables:3
+AMERICA:isa:Country
+AMERICA:isa:Geographic Location
+AMERICA:lifeArea:Education
+ARABIA:hasPurpose:to form a kingdom
+ARABIA:hasSize:11
+ARABIA:hasSyllables:4
+ARABIA:isa:Country
+ARABIA:isa:Geographic Location
+ARABIA:lifeArea:Education
+ARMENIA:hasPurpose:to form a nation
+ARMENIA:hasSize:11
+ARMENIA:hasSyllables:4
+ARMENIA:isa:Country
+ARMENIA:isa:Geographic Location
+ARMENIA:lifeArea:Education
+AUSTRALIA:hasPurpose:to form a continent
+AUSTRALIA:hasSize:11
+AUSTRALIA:hasSyllables:1
+AUSTRALIA:isa:Continent
+AUSTRALIA:isa:Geographic Location
+AUSTRALIA:lifeArea:Education
+BRITAIN:hasPurpose:to form a nation
+BRITAIN:hasSize:11
+BRITAIN:hasSyllables:2
+BRITAIN:isa:Country
+BRITAIN:isa:Geographic Location
+BRITAIN:lifeArea:Education
+CANADA:hasPurpose:to form a nation
+CANADA:hasSize:11
+CANADA:hasSyllables:3
+CANADA:isa:Country
+CANADA:isa:Geographic Location
+CANADA:lifeArea:Education
+CANADIAN:hasPurpose:to be a citizen of Canada
+CANADIAN:hasSize:7
+CANADIAN:hasSyllables:4
+CANADIAN:isa:Citizen
+CANADIAN:isa:Person
+CANADIAN:lifeArea:Social
+CHAD:hasPurpose:to form a country
+CHAD:hasSize:11
+CHAD:hasSyllables:1
+CHAD:isa:Country
+CHAD:isa:Geographic Location
+CHAD:lifeArea:Education
+CHINA:hasPurpose:to form a nation
+CHINA:hasSize:11
+CHINA:hasSyllables:2
+CHINA:isa:Country
+CHINA:isa:Geographic Location
+CHINA:lifeArea:Education
+CHINESE:hasPurpose:to be a citizen of China
+CHINESE:hasSize:0
+CHINESE:hasSyllables:2
+CHINESE:isa:Nationality
+CHINESE:lifeArea:Social
+ENGLAND:hasPurpose:to form a nation
+ENGLAND:hasSize:11
+ENGLAND:hasSyllables:2
+ENGLAND:isa:Country
+ENGLAND:isa:Geographic Location
+ENGLAND:lifeArea:Education
+ENGLISH:hasPurpose:to be a citizen of England
+ENGLISH:hasSize:0
+ENGLISH:hasSyllables:2
+ENGLISH:isa:Nationality
+ENGLISH:lifeArea:Social
+FINLAND:hasPurpose:to form a nation
+FINLAND:hasSize:11
+FINLAND:hasSyllables:2
+FINLAND:isa:Country
+FINLAND:isa:Geographic Location
+FINLAND:lifeArea:Education
+FRANCE:hasPurpose:to form a nation
+FRANCE:hasSize:11
+FRANCE:hasSyllables:1
+FRANCE:isa:Country
+FRANCE:isa:Geographic Location
+FRANCE:lifeArea:Education
+FRENCH:hasPurpose:to be a citizen of France
+FRENCH:hasSize:0
+FRENCH:hasSyllables:1
+FRENCH:isa:Nationality
+FRENCH:lifeArea:Social
+GERMAN:hasPurpose:to be a citizen of Germany
+GERMAN:hasSize:0
+GERMAN:hasSyllables:2
+GERMAN:isa:Nationality
+GERMAN:lifeArea:Social
+GERMANY:hasPurpose:to form a country
+GERMANY:hasSize:10
+GERMANY:hasSyllables:3
+GERMANY:isa:Country
+GERMANY:isa:Geographic Location
+GERMANY:lifeArea:Education
+HOLLAND:hasPurpose:to form a nation
+HOLLAND:hasSize:11
+HOLLAND:hasSyllables:2
+HOLLAND:isa:Country
+HOLLAND:isa:Geographic Location
+HOLLAND:lifeArea:Education
+INDIA:hasPurpose:to form a country
+INDIA:hasSize:10
+INDIA:hasSyllables:3
+INDIA:isa:Country
+INDIA:isa:Geographic Location
+INDIA:lifeArea:Education
+INDIAN:hasPurpose:to be a citizen of India
+INDIAN:hasSize:0
+INDIAN:hasSyllables:3
+INDIAN:isa:Nationality
+INDIAN:lifeArea:Social
+IRAN:hasSize:11
+IRAN:hasSyllables:2
+IRAN:isa:Country
+IRAN:isa:Geographic Location
+IRAN:lifeArea:Education
+IRAN:hasPurpose:to form a nation
+IRELAND:hasPurpose:to form a nation
+IRELAND:hasSize:11
+IRELAND:hasSyllables:3
+IRELAND:isa:Country
+IRELAND:isa:Geographic Location
+IRELAND:lifeArea:Education
+IRISH:hasPurpose:to be a citizen of Ireland
+IRISH:hasSize:0
+IRISH:hasSyllables:2
+IRISH:isa:Nationality
+IRISH:lifeArea:Social
+ITALIAN:hasPurpose:to be a citizen of Italy
+ITALIAN:hasSize:0
+ITALIAN:hasSyllables:3
+ITALIAN:isa:Nationality
+ITALIAN:lifeArea:Social
+ITALY:hasPurpose:to form a nation
+ITALY:hasSize:11
+ITALY:hasSyllables:2
+ITALY:isa:Country
+ITALY:isa:Geographic Location
+ITALY:lifeArea:Education
+JAPAN:hasPurpose:to form a nation
+JAPAN:hasSize:11
+JAPAN:hasSyllables:2
+JAPAN:isa:Country
+JAPAN:isa:Geographic Location
+JAPAN:lifeArea:Education
+JAPANESE:hasPurpose:to be a citizen of Japan
+JAPANESE:hasSize:0
+JAPANESE:hasSyllables:3
+JAPANESE:isa:Nationality
+JAPANESE:lifeArea:Social
+JORDAN:hasPurpose:to form a nation
+JORDAN:hasSize:11
+JORDAN:hasSyllables:2
+JORDAN:isa:Country
+JORDAN:isa:Geographic Location
+JORDAN:lifeArea:Education
+KOREAN:hasPurpose:to be a citizen of Korea
+KOREAN:hasSize:0
+KOREAN:hasSyllables:3
+KOREAN:isa:Nationality
+KOREAN:lifeArea:Social
+MALAYSIA:hasPurpose:to form a nation
+MALAYSIA:hasSize:11
+MALAYSIA:hasSyllables:3
+MALAYSIA:isa:Country
+MALAYSIA:isa:Geographic Location
+MALAYSIA:lifeArea:Education
+MANDARIN:hasPurpose:to be a dialect of Chinese
+MANDARIN:hasSize:0
+MANDARIN:hasSyllables:3
+MANDARIN:isa:Language
+MANDARIN:lifeArea:Social
+WALES:hasPurpose:to form a nation
+WALES:hasSize:11
+WALES:hasSyllables:1
+WALES:isa:Country
+WALES:isa:Geographic Location
+WALES:lifeArea:Education
+USA:hasPurpose:to form a country
+USA:hasSize:10
+USA:hasSyllables:3
+USA:isa:Country
+USA:isa:Geographic Location
+USA:lifeArea:Education
+TURKEY:hasPurpose:to make Thanksgiving dinner
+TURKEY:hasSize:0
+TURKEY:hasSyllables:2
+TURKEY:isa:Bird
+TURKEY:lifeArea:Physical
+TURKISH:hasPurpose:to be a citizen of Turkey
+TURKISH:hasSize:0
+TURKISH:hasSyllables:2
+TURKISH:isa:Nationality
+TURKISH:lifeArea:Social
+THAILAND:hasPurpose:to form a nation
+THAILAND:hasSize:11
+THAILAND:hasSyllables:2
+THAILAND:isa:Country
+THAILAND:isa:Geographic Location
+THAILAND:lifeArea:Education
+SPANISH:hasPurpose:to be a citizen of Spain
+SPANISH:hasSize:0
+SPANISH:hasSyllables:2
+SPANISH:isa:Nationality
+SPANISH:lifeArea:Social
+SCOTLAND:hasPurpose:to form a country
+SCOTLAND:hasSize:11
+SCOTLAND:hasSyllables:2
+SCOTLAND:isa:Country
+SCOTLAND:isa:Geographic Location
+SCOTLAND:lifeArea:Education
+SAUDI ARABIA:hasPurpose:to form a nation
+SAUDI ARABIA:hasSize:11
+SAUDI ARABIA:hasSyllables:6
+SAUDI ARABIA:isa:Country
+SAUDI ARABIA:isa:Geographic Location
+SAUDI ARABIA:lifeArea:Education
+RUSSIA:hasPurpose:to form a nation
+RUSSIA:hasSize:11
+RUSSIA:hasSyllables:2
+RUSSIA:isa:Country
+RUSSIA:isa:Geographic Location
+RUSSIA:lifeArea:Education
+RUSSIAN:hasPurpose:to be a citizen of Russia
+RUSSIAN:hasSize:0
+RUSSIAN:hasSyllables:2
+RUSSIAN:isa:Nationality
+RUSSIAN:lifeArea:Social
+MEXICAN:hasPurpose:to be a citizen of Mexico
+MEXICAN:hasSize:0
+MEXICAN:hasSyllables:3
+MEXICAN:isa:Nationality
+MEXICAN:lifeArea:Social
+MEXICO:hasPurpose:to form a nation
+MEXICO:hasSize:11
+MEXICO:hasSyllables:3
+MEXICO:isa:Country
+MEXICO:isa:Geographic Location
+MEXICO:lifeArea:Education
+NEW ZEALAND:hasPurpose:to form a country
+NEW ZEALAND:hasSize:11
+NEW ZEALAND:hasSyllables:3
+NEW ZEALAND:isa:Country
+NEW ZEALAND:isa:Geographic Location
+NEW ZEALAND:lifeArea:Education
+NIGERIA:hasPurpose:to form a country
+NIGERIA:hasSize:11
+NIGERIA:hasSyllables:3
+NIGERIA:isa:Country
+NIGERIA:isa:Geographic Location
+NIGERIA:lifeArea:Education
+PAKISTAN:hasPurpose:to form a nation
+PAKISTAN:hasSize:11
+PAKISTAN:hasSyllables:3
+PAKISTAN:isa:Country
+PAKISTAN:isa:Geographic Location
+PAKISTAN:lifeArea:Education
+PORTUGAL:hasPurpose:to form a country
+PORTUGAL:hasSize:11
+PORTUGAL:hasSyllables:3
+PORTUGAL:isa:Country
+PORTUGAL:isa:Geographic Location
+PORTUGAL:lifeArea:Education
+PORTUGUESE:hasPurpose:to be a citizen of Portugual
+PORTUGUESE:hasSize:0
+PORTUGUESE:hasSyllables:3
+PORTUGUESE:isa:Nationality
+PORTUGUESE:lifeArea:Social
+ROMANIA:hasPurpose:to form a country
+ROMANIA:hasSize:11
+ROMANIA:hasSyllables:4
+ROMANIA:isa:Geographic Location
+ROMANIA:lifeArea:Education
+SWEDEN:hasPurpose:to form a nation
+SWEDEN:hasSize:11
+SWEDEN:hasSyllables:2
+SWEDEN:isa:Country
+SWEDEN:isa:Geographic Location
+SWEDEN:lifeArea:Education
+SWEDISH:hasPurpose:to be a citizen of Sweden
+SWEDISH:hasSize:0
+SWEDISH:hasSyllables:2
+SWEDISH:isa:Nationality
+SWEDISH:lifeArea:Social
+THAILAND:hasPurpose:to form a nation
+THAILAND:hasSize:11
+THAILAND:hasSyllables:2
+THAILAND:isa:Country
+THAILAND:isa:Geographic Location
+THAILAND:lifeArea:Education
+PHILIPPINES:hasPurpose:to form a nation
+PHILIPPINES:hasSize:11
+PHILIPPINES:hasSyllables:3
+PHILIPPINES:isa:Country
+PHILIPPINES:isa:Geographic Location
+PHILIPPINES:lifeArea:Education
+POLAND:hasPurpose:to form a city
+POLAND:hasSize:11
+POLAND:hasSyllables:2
+POLAND:isa:Country
+POLAND:isa:Geographic Location
+POLAND:lifeArea:Education

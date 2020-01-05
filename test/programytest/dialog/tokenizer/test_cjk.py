@@ -9,6 +9,11 @@ class CjkTokenizerTests(unittest.TestCase):
         tokenizer = CjkTokenizer()
         self.assertIsNotNone(tokenizer)
 
+        self.assertTrue(CjkTokenizer._is_chinese_word("韩"))
+        self.assertFalse(CjkTokenizer._is_chinese_word("Keith"))
+        self.assertFalse(CjkTokenizer._is_chinese_word(None))
+
+        self.assertEqual([], tokenizer.texts_to_words(None))
         self.assertEqual([], tokenizer.texts_to_words(""))
         self.assertEqual(["Hello"], tokenizer.texts_to_words("Hello"))
         self.assertEqual(["Hello", "World"], tokenizer.texts_to_words("Hello World"))
@@ -18,6 +23,7 @@ class CjkTokenizerTests(unittest.TestCase):
         self.assertEqual(["半", "宽", "韩", "文", "字", "母", "半", "宽", "平", "假", "名"], tokenizer.texts_to_words("半宽韩文字母 半宽平假名"))
 
         self.assertEqual("", tokenizer.words_to_texts([]))
+        self.assertEqual("", tokenizer.words_to_texts(None))
         self.assertEqual("Hello", tokenizer.words_to_texts(["Hello"]))
         self.assertEqual("Hello World", tokenizer.words_to_texts(["Hello", "World"]))
         self.assertEqual("Hello World", tokenizer.words_to_texts(["Hello", "", "World"]))
@@ -31,9 +37,7 @@ class CjkTokenizerTests(unittest.TestCase):
 
         self.assertEqual("(200万 ,100万 ,50万 )", tokenizer.words_to_texts(["(", "200万", ",", "100万", ",", "50万", ")"]))
 
-
         self.assertEqual(['你', '好', '！'], tokenizer.texts_to_words('你好！'))
-
 
         self.assertEqual(['你', '好', '！'], tokenizer.texts_to_words('你好！'))
         self.assertEqual(['X', '你', '好', 'X'], tokenizer.texts_to_words('X你好X'))
@@ -44,3 +48,12 @@ class CjkTokenizerTests(unittest.TestCase):
         self.assertEqual(['*', 'HELLO', '你', '好', '*'], tokenizer.texts_to_words('*HELLO你好*'))
         self.assertEqual(['HELLO', '*', '你', '好', '*'], tokenizer.texts_to_words('HELLO*你好*'))
         self.assertEqual(['HELLO', '*', '你', '好', '*', 'NICE', 'OK'], tokenizer.texts_to_words('HELLO*你好*NICE OK'))
+
+        self.assertEquals('韩文字母', tokenizer.words_from_current_pos("半宽韩文字母", 2))
+        with self.assertRaises(ValueError):
+            tokenizer.words_from_current_pos("", 2)
+        with self.assertRaises(ValueError):
+            tokenizer.words_from_current_pos(None, 2)
+
+        self.assertTrue(tokenizer.compare("半宽韩文字母", "半宽韩文字母"))
+        self.assertFalse(tokenizer.compare("半宽韩文字母", "半宽韩文"))

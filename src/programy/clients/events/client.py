@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -21,12 +21,12 @@ from programy.clients.client import BotClient
 
 class EventBotClient(BotClient):
 
-    def __init__(self, id, argument_parser=None):
+    def __init__(self, botid, argument_parser=None):
         self._running = False
-        BotClient.__init__(self, id, argument_parser=argument_parser)
+        BotClient.__init__(self, botid, argument_parser=argument_parser)
 
     def prior_to_run_loop(self):
-        pass
+        pass    # pragma: no cover
 
     def run_loop(self):
         self._running = True
@@ -34,12 +34,14 @@ class EventBotClient(BotClient):
             self._running = self.wait_and_answer()
 
     def wait_and_answer(self):
-        raise NotImplementedError("You must override this and implement the logic wait for a question and send an answer back")
+        raise NotImplementedError("You must override this and implement the "
+                                  "logic wait for a question and send an answer back")  # pragma: no cover
 
     def post_run_loop(self):
-        pass
+        pass    # pragma: no cover
 
-    def run(self):
+    def run(self, app=None):
+        del app
 
         if self.arguments.noloop is False:
             YLogger.info(self, "Entering conversation loop...")

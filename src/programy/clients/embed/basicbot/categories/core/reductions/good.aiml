@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>WONDERFUL *</pattern>
+        <template>
+            <srai>GOOD
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>BIEN</pattern>
+        <template>
+            <srai>GOOD</srai>
+        </template>
+    </category>
+        <category>
+        <pattern>GOOD HOW *</pattern>
+        <template>
+            <srai>GOOD</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>NICE</pattern>
+        <template>
+            <srai>GOOD</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GUD *</pattern>
+        <template>
+            <srai>GOOD
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GOOD RPAREN</pattern>
+        <template>
+            <srai>GOOD</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>GOOD LUCK *</pattern>
+        <template>
+            <srai>GOOD LUCK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GOOD JOB *</pattern>
+        <template>
+            <srai>GOOD JOB</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>GOOD FOR YOU *</pattern>
+        <template>
+            <srai>GOOD FOR YOU</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>TERRIFIC</pattern>
+        <template>
+            <srai>GOOD</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GREAT</pattern>
+        <template>
+            <srai>GOOD</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WONDERFUL</pattern>
+        <template>
+            <srai>good</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NOT BAD</pattern>
+        <template>
+            <srai>GOOD</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>INTERESTING</pattern>
+        <template>
+            <srai>GOOD</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>BRAVO</pattern>
+        <template>
+            <srai>GOOD</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SUPER</pattern>
+        <template>
+            <srai>GOOD</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SUPERB</pattern>
+        <template>
+            <srai>GOOD</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>AMAZING</pattern>
+        <template>
+            <srai>GOOD</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>PERFECT</pattern>
+        <template>
+            <srai>GOOD</srai>
+        </template>
+    </category>
+        <category>
+        <pattern>EXCELLENT</pattern>
+        <template>
+            <srai>GOOD</srai>
+        </template>
+    </category>
+</aiml>

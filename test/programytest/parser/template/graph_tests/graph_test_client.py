@@ -1,10 +1,9 @@
 import unittest
 
 from programy.dialog.question import Question, Sentence
-from programy.parser.pattern.matchcontext import MatchContext
 from programy.parser.pattern.match import Match
+from programy.parser.pattern.matchcontext import MatchContext
 from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
-
 from programytest.client import TestClient
 
 

@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -15,19 +15,24 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.utils.logging.ylogger import YLogger
-import os
-import os.path
-
 from programy.storage.stores.file.store.filestore import FileStore
 from programy.storage.entities.nodes import NodesStore
 from programy.utils.classes.loader import ClassLoader
+
 
 class FileNodeStore(FileStore, NodesStore):
 
     def __init__(self, storage_engine):
         FileStore.__init__(self, storage_engine)
+        NodesStore.__init__(self)
 
-    def _load_file_contents(self, node_factory, filename):
+    def _get_storage_path(self):
+        raise NotImplementedError()  # pragma: no cover
+
+    def get_storage(self):
+        raise NotImplementedError()  # pragma: no cover
+
+    def _load_file_contents(self, collection, filename):
         YLogger.debug(self, "Loading nodes from file [%s]", filename)
         count = 0
         try:
@@ -35,7 +40,7 @@ class FileNodeStore(FileStore, NodesStore):
                 for line in file:
                     line = line.strip()
                     if line:
-                        self.process_config_line(node_factory, line, filename)
+                        self.process_config_line(collection, line, filename)
         except FileNotFoundError:
             YLogger.error(self, "File not found [%s]", filename)
 
@@ -43,17 +48,24 @@ class FileNodeStore(FileStore, NodesStore):
 
     def process_config_line(self, node_factory, line, filename):
         if self.valid_config_line(line, filename):
+
             splits = line.split("=")
             node_name = splits[0].strip()
             if node_name in node_factory.nodes:
                 YLogger.error(self, "Node already exists in config [%s]", line)
-                return
+                return False
+
             class_name = splits[1].strip()
             YLogger.debug(self, "Pre-instantiating %s Node [%s]", node_factory.type, class_name)
             try:
                 node_factory.add_node(node_name, ClassLoader.instantiate_class(class_name))
+                return True
+
             except Exception as e:
-                YLogger.exception_nostack(self, "Failed pre-instantiating %s Node [%s]"%(node_factory.type, class_name), e)
+                YLogger.exception_nostack(self,
+                                          "Failed pre-instantiating %s Node [%s]" % (node_factory.type, class_name), e)
+
+        return False
 
     def valid_config_line(self, line, filename):
 
@@ -75,6 +87,9 @@ class FilePatternNodeStore(FileNodeStore):
     def __init__(self, storage_engine):
         FileNodeStore.__init__(self, storage_engine)
 
+    def _get_storage_path(self):
+        return self.storage_engine.configuration.pattern_nodes_storage.file
+
     def get_storage(self):
         return self.storage_engine.configuration.pattern_nodes_storage
 
@@ -83,6 +98,9 @@ class FileTemplateNodeStore(FileNodeStore):
 
     def __init__(self, storage_engine):
         FileNodeStore.__init__(self, storage_engine)
+
+    def _get_storage_path(self):
+        return self.storage_engine.configuration.template_nodes_storage.file
 
     def get_storage(self):
         return self.storage_engine.configuration.template_nodes_storage

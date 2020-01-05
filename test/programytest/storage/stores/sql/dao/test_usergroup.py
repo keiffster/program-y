@@ -1,13 +1,13 @@
 
 import unittest
 
-from programy.storage.stores.sql.dao.usergroup import AuthoriseUser
-from programy.storage.stores.sql.dao.usergroup import UserRole
-from programy.storage.stores.sql.dao.usergroup import UserGroup
 from programy.storage.stores.sql.dao.usergroup import AuthoriseGroup
+from programy.storage.stores.sql.dao.usergroup import AuthoriseUser
 from programy.storage.stores.sql.dao.usergroup import GroupGroup
 from programy.storage.stores.sql.dao.usergroup import GroupRole
 from programy.storage.stores.sql.dao.usergroup import GroupUser
+from programy.storage.stores.sql.dao.usergroup import UserGroup
+from programy.storage.stores.sql.dao.usergroup import UserRole
 
 
 class AuthoriseUserTests(unittest.TestCase):

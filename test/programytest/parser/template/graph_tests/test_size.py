@@ -1,8 +1,7 @@
 import xml.etree.ElementTree as ET
 
-from programy.parser.template.nodes.size import TemplateSizeNode
 from programy.parser.exceptions import ParserException
-
+from programy.parser.template.nodes.size import TemplateSizeNode
 from programytest.parser.template.graph_tests.graph_test_client import TemplateGraphTestClient
 
 

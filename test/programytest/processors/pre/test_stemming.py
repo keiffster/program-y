@@ -1,6 +1,6 @@
 import unittest
-from programy.processors.pre.stemming import StemmingPreProcessor
 
+from programy.processors.pre.stemming import StemmingPreProcessor
 from programytest.client import TestClient
 
 

@@ -25,16 +25,25 @@ class LookupTests(unittest.TestCase):
         self.assertEqual('value1', lookup.value)
         self.assertEqual({'_id': '666', 'key': 'key1', 'value': 'value1'}, lookup.to_document())
 
-    def test_from_document(self):
+    def test_from_document_no_id(self):
         lookup1 = Lookup.from_document({'key': 'key1', 'value': 'value1'})
         self.assertIsNotNone(lookup1)
         self.assertIsNone(lookup1.id)
         self.assertEqual('key1', lookup1.key)
         self.assertEqual('value1', lookup1.value)
 
+    def test_from_document_with_id(self):
         lookup2 = Lookup.from_document({'_id': '666', 'key': 'key1', 'value': 'value1'})
         self.assertIsNotNone(lookup2)
         self.assertIsNotNone(lookup2.id)
         self.assertEqual('666', lookup2.id)
         self.assertEqual('key1', lookup2.key)
         self.assertEqual('value1', lookup2.value)
+
+    def test_repr_no_id(self):
+        lookup1 = Lookup.from_document({'key': 'key1', 'value': 'value1'})
+        self.assertEquals("<Lookup(id='n/a', key='key1', value='value1')>", str(lookup1))
+
+    def test_repr_with_id(self):
+        lookup2 = Lookup.from_document({'_id': '666', 'key': 'key1', 'value': 'value1'})
+        self.assertEquals("<Lookup(id='666', key='key1', value='value1')>", str(lookup2))

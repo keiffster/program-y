@@ -1,6 +1,6 @@
-import unittest
 import os
 import os.path
+import unittest
 
 from programy.utils.license.keys import LicenseKeys
 

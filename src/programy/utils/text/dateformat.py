@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -17,11 +17,12 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import datetime
 
-class DateFormatter(object):
+
+class DateFormatter:
 
     @staticmethod
     def year_month_day(year, month, day):
-        return datetime.datetime.strptime("%d-%d-%d"%(year, month, day), "%Y-%m-%d")
+        return datetime.datetime.strptime("%d-%d-%d" % (year, month, day), "%Y-%m-%d")
 
     @staticmethod
     def year_month_day_now():
@@ -31,16 +32,16 @@ class DateFormatter(object):
     def __init__(self, weeks=0, days=0, hours=0, minutes=0, seconds=0):
         self._time_now = datetime.datetime.now()
         if weeks > 0:
-            new_now = self._time_now + datetime.timedelta(days=weeks*7)
+            new_now = self._time_now + datetime.timedelta(days=weeks * 7)
             self._time_now = new_now
         if days > 0:
             new_now = self._time_now + datetime.timedelta(days=days)
             self._time_now = new_now
         if hours > 0:
-            new_now = self._time_now + datetime.timedelta(seconds=hours*60*60)
+            new_now = self._time_now + datetime.timedelta(seconds=hours * 60 * 60)
             self._time_now = new_now
         if minutes > 0:
-            new_now = self._time_now + datetime.timedelta(seconds=minutes*60)
+            new_now = self._time_now + datetime.timedelta(seconds=minutes * 60)
             self._time_now = new_now
         if seconds > 0:
             new_now = self._time_now + datetime.timedelta(seconds=seconds)

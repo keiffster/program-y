@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -87,15 +87,13 @@ class CjkTokenizer(Tokenizer):
         texts = ''
 
         if words is None:
-            words = ''
+            words = ['']
 
         for word in words:
             if CjkTokenizer._is_chinese_word(word):
                 texts += word
             elif len(texts) > 0:
                 texts += ' ' + word
-            elif word is None:
-                pass
             else:
                 texts += word
 
@@ -106,10 +104,9 @@ class CjkTokenizer(Tokenizer):
     def words_from_current_pos(self, words, current_pos):
         if words:
             return self.words_to_texts(words[current_pos:])
-        raise Exception("Num word array violation !")
+        raise ValueError("Num word array violation !")
 
     def compare(self, value1, value2):
         cjk_value1 = self.words_to_texts(self.texts_to_words(value1.upper()))
         cjk_value2 = self.words_to_texts(self.texts_to_words(value2.upper()))
         return cjk_value1 == cjk_value2
-

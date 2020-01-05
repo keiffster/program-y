@@ -1,0 +1,52 @@
+north of:south of
+east of:west of
+above:below
+across from:across from
+against:against
+ahead of:trailing
+along:along
+alongside:alongside
+around:inside
+atop:below
+behind:in front of
+below:above
+beneath:above
+beside:beside
+close to:close to
+far from:far from
+in front of:behind
+inside:around
+inside of:around
+left of:right of
+near:near
+near to:near to
+next to:next to
+on top of:below
+opposite:opposite
+underneath:above
+south of:north of
+west of:east of
+below:above
+across from:across from
+against:against
+trailing:ahead of
+along:along
+alongside:alongside
+inside:around
+below:atop
+in front of:behind
+above:below
+above:beneath
+beside:beside
+close to:close to
+far from:far from
+behind:in front of
+around:inside
+around:inside of
+right of:left of
+near:near
+near to:near to
+next to:next to
+below:on top of
+opposite:opposite
+above:underneath

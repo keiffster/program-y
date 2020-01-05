@@ -2,7 +2,6 @@ import unittest
 
 from programy.services.rest import GenericRESTService, RestAPI
 from programy.services.service import BrainServiceConfiguration
-
 from programytest.client import TestClient
 
 

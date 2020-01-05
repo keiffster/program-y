@@ -1,11 +1,11 @@
 import xml.etree.ElementTree as ET
 
-from programy.parser.template.nodes.base import TemplateNode
-from programy.parser.template.nodes.that import TemplateThatNode
 from programy.dialog.conversation import Conversation
 from programy.dialog.question import Question
-
+from programy.parser.template.nodes.base import TemplateNode
+from programy.parser.template.nodes.that import TemplateThatNode
 from programytest.parser.base import ParserTestsBaseClass
+
 
 class MockTemplateThatNode(TemplateThatNode):
     def __init__(self):
@@ -13,6 +13,7 @@ class MockTemplateThatNode(TemplateThatNode):
 
     def resolve_to_string(self, context):
         raise Exception("This is an error")
+
 
 class TemplateThatNodeTests(ParserTestsBaseClass):
 
@@ -143,6 +144,32 @@ class TemplateThatNodeTests(ParserTestsBaseClass):
 
         self.assertEqual("Hello matey", node.resolve(self._client_context))
 
+    def test_resolve_to_string_three_digit(self):
+        root = TemplateNode()
+        self.assertIsNotNone(root)
+        self.assertIsNotNone(root.children)
+        self.assertEqual(len(root.children), 0)
+
+        node = TemplateThatNode(index="1,1,3")
+        self.assertIsNotNone(node)
+
+        root.append(node)
+        self.assertEqual(len(root.children), 1)
+        self.assertIsInstance(node.index, TemplateNode)
+
+        conversation = Conversation(self._client_context)
+
+        question = Question.create_from_text(self._client_context, "Hello world")
+        question.current_sentence()._response = "Hello matey"
+        conversation.record_dialog(question)
+
+        question = Question.create_from_text(self._client_context, "How are you")
+        question.current_sentence()._response = "Very well thanks"
+        conversation.record_dialog(question)
+
+        self._client_context.bot._conversation_mgr._conversations["testid"] = conversation
+
+        self.assertEqual("", node.resolve(self._client_context))
 
     def test_node_exception_handling(self):
         root = TemplateNode()

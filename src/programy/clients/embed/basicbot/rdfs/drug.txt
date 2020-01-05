@@ -1,0 +1,10 @@
+COCAINE:hasPurpose:to make us intoxicated
+COCAINE:hasSize:3
+COCAINE:hasSyllables:2
+COCAINE:isa:Drug
+COCAINE:lifeArea:Diet
+DRUG:hasPurpose:to heal us
+DRUG:hasSize:4
+DRUG:hasSyllables:1
+DRUG:isa:Medicine
+DRUG:lifeArea:Diet

@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,9 +14,9 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from sqlalchemy import Column, Integer, String
-
+from sqlalchemy import Column
+from sqlalchemy import Integer
+from sqlalchemy import String
 from programy.storage.stores.sql.base import Base
 from programy.storage.stores.utils import DAOUtils
 
@@ -29,5 +29,5 @@ class LinkedAccount(Base):
     linked_user = Column(String(16))
 
     def __repr__(self):
-       return "<Linked(id='%s', primary_user='%s', linked_user='%s')>" % (DAOUtils.valid_id(self.id), self.primary_user, self.linked_user)
-
+        return "<Linked(id='%s', primary_user='%s', linked_user='%s')>" % (
+            DAOUtils.valid_id(self.id), self.primary_user, self.linked_user)

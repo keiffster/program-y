@@ -1,11 +1,11 @@
 import xml.etree.ElementTree as ET
 
+from programy.dialog.question import Question
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.set import TemplateSetNode
 from programy.parser.template.nodes.word import TemplateWordNode
-from programy.dialog.question import Question
-
 from programytest.parser.base import ParserTestsBaseClass
+
 
 class MockTemplateSetNode(TemplateSetNode):
     def __init__(self):

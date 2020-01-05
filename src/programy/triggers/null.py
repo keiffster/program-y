@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -16,6 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 from programy.triggers.trigger import Trigger
 from programy.context import ClientContext
+from programy.utils.console.console import outputLog
 
 
 class NullTrigger(Trigger):
@@ -23,6 +24,9 @@ class NullTrigger(Trigger):
     def __init__(self):
         Trigger.__init__(self)
 
-    def trigger(self, client_context: ClientContext = None, additional = None):
-        print("%s Trigger fired, no action..."%additional["event"])
+    def trigger(self, client_context: ClientContext = None, additional=None):
+        if additional is not None:
+            if 'event' in additional:
+                outputLog(self, "%s Trigger fired, no action..." % additional["event"])
 
+        outputLog(self, "%s Trigger fired, no action...")

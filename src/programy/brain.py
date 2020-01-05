@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -15,12 +15,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.utils.logging.ylogger import YLogger
-
-try:
-    import _pickle as pickle
-except:
-    import pickle
-
 from programy.processors.processing import PreProcessorCollection
 from programy.processors.processing import PostProcessorCollection
 from programy.processors.processing import PostQuestionProcessorCollection
@@ -49,12 +43,12 @@ from programy.security.manager import SecurityManager
 from programy.oob.handler import OOBHandler
 
 
-class Brain(object):
+class Brain:
 
     def __init__(self, bot, configuration: BrainConfiguration):
 
-        assert (bot is not None)
-        assert (configuration is not None)
+        assert bot is not None
+        assert configuration is not None
 
         self._questions = 0
 
@@ -63,7 +57,7 @@ class Brain(object):
 
         self._binaries = BinariesManager(configuration.binaries)
         self._braintree = BraintreeManager(configuration.braintree)
-        self._tokenizer = Tokenizer.load_tokenizer(configuration)
+        self._tokenizer = Tokenizer.load_tokenizer(configuration.tokenizer)
 
         self._denormal_collection = DenormalCollection()
         self._normal_collection = NormalCollection()
@@ -97,7 +91,8 @@ class Brain(object):
 
         self.load(self.configuration)
 
-    def ylogger_type(self):
+    @staticmethod
+    def ylogger_type():
         return "brain"
 
     @property
@@ -224,7 +219,7 @@ class Brain(object):
             self.load_aiml()
 
         if configuration.binaries.save_binary is True:
-            self._binaries.save_binary(self.bot.client.storage_factory)
+            self._binaries.save_binary(self.bot.client.storage_factory, self._aiml_parser)
 
         YLogger.info(self, "Loading collections")
         self.load_collections()
@@ -250,31 +245,31 @@ class Brain(object):
     def dump_brain_tree(self, client_context):
         self._braintree.dump_brain_tree(client_context)
 
-    def _load_denormals(self):
+    def load_denormals(self):
         self._denormal_collection.empty()
         self._denormal_collection.load(self.bot.client.storage_factory)
 
-    def _load_normals(self):
+    def load_normals(self):
         self._normal_collection.empty()
         self._normal_collection.load(self.bot.client.storage_factory)
 
-    def _load_genders(self):
+    def load_genders(self):
         self._gender_collection.empty()
         self._gender_collection.load(self.bot.client.storage_factory)
 
-    def _load_persons(self):
+    def load_persons(self):
         self._person_collection.empty()
         self._person_collection.load(self.bot.client.storage_factory)
 
-    def _load_person2s(self):
+    def load_person2s(self):
         self._person2_collection.empty()
         self._person2_collection.load(self.bot.client.storage_factory)
 
-    def _load_properties(self):
+    def load_properties(self):
         self._properties_collection.empty()
         self._properties_collection.load(self.bot.client.storage_factory)
 
-    def _load_default_variables(self):
+    def load_default_variables(self):
         self._default_variables_collection.empty()
         self._default_variables_collection.load(self.bot.client.storage_factory)
 
@@ -290,7 +285,7 @@ class Brain(object):
         if self._default_variables_collection.has_variable("subjectivity") is False:
             self._default_variables_collection.set_value("subjectivity", str(subjectivity))
 
-    def _load_maps(self):
+    def load_maps(self):
         self._maps_collection.empty()
         self._maps_collection.load(self.bot.client.storage_factory)
 
@@ -300,7 +295,7 @@ class Brain(object):
         else:
             YLogger.error(self, "Unknown map name [%s], unable to reload ", mapname)
 
-    def _load_sets(self):
+    def load_sets(self):
         self._sets_collection.empty()
         self._sets_collection.load(self.bot.client.storage_factory)
 
@@ -310,7 +305,7 @@ class Brain(object):
         else:
             YLogger.error(self, "Unknown set name [%s], unable to reload ", setname)
 
-    def _load_rdfs(self):
+    def load_rdfs(self):
         self._rdf_collection.empty()
         self._rdf_collection.load(self.bot.client.storage_factory)
 
@@ -341,16 +336,16 @@ class Brain(object):
         self._template_factory.load(self.bot.client.storage_factory)
 
     def load_collections(self):
-        self._load_denormals()
-        self._load_normals()
-        self._load_genders()
-        self._load_persons()
-        self._load_person2s()
-        self._load_properties()
-        self._load_default_variables()
-        self._load_rdfs()
-        self._load_sets()
-        self._load_maps()
+        self.load_denormals()
+        self.load_normals()
+        self.load_genders()
+        self.load_persons()
+        self.load_person2s()
+        self.load_properties()
+        self.load_default_variables()
+        self.load_rdfs()
+        self.load_sets()
+        self.load_maps()
         self._load_preprocessors()
         self._load_postprocessors()
         self._load_postquestionprocessors()
@@ -365,10 +360,7 @@ class Brain(object):
         self._security.load_security_services(self.bot.client)
 
     def load_dynamics(self):
-        if self.configuration.dynamics is not None:
-            self._dynamics_collection.load_from_configuration(self.configuration.dynamics)
-        else:
-            YLogger.debug(self, "No dynamics configuration defined...")
+        self._dynamics_collection.load_from_configuration(self.configuration.dynamics)
 
     def load_regex_templates(self):
         self._regex_templates.load(self.bot.client.storage_factory)
@@ -385,16 +377,13 @@ class Brain(object):
             return None
         return response
 
-    def failed_authentication(self, client_context):
-        return self._security.failed_authentication(client_context)
-
     def authenticate_user(self, client_context):
         return self._security.authenticate_user(client_context)
 
     def resolve_matched_template(self, client_context, match_context):
 
-        assert (client_context is not None)
-        assert (match_context is not None)
+        assert client_context is not None
+        assert match_context is not None
 
         template_node = match_context.template_node
 
@@ -411,9 +400,9 @@ class Brain(object):
 
     def ask_question(self, client_context, sentence, srai=False):
 
-        assert (client_context is not None)
-        assert (client_context.bot is not None)
-        assert (self._aiml_parser is not None)
+        assert client_context is not None
+        assert client_context.bot is not None
+        assert self._aiml_parser is not None
 
         client_context.brain = self
 
@@ -423,22 +412,19 @@ class Brain(object):
 
         conversation = client_context.bot.get_conversation(client_context)
 
-        if conversation is not None:
+        self._questions += 1
 
-            self._questions += 1
+        topic_pattern = conversation.get_topic_pattern(client_context)
 
-            topic_pattern = conversation.get_topic_pattern(client_context)
+        that_pattern = conversation.get_that_pattern(client_context, srai)
 
-            that_pattern = conversation.get_that_pattern(client_context, srai)
+        match_context = self._aiml_parser.match_sentence(client_context,
+                                                         sentence,
+                                                         topic_pattern=topic_pattern,
+                                                         that_pattern=that_pattern)
 
-            match_context = self._aiml_parser.match_sentence(client_context,
-                                                             sentence,
-                                                             topic_pattern=topic_pattern,
-                                                             that_pattern=that_pattern)
-
-            if match_context is not None:
-                match_context.sentence = sentence.text(client_context)
-                return self.resolve_matched_template(client_context, match_context)
+        if match_context is not None:
+            match_context.sentence = sentence.text(client_context)
+            return self.resolve_matched_template(client_context, match_context)
 
         return None
-

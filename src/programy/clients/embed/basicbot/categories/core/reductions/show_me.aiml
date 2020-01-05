@@ -1,0 +1,740 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>SHOE ME</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME A PHOTO *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME A PICTURE OF SOME *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU FIND ME A PICTURE OF *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME A FUNNY PICTURE ABOUT A *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME A PIC *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WILL YOU SHOW ME YOUR *</pattern>
+        <template>
+            <srai>SHOW ME YOUR
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU PLEASE SHOW ME A PICTURE OF *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME A PICTURE OF A GIRL</pattern>
+        <template>
+            <srai>SHOW ME A GIRL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME A PICTURE OF A HORSE</pattern>
+        <template>
+            <srai>SHOW ME A HORSE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME A PICTURE OF A ZOMBIE</pattern>
+        <template>
+            <srai>SHOW ME A ZOMBIE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME A PICTURE OF *</pattern>
+        <template>
+            <srai>SHOW ME A PICTURE OF
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN I SEE A PICTURE *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>PICTURE OF THE *</pattern>
+        <template>
+            <srai>SHOW ME A PICTURE OF
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>LET ME SEE A PICTURE OF *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME SHOW ME *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU PLEASE SHOW ME *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MAY I SEE *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME A PICTURE OF THE WORLDS *</pattern>
+        <template>
+            <srai>SHOW ME THE WORLD S
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME ANOTHER *</pattern>
+        <template>
+            <srai>SHOW ME A
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I WANT TO SEE A *</pattern>
+        <template>
+            <srai>SHOW ME A
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN I SEE A PICTURE OF *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU SHOW ME A PICTURE OF THE *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GIVE ME A PICTURE OF *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME YOUR PICTURE</pattern>
+        <template>
+            <srai>PIC</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU SEND ME A PICTURE OF *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME A PHOTO OF *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE A PICTURE OF *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>PLEASE SHOW ME *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME A PICTURE OF A DOG</pattern>
+        <template>
+            <srai>SHOW ME A DOG</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME A PICTURE OF YOURSELF</pattern>
+        <template>
+            <srai>PIC</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN I SEE A *</pattern>
+        <template>
+            <srai>SHOW ME A
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME A MAP OF *</pattern>
+        <template>
+            <srai>MAP
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN I SEE *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>PICTURE OF A *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME A PICTURE OF AN *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>PICTURE OF *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME A PIC OF *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU SHOW ME A PICTURE OF *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU SHOW ME A PICTURE OF A *</pattern>
+        <template>
+            <srai>SHOW ME A PICTURE OF
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU SHOW ME A *</pattern>
+        <template>
+            <srai>SHOW ME A
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I WANT TO SEE *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME A PICTURE *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SEND ME A PICTURE OF *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU SHOW ME *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME A PICTURE OF THE *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME A *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME A PICTURE OF A *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME A PICTURE OF *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DOES AN * LOOK LIKE</pattern>
+        <template>
+            <srai>SHOW ME AN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW A PICTURE OF A *</pattern>
+        <template>
+            <srai>SHOW ME A
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME THE PICTURE OF *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DISPLAY *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME A PIC OF A *</pattern>
+        <template>
+            <srai>SHOW ME A
+                <star/>
+            </srai>
+        </template>
+    </category>
+   <category>
+        <pattern>A PICTURE OF *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU SHOW ME SOME *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME ANOTHER PICTURE OF *</pattern>
+        <template>
+            <srai>SHOW ME A PICTURE OF
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SEND ME A PIC *</pattern>
+        <template>
+            <srai>SHOW ME A PICTURE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU SHOW ME A PICTURE *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU FIND ME A PICTURE OF A *</pattern>
+        <template>
+            <srai>SHOW ME A PICTURE OF
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I NEED TO SEE *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I WANT A PICTURE OF *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>PICTURES *</pattern>
+        <template>
+            <srai>SHOW ME PICTURES
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO * LOOK LIKE</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DOES THE * LOOK LIKE</pattern>
+        <template>
+            <srai>SHOW ME THE
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+
+
+
+
+
+    <category>
+        <pattern>SHOW ME YOU</pattern>
+        <template>
+            <srai>PIC</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME A PICTURE OF ALICE</pattern>
+        <template>
+            <srai>PIC</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME YOUR *</pattern>
+        <template>
+            <srai>PIC</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME YOUR BODY</pattern>
+        <template>
+            <srai>PIC</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>CAN YOU SHOW ME A PICTURE OF YOU</pattern>
+        <template>
+            <srai>PIC</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU SHOW ME A PICTURE</pattern>
+        <template>
+            <srai>HELP PICTURE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW A *</pattern>
+        <template>
+            <srai>SHOW ME A
+                <star/>
+            </srai>
+        </template>
+    </category>
+     <category>
+        <pattern>SEND ME A PICTURE OF YOUR *</pattern>
+        <template>
+            <srai>SHOW ME YOUR
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SEND ME A PICTURE *</pattern>
+        <template>
+            <srai>SHOW ME A PICTURE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME HOW *</pattern>
+        <template>
+            <srai>HOW
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU SHOW ME YOUR *</pattern>
+        <template>
+            <srai>SHOW ME YOUR
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DOES A * LOOK LIKE</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DOES * LOOK LIKE</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME AN *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME PICTURES OF *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME A PICTURE OF YOU</pattern>
+        <template>
+            <srai>PIC</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND A PICTURE OF *</pattern>
+        <template>
+            <srai>SHOW ME A PICTURE OF
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND ANOTHER PICTURE *</pattern>
+        <template>
+            <srai>SHOW ME A PICTURE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME A PICTURE</pattern>
+        <template>
+            <srai>PIC</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME A PICTURE OF THE BIGGEST *</pattern>
+        <template>
+            <srai>SHOE ME THE BIGGEST
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME A PICTURE OF A CAT</pattern>
+        <template>
+            <srai>SHOW ME A CAT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND ME A PICTURE OF *</pattern>
+        <template>
+            <srai>SHOW ME A PICTURE OF
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SEND ME A PICTURE OF A *</pattern>
+        <template>
+            <srai>SHOW ME A
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME AN IMAGE OF A *</pattern>
+        <template>
+            <srai>SHOW ME A
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME AN IMAGE OF *</pattern>
+        <template>
+            <srai>SHOW ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>SHOW ME A PICTURE OF NAKED *</pattern>
+        <template>
+            <srai>FILTER INAPPROPRIATE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>SHOW ME A MAP *</pattern>
+        <template>
+            <srai>MAP
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+
+
+</aiml>

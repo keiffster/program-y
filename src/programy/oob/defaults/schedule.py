@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,16 +14,17 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from programy.utils.parsing.linenumxml import LineNumberingParser
+import xml.etree.ElementTree as ET  # pylint: disable=wrong-import-order
 from programy.utils.logging.ylogger import YLogger
-import xml.etree.ElementTree as ET
-
 from programy.oob.defaults.oob import OutOfBandProcessor
 
 
 class ScheduleOutOfBandProcessor(OutOfBandProcessor):
     """
     <oob>
-        <schedule><title><star/></title><description><lowercase><star index="2"/></lowercase></description><get name="sraix"/></schedule>
+        <schedule><title><star/></title><description><lowercase><star index="2"/><
+        /lowercase></description><get name="sraix"/></schedule>
     </oob>
     """
 
@@ -43,7 +44,7 @@ class ScheduleOutOfBandProcessor(OutOfBandProcessor):
                     YLogger.error(self, "Unknown child element [%s] in schedule oob", child.tag)
 
             if self._title is not None and \
-                self._description is not None:
+                    self._description is not None:
                 return True
 
         YLogger.error(self, "Invalid email schedule command")

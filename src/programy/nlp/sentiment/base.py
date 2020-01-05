@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -18,16 +18,16 @@ from programy.utils.logging.ylogger import YLogger
 from programy.utils.classes.loader import ClassLoader
 
 
-class BaseSentimentAnalyser(object):
+class BaseSentimentAnalyser:
 
     def initialise(self, storage_factory=None):
-        pass
+        pass    # pragma: no cover
 
     def analyse_each(self, text):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     def analyse_all(self, text):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     @staticmethod
     def initiate_sentiment_analyser(sentiment_config):

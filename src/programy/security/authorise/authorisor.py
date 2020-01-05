@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,8 +14,8 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.config.brain.security import BrainSecurityConfiguration
+from programy.context import ClientContext
 
 
 class AuthorisationException(Exception):
@@ -24,7 +24,7 @@ class AuthorisationException(Exception):
         Exception.__init__(self, msg)
 
 
-class Authoriser(object):
+class Authoriser:
 
     def __init__(self, configuration: BrainSecurityConfiguration):
         self._configuration = configuration
@@ -33,11 +33,13 @@ class Authoriser(object):
     def configuration(self):
         return self._configuration
 
-    def initialise(self, brain):
+    def initialise(self, client: ClientContext):
         pass
 
     def get_default_denied_srai(self):
         return self.configuration.denied_srai
 
     def authorise(self, userid, role):
+        del userid
+        del role
         return False

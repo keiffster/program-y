@@ -3,6 +3,7 @@ import unittest
 
 from programy.storage.stores.sql.dao.corpus import Corpus
 
+
 class CorpusTests(unittest.TestCase):
     
     def test_init(self):

@@ -3,7 +3,6 @@ import xml.etree.ElementTree as ET
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.lowercase import TemplateLowercaseNode
 from programy.parser.template.nodes.word import TemplateWordNode
-
 from programytest.parser.base import ParserTestsBaseClass
 
 

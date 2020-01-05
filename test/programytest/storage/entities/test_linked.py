@@ -2,6 +2,7 @@ import unittest
 
 from programy.storage.entities.linked import LinkedAccountStore
 
+
 class LinkedAccountStoreTests(unittest.TestCase):
 
     def test_link_accounts(self):

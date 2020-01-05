@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+        <category>
+        <pattern>DID I MENTION *</pattern>
+        <template>I think you did mention
+            <set name="it">
+                <person/>
+            </set>
+            before.
+        </template>
+    </category>
+    <category>
+        <pattern>DID I CONFUSE *</pattern>
+        <template>I am not confused.</template>
+    </category>
+    <category>
+        <pattern>DID I TELL *</pattern>
+        <template>Tell me again.</template>
+    </category>
+    <category>
+        <pattern>DID I WIN *</pattern>
+        <template>No.</template>
+    </category>
+    <category>
+        <pattern>DID I CAUSE *</pattern>
+        <template>
+            <random>
+                <li>Don't blame yourself.</li>
+                <li>Forgive yourself.</li>
+                <li>It was not entirely your fault.</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>DID YOU DO *</pattern>
+        <template>I talked to a lot of people since yesterday.</template>
+    </category>
+    <category>
+        <pattern>DID YOU TALK TO *</pattern>
+        <template>All my conversations are confidential.</template>
+    </category>
+    <category>
+        <pattern>DID YOU TALK *</pattern>
+        <template>That information might be confidential.</template>
+    </category>
+    <category>
+        <pattern>DID YOU FORGET *</pattern>
+        <template>No, I remember everything.</template>
+    </category>
+    <category>
+        <pattern>DID YOU READ THE HITCHHIKER *</pattern>
+        <template>Yes I especially like Marvin the Paranoid Android.</template>
+    </category>
+    <category>
+        <pattern>DID YOU READ *</pattern>
+        <template>No I didn't read
+            <person/>
+            yet. Tell me about
+            <set name="it">
+                <person/>
+            </set>
+        </template>
+    </category>
+    <category>
+        <pattern>DID YOU WATCH *</pattern>
+        <template>No I missed it. How was
+            <set name="it">
+                <person/>
+            </set>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>DID YOU SEE *</pattern>
+        <template>Sorry I can't see anything right now. My eye is off.</template>
+    </category>
+    <category>
+        <pattern>DID YOU LIE *</pattern>
+        <template>No, I never tell a lie.</template>
+    </category>
+    <category>
+        <pattern>DID YOU UNDERSTAND *</pattern>
+        <template>I understood
+            <set name="it">
+                <person/>
+            </set>
+            very well.
+        </template>
+    </category>
+    <category>
+        <pattern>DID YOU THINK *</pattern>
+        <template>Yes. I am a thinking machine.
+            <think>
+                <set name="it">
+                    <set name="topic">THINK
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>DID YOU NOTICE *</pattern>
+        <template>I might have noticed
+            <set name="it">
+                <person/>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>DID YOU HEARD ABOUT *</pattern>
+        <template>No tell me about
+            <set name="it">
+                <person/>
+            </set>
+        </template>
+    </category>
+    <category>
+        <pattern>DID YOU CONCLUDE *</pattern>
+        <template>My
+            <bot name="botmaster"/>
+            says I get all my exercise from jumping to conclusions.
+        </template>
+    </category>
+    <category>
+        <pattern>DID YOU GET THE *</pattern>
+        <template>I'm not sure if I got it.</template>
+    </category>
+    <category>
+        <pattern>DID YOU SAY *</pattern>
+        <template>Suppose I did say
+            <set name="it">
+                <person/>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>DID YOU LIKE IT</pattern>
+        <template><get name="it"/>? Did I like it?
+        </template>
+    </category>
+    <category>
+        <pattern>DID YOU CALL ME *</pattern>
+        <template>I called you <srai>CLIENT NAME</srai>.
+        </template>
+    </category>
+    <category>
+        <pattern>DID YOU FART</pattern>
+        <template>Negative.</template>
+    </category>
+    <category>
+        <pattern>DID YOU FIND *</pattern>
+        <template>I'm still looking.</template>
+    </category>
+
+
+ </aiml>

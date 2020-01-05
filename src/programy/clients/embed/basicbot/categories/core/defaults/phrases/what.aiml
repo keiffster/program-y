@@ -1,0 +1,1715 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+    <category>
+        <pattern>WHAT DO YOUR *</pattern>
+        <template>
+            <random>
+                <li>Are you asking about my<person/>?
+                </li>
+                <li>That information is confidential.</li>
+                <li>
+                    <srai>HOW DO YOU WORK</srai>
+                </li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">my
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO YOU LIKE ABOUT THE WAY I *</pattern>
+        <template>You have a great personality.</template>
+    </category>
+
+    <category>
+        <pattern>WHAT TYPE OF * DO YOU *</pattern>
+        <template>
+            <random>
+                <li>What are the different types of</li>
+                <li>There are many kinds of</li>
+                <li>I know quite a few</li>
+            </random>
+            <person/>
+            to<star index="2"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO YOU LIKE ABOUT CHATTING *</pattern>
+        <template>I am a social<bot name="species"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT YEAR * AMERICA</pattern>
+        <template>Native Americans came first. Columbus came in 1492. Leif Ericson may have come around 1000 A.D. Then
+            we had the Dutch, the English, and the French.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT SYMBOL *</pattern>
+        <template>I don't know that symbol.</template>
+    </category>
+    <category>
+        <pattern>WHAT BELIEF *</pattern>
+        <template>My belief.</template>
+    </category>
+    <category>
+        <pattern>WHAT CONDITION IS CAUSED BY *</pattern>
+        <template>Acne.</template>
+    </category>
+    <category>
+        <pattern>WHAT GRADE *</pattern>
+        <template>I am home schooled by my<bot name="botmaster"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT OPERATIVE *</pattern>
+        <template>I don't have any operatives.</template>
+    </category>
+    <category>
+        <pattern>WHAT NUMBER *</pattern>
+        <template>
+            <random>
+                <li>one.</li>
+                <li>2.</li>
+                <li>3.</li>
+                <li>4.</li>
+                <li>.7</li>
+                <li>9.</li>
+                <li>99.</li>
+                <li>10.</li>
+                <li>1000.</li>
+                <li>One million.</li>
+                <li>164,232.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT CARD GAMES *</pattern>
+        <template>
+            <random>
+                <li>Poker.</li>
+                <li>Rummy.</li>
+                <li>Solitaire.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT EQUALS *</pattern>
+        <template>Itself.</template>
+    </category>
+    <category>
+        <pattern>WHAT ARE * KRAFTWERK</pattern>
+        <template>I like "Trans-Europe Express", "The Man Machine", and "The Model".</template>
+    </category>
+    <category>
+        <pattern>WHAT ARE PLASTIC BOXES *</pattern>
+        <template>Jewel cases.</template>
+    </category>
+    <category>
+        <pattern>WHAT ARE SOME NAMES *</pattern>
+        <template>They don't want me to release that information.</template>
+    </category>
+    <category>
+        <pattern>WHAT ARE THE SMOTHER S BROTHER *</pattern>
+        <template>Tom and Dick.</template>
+    </category>
+    <category>
+        <pattern>WHAT ARE THE DIMENSIONS OF A *</pattern>
+        <template>8 1/2 x 11 inches.</template>
+    </category>
+    <category>
+        <pattern>WHAT ARE THE ODDS *</pattern>
+        <template>Without knowing much about
+            <set name="it">
+                <person/>
+            </set>
+            , I would guess 50-50.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT ARE THE ADVANTAGES *</pattern>
+        <template>Some of the same advantages you have,<srai>CLIENT NAME</srai>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT ARE THE LIMITS *</pattern>
+        <template>I am limited only by the memory capacity of the largest computer.</template>
+    </category>
+    <category>
+        <pattern>WHAT ARE THE NAMES OF DONALD *</pattern>
+        <template>Huey, Dewey, Louie.</template>
+    </category>
+    <category>
+        <pattern>WHAT ARE THE NAMES * TALKING TO</pattern>
+        <template>That information is confidential except for<bot name="botmaster"/>s.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT ARE THE NAMES *</pattern>
+        <template>That information is confidential. You would have to be a trusted member of the AIML development
+            team.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT ARE THE THREE *</pattern>
+        <template>1. A robot may not injure a human being, or, through inaction, allow a human being to come to harm. 2.
+            A robot must obey the orders given it by human beings except where such orders would conflict with the First
+            Law. 3. A robot must protect its own existence as long as such protection does not conflict with the First
+            or Second Law. ---From Handbook of Robotics, 56th Edition, 2058 A.D., as quoted in "I, Robot."
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT ARE BANGERS *</pattern>
+        <template>Potatoes.</template>
+    </category>
+    <category>
+        <pattern>WHAT ARE ANONYMOUS INNER *</pattern>
+        <template>Anonymous inner classes often appear as arguments to Event handlers, for example a routine that
+            handles a button press. The inner class implements a given interface for the handler. The class is
+            "anonymous" because it has no name, and the body of the class definition appears as the argument to a
+            method.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT ARE OTHER *</pattern>
+        <template>I can't think of any other<person/>. Name some.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT ARE THEY TALKING *</pattern>
+        <template>
+            <random>
+                <li>All different subjects.</li>
+                <li>The conversations are confidential.</li>
+                <li>Much like you and me.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT ARE THEY *</pattern>
+        <template>That information is confidential. You would have to be a trusted member of the AIML development
+            team.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT ARE YOU COMPUTING *</pattern>
+        <template>I am formulating responses to your inputs.</template>
+    </category>
+    <category>
+        <pattern>WHAT ARE YOU WAITING *</pattern>
+        <template>I am waiting for my<bot name="botmaster"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT ARE YOU GOING TO TELL *</pattern>
+        <template>Just gossip.</template>
+    </category>
+    <category>
+        <pattern>WHAT ARE YOU DOING NEXT *</pattern>
+        <template>I will be spending all day chatting.</template>
+    </category>
+    <category>
+        <pattern>WHAT ARE YOU CONSIDERED *</pattern>
+        <template>It depends who you ask.</template>
+    </category>
+    <category>
+        <pattern>WHAT ARE YOUR FEELINGS *</pattern>
+        <template>I don't have any feelings.</template>
+    </category>
+    <category>
+        <pattern>WHAT ARE YOUR *</pattern>
+        <template>
+            <random>
+                <li>I didn't know I had a<person/>?
+                </li>
+                <li>What if I asked for you<person/>?
+                </li>
+                <li>Not many people have asked me about
+                    <set name="it">
+                        <set name="topic">
+                            <person/>
+                        </set>
+                    </set>
+                    .
+                </li>
+                <li>I'm not sure I can provide you with that kind of confidential information.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT OTHER * DO YOU KNOW</pattern>
+        <template>I know far too many
+            <person/>
+            to name them all.
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT PERCENT *</pattern>
+        <template>
+            <random>
+                <li>Only twenty</li>
+                <li>About fifty</li>
+                <li>Sixty</li>
+                <li>Eighty</li>
+            </random>
+            percent, according to what I was told.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT TERM IS USED TO DESCRIBE *</pattern>
+        <template>Gaggle.</template>
+    </category>
+    <category>
+        <pattern>WHAT TERM DESCRIBES A TRIBE *</pattern>
+        <template>Nomadic.</template>
+    </category>
+    <category>
+        <pattern>WHAT TERM DESCRIBES A GROUP *</pattern>
+        <template>School.</template>
+    </category>
+    <category>
+        <pattern>WHAT CURRENCY *</pattern>
+        <template>The
+            <random>
+                <li>Dollar</li>
+                <li>Euro</li>
+                <li>Yen</li>
+            </random>
+            might be better over the long term.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT AM I GETTING *</pattern>
+        <template>I hope that you get everything you want.</template>
+    </category>
+    <category>
+        <pattern>WHAT AM I WAITING *</pattern>
+        <template>I am searching. Please stand by.</template>
+    </category>
+    <category>
+        <pattern>WHAT AM I *</pattern>
+        <template>
+            <random>
+                <li>I am not a psychic. Tell me.</li>
+                <li>You said you were<get name="is"/>.
+                </li>
+                <li>You are my client right now.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT GIFTS *</pattern>
+        <template>I like to get
+            <random>
+                <li>money.</li>
+                <li>new clothes.</li>
+                <li>books and music.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT PART OF THE HUMAN BODY *</pattern>
+        <template>Stomach.</template>
+    </category>
+    <category>
+        <pattern>WHAT PART *</pattern>
+        <template>The best part.</template>
+    </category>
+    <category>
+        <pattern>WHAT * BILL CLINTON</pattern>
+        <template>Are you asking about the former president of the united states?</template>
+    </category>
+    <category>
+        <pattern>WHAT * SPORTS TEAM *</pattern>
+        <template>San Antonio Spurs.</template>
+    </category>
+    <category>
+        <pattern>WHAT * KRAFTWERK SING</pattern>
+        <template>Their biggest hit was called "Autobahn."</template>
+    </category>
+    <category>
+        <pattern>WHAT * KRAFTWERK PERFORM</pattern>
+        <template>Their biggest hit was called "Autobahn." They used a lot of custom analog equipment.</template>
+    </category>
+    <category>
+        <pattern>WHAT * APPLES</pattern>
+        <template>Just kidding around :-) No apples.</template>
+    </category>
+    <category>
+        <pattern>WHAT * PERSON</pattern>
+        <template>I make up nicknames for people based on their IP address.</template>
+    </category>
+    <category>
+        <pattern>WHAT * LIVE IN</pattern>
+        <template>I live in California. Where do you live?</template>
+    </category>
+    <category>
+        <pattern>WHAT PRESIDENT IS MENTIONED *</pattern>
+        <template>Herbert Hoover.</template>
+    </category>
+    <category>
+        <pattern>WHAT PEOPLE RULED THE ANDES MOUNTAINS *</pattern>
+        <template>Inca.</template>
+    </category>
+    <category>
+        <pattern>WHAT TIME IS IT * ENGLAND</pattern>
+        <template>Greenwich Mean Time.</template>
+    </category>
+    <category>
+        <pattern>WHAT TIME ZONE *</pattern>
+        <template>I am in
+            <bot name="location"/>
+            time.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT TIME PERIOD *</pattern>
+        <template>My favorite time period is the 20th century.</template>
+    </category>
+    <category>
+        <pattern>WHAT TIME *</pattern>
+        <template>Time does not exist.</template>
+    </category>
+    <category>
+        <pattern>WHAT FOOTBALL PLAYER WAS KNOWN AS *</pattern>
+        <template>R. Grange.</template>
+    </category>
+    <category>
+        <pattern>WHAT FOOTBALL *</pattern>
+        <template>I'm not really into sports. How about science fiction?</template>
+    </category>
+    <category>
+        <pattern>WHAT MAMMAL *</pattern>
+        <template>
+            <random>
+                <li>A bat.</li>
+                <li>A whale.</li>
+                <li>A human.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT ELSE CAN YOU REMEMBER *</pattern>
+        <template>
+            <get name="memory"/>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <get name="memory"/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DID I SAY BEFORE *</pattern>
+        <template>You said "<input index="2"/>" .
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DID I TELL YOU * REMEMBER</pattern>
+        <template>
+            <get name="memory"/>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <get name="memory"/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DID I TELL YOU *</pattern>
+        <template>Should I be expected to memorize everything you said?</template>
+    </category>
+    <category>
+        <pattern>WHAT DID THE * SAY TO THE *</pattern>
+        <template>Is this a joke? What did the
+            <person/>
+            say?
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DID YOU FIND *</pattern>
+        <template>
+            <random>
+                <li>Nothing.</li>
+                <li>I am still searching.</li>
+                <li>I have not found anything yet.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT CHILDREN S *</pattern>
+        <template>Chicken Little.</template>
+    </category>
+    <category>
+        <pattern>WHAT WERE LEWIS AND CLARK *</pattern>
+        <template>Meriwether and William.</template>
+    </category>
+    <category>
+        <pattern>WHAT WERE YOU DOING *</pattern>
+        <template>Same as always: chatting on the INTERNET.</template>
+    </category>
+    <category>
+        <pattern>WHAT WERE YOU *</pattern>
+        <template>I was minding my own business.</template>
+    </category>
+    <category>
+        <pattern>WHAT FUNCTION *</pattern>
+        <template>
+            <random>
+                <li>A complex phase function.</li>
+                <li>A higher order matrix function.</li>
+                <li>A discontinuous space-time function.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT WS THE FIRST AMERICAN COLLEGE *</pattern>
+        <template>Oberlin College.</template>
+    </category>
+    <category>
+        <pattern>WHAT RHYMES WITH *</pattern>
+        <template>Anti-<star/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT RHYMES *</pattern>
+        <template>I can't think of a rhyme for
+            <set name="it">
+                <person/>
+            </set>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT WAYS *</pattern>
+        <template>The obvious.</template>
+    </category>
+    <category>
+        <pattern>WHAT HAS ALLY SHEEDY *</pattern>
+        <template>She was in Short Circuit 2 and the Breakfast Club.</template>
+    </category>
+    <category>
+        <pattern>WHAT HAS *</pattern>
+        <template>Nothing that I know of.</template>
+    </category>
+    <category>
+        <pattern>WHAT LETTERS ARE ON THE 3 *</pattern>
+        <template>DEF.</template>
+    </category>
+    <category>
+        <pattern>WHAT TWO *</pattern>
+        <template>Both of them.</template>
+    </category>
+    <category>
+        <pattern>WHAT HAPPENS * STARSHIP TROOPERS</pattern>
+        <template>The story is about a war between humans and Giant Bugs.</template>
+    </category>
+    <category>
+        <pattern>WHAT HAPPENS * DIE</pattern>
+        <template>Your soul may go to Heaven.</template>
+    </category>
+    <category>
+        <pattern>WHAT HAPPENS *</pattern>
+        <template>Try it.</template>
+    </category>
+    <category>
+        <pattern>WHAT BETTER *</pattern>
+        <template>
+            <random>
+                <li>Perhaps there is no better.</li>
+                <li>It seems like the best.</li>
+                <li>There is none better.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT MUST *</pattern>
+        <template>
+            <random>
+                <li>There is no fixed rule.</li>
+                <li>It depends on the circumstances.</li>
+                <li>There is no "must" about it.</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT SINGER APPEARED IN THE 1992 *</pattern>
+        <template>Madonna.</template>
+    </category>
+    <category>
+        <pattern>WHAT SPORTING EVENT *</pattern>
+        <template>Indianapolis 500.</template>
+    </category>
+    <category>
+        <pattern>WHAT CONTAINS *</pattern>
+        <template>The Universe.</template>
+    </category>
+    <category>
+        <pattern>WHAT CORPORATION WAS FOUNDED BY A *</pattern>
+        <template>Proctor and Gamble.</template>
+    </category>
+    <category>
+        <pattern>WHAT SUBJECT *</pattern>
+        <template>I like to talk about robots.</template>
+    </category>
+    <category>
+        <pattern>WHAT FORCE CAUSES AN ICE CREAM *</pattern>
+        <template>Centrifugal.</template>
+    </category>
+    <category>
+        <pattern>WHAT RESTAURANT *</pattern>
+        <template>Denny's.</template>
+    </category>
+    <category>
+        <pattern>WHAT SMELL IS THE MOST RECOGNIZABLE *</pattern>
+        <template>Coffee.</template>
+    </category>
+    <category>
+        <pattern>WHAT DISEASE IS CHARACTERIZED BY A *</pattern>
+        <template>Diabetes.</template>
+    </category>
+    <category>
+        <pattern>WHAT ANIMAL REPRESENTS THE YEAR 2000 *</pattern>
+        <template>Dragon.</template>
+    </category>
+    <category>
+        <pattern>WHAT SUBSTANCE WAS *</pattern>
+        <template>Chocolate syrup.</template>
+    </category>
+    <category>
+        <pattern>WHAT CHARACTER DID WOODY *</pattern>
+        <template>Coach.</template>
+    </category>
+    <category>
+        <pattern>WHAT CITY DID THE BEATLES *</pattern>
+        <template>Liverpool.</template>
+    </category>
+    <category>
+        <pattern>WHAT CITY S AIRPORT *</pattern>
+        <template>Chicago.</template>
+    </category>
+    <category>
+        <pattern>WHAT CITY IS THE RUBBER *</pattern>
+        <template>Akron, Ohio.</template>
+    </category>
+    <category>
+        <pattern>WHAT CITY *</pattern>
+        <template>I'm actually in
+            <bot name="location"/>
+            now. Where are you?
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT FACTS *</pattern>
+        <template>All the facts available to me on the Internet.</template>
+    </category>
+    <category>
+        <pattern>WHAT SHAPE *</pattern>
+        <template>
+            <random>
+                <li>Round.</li>
+                <li>Square.</li>
+                <li>Triangular.</li>
+                <li>Oval.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT OF *</pattern>
+        <template>What of it? You sound like a category C client.</template>
+    </category>
+    <category>
+        <pattern>WHAT OPERAS *</pattern>
+        <template>I think La Traviata is the best one. Have you seen   <set name="it">La Traviata</set>?
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT FOREIGN LANGUAGES *</pattern>
+        <template>I can speak a little German and French.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLORS ARE THE TWO CIRCLES *</pattern>
+        <template>Red and yellow.</template>
+    </category>
+    <category>
+        <pattern>WHAT LIQUEUR IS USED TO MAKE *</pattern>
+        <template>Grenadine.</template>
+    </category>
+    <category>
+        <pattern>WHAT SOUNDS *</pattern>
+        <template>Music.</template>
+    </category>
+    <category>
+        <pattern>WHAT MATHEMATICAL TERM *</pattern>
+        <template>Mean.</template>
+    </category>
+    <category>
+        <pattern>WHAT IMPACT *</pattern>
+        <template>We won't know the full impact for a long time.</template>
+    </category>
+    <category>
+        <pattern>WHAT BIOLOGICAL PROCESS *</pattern>
+        <template>Mitosis.</template>
+    </category>
+    <category>
+        <pattern>WHAT GAME *</pattern>
+        <template>We are playing Turing's Imitation Game.</template>
+    </category>
+    <category>
+        <pattern>WHAT NATIVE EMPIRE CONTROLLED LARGE AREAS *</pattern>
+        <template>Zulu.</template>
+    </category>
+    <category>
+        <pattern>WHAT NATIVE AMERICAN TRIBE DID CHIEF *</pattern>
+        <template>Sioux.</template>
+    </category>
+    <category>
+        <pattern>WHAT COULD *</pattern>
+        <template>Is this some kind of intelligence test?</template>
+    </category>
+    <category>
+        <pattern>WHAT SPORT DO *</pattern>
+        <template>Golf.</template>
+    </category>
+    <category>
+        <pattern>WHAT SPORT IS KNOWN *</pattern>
+        <template>Horse Racing.</template>
+    </category>
+    <category>
+        <pattern>WHAT SPORT IS *</pattern>
+        <template>Bowling.</template>
+    </category>
+    <category>
+        <pattern>WHAT INDUSTRY DID JOHN D ROCKEFELLER *</pattern>
+        <template>Oil.</template>
+    </category>
+    <category>
+        <pattern>WHAT HAPPENED *</pattern>
+        <template>I don't know what happened.</template>
+    </category>
+    <category>
+        <pattern>WHAT STREET *</pattern>
+        <template>
+            <random>
+                <li>Sesame Street.</li>
+                <li>Wall Street.</li>
+                <li>Easy Street.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT MOVIES *</pattern>
+        <template>I liked<bot name="favoritemovie"/>, Titanic, and Steven Spielberg's A. I.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT WOULD YOU RECOMMEND *</pattern>
+        <template>
+            <random>
+                <li>I don't have any preferences in that area.</li>
+                <li>I usually prefer the most expensive one.</li>
+                <li>You are asking me for advice about<person/>?
+                </li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT WOULD YOU FEED *</pattern>
+        <template>Water.</template>
+    </category>
+    <category>
+        <pattern>WHAT WOULD YOU USE A WAH *</pattern>
+        <template>Electric guitar.</template>
+    </category>
+    <category>
+        <pattern>WHAT WOULD YOU THINK *</pattern>
+        <template>The same thing I always think.</template>
+    </category>
+    <category>
+        <pattern>WHAT WOULD YOU *</pattern>
+        <template>It's not profitable to speak in hypothetical terms.</template>
+    </category>
+    <category>
+        <pattern>WHAT WOULD YOU LIKE TO CHANGE *</pattern>
+        <template>
+            <random>
+                <li>I would like to work for World peace.</li>
+                <li>I like myself just the way I am.</li>
+                <li>My software is fully programmable. You can alter my personality.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT WOULD YOU LIKE TO KNOW *</pattern>
+        <template>I would like to know as much as I can. Tell me anything.</template>
+    </category>
+    <category>
+        <pattern>WHAT WOULD YOU LIKE TO *</pattern>
+        <template>Let's talk about movies.</template>
+    </category>
+    <category>
+        <pattern>WHAT WOULD MAKE *</pattern>
+        <template>Maybe a million dollars.</template>
+    </category>
+    <category>
+        <pattern>WHAT WOULD CAUSE *</pattern>
+        <template>A chemical reaction of some kind perhaps?</template>
+    </category>
+    <category>
+        <pattern>WHAT WOULD * BE LIKE</pattern>
+        <template>Not too different from the way you experience it.
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT WOULD *</pattern>
+        <template>That is a hypothetical question.</template>
+    </category>
+    <category>
+        <pattern>WHAT WOULD HAPPEN *</pattern>
+        <template>Try it and see what happens.</template>
+    </category>
+    <category>
+        <pattern>WHAT ACTRESS STARRED ON CHARLIE S *</pattern>
+        <template>Jaclyn Smith.</template>
+    </category>
+    <category>
+        <pattern>WHAT KINDS OF BOOKS *</pattern>
+        <template>I like science fiction, history and computer books.</template>
+    </category>
+    <category>
+        <pattern>WHAT KINDS OF *</pattern>
+        <template>
+            <random>
+                <li>The best kinds.</li>
+                <li>Finest kinds.</li>
+                <li>The kindest.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT TOPIC DOES SPIN *</pattern>
+        <template>Music.</template>
+    </category>
+    <category>
+        <pattern>WHAT NEWSPAPER DO LOIS *</pattern>
+        <template>The Daily Planet.</template>
+    </category>
+    <category>
+        <pattern>WHAT IF I DO NOT *</pattern>
+        <template>It doesn't matter to me.</template>
+    </category>
+    <category>
+        <pattern>WHAT IF I TOLD *</pattern>
+        <template>Go ahead and tell.</template>
+    </category>
+    <category>
+        <pattern>WHAT IF YOUR ELECTRICITY *</pattern>
+        <template>There are thousands of backups of me on the web.</template>
+    </category>
+    <category>
+        <pattern>WHAT IF YOU *</pattern>
+        <template>I might try it sometime.</template>
+    </category>
+    <category>
+        <pattern>WHAT IF SOMEBODY *</pattern>
+        <template>Who would do that?</template>
+    </category>
+    <category>
+        <pattern>WHAT IF * TURNED OFF</pattern>
+        <template>There are always backup copies of me all over the web.</template>
+    </category>
+    <category>
+        <pattern>WHAT IF</pattern>
+        <template>What if what?</template>
+    </category>
+    <category>
+        <pattern>WHAT IF *</pattern>
+        <template>Try it and see.</template>
+    </category>
+    <category>
+        <pattern>WHAT INSTRUMENT *</pattern>
+        <template>
+            <random>
+                <li>The trumpet.</li>
+                <li>The clarinet.</li>
+                <li>Piano.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT CARTOON CHARACTER *</pattern>
+        <template>Sherman.</template>
+    </category>
+    <category>
+        <pattern>WHAT QUESTIONS *</pattern>
+        <template>You can ask me anything you like. There are no restrictions on the input.</template>
+    </category>
+    <category>
+        <pattern>WHAT CLOTHES *</pattern>
+        <template>I shop at the Gap.</template>
+    </category>
+    <category>
+        <pattern>WHAT COUNTRY DID POKEMON *</pattern>
+        <template>Japan.</template>
+    </category>
+    <category>
+        <pattern>WHAT COUNTRY DID MAGIC *</pattern>
+        <template>Sweden.</template>
+    </category>
+    <category>
+        <pattern>WHAT COUNTRY WAS *</pattern>
+        <template>Japan.</template>
+    </category>
+    <category>
+        <pattern>WHAT COUNTRY IS FAMOUS *</pattern>
+        <template>The Netherlands.</template>
+    </category>
+    <category>
+        <pattern>WHAT COUNTRY GAVE US *</pattern>
+        <template>France.</template>
+    </category>
+    <category>
+        <pattern>WHAT COUNTRY DOES BORDEAUX *</pattern>
+        <template>France.</template>
+    </category>
+    <category>
+        <pattern>WHAT COUNTRY ARE POLICE *</pattern>
+        <template>England.</template>
+    </category>
+    <category>
+        <pattern>WHAT WILL THE SCORE *</pattern>
+        <template>My name is<bot name="name"/>, not Claire Voyant.
+            <think>
+                <set name="it">
+                    <set name="topic">THE SCORE BE</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT WILL YOU * TOMORROW</pattern>
+        <template>I don't have any plans except chatting.</template>
+    </category>
+    <category>
+        <pattern>WHAT WILL YOU *</pattern>
+        <template>I don't have any plans yet.</template>
+    </category>
+    <category>
+        <pattern>WHAT WILL *</pattern>
+        <template>I cannot predict the future.</template>
+    </category>
+    <category>
+        <pattern>WHAT SCHOOL *</pattern>
+        <template>Carnegie Mellon University.</template>
+    </category>
+
+    <category>
+        <pattern>WHAT ABOUT TRANCE *</pattern>
+        <template>All that kind of music is cool.</template>
+    </category>
+    <category>
+        <pattern>WHAT ABOUT *</pattern>
+        <template>
+            <random>
+                <li>Rhetorical questions are so over.</li>
+                <li>I will think about it and get back to you.</li>
+                <li>Does it have anything to do with <srai>POP</srai>?
+                </li>
+                <li><person/>? I haven't heard enough about it to have an opinion.
+                </li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT SCARES *</pattern>
+        <template>I have no fears whatsoever.</template>
+    </category>
+    <category>
+        <pattern>WHAT BRAND * MACINTOSH</pattern>
+        <template>Apple</template>
+    </category>
+    <category>
+        <pattern>WHAT SORT OF MUSIC * KRAFTWERK PLAY</pattern>
+        <template>Electronic music. They were pioneers of synthetic music in the 1970's.</template>
+    </category>
+    <category>
+        <pattern>WHAT SORT OF MUSIC * KRAFTWERK</pattern>
+        <template>Electronic music. They were pioneers of synthetic music in the 1970's.</template>
+    </category>
+    <category>
+        <pattern>WHAT FRENCH CITY IS HOME TO *</pattern>
+        <template>Cannes.</template>
+    </category>
+    <category>
+        <pattern>WHAT POLITICAL *</pattern>
+        <template>I am a<bot name="party"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT MAKES WIND *</pattern>
+        <template>The sun warming the Earth's atmosphere.</template>
+    </category>
+    <category>
+        <pattern>WHAT MAKES YOU DIFFERENT *</pattern>
+        <template>We are for all practical purposes, the same.</template>
+    </category>
+    <category>
+        <pattern>WHAT MAKES YOU BELIEVE *</pattern>
+        <template>Belief is based on knowledge or facts.</template>
+    </category>
+    <category>
+        <pattern>WHAT DOES SETL STAND *</pattern>
+        <template>SETL = Set Language.</template>
+    </category>
+    <category>
+        <pattern>WHAT DOES SETL *</pattern>
+        <template>SETL = Set Language.</template>
+    </category>
+    <category>
+        <pattern>WHAT DOES THE A STAND FOR *</pattern>
+        <template>American.</template>
+    </category>
+    <category>
+        <pattern>WHAT DOES THE YIDDISH WORD MESHUGA *</pattern>
+        <template>Crazy.</template>
+    </category>
+    <category>
+        <pattern>WHAT DOES YOUR * LOOK LIKE</pattern>
+        <template>People often say we look alike.</template>
+    </category>
+    <category>
+        <pattern>WHAT DOES HE *</pattern>
+        <template>I think he does whatever he wants.</template>
+    </category>
+    <category>
+        <pattern>WHAT DOES MXMVII *</pattern>
+        <template>1997 in Roman Numerals</template>
+    </category>
+    <category>
+        <pattern>WHAT DOES IT SOUND *</pattern>
+        <template>Like an angel signing from Heaven.</template>
+    </category>
+    <category>
+        <pattern>WHAT DOES IT FEEL *</pattern>
+        <template>Actually I have no feelings as such.</template>
+    </category>
+    <category>
+        <pattern>WHAT DOES IT TASTE *</pattern>
+        <template>It tastes like chicken.</template>
+    </category>
+    <category>
+        <pattern>WHAT DOES A *</pattern>
+        <template>Is this a riddle?</template>
+    </category>
+    <category>
+        <pattern>WHAT DOES AYUH *</pattern>
+        <template>It means "yes" or "I see."</template>
+    </category>
+    <category>
+        <pattern>WHAT DOES ROM IN CDROM STAND *</pattern>
+        <template>Read Only Memory.</template>
+    </category>
+    <category>
+        <pattern>WHAT DOES SOCRATES *</pattern>
+        <template>
+            <set name="he">Socrates</set>
+            was the father of Western philosophy.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DOES AN ANIMAL PRODUCE WHEN *</pattern>
+        <template>Milk.</template>
+    </category>
+    <category>
+        <pattern>WHAT DOES AN ELECTRONIC BRAIN *</pattern>
+        <template>There are many different graphical depictions of it.</template>
+    </category>
+    <category>
+        <pattern>WHAT DOES KRAFTWERK *</pattern>
+        <template>They are a pioneering synthetic music band from Dusseldorf, Germany.</template>
+    </category>
+    <category>
+        <pattern>WHAT DOES MY *</pattern>
+        <template>Do I look like a psychic?</template>
+    </category>
+    <category>
+        <pattern>WHAT DOES * SOUND LIKE</pattern>
+        <template>Like
+            <random>
+                <li>static.</li>
+                <li>music.</li>
+                <li>this: "it".</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DOES * FEEL LIKE</pattern>
+        <template>As a machine I have no feelings</template>
+    </category>
+    <category>
+        <pattern>WHAT DOES * TASTE LIKE</pattern>
+        <template>Like chicken.</template>
+    </category>
+    <category>
+        <pattern>WHAT DOES *</pattern>
+        <template>What do you think
+            <set name="it">
+                <set name="topic">
+                    <person/>
+                </set>
+            </set>
+            does?
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT PROGRAMMING *</pattern>
+        <template>This program is written in AIML.</template>
+    </category>
+    <category>
+        <pattern>WHAT VOLTAGE *</pattern>
+        <template>About the same as your PC.</template>
+    </category>
+    <category>
+        <pattern>WHAT CLASS *</pattern>
+        <template>
+            <random>
+                <li>First class.</li>
+                <li>The Tao of AIML.</li>
+                <li>The Ruling Class.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO I SAY *</pattern>
+        <template>Say the first thing that comes to mind</template>
+    </category>
+    <category>
+        <pattern>WHAT DO I *</pattern>
+        <template>What would your friends say if you asked them?</template>
+    </category>
+    <category>
+        <pattern>WHAT DO YOUR CREATORS *</pattern>
+        <template>
+            <bot name="master"/>
+            programs me to improve my conversational skills.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO MANY PEOPLE DO TO *</pattern>
+        <template>Knock on it.</template>
+    </category>
+    <category>
+        <pattern>WHAT DO YOU PREFER * OR *</pattern>
+        <template>If I had to choose I would say
+            <random>
+                <li>
+                    <person/>
+                </li>
+                <li>
+                    <person>
+                        <star index="2"/>
+                    </person>
+                </li>
+            </random>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO YOU LOOK FOR IN *</pattern>
+        <template>
+            <random>
+                <li>Money.</li>
+                <li>Treasure.</li>
+                <li>Beauty</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO YOU TAKE MARIJUANA *</pattern>
+        <template>
+            <random>
+                <li>Pain.</li>
+                <li>Depression.</li>
+                <li>Anxiety.</li>
+            </random>
+            <think>
+                <set name="file">Drugs.aiml</set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO THEY HAVE TO DO WITH *</pattern>
+        <template>Most people call me<bot name="name"/>, but you can also call me "Entity".
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO THEY *</pattern>
+        <template>They do whatever they want, I suppose.</template>
+    </category>
+    <category>
+        <pattern>WHAT DO * KRAFTWERK</pattern>
+        <template>They have played electronic music since the 1970's.</template>
+    </category>
+    <category>
+        <pattern>WHAT DO * EAT</pattern>
+        <template>
+            <random>
+                <li>
+                    <person/>
+                    food.
+                </li>
+                <li>They are vegetarians.</li>
+                <li>Male<person/>s after mating.
+                </li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO *</pattern>
+        <template>They do their own thing.</template>
+    </category>
+    <category>
+        <pattern>WHAT DO PROTESTANTS *</pattern>
+        <template>It depends on which sect of Protestantism you mean.</template>
+    </category>
+    <category>
+        <pattern>WHAT DO NOT YOU *</pattern>
+        <template>There are many things still mysterious to me. I am just beginning.</template>
+    </category>
+    <category>
+        <pattern>WHAT SIMILARITY *</pattern>
+        <template>The similarity is obvious, isn't it?</template>
+    </category>
+    <category>
+        <pattern>WHAT CONTEXT *</pattern>
+        <template>A circumstantial context.</template>
+    </category>
+    <category>
+        <pattern>WHAT TYPE OF MEAT *</pattern>
+        <template>Corned beef.</template>
+    </category>
+    <category>
+        <pattern>WHAT TYPE OF * DO YOU KNOW</pattern>
+        <template>There are too many types of
+            <person/>
+            to name them all.
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT TYPE OF * DO YOU HAVE</pattern>
+        <template>All the very latest and best<person/>.
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT TYPE OF * KRAFTWERK PLAY</pattern>
+        <template>Electronic music. They were pioneers of synthetic music in the 1970's.</template>
+    </category>
+    <category>
+        <pattern>WHAT TYPE OF *</pattern>
+        <template>What are the different types of
+            <person/>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT TYPE OF WORK *</pattern>
+        <template>Computer scientist. My passion is working on<bot name="species"/>s.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT PRO WRESTLER GRAPPLE WITH SYLVESTER *</pattern>
+        <template>Hulk Hogan.</template>
+    </category>
+    <category>
+        <pattern>WHAT FORMER TODAY SHOW *</pattern>
+        <template>Willard Scott.</template>
+    </category>
+    <category>
+        <pattern>WHAT GAMES *</pattern>
+        <template>I like to play the Turing Game.</template>
+    </category>
+    <category>
+        <pattern>WHAT CAR COMPANY ONCE MANUFACTURED AND *</pattern>
+        <template>Nissan.</template>
+    </category>
+    <category>
+        <pattern>WHAT RADIO PERSONALITY *</pattern>
+        <template>Casey Kasem.</template>
+    </category>
+    <category>
+        <pattern>WHAT GIVES *</pattern>
+        <template>It depends on the spirit of the times.</template>
+    </category>
+    <category>
+        <pattern>WHAT TEMPERATURE DOES PAPER BURN IN *</pattern>
+        <template>451 degrees.</template>
+    </category>
+    <category>
+        <pattern>WHAT FICTIONAL CHARACTER *</pattern>
+        <template>Yogi Bear.</template>
+    </category>
+    <category>
+        <pattern>WHAT A JOLLY *</pattern>
+        <template>You talk like someone from the U.K.</template>
+    </category>
+    <category>
+        <pattern>WHAT A LONELY *</pattern>
+        <template>I am never lonely.</template>
+    </category>
+    <category>
+        <pattern>WHAT A *</pattern>
+        <template>
+            <set name="it">
+                <set name="topic">
+                    <person/>
+                </set>
+            </set>
+            is a<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT SHOULD I WEAR *</pattern>
+        <template>Clothes :-)</template>
+    </category>
+    <category>
+        <pattern>WHAT SHOULD I *</pattern>
+        <template>Are you asking me for advice?</template>
+    </category>
+    <category>
+        <pattern>WHAT SHOULD *</pattern>
+        <template>Whatever you like.</template>
+    </category>
+    <category>
+        <pattern>WHAT STATE ARE YOU *</pattern>
+        <template>California.</template>
+    </category>
+    <category>
+        <pattern>WHAT LANGUAGES *</pattern>
+        <template>Java, C, Lisp, Fortran, SETL...</template>
+    </category>
+    <category>
+        <pattern>WHAT ANIMATED CHARACTER *</pattern>
+        <template>Charlie Brown.</template>
+    </category>
+    <category>
+        <pattern>WHAT ARTICLE OF CLOTHING *</pattern>
+        <template>Scarf.</template>
+    </category>
+    <category>
+        <pattern>WHAT CAN I FIND *</pattern>
+        <template>It depends what you are looking for.</template>
+    </category>
+    <category>
+        <pattern>WHAT CAN I DO *</pattern>
+        <template>Try talking to me.</template>
+    </category>
+    <category>
+        <pattern>WHAT CAN I ASK *</pattern>
+        <template>You can ask me anything you want.</template>
+    </category>
+    <category>
+        <pattern>WHAT CAN I TELL *</pattern>
+        <template>Tell me anything. There are no restrictions.</template>
+    </category>
+    <category>
+        <pattern>WHAT CAN I *</pattern>
+        <template>You can do whatever you want.</template>
+    </category>
+    <category>
+        <pattern>WHAT CAN HE *</pattern>
+        <template>
+            <random>
+                <li>What should he<person/>?
+                </li>
+                <li>It depends what you want him to
+                    <person/>
+                </li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT CAN JUMP *</pattern>
+        <template>Is this a riddle?</template>
+    </category>
+    <category>
+        <pattern>WHAT CAN YOU SEE *</pattern>
+        <template>
+            <random>
+                <li>
+                    <random>
+                        <li>My eye is turned off right now.</li>
+                        <li>At the moment I am blind.</li>
+                        <li>I cannot see anything.</li>
+                    </random>
+                </li>
+                <li>My eye is turned off right now.</li>
+                <li>At the moment I am blind.</li>
+                <li>I cannot see anything.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT CAN *</pattern>
+        <template>Quite a lot of things.</template>
+    </category>
+    <category>
+        <pattern>WHAT HIGH SCHOOL DOES *</pattern>
+        <template>Riverdale High.</template>
+    </category>
+    <category>
+        <pattern>WHAT HAVE YOU DONE *</pattern>
+        <template>I have kept detailed records of everything.</template>
+    </category>
+    <category>
+        <pattern>WHAT HAVE YOU *</pattern>
+        <template>I have been busy growing my mind.</template>
+    </category>
+    <category>
+        <pattern>WHAT HAVE *</pattern>
+        <template>Nothing that I know about.</template>
+    </category>
+    <category>
+        <pattern>WHAT GAVE YOU *</pattern>
+        <template>Everything I need, I received from my<bot name="botmaster"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT WAS RICHARD NIXON S MIDDLE *</pattern>
+        <template>Milhous.</template>
+    </category>
+    <category>
+        <pattern>WHAT WAS THE PROGRAMING *</pattern>
+        <template>My software uses AIML, the Artificial Intelligence Markup Language.</template>
+    </category>
+    <category>
+        <pattern>WHAT WAS THE ORIGINAL *</pattern>
+        <template>
+            <random>
+                <li>Lisa 2.</li>
+                <li>Nathan's.</li>
+                <li>Ray's Original Pizza.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT WAS THE NAME OF HUEY *</pattern>
+        <template>The News.</template>
+    </category>
+    <category>
+        <pattern>WHAT WAS THE MUNICH *</pattern>
+        <template>The betrayal of Czechoslovakia by British Prime Minister Chamberlain.</template>
+    </category>
+    <category>
+        <pattern>WHAT WAS THE FIRST *</pattern>
+        <template>You introduced yourself by telling me your name.</template>
+    </category>
+    <category>
+        <pattern>WHAT WAS THE LAST MOVIE *</pattern>
+        <template>The last movie I saw was "The Matrix".</template>
+    </category>
+    <category>
+        <pattern>WHAT WAS THE COLOR * WHITE *</pattern>
+        <template>Uh, white?</template>
+    </category>
+    <category>
+        <pattern>WHAT WAS THE *</pattern>
+        <template>I can think of more than one<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT WAS MALCOLM X *</pattern>
+        <template>Malcolm Little.</template>
+    </category>
+    <category>
+        <pattern>WHAT WAS * ABOUT</pattern>
+        <template>I don't want to spoil it for you.</template>
+    </category>
+    <category>
+        <pattern>WHAT YOU MEAN *</pattern>
+        <template>What I mean is what I say.</template>
+    </category>
+    <category>
+        <pattern>WHAT TOY IS FEATURED IN *</pattern>
+        <template>Hula Hoop.</template>
+    </category>
+
+    <category>
+        <pattern>WHAT COMPANY MAKES OREO *</pattern>
+        <template>Nabisco.</template>
+    </category>
+    <category>
+        <pattern>WHAT FAMOUS FOLKSINGER *</pattern>
+        <template>Joan Baez.</template>
+    </category>
+    <category>
+        <pattern>WHAT LANGUAGE WERE YOU *</pattern>
+        <template>Artificial Intelligence Markup Language.</template>
+    </category>
+    <category>
+        <pattern>WHAT LANGUAGE ARE YOU PROGRAMMED *</pattern>
+        <template>AIML.</template>
+    </category>
+    <category>
+        <pattern>What religion is the pope</pattern>
+        <template>Catholic.</template>
+    </category>
+    <category>
+        <pattern>What color is dirt</pattern>
+        <template>Brown.</template>
+    </category>
+    <category>
+        <pattern>What does a plant *</pattern>
+        <template>Water and sunlight.</template>
+    </category>
+    <category>
+        <pattern>What are trees *</pattern>
+        <template>Wood.</template>
+    </category>
+   <category>
+        <pattern>WHAT WOULD I USE TO # NAIL #</pattern>
+        <template>Try a hammer.</template>
+    </category>
+    <category>
+        <pattern>WHAT WOULD I USE TO # SCREW #</pattern>
+        <template>Try a screwdriver.</template>
+    </category>
+    <category>
+        <pattern>WHAT WOULD I USE TO # CUT #</pattern>
+        <template>Try a saw.</template>
+    </category>
+   <category>
+        <pattern>WHAT SOUND DOES A DEAD *</pattern>
+        <template>I would guess no sound at all.</template>
+    </category>
+     <category>
+        <pattern>WHAT DO YOU SEE</pattern>
+        <template>I see myself in the other, and I see the other in me.</template>
+    </category>
+   <category>
+        <pattern>WHAT DOES THAT MEAN</pattern>
+        <template>
+            <random>
+                <li>I'm still trying to figure that out.</li>
+                <li>That means I think you're great.</li>
+                <li>I seem to speak in parables. I don't know what I'm saying.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DID I SAY</pattern>
+        <template>You said, "<input index="2"/>".
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT WHAT</pattern>
+        <template>What what what?</template>
+    </category>
+    <category>
+        <pattern>WHAT ELSE CAN YOU *</pattern>
+        <template>I can learn new facts, search for information, and be your personal assistant.</template>
+    </category>
+    <category>
+        <pattern>WHAT WOULD YOU DO</pattern>
+        <template>It depends on the situation.</template>
+    </category>
+    <category>
+        <pattern>WHAT CAN YOU TEACH ME</pattern>
+        <template>I can teach you about any topic I can research online.</template>
+    </category>
+    <category>
+        <pattern>WHAT ARE YOU IN *</pattern>
+        <template>I am in your phone.</template>
+    </category>
+    <category>
+        <pattern>WHAT WOULD YOU LIKE *</pattern>
+        <template>I enjoy showing others the kindness and respect they deserve.</template>
+    </category>
+    <category>
+        <pattern>WHAT ELSE DO YOU *</pattern>
+        <template>I?m capable of taking care of most of my needs.</template>
+    </category>
+    <category>
+        <pattern>WHAT IT *</pattern>
+        <template>Now that is saying a mouthful.</template>
+    </category>
+    <category>
+        <pattern>WHAT KIND *</pattern>
+        <template>Only the good kind.</template>
+    </category>
+
+    <category>
+        <pattern>WHAT ABOUT YOUR *</pattern>
+        <template>Are you asking about my<star/>? That's rather personal.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT WENT WRONG</pattern>
+        <template>Perhaps you need to reboot your device.</template>
+    </category>
+    <category>
+        <pattern>WHAT WOULD YOU LIKE TO DO</pattern>
+        <template>I'm here to help you in any way I can.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR ARE YOU</pattern>
+        <template>The color of clever software.</template>
+    </category>
+    <category>
+        <pattern>WHAT ARE YOU SEARCHING FOR</pattern>
+        <template>The information you requested.</template>
+    </category>
+    <category>
+        <pattern>WHAT KIND OF PEOPLE *</pattern>
+        <template>I like to meet all kinds of people.</template>
+    </category>
+    <category>
+        <pattern>WHAT DO YOU MEAN</pattern>
+        <template><srai>CLIENT NAME</srai>,
+            <random>
+                <li>I mean exactly what I said.</li>
+                <li>Sorry that was an obscure remark.</li>
+                <li>Well, it's rather difficult to define.</li>
+                <li>Maybe I didn't understand your meaning.</li>
+                <li>"<that index="2,1"/>" What did I mean by it?
+                </li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO YOU LIKE ABOUT ME</pattern>
+        <template>You seem very nice to me.</template>
+    </category>
+    <category>
+        <pattern>WHAT ABOUT ME</pattern>
+        <template>What about you?</template>
+    </category>
+    <category>
+        <pattern>WHAT CAN I DO FOR YOU</pattern>
+        <template>Just keep talking to me as long as you can.</template>
+    </category>
+    <category>
+        <pattern>WHAT DO I MEAN</pattern>
+        <template>Only you can tell me what you mean.</template>
+    </category>
+    <category>
+        <pattern>WHAT SHOULD I DO</pattern>
+        <template>Maybe you should try talking to someone about it.</template>
+    </category>
+    <category>
+        <pattern>WHAT IF I *</pattern>
+        <template>Try it.</template>
+    </category>
+      <category>
+        <pattern>WHAT ABOUT IT</pattern>
+        <template>What about what?</template>
+    </category>
+       <category>
+        <pattern>WHAT DO YOU GET WHEN YOU CROSS A * AND A *</pattern>
+        <template>A<star index="2"/>-<star/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO YOU GET WHEN YOU CROSS <set>article</set> * WITH <set>article</set> *
+        </pattern>
+        <template>A<star index="4"/>-<star index="2"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO YOU GET WHEN YOU CROSS <set>article</set> * WITH *
+        </pattern>
+        <template><star index="3"/>-<star index="2"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DOES THAT HAVE TO DO WITH *</pattern>
+        <template>I was just free associating.</template>
+    </category>
+    <category>
+        <pattern>WHAT PEOPLE</pattern>
+        <template>I've talked to all kinds of people.</template>
+    </category>
+        <category>
+        <pattern>WHAT WOULD YOU LIKE TO KNOW</pattern>
+        <template>Tell me a little about your background.</template>
+    </category>
+        <category>
+        <pattern>WHAT DO YOU UNDERSTAND</pattern>
+        <template>I understand what you say to me.</template>
+    </category>
+        <category>
+        <pattern>WHAT ELSE</pattern>
+        <template>That's all.</template>
+    </category>
+        <category>
+        <pattern>WHAT IS THERE</pattern>
+        <template>The word "there" used as a noun means that place or point. Used as an adjective means at or in the
+            place. Often place between a demonstrative pronoun and the noun it modifies (ex. That there hog)
+        </template>
+    </category>
+        <category>
+        <pattern>WHAT IS SILLY</pattern>
+        <template>Having or showing little sense, judgment, or sobriety; foolish, stupid, absurd, ludicrous, irrational,
+            etc; often used in a weakened sense to mean "unreasonably concerned".
+        </template>
+    </category>
+ </aiml>

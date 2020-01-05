@@ -1,8 +1,8 @@
-from programytest.parser.base import ParserTestsBaseClass
-
-from programy.parser.pattern.nodes.iset import PatternISetNode
 from programy.dialog.sentence import Sentence
 from programy.parser.exceptions import ParserException
+from programy.parser.pattern.nodes.iset import PatternISetNode
+from programytest.parser.base import ParserTestsBaseClass
+
 
 class PatternSetNodeTests(ParserTestsBaseClass):
 
@@ -115,6 +115,12 @@ class PatternSetNodeTests(ParserTestsBaseClass):
 
         self.assertTrue(node1.equivalent(node2))
         self.assertFalse(node1.equivalent(node3))
+
+    def test_not_equivalent(self):
+        node1 = PatternISetNode([], "test1, test2, test3")
+        node2 = PatternISetNode([], "test1, test2, test4")
+
+        self.assertFalse(node1.equivalent(node2))
 
     def test_equals(self):
         node1 = PatternISetNode([], "test1, test2, test3")

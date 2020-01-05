@@ -1,8 +1,7 @@
 import unittest
 
-from programy.dynamic.maps.stemmer import StemmerMap
 from programy.context import ClientContext
-
+from programy.dynamic.maps.stemmer import StemmerMap
 from programytest.client import TestClient
 
 

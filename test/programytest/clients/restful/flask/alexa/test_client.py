@@ -1,10 +1,10 @@
-import unittest.mock
-import os
 import json
+import os
+import unittest.mock
 
 from programy.clients.restful.flask.alexa.client import AlexaBotClient
 from programy.clients.restful.flask.alexa.config import AlexaConfiguration
-
+from programy.clients.render.text import TextRenderer
 from programytest.clients.arguments import MockArgumentParser
 
 
@@ -32,6 +32,9 @@ class AlexaClientBotClientTests(unittest.TestCase):
 
         self.assertIsInstance(client.get_client_configuration(), AlexaConfiguration)
         self.assertEqual('ProgramY AIML2.0 Client', client.get_description())
+
+        self.assertFalse(client._render_callback())
+        self.assertIsInstance(client.renderer, TextRenderer)
 
     def test_load_intent_mappings(self):
         arguments = MockArgumentParser()
@@ -61,7 +64,7 @@ class AlexaClientBotClientTests(unittest.TestCase):
         self.assertIsNotNone(response)
 
         self.assertTrue('version' in response)
-        self.assertEquals("1.0", response['version'])
+        self.assertEqual("1.0", response['version'])
 
         self.assertTrue('response' in response)
 
@@ -83,11 +86,11 @@ class AlexaClientBotClientTests(unittest.TestCase):
         client = MockAlexaBotClient(arguments)
         self.assertIsNotNone(client)
 
-        response = client._create_response("Hello World", type="PlainText", playBehavior="REPLACE_ENQUEUED", shouldEndSession=True)
+        response = client._create_response("Hello World", responsetype="PlainText", playBehavior="REPLACE_ENQUEUED", shouldEndSession=True)
         self.assertIsNotNone(response)
 
         self.assertTrue('version' in response)
-        self.assertEquals("1.0", response['version'])
+        self.assertEqual("1.0", response['version'])
 
         self.assertTrue('response' in response)
 
@@ -120,10 +123,10 @@ class AlexaClientBotClientTests(unittest.TestCase):
         client = MockAlexaBotClient(arguments)
         self.assertIsNotNone(client)
 
-        self.assertEquals("nothing", client._add_intent("AskNothing", "nothing"))
+        self.assertEqual("nothing", client._add_intent("AskNothing", "nothing"))
 
         client._intent_mappings["Something"] = "AskSomething"
-        self.assertEquals("AskSomething something", client._add_intent("Something", "something"))
+        self.assertEqual("AskSomething something", client._add_intent("Something", "something"))
 
     def test_handle_launch_request(self):
         arguments = MockArgumentParser()
@@ -210,7 +213,7 @@ class AlexaClientBotClientTests(unittest.TestCase):
                                 """
         )
 
-        self.assertEquals(client._get_userid(request), "amzn1.ask.account.AGD73QVLBN4YXQ3MNXMQXKHEJIXSXYUF3336QSOVAVOYOLO5V6NR2JML7RJZX5FELAU5I5DWGORWLLRQ4H4V6TKCCHFMMLJJFVYHVF7YO3ROOKGSDCMRZRQ24T7Y6RXSD2UTQMXHIONKCRSX4BZC73EI6R5JPFRTLT3KIXAMBT6RBOAATHIERBJ663GLDR3W5BKU6XSLSTX2N4A")
+        self.assertEqual(client._get_userid(request), "amzn1.ask.account.AGD73QVLBN4YXQ3MNXMQXKHEJIXSXYUF3336QSOVAVOYOLO5V6NR2JML7RJZX5FELAU5I5DWGORWLLRQ4H4V6TKCCHFMMLJJFVYHVF7YO3ROOKGSDCMRZRQ24T7Y6RXSD2UTQMXHIONKCRSX4BZC73EI6R5JPFRTLT3KIXAMBT6RBOAATHIERBJ663GLDR3W5BKU6XSLSTX2N4A")
 
     def test_receive_message(self):
         arguments = MockArgumentParser()

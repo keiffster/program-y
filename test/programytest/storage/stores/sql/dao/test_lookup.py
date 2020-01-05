@@ -2,10 +2,11 @@
 import unittest
 
 from programy.storage.stores.sql.dao.lookup import Denormal
-from programy.storage.stores.sql.dao.lookup import Normal
 from programy.storage.stores.sql.dao.lookup import Gender
+from programy.storage.stores.sql.dao.lookup import Normal
 from programy.storage.stores.sql.dao.lookup import Person
 from programy.storage.stores.sql.dao.lookup import Person2
+
 
 class DenormalTests(unittest.TestCase):
 

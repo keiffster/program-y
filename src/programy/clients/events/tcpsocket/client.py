@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,17 +14,16 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.utils.logging.ylogger import YLogger
 import socket
 import json
-
+from programy.utils.logging.ylogger import YLogger
 from programy.clients.events.client import EventBotClient
 from programy.clients.events.tcpsocket.config import SocketConfiguration
 from programy.clients.render.json import JSONRenderer
+from programy.utils.console.console import outputLog
 
 
-class ClientConnection(object):
+class ClientConnection():
 
     def __init__(self, clientsocket, addr, max_buffer):
         self._clientsocket = clientsocket
@@ -64,14 +63,14 @@ class ClientConnection(object):
             self._clientsocket = None
 
 
-class SocketFactory(object):
+class SocketFactory():
 
-    def create_socket(self, family=socket.AF_INET, type=socket.SOCK_STREAM):
-        return socket.socket(family, type)
+    def create_socket(self, family=socket.AF_INET, sockettype=socket.SOCK_STREAM):
+        return socket.socket(family, sockettype)
 
 
-class SocketConnection(object):
-    
+class SocketConnection():
+
     def __init__(self, host, port, queue, max_buffer=1024, factory=SocketFactory()):
         self._socket_connection = self._create_socket(host, port, queue, factory)
         self._max_buffer = max_buffer
@@ -88,18 +87,30 @@ class SocketConnection(object):
     def accept_connection(self):
         # establish a connection
         clientsocket, addr = self._socket_connection.accept()
-        return ClientConnection(clientsocket, addr, self._max_buffer )
+        return ClientConnection(clientsocket, addr, self._max_buffer)
 
 
 class SocketBotClient(EventBotClient):
 
     def __init__(self, argument_parser=None):
+        self._host = None
+        self._port = None
+        self._queue = None
+        self._max_buffer = None
+        self._server_socket = None
+        self._client_connection = None
+
         EventBotClient.__init__(self, "Socket", argument_parser)
 
-        print("TCP Socket Client server now listening on %s:%d"%(self._host, self._port))
-        self._server_socket = self.create_socket_connection(self._host, self._port, self._queue, self._max_buffer)
+        if self._host is not None and \
+                self._port is not None and \
+                self._queue is not None:
+            outputLog(self, "TCP Socket Client server now listening on %s:%d" % (self._host, self._port))
+            self._server_socket = self.create_socket_connection(self._host, self._port, self._queue, self._max_buffer)
+            self._renderer = JSONRenderer(self)
 
-        self._renderer = JSONRenderer(self)
+        else:
+            outputLog(self, "TCP Socket Client configuration not defined, unable to create socket!")
 
     def get_client_configuration(self):
         return SocketConfiguration()
@@ -131,18 +142,26 @@ class SocketBotClient(EventBotClient):
 
     def process_question(self, client_context, question):
         self._questions += 1
-        return client_context.bot.ask_question(client_context , question, responselogger=self)
+        response = client_context.bot.ask_question(client_context, question, responselogger=self)
+        return self.renderer.render(client_context, response)
 
     def render_response(self, client_context, response):
         # Calls the renderer which handles RCS context, and then calls back to the client to show response
         self._renderer.render(client_context, response)
 
     def process_response(self, client_context, response):
-        self._client_connection.send_response(client_context.userid, response)
+        if self._client_connection is not None:
+            self._client_connection.send_response(client_context.userid, response)
+
+        else:
+            YLogger.error(client_context, "Not client connection, unable to process response")
 
     def wait_and_answer(self):
         running = True
         try:
+            if self._server_socket is None:
+                raise Exception("No server socket, unable to accept connections")
+
             self._client_connection = self._server_socket.accept_connection()
 
             receive_payload = self._client_connection.receive_data()
@@ -171,13 +190,12 @@ class SocketBotClient(EventBotClient):
 
 
 if __name__ == '__main__':
+    outputLog(None, "Initiating TCP Socket Client...")
 
-    print("Initiating TCP Socket Client...")
 
     def run():
         tcpsocket_app = SocketBotClient()
         tcpsocket_app.run()
 
+
     run()
-
-

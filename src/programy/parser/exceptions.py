@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,6 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+
 
 class ParserException(Exception):
     def __init__(self, message, filename=None, xml_exception=None, xml_element=None):
@@ -67,8 +68,9 @@ class ParserException(Exception):
 
         if self._xml_element is not None:
             if hasattr(self._xml_element, '_end_line_number') and hasattr(self._xml_element, '_end_column_number'):
-                msg += " at [line(%d), column(%d)]" % (self._xml_element._end_line_number,
-                                                       self._xml_element._end_column_number)
+                msg += " at [line(%d), column(%d)]" % \
+                       (self._xml_element._end_line_number, # pylint: disable=protected-access
+                        self._xml_element._end_column_number)  # pylint: disable=protected-access
         return msg
 
 

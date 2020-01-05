@@ -1,7 +1,6 @@
-import unittest
 import os
 import os.path
-
+import unittest
 from programy.mappings.properties import DefaultVariablesCollection
 
 

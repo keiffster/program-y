@@ -1,9 +1,8 @@
 import unittest
 
-from programy.extensions.admin.transcript import TranscriptAdminExtension
-from programy.dialog.sentence import Sentence
 from programy.dialog.question import Question
-
+from programy.dialog.sentence import Sentence
+from programy.extensions.admin.transcript import TranscriptAdminExtension
 from programytest.client import TestClient
 
 
@@ -17,6 +16,18 @@ class TranscriptAdminExtensionClient(TestClient):
 
 
 class TranscriptAdminExtensionTests(unittest.TestCase):
+
+    def test_transcripts_no_conversation(self):
+        client = TranscriptAdminExtensionClient()
+        client_context = client.create_client_context("testid")
+
+        extension = TranscriptAdminExtension()
+        self.assertIsNotNone(extension)
+
+        result = extension.execute(client_context, "")
+        self.assertIsNotNone(result)
+        self.assertEqual("No conversation currently available", result)
+
 
     def test_transcripts_no_questions_without_props(self):
         client = TranscriptAdminExtensionClient()

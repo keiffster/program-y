@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,15 +14,17 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from programy.storage.stores.utils import DAOUtils
 
-class Corpus(object):
+
+class Corpus():
 
     def __init__(self, words):
         self.id = None
         self.words = words
 
     def __repr__(self):
-        return "<Corpus(id='%d', name='%s')>" % (self.id, self.name)
+        return "<Corpus(id='%s')>" % (DAOUtils.valid_id(self.id))
 
     def to_document(self):
         document = {"words": self.words}
@@ -33,8 +35,6 @@ class Corpus(object):
     @staticmethod
     def from_document(data):
         lookup = Corpus(None)
-        if '_id' in data:
-            lookup.id = data['_id']
-        if 'words' in data:
-            lookup.words = data['words']
+        lookup.id = DAOUtils.get_value_from_data(data, '_id')
+        lookup.words = DAOUtils.get_value_from_data(data, 'words', default=[])
         return lookup

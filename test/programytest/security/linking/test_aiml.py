@@ -1,10 +1,9 @@
-import unittest
 import os
+import unittest
 
-from programy.storage.stores.sql.engine import SQLStorageEngine
-from programy.storage.stores.sql.config import SQLStorageConfiguration
 from programy.security.linking.accountlinker import BasicAccountLinkerService
-
+from programy.storage.stores.sql.config import SQLStorageConfiguration
+from programy.storage.stores.sql.engine import SQLStorageEngine
 from programytest.client import TestClient
 
 

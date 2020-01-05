@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,13 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-# https://developers.viber.com/docs/api/python-bot-api/
-
-from programy.utils.logging.ylogger import YLogger
-
 from flask import Flask, request, Response
-
 from viberbot import Api
 from viberbot.api.bot_configuration import BotConfiguration
 from viberbot.api.viber_requests import ViberConversationStartedRequest
@@ -29,9 +23,10 @@ from viberbot.api.viber_requests import ViberMessageRequest
 from viberbot.api.viber_requests import ViberSubscribedRequest
 from viberbot.api.viber_requests import ViberUnsubscribedRequest
 from viberbot.api.messages.text_message import TextMessage
-
+from programy.utils.logging.ylogger import YLogger
 from programy.clients.restful.flask.client import FlaskRestBotClient
 from programy.clients.restful.flask.viber.config import ViberConfiguration
+from programy.utils.console.console import outputLog
 
 
 VIBER_CLIENT = None
@@ -42,11 +37,17 @@ class ViberBotClient(FlaskRestBotClient):
     _running = False
 
     def __init__(self, argument_parser=None):
+        self._viber_bot = None
+        self._viber_token = None
         FlaskRestBotClient.__init__(self, "viber", argument_parser)
 
         YLogger.debug(self, "Viber Client is running....")
 
-        self._viber_bot = self.create_viber_bot(self._viber_token)
+        if self._viber_token is not None:
+            self._viber_bot = self.create_viber_bot(self._viber_token)
+
+        else:
+            YLogger.error(self, "Viber token missing, unable to create client")
 
     def get_client_configuration(self):
         return ViberConfiguration()
@@ -95,25 +96,30 @@ class ViberBotClient(FlaskRestBotClient):
         message = viber_request.message
         userid = viber_request.sender.id
 
-        response = self.ask_question(userid, message)
+        client_context = self.create_client_context(userid)
 
-        self._viber_bot.send_messages(viber_request.sender.id, [
-            TextMessage(text=response)
-        ])
+        response = self.ask_question(userid, message)
+        rendered = self.renderer.render(client_context, response)
+
+        if self._viber_bot is not None:
+            self._viber_bot.send_messages(viber_request.sender.id, [
+                TextMessage(text=rendered)
+            ])
 
     def handle_subscribed_request(self, viber_request):
-        self._viber_bot.send_messages(viber_request.user.id, [
-            TextMessage(text="Thanks for subscribing!")
-        ])
+        if self._viber_bot is not None:
+            self._viber_bot.send_messages(viber_request.user.id, [
+                TextMessage(text="Thanks for subscribing!")
+            ])
 
     def handle_unsubscribed_request(self, viber_request):
-        pass
+        pass    # pragma: no cover
 
     def handle_conversation_started_request(self, viber_request):
-        pass
+        pass    # pragma: no cover
 
     def handle_failed_request(self, viber_request):
-        pass
+        pass    # pragma: no cover
 
     def handle_unknown_request(self, viber_request):
         YLogger.error(self, "client failed receiving message. failure: {0}".format(viber_request))
@@ -122,6 +128,9 @@ class ViberBotClient(FlaskRestBotClient):
 
         if self.configuration.client_configuration.debug is True:
             self.dump_request(request)
+
+        if self._viber_bot is None:
+            return Response(status=500)
 
         # every viber message is signed, you can verify the signature using this method
         if not self._viber_bot.verify_signature(request.get_data(), request.headers.get('X-Viber-Content-Signature')):
@@ -153,7 +162,7 @@ class ViberBotClient(FlaskRestBotClient):
 
 if __name__ == "__main__":
 
-    print("Initiating Viber Client...")
+    outputLog(None, "Initiating Viber Client...")
 
     VIBER_CLIENT = ViberBotClient()
 
@@ -163,6 +172,7 @@ if __name__ == "__main__":
     def receive_message():
         try:
             return VIBER_CLIENT.receive_message(request)
+
         except Exception as e:
             YLogger.exception(None, "Viber error", e)
 

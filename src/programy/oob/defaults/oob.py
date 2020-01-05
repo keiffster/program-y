@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,10 +14,11 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import xml.etree.ElementTree as ET
+from programy.utils.parsing.linenumxml import LineNumberingParser
+import xml.etree.ElementTree as ET  # pylint: disable=wrong-import-order
 
 
-class OutOfBandProcessor(object):
+class OutOfBandProcessor:
 
     def __init__(self):
         self._xml = None
@@ -31,6 +32,7 @@ class OutOfBandProcessor(object):
     # Override this method in your own class to do something
     # useful with the command data
     def execute_oob_command(self, client_context):
+        del client_context
         return ""
 
     def process_out_of_bounds(self, client_context, oob: ET.Element):

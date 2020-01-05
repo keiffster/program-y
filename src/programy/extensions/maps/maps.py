@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -15,7 +15,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.utils.logging.ylogger import YLogger
-
 from programy.utils.geo.google import GoogleMaps
 from programy.extensions.base import Extension
 
@@ -26,40 +25,59 @@ class GoogleMapsExtension(Extension):
         return GoogleMaps()
 
     # execute() is the interface that is called from the <extension> tag in the AIML
-    def execute(self, context, data):
-        YLogger.debug(context, "GoogleMaps [%s]", data)
+    def execute(self, client_context, data):
+        YLogger.debug(client_context, "GoogleMaps [%s]", data)
 
-        splits = data.split(" ")
-        command = splits[0]
-        from_place = splits[1]
-        to_place = splits[2]
+        try:
+            splits = data.split(" ")
+            if len(splits) == 3:
+                command = splits[0]
+                from_place = splits[1]
+                to_place = splits[2]
 
-        googlemaps = self.get_geo_locator()
+                googlemaps = self.get_geo_locator()
 
-        if command == "DISTANCE":
-            distance = googlemaps.get_distance_between_addresses(from_place, to_place)
-            return self._format_distance_for_programy(distance)
-        elif command == "DIRECTIONS":
-            directions = googlemaps.get_directions_between_addresses(from_place, to_place)
-            return self._format_directions_for_programy(directions)
-        else:
-            YLogger.error(context, "Unknown Google Maps Extension command [%s]", command)
-            return None
+                if command == "DISTANCE":
+                    distance = googlemaps.get_distance_between_addresses(from_place, to_place)
+                    if distance is not None:
+                        return self._format_distance_for_programy(distance)
+
+                elif command == "DIRECTIONS":
+                    directions = googlemaps.get_directions_between_addresses(from_place, to_place)
+                    if directions is not None:
+                        return self._format_directions_for_programy(directions)
+
+                else:
+                    YLogger.error(client_context, "Unknown Google Maps Extension command [%s]", command)
+
+            else:
+                YLogger.error(client_context, "Invalid Google Maps Extension command DISTANCE|DIRECTIONS TO FROM")
+
+        except Exception as e:
+            YLogger.exception(client_context, "Failed to execute maps extension", e)
+
+        return None
 
     def _format_distance_for_programy(self, distance):
         distance_splits = distance.distance_text.split(" ")
+
         value = distance_splits[0]
         if "." in value:
             value_splits = distance_splits[0].split(".")
             dec = value_splits[0]
             frac = value_splits[1]
+
         else:
             dec = value
             frac = "0"
+
         units = distance_splits[1]
         if units == 'mi':
             units = "miles"
-        return "DISTANCE DEC %s FRAC %s UNITS %s"%(dec, frac, units)
+
+        return "DISTANCE DEC %s FRAC %s UNITS %s" % (dec, frac, units)
 
     def _format_directions_for_programy(self, directions):
-        return "DIRECTIONS %s"%directions.legs_as_a_string()
+        if directions is not None:
+            return "DIRECTIONS %s" % directions.legs_as_a_string()
+        return None

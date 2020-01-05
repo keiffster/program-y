@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: balance.aiml -->
+    <!--  -->
+    <!-- This AIML file is part of the Y-Bot knowledge base. -->
+    <!--  -->
+    <!-- Y-Bot is Copyright &copy; 2017 by Keith Sterling. -->
+    <!--
+    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+    documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+    the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+    and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+    THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+    TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    -->
+
+    <category>
+        <pattern># WHAT # DEEP THOUGHT</pattern>
+        <template>
+            Deep Thought is a computer that was created by the pan-dimensional, hyper-intelligent species of beings <br/>
+            to come up with the answer to The Ultimate Question of Life, the Universe, and Everything
+        </template>
+    </category>
+
+    <category>
+        <pattern># WHO # DEEP THOUGHT</pattern>
+        <template>
+            Deep Thought is a computer that was created by the pan-dimensional, hyper-intelligent species of beings <br/>
+            to come up with the answer to The Ultimate Question of Life, the Universe, and Everything
+        </template>
+    </category>
+
+    <category>
+        <pattern># WHAT IS THE ANSWER # LIFE</pattern>
+        <template>
+            If you meant what is the answer to The Ultimate Question of Life, the Universe, and Everything, then its 42. <br/>
+            Other than that I don't ponder the answers to the meta physical world!
+        </template>
+    </category>
+
+    <category>
+        <pattern># WHAT IS THE ANSWER # LIFE THE UNIVERSE AND EVERYTHING</pattern>
+        <template>
+            42 of course.
+        </template>
+    </category>
+
+</aiml>

@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,7 +14,6 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.storage.stores.sql.store.sqlstore import SQLStore
 from programy.storage.entities.errors import ErrorsStore
 from programy.storage.stores.sql.dao.error import Error
@@ -24,14 +23,17 @@ class SQLErrorsStore(SQLStore, ErrorsStore):
 
     def __init__(self, storage_engine):
         SQLStore.__init__(self, storage_engine)
+        ErrorsStore.__init__(self)
+
+    def _get_all(self):
+        return self._storage_engine.session.query(Error)
 
     def empty(self):
-        self._storage_engine.session.query(Error).delete()
+        self._get_all().delete()
 
     def save_errors(self, errors, commit=True):
         for error in errors:
             error = Error(error=error[0], file=error[1], start=error[2], end=error[3])
             self._storage_engine.session.add(error)
 
-        if commit is True:
-            self.commit()
+        self.commit(commit)

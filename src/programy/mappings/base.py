@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,13 +14,13 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.utils.logging.ylogger import YLogger
 import re
+from programy.utils.logging.ylogger import YLogger
+from programy.utils.console.console import outputLog
 
 
-class BaseCollection(object):
-    pass
+class BaseCollection:
+    pass    # pragma: no cover
 
 
 class SingleStringCollection(BaseCollection):
@@ -57,6 +57,7 @@ class DoubleStringCharSplitCollection(BaseCollection):
         self._pairs.clear()
 
     def remove(self, name=None):
+        del name
         self._pairs.clear()
 
     @property
@@ -146,15 +147,17 @@ class DoubleStringPatternSplitCollection(BaseCollection):
                         stripped = key.strip()
                         if stripped in already:
                             found = True
-                    if found is not True:
 
+                    if found is not True:
                         to_replace = pair[1]
                         to_replace = self.match_case(replacable, to_replace)
 
                         if pair[1].endswith("."):
                             replacable = pattern.sub(to_replace, replacable)
+
                         else:
                             replacable = pattern.sub(to_replace+" ", replacable)
+
                         alreadys.append(pair[1])
 
             except Exception as excep:
@@ -199,7 +202,7 @@ class DoubleStringPatternSplitCollection(BaseCollection):
                 lhs = match.group(1)
                 rhs = match.group(2)
                 return [lhs, rhs]
-            print("Pattern is bad [%s]", line)
+            YLogger.error(None, "Pattern is bad [%s]", line)
         return None
 
     @staticmethod
@@ -219,7 +222,8 @@ class DoubleStringPatternSplitCollection(BaseCollection):
         return pattern
 
     @staticmethod
-    def process_key_value(key, value, id=None):
+    def process_key_value(key, value, userid=None):
+        del userid
         pattern_text = DoubleStringPatternSplitCollection.normalise_pattern(key)
         start = pattern_text.lstrip()
         middle = pattern_text

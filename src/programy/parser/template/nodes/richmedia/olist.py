@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,10 +14,8 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.utils.logging.ylogger import YLogger
-
 from programy.parser.template.nodes.richmedia.list import TemplateListNode
+from programy.parser.exceptions import ParserException
 
 
 class TemplateOrderedListNode(TemplateListNode):
@@ -26,11 +24,7 @@ class TemplateOrderedListNode(TemplateListNode):
         TemplateListNode.__init__(self)
 
     def resolve_to_string(self, client_context):
-        str = "<olist>"
-        str += self.resolve_list_items(client_context)
-        str += "</olist>"
-        return str
+        return "<olist>" + self.resolve_list_items(client_context) + "</olist>"
 
     def to_string(self):
         return "[OLIST %d]" % (len(self._items))
-

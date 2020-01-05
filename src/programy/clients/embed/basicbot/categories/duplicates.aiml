@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+
+    <category>
+        <pattern>DUPLICATE GRAMMAR 1</pattern>
+        <template>Report I am a duplicate</template>
+    </category>
+
+    <category>
+        <pattern>DUPLICATE GRAMMAR 1</pattern>
+        <template>Report I am a duplicate</template>
+    </category>
+
+</aiml>

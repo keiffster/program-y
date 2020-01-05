@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,16 +14,17 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from flask import Flask, jsonify, request
 import threading
 import datetime
 import requests
+from flask import Flask, jsonify, request
 
 from programy.utils.logging.ylogger import YLogger
 from programy.clients.ping.config import PingResponderConfig
+from programy.utils.console.console import outputLog
 
 
-class PingResponder(object):
+class PingResponder():
 
     def __init__(self, client):
         self._start_time = datetime.datetime.now()
@@ -47,25 +48,22 @@ class PingResponder(object):
 
     @staticmethod
     def ping_service(ping_app: Flask, config: PingResponderConfig):
-        ping_app.run(host=config.host, port=config.port)
 
-        """
         if config.ssl_cert_file is not None and \
                 config.ssl_key_file is not None:
             context = (config.ssl_cert_file,
                        config.ssl_key_file)
 
-            print("Healthcheck running in https mode")
-            flask.run(host=config.host,
-                      port=config.port,
-                      debug=config.debug,
-                      ssl_context=context)
+            outputLog(None, "Healthcheck running in https mode")
+            ping_app.run(host=config.host,
+                         port=config.port,
+                         debug=config.debug,
+                         ssl_context=context)
         else:
-            print("Healthcheck running in http mode, careful now !")
-            flask.run(host=config.host,
-                      port=config.port,
-                      debug=config.debug)
-        """
+            outputLog(None, "Healthcheck running in http mode, careful now !")
+            ping_app.run(host=config.host,
+                         port=config.port,
+                         debug=config.debug)
 
     def start_ping_service(self, ping_app: Flask):
         t = threading.Thread(target=PingResponder.ping_service, args=(ping_app, self.config))
@@ -84,7 +82,7 @@ class PingResponder(object):
         self.unregister_with_healthchecker()
 
         try:
-            url = "http://%s:%d%s"%(self.config.host, self.config.port, self.config.shutdown)
+            url = "http://%s:%d%s" % (self.config.host, self.config.port, self.config.shutdown)
             requests.get(url)
 
         except Exception:
@@ -106,11 +104,12 @@ class PingResponder(object):
                 port = self._client.configuration.client_configuration.port
 
             try:
-                url = "%s?name=%s&host=%s&port=%s&url=%s" % (self.config.register, self._client.id, host, port, self.config.url)
+                url = "%s?name=%s&host=%s&port=%s&url=%s" % (self.config.register, self._client.id,
+                                                             host, port, self.config.url)
                 requests.get(url)
 
             except Exception as e:
-                YLogger.error(None, "Unable to register with healthchecker")
+                YLogger.exception(None, "Unable to register with healthchecker", e)
 
     def unregister_with_healthchecker(self):
 
@@ -119,7 +118,7 @@ class PingResponder(object):
                 url = "%s?name=%s" % (self.config.unregister, self._client.id)
                 requests.get(url)
             except Exception as e:
-                print(e)
+                outputLog(self, e)
                 YLogger.error(None, "Unable to unregister with healthchecker")
 
     @staticmethod
@@ -127,21 +126,21 @@ class PingResponder(object):
 
         if ping_responder.config.host is None:
             YLogger.info(None, "No REST configuration for ping responder")
-            print("Healthcheck now running as part of REST Service...")
+            outputLog(None, "Healthcheck now running as part of REST Service...")
             return
 
-        print ("Healthcheck now running as separate REST Service...")
+        outputLog(None, "Healthcheck now running as separate REST Service...")
 
         ping_app = Flask(ping_responder.config.name)
 
         if ping_responder.config.url is not None:
             @ping_app.route(ping_responder.config.url, methods=['GET'])
-            def ping():
+            def ping():  # pylint: disable=unused-variable
                 return jsonify(ping_responder.ping())
 
         if ping_responder.config.shutdown is not None:
             @ping_app.route(ping_responder.config.shutdown, methods=['GET'])
-            def shutdown():
+            def shutdown():  # pylint: disable=unused-variable
                 ping_responder.stop_ping_service()
                 return 'Server shutting down...'
 

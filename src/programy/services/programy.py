@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -16,7 +16,6 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 import json
 from urllib.parse import quote
-
 from programy.services.rest import GenericRESTService
 from programy.config.brain.service import BrainServiceConfiguration
 
@@ -29,10 +28,13 @@ class ProgramyRESTService(GenericRESTService):
     def _format_payload(self, client_context, question):
         return {'question': question, "userid": client_context.userid}
 
-    def _format_get_url(self, url, client_context, question):
-        return "%s?question=%s&userid=%s"%(url, quote(question), client_context.userid)
+    def _format_get_url(self, url, client_context, question, lang=None, location=None, api_key=None):
+        del lang
+        del location
+        del api_key
+        return "%s?question=%s&userid=%s" % (url, quote(question), client_context.userid)
 
-    def _parse_response(self, text):
+    def _parse_response(self, client_context, text):
         data = json.loads(text)
         if data:
             if 'response' in data[0]:

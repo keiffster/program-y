@@ -1,9 +1,18 @@
 import unittest
-
-from programy.oob.defaults.oob import OutOfBandProcessor
 import xml.etree.ElementTree as ET
 
+from programy.oob.defaults.oob import OutOfBandProcessor
 from programytest.client import TestClient
+
+
+class MockOutOfBandProcessor(OutOfBandProcessor):
+
+    def __init__(self):
+        OutOfBandProcessor.__init__(self)
+
+    def parse_oob_xml(self, oob: ET.Element):
+        return False
+
 
 class OutOfBandProcessorTests(unittest.TestCase):
 
@@ -23,3 +32,9 @@ class OutOfBandProcessorTests(unittest.TestCase):
         self.assertEqual("", oob_processor.execute_oob_command(self._client_context))
 
         self.assertEqual("", oob_processor.process_out_of_bounds(self._client_context, oob_content))
+
+    def test_failed_xml_parse(self):
+        oob_processor = MockOutOfBandProcessor()
+
+        self.assertEqual("", oob_processor.process_out_of_bounds(self._client_context, ""))
+

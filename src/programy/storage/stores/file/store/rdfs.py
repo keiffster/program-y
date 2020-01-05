@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -15,34 +15,40 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.utils.logging.ylogger import YLogger
-
 from programy.storage.stores.file.store.filestore import FileStore
+from programy.storage.entities.rdf import RDFReadOnlyStore
 
-from programy.storage.entities.rdf import RDFStore
 
-class FileRDFStore(FileStore, RDFStore):
+class FileRDFStore(FileStore, RDFReadOnlyStore):
 
     def __init__(self, storage_engine):
         FileStore.__init__(self, storage_engine)
+        RDFReadOnlyStore.__init__(self)
 
-    def _load_file_contents(self, rdf_collection, filename):
+    def _load_rdfs_from_file(self, filename, collection):
+        with open(filename, 'r', encoding='utf8') as my_file:
+            for line in my_file:
+                splits = line.split(":")
+                if len(splits) > 2:
+                    subj = splits[0].upper()
+                    pred = splits[1].upper()
+                    obj = (":".join(splits[2:])).strip()
+                    rdf_name = FileStore.get_just_filename_from_filepath(filename)
+                    collection.add_entity(subj, pred, obj, rdf_name, filename)
+
+    def _load_file_contents(self, collection, filename):
         YLogger.debug(self, "Loading rdf [%s]", filename)
         try:
-            with open(filename, 'r', encoding='utf8') as my_file:
-                for line in my_file:
-                    if line:
-                        splits = line.split(":")
-                        if len(splits) > 2:
-                            subj = splits[0].upper()
-                            pred = splits[1].upper()
-                            obj = (":".join(splits[2:])).strip()
-                            
-                            rdf_name = self.get_just_filename_from_filepath(filename)
-                            
-                            rdf_collection.add_entity(subj, pred, obj, rdf_name, filename)
-                            
+            self._load_rdfs_from_file(filename, collection)
+            return True
+
         except Exception as excep:
             YLogger.exception_nostack(self, "Failed to load rdf [%s]", excep, filename)
+
+        return False
+
+    def _get_storage_path(self):
+        return self.storage_engine.configuration.rdf_storage.dirs
 
     def get_storage(self):
         return self.storage_engine.configuration.rdf_storage
@@ -50,4 +56,4 @@ class FileRDFStore(FileStore, RDFStore):
     def reload(self, collection, rdf_name):
         filename = collection.storename(rdf_name)
         collection.empty()
-        self._load_file_contents(collection, filename)
+        return self._load_file_contents(collection, filename)

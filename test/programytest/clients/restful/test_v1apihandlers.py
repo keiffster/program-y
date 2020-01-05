@@ -2,6 +2,7 @@ import unittest
 
 from programy.clients.restful.apihandlers import APIHandler_V1_0
 
+
 class MockBot(object):
 
     def __init__(self):
@@ -14,12 +15,23 @@ class MockClientContext(object):
         self.bot = bot
 
 
+class MockRenderer:
+
+    def render(self, client_context, answer):
+        return answer
+
+
 class MockBotClient(object):
 
     def __init__(self, verify_api_key_usage=(None, None), variables={}, response=None):
         self._verify_api_key_usage = verify_api_key_usage
         self._variables = variables
         self._response = response
+        self._renderer = MockRenderer()
+
+    @property
+    def renderer(self):
+        return self._renderer
 
     def verify_api_key_usage(self, request, method='GET'):
         return self._verify_api_key_usage[0],  self._verify_api_key_usage[1]
@@ -50,9 +62,9 @@ class APIHandler_V1_0Tests(unittest.TestCase):
         handler = APIHandler_V1_0(mock_bot_client)
         self.assertIsNotNone(handler)
 
-        response = handler.process_request("Hello")
+        response = handler.process_request(mock_bot_client, "Hello")
         self.assertIsNotNone(response)
-        self.assertEquals(response, ({'response': {'question': 'question', 'answer': "Hello", 'userid': 'userid'}}, 200))
+        self.assertEqual(response, ({'response': {'question': 'question', 'answer': "Hello", 'userid': 'userid'}}, 200))
 
     def test_format_success_response(self):
         mock_bot_client = MockBotClient()
@@ -63,7 +75,7 @@ class APIHandler_V1_0Tests(unittest.TestCase):
 
         response = handler.format_success_response("userid1", "Hello", "Hi there")
         self.assertIsNotNone(response)
-        self.assertEquals(response, {'response': {"question": "Hello", "answer": "Hi there", "userid": "userid1"}})
+        self.assertEqual(response, {'response': {"question": "Hello", "answer": "Hi there", "userid": "userid1"}})
 
     def test_format_error_response(self):
         mock_bot_client = MockBotClient()
@@ -74,4 +86,4 @@ class APIHandler_V1_0Tests(unittest.TestCase):
 
         response = handler.format_error_response("userid1", "Hello", "Oopsie")
         self.assertIsNotNone(response)
-        self.assertEquals(response, {'response': {"question": "Hello", "answer": "default response", "userid": "userid1", "error": "Oopsie"}})
+        self.assertEqual(response, {'response': {"question": "Hello", "answer": "default response", "userid": "userid1", "error": "Oopsie"}})

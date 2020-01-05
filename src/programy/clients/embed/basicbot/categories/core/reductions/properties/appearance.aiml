@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>HOW TALL ARE YOU</pattern>
+        <template>
+            <srai>HEIGHT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW TALL AM I</pattern>
+        <template>
+            <srai>MY HEIGHT</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HOW MUCH DO I WEIGH</pattern>
+        <template>
+            <srai>MY WEIGHT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR WEIGHT</pattern>
+        <template>
+            <srai>WEIGHT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MUCH DO YOU WEIGH</pattern>
+        <template>
+            <srai>WEIGHT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU FAT</pattern>
+        <template>
+            <srai>WEIGHT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU HEAVY</pattern>
+        <template>
+            <srai>WEIGHT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU BLONDE</pattern>
+        <template>
+            <srai>HAIR</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU GINGER</pattern>
+        <template>
+            <srai>HAIR</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU BRUNETTE</pattern>
+        <template>
+            <srai>HAIR</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU BALD</pattern>
+        <template>
+            <srai>HAIR</srai>
+        </template>
+    </category>
+        <category>
+        <pattern>ARE YOU RED HEAD</pattern>
+        <template>
+            <srai>HAIR</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR # YOUR HAIR</pattern>
+        <template>
+            <srai>HAIR</srai>
+        </template>
+    </category>
+
+        <category>
+        <pattern>WHAT COLOR ARE YOUR EYES</pattern>
+        <template>
+            <srai>EYECOLOR</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MANY EYES DO YOU #</pattern>
+        <template>
+            <srai>EYES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT # YOUR EYES #</pattern>
+        <template>
+            <srai>EYES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT # YOUR EYE #</pattern>
+        <template>
+            <srai>EYES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU WEARING *</pattern>
+        <template>
+            <srai>WEARING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU WEAR *</pattern>
+        <template>
+            <srai>WEARING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT ARE YOU WEARING</pattern>
+        <template>
+            <srai>WEARING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU WEAR A *</pattern>
+        <template>
+            <srai>WEARING</srai>
+        </template>
+    </category>
+
+</aiml>

@@ -1,11 +1,9 @@
-from programy.utils.parsing.linenumxml import LineNumberingParser
-import xml.etree.ElementTree as ET
-
 import os
 import unittest
+import xml.etree.ElementTree as ET
 
-#############################################################################
-#
+from programy.utils.parsing.linenumxml import LineNumberingParser
+
 
 class LineNumberingParserTests(unittest.TestCase):
 

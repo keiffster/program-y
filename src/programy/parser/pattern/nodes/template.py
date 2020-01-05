@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,7 +14,6 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.parser.exceptions import ParserException
 from programy.parser.pattern.nodes.base import PatternNode
 
@@ -32,20 +31,26 @@ class PatternTemplateNode(PatternNode):
     def is_template(self):
         return True
 
-    def can_add(self, new_node):
+    def can_add(self, new_node: PatternNode):
+        if new_node is None:
+            raise ParserException("Empty node, cannot add")
+
         if new_node.is_root():
-            raise ParserException("Cannot add root node to template node")
+            raise ParserException("Cannot add 'root' node to template node")
+
         elif new_node.is_topic():
-            raise ParserException("Cannot add topic node to template node")
+            raise ParserException("Cannot add 'topic' node to template node")
+
         elif new_node.is_that():
-            raise ParserException("Cannot add that node to template node")
+            raise ParserException("Cannot add 'that' node to template node")
+
         elif new_node.is_template():
-            raise ParserException("Cannot add template node to template node")
+            raise ParserException("Cannot add 'template' node to template node")
 
     def to_xml(self, client_context, include_user=False):
         string = ""
         if include_user is True:
-            string += '<template userid="%s">'%self.userid
+            string += '<template userid="%s">' % self.userid
         else:
             string += '<template>'
         string2 = super(PatternTemplateNode, self).to_xml(client_context, include_user)
@@ -55,7 +60,7 @@ class PatternTemplateNode(PatternNode):
 
     def to_string(self, verbose=True):
         if verbose is True:
-            return "PTEMPLATE [%s] [%s]" %(self.userid, self._child_count(verbose))
+            return "PTEMPLATE [%s] [%s]" % (self.userid, self._child_count(verbose))
         return "PTEMPLATE"
 
     def equivalent(self, other):
@@ -63,4 +68,3 @@ class PatternTemplateNode(PatternNode):
             if self.userid == other.userid:
                 return True
         return False
-

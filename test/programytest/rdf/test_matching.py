@@ -1,5 +1,4 @@
 import unittest
-
 from programy.rdf.collection import RDFCollection
 
 
@@ -112,99 +111,94 @@ class RDFCollectionMatchingTests(unittest.TestCase):
         self.assertEqual(1, len(matched))
         self.assertTrue(["MONKEY", "LEGS", "2"] in matched)
 
-    def test_remove_subject(self):
 
+    def test_not_matched_as_tuples(self):
         collection = RDFCollection()
         self.assertIsNotNone(collection)
 
         self.add_data(collection)
 
-        all = collection.all_as_tuples()
+        all = collection.not_matched_as_tuples()
+        self.assertIsNotNone(all)
+        self.assertEqual(0, len(all))
 
-        remains = collection.remove(all, subject='MONKEY')
-        self.assertIsNotNone(remains)
-        self.assertEqual(3, len(remains))
-        self.assertTrue(["ZEBRA", "LEGS", "4"] in remains)
-        self.assertTrue(["BIRD", "LEGS", "2"] in remains)
-        self.assertTrue(["ELEPHANT", "TRUNK", "true"] in remains)
-
-    def test_remove_subject_predicate(self):
-
+    def test_not_matched_as_tuples_subject(self):
         collection = RDFCollection()
         self.assertIsNotNone(collection)
 
         self.add_data(collection)
 
-        all = collection.all_as_tuples()
+        all = collection.not_matched_as_tuples(subject="BIRD")
+        self.assertIsNotNone(all)
+        self.assertEqual(4, len(all))
+        self.assertTrue(["MONKEY", "LEGS", "2"] in all)
+        self.assertTrue(["MONKEY", "HASFUR", "true"] in all)
+        self.assertTrue(["ZEBRA", "LEGS", "4"] in all)
+        self.assertTrue(["ELEPHANT", "TRUNK", "true"] in all)
 
-        remains = collection.remove(all, subject='MONKEY', predicate="LEGS")
-        self.assertIsNotNone(remains)
-        self.assertEqual(4, len(remains))
-        self.assertTrue(["MONKEY", "HASFUR", "true"] in remains)
-        self.assertTrue(["ZEBRA", "LEGS", "4"] in remains)
-        self.assertTrue(["BIRD", "LEGS", "2"] in remains)
-        self.assertTrue(["ELEPHANT", "TRUNK", "true"] in remains)
-
-    def test_remove_subject_object(self):
-
+    def test_not_matched_as_tuples_predicate(self):
         collection = RDFCollection()
         self.assertIsNotNone(collection)
 
         self.add_data(collection)
 
-        all = collection.all_as_tuples()
+        all = collection.not_matched_as_tuples(predicate="LEGS")
+        self.assertIsNotNone(all)
+        self.assertEqual(2, len(all))
+        self.assertTrue(["MONKEY", "HASFUR", "true"] in all)
+        self.assertTrue(["ELEPHANT", "TRUNK", "true"] in all)
 
-        remains = collection.remove(all, subject='MONKEY', obj="2")
-        self.assertIsNotNone(remains)
-        self.assertEqual(4, len(remains))
+    def test_not_matched_as_tuples_object(self):
+        collection = RDFCollection()
+        self.assertIsNotNone(collection)
+
+        self.add_data(collection)
+
+        all = collection.not_matched_as_tuples(obj="2")
+        self.assertIsNotNone(all)
+        self.assertEqual(3, len(all))
+        self.assertTrue(["MONKEY", "HASFUR", "true"] in all)
+        self.assertTrue(["ZEBRA", "LEGS", "4"] in all)
+        self.assertTrue(["ELEPHANT", "TRUNK", "true"] in all)
+
+    def test_not_matched_as_tuples_subject_object(self):
+        collection = RDFCollection()
+        self.assertIsNotNone(collection)
+
+        self.add_data(collection)
+
+        all = collection.not_matched_as_tuples(subject="MONKEY", obj="2")
+        self.assertIsNotNone(all)
+        self.assertEqual(4, len(all))
         self.assertTrue(["MONKEY", "HASFUR", "true"] in all)
         self.assertTrue(["ZEBRA", "LEGS", "4"] in all)
         self.assertTrue(["BIRD", "LEGS", "2"] in all)
         self.assertTrue(["ELEPHANT", "TRUNK", "true"] in all)
 
-    def test_remove_predicate(self):
-
+    def test_not_matched_as_tuples_subject_predicate(self):
         collection = RDFCollection()
         self.assertIsNotNone(collection)
 
         self.add_data(collection)
 
-        all = collection.all_as_tuples()
-
-        remains = collection.remove(all, predicate='LEGS')
-        self.assertIsNotNone(remains)
-        self.assertEqual(2, len(remains))
-        self.assertTrue(["MONKEY", "HASFUR", "true"] in remains)
-        self.assertTrue(["ELEPHANT", "TRUNK", "true"] in remains)
-
-    def test_remove_predicate_object(self):
-
-        collection = RDFCollection()
-        self.assertIsNotNone(collection)
-
-        self.add_data(collection)
-
-        all = collection.all_as_tuples()
-
-        remains = collection.remove(all, predicate='LEGS', obj="2")
-        self.assertIsNotNone(remains)
-        self.assertEqual(3, len(remains))
+        all = collection.not_matched_as_tuples(subject="MONKEY", predicate="LEGS")
+        self.assertIsNotNone(all)
+        self.assertEqual(4, len(all))
         self.assertTrue(["MONKEY", "HASFUR", "true"] in all)
         self.assertTrue(["ZEBRA", "LEGS", "4"] in all)
+        self.assertTrue(["BIRD", "LEGS", "2"] in all)
         self.assertTrue(["ELEPHANT", "TRUNK", "true"] in all)
 
-    def test_remove_object(self):
+    def test_not_matched_as_tuples_predicate_object(self):
         collection = RDFCollection()
         self.assertIsNotNone(collection)
 
         self.add_data(collection)
 
-        all = collection.all_as_tuples()
-
-        remains = collection.remove(all, obj='2')
-        self.assertIsNotNone(remains)
-        self.assertEqual(3, len(remains))
-        self.assertTrue(["MONKEY", "HASFUR", "true"] in remains)
-        self.assertTrue(["ZEBRA", "LEGS", "4"] in remains)
-        self.assertTrue(["ELEPHANT", "TRUNK", "true"] in remains)
-
+        all = collection.not_matched_as_tuples(predicate="LEGS", obj="4")
+        self.assertIsNotNone(all)
+        self.assertEqual(4, len(all))
+        self.assertTrue(["MONKEY", "LEGS", "2"] in all)
+        self.assertTrue(["MONKEY", "HASFUR", "true"] in all)
+        self.assertTrue(["BIRD", "LEGS", "2"] in all)
+        self.assertTrue(["ELEPHANT", "TRUNK", "true"] in all)

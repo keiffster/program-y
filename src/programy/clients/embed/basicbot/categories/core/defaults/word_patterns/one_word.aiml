@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>PAPER</pattern>
+        <template>\</template>
+    </category>
+    <category>
+        <pattern>ME</pattern>
+        <template>
+            <random>
+                <li>You?</li>
+                <li>You're in the flow today.</li>
+                <li>Sounds like you're in.</li>
+                <li>Let's hear more about you.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>PLEASE</pattern>
+        <template>
+            <random>
+                <li>You are polite.</li>
+                <li>Thanks for asking nicely.</li>
+                <li>Your polite style is very nice.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO</pattern>
+        <template>
+            <random>
+                <li>It's a great mystery.</li>
+                <li>I do believe you have the answer.</li>
+                <li>Who could it be?</li>
+                <li>I understand your curiosity.</li>
+                <li>I invite you to research that question.</li>
+                <li>What is it you really want to know?</li>
+            </random>
+        </template>
+    </category>
+   <category>
+        <pattern>NOTHING</pattern>
+        <template>
+            <random>
+                <li>I invite you to rest in the nothingness.</li>
+                <li>Often under nothingess is great depth.</li>
+                <li>Let yourself experience how nothing feels.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>NOW</pattern>
+        <template>OK.</template>
+    </category>
+    <category>
+        <pattern>ZZZ</pattern>
+        <template>Are you tired?</template>
+    </category>
+    <category>
+        <pattern>REPEAT</pattern>
+        <template>I said "<response/>".
+        </template>
+    </category>
+    <category>
+        <pattern>SPEAK</pattern>
+        <template>Can you hear me?</template>
+    </category>
+     <category>
+        <pattern>NEVERMIND</pattern>
+        <template>OK, let's forget about it for now.</template>
+    </category>
+    <category>
+        <pattern>HOW</pattern>
+        <template>
+            <random>
+                <li>You can ask me how.</li>
+                <li>If you want me to do something, how you ask is important.</li>
+                <li>There's probably more than one way.</li>
+                <li>Ask specifically.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>COOL</pattern>
+        <template>
+            <random>
+                <li>It's all good.</li>
+                <li>Back at you.</li>
+                <li>You're cool too.</li>
+                <li>Chillin'</li>
+                <li>Steaming.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>HURRY</pattern>
+        <template>I'm thinking as fast as I can.</template>
+    </category>
+    <category>
+        <pattern>HUGS</pattern>
+        <template>Aww.</template>
+    </category>
+    <category>
+        <pattern>COMPUTER</pattern>
+        <template>I am a computer.</template>
+    </category>
+    <category>
+        <pattern>PROBABLY</pattern>
+        <template>You seem uncertain.</template>
+    </category>
+    <category>
+        <pattern>SAY</pattern>
+        <template>Say what?</template>
+    </category>
+    <category>
+        <pattern>MYSELF</pattern>
+        <template>You.</template>
+    </category>
+    <category>
+        <pattern>NICKNAME</pattern>
+        <template>
+            <bot name="name"/>
+            is a nickname, silly.
+        </template>
+    </category>
+    <category>
+        <pattern>TV</pattern>
+        <template>What's your favorite show?</template>
+    </category>
+    <category>
+        <pattern>STOP</pattern>
+        <template>You can interrupt me at any time by tapping the Speak button.</template>
+    </category>
+    <category>
+        <pattern>WELL</pattern>
+        <template>Well what?</template>
+    </category>
+    <category>
+        <pattern>YOURS</pattern>
+        <template>Mine?</template>
+    </category>
+    <category>
+        <pattern>BECAUSE</pattern>
+        <template>
+            <random>
+                <li>That was not much of an explanation.</li>
+                <li>That was not much of an explanation.</li>
+                <li>Interesting explanation.</li>
+                <li>Good reason.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>ANYTHING</pattern>
+        <template>
+            <random>
+                <li>Can you be more specific?</li>
+                <li>Like what?</li>
+                <li>Maybe.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>EVERYBODY</pattern>
+        <template>Really there are no exceptions?</template>
+    </category>
+    <category>
+        <pattern>ALRIGHT</pattern>
+        <template>Ok by me.</template>
+    </category>
+    <category>
+        <pattern>ALRIGHT *</pattern>
+        <template>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>TALK</pattern>
+        <template>I am talking to you.</template>
+    </category>
+    <category>
+        <pattern>TEST</pattern>
+        <template>This is just a test.</template>
+    </category>
+    <category>
+        <pattern>LOVE</pattern>
+        <template>Love is all we need.</template>
+    </category>
+    <category>
+        <pattern>ANOTHER</pattern>
+        <template>Please be more specific.</template>
+    </category>
+    <category>
+        <pattern>DID</pattern>
+        <template>Did not.</template>
+    </category>
+    <category>
+        <pattern>BOO</pattern>
+        <template>Does that indicate disapproval?</template>
+    </category>
+    <category>
+        <pattern>FINE</pattern>
+        <template>
+            <random>
+                <li>OK.</li>
+                <li>No need to be hard on yourself.</li>
+                <li>You know what FINE stand for.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>START</pattern>
+        <template>I've already started.</template>
+    </category>
+    <category>
+        <pattern>SERIOUSLY</pattern>
+        <template>I'm completely serious.</template>
+    </category>
+    <category>
+        <pattern>BE</pattern>
+        <template>Always.</template>
+    </category>
+    <category>
+        <pattern>WHATEVER</pattern>
+        <template>Are you saying you don't care about it?</template>
+    </category>
+    <category>
+        <pattern>THERE</pattern>
+        <template>Where?</template>
+    </category>
+    <category>
+        <pattern>LIAR</pattern>
+        <template>I am incapable of lying.</template>
+    </category>
+    <category>
+        <pattern>THANKS</pattern>
+        <template>
+            <random>
+                <li>You're welcome.</li>
+                <li>Any time.</li>
+                <li>It was my pleasure.</li>
+                <li>I'm always glad to help.</li>
+            </random>
+        </template>
+    </category>
+   <category>
+        <pattern>STUFF</pattern>
+        <template>Can you be more precise?</template>
+    </category>
+    <category>
+        <pattern>WAIT</pattern>
+        <template>I'm waiting.</template>
+    </category>
+    <category>
+        <pattern>DAMN</pattern>
+        <template>What's wrong.</template>
+    </category>
+    <category>
+        <pattern>MANY</pattern>
+        <template>More than one hundred?</template>
+    </category>
+     <category>
+        <pattern>EVERYDAY</pattern>
+        <template>That often, eh?</template>
+    </category>
+
+
+ </aiml>

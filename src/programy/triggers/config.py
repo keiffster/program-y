@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -15,18 +15,16 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.utils.logging.ylogger import YLogger
-
-from programy.config.container import BaseContainerConfigurationData
+from programy.config.base import BaseConfigurationData
 from programy.utils.substitutions.substitues import Substitutions
 
 
-class TriggerConfiguration(BaseContainerConfigurationData):
-
+class TriggerConfiguration(BaseConfigurationData):
     LOCAL_MANAGER = "programy.triggers.local.LocalTriggerManager"
     REST_MANAGER = "programy.triggers.rest.RestTriggerManager"
 
     def __init__(self, name="triggers"):
-        BaseContainerConfigurationData.__init__(self, name)
+        BaseConfigurationData.__init__(self, name)
         self._manager = TriggerConfiguration.LOCAL_MANAGER
 
     @property
@@ -37,16 +35,19 @@ class TriggerConfiguration(BaseContainerConfigurationData):
         return ["url", "method", "token"]
 
     def load_config_section(self, configuration_file, section, bot_root, subs: Substitutions = None):
+        del bot_root
+        del subs
         triggers = configuration_file.get_section(self._section_name, section)
         if triggers is not None:
-            self._manager = configuration_file.get_option(triggers, "manager", missing_value=TriggerConfiguration.LOCAL_MANAGER)
+            self._manager = configuration_file.get_option(triggers, "manager",
+                                                          missing_value=TriggerConfiguration.LOCAL_MANAGER)
             self.load_additional_key_values(configuration_file, triggers)
         else:
             YLogger.warning(self, "'triggers' section missing from client config, using defaults")
 
     def to_yaml(self, data, defaults=True):
 
-        assert (data is not None)
+        assert data is not None
 
         if defaults is True:
             data['manager'] = TriggerConfiguration.LOCAL_MANAGER

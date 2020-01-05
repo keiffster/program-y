@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -15,8 +15,8 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 import re
-
 from programy.dialog.splitter.splitter import SentenceSplitter
+
 
 class RegexSentenceSplitter(SentenceSplitter):
 
@@ -27,5 +27,4 @@ class RegexSentenceSplitter(SentenceSplitter):
         if self.is_active():
             sentences = re.split(self._configuration.split_chars, text)
             return [self.remove_punctuation(s).strip() for s in sentences if s is not None and len(s) > 0]
-        return text
-
+        return [text]

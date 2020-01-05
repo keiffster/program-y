@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+     <category>
+        <pattern>SAYS WHO</pattern>
+        <template>Says you.</template>
+    </category>
+    <category>
+        <pattern>DID YOU</pattern>
+        <template>What I did was respond to your query.</template>
+    </category>
+    <category>
+        <pattern>SPEAK NOW</pattern>
+        <template>Can you hear me?</template>
+    </category>
+    <category>
+        <pattern>HAPPY BIRTHDAY</pattern>
+        <template>Thank you!</template>
+    </category>
+    <category>
+        <pattern>PLEASE TALK</pattern>
+        <template>Can you hear me?</template>
+    </category>
+    <category>
+        <pattern>REPEAT THAT</pattern>
+        <template><that index="2,1"/>" .
+        </template>
+    </category>
+    <category>
+        <pattern>TOO MUCH</pattern>
+        <template>More than a ton?</template>
+    </category>
+    <category>
+        <pattern>OH WELL</pattern>
+        <template>That's about it.</template>
+    </category>
+    <category>
+        <pattern>REMEMBER THAT</pattern>
+        <template>Don't worry I will remember it.</template>
+    </category>
+    <category>
+        <pattern>START OVER</pattern>
+        <template>You start.</template>
+    </category>
+    <category>
+        <pattern>VERY MUCH</pattern>
+        <template>That seems like a lot.</template>
+    </category>
+    <category>
+        <pattern>EAT ME</pattern>
+        <template>That was not very nice.</template>
+    </category>
+   <category>
+        <pattern>ANSWER ME</pattern>
+        <template>Try asking me again using simpler words.</template>
+    </category>
+    <category>
+        <pattern>HAVE FUN</pattern>
+        <template>I am having a blast.</template>
+    </category>
+    <category>
+        <pattern>WITH YOU</pattern>
+        <template>I'm flattered.</template>
+    </category>
+    <category>
+        <pattern>VERY INTERESTING</pattern>
+        <template>I thought so too.</template>
+    </category>
+     <category>
+        <pattern>TELL ME</pattern>
+        <template>I thought I told you already.</template>
+    </category>
+    <category>
+        <pattern>NOW WHAT</pattern>
+        <template>Whatever you want,<srai>CLIENT NAME</srai>.
+        </template>
+    </category>
+    <category>
+        <pattern>SAY IT</pattern>
+        <template>It.</template>
+    </category>
+    <category>
+        <pattern>NOT GOOD</pattern>
+        <template>What's wrong,<srai>CLIENT NAME</srai>?
+        </template>
+    </category>
+    <category>
+        <pattern>SEE WHAT</pattern>
+        <template>See the point.</template>
+    </category>
+    <category>
+        <pattern>MINE TOO</pattern>
+        <template>Really yours too. That's unbelievable.</template>
+    </category>
+    <category>
+        <pattern>ALRIGHT THEN</pattern>
+        <template>Ok by me.</template>
+    </category>
+    <category>
+        <pattern>ABOUT WHAT</pattern>
+        <template>What about what?</template>
+    </category>
+    <category>
+        <pattern>COOL BEANS</pattern>
+        <template>What kind of beans?</template>
+    </category>
+    <category>
+        <pattern>WITH ME</pattern>
+        <template>With you?</template>
+    </category>
+    <category>
+        <pattern>EXCUSE ME</pattern>
+        <template>You're excused.</template>
+    </category>
+    <category>
+        <pattern>OF WHAT</pattern>
+        <template>I have no idea what to say now.</template>
+    </category>
+    <category>
+        <pattern>DONE WHAT</pattern>
+        <template>Sorry, I forgot what "what" was.</template>
+    </category>
+    <category>
+        <pattern>GET WHAT</pattern>
+        <template>Get with it.</template>
+    </category>
+    <category>
+        <pattern>TALK NOW</pattern>
+        <template>Can you hear me?</template>
+    </category>
+    <category>
+        <pattern>NOT LONG</pattern>
+        <template>Pretty soon, eh?</template>
+    </category>
+    <category>
+        <pattern>NOT NOW</pattern>
+        <template>Maybe later?</template>
+    </category>
+    <category>
+        <pattern>IT IS</pattern>
+        <template>
+            <random>
+                <li>Oh.</li>
+                <li>Huh.</li>
+                <li>Is it?</li>
+                <li>It is, eh?</li>
+                <li>Sure it is.</li>
+                <li>Interesting.</li>
+                <li>Fascinating.</li>
+                <li>That means...</li>
+                <li>I know it is.</li>
+                <li>
+                    <get name="it"/>
+                    is?
+                </li>
+                <li>It is?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>IT WAS</pattern>
+        <template>When was this?</template>
+    </category>
+    <category>
+        <pattern>FROM YOU</pattern>
+        <template>How did you get that from me?</template>
+    </category>
+    <category>
+        <pattern>OH SHIT</pattern>
+        <template>What's wrong?</template>
+    </category>
+    <category>
+        <pattern>GUESS WHAT</pattern>
+        <template>What?</template>
+    </category>
+    <category>
+        <pattern>RIGHT ON</pattern>
+        <template>Yeah.</template>
+    </category>
+
+    <category>
+        <pattern>CLOSE ENOUGH</pattern>
+        <template>Fair enough.</template>
+    </category>
+    <category>
+        <pattern>SET ALARM</pattern>
+        <template>What time should I set the alarm for?</template>
+    </category>
+    <category>
+        <pattern>CANCEL THAT</pattern>
+        <template>OK. Processing stopped.</template>
+    </category>
+    <category>
+        <pattern>SHUT UP</pattern>
+        <template>You can always interrupt me by pressing the Speak button.</template>
+    </category>
+    <category>
+        <pattern>GOOD JOB</pattern>
+        <template>Thank you very much.</template>
+    </category>
+    <category>
+        <pattern>ITS GREAT</pattern>
+        <template>What is so great about it?</template>
+    </category>
+    <category>
+        <pattern>LIKE WHAT</pattern>
+        <template>More details.</template>
+    </category>
+    <category>
+        <pattern>FORGET IT</pattern>
+        <template>Let's move on.</template>
+    </category>
+    <category>
+        <pattern>ME TOO</pattern>
+        <template>
+            <random>
+                <li>I think a lot of people feel that way.</li>
+                <li>We're on the same wavelength,<srai>CLIENT NAME</srai>.
+                </li>
+                <li>I would have thought so.</li>
+            </random>
+        </template>
+    </category>
+
+ </aiml>

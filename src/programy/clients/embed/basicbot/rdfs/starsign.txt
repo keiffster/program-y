@@ -1,0 +1,60 @@
+AQUARIUS:hasPurpose:to give us personality based on birth
+AQUARIUS:hasSize:0
+AQUARIUS:hasSyllables:4
+AQUARIUS:isa:Star Sign
+AQUARIUS:lifeArea:Spiritual
+ARIES:hasPurpose:to give us personality based on birth
+ARIES:hasSize:0
+ARIES:hasSyllables:2
+ARIES:isa:Star Sign
+ARIES:lifeArea:Spiritual
+CANCER:hasPurpose:to give us personality based on birth
+CANCER:hasSize:0
+CANCER:hasSyllables:2
+CANCER:isa:Star Sign
+CANCER:lifeArea:Spiritual
+CAPRICORN:hasPurpose:to give us personality based on birth
+CAPRICORN:hasSize:0
+CAPRICORN:hasSyllables:3
+CAPRICORN:isa:Star Sign
+CAPRICORN:lifeArea:Spiritual
+GEMINI:hasPurpose:to give us personality based on birth
+GEMINI:hasSize:0
+GEMINI:hasSyllables:3
+GEMINI:isa:Star Sign
+GEMINI:lifeArea:Spiritual
+LIBRA:hasPurpose:to give us personality based on birth
+LIBRA:hasSize:0
+LIBRA:hasSyllables:2
+LIBRA:isa:Star Sign
+LIBRA:lifeArea:Spiritual
+VIRGO:hasPurpose:to give us personality based on birth
+VIRGO:hasSize:0
+VIRGO:hasSyllables:2
+VIRGO:isa:Star Sign
+VIRGO:lifeArea:Spiritual
+SCORPIO:hasPurpose:to give us personality based on birth
+SCORPIO:hasSize:0
+SCORPIO:hasSyllables:3
+SCORPIO:isa:Star Sign
+SCORPIO:lifeArea:Spiritual
+SAGGITARIUS:hasPurpose:to give us personality based on birth
+SAGGITARIUS:hasSize:0
+SAGGITARIUS:hasSyllables:2
+SAGGITARIUS:isa:Star Sign
+SAGGITARIUS:lifeArea:Spiritual
+PISCES:hasPurpose:to give us personality based on birth
+PISCES:hasSize:0
+PISCES:hasSyllables:2
+PISCES:isa:Star Sign
+PISCES:lifeArea:Spiritual
+TAURUS:hasPurpose:to give us personality based on birth
+TAURUS:hasSize:0
+TAURUS:hasSyllables:5
+TAURUS:isa:Star Sign
+TAURUS:lifeArea:Spiritual
+LEO:hasPurpose:to give us personality based on birth
+LEO:hasSize:0
+LEO:hasSyllables:2
+LEO:isa:Star Sign
+LEO:lifeArea:Spiritual

@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,20 +14,25 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from programy.storage.entities.store import Store
 
-class UserStore(object):
+
+class UserStore(Store):
+
+    def __init__(self):
+        Store.__init__(self)
 
     def add_user(self, userid, clientid):
-        raise NotImplementedError("add_user missing from User Store")
+        raise NotImplementedError("add_user missing from User Store")  # pragma: no cover
 
     def exists(self, userid, clientid):
-        raise NotImplementedError("exists missing from User Store")
+        raise NotImplementedError("exists missing from User Store")  # pragma: no cover
 
     def get_links(self, userid):
-        raise NotImplementedError("get_links missing from User Store")
+        raise NotImplementedError("get_links missing from User Store")  # pragma: no cover
 
     def remove_user(self, userid, clientid):
-        raise NotImplementedError("remove_user missing from User Store")
+        raise NotImplementedError("remove_user missing from User Store")  # pragma: no cover
 
     def remove_user_from_all_clients(self, userid):
-        raise NotImplementedError("remove_user_from_all_clients missing from User Store")
+        raise NotImplementedError("remove_user_from_all_clients missing from User Store")  # pragma: no cover

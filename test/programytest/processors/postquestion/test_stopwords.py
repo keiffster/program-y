@@ -1,7 +1,8 @@
 import unittest
-from programy.processors.postquestion.stopwords import StopWordsPostQuestionProcessor
 
+from programy.processors.postquestion.stopwords import StopWordsPostQuestionProcessor
 from programytest.client import TestClient
+
 
 class MockBrain(object):
 

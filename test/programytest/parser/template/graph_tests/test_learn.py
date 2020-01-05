@@ -1,12 +1,8 @@
 import xml.etree.ElementTree as ET
 
+from programy.parser.exceptions import ParserException
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.learn import TemplateLearnNode, LearnCategory
-from programy.context import ClientContext
-from programy.bot import Bot
-from programy.config.bot.bot import BotConfiguration
-
-from programytest.client import TestClient
 from programytest.parser.template.graph_tests.graph_test_client import TemplateGraphTestClient
 
 
@@ -150,3 +146,47 @@ class TemplateGraphLearnTests(TemplateGraphTestClient):
         response = client_context2.bot.ask_question(client_context2, "HELLO THERE")
         self.assertEqual("HIYA TWO.", response)
 
+    def test_category_missing(self):
+        template = ET.fromstring("""
+         			<template>
+         				<learn>
+         				        <pattern>HELLO THERE</pattern>
+         				        <template>HIYA TWO</template>
+         				</learn>
+         			</template>
+         			""")
+
+        with self.assertRaises(ParserException):
+            _ = self._graph.parse_template_expression(template)
+
+    def test_topic_present(self):
+        template = ET.fromstring("""
+         			<template>
+         				<learn>
+         				    <topic>
+         				      <category>
+         				        <pattern>HELLO THERE</pattern>
+         				        <template>HIYA TWO</template>
+         				      </category>
+         				    </topic>
+         				</learn>
+         			</template>
+         			""")
+
+        with self.assertRaises(ParserException):
+            _ = self._graph.parse_template_expression(template)
+
+    def test_other_tag(self):
+        template = ET.fromstring("""
+         			<template>
+         				<learn>
+         				      <categoryx>
+         				        <pattern>HELLO THERE</pattern>
+         				        <template>HIYA TWO</template>
+         				      </categoryx>
+         				</learn>
+         			</template>
+         			""")
+
+        with self.assertRaises(ParserException):
+            _ = self._graph.parse_template_expression(template)

@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -15,7 +15,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.utils.logging.ylogger import YLogger
-
 from programy.config.base import BaseConfigurationData
 from programy.storage.stores.sql.engine import SQLStorageEngine
 from programy.utils.substitutions.substitues import Substitutions
@@ -36,6 +35,10 @@ class SQLStorageConfiguration(BaseConfigurationData):
     def url(self):
         return self._url
 
+    @url.setter
+    def url(self, url):
+        self._url = url
+
     @property
     def echo(self):
         return self._echo
@@ -48,14 +51,20 @@ class SQLStorageConfiguration(BaseConfigurationData):
     def create_db(self):
         return self._create_db
 
+    @create_db.setter
+    def create_db(self, create):
+        self._create_db = create
+
     @property
     def drop_all_first(self):
         return self._drop_all_first
 
-    def check_for_license_keys(self, license_keys):
-        BaseConfigurationData.check_for_license_keys(self, license_keys)
+    @drop_all_first.setter
+    def drop_all_first(self, drop_all):
+        self._drop_all_first = drop_all
 
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
+        del bot_root
         storage = configuration_file.get_section(self._section_name, configuration)
         if storage is not None:
             self._url = configuration_file.get_option(storage, "url", subs=subs)
@@ -70,18 +79,11 @@ class SQLStorageConfiguration(BaseConfigurationData):
             YLogger.error(None, "'config' section missing from storage config")
 
     def create_sqlstorage_config(self):
-        config = {}
-
-        config['url'] = self._url
-        config['echo'] = self._echo
-        config['encoding'] = self._encoding
-        config['create_db'] = self._create_db
-        config['drop_all_first'] = self._drop_all_first
-
-        if len(config.keys()) > 0:
-            return config
-
-        return None
+        return {'url': self._url,
+                'echo': self._echo,
+                'encoding': self._encoding,
+                'create_db': self._create_db,
+                'drop_all_first': self._drop_all_first}
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:

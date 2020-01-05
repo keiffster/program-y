@@ -1,5 +1,3 @@
-import xml.etree.ElementTree as ET
-
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.rand import TemplateRandomNode
 from programy.parser.template.nodes.word import TemplateWordNode

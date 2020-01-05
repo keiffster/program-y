@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -17,40 +17,47 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.utils.logging.ylogger import YLogger
 from programy.storage.factory import StorageFactory
 
-class BinariesManager(object):
+
+class BinariesManager:
 
     def __init__(self, binaries_configuration):
-
-        assert (binaries_configuration is not None)
+        assert binaries_configuration is not None
 
         self._configuration = binaries_configuration
 
+    def _load_from_storage(self, storage_factory):
+        storage_engine = storage_factory.entity_storage_engine(StorageFactory.BINARIES)
+        binaries_storage = storage_engine.binaries_store()
+        return binaries_storage.load_binary()
+
     def load_binary(self, storage_factory):
-        YLogger.info(self, "Loading binary brain from [%s]", StorageFactory.BINARIES)
         try:
+            if storage_factory.entity_storage_engine_available(StorageFactory.BINARIES) is True:
+                YLogger.info(self, "Loading binary brain from [%s]", StorageFactory.BINARIES)
 
-            storage_engine = storage_factory.entity_storage_engine(self._configuration.storage)
-            binaries_storage = storage_engine.binaries_storage()
-            self._aiml_parser = binaries_storage.load_binary()
-
-            return False   # Tell caller, load succeeded and skip aiml load
+                return self._load_from_storage(storage_factory)
 
         except Exception as excep:
             YLogger.exception(self, "Failed to load binary file", excep)
-            if self._configuration.load_aiml_on_binary_fail is True:
-                return True   # Tell caller, load failed and to load aiml directly
-            else:
+            if self._configuration.load_aiml_on_binary_fail is False:
                 raise excep
 
-    def save_binary(self, storage_factory):
+        return None
+
+    def _save_to_storage(self, storage_factory, aiml_parser):
+        storage_engine = storage_factory.entity_storage_engine(StorageFactory.BINARIES)
+        binaries_storage = storage_engine.binaries_store()
+        binaries_storage.save_binary(aiml_parser)
+
+    def save_binary(self, storage_factory, aiml_parser):
         try:
             if storage_factory.entity_storage_engine_available(StorageFactory.BINARIES) is True:
                 YLogger.info(self, "Saving binary brain to [%s]", StorageFactory.BINARIES)
 
-                storage_engine = storage_factory.entity_storage_engine(StorageFactory.BINARIES)
-                binaries_storage = storage_engine.binaries_storage()
-                binaries_storage.save_binary(self._aiml_parser)
+                self._save_to_storage(storage_factory, aiml_parser)
+                return True
 
         except Exception as failure:
             YLogger.info(self, "Failed to save binary [%s]", failure)
 
+        return False

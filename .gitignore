@@ -4,6 +4,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
+.pytype/
 
 # C extensions
 *.so
@@ -96,6 +97,9 @@ ENV/
 
 # Pylint output
 pylint.log
+
+# Pytype outout
+pytype.log
 
 # Ignore license key files
 license.keys

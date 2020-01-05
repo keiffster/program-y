@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -20,11 +20,12 @@ from programy.storage.factory import StorageFactory
 from programy.config.bot.conversations import BotConversationsConfiguration
 
 
-class ConversationManager(object):
+class ConversationManager:
 
     def __init__(self, conversation_configuration):
-        assert (conversation_configuration is not None)
-        assert (isinstance(conversation_configuration, BotConversationsConfiguration))
+
+        assert conversation_configuration is not None
+        assert isinstance(conversation_configuration, BotConversationsConfiguration)
 
         self._configuration = conversation_configuration
         self._conversation_storage = None
@@ -47,7 +48,7 @@ class ConversationManager(object):
 
     def initialise(self, storage_factory):
         if storage_factory.entity_storage_engine_available(StorageFactory.CONVERSATIONS) is True:
-            converstion_engine =  storage_factory.entity_storage_engine(StorageFactory.CONVERSATIONS)
+            converstion_engine = storage_factory.entity_storage_engine(StorageFactory.CONVERSATIONS)
             if converstion_engine:
                 self._conversation_storage = converstion_engine.conversation_store()
 
@@ -55,16 +56,15 @@ class ConversationManager(object):
         if self._conversation_storage is not None:
             if client_context.userid in self._conversations:
                 conversation = self._conversations[client_context.userid]
-                if conversation is not None:
-                    self._conversation_storage.store_conversation(client_context, conversation)
+                self._conversation_storage.store_conversation(client_context, conversation)
 
-    def has_conversation(self, client_context):
+    def has_conversation(self, client_context) -> bool:
         return bool(client_context.userid in self._conversations)
 
     def get_conversation(self, client_context):
 
-        assert (client_context is not None)
-        assert (client_context.userid  is not None)
+        assert client_context is not None
+        assert client_context.userid is not None
 
         if client_context.userid in self._conversations:
             YLogger.debug(client_context, "Retrieving conversation for client %s", client_context.userid)
@@ -92,4 +92,3 @@ class ConversationManager(object):
                 pass
 
         return conversation
-

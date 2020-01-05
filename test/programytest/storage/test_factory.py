@@ -1,19 +1,28 @@
 import unittest
 
-from programy.storage.factory import StorageFactory
-
-from programy.config.file.yaml_file import YamlConfigurationFile
-
-from programy.storage.config import StorageConfiguration
+import programytest.storage.engines as Engines
 from programy.clients.events.console.config import ConsoleConfiguration
-
-from programy.storage.stores.sql.engine import SQLStorageEngine
+from programy.config.file.yaml_file import YamlConfigurationFile
+from programy.storage.config import StorageConfiguration
+from programy.storage.factory import StorageFactory
 from programy.storage.stores.file.engine import FileStorageEngine
 from programy.storage.stores.logger.engine import LoggerStorageEngine
 from programy.storage.stores.nosql.mongo.engine import MongoStorageEngine
 from programy.storage.stores.nosql.redis.engine import RedisStorageEngine
+from programy.storage.stores.sql.engine import SQLStorageEngine
+from programy.config.base import BaseConfigurationData
 
-import programytest.storage.engines as Engines
+
+class MockStorageConfiguration(BaseConfigurationData):
+
+    def __init__(self, name, throwexcept=False):
+        BaseConfigurationData.__init__(self, name)
+        self._throwexcept = throwexcept
+
+    def create_engine(self):
+        if self._throwexcept is True:
+            raise Exception("Mock Exception")
+        return None
 
 
 class StorageFactoryTests(unittest.TestCase):
@@ -285,3 +294,22 @@ class StorageFactoryTests(unittest.TestCase):
         self.assertFalse(factory.entity_storage_engine_available("other"))
         self.assertIsNone(factory.entity_storage_engine("other"))
 
+    def test_load_engines_from_config_return_none(self):
+        storage_config = StorageConfiguration()
+        storage_config._entity_store["MOCK"] = storage_config
+        storage_config._store_configs["MOCK"] = MockStorageConfiguration("MOCK", throwexcept=False)
+        factory = StorageFactory()
+
+        factory.load_engines_from_config(storage_config)
+
+        self.assertFalse(factory.storage_engine_available("MOCK"))
+
+    def test_load_engines_from_config_raise_exception(self):
+        storage_config = StorageConfiguration()
+        storage_config._entity_store["MOCK"] = storage_config
+        storage_config._store_configs["MOCK"] = MockStorageConfiguration("MOCK", throwexcept=True)
+        factory = StorageFactory()
+
+        factory.load_engines_from_config(storage_config)
+
+        self.assertFalse(factory.storage_engine_available("MOCK"))

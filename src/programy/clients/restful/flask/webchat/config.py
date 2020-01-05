@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without webchatriction, including without limitation
@@ -25,6 +25,9 @@ class WebChatConfiguration(RestConfiguration):
         self._cookie_id = "ProgramYSession"
         self._cookie_expires = 90
 
+    def _get_renderer_class(self):
+        return "programy.clients.render.html.HtmlRenderer"
+
     @property
     def cookie_id(self):
         return self._cookie_id
@@ -33,14 +36,16 @@ class WebChatConfiguration(RestConfiguration):
     def cookie_expires(self):
         return self._cookie_expires
 
-    def check_for_license_keys(self, license_keys):
-        RestConfiguration.check_for_license_keys(self, license_keys)
+    def load_configuration_section(self, configuration_file, section, bot_root, subs: Substitutions = None):
 
-    def load_configuration_section(self, configuration_file, webchat, bot_root, subs: Substitutions = None):
-        if webchat is not None:
-            self._cookie_id = configuration_file.get_option(webchat, "cookie_id", missing_value="ProgramYSession", subs=subs)
-            self._cookie_expires = configuration_file.get_int_option(webchat, "cookie_expires", missing_value=90, subs=subs)
-            super(WebChatConfiguration, self).load_configuration_section(configuration_file, webchat, bot_root, subs=subs)
+        assert section is not None
+
+        self._cookie_id = configuration_file.get_option(section, "cookie_id", missing_value="ProgramYSession",
+                                                        subs=subs)
+        self._cookie_expires = configuration_file.get_int_option(section, "cookie_expires", missing_value=90,
+                                                                 subs=subs)
+        super(WebChatConfiguration, self).load_configuration_section(configuration_file, section, bot_root,
+                                                                     subs=subs)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:

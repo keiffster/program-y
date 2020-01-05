@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -18,7 +18,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.config.brain.security import BrainSecurityConfiguration
 
 
-class Authenticator(object):
+class Authenticator:
 
     def __init__(self, configuration: BrainSecurityConfiguration):
         self._configuration = configuration
@@ -27,11 +27,12 @@ class Authenticator(object):
     def configuration(self):
         return self._configuration
 
-    def initialise(self, brain):
+    def initialise(self, client):
         pass
 
     def get_default_denied_srai(self):
         return self.configuration.denied_srai
 
     def authenticate(self, client_context):
+        del client_context
         return False

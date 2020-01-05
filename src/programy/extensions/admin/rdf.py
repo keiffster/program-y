@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -16,7 +16,6 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 """
 from programy.utils.logging.ylogger import YLogger
-
 from programy.extensions.base import Extension
 
 
@@ -26,6 +25,8 @@ class RDFAdminExtension(Extension):
     def execute(self, client_context, data):
         YLogger.debug(client_context, "RDF Admin - [%s]", data)
 
+        #TODO Add better parsing protextion to the splits
+
         rdf = ""
         segments = data.split()
         if segments[0] == 'SUBJECTS':
@@ -33,7 +34,7 @@ class RDFAdminExtension(Extension):
             if segments[1] == 'LIST':
                 rdf += "<ul>"
                 for subject in subjects:
-                    rdf += "<li>%s</li>"%subject
+                    rdf += "<li>%s</li>" % subject
                 rdf += "</ul>"
             else:
                 return str(len(subjects))
@@ -49,11 +50,14 @@ class RDFAdminExtension(Extension):
         elif segments[0] == "OBJECT":
             subject = segments[1]
             predicate = segments[2]
-            objects =  client_context.brain.rdf.objects(subject, predicate)
+            objects = client_context.brain.rdf.objects(subject, predicate)
             rdf += "<ul>"
-            for object in objects:
-                for obj in object:
+            for anobject in objects:
+                for obj in anobject:
                     rdf += "<li>%s</li>" % obj
             rdf += "</ul>"
+
+        else:
+            YLogger.error(client_context, "Invalid RDF Admin command [%s]" % segments[0])
 
         return rdf

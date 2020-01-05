@@ -1,18 +1,17 @@
-import unittest
-
-from programy.dialog.question import Question
-from programy.dialog.conversation import Conversation
-
-from programytest.client import TestClient
 import datetime
+import unittest
+from programy.dialog.conversation import Conversation
+from programy.dialog.question import Question
+from programytest.client import TestClient
+
 
 class StorageEngineTestUtils(unittest.TestCase):
 
     def user_asserts(self, storage_engine):
         user_store = storage_engine.user_store()
-        user_store.add_user(userid="@keiffster", client="twitter")
-        user_store.add_user(userid="keiffster@gmail.com", client="hangouts")
-        user_store.add_user(userid="keiffster", client="telegram")
+        user_store.add_user(userid="@keiffster", clientid="twitter")
+        user_store.add_user(userid="keiffster@gmail.com", clientid="hangouts")
+        user_store.add_user(userid="keiffster", clientid="telegram")
         user_store.commit()
 
     def linked_account_asserts(self, storage_engine):

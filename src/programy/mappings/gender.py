@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -15,9 +15,9 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.utils.logging.ylogger import YLogger
-
 from programy.mappings.base import DoubleStringPatternSplitCollection
 from programy.storage.factory import StorageFactory
+
 
 class GenderCollection(DoubleStringPatternSplitCollection):
 
@@ -32,16 +32,21 @@ class GenderCollection(DoubleStringPatternSplitCollection):
     def genderise_string(self, string):
         return self.replace_by_pattern(string)
 
+    def _load_collection(self, lookups_engine):
+        lookups_store = lookups_engine.gender_store()
+        lookups_store.load_all(self)
+
     def load(self, storage_factory):
         if storage_factory.entity_storage_engine_available(StorageFactory.GENDER) is True:
             lookups_engine = storage_factory.entity_storage_engine(StorageFactory.GENDER)
-            if lookups_engine:
-                try:
-                    lookups_store = lookups_engine.gender_store()
-                    lookups_store.load_all(self)
-                except Exception as e:
-                    YLogger.exception(self, "Failed to load lookups from storage", e)
+            try:
+                self._load_collection(lookups_engine)
+                return True
+
+            except Exception as e:
+                YLogger.exception(self, "Failed to load lookups from storage", e)
+
+        return False
 
     def reload(self, storage_factory):
-        self.load(storage_factory)
-
+        return self.load(storage_factory)

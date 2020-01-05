@@ -1,13 +1,12 @@
 import unittest
 
-from programy.dynamic.variables.system.spelling import Spelling
-from programy.context import ClientContext
+from programy.activate import Activatable
 from programy.bot import Bot
 from programy.config.bot.bot import BotConfiguration
-from programy.spelling.base import SpellingChecker
 from programy.config.bot.spelling import BotSpellingConfiguration
-from programy.activate import Activatable
-
+from programy.context import ClientContext
+from programy.dynamic.variables.system.spelling import Spelling
+from programy.spelling.base import SpellingChecker
 from programytest.client import TestClient
 
 
@@ -36,9 +35,27 @@ class SpellingDynamicVarTests(unittest.TestCase):
         self.assertIsNotNone(dyn_var)
         active = dyn_var.get_value(self._client_context)
         self.assertIsNotNone(active)
-        self.assertEquals(Activatable.ON, active)
+        self.assertEqual(Activatable.ON, active)
 
         dyn_var.set_value(self._client_context, Activatable.OFF)
         active = dyn_var.get_value(self._client_context)
         self.assertIsNotNone(active)
-        self.assertEquals(Activatable.OFF, active)
+        self.assertEqual(Activatable.OFF, active)
+
+    def test_no_spell_checker(self):
+        self._client_context.bot._spell_checker = None
+
+        dyn_var = Spelling(None)
+        self.assertIsNotNone(dyn_var)
+        active = dyn_var.get_value(self._client_context)
+        self.assertIsNone(active)
+
+    def test_no_spell_checker_no_active(self):
+        self._client_context.bot._spell_checker = None
+
+        dyn_var = Spelling(None)
+        self.assertIsNotNone(dyn_var)
+        dyn_var.set_value(self._client_context, True)
+
+        active = dyn_var.get_value(self._client_context)
+        self.assertIsNone(active)

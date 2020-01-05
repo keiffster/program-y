@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+    <category>
+        <pattern>WHAT DAY OF THE WEEK IS IT</pattern>
+        <template>
+            <srai>TODAY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DAY IS IT</pattern>
+        <template>
+            <srai>TODAY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DAY IS TODAY</pattern>
+        <template>
+            <srai>TODAY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DAY IS IT TODAY</pattern>
+        <template>
+            <srai>TODAY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DAY WILL IT BE TOMORROW</pattern>
+        <template>
+            <srai>TOMORROW</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DAY IS TOMORROW</pattern>
+        <template>
+            <srai>TOMORROW</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DAY WILL TOMORROW BE</pattern>
+        <template>
+            <srai>TOMORROW</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT MONTH * IS IT</pattern>
+        <template>
+            <srai>MONTH</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT MONTH <set>preposition</set>
+            <set>article</set> YEAR IS IT
+        </pattern>
+        <template>
+            <srai>MONTH</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT MONTH <set>preposition</set>
+            <set>article</set> YEAR IS *
+        </pattern>
+        <template>
+            <srai>MONTH</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS TODAYS DATE</pattern>
+        <template>
+            <srai>DATE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT MONTH IS THIS #</pattern>
+        <template>
+            <srai>MONTH</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT YEAR</pattern>
+        <template>
+            <srai>YEAR</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT YEAR IS IT</pattern>
+        <template>
+            <srai>YEAR</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>WHAT WILL _ IN * YEARS</pattern>
+        <template>
+            <srai>FUTURE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>WHAT YEAR # NEXT YEAR</pattern>
+        <template>
+            <srai>NEXT YEAR</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT YEAR # LAST YEAR</pattern>
+        <template>
+            <srai>LAST YEAR</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT MORNING #</pattern>
+        <template>It is <srai>DAY PHASE</srai>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT NOON #</pattern>
+        <template>It is <srai>DAY PHASE</srai>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT NIGHT #</pattern>
+        <template>It is <srai>DAY PHASE</srai>.
+        </template>
+    </category>
+    <category>
+        <pattern>DAY IN <set>number</set> DAYS
+        </pattern>
+        <template>
+            <srai>WEEKDAY IN
+                <star/>
+                DAYS
+            </srai>
+            <srai>DATE IN
+                <star/>
+                DAYS
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DAYS UNTIL * <set>ordinal</set> *
+        </pattern>
+        <template>
+            <srai>DAYS UNTIL
+                <star/>
+                <map name="ordinal2number">
+                    <star index="2"/>
+                </map>
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DAYS UNTIL *
+            <set>ordinal</set>
+        </pattern>
+        <template>
+            <srai>DAYS UNTIL
+                <star/>
+                <map name="ordinal2number">
+                    <star index="2"/>
+                </map>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MANY DAYS UNTIL *</pattern>
+        <template>
+            <srai>DAYS UNTIL
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE DAY AFTER TOMORROW #</pattern>
+        <template>
+            <srai>DAY AFTER TOMORROW</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DAY # DAY AFTER TOMORROW #</pattern>
+        <template>
+            <srai>DAY AFTER TOMORROW</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT # DATE # DAY AFTER TOMORROW #</pattern>
+        <template>
+            <srai>DAYAFTERTOMORROWDATE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DAY WILL IT BE IN <set>number</set> DAYS
+        </pattern>
+        <template>
+            <srai>WEEKDAY IN
+                <star/>
+                DAYS
+            </srai>
+            <srai>DATE IN
+                <star/>
+                DAYS
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT YEAR COMES AFTER *</pattern>
+        <template>
+            <srai>WHAT COMES AFTER
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DATE IS TODAY</pattern>
+        <template>
+            <srai>DATE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE DATE</pattern>
+        <template>
+            <srai>DATE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS TODAY S DATE</pattern>
+        <template>
+            <srai>DATE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT # DATE # TOMORROW ^</pattern>
+        <template>
+            <srai>DATE TOMORROW</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>WHAT # TOMORROW S DATE ^</pattern>
+        <template>
+            <srai>DATE TOMORROW</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>WHAT WILL # TOMORROW #</pattern>
+        <template>
+            <srai>TOMORROW</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO I NEED AN UMBRELLA *</pattern>
+        <template>
+            <srai>WEATHER
+                <star/>
+            </srai>
+        </template>
+    </category>
+     <category>
+        <pattern>IS IT GOING TO RAIN TODAY</pattern>
+        <template>
+            <srai>WEATHER FORECAST</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE FORECAST FOR *</pattern>
+        <template>
+            <srai>WHAT IS THE WEATHER FORECAST FOR
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE THE # TIME</pattern>
+        <template>
+            <srai>TIME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THE TIME IS *</pattern>
+        <template>I have <srai>TIME</srai>.
+        </template>
+    </category>
+     <category>
+        <pattern>THE TIME</pattern>
+        <template>
+            <srai>TIME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE TIME *</pattern>
+        <template>
+            <srai>TIME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT TIME IS IT RIGHT NOW</pattern>
+        <template>
+            <srai>TIME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT TIME NOW</pattern>
+        <template>
+            <srai>TIME</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>WHAT TIME IS IT THERE</pattern>
+        <template>
+            <srai>TIME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE TIME NOW</pattern>
+        <template>
+            <srai>TIME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT TIME IS IT WHAT TIME IS IT</pattern>
+        <template>
+            <srai>TIME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT TIME IS IT NOW</pattern>
+        <template>
+            <srai>TIME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT TIME IS IT *</pattern>
+        <template>
+            <srai>TIME</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>WHAT IS THE TIME</pattern>
+        <template>
+            <srai>TIME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT TIME IS IT</pattern>
+        <template>
+            <srai>TIME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE DATE TODAY</pattern>
+        <template>
+            <srai>DATE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS TODAY</pattern>
+        <template>
+            <srai>DATE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT THE DAY *</pattern>
+        <template>
+            <srai>WHAT IS THE DAY
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT THE DATE *</pattern>
+        <template>
+            <srai>WHAT IS THE DATE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DATE IS IT TODAY</pattern>
+        <template>
+            <srai>DATE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>_ 60 MINUTES</pattern>
+        <template>
+            <srai>
+                <star/>
+                ONE HOUR
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>_ AN HOUR</pattern>
+        <template>
+            <srai>
+                <star/>
+                ONE HOUR
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT TIME IT IS #</pattern>
+        <template>
+            <srai>WHAT TIME IS IT</srai>
+        </template>
+    </category>
+
+
+
+
+</aiml>

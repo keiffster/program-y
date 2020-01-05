@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,21 +14,25 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from programy.storage.entities.store import Store
 
 
-class LinkStore(object):
+class LinkStore(Store):
+
+    def __init__(self):
+        Store.__init__(self)
 
     def create_link(self, primary_userid, provided_key, generated_key, expires, expired=False, retry_count=0):
-        raise NotImplementedError("create_link missing from Link Store")
+        raise NotImplementedError("create_link missing from Link Store")  # pragma: no cover
 
-    def get_link(self, primary_userid):
-        raise NotImplementedError("get_link missing from Link Store")
+    def get_link(self, userid):
+        raise NotImplementedError("get_link missing from Link Store")  # pragma: no cover
 
-    def remove_link(self, primary_userid):
-        raise NotImplementedError("remove_link missing from Link Store")
+    def remove_link(self, userid):
+        raise NotImplementedError("remove_link missing from Link Store")  # pragma: no cover
 
     def link_exists(self, userid, provided_key, generated_key):
-        raise NotImplementedError("link_exists missing from Link Store")
+        raise NotImplementedError("link_exists missing from Link Store")  # pragma: no cover
 
     def update_link(self, link):
-        raise NotImplementedError("update_link missing from Link Store")
+        raise NotImplementedError("update_link missing from Link Store")  # pragma: no cover

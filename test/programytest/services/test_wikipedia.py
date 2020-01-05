@@ -1,9 +1,8 @@
 import unittest
-import os
+
 import wikipedia
 
 from programy.services.wikipediaservice import WikipediaService
-
 from programytest.client import TestClient
 
 

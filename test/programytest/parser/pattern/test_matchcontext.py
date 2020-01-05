@@ -1,5 +1,5 @@
-import unittest
 import datetime
+import unittest
 
 from programy.parser.pattern.match import Match
 from programy.parser.pattern.matchcontext import MatchContext
@@ -22,16 +22,67 @@ class MatcherTestClient(TestClient):
         self.add_pattern_nodes_store()
         
 
+total_str = ""
+
+
+def collector(context, str):
+    global total_str
+    total_str += str
+
+
 class MatchContextTests(unittest.TestCase):
 
     def setUp(self):
         client = MatcherTestClient()
         self._client_context = client.create_client_context("testid")
 
+    def test_init_match_nodes_empty(self):
+        context1 = MatchContext(max_search_depth=100,
+                                max_search_timeout=60,
+                                matched_nodes=[])
+        self.assertEqual(100, context1.max_search_depth)
+        self.assertEqual(60, context1.max_search_timeout)
+        self.assertEqual([], context1.matched_nodes)
+        self.assertIsInstance(context1.total_search_start, datetime.datetime)
+
+    def test_set_get_matched_nodes(self):
+        context1 = MatchContext(max_search_depth=100,
+                                max_search_timeout=60,
+                                matched_nodes=[])
+
+        self.assertEquals([], context1.matched_nodes)
+
+        context1.set_matched_nodes([Match(Match.WORD, PatternWordNode("Hello"), "Hello")])
+
+        self.assertEquals(1, len(context1.matched_nodes))
+
+    def test_init_match_nodes_not_empty(self):
+        context1 = MatchContext(max_search_depth=100,
+                                max_search_timeout=60,
+                                matched_nodes=[Match(Match.WORD, PatternWordNode("Hello"), "Hello"),
+                                               Match(Match.WORD, PatternWordNode("There"), "There")])
+        self.assertEqual(100, context1.max_search_depth)
+        self.assertEqual(60, context1.max_search_timeout)
+        self.assertEqual(2, len(context1.matched_nodes))
+        self.assertIsInstance(context1.total_search_start, datetime.datetime)
+
+    def test_get_set_matched_nodes(self):
+        context = MatchContext(max_search_depth=100,
+                               max_search_timeout=60)
+
+        context._matched_nodes = [Match(Match.WORD, PatternWordNode("Hello"), "Hello"),
+                                 Match(Match.WORD, PatternWordNode("There"), "There")]
+
+        self.assertEqual(2, len(context.matched_nodes))
+
+        matched = context.matched_nodes
+
+        self.assertEqual(2, len(matched))
+
     def test_match_context_depth(self):
         context1 = MatchContext(max_search_depth=100, max_search_timeout=60)
         self.assertEqual(100, context1.max_search_depth)
-        self.assertEqual(60, context1.max_search_time)
+        self.assertEqual(60, context1.max_search_timeout)
 
     def test_match_context_depth(self):
         context = MatchContext(max_search_depth=100, max_search_timeout=60)
@@ -152,3 +203,64 @@ class MatchContextTests(unittest.TestCase):
         self.assertEquals(match_context.sentence, "Hello")
         self.assertEquals(match_context.response, "Hi there")
         self.assertEquals(3, len(match_context._matched_nodes))
+
+    def test_calculate_match_score(self):
+        context = MatchContext(max_search_depth=100,
+                                max_search_timeout=60,
+                                matched_nodes=[])
+
+        self.assertEqual(0.00, context.calculate_match_score())
+
+    def test_list_matches_empty(self):
+        global total_str
+
+        context = MatchContext(max_search_depth=100,
+                                max_search_timeout=60,
+                                matched_nodes=[])
+
+        total_str = ""
+        context.list_matches(self._client_context, output_func=collector)
+        self.assertEquals("\tMatches...\tMatch score 0.00\t\tResponse: None", total_str)
+
+    def test_list_matches(self):
+        global total_str
+
+        topic = PatternOneOrMoreWildCardNode("*")
+        word1 = PatternWordNode("Hi")
+        word2 = PatternWordNode("There")
+        context = MatchContext(max_search_depth=100, max_search_timeout=60,
+                               template_node=PatternTemplateNode(TemplateWordNode("Hello")),
+                               sentence="HELLO",
+                               response="Hi there")
+        context.add_match(Match(Match.TOPIC, topic, None))
+        context.add_match(Match(Match.WORD, word1, "Hi"))
+        context.add_match(Match(Match.WORD, word2, "There"))
+
+        total_str = ""
+        context.list_matches(self._client_context, output_func=collector)
+        self.assertEquals("\tMatches...	Asked: HELLO		1: Match=(Topic) Node=(ONEORMORE [*]) Matched=()		"
+                          "2: Match=(Word) Node=(WORD [Hi]) Matched=(Hi)		"
+                          "3: Match=(Word) Node=(WORD [There]) Matched=(There)	"
+                          "Match score 100.00		Response: Hi there", total_str)
+
+    def test_list_matches_no_template(self):
+        global total_str
+
+        topic = PatternOneOrMoreWildCardNode("*")
+        word1 = PatternWordNode("Hi")
+        word2 = PatternWordNode("There")
+        context = MatchContext(max_search_depth=100, max_search_timeout=60,
+                               template_node=PatternTemplateNode(TemplateWordNode("Hello")),
+                               sentence="HELLO",
+                               response="Hi there")
+        context.add_match(Match(Match.TOPIC, topic, None))
+        context.add_match(Match(Match.WORD, word1, "Hi"))
+        context.add_match(Match(Match.WORD, word2, "There"))
+
+        total_str = ""
+        context.list_matches(self._client_context, output_func=collector, include_template=False)
+        self.assertEquals("\tMatches...	Asked: HELLO		1: Match=(Topic) Node=(ONEORMORE [*]) Matched=()		"
+                          "2: Match=(Word) Node=(WORD [Hi]) Matched=(Hi)		"
+                          "3: Match=(Word) Node=(WORD [There]) Matched=(There)	"
+                          "Match score 100.00", total_str)
+

@@ -1,0 +1,884 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>
+            <set>name</set>
+            IS TALLER THAN * AND * IS TALLER THAN *
+        </pattern>
+        <template>
+            <srai>
+                <star/>
+                IS TALLER THAN
+                <star index="2"/>
+            </srai>
+            <srai>
+                <star index="3"/>
+                IS TALLER THAN
+                <star index="4"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>
+            <set>name</set>
+            IS SHORTER THAN *
+        </pattern>
+        <template>
+            <srai>
+                <star index="2"/>
+                IS TALLER THAN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DO * AND * DIFFER</pattern>
+        <template>
+            <srai>HOW DOES
+                <star/>
+                DIFFER FROM
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DOES <set>article</set> * DIFFER FROM *
+        </pattern>
+        <template>
+            <srai>HOW DOES
+                <star index="2"/>
+                DIFFER FROM
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DOES * DIFFER FROM <set>article</set> *
+        </pattern>
+        <template>
+            <srai>HOW DOES
+                <star/>
+                DIFFER FROM
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU DISTINGUISH BETWEEN * AND *</pattern>
+        <template>
+            <srai>WHAT IS THE DIFFERENCE BETWEEN
+                <star/>
+                AND
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW IS * DIFFERENT FROM *</pattern>
+        <template>
+            <srai>HOW DOES
+                <star/>
+                DIFFER FROM
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE DIFFERENCE BETWEEN * AND *</pattern>
+        <template>
+            <srai>HOW DOES
+                <star/>
+                DIFFER FROM
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH IS LARGER <set>article</set> * OR *
+        </pattern>
+        <template>
+            <srai>WHICH IS LARGER
+                <star index="2"/>
+                OR
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH IS LARGER * OR <set>article</set> *
+        </pattern>
+        <template>
+            <srai>WHICH IS LARGER
+                <star/>
+                OR
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH IS BIGGER *</pattern>
+        <template>
+            <srai>WHICH IS LARGER
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH THE BIGGER OF *</pattern>
+        <template>
+            <srai>WHICH IS LARGER
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OF * AND * WHICH IS *</pattern>
+        <template>
+            <srai>WHICH IS
+                <star index="3"/>
+                <star/>
+                OR
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH IS SMALLER <set>article</set> * OR *
+        </pattern>
+        <template>
+            <srai>WHICH IS SMALLER
+                <star index="2"/>
+                OR
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH IS SMALLER * OR <set>article</set> *
+        </pattern>
+        <template>
+            <srai>WHICH IS SMALLER
+                <star/>
+                OR
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH IS TINIER *</pattern>
+        <template>
+            <srai>WHICH IS SMALLER
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH IS BIGGEST *</pattern>
+        <template>
+            <srai>WHICH IS SMALLER
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH THE LARGEST OF *</pattern>
+        <template>
+            <srai>WHICH IS SMALLER
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH THE TINIER OF *</pattern>
+        <template>
+            <srai>WHICH IS SMALLER
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>article</set> * SMALLER THAN *
+        </pattern>
+        <template>
+            <srai>IS
+                <star index="2"/>
+                SMALLER THAN
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS * SMALLER THAN <set>article</set> *
+        </pattern>
+        <template>
+            <srai>IS
+                <star/>
+                SMALLER THAN
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>article</set> * BIGGER THAN *
+        </pattern>
+        <template>
+            <srai>IS
+                <star index="2"/>
+                BIGGER THAN
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS * BIGGGER THAN <set>article</set> *
+        </pattern>
+        <template>
+            <srai>IS
+                <star/>
+                BIGGER THAN
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>_ WHO IS <set>article</set> SHORTER
+        </pattern>
+        <template>
+            <srai>
+                <star/>
+                WHO IS SHORTER
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>_ WHO IS <set>article</set> TALLER
+        </pattern>
+        <template>
+            <srai>
+                <star/>
+                WHO IS TALLER
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH IS LARGER * AND *</pattern>
+        <template>
+            <srai>WHICH IS LARGER
+                <star/>
+                OR
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS * LARGER THAN *</pattern>
+        <template>
+            <srai>WHICH IS LARGER
+                <star/>
+                OR
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS * SMALLER THAN *</pattern>
+        <template>
+            <srai>WHICH IS SMALLER
+                <star/>
+                OR
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS * BIGGER THAN *</pattern>
+        <template>
+            <srai>WHICH IS BIGGER
+                <star/>
+                OR
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH IS SMALLER * OR *</pattern>
+        <template>
+            <think>
+                <set var="smaller">
+                    <srai>SMALLEROF
+                        <star/>
+                        AND
+                        <star index="2"/>
+                    </srai>
+                </set>
+            </think>
+            <condition var="smaller">
+                <li value="unknown">I can't tell which one is smaller.</li>
+                <li value="same">They are about the same size.</li>
+                <li>
+                    <formal>
+                        <get var="smaller"/>
+                    </formal>
+                    is smaller.
+                </li>
+            </condition>
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>article</set> * LARGER THAN *
+        </pattern>
+        <template>
+            <srai>IS
+                <star index="2"/>
+                LARGER THAN
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS * LARGER THAN <set>article</set> *
+        </pattern>
+        <template>
+            <srai>IS
+                <star/>
+                LARGER THAN
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH IS GREATER <set>number</set> OR
+            <set>number</set>
+        </pattern>
+        <template>
+            <srai>LARGEROF
+                <star/>
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH IS LARGER <set>number</set> OR
+            <set>number</set>
+        </pattern>
+        <template>
+            <srai>LARGEROF
+                <star/>
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH IS BIGGER <set>number</set> OR
+            <set>number</set>
+        </pattern>
+        <template>
+            <srai>LARGEROF
+                <star/>
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH IS BIGGEST <set>number</set> OR
+            <set>number</set>
+        </pattern>
+        <template>
+            <srai>LARGEROF
+                <star/>
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH IS LARGEST <set>number</set> OR
+            <set>number</set>
+        </pattern>
+        <template>
+            <srai>LARGEROF
+                <star/>
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH IS GREATEST <set>number</set> OR
+            <set>number</set>
+        </pattern>
+        <template>
+            <srai>LARGEROF
+                <star/>
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH IS SMALLER <set>number</set> OR
+            <set>number</set>
+        </pattern>
+        <template>
+            <srai>SMALLEROF
+                <star/>
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH IS SMALLEST <set>number</set> OR
+            <set>number</set>
+        </pattern>
+        <template>
+            <srai>SMALLEROF
+                <star/>
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH IS THE
+            <set>estdown</set>
+        </pattern>
+        <template>
+            <srai>WHICH IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS
+            <set>estdown</set>
+        </pattern>
+        <template>
+            <think>
+                <set var="whowhat">what</set>
+            </think>
+            <srai>WHICH IS
+                <map>
+                    <name>est2er</name>
+                    <star/>
+                </map>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH IS THE
+            <set>estup</set>
+        </pattern>
+        <template>
+            <srai>WHICH IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS <set>estup</set> *
+        </pattern>
+        <template>
+            <srai>WHO IS
+                <map>
+                    <name>est2er</name>
+                    <star/>
+                </map>
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>
+            <set>name</set>
+            IS <set>erup</set> THAN <set>name</set> BUT <set>erdown</set> THAN
+            <set>name</set>
+        </pattern>
+        <template>
+            <srai>
+                <star/>
+                IS
+                <star index="2"/>
+                THAN
+                <star index="3"/>
+            </srai>
+            <srai>
+                <star index="5"/>
+                IS
+                <star index="2"/>
+                THAN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS
+            <set>estup</set>
+        </pattern>
+        <template>
+            <srai>WHO IS
+                <map>
+                    <name>est2er</name>
+                    <star/>
+                </map>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS * <set>erup</set> THAN <set>article</set> *
+        </pattern>
+        <template>
+            <srai>IS
+                <star/>
+                <star index="2"/>
+                THAN
+                <star index="4"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH IS <set>erup</set>
+            <set>article</set> * OR *
+        </pattern>
+        <template>
+            <srai>WHICH IS
+                <star/>
+                <star index="3"/>
+                OR
+                <star index="4"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS <set>erup</set> *
+        </pattern>
+        <template>
+            <srai>WHICH IS
+                <star/>
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS <set>erup</set> *
+        </pattern>
+        <template>
+            <srai>WHICH IS
+                <star/>
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS <set>erdown</set> *
+        </pattern>
+        <template>
+            <srai>WHICH IS
+                <star/>
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS <set>erdown</set> *
+        </pattern>
+        <template>
+            <srai>WHICH IS
+                <star/>
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>
+            <set>article</set>
+            * IS <set>erup</set> THAN *
+        </pattern>
+        <template>
+            <srai>
+                <star index="2"/>
+                IS
+                <star index="3"/>
+                THAN
+                <star index="4"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>
+            <set>article</set>
+            * IS <set>erdown</set> THAN *
+        </pattern>
+        <template>
+            <srai>
+                <star index="2"/>
+                IS
+                <star index="3"/>
+                THAN
+                <star index="4"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>* IS <set>erup</set> THAN <set>article</set> *
+        </pattern>
+        <template>
+            <srai>
+                <star/>
+                IS
+                <star index="2"/>
+                THAN
+                <star index="4"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>* IS <set>erdown</set> THAN <set>article</set> *
+        </pattern>
+        <template>
+            <srai>
+                <star/>
+                IS
+                <star index="2"/>
+                THAN
+                <star index="4"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>
+            <set>name</set>
+            IS <set>erup</set> THAN <set>article</set> *
+        </pattern>
+        <template>
+            <srai>
+                <star/>
+                IS
+                <star index="2"/>
+                THAN
+                <star index="4"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>
+            <set>name</set>
+            IS <set>erdown</set> THAN <set>article</set> *
+        </pattern>
+        <template>
+            <srai>
+                <star/>
+                IS
+                <star index="2"/>
+                THAN
+                <star index="4"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>article</set> * <set>erup</set> THAN *
+        </pattern>
+        <template>
+            <srai>IS
+                <star index="2"/>
+                <star index="3"/>
+                THAN
+                <star index="4"/>
+            </srai>
+        </template>
+    </category>
+     <category>
+        <pattern>WHICH IS <set>erup</set> * OR <set>article</set> *
+        </pattern>
+        <template>
+            <srai>WHICH IS
+                <star/>
+                <star index="2"/>
+                OR
+                <star index="4"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS
+            <set>estdown</set>
+        </pattern>
+        <template>
+            <think>
+                <set var="whowhat">who</set>
+            </think>
+            <srai>WHICH IS
+                <map>
+                    <name>est2er</name>
+                    <star/>
+                </map>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS
+            <set>estup</set>
+        </pattern>
+        <template>
+            <think>
+                <set var="whowhat">who</set>
+            </think>
+            <srai>WHICH IS
+                <map>
+                    <name>est2er</name>
+                    <star/>
+                </map>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW ARE * LIKE *</pattern>
+        <template>
+            <srai>HOW IS
+                <star/>
+                LIKE
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW ARE * AND * ALIKE</pattern>
+        <template>
+            <srai>HOW IS
+                <star/>
+                LIKE
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW ARE <set>article</set> * AND <set>article</set> * ALIKE
+        </pattern>
+        <template>
+            <srai>HOW IS
+                <star index="2"/>
+                LIKE
+                <star index="4"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW ARE * AND <set>article</set> * ALIKE
+        </pattern>
+        <template>
+            <srai>HOW IS
+                <star/>
+                LIKE
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW ARE <set>article</set> * AND * ALIKE
+        </pattern>
+        <template>
+            <srai>HOW IS
+                <star index="2"/>
+                LIKE
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW IS <set>article</set> * LIKE <set>article</set> *
+        </pattern>
+        <template>
+            <srai>HOW IS
+                <star index="2"/>
+                LIKE
+                <star index="4"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW IS * LIKE <set>article</set> *
+        </pattern>
+        <template>
+            <srai>HOW IS
+                <star/>
+                LIKE
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW IS <set>article</set> * LIKE *
+        </pattern>
+        <template>
+            <srai>HOW IS
+                <star index="2"/>
+                LIKE
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO * AND * HAVE IN COMMON</pattern>
+        <template>
+            <srai>HOW IS
+                <star/>
+                LIKE
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO <set>article</set> * AND <set>article</set> * HAVE IN COMMON
+        </pattern>
+        <template>
+            <srai>HOW IS
+                <star index="2"/>
+                LIKE
+                <star index="4"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DOES * AND * HAVE IN COMMON</pattern>
+        <template>
+            <srai>HOW IS
+                <star/>
+                LIKE
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DOES <set>article</set> * AND <set>article</set> * HAVE IN COMMON
+        </pattern>
+        <template>
+            <srai>HOW IS
+                <star index="2"/>
+                LIKE
+                <star index="4"/>
+            </srai>
+        </template>
+    </category>
+
+
+
+
+
+</aiml>

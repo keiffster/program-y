@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,12 +14,11 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from abc import ABC
+from abc import abstractmethod
 
-from abc import ABCMeta, abstractmethod
 
-
-class DynamicVariable(object):
-    __metaclass__ = ABCMeta
+class DynamicVariable(ABC):
 
     def __init__(self, config):
         self._config = config
@@ -30,7 +29,13 @@ class DynamicVariable(object):
 
     @abstractmethod
     def get_value(self, client_context, value):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
+
+
+class DynamicSettableVariable(DynamicVariable):
+
+    def __init__(self, config):
+        DynamicVariable.__init__(self, config)
 
     def set_value(self, client_context, value):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover

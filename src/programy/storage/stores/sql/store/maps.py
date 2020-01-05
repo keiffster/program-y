@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -15,14 +15,21 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.storage.stores.sql.store.sqlstore import SQLStore
-from programy.storage.entities.maps import MapsStore
+from programy.storage.entities.maps import MapsReadWriteStore
 from programy.storage.stores.sql.dao.map import Map
 
 
-class SQLMapsStore(SQLStore, MapsStore):
+class SQLMapsStore(SQLStore, MapsReadWriteStore):
+
+    def __init__(self, storage_engine):
+        SQLStore.__init__(self, storage_engine)
+        MapsReadWriteStore.__init__(self)
+
+    def _get_all(self):
+        return self._storage_engine.session.query(Map)
 
     def empty(self):
-        self._storage_engine.session.query(Map).delete()
+        self._get_all().delete()
 
     def empty_named(self, name):
         self._storage_engine.session.query(Map).filter(Map.name == name).delete()
@@ -31,23 +38,33 @@ class SQLMapsStore(SQLStore, MapsStore):
         return Map(name=name, key=key, value=value)
 
     def add_to_map(self, name, key, value, overwrite_existing=False):
-        amap = Map(name=name, key=key, value=value)
+        del overwrite_existing
+        amap = self. _get_entity(name, key, value)
         self._storage_engine.session.add(amap)
         return True
 
     def remove_from_map(self, name, key):
-        self._storage_engine.session.query(Map).filter(Map.name==name, Map.key==key).delete()
+        if self._storage_engine.session.query(Map).filter(Map.name == name, Map.key == key).delete() > 0:
+            return True
 
-    def load_all(self, map_collection):
-        map_collection.empty()
+        return False
+
+    def load_all(self, collector):
+        collector.empty()
         names = self._storage_engine.session.query(Map.name).distinct()
         for name in names:
-            self.load(map_collection, name[0])
+            self.load(collector, name[0])
+        return True
 
-    def load(self, map_collection, map_name):
-        map_collection.remove(map_name)
-        values = self._storage_engine.session.query(Map).filter(Map.name==map_name)
+    def load(self, collector, name=None):
+        collector.remove(name)
+        values = self._storage_engine.session.query(Map).filter(Map.name == name)
         the_map = {}
         for item in values:
             the_map[item.key] = item.value
-        map_collection.add_map(map_name, the_map, 'sql')
+
+        if len(the_map):
+            collector.add_map(name, the_map, 'sql')
+            return True
+
+        return False

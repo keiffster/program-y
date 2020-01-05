@@ -1,9 +1,8 @@
 import xml.etree.ElementTree as ET
 
 from programy.parser.template.nodes.base import TemplateNode
-from programy.parser.template.nodes.xml import TemplateXMLNode
 from programy.parser.template.nodes.word import TemplateWordNode
-
+from programy.parser.template.nodes.xml import TemplateXMLNode
 from programytest.parser.base import ParserTestsBaseClass
 
 
@@ -32,6 +31,8 @@ class TemplateXMLNodeTests(ParserTestsBaseClass):
         resolved = root.resolve(self._client_context)
         self.assertIsNotNone(resolved)
         self.assertEqual("<dial>07777777777</dial>", resolved)
+        self.assertEqual("<dial>07777777777</dial>", xml.resolve_to_string(self._client_context))
+        self.assertEquals("[XML]", xml.to_string())
 
     def test_node_with_attribs(self):
         root = TemplateNode()
@@ -72,15 +73,24 @@ class TemplateXMLNodeTests(ParserTestsBaseClass):
 
     def test_to_xml(self):
         root = TemplateNode()
-        xml = TemplateXMLNode()
-        xml._name = "dial"
-        root.append(xml)
-        xml.append(TemplateWordNode("07777777777"))
+        xml_node = TemplateXMLNode()
+        xml_node._name = "dial"
+        root.append(xml_node)
+        xml_node.append(TemplateWordNode("07777777777"))
 
         xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><dial>07777777777</dial></template>", xml_str)
+        self.assertEqual("<dial>07777777777</dial>", xml_node.to_xml(self._client_context))
+
+    def test_to_xml_no_name(self):
+        xml = TemplateXMLNode()
+        self.assertEquals("", xml.to_xml(self._client_context))
+
+    def test_resolve_no_name(self):
+        xml = TemplateXMLNode()
+        self.assertEquals("", xml.resolve(self._client_context))
 
     def test_to_xml_with_attribs(self):
         root = TemplateNode()

@@ -1,11 +1,10 @@
 import unittest
 
-from programy.security.authenticate.passthrough import BasicPassThroughAuthenticationService
-from programy.config.brain.service import BrainServiceConfiguration
 from programy.bot import Bot
 from programy.config.bot.bot import BotConfiguration
+from programy.config.brain.service import BrainServiceConfiguration
 from programy.context import ClientContext
-
+from programy.security.authenticate.passthrough import BasicPassThroughAuthenticationService
 from programytest.client import TestClient
 
 

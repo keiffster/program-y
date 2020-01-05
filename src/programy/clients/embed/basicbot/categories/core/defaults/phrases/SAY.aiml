@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>SAY I *</pattern>
+        <template>OK. "You<person/>."
+        </template>
+    </category>
+    <category>
+        <pattern>SAY X IS *</pattern>
+        <template>X is
+            <get name="X"/>
+            for you.
+        </template>
+    </category>
+    <category>
+        <pattern>SAY NAME *</pattern>
+        <template>Your name is<srai>CLIENT NAME</srai>, seeker.
+        </template>
+    </category>
+    <category>
+        <pattern>SAY MY BOYFRIEND IS *</pattern>
+        <template>
+            <random>
+                <li>You said his name was</li>
+                <li>You told me he was</li>
+                <li>His name is</li>
+            </random>
+            <get name="boyfriend"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>SAY MY NICKNAME IS *</pattern>
+        <template>
+            <random>
+                <li>You said it was</li>
+                <li>You told me it was</li>
+                <li>It is</li>
+            </random>
+            <get name="nickname"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>SAY MY PASSWORD IS *</pattern>
+        <template>
+            <random>
+                <li>You said it was</li>
+                <li>You told me it was</li>
+                <li>It is</li>
+            </random>
+            <get name="password"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>SAY MY FRIEND IS *</pattern>
+        <template>
+            <random>
+                <li>You said his name was</li>
+                <li>You told me he was</li>
+                <li>His name is</li>
+            </random>
+            <get name="friend"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>SAY MY HUSBAND IS *</pattern>
+        <template>
+            <random>
+                <li>You said his name was</li>
+                <li>You told me he was</li>
+                <li>His name is</li>
+            </random>
+            <get name="husband"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>SAY MY SISTER IS *</pattern>
+        <template>
+            <random>
+                <li>You said her name was</li>
+                <li>You told me she was</li>
+                <li>Her name is</li>
+            </random>
+            <get name="sister"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>SAY MY WIFE IS *</pattern>
+        <template>
+            <random>
+                <li>You said her name was</li>
+                <li>You told me she was</li>
+                <li>Her name is</li>
+            </random>
+            <get name="wife"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>SAY MY EMAIL IS *</pattern>
+        <template>
+            <random>
+                <li>You said it was</li>
+                <li>You told me it was</li>
+                <li>It is</li>
+            </random>
+            <get name="email"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>SAY MY MIDDLE NAME IS *</pattern>
+        <template>
+            <random>
+                <li>You said it was</li>
+                <li>You told me it was</li>
+                <li>It is</li>
+            </random>
+            <get name="middlename"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>SAY MY MOTHER IS *</pattern>
+        <template>
+            <random>
+                <li>You said her name was</li>
+                <li>You told me she was</li>
+                <li>Her name is</li>
+            </random>
+            <get name="mother"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>SAY MY GIRLFRIEND IS *</pattern>
+        <template>
+            <random>
+                <li>You said her name was</li>
+                <li>You told me she was</li>
+                <li>Her name is</li>
+            </random>
+            <get name="girlfriend"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>SAY MY PHONE NUMBER IS *</pattern>
+        <template>
+            <random>
+                <li>You said it was</li>
+                <li>You told me it was</li>
+                <li>It is</li>
+            </random>
+            <get name="phone"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>SAY MY FATHER IS *</pattern>
+        <template>
+            <random>
+                <li>You said his name was</li>
+                <li>You told me he was</li>
+                <li>His name is</li>
+            </random>
+            <get name="father"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>SAY MY BROTHER IS *</pattern>
+        <template>
+            <random>
+                <li>You said his name was</li>
+                <li>You told me he was</li>
+                <li>His name is</li>
+            </random>
+            <get name="brother"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>SAY MY FULL NAME IS *</pattern>
+        <template>
+            <random>
+                <li>You said it was</li>
+                <li>You told me it was</li>
+                <li>It is</li>
+            </random>
+            <get name="fullname"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>SAY MY BIRTHDAY IS *</pattern>
+        <template>
+            <random>
+                <li>You said it was</li>
+                <li>You told me it was</li>
+                <li>It is</li>
+            </random>
+            <get name="birthday"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>SAY MY LAST NAME IS *</pattern>
+        <template>
+            <random>
+                <li>You said it was</li>
+                <li>You told me it was</li>
+                <li>It is</li>
+            </random>
+            <get name="lastname"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>SAY MY CAT IS *</pattern>
+        <template>
+            <random>
+                <li>You said her name was</li>
+                <li>You told me she was</li>
+                <li>Her name is</li>
+            </random>
+            <get name="cat"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>SAY SOMETHING IN *</pattern>
+        <template>You can ask me to translate anything.</template>
+    </category>
+
+ </aiml>

@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,40 +14,54 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.storage.stores.sql.store.sqlstore import SQLStore
-from programy.storage.entities.sets import SetsStore
+from programy.storage.entities.sets import SetsReadWriteStore
 from programy.storage.stores.sql.dao.set import Set
 
 
-class SQLSetsStore(SQLStore, SetsStore):
+class SQLSetsStore(SQLStore, SetsReadWriteStore):
+
+    def __init__(self, storage_engine):
+        SQLStore.__init__(self, storage_engine)
+        SetsReadWriteStore.__init__(self)
+
+    def _get_all(self):
+        return self._storage_engine.session.query(Set)
 
     def empty(self):
-        self._storage_engine.session.query(Set).delete()
+        self._get_all().delete()
 
     def empty_named(self, name):
-        self._storage_engine.session.query(Set).filter(Set.name==name).delete()
+        self._storage_engine.session.query(Set).filter(Set.name == name).delete()
 
-    def add_to_set(self, name, value):
+    def add_to_set(self, name, value, replace_existing=False):
         aset = Set(name=name, value=value.upper())
         self._storage_engine.session.add(aset)
         return True
 
     def remove_from_set(self, name, value):
-        self._storage_engine.session.query(Set).filter(Set.name==name, Set.value==value.upper()).delete()
+        result = self._storage_engine.session.query(Set).filter(Set.name == name, Set.value == value.upper()).delete()
+        if result == 0:
+            return False
 
-    def load_all(self, set_collection):
-        set_collection.empty()
+        return True
+
+    def load_all(self, collector):
+        collector.empty()
         names = self._storage_engine.session.query(Set.name).distinct()
         for name in names:
-            self.load(set_collection, name[0])
+            self.load(collector, name[0])
 
-    def load(self, set_collection, set_name):
-        set_collection.remove(set_name)
-        values = self._storage_engine.session.query(Set).filter(Set.name==set_name)
+    def load(self, collector, name=None):
+        collector.remove(name)
+        values = self._storage_engine.session.query(Set).filter(Set.name == name)
         the_set = {}
         for pair in values:
             value = pair.value.strip()
-            if value:
-                self.add_set_values(the_set, value)
-        set_collection.add_set(set_name, the_set, SQLStore.SQL)
+            self.add_set_values(the_set, value)
+
+        if the_set:
+            collector.add_set(name, the_set, SQLStore.SQL)
+            return True
+
+        return False

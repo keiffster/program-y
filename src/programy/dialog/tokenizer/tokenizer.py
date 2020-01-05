@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,12 +14,11 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import re
 from programy.utils.logging.ylogger import YLogger
 from programy.utils.classes.loader import ClassLoader
 
 
-class Tokenizer(object):
+class Tokenizer:
 
     def __init__(self, split_chars=' '):
         self.split_chars = split_chars
@@ -45,10 +44,12 @@ class Tokenizer(object):
 
     @staticmethod
     def load_tokenizer(configuration):
-        if configuration is not None and configuration.tokenizer.classname is not None:
-            YLogger.info(None, "Loading tokenizer from class [%s]", configuration.tokenizer.classname)
-            tokenizer_class = ClassLoader.instantiate_class(configuration.tokenizer.classname)
-            return tokenizer_class(configuration.tokenizer.split_chars)
-        else:
-            return Tokenizer(configuration.tokenizer.split_chars)
+        if configuration is not None and configuration.classname is not None:
+            try:
+                YLogger.info(None, "Loading tokenizer from class [%s]", configuration.classname)
+                tokenizer_class = ClassLoader.instantiate_class(configuration.classname)
+                return tokenizer_class(configuration.split_chars)
+            except Exception as error:
+                YLogger.exception(None, "Failed to load tokenizer, defaulting to default", error)
 
+        return Tokenizer(configuration.split_chars)

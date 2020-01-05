@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import csv
 
 
-class FileProcessor(object):
+class FileProcessor:
 
     READ = "r"
     WRITE = "w"
@@ -30,7 +30,7 @@ class FileProcessor(object):
         self._mode = mode
 
     def flush(self):
-        pass
+        pass    # pragma: no cover
 
 
 class TextFile(FileProcessor):
@@ -39,10 +39,8 @@ class TextFile(FileProcessor):
         FileProcessor.__init__(self, filename, mode, encoding)
         self._file = open(self._filename, self._mode, encoding=self._encoding)
 
-    def close(self):
-        self._file.close()
-
     def process_lines(self, set_name, processor, verbose=False):
+        del verbose
         count = 0
         success = 0
         for line in self._file:
@@ -53,12 +51,15 @@ class TextFile(FileProcessor):
             count += 1
         return count, success
 
-    def write_line(self, file_writer, elements):
+    def write_line(self, elements, file_writer=None):
         string = file_writer.format_row_as_text(elements)
         self._file.write(string)
 
     def flush(self):
         self._file.flush()
+
+    def close(self):
+        self._file.close()
 
 
 class CSVFileProcessor(FileProcessor):
@@ -72,12 +73,13 @@ class CSVFileProcessor(FileProcessor):
 
 class CSVFileWriter(CSVFileProcessor):
 
-    def __init__(self, filename, mode=FileProcessor.WRITE, encoding=FileProcessor.UTF8, delimiter=CSVFileProcessor.DELIMITER, quotechar=CSVFileProcessor.QUOTECHAR, quoting=csv.QUOTE_ALL):
+    def __init__(self, filename, mode=FileProcessor.WRITE, encoding=FileProcessor.UTF8,
+                 delimiter=CSVFileProcessor.DELIMITER, quotechar=CSVFileProcessor.QUOTECHAR, quoting=csv.QUOTE_ALL):
         CSVFileProcessor.__init__(self, filename, mode, encoding)
         self._file = open(self._filename, self._mode, encoding=self._encoding)
         self._csv_writer = csv.writer(self._file, delimiter=delimiter, quotechar=quotechar, quoting=quoting)
 
-    def write_line(self, _, elements):
+    def write_line(self, elements, filewriter=None):
         self._csv_writer.writerow(elements)
 
     def close(self):
@@ -86,12 +88,14 @@ class CSVFileWriter(CSVFileProcessor):
 
 class CSVFileReader(CSVFileProcessor):
 
-    def __init__(self, filename, mode=FileProcessor.READ, encoding=FileProcessor.UTF8, delimiter=CSVFileProcessor.DELIMITER, quotechar=CSVFileProcessor.QUOTECHAR, quoting=csv.QUOTE_ALL):
+    def __init__(self, filename, mode=FileProcessor.READ, encoding=FileProcessor.UTF8,
+                 delimiter=CSVFileProcessor.DELIMITER, quotechar=CSVFileProcessor.QUOTECHAR, quoting=csv.QUOTE_ALL):
         CSVFileProcessor.__init__(self, filename, mode, encoding)
         self._file = open(self._filename, self._mode, encoding=self._encoding)
         self._csv_reader = csv.reader(self._file, delimiter=delimiter, quotechar=quotechar, quoting=quoting)
 
-    def process_lines(self, name, processor):
+    def process_lines(self, name, processor, verbose=False):
+        del verbose
         count = 0
         success = 0
         for line in self._csv_reader:

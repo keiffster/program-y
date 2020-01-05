@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,17 +14,15 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.utils.logging.ylogger import YLogger
-
 from programy.parser.pattern.matchcontext import MatchContext
 
 
-class Sentence(object):
+class Sentence:
 
-    def __init__(self, client_context=None, text: str=None,
-                 response: str=None,
-                 matched_context: MatchContext=None,
+    def __init__(self, client_context=None, text: str = None,
+                 response: str = None,
+                 matched_context: MatchContext = None,
                  positivity=0.0, subjectivity=0.5):
         if text is not None:
             self._words = client_context.brain.tokenizer.texts_to_words(text)
@@ -36,8 +34,28 @@ class Sentence(object):
         self._subjectivity = subjectivity
 
     @property
+    def response(self):
+        return self._response
+
+    @response.setter
+    def response(self, text: str):
+        self._response = text
+
+    @property
+    def matched_context(self):
+        return self._matched_context
+
+    @matched_context.setter
+    def matched_context(self, context):
+        self._matched_context = context
+
+    @property
     def words(self):
         return self._words
+
+    @words.setter
+    def words(self, words):
+        self._words = words[:]
 
     @property
     def positivity(self):
@@ -63,23 +81,7 @@ class Sentence(object):
             self._words.append(word)
 
     def replace_words(self, client_context, text):
-        self._words = self._split_into_words(client_context.brain.tokenizer, text)
-
-    @property
-    def response(self):
-        return self._response
-
-    @response.setter
-    def response(self, text: str):
-        self._response = text
-
-    @property
-    def matched_context(self):
-        return self._matched_context
-
-    @matched_context.setter
-    def matched_context(self, context):
-        self._matched_context = context
+        self._words = Sentence._split_into_words(client_context.brain.tokenizer, text)
 
     def num_words(self):
         return len(self.words)
@@ -95,14 +97,15 @@ class Sentence(object):
     def text(self, client_context):
         return client_context.brain.tokenizer.words_to_texts(self._words)
 
-    def _split_into_words(self, tokenizer, text):
-        if text is None:
+    @staticmethod
+    def _split_into_words(tokenizer, text):
+        if text is None or tokenizer is None:
             return []
         return tokenizer.texts_to_words(text)
 
     def calculate_sentinment_score(self, client_context):
 
-        assert (client_context is not None)
+        assert client_context is not None
 
         if client_context.bot.sentiment_analyser is not None:
             positivity, subjectivity = client_context.bot.sentiment_analyser.analyse_all(self.text(client_context))
@@ -128,14 +131,12 @@ class Sentence(object):
 
         sentence = Sentence(client_context)
 
-        sentence._words = json_data['words']
-        sentence._response = json_data['response']
-        sentence._positivity = json_data['positivity']
-        sentence._subjectivity = json_data['subjectivity']
+        sentence.words = json_data['words']
+        sentence.response = json_data['response']
+        sentence.positivity = json_data['positivity']
+        sentence.subjectivity = json_data['subjectivity']
 
         if 'matched_context' in json_data:
-            sentence._matched_context = MatchContext.from_json(json_data["matched_context"])
+            sentence.matched_context = MatchContext.from_json(json_data["matched_context"])
 
         return sentence
-
-

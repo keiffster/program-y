@@ -1,9 +1,6 @@
 import unittest
-
 from programy.utils.language.chinese import ChineseLanguage
 
-#############################################################################
-#
 
 class ChineseTests(unittest.TestCase):
 
@@ -11,6 +8,7 @@ class ChineseTests(unittest.TestCase):
         self.assertFalse(ChineseLanguage.is_language(""))
         self.assertFalse(ChineseLanguage.is_language("H"))
         self.assertTrue(ChineseLanguage.is_language("你"))
+        self.assertFalse(ChineseLanguage.is_language(32))
 
     def test_split_langauge(self):
         self.assertEqual([], ChineseLanguage.split_language(""))
@@ -35,3 +33,4 @@ class ChineseTests(unittest.TestCase):
         self.assertEqual('你  好', ChineseLanguage.split_with_spaces(['你', '好']))
         self.assertEqual('X  你  好', ChineseLanguage.split_with_spaces(['X', '你', '好']))
         self.assertEqual('X  你  好  Y', ChineseLanguage.split_with_spaces(['X', '你', '好', 'Y']))
+        self.assertEqual('X  你 ?Y', ChineseLanguage.split_with_spaces(['X', '你', '?Y']))

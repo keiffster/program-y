@@ -1,14 +1,14 @@
-import unittest
 import os
+import unittest
 
-from programy.clients.restful.flask.alexa.intents import QueryIntent
-from programy.clients.restful.flask.alexa.intents import StopIntent
 from programy.clients.restful.flask.alexa.intents import CancelIntent
 from programy.clients.restful.flask.alexa.intents import HelpIntent
+from programy.clients.restful.flask.alexa.intents import IntentGenerator
 from programy.clients.restful.flask.alexa.intents import Intents
 from programy.clients.restful.flask.alexa.intents import InteractionModel
 from programy.clients.restful.flask.alexa.intents import LanguageModel
-from programy.clients.restful.flask.alexa.intents import IntentGenerator
+from programy.clients.restful.flask.alexa.intents import QueryIntent
+from programy.clients.restful.flask.alexa.intents import StopIntent
 
 
 class CancelIntentTests(unittest.TestCase):
@@ -19,13 +19,13 @@ class CancelIntentTests(unittest.TestCase):
         self.assertIsNotNone(data)
 
         self.assertTrue("name" in data)
-        self.assertEquals(data['name'], "AMAZON.CancelIntent")
+        self.assertEqual(data['name'], "AMAZON.CancelIntent")
 
         self.assertFalse("slots" in data)
 
         self.assertTrue("samples" in data)
         samples = data['samples']
-        self.assertEquals(0, len(samples))
+        self.assertEqual(0, len(samples))
 
 
 class HelpIntentTests(unittest.TestCase):
@@ -36,13 +36,13 @@ class HelpIntentTests(unittest.TestCase):
         self.assertIsNotNone(data)
 
         self.assertTrue("name" in data)
-        self.assertEquals(data['name'], "AMAZON.HelpIntent")
+        self.assertEqual(data['name'], "AMAZON.HelpIntent")
 
         self.assertFalse("slots" in data)
 
         self.assertTrue("samples" in data)
         samples = data['samples']
-        self.assertEquals(0, len(samples))
+        self.assertEqual(0, len(samples))
 
 
 class StopIntentTests(unittest.TestCase):
@@ -53,13 +53,13 @@ class StopIntentTests(unittest.TestCase):
         self.assertIsNotNone(data)
 
         self.assertTrue("name" in data)
-        self.assertEquals(data['name'], "AMAZON.StopIntent")
+        self.assertEqual(data['name'], "AMAZON.StopIntent")
 
         self.assertFalse("slots" in data)
 
         self.assertTrue("samples" in data)
         samples = data['samples']
-        self.assertEquals(0, len(samples))
+        self.assertEqual(0, len(samples))
 
 
 class QueryIntentTests(unittest.TestCase):
@@ -72,10 +72,10 @@ class QueryIntentTests(unittest.TestCase):
         self.assertIsNotNone(data)
 
         self.assertTrue("name" in data)
-        self.assertEquals(data['name'], "AskTest")
+        self.assertEqual(data['name'], "AskTest")
 
         self.assertTrue("slots" in data)
-        self.assertEquals(1, len(data['slots']))
+        self.assertEqual(1, len(data['slots']))
         slot = data['slots'][0]
         self.assertIsNotNone(slot)
         self.assertTrue("name" in slot)
@@ -84,8 +84,8 @@ class QueryIntentTests(unittest.TestCase):
 
         self.assertTrue("samples" in data)
         samples = data['samples']
-        self.assertEquals(1, len(samples))
-        self.assertEquals(samples[0], "test {text}")
+        self.assertEqual(1, len(samples))
+        self.assertEqual(samples[0], "test {text}")
 
 
 class LanguageModelTests(unittest.TestCase):
@@ -135,7 +135,7 @@ class IntentsTests(unittest.TestCase):
         self.assertTrue('intents' in languageModel)
         intents = languageModel['intents']
         self.assertIsNotNone(intents)
-        self.assertEquals(4, len(intents))
+        self.assertEqual(4, len(intents))
 
 
 class IntentGeneratorTests(unittest.TestCase):

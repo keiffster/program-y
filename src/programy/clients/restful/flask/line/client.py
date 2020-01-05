@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,24 +14,21 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-# https://github.com/line/line-bot-sdk-python
-
-from programy.utils.logging.ylogger import YLogger
-
 from flask import Flask, request, abort, Response
-
 from linebot import LineBotApi, WebhookParser
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
-
+from programy.utils.logging.ylogger import YLogger
 from programy.clients.restful.flask.client import FlaskRestBotClient
 from programy.clients.restful.flask.line.config import LineConfiguration
+from programy.utils.console.console import outputLog
 
 
 class LineBotClient(FlaskRestBotClient):
 
     def __init__(self, argument_parser=None):
+        self._channel_access_token = None
+        self._channel_secret = None
         FlaskRestBotClient.__init__(self, "line", argument_parser)
 
         self.create_line_bot()
@@ -46,25 +43,36 @@ class LineBotClient(FlaskRestBotClient):
         self._channel_access_token = self.license_keys.get_key("LINE_ACCESS_TOKEN")
 
     def create_line_bot(self):
-        self._line_bot_api = LineBotApi(self._channel_access_token)
-        self._parser = WebhookParser(self._channel_secret)
+        if self._channel_access_token is not None and self._channel_secret is not None:
+            self._line_bot_api = LineBotApi(self._channel_access_token)
+            self._parser = WebhookParser(self._channel_secret)
+
+        else:
+            YLogger.error(self, "Line channel access token and/or secret missing, unable to create line bot")
 
     def handle_text_message(self, event):
         question = event.message.text
         userid = event.source.user_id
 
-        answer = self.ask_question(userid, question)
+        client_context = self.create_client_context(userid)
 
-        self._line_bot_api.reply_message(event.reply_token, TextSendMessage(text=answer))
+        answer = self.ask_question(userid, question)
+        rendered = self.renderer.render(client_context, answer)
+
+        self._line_bot_api.reply_message(event.reply_token, TextSendMessage(text=rendered))
 
     def get_unknown_response(self, userid):
         if self.configuration.client_configuration.unknown_command_srai is None:
             unknown_response = self.configuration.client_configuration.unknown_command
+
         else:
             unknown_response = self.ask_question(userid, self.configuration.client_configuration.unknown_command_srai)
             if unknown_response is None or unknown_response == "":
                 unknown_response = self.configuration.client_configuration.unknown_command
-        return unknown_response
+
+        client_context = self.create_client_context(userid)
+
+        return self.renderer.render(client_context, unknown_response)
 
     def handle_unknown_event(self, event):
         userid = ""
@@ -112,7 +120,7 @@ class LineBotClient(FlaskRestBotClient):
 
 if __name__ == "__main__":
 
-    print("Initiating Line Client...")
+    outputLog(None, "Initiating Line Client...")
 
     LINE_CLIENT = LineBotClient()
 

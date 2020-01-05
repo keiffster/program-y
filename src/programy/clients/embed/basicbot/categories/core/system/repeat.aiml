@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: balance.aiml -->
+    <!--  -->
+    <!-- This AIML file is part of the Y-Bot knowledge base. -->
+    <!--  -->
+    <!-- Y-Bot is Copyright &copy; 2017 by Keith Sterling. -->
+    <!--
+    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+    documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+    the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+    and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+    THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+    TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    -->
+
+    <category>
+        <pattern>* AGAIN</pattern>
+        <template>
+            <srai>YAGAIN <uppercase><first><request><index>1</index></request></first></uppercase> 1</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>AGAIN *</pattern>
+        <template>
+            <srai>YAGAIN <uppercase><first><request><index>1</index></request></first></uppercase> 1</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>AGAIN</pattern>
+        <template>
+            <srai>YAGAIN <uppercase><first><request><index>1</index></request></first></uppercase> 1</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>YAGAIN * *</pattern>
+        <template>
+            <think>
+                <set var="again"><star index="1"/></set>
+                <set var="count"><star index="2"/></set>
+            </think>
+
+            <condition var="again">
+                <li value="AGAIN">
+                    <think>
+                        <set var="count">
+                            <map name="successor">
+                                <map name="successor"><get var="count" /></map>
+                            </map>
+                        </set>
+                    </think>
+                    <srai>YAGAIN <uppercase><first><request><index><get var="count" /></index></request></first></uppercase> <get var="count" /></srai>
+                </li>
+                <li>
+                    <srai><get var="again" /></srai>
+                </li>
+            </condition>
+
+        </template>
+    </category>
+
+</aiml>

@@ -1,0 +1,6 @@
+SOCRATES:hasPurpose:to invent logic
+SOCRATES:hasSize:7
+SOCRATES:hasSyllables:3
+SOCRATES:isa:Person
+SOCRATES:isa:Philosopher
+SOCRATES:lifeArea:Education

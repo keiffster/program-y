@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -18,12 +18,14 @@ from programy.utils.logging.ylogger import YLogger
 from programy.storage.factory import StorageFactory
 from programy.config.brain.braintree import BrainBraintreeConfiguration
 
-class BraintreeManager(object):
+
+class BraintreeManager:
 
     def __init__(self, braintree_configuration, admin_user="system"):
+        del admin_user
 
-        assert (braintree_configuration is not None)
-        assert (isinstance(braintree_configuration, BrainBraintreeConfiguration))
+        assert braintree_configuration is not None
+        assert isinstance(braintree_configuration, BrainBraintreeConfiguration)
 
         self._configuration = braintree_configuration
         self._save_as_user = self._configuration.save_as_user
@@ -31,9 +33,9 @@ class BraintreeManager(object):
     def dump_brain_tree(self, client_context):
 
         if self._configuration.create is True:
-            YLogger.debug(self, "Dumping AIML Graph as tree to [%s]", self._configuration.file)
+            YLogger.debug(self, "Dumping AIML Graph as tree")
 
             if client_context.client.storage_factory.entity_storage_engine_available(StorageFactory.BRAINTREE) is True:
                 storage_engine = client_context.client.storage_factory.entity_storage_engine(StorageFactory.BRAINTREE)
-                braintree_storage = storage_engine.braintree_storage()
-                braintree_storage.save_braintree(client_context)
+                braintree_storage = storage_engine.braintree_store()
+                braintree_storage.save_braintree(client_context, client_context.brain.aiml_parser.pattern_parser)

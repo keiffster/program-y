@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+    <category>
+        <pattern>NOT NOT</pattern>
+        <template>
+            <srai>NO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OF COURSE NOT</pattern>
+        <template>
+            <srai>NO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NA</pattern>
+        <template>
+            <srai>NO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NAW</pattern>
+        <template>
+            <srai>NO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NO WHY *</pattern>
+        <template>
+            <srai>NO</srai>
+            <srai>WHY
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NOO</pattern>
+        <template>
+            <srai>NO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NOP</pattern>
+        <template>
+            <srai>NO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NO NOT REALLY</pattern>
+        <template>
+            <srai>NO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HELL NO</pattern>
+        <template>
+            <srai>NO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NO I SAID I *</pattern>
+        <template>
+            <srai>NO</srai>
+            <srai>I
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NI</pattern>
+        <template>
+            <srai>NO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NO WAY</pattern>
+        <template>
+            <srai>NO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NAH</pattern>
+        <template>
+            <srai>NO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NO I SAID *</pattern>
+        <template>
+            <srai>NO</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>NOPE *</pattern>
+        <template>
+            <srai>NO</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>NO I *</pattern>
+        <template>
+            <srai>NO</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>NOT REALLY</pattern>
+        <template>
+            <srai>NO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NO YOU *</pattern>
+        <template>
+            <srai>NO</srai>
+            <srai>YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NO I AM *</pattern>
+        <template>
+            <srai>NO</srai>
+            <srai>I AM
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NOPE</pattern>
+        <template>
+            <srai>NO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NO *</pattern>
+        <template>
+            <srai>NO</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>PROBABLY NOT</pattern>
+        <template>
+            <srai>NO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NO NOT AT ALL</pattern>
+        <template>
+            <srai>NO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NO THANK YOU</pattern>
+        <template>
+            <srai>NO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NAH *</pattern>
+        <template>
+            <srai>NO</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>NOT</pattern>
+        <template>
+            <srai>NO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NO THANKS</pattern>
+        <template>
+            <srai>NO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IT IS NOT</pattern>
+        <template>
+            <srai>NO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NO NO NO</pattern>
+        <template>
+            <srai>NO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NOOOOOOO</pattern>
+        <template>
+            <srai>NO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NON</pattern>
+        <template>
+            <srai>no</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NOOOOO</pattern>
+        <template>
+            <srai>no</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NOT RIGHT NOW</pattern>
+        <template>
+            <srai>NO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I DO NOT THINK SO</pattern>
+        <template>
+            <srai>NO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NOT RIGHT NOW *</pattern>
+        <template>
+            <srai>NO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NO IDEA *</pattern>
+        <template>
+            <srai>NO IDEA</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>NOOO *</pattern>
+        <template>
+            <srai>NO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NO NO NO *</pattern>
+        <template>
+            <srai>NO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NOOO</pattern>
+        <template>
+            <srai>NO</srai><!-- REDUCTION -->
+        </template>
+    </category>
+    <category>
+        <pattern>NO WAY *</pattern>
+        <template>
+            <srai>NO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NOPES</pattern>
+        <template>
+            <srai>NO
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NO THANK YOU *</pattern>
+        <template>
+            <srai>NO THANK YOU</srai>
+        </template>
+    </category>
+
+
+</aiml>

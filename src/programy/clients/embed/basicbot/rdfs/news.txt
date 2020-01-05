@@ -1,0 +1,10 @@
+BBC:hasPurpose:to produce TV shows
+BBC:hasSize:0
+BBC:hasSyllables:3
+BBC:isa:TV Network
+BBC:lifeArea:Recreation
+CNN:hasPurpose:to broadcast news
+CNN:hasSize:0
+CNN:hasSyllables:3
+CNN:isa:TV Network
+CNN:lifeArea:Recreation

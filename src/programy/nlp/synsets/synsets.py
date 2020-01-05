@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -15,10 +15,16 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from textblob import Word
-from textblob.wordnet import VERB, NOUN, ADJ, ADV
+from textblob.wordnet import VERB
+from textblob.wordnet import NOUN
+from textblob.wordnet import ADJ
+from textblob.wordnet import ADV
 
 
-class Synsets(object):
+class Synsets:
+
+    def __init__(self):
+        pass
 
     @staticmethod
     def _get_synsets(string, pos=None):
@@ -36,8 +42,7 @@ class Synsets(object):
         parts = synset.name().split(".")
         return parts[0], int(parts[2])
 
-    @staticmethod
-    def get_similar_words(string, pos=None, weight=0):
+    def get_similar_words(self, string, pos=None, weight=0):
         synsets = Synsets._get_synsets(string, pos)
 
         synset_words = []
@@ -49,24 +54,19 @@ class Synsets(object):
 
         return synset_words
 
-    @staticmethod
-    def get_similar_verbs(string, weight=0):
-        return Synsets.get_similar_words(string, VERB, weight=weight)
+    def get_similar_verbs(self, string, weight=0):
+        return self.get_similar_words(string, VERB, weight=weight)
 
-    @staticmethod
-    def get_similar_nouns(string, weight=0):
-        return Synsets.get_similar_words(string, NOUN, weight=weight)
+    def get_similar_nouns(self, string, weight=0):
+        return self.get_similar_words(string, NOUN, weight=weight)
 
-    @staticmethod
-    def get_similar_adjectives(string, weight=0):
-        return Synsets.get_similar_words(string, ADJ, weight=weight)
+    def get_similar_adjectives(self, string, weight=0):
+        return self.get_similar_words(string, ADJ, weight=weight)
 
-    @staticmethod
-    def get_similar_adverbs(string, weight=0):
-        return Synsets.get_similar_words(string, ADV, weight=weight)
+    def get_similar_adverbs(self, string, weight=0):
+        return self.get_similar_words(string, ADV, weight=weight)
 
-    @staticmethod
-    def get_similarity(string1, string2, pos=None):
+    def get_similarity(self, string1, string2, pos=None):
         syns1 = Synsets._get_synsets(string1, pos)
         syns2 = Synsets._get_synsets(string2, pos)
 
@@ -75,8 +75,8 @@ class Synsets(object):
             for syn2 in syns2:
                 similarity = syn1.path_similarity(syn2)
                 if similarity is not None:
-                    lemma1, weight1 = Synsets._get_lemma_and_weight(syn1)
-                    lemma2, weight2 = Synsets._get_lemma_and_weight(syn2)
+                    lemma1, _ = Synsets._get_lemma_and_weight(syn1)
+                    lemma2, _ = Synsets._get_lemma_and_weight(syn2)
                     similarities.append((lemma1, lemma2, similarity))
 
         return similarities

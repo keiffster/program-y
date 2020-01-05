@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -45,9 +45,6 @@ class BrainOpenChatBotConfiguration(BaseSectionConfigurationData):
     def api_key(self):
         return self._api_key
 
-    def check_for_license_keys(self, license_keys):
-        BaseSectionConfigurationData.check_for_license_keys(self, license_keys)
-
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         openchatbot = configuration_file.get_section(self.section_name, configuration)
         if openchatbot is not None:
@@ -61,12 +58,13 @@ class BrainOpenChatBotConfiguration(BaseSectionConfigurationData):
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:
-            data['url'] = self._url
-            data['method'] = self._method
-            data['authorization'] = self._authorization
-            data['api_key'] = self._api_key
-        else:
             data['url'] = None
             data['method'] = None
             data['authorization'] = None
             data['api_key'] = None
+
+        else:
+            data['url'] = self._url
+            data['method'] = self._method
+            data['authorization'] = self._authorization
+            data['api_key'] = self._api_key

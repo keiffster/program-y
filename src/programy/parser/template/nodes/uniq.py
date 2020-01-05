@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,29 +14,44 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.utils.logging.ylogger import YLogger
-
-from programy.utils.text.text import TextUtils
 from programy.parser.template.nodes.triple import TemplateTripleNode
+from typing import List
+
 
 class TemplateUniqNode(TemplateTripleNode):
 
     def __init__(self, subj=None, pred=None, obj=None):
         TemplateTripleNode.__init__(self, node_name="uniq", subj=subj, pred=pred, obj=obj)
 
-    def resolve_to_string(self, client_context):
-        rdf_subject = self._subj.resolve(client_context).upper()
-        rdf_predicate = self._pred.resolve(client_context).upper()
-        rdf_object = self._obj.resolve(client_context)
-
-        results = client_context.brain.rdf.match_only_vars(rdf_subject, rdf_predicate, rdf_object)
-
+    @staticmethod
+    def _filter_results(results):
         values = []
         for result in results:
             for pair in result:
                 if pair[1] not in values:
                     values.append(pair[1])
+        return values
+
+    @staticmethod
+    def _match_only_vars(client_context, rdf_subject, rdf_predicate, rdf_object) -> List:
+
+        assert client_context
+
+        if client_context.brain is not None:
+            if client_context.brain.rdf is not None:
+                return client_context.brain.rdf.match_only_vars(rdf_subject, rdf_predicate, rdf_object)
+
+        return []
+
+    def resolve_to_string(self, client_context):
+        rdf_subject = self._subj.resolve(client_context).upper()
+        rdf_predicate = self._pred.resolve(client_context).upper()
+        rdf_object = self._obj.resolve(client_context)
+
+        results = TemplateUniqNode._match_only_vars(client_context, rdf_subject, rdf_predicate, rdf_object)
+
+        values = TemplateUniqNode._filter_results(results)
 
         resolved = ""
         if values:

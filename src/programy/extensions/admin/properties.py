@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -16,10 +16,10 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 """
 from programy.utils.logging.ylogger import YLogger
-
 from programy.extensions.base import Extension
 from programy.parser.template.nodes.get import TemplateGetNode
 from programy.parser.template.nodes.bot import TemplateBotNode
+
 
 class PropertiesAdminExtension(Extension):
 
@@ -30,33 +30,59 @@ class PropertiesAdminExtension(Extension):
         properties = ""
 
         splits = data.split()
-        if splits[0] == 'GET':
+        command = splits[0]
+        if command == 'GET':
 
-            if splits[1] == 'BOT':
-                properties = TemplateBotNode.get_bot_variable(client_context, splits[2])
+            get_command = splits[1]
+            if get_command == 'BOT':
+                if len(splits) == 3:
+                    var_name = splits[2]
+                    properties = TemplateBotNode.get_bot_variable(client_context, var_name)
+                else:
+                    return "Missing variable name for GET BOT"
 
-            elif splits[1] == "USER":
-                local = bool(splits[2].upper == 'LOCAL')
-                properties = TemplateGetNode.get_property_value(client_context, local, splits[3])
+            elif get_command == "USER":
+                if len(splits) < 3:
+                    return "Invalid syntax for GET USER, LOCAL or GLOBAL"
 
-        elif splits[0] == 'BOT':
+                var_type = splits[2].upper()
+                if var_type not in ['LOCAL', 'GLOBAL']:
+                    return "Invalid GET USER var type [%s]" % var_type
+
+                if len(splits) < 4:
+                    return "Missing variable name for GET USER"
+                var_name = splits[3]
+
+                if var_type == 'LOCAL':
+                    properties = TemplateGetNode.get_property_value(client_context, True, var_name)
+
+                else:
+                    properties = TemplateGetNode.get_property_value(client_context, False, var_name)
+
+            else:
+                return "Unknown GET command [%s]" % get_command
+
+        elif command == 'BOT':
             properties += "Properties:<br /><ul>"
             for pair in client_context.brain.properties.pairs:
-                properties += "<li>%s = %s</li>"%(pair[0], pair[1])
+                properties += "<li>%s = %s</li>" % (pair[0], pair[1])
             properties += "</ul>"
             properties += "<br />"
 
-        elif splits[0] == "USER":
+        elif command == "USER":
             if client_context.bot.has_conversation(client_context):
                 conversation = client_context.bot.get_conversation(client_context)
 
                 properties += "Properties:<br /><ul>"
                 for name, value in conversation.properties.items():
-                    properties += "<li>%s = %s</li>"%(name, value)
+                    properties += "<li>%s = %s</li>" % (name, value)
                 properties += "</ul>"
                 properties += "<br />"
 
             else:
                 properties += "No conversation currently available"
+
+        else:
+            return "Unknown properties command [%s]" % command
 
         return properties

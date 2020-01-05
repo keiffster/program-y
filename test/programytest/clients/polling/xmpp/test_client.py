@@ -1,11 +1,11 @@
 import unittest
 
-from programy.clients.polling.xmpp.xmpp import XmppClient
+from programy.bot import Bot
 from programy.clients.polling.xmpp.client import XmppBotClient
 from programy.clients.polling.xmpp.config import XmppConfiguration
-from programy.bot import Bot
+from programy.clients.polling.xmpp.xmpp import XmppClient
 from programy.config.bot.bot import BotConfiguration
-
+from programy.clients.render.text import TextRenderer
 from programytest.clients.arguments import MockArgumentParser
 
 
@@ -66,6 +66,7 @@ class MockXmppClient(XmppClient):
                 use_tls=True, use_ssl=False):
         return self.should_connect
 
+
 class MockXmppBotClient(XmppBotClient):
 
     def __init__(self, argument_parser=None):
@@ -107,6 +108,9 @@ class XmppBotClientTests(unittest.TestCase):
         self.assertEqual('XMPPPASSWORD', client._password)
         self.assertEqual("Server", client._server)
         self.assertEqual(8080, client._port)
+
+        self.assertFalse(client._render_callback())
+        self.assertIsInstance(client.renderer, TextRenderer)
 
     def test_connect(self):
         arguments = MockArgumentParser()

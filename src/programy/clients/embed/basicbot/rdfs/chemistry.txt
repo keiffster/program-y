@@ -1,0 +1,32 @@
+CHEMICAL:hasPurpose:to make compounds
+CHEMICAL:hasSize:0
+CHEMICAL:hasSyllables:3
+CHEMICAL:isa:Chemistry
+CHEMICAL:lifeArea:Education
+CRYSTAL:hasPurpose:to look pretty
+CRYSTAL:hasSize:0
+CRYSTAL:hasSyllables:2
+CRYSTAL:isa:Chemistry
+CRYSTAL:lifeArea:Education
+Vapor:isa:Chemical
+GAS:hasPurpose:to power internal cumbustion engines
+GAS:hasSize:0
+GAS:hasSyllables:1
+GAS:isa:Liquid
+GAS:isa:Liquid Fuel
+GAS:lifeArea:Physical
+SMOKE:hasPurpose:to expel fire residue
+SMOKE:hasSize:0
+SMOKE:hasSyllables:1
+SMOKE:isa:Chemical
+SMOKE:isa:Vapor
+SMOKE:lifeArea:Physical
+OIL:hasPurpose:to provide fuel
+OIL:hasSize:0
+OIL:hasSyllables:1
+OIL:lifeArea:Physical
+FIRE:hasPurpose:to burn things
+FIRE:hasSize:0
+FIRE:hasSyllables:1
+FIRE:isa:Physical State
+FIRE:lifeArea:Physical

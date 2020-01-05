@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>CALL * AT THE OFFICE</pattern>
+        <template>
+            <srai>CALL
+                <star/>
+                AT WORK
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CALL ME A TAXI</pattern>
+        <template>
+            <srai>CALL A TAXI</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I WANT TO CALL *</pattern>
+        <template>
+            <srai>CALL
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CALL CALL *</pattern>
+        <template>
+            <srai>CALL
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CALL MY HOME</pattern>
+        <template>
+            <srai>CALL HOME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU PLEASE CALL *</pattern>
+        <template>
+            <srai>CALL
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU CALL MY *</pattern>
+        <template>
+            <srai>CALL MY
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU CALL *</pattern>
+        <template>
+            <srai>CALL
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>911</pattern>
+        <template>
+            <srai>CALL 911</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>EMERGENCY</pattern>
+        <template>
+            <srai>CALL 911</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CHECK VOICEMAIL</pattern>
+        <template>
+            <srai>CALL VOICEMAIL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY VOICEMAIL</pattern>
+        <template>
+            <srai>CALL VOICEMAIL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I HAVE A FLAT TIRE</pattern>
+        <template>
+            <srai>CALL AAA</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>PHONE CALL</pattern>
+        <template>
+            <srai>CALL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MAKE A CALL</pattern>
+        <template>
+            <srai>CALL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DIAL *</pattern>
+        <template>
+            <srai>CALL
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>PHONE *</pattern>
+        <template>
+            <srai>CALL
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CALL MY *</pattern>
+        <template>
+            <srai>CALL
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CALL HOME</pattern>
+        <template>
+            <srai>CALL ME AT HOME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>RING *</pattern>
+        <template>
+            <srai>CALL
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CALL * MOBILE</pattern>
+        <template>
+            <srai>CALL
+                <star/>
+                AT MOBILE
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CALL MOM *</pattern>
+        <template>
+            <srai>CALL MOM</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CALL MY MOM</pattern>
+        <template>
+            <srai>CALL MOM</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CALL THIS NUMBER *</pattern>
+        <template>
+            <srai>CALL
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+
+    <category>
+        <pattern>CHAT</pattern>
+        <template>
+            <srai>talk</srai>
+        </template>
+    </category>
+
+
+
+</aiml>

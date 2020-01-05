@@ -1,0 +1,149 @@
+Aircraft:isa:Transportation
+AIRPLANE:hasPurpose:to transport us through the air
+AIRPLANE:hasSize:9
+AIRPLANE:hasSpeed:12
+AIRPLANE:hasSyllables:1
+AIRPLANE:isa:Aircraft
+AIRPLANE:isa:Transportation
+AIRPLANE:lifeArea:Physical
+BENTLEY:hasPurpose:to transport us in luxury
+BENTLEY:hasSize:8
+BENTLEY:hasSyllables:2
+BENTLEY:isa:Automobile
+BENTLEY:isa:Transportation
+BENTLEY:lifeArea:Physical
+BMW:hasPurpose:to transport us on the ground
+BMW:hasSize:8
+BMW:hasSyllables:3
+BMW:isa:Automobile
+BMW:isa:Transportation
+BMW:lifeArea:Physical
+CAR:hasPurpose:to transport us around
+CAR:hasSize:8
+CAR:hasSpeed:10
+CAR:hasSyllables:1
+CAR:isa:Automobile
+CAR:isa:Transportation
+CAR:lifeArea:Physical
+FERRARI:hasPurpose:to transport us on the ground
+FERRARI:hasSize:8
+FERRARI:hasSyllables:3
+FERRARI:isa:Automobile
+FERRARI:isa:Transportation
+FERRARI:lifeArea:Physical
+HYUNDAI:hasPurpose:to transport us on the ground
+HYUNDAI:hasSize:8
+HYUNDAI:hasSyllables:3
+HYUNDAI:isa:Automobile
+HYUNDAI:isa:Transportation
+HYUNDAI:lifeArea:Physical
+JEEP:hasPurpose:to transport us on the ground
+JEEP:hasSize:8
+JEEP:hasSyllables:1
+JEEP:isa:Automobile
+JEEP:isa:Transportation
+JEEP:lifeArea:Physical
+TOYOTA:hasPurpose:to transport us on the ground
+TOYOTA:hasSize:8
+TOYOTA:hasSyllables:3
+TOYOTA:isa:Automobile
+TOYOTA:isa:Transportation
+TOYOTA:lifeArea:Physical
+CHEVY:hasPurpose:to transport us on the ground
+CHEVY:hasSize:8
+CHEVY:hasSyllables:2
+CHEVY:isa:Automobile
+CHEVY:isa:Transportation
+CHEVY:lifeArea:Physical
+DODGE:hasPurpose:to transport us around
+DODGE:hasPurpose:to transport us on the ground
+DODGE:hasSize:8
+DODGE:hasSyllables:1
+DODGE:isa:Automobile
+DODGE:isa:Transportation
+DODGE:lifeArea:Physical
+DRIVING:hasPurpose:to transport us in a car
+DRIVING:hasSize:0
+DRIVING:hasSyllables:2
+DRIVING:isa:Activity
+DRIVING:lifeArea:Physical
+PONTIAC:hasPurpose:to transport us on the ground
+PONTIAC:hasSize:8
+PONTIAC:hasSyllables:3
+PONTIAC:isa:Automobile
+PONTIAC:isa:Transportation
+PONTIAC:lifeArea:Physical
+OLDS:hasPurpose:to transport us on the ground
+OLDS:hasSize:8
+OLDS:hasSyllables:1
+OLDS:isa:Automobile
+OLDS:isa:Transportation
+OLDS:lifeArea:Physical
+NISSAN:hasPurpose:to transport us on the ground
+NISSAN:hasSize:8
+NISSAN:hasSyllables:2
+NISSAN:isa:Automobile
+NISSAN:isa:Transportation
+NISSAN:lifeArea:Physical
+PICKUP:hasPurpose:to transport us on the ground
+PICKUP:hasSize:8
+PICKUP:hasSyllables:2
+PICKUP:isa:Automobile
+PICKUP:isa:Transportation
+PICKUP:lifeArea:Physical
+Automobile:isa:Transportation
+PLANE:hasPurpose:to transport us through the air
+PLANE:hasSize:9
+PLANE:hasSpeed:12
+PLANE:hasSyllables:1
+PLANE:isa:Aircraft
+PLANE:isa:Transportation
+PLANE:lifeArea:Physical
+JET:hasPurpose:to transport us in the air at high speed
+JET:hasSize:9
+JET:hasSpeed:12
+JET:hasSyllables:1
+JET:isa:Aircraft
+JET:isa:Transportation
+JET:lifeArea:Physical
+ROAD:hasPurpose:to provide a route
+ROAD:hasSize:0
+ROAD:hasSyllables:1
+ROAD:lifeArea:Physical
+RAILROAD:hasPurpose:to transport us on rails
+RAILROAD:hasSize:8
+RAILROAD:hasSpeed:11
+RAILROAD:hasSyllables:1
+Railroad:isa:Transportation
+RAILROAD:isa:Transportation
+RAILROAD:lifeArea:Physical
+TRAIN:hasPurpose:to transport us on rails
+TRAIN:hasSize:8
+TRAIN:hasSpeed:11
+TRAIN:hasSyllables:1
+TRAIN:isa:Railroad
+TRAIN:isa:Transportation
+TRAIN:lifeArea:Physical
+FORD:hasPurpose:to transport us on the ground
+FORD:hasSize:8
+FORD:hasSyllables:1
+FORD:isa:Automobile
+FORD:isa:Transportation
+FORD:lifeArea:Physical
+SHUTTLE:hasPurpose:to provide transportation
+SHUTTLE:hasSize:9
+SHUTTLE:hasSyllables:2
+SHUTTLE:isa:Aircraft
+SHUTTLE:isa:Transportation
+SHUTTLE:lifeArea:Physical
+TAXI:hasPurpose:to transport us for a fee
+TAXI:hasSize:8
+TAXI:hasSyllables:2
+TAXI:isa:Automobile
+TAXI:isa:Transportation
+TAXI:lifeArea:Physical
+TRAFFIC:hasPurpose:to hinder movement
+TRAFFIC:hasSize:9
+TRAFFIC:hasSyllables:2
+TRAFFIC:lifeArea:Physical
+Train Station:isa:Building

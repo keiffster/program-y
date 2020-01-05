@@ -1,7 +1,8 @@
 import unittest
 
-from programy.security.authorise.passthrough import PassThroughAuthorisationService
 from programy.config.brain.service import BrainServiceConfiguration
+from programy.security.authorise.passthrough import PassThroughAuthorisationService
+
 
 class PassThroughAuthorisationServiceTests(unittest.TestCase):
 

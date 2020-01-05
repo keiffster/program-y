@@ -96,7 +96,7 @@ class TemplateGraphFirstTests(TemplateGraphTestClient):
         self.assertIsNotNone(result)
         self.assertEqual('[["?x", "MONKEY"], ["?y", "true"]]', result)
 
-    def test_first_multiple_var_multipe_result(self):
+    def test_first_multiple_var_multiple_result(self):
 
         self._client_context.brain.rdf.add_entity("MONKEY", "LEGS", "2", "ANIMALS")
         self._client_context.brain.rdf.add_entity("MONKEY", "HASFUR", "true", "ANIMALS")

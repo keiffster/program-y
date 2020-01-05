@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,11 +14,10 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.utils.logging.ylogger import YLogger
 import re
 import os
 import os.path
-
+from programy.utils.logging.ylogger import YLogger
 from programy.storage.stores.nosql.mongo.store.mongostore import MongoStore
 from programy.storage.entities.property import PropertyStore
 from programy.storage.stores.nosql.mongo.dao.property import Property
@@ -27,7 +26,6 @@ from programy.storage.entities.store import Store
 
 
 class MongoPropertyStore(PropertyStore, MongoStore):
-
     PROPERTIES = 'properties'
     SPLIT_CHAR = ':'
     COMMENT = '#'
@@ -36,6 +34,7 @@ class MongoPropertyStore(PropertyStore, MongoStore):
 
     def __init__(self, storage_engine):
         MongoStore.__init__(self, storage_engine)
+        PropertyStore.__init__(self)
 
     def collection_name(self):
         return MongoPropertyStore.PROPERTIES
@@ -45,16 +44,16 @@ class MongoPropertyStore(PropertyStore, MongoStore):
 
     def add_property(self, name, value):
         collection = self.collection()
-        property = collection.find_one({MongoPropertyStore.NAME: name})
-        if property is not None:
-            property.value = value
-            collection.replace_document(property)
+        prop = collection.find_one({MongoPropertyStore.NAME: name})
+        if prop is not None:
+            prop['value'] = value
             YLogger.info(self, "Replacing property [%s] = [%s]", name, value)
-        else:
-            property = Property(name, value)
-            self.add_document(property)
-            YLogger.info(self, "Adding property [%s] = [%s]", name, value)
-        return True
+            result = collection.replace_one({'_id': prop['_id']}, prop)
+            return bool(result.modified_count > 0)
+
+        prop = Property(name, value)
+        YLogger.info(self, "Adding property [%s] = [%s]", name, value)
+        return self.add_document(prop)
 
     def add_properties(self, properties):
         for name, value in properties.items():
@@ -62,66 +61,72 @@ class MongoPropertyStore(PropertyStore, MongoStore):
 
     def get_properties(self):
         collection = self.collection()
-        props_colleciton = collection.find()
+        props_collection = collection.find()
         properties = {}
-        if props_colleciton is not None:
-            for property in props_colleciton:
-                properties[property[MongoPropertyStore.NAME]] = property[MongoPropertyStore.VALUE]
+        for prop in props_collection:
+            properties[prop[MongoPropertyStore.NAME]] = prop[MongoPropertyStore.VALUE]
         return properties
 
-    def load(self, property_collection):
+    def load(self, collector, name=None):
+        del name
         YLogger.info(self, "Loading properties from Mongo")
-        self.load_all(property_collection)
+        self.load_all(collector)
 
-    def load_all(self, property_collection):
+    def load_all(self, collector):
         YLogger.info(self, "Loading all properties from Mongo")
-        property_collection.empty()
+        collector.empty()
         collection = self.collection()
         db_propertys = collection.find()
         for db_property in db_propertys:
-            self.add_to_collection(property_collection, db_property[MongoPropertyStore.NAME],  db_property[MongoPropertyStore.VALUE])
+            self.add_to_collection(collector, db_property[MongoPropertyStore.NAME],
+                                   db_property[MongoPropertyStore.VALUE])
 
     def add_to_collection(self, collection, name, value):
         collection.add_property(name, value)
 
-    def upload_from_file(self, filename, format=Store.TEXT_FORMAT, commit=True, verbose=False):
+    def _process_line(self, line, verbose):
+        line = line.strip()
+        if line.startswith(MongoPropertyStore.COMMENT) is False:
+            splits = line.split(MongoPropertyStore.SPLIT_CHAR)
+            if len(splits) > 1:
+                key = splits[0].strip()
+                val = ":".join(splits[1:]).strip()
+                if verbose is True:
+                    YLogger.debug(self, "Adding %s property [%s=%s] to Mongo",
+                                  self.collection_name(), key, val)
+                return self.add_property(key, val)
+
+        return False
+
+    def _read_lines_from_file(self, filename, verbose):
+        count = 0
+        success = 0
+        with open(filename, "r") as vars_file:
+            for line in vars_file:
+                if self._process_line(line, verbose) is True:
+                    success += 1
+                count += 1
+        return count, success
+
+    def upload_from_file(self, filename, fileformat=Store.TEXT_FORMAT, commit=True, verbose=False):
 
         YLogger.info(self, "Uploading %s to Mongo from [%s]", filename, self.collection_name())
 
-        count = 0
-        success = 0
-        if os.path.exists(filename):
-            try:
-                with open(filename, "r") as vars_file:
-                    for line in vars_file:
-                        line = line.strip()
-                        if line:
-                            if line.startswith(MongoPropertyStore.COMMENT) is False:
-                                splits = line.split(MongoPropertyStore.SPLIT_CHAR)
-                                if len(splits)>1:
-                                    key = splits[0].strip()
-                                    val = ":".join(splits[1:]).strip()
-                                    if verbose is True:
-                                        YLogger.debug(self, "Adding %s property [%s=%s] to Mongo",
-                                                      self.collection_name(), key, val)
-                                    if self.add_property(key, val) is True:
-                                        success += 1
-                            count += 1
+        try:
+            return self._read_lines_from_file(filename, verbose)
 
-                if commit is True:
-                    self.commit()
+        except Exception as excep:
+            YLogger.exception(self, "Failed to upload %s from %s to Mongo", excep, self.collection_name(), filename)
 
-            except Exception as excep:
-                YLogger.exception(self, "Failed to upload %s from %s to Mongo", excep, self.collection_name(), filename)
-
-        return count, success
+        return 0, 0
 
     def split_into_fields(self, line):
-        return DoubleStringPatternSplitCollection.split_line_by_pattern(line, DoubleStringPatternSplitCollection.RE_OF_SPLIT_PATTERN)
+        return DoubleStringPatternSplitCollection.split_line_by_pattern(line,
+                                                                        DoubleStringPatternSplitCollection.
+                                                                        RE_OF_SPLIT_PATTERN)
 
 
 class MongoDefaultVariablesStore(MongoPropertyStore):
-
     DEFAULTS = 'defaults'
 
     def __init__(self, storage_engine):
@@ -141,7 +146,6 @@ class MongoDefaultVariablesStore(MongoPropertyStore):
 
 
 class MongoRegexesStore(MongoPropertyStore):
-
     REGEXES = 'regexes'
 
     def __init__(self, storage_engine):
@@ -161,7 +165,6 @@ class MongoRegexesStore(MongoPropertyStore):
 
     def add_to_collection(self, collection, name, value):
         try:
-            collection.add_property(name, re.compile(value, re.IGNORECASE))
+            collection.add_regex(name, re.compile(value, re.IGNORECASE))
         except Exception as excep:
             YLogger.exception(self, "Error adding regex to collection: [%s]", excep, value)
-

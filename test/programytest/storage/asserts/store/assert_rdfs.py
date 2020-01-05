@@ -1,6 +1,6 @@
-import unittest
 import os
 import os.path
+import unittest
 
 from programy.rdf.collection import RDFCollection
 from programy.storage.entities.store import Store
@@ -9,7 +9,6 @@ from programy.storage.entities.store import Store
 class RDFStoreAsserts(unittest.TestCase):
 
     def assert_rdf_storage(self, store):
-
         store.empty()
 
         store.add_rdf("ACTIVITY", "ACT", "hasPurpose", "to entertain by performing")
@@ -28,7 +27,6 @@ class RDFStoreAsserts(unittest.TestCase):
         self.assertTrue(rdf_collection.has_object('ACT', "hasPurpose", "to entertain by performing"))
 
     def assert_upload_from_text(self, store):
-
         store.empty()
 
         store.upload_from_text("ACTIVITY", """
@@ -57,7 +55,7 @@ class RDFStoreAsserts(unittest.TestCase):
         self.assertTrue(rdf_collection.has_predicate('ACT', "hasPurpose"))
         self.assertTrue(rdf_collection.has_object('ACT', "hasPurpose", "to entertain by performing"))
 
-    def assert_upload_from_text_file(self, store):
+    def assert_load(self, store):
         store.empty()
 
         store.upload_from_file(os.path.dirname(__file__)+os.sep+"data"+os.sep+"rdfs"+os.sep+"text"+os.sep+"activity.rdf")
@@ -70,8 +68,20 @@ class RDFStoreAsserts(unittest.TestCase):
         self.assertTrue(rdf_collection.has_predicate('ACT', "hasPurpose"))
         self.assertTrue(rdf_collection.has_object('ACT', "hasPurpose", "to entertain by performing"))
 
-    def assert_upload_text_files_from_directory_no_subdir(self, store):
+    def assert_load_all(self, store):
+        store.empty()
 
+        store.upload_from_file(os.path.dirname(__file__)+os.sep+"data"+os.sep+"rdfs"+os.sep+"text"+os.sep+"activity.rdf")
+
+        rdf_collection = RDFCollection()
+        store.load_all(rdf_collection)
+
+        self.assertTrue(rdf_collection.contains("ACTIVITY"))
+        self.assertTrue(rdf_collection.has_subject('ACT'))
+        self.assertTrue(rdf_collection.has_predicate('ACT', "hasPurpose"))
+        self.assertTrue(rdf_collection.has_object('ACT', "hasPurpose", "to entertain by performing"))
+
+    def assert_upload_text_files_from_directory_no_subdir(self, store):
         store.empty()
 
         store.upload_from_directory(os.path.dirname(__file__)+os.sep+"data"+os.sep+"rdfs"+os.sep+"text", subdir=False)
@@ -84,11 +94,30 @@ class RDFStoreAsserts(unittest.TestCase):
         self.assertTrue(rdf_collection.has_predicate('ACT', "hasPurpose"))
         self.assertTrue(rdf_collection.has_object('ACT', "hasPurpose", "to entertain by performing"))
 
-    def assert_upload_from_csv_file(self, store):
-
+    def assert_empty_named(self, store):
         store.empty()
 
-        store.upload_from_file(os.path.dirname(__file__)+os.sep+"data"+os.sep+"rdfs"+os.sep+"csv"+os.sep+"activity.csv", format=Store.CSV_FORMAT)
+        store.upload_from_file(os.path.dirname(__file__)+os.sep+"data"+os.sep+"rdfs"+os.sep+"text"+os.sep+"activity.rdf")
+
+        rdf_collection = RDFCollection()
+        store.load_all(rdf_collection)
+
+        self.assertTrue(rdf_collection.contains("ACTIVITY"))
+        self.assertTrue(rdf_collection.has_subject('ACT'))
+        self.assertTrue(rdf_collection.has_predicate('ACT', "hasPurpose"))
+        self.assertTrue(rdf_collection.has_object('ACT', "hasPurpose", "to entertain by performing"))
+
+        store.empty_named("ACTIVITY")
+
+        rdf_collection2 = RDFCollection()
+        store.load_all(rdf_collection2)
+
+        self.assertFalse(rdf_collection2.contains("ACTIVITY"))
+
+    def assert_upload_from_csv_file(self, store):
+        store.empty()
+
+        store.upload_from_file(os.path.dirname(__file__)+os.sep+"data"+os.sep+"rdfs"+os.sep+"csv"+os.sep+"activity.csv", fileformat=Store.CSV_FORMAT)
 
         rdf_collection = RDFCollection()
         store.load(rdf_collection, "ACTIVITY")
@@ -99,10 +128,9 @@ class RDFStoreAsserts(unittest.TestCase):
         self.assertTrue(rdf_collection.has_object('ACT', "hasPurpose", "to entertain by performing"))
 
     def assert_upload_csv_files_from_directory_with_subdir(self, store):
-
         store.empty()
 
-        store.upload_from_directory(os.path.dirname(__file__)+os.sep+"data"+os.sep+"rdfs"+os.sep+"csv", subdir=True, format=Store.CSV_FORMAT)
+        store.upload_from_directory(os.path.dirname(__file__)+os.sep+"data"+os.sep+"rdfs"+os.sep+"csv", subdir=True, fileformat=Store.CSV_FORMAT)
 
         rdf_collection = RDFCollection()
         store.load_all(rdf_collection)

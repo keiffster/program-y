@@ -1,12 +1,10 @@
 import unittest
 
-from programytest.storage.asserts.store.assert_defaults import DefaultStoreAsserts
-
-from programy.storage.stores.nosql.mongo.store.properties import MongoDefaultVariablesStore
-from programy.storage.stores.nosql.mongo.engine import MongoStorageEngine
-from programy.storage.stores.nosql.mongo.config import MongoStorageConfiguration
-
 import programytest.storage.engines as Engines
+from programy.storage.stores.nosql.mongo.config import MongoStorageConfiguration
+from programy.storage.stores.nosql.mongo.engine import MongoStorageEngine
+from programy.storage.stores.nosql.mongo.store.properties import MongoDefaultVariablesStore
+from programytest.storage.asserts.store.assert_defaults import DefaultStoreAsserts
 
 
 class MongoDefaultVariablesStoreTests(DefaultStoreAsserts):
@@ -29,13 +27,13 @@ class MongoDefaultVariablesStoreTests(DefaultStoreAsserts):
         self.assert_defaults_storage(store)
 
     @unittest.skipIf(Engines.mongo is False, Engines.mongo_disabled)
-    def test_property_storage(self):
+    def test_default_storage(self):
         config = MongoStorageConfiguration()
         engine = MongoStorageEngine(config)
         engine.initialise()
         store = MongoDefaultVariablesStore(engine)
 
-        self.assert_empty_defaults(store)
+        self.assert_default_storage(store)
 
     @unittest.skipIf(Engines.mongo is False, Engines.mongo_disabled)
     def test_empty_defaults(self):

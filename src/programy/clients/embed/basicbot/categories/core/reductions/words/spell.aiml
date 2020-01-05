@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+    <category>
+        <pattern>SPELL MY NAME</pattern>
+        <template>
+            <srai>SPELL
+                <srai>CLIENT NAME</srai>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SPELL MY MIDDLE NAME</pattern>
+        <template>
+            <srai>SPELL
+                <get name="middlename"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SPELL MY LAST NAME</pattern>
+        <template>
+            <srai>SPELL
+                <get name="lastname"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SPELL MY FIRST NAME</pattern>
+        <template>
+            <srai>SPELL
+                <get name="firstname"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DOES * SPELL BACKWARDS</pattern>
+        <template>
+            <srai>SPELL
+                <star/>
+                BACKWARDS
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SPELL MY NAME *</pattern>
+        <template>
+            <srai>SPELL
+                <srai>CLIENT NAME</srai>
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SPELL MY MIDDLE NAME *</pattern>
+        <template>
+            <srai>SPELL
+                <get name="middlename"/>
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SPELL MY LAST NAME *</pattern>
+        <template>
+            <srai>SPELL
+                <get name="lastname"/>
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SPELL MY FIRST NAME *</pattern>
+        <template>
+            <srai>SPELL
+                <get name="firstname"/>
+                <star/>
+            </srai>
+        </template>
+    </category>
+   <category>
+        <pattern>HOW TO SPELL *</pattern>
+        <template>
+            <srai>SPELL
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THE WORD IS *</pattern>
+        <template>
+            <srai>SPELL
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU SPELL *</pattern>
+        <template>
+            <srai>SPELL
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU SPELL *</pattern>
+        <template>
+            <srai>SPELL
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+
+    <category>
+        <pattern>WHAT DOES * SPELL</pattern>
+        <template>
+            <srai>IMPLODE
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+        <category>
+        <pattern>* S NAME IS SPELLED *</pattern>
+        <template>
+            <srai>
+                <star/>
+                MEANS
+                <srai>IMPLODE
+                    <star index="2"/>
+                </srai>
+            </srai>
+        </template>
+    </category>
+
+         <category>
+        <pattern>HOW MANY LETTERS IN *</pattern>
+        <template>The word "<star/>" has
+            <srai>SENTENCELENGTH
+                <explode>
+                    <star/>
+                </explode>
+            </srai>
+            letters.
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MANY LETTERS IN THE NAME *</pattern>
+        <template>The word
+            <star/>
+            has
+            <srai>SENTENCELENGTH
+                <explode>
+                    <star/>
+                </explode>
+            </srai>
+            letters.
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MANY LETTERS IN MY *</pattern>
+        <template>The word "
+            <srai>MY
+                <star/>
+            </srai>
+            " has
+            <srai>SENTENCELENGTH
+                <explode>
+                    <srai>MY
+                        <star/>
+                    </srai>
+                </explode>
+            </srai>
+            letters.
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MANY LETTERS IN MY NAME</pattern>
+        <template>The word "<srai>CLIENT NAME</srai>" has
+            <srai>SENTENCELENGTH
+                <explode>
+                    <srai>CLIENT NAME</srai>
+                </explode>
+            </srai>
+            letters.
+        </template>
+    </category>
+
+
+</aiml>

@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -16,7 +16,8 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 from programy.utils.substitutions.substitues import Substitutions
 
-class ProgramyConfiguration(object):
+
+class ProgramyConfiguration:
 
     def __init__(self, client_configuration):
         self._client_config = client_configuration
@@ -25,5 +26,5 @@ class ProgramyConfiguration(object):
     def client_configuration(self):
         return self._client_config
 
-    def load_config_data(self, config_file, bot_root, subs: Substitutions=None):
+    def load_config_data(self, config_file, bot_root, subs: Substitutions = None):
         self._client_config.load_configuration(config_file, bot_root, subs=subs)

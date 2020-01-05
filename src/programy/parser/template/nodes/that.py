@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,10 +14,9 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.utils.logging.ylogger import YLogger
-
 from programy.parser.template.nodes.indexed import TemplateIndexedNode
+
 
 ######################################################################################################################
 #
@@ -55,7 +54,7 @@ class TemplateThatNode(TemplateIndexedNode):
         if int_sentence == -1:
             resolved = question.combine_answers()
         else:
-            resolved = question.sentence(int_sentence-1).response
+            resolved = question.sentence(int_sentence - 1).response
 
         YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
 
@@ -63,12 +62,12 @@ class TemplateThatNode(TemplateIndexedNode):
 
     def to_string(self):
         string = "[THAT"
-        string += self.index.to_string()+']'
+        string += self.index.to_string() + ']'
         return string
 
     def to_xml(self, client_context):
         xml = "<that "
-        xml += 'index="%s"'%self.index.to_xml(client_context)
+        xml += 'index="%s"' % self.index.to_xml(client_context)
         xml += ">"
         xml += "</that>"
         return xml

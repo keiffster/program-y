@@ -1,0 +1,128 @@
+BLOOD:hasPurpose:to circulate fluid
+BLOOD:hasSize:0
+BLOOD:hasSyllables:1
+BLOOD:isa:Body Part
+BLOOD:lifeArea:Physical
+BODY:hasPurpose:to contain our souls
+BODY:hasSize:7
+BODY:hasSyllables:2
+BODY:lifeArea:Physical
+BACK:hasPurpose:to support the torso
+BACK:hasSize:5
+BACK:hasSyllables:1
+BACK:isa:Body Part
+BACK:lifeArea:Physical
+FINGER:hasPurpose:to point
+FINGER:hasSize:3
+FINGER:hasSyllables:2
+FINGER:isa:Body Part
+FINGER:isa:Hand Part
+FINGER:lifeArea:Physical
+Head Part:isa:Body Part
+HEAD:hasPurpose:to contain our brain and face
+HEAD:hasSize:5
+HEAD:hasSyllables:1
+HEAD:isa:Body Part
+HEAD:lifeArea:Physical
+HEART:hasPurpose:to pump blood
+HEART:hasSize:4
+HEART:hasSyllables:1
+HEART:isa:Body Part
+HEART:isa:Organ
+HEART:lifeArea:Physical
+LEG:hasPurpose:to stand on
+LEG:hasSize:4
+LEG:hasSyllables:1
+LEG:isa:Body Part
+LEG:lifeArea:Physical
+Arm Part:isa:Body Part
+IRIS:hasPurpose:to sense visual information
+IRIS:hasSize:3
+IRIS:hasSyllables:2
+IRIS:isa:Body Part
+IRIS:isa:Eye Part
+IRIS:lifeArea:Physical
+STOMACH:hasPurpose:to digest food
+STOMACH:hasSize:4
+STOMACH:hasSyllables:2
+STOMACH:isa:Body Part
+STOMACH:isa:Organ
+STOMACH:lifeArea:Physical
+TOE:hasPurpose:to help us balance
+TOE:hasSize:3
+TOE:hasSyllables:1
+TOE:isa:Body Part
+TOE:isa:Foot Part
+TOE:lifeArea:Physical
+MOUTH:hasPurpose:to taste speak and kiss
+MOUTH:hasSize:3
+MOUTH:hasSyllables:1
+MOUTH:isa:Body Part
+MOUTH:isa:Face Part
+MOUTH:lifeArea:Physical
+BRAIN:hasPurpose:to think
+BRAIN:hasSize:5
+BRAIN:hasSyllables:1
+BRAIN:isa:Body Part
+BRAIN:isa:Organ
+BRAIN:lifeArea:Physical
+MIND:hasPurpose:to think
+MIND:hasSize:0
+MIND:hasSyllables:1
+MIND:isa:Concept
+MIND:lifeArea:Spiritual
+Microorganism:isa:Body Part
+MEMORY:hasPurpose:to remember things
+MEMORY:hasSize:0
+MEMORY:hasSyllables:3
+MEMORY:isa:Concept
+MEMORY:lifeArea:Spiritual
+Hand Part:isa:Body Part
+Hand Tool:isa:Tool
+HAND:hasPurpose:to grasp things
+HAND:hasSize:4
+HAND:hasSyllables:1
+HAND:isa:Arm Part
+HAND:isa:Body Part
+HAND:lifeArea:Physical
+BUTT:hasPurpose:to be a rear end
+BUTT:hasSize:3
+BUTT:hasSyllables:1
+BUTT:isa:Body Part
+BUTT:lifeArea:Physical
+Eye Part:isa:Body Part
+EYE:hasPurpose:to see things
+EYE:hasSize:3
+EYE:hasSyllables:1
+EYE:isa:Body Part
+EYE:isa:Face Part
+EYE:lifeArea:Physical
+Face Part:isa:Body Part
+FACE:hasPurpose:to show our appearance
+FACE:hasSize:4
+FACE:hasSyllables:1
+FACE:isa:Body Part
+FACE:isa:Head Part
+FACE:lifeArea:Physical
+Foot Part:isa:Body Part
+HUMAN:hasPurpose:to live a meaningful life
+HUMAN:hasSize:7
+HUMAN:hasSyllables:2
+HUMAN:isa:Person
+HUMAN:lifeArea:Physical
+Organ:isa:Body Part
+TAIL:hasPurpose:to wag
+TAIL:hasSize:4
+TAIL:hasSyllables:1
+TAIL:isa:Animal Part
+TAIL:isa:Body Part
+TAIL:lifeArea:Physical
+JOINT:hasPurpose:to flex
+JOINT:hasSize:3
+JOINT:hasSyllables:1
+JOINT:isa:Body Part
+JOINT:lifeArea:Physical
+VOICE:hasPurpose:to speak
+VOICE:hasSize:0
+VOICE:hasSyllables:1
+VOICE:lifeArea:Physical

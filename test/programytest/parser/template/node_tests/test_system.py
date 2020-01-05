@@ -1,11 +1,10 @@
-import xml.etree.ElementTree as ET
 import os
+import xml.etree.ElementTree as ET
 
-from programy.parser.template.nodes.base import TemplateNode
-from programy.parser.template.nodes.word import TemplateWordNode
-from programy.parser.template.nodes.system import TemplateSystemNode
 from programy.parser.exceptions import ParserException
-
+from programy.parser.template.nodes.base import TemplateNode
+from programy.parser.template.nodes.system import TemplateSystemNode
+from programy.parser.template.nodes.word import TemplateWordNode
 from programytest.parser.base import ParserTestsBaseClass
 
 
@@ -114,6 +113,21 @@ class TemplateSystemNodeTests(ParserTestsBaseClass):
     def test_to_xml_with_timeout(self):
         root = TemplateNode()
         node = TemplateSystemNode()
+        node.timeout = 100
+        self.assertEqual("100", node.timeout.word)
+        root.append(node)
+        node.append(TemplateWordNode('echo "Hello World"'))
+
+        xml = root.xml_tree(self._client_context)
+        self.assertIsNotNone(xml)
+        xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
+        self.assertEqual('<template><system timeout="100">echo "Hello World"</system></template>', xml_str)
+
+    def test_to_xml_with_timeout_is_zero(self):
+        root = TemplateNode()
+        node = TemplateSystemNode()
+        node.timeout = 0
+        self.assertEqual("0", node.timeout.word)
         root.append(node)
         node.append(TemplateWordNode('echo "Hello World"'))
 

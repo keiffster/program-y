@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -33,14 +33,15 @@ class TelegramConfiguration(ClientConfigurationData):
     def unknown_command_srai(self):
         return self._unknown_command_srai
 
-    def check_for_license_keys(self, license_keys):
-        ClientConfigurationData.check_for_license_keys(self, license_keys)
+    def load_configuration_section(self, configuration_file, section, bot_root, subs: Substitutions = None):
+        assert section is not None
 
-    def load_configuration_section(self, configuration_file, telegram, bot_root, subs: Substitutions = None):
-        if telegram is not None:
-            self._unknown_command = configuration_file.get_option(telegram, "unknown_command", missing_value="Unknown command", subs=subs)
-            self._unknown_command_srai = configuration_file.get_option(telegram, "unknown_command_srai", missing_value=None, subs=subs)
-            super(TelegramConfiguration, self).load_configuration_section(configuration_file, telegram, bot_root, subs=subs)
+        self._unknown_command = configuration_file.get_option(section, "unknown_command",
+                                                              missing_value="Unknown command", subs=subs)
+        self._unknown_command_srai = configuration_file.get_option(section, "unknown_command_srai",
+                                                                   missing_value=None, subs=subs)
+        super(TelegramConfiguration, self).load_configuration_section(configuration_file, section, bot_root,
+                                                                      subs=subs)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:

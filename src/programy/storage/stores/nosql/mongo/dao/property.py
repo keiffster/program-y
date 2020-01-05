@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -16,7 +16,8 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 from programy.storage.stores.utils import DAOUtils
 
-class Property(object):
+
+class Property():
 
     def __init__(self, name, value):
         self.id = None
@@ -35,14 +36,11 @@ class Property(object):
 
     @staticmethod
     def from_document(data):
-        property = Property(None, None)
-        if '_id' in data:
-            property.id = data['_id']
-        if 'name' in data:
-            property.name = data['name']
-        if 'value' in data:
-            property.value = data['value']
-        return property
+        propertydao = Property(None, None)
+        propertydao.id = DAOUtils.get_value_from_data(data, '_id')
+        propertydao.name = DAOUtils.get_value_from_data(data, 'name')
+        propertydao.value = DAOUtils.get_value_from_data(data, 'value')
+        return propertydao
 
 
 class DefaultVariable(Property):
@@ -55,14 +53,11 @@ class DefaultVariable(Property):
 
     @staticmethod
     def from_document(data):
-        property = DefaultVariable(None, None)
-        if '_id' in data:
-            property.id = data['_id']
-        if 'name' in data:
-            property.name = data['name']
-        if 'value' in data:
-            property.value = data['value']
-        return property
+        variabledao = DefaultVariable(None, None)
+        variabledao.id = DAOUtils.get_value_from_data(data, '_id')
+        variabledao.name = DAOUtils.get_value_from_data(data, 'name')
+        variabledao.value = DAOUtils.get_value_from_data(data, 'value')
+        return variabledao
 
 
 class Regex(Property):
@@ -75,12 +70,8 @@ class Regex(Property):
 
     @staticmethod
     def from_document(data):
-        property = Regex(None, None)
-        if '_id' in data:
-            property.id = data['_id']
-        if 'name' in data:
-            property.name = data['name']
-        if 'value' in data:
-            property.value = data['value']
-        return property
-
+        regexdao = Regex(None, None)
+        regexdao.id = DAOUtils.get_value_from_data(data, '_id')
+        regexdao.name = DAOUtils.get_value_from_data(data, 'name')
+        regexdao.value = DAOUtils.get_value_from_data(data, 'value')
+        return regexdao

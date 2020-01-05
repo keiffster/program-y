@@ -1,11 +1,9 @@
 import unittest
-import os
 
 from programy.services.pandora import PandoraService, PandoraAPI
 from programy.services.service import BrainServiceConfiguration
-from programytest.services.mock_requests import MockRequestsAPI
-
 from programytest.client import TestClient
+from programytest.services.mock_requests import MockRequestsAPI
 
 
 class PandoraAPITests(unittest.TestCase):

@@ -1,16 +1,20 @@
 import unittest.mock
+
 from pymessenger.bot import Bot
 
 from programy.clients.restful.flask.facebook.client import FacebookBotClient
 from programy.clients.restful.flask.facebook.config import FacebookConfiguration
-
+from programy.clients.restful.flask.facebook.renderer import FacebookRenderer
 from programytest.clients.arguments import MockArgumentParser
 
 
 class MockFacebookBot(Bot):
 
     def __init__(self, access_token):
-        pass
+        self._access_token = access_token
+        self._recipient_id = None
+        self._message = None
+        self.payload = None
 
     def render_response(self, recipient_id, message):
         self._recipient_id = recipient_id
@@ -23,9 +27,10 @@ class MockFacebookBot(Bot):
 class MockFacebookBotClient(FacebookBotClient):
 
     def __init__(self, argument_parser=None):
+        self._access_token = None
+        self._verify_token = None
         FacebookBotClient.__init__(self, argument_parser)
         self.test_question = None
-        self.payload = None
 
     def set_question(self, question):
         self.test_question = question
@@ -57,6 +62,9 @@ class FacebookClientBotClientTests(unittest.TestCase):
         self.assertEqual('ProgramY AIML2.0 Client', client.get_description())
 
         self.assertIsInstance(client._facebook_bot, Bot)
+
+        self.assertTrue(client._render_callback())
+        self.assertIsInstance(client.renderer, FacebookRenderer)
 
     def test_hub_challenge(self):
         arguments = MockArgumentParser()

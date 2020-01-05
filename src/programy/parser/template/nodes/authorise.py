@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,11 +14,10 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.utils.logging.ylogger import YLogger
-
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.exceptions import ParserException
+
 
 class TemplateAuthoriseNode(TemplateNode):
 
@@ -64,9 +63,9 @@ class TemplateAuthoriseNode(TemplateNode):
 
     def to_string(self):
         text = "[AUTHORISE ("
-        text += "role=%s"%self._role
+        text += "role=%s" % self._role
         if self._denied_srai is not None:
-            text += ", denied_srai=%s"%self._denied_srai
+            text += ", denied_srai=%s" % self._denied_srai
         text += ")]"
         return text
 
@@ -92,8 +91,14 @@ class TemplateAuthoriseNode(TemplateNode):
         if self._role is None:
             raise ParserException("AUTHORISE role attribute missing !")
 
+        if self._role == "":
+            raise ParserException("AUTHORISE role attribute empty !")
+
         if 'denied_srai' in expression.attrib:
             self._denied_srai = expression.attrib['denied_srai']
+
+            if self._denied_srai == "":
+                raise ParserException("AUTHORISE denied_srai attribute empty !")
 
         head_text = self.get_text_from_element(expression)
         self.parse_text(graph, head_text)

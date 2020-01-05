@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>SEARCH GOOGLE</pattern>
+        <template>What would you like me to search for?</template>
+    </category>
+    <category>
+        <pattern>SEARCH EMAIL FOR *</pattern>
+        <template>Sorry, I haven't yet been programmed to search email.</template>
+    </category>
+    <category>
+        <pattern>CALL * GOOGLE TALK</pattern>
+        <template>
+            <srai>FEATURE REQUEST PLACE GOOGLE TALK CALLS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CALL * SKYPE</pattern>
+        <template>
+            <srai>FEATURE REQUEST PLACE SKYPE CALLS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TWEET</pattern>
+        <template>What would you like to write on Twitter?</template>
+    </category>
+    <category>
+        <pattern>ADD TO MY CALENDAR</pattern>
+        <template>What do you want to add to your calendar?</template>
+    </category>
+    <category>
+        <pattern>SEARCH</pattern>
+        <template>What would you like to search for?</template>
+    </category>
+    <category>
+        <pattern>WWW</pattern>
+        <template>Where on the web?</template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE URL *</pattern>
+        <template>Use http://www.alicebot.org</template>
+    </category>
+    <category>
+        <pattern>WWW DOT *</pattern>
+        <template>I will pass it along to my<bot name="botmaster"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WWW * COM</pattern>
+        <template>Thanks for that URL.</template>
+    </category>
+    <category>
+        <pattern>NAME <set>quantifier</set> # SEARCH ENGINE
+        </pattern>
+        <template>Google.</template>
+    </category>
+
+ </aiml>

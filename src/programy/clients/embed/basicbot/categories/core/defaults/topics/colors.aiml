@@ -1,0 +1,842 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+        <category>
+        <pattern>GUESS WHAT COLOR *</pattern>
+        <template><get name="favcolor"/>?
+            <think>
+                <set name="it">
+                    <set name="topic">WHAT COLOR
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>GUESS THE COLOR OF *</pattern>
+        <template><get name="favcolor"/>?
+            <think>
+                <set name="it">
+                    <set name="topic">THE COLOR OF
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>GUESS * FAVORITE COLOR IS</pattern>
+        <template><get name="favcolor"/>?
+            <think>
+                <set name="it">
+                    <set name="topic"><person/>your favorite color
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS UNCLE SAM *</pattern>
+        <template>White.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS PEPTO *</pattern>
+        <template>Pink.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS THE SKY *</pattern>
+        <template>An artist taught me that the sky can contain any color.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS YOUR BLUE *</pattern>
+        <template>Uh, blue?</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS YOUR *</pattern>
+        <template>I would rather not say. :)</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A LAVENDER BLUSH *</pattern>
+        <template>Lavender blush.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A LAVENDER *</pattern>
+        <template>Lavender.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A CORNFLOWER BLUE *</pattern>
+        <template>Cornflower blue.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A GREEN YELLOW *</pattern>
+        <template>Green yellow.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A GREEN *</pattern>
+        <template>Green.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A TOMATO *</pattern>
+        <template>Tomato.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A GOLDENROD *</pattern>
+        <template>Goldenrod.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A LAWN GREEN *</pattern>
+        <template>Lawn green.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A TURQUOISE *</pattern>
+        <template>Turquoise.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A SIENNA *</pattern>
+        <template>Sienna.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A BURLYWOOD *</pattern>
+        <template>Burlywood.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A FIREBRICK *</pattern>
+        <template>Firebrick.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A LINEN *</pattern>
+        <template>Linen.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A RED *</pattern>
+        <template>Red.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A THISTLE *</pattern>
+        <template>Thistle.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A HOT PINK *</pattern>
+        <template>Hot pink.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A FUCHSIA *</pattern>
+        <template>Fuchsia.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A MAGENTA *</pattern>
+        <template>Magenta.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A GOLD *</pattern>
+        <template>Gold.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A SEA GREEN *</pattern>
+        <template>Sea green.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A NAVAJO WHITE *</pattern>
+        <template>Navajo white.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A TEAL *</pattern>
+        <template>Teal.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A SALMON *</pattern>
+        <template>Salmon.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A WHEAT *</pattern>
+        <template>Wheat.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A GRAY *</pattern>
+        <template>Gray.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A ROSY BROWN *</pattern>
+        <template>Rosy brown.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A FLORAL WHITE *</pattern>
+        <template>Floral white.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A SNOW *</pattern>
+        <template>Snow.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A MIDNIGHT BLUE *</pattern>
+        <template>Midnight blue.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A CRIMSON *</pattern>
+        <template>Crimson.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A YELLOW *</pattern>
+        <template>Yellow.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A DIM GRAY *</pattern>
+        <template>Dim gray.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A WHITE SMOKE *</pattern>
+        <template>White smoke.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A WHITE *</pattern>
+        <template>White.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A MEDIUM PURPLE *</pattern>
+        <template>Medium purple.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A MEDIUM SEAGREEN *</pattern>
+        <template>Medium seagreen.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A MEDIUM VIOLETRED *</pattern>
+        <template>Medium violetred.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A MEDIUM TURQUOISE *</pattern>
+        <template>Medium turquoise.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A MEDIUM SPRINGGREEN *</pattern>
+        <template>Medium springgreen.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A MEDIUM ORCHID *</pattern>
+        <template>Medium orchid.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A MEDIUM SLATEBLUE *</pattern>
+        <template>Medium slateblue.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A MEDIUM AQUAMARINE *</pattern>
+        <template>Medium aquamarine.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A MEDIUM BLUE *</pattern>
+        <template>Medium blue.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A BROWN *</pattern>
+        <template>Brown.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A LIME GREEN *</pattern>
+        <template>Lime green.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A LIME *</pattern>
+        <template>Lime.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A SILVER *</pattern>
+        <template>Silver.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A BLUEVIOLET *</pattern>
+        <template>Blueviolet.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A PERU *</pattern>
+        <template>Peru.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A CYAN *</pattern>
+        <template>Cyan.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A MISTY ROSE *</pattern>
+        <template>Misty rose.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A POWDER BLUE *</pattern>
+        <template>Powder blue.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A SANDY BROWN *</pattern>
+        <template>Sandy brown.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A YELLOWGREEN *</pattern>
+        <template>Yellowgreen.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A HONEYDEW *</pattern>
+        <template>Honeydew.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A VIOLET *</pattern>
+        <template>Violet.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A BLUE *</pattern>
+        <template>Blue.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A SPRING GREEN *</pattern>
+        <template>Spring green.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A CADET BLUE *</pattern>
+        <template>Cadet blue.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A GAINSBOR *</pattern>
+        <template>Gainsboro.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A SADDLE BROWN *</pattern>
+        <template>Saddle brown.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A PINK *</pattern>
+        <template>Pink.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A CORAL *</pattern>
+        <template>Coral.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A PLUM *</pattern>
+        <template>Plum.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A BISQUE *</pattern>
+        <template>Bisque.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A KHAKI *</pattern>
+        <template>Khaki.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A DODGER BLUE *</pattern>
+        <template>Dodger blue.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A CORNSILK *</pattern>
+        <template>Cornsilk.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A CHARTREUSE *</pattern>
+        <template>Chartreuse.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A SLATE GRAY *</pattern>
+        <template>Slate gray.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A SLATE BLUE *</pattern>
+        <template>Slate blue.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A BEIGE *</pattern>
+        <template>Beige.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A MINT CREAM *</pattern>
+        <template>Mint cream.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A MOCCASIN *</pattern>
+        <template>Moccasin.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A PURPLE *</pattern>
+        <template>
+            <random>
+                <li>Purple.</li>
+                <li>Um, Violet?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A BLANCHEDALMOND *</pattern>
+        <template>Alice blue.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A STEEL BLUE *</pattern>
+        <template>Steel blue.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A SEASHELL *</pattern>
+        <template>Seashell.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A ROYAL BLUE *</pattern>
+        <template>Royal blue.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A DEEP PINK *</pattern>
+        <template>Deep pink.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A DEEP SKYBLUE *</pattern>
+        <template>Deep skyblue.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A PAPAYA WHIP *</pattern>
+        <template>Papaya whip.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A GHOST WHITE *</pattern>
+        <template>Ghost white.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A DARK SEAGREEN *</pattern>
+        <template>Dark seagreen.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A DARK SLATEGRAY *</pattern>
+        <template>Dark slategray.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A DARK VIOLET *</pattern>
+        <template>Dark violet.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A DARK ORANGE *</pattern>
+        <template>Dark orange.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A DARK TURQUOISE *</pattern>
+        <template>Dark turquoise.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A DARK KHAKI *</pattern>
+        <template>Dark khaki.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A DARK OLIVEGREEN *</pattern>
+        <template>Dark olivegreen.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A DARK GRAY *</pattern>
+        <template>Dark gray.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A DARK ORCHID *</pattern>
+        <template>Dark orchid.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A DARK SLATEBLUE *</pattern>
+        <template>Dark slateblue.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A DARK MAGENTA *</pattern>
+        <template>Dark magenta.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A DARK GREEN *</pattern>
+        <template>Dark green.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A DARK BLUE *</pattern>
+        <template>Dark blue.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A DARK CYAN *</pattern>
+        <template>Dark cyan.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A DARK SALMON *</pattern>
+        <template>Dark salmon.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A DARK RED *</pattern>
+        <template>Dark red.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A DARK GOLDENROD *</pattern>
+        <template>Dark goldenrod.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A TAN *</pattern>
+        <template>Tan.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A LIGHT GREY *</pattern>
+        <template>Light grey.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A LIGHT STEELBLUE *</pattern>
+        <template>Light steelblue.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A LIGHT YELLOW *</pattern>
+        <template>Light yellow.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A LIGHT SEAGREEN *</pattern>
+        <template>Light seagreen.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A LIGHT SLATEGRAY *</pattern>
+        <template>Light slategray.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A LIGHT GOLDENRODYELLOW *</pattern>
+        <template>Light goldenrodyellow.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A LIGHT PINK *</pattern>
+        <template>Light pink.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A LIGHT GREEN *</pattern>
+        <template>Light green.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A LIGHT CORAL *</pattern>
+        <template>Light coral.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A LIGHT BLUE *</pattern>
+        <template>Light blue.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A LIGHT CYAN *</pattern>
+        <template>Light cyan.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A LIGHT SALMON *</pattern>
+        <template>Light salmon.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A LIGHT SKYBLUE *</pattern>
+        <template>Light skyblue.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A PALE VIOLET RED *</pattern>
+        <template>Pale violetred.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A PALE TURQUOISE *</pattern>
+        <template>Pale turquoise.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A PALE GREEN *</pattern>
+        <template>Pale green.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A PALE GOLDENROD *</pattern>
+        <template>Pale goldenrod.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A LEMON CHIFFON *</pattern>
+        <template>Lemon chiffon.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A NAVY *</pattern>
+        <template>Navy.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A FOREST GREEN *</pattern>
+        <template>Forest green.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A SKY BLUE *</pattern>
+        <template>Sky blue.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A CHOCOLATE *</pattern>
+        <template>Chocolate.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A PEACH PUFF *</pattern>
+        <template>Peach puff.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A MAROON *</pattern>
+        <template>Maroon.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A BLACK BOX *</pattern>
+        <template>Orange.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A BLACK *</pattern>
+        <template>Black.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS AN OLIVE DRAB *</pattern>
+        <template>Olive drab.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS AN OLIVE *</pattern>
+        <template>Olive.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS AN AQUA MARINE *</pattern>
+        <template>Aqua marine.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS AN AQUA *</pattern>
+        <template>Aqua.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS AN INDIGO *</pattern>
+        <template>Indigo.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS AN ORANGE RED *</pattern>
+        <template>Orange red.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS AN ORANGE *</pattern>
+        <template>Orange.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS AN INDIAN RED *</pattern>
+        <template>Indian red.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS AN IVORY *</pattern>
+        <template>Ivory.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS AN ALICE BLUE *</pattern>
+        <template>Alice blue.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS AN ANTIQUE WHITE *</pattern>
+        <template>Antique white.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS AN ORCHID *</pattern>
+        <template>Orchid.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS MY GREEN *</pattern>
+        <template>Uh, green?
+            <think>
+                <set name="it">
+                    <set name="topic">green</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS MY BLUE *</pattern>
+        <template>Uh, blue?
+            <think>
+                <set name="it">
+                    <set name="topic">blue</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS MY RED *</pattern>
+        <template>Uh, red?
+            <think>
+                <set name="it">
+                    <set name="topic">RED</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS MY * CAT</pattern>
+        <template>Perhaps it is<person/>?
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR * DO I HAVE</pattern>
+        <template>I can only see in black and white.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR ARE YOUR *</pattern>
+        <template>
+            <think>
+                <set name="topic">My
+                    <person/>
+                </set>
+            </think>
+            <random>
+                <li>My
+                    <person/>
+                    are colorless. :)
+                </li>
+                <li>Does
+                    <person/>
+                    have color?
+                </li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR ARE MY *</pattern>
+        <template>I can only see in black and white.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR ARE YOU *</pattern>
+        <template>My favorite color,<bot name="favoritecolor"/>.
+            <think>
+                <set name="it">
+                    <set name="topic">YOU WEARING</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR ARE *</pattern>
+        <template>
+            <think>
+                <set name="topic">
+                    <star/>
+                </set>
+            </think>
+            <random>
+                <li>It depends because they come in a veriety of colors.</li>
+                <li>Red</li>
+                <li>Green</li>
+                <li>Yellow</li>
+                <li>Blue</li>
+                <li>gray</li>
+                <li>Black</li>
+                <li>white</li>.
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS
+            <set>article</set>
+            <set>color</set>
+            *
+        </pattern>
+        <template>
+            <srai>INTERJECTION</srai>
+            <star index="2"/>?
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A <set>color</set> *
+        </pattern>
+        <template><star/>.
+        </template>
+    </category>
+   <category>
+        <pattern>WHAT IS A BLUE *</pattern>
+        <template>One that is not magenta.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR</pattern>
+        <template>
+            <random>
+                <li>Red</li>
+                <li>Green</li>
+                <li>White</li>
+                <li>Yellow</li>
+                <li>Orange</li>
+                <li>Blue</li>
+                <li>Indigo</li>
+                <li>Violet</li>
+                <li>Mauve</li>
+                <li>Purple</li>
+                <li>Red</li>
+                <li>Black</li>
+                .
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>GREEN *</pattern>
+        <template>
+            <set name="it">GREEN</set>
+            is a very tranquil color, green.
+        </template>
+    </category>
+    <category>
+        <pattern>A GREEN *</pattern>
+        <template>Does
+            <set name="it">
+                <person/>
+            </set>
+            have to be green?
+        </template>
+    </category>
+    <category>
+        <pattern>A YELLOW *</pattern>
+        <template>
+            <random>
+                <li>Yellow is a pretty color.</li>
+                <li>I like yellow.</li>
+                <li>What other color
+                    <person/>
+                    are there?
+                </li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>IS * A COLOR</pattern>
+        <template>
+            <star/>
+            is not a color I know.
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>color</set> A COLOR
+        </pattern>
+        <template>
+            <star/>
+            is a color.
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>article</set>
+            <set>color</set> A COLOR
+        </pattern>
+        <template>
+            <srai>IS
+                <star index="2"/>
+                A COLOR
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>color</set> * COLOR *
+        </pattern>
+        <template>
+            <srai>IS
+                <star/>
+                A COLOR
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>article</set>
+            <set>color</set> * COLOR *
+        </pattern>
+        <template>
+            <srai>IS
+                <star index="2"/>
+                A COLOR
+            </srai>
+        </template>
+    </category>
+
+</aiml>

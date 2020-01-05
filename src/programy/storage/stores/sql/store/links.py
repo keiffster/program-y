@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,51 +14,70 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
+from sqlalchemy import and_
 from programy.storage.stores.sql.store.sqlstore import SQLStore
 from programy.storage.entities.link import LinkStore
 from programy.storage.stores.sql.dao.link import Link
-from sqlalchemy import and_
+from programy.utils.logging.ylogger import YLogger
+
 
 class SQLLinkStore(SQLStore, LinkStore):
 
     def __init__(self, storage_engine):
         SQLStore.__init__(self, storage_engine)
+        LinkStore.__init__(self)
+
+    def _get_all(self):
+        return self._storage_engine.session.query(Link)
 
     def empty(self):
-        self._storage_engine.session.query(Link).delete()
+        self._get_all().delete()
 
     def create_link(self, primary_userid, provided_key, generated_key, expires, expired=False, retry_count=0):
-        link = Link(primary_user=primary_userid, generated_key=generated_key, provided_key=provided_key, expires=expires, expired=expired, retry_count=retry_count)
+        link = Link(primary_user=primary_userid, generated_key=generated_key, provided_key=provided_key,
+                    expires=expires, expired=expired, retry_count=retry_count)
         self._storage_engine.session.add(link)
         return link
 
-    def get_link(self, primary_userid):
+    def get_link(self, userid):
         try:
-            link = self._storage_engine.session.query(Link).filter(Link.primary_user == primary_userid).one()
+            link = self._storage_engine.session.query(Link).filter(Link.primary_user == userid).one()
             return link
+
         except Exception as e:
-            print(e)
+            YLogger.exception_nostack(self, "Failed to get link", e)
+
         return None
 
-    def remove_link(self, primary_userid):
-        try:
-            self._storage_engine.session.query(Link).filter(Link.primary_user == primary_userid).delete()
-            return True
-        except Exception as e:
-            return False
+    def _delete_link(self, userid):
+        result = self._storage_engine.session.query(Link).filter(Link.primary_user == userid).delete()
+        return bool(result==1)
 
-    def link_exists(self, primary_userid, provided_key, generated_key):
+    def remove_link(self, userid):
         try:
-            self._storage_engine.session.query(Link).filter(Link.primary_user == primary_userid,
+            return self._delete_link(userid)
+
+        except Exception as excep:
+            YLogger.exception_nostack(self, "Failed to remove link", excep)
+
+        return False
+
+    def link_exists(self, userid, provided_key, generated_key):
+        try:
+            self._storage_engine.session.query(Link).filter(Link.primary_user == userid,
                                                             Link.provided_key == provided_key,
                                                             Link.generated_key == generated_key).one()
             return True
-        except Exception as e:
+
+        except Exception as excep:
+            YLogger.exception_nostack(self, "Failed to check link exists", excep)
             return False
 
+    def _get_link(self, id):
+        return self._storage_engine.session.query(Link).filter(and_(Link.id == id)).one()
+
     def update_link(self, link):
-        existing = self._storage_engine.session.query(Link).filter(and_(Link.id == link.id)).one()
+        existing = self._get_link(link.id)
         if existing is not None:
             existing.primary_user = link.primary_user
             existing.generated_key = link.generated_key

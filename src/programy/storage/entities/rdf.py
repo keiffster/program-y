@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,18 +14,19 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from programy.storage.entities.store import Store
 
 
-class RDFStore(object):
+class RDFReadOnlyStore(Store):
 
-    def add_rdf(self, name, subject, predicate, objct):
-        raise NotImplementedError("add_rdf missing from RDF Store")
+    def __init__(self):
+        Store.__init__(self)
 
-    def load_all(self, set_collection, subdir=True, set_ext=".txt"):
-        raise NotImplementedError("load_all_rds missing from RDF Store")
+    def load_all(self, collector):
+        raise NotImplementedError("load_all_rds missing from RDF Store")  # pragma: no cover
 
-    def load(self, rdf_collection, rdf_name):
-        raise NotImplementedError("load missing from RDF Store")
+    def load(self, collector, name=None):
+        raise NotImplementedError("load missing from RDF Store")  # pragma: no cover
 
     def split_into_fields(self, line):
         splits = self.split_line_by_char(line)
@@ -40,7 +41,16 @@ class RDFStore(object):
         splits = line.split(self.get_split_char())
         return splits
 
-    def process_line(self, name, fields, id=None):
+
+class RDFReadWriteStore(RDFReadOnlyStore):
+
+    def __init__(self):
+        RDFReadOnlyStore.__init__(self)
+
+    def add_rdf(self, name, subject, predicate, objct, replace_existing=True):
+        raise NotImplementedError("add_rdf missing from RDF Store")  # pragma: no cover
+
+    def process_line(self, name, fields, verbose=False):
         if len(fields) == 3:
             subject = fields[0].strip().strip('"')
             predicate = fields[1].strip().strip('"')

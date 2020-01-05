@@ -77,6 +77,7 @@ class XML_Viewer(Frame):
             self.parse_xml(xml)
 
     def _on_open(self, event):
+        del event
         item_ID = self._treeview.focus()
         if item_ID not in self._item_ID_to_element: return
 
@@ -85,6 +86,7 @@ class XML_Viewer(Frame):
         self._treeview.item(item_ID, text=self._repr_of_openning_tag(node))
 
     def _on_close(self, event):
+        del event
         item_ID = self._treeview.focus()
         if item_ID not in self._item_ID_to_element: return
 

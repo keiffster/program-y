@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -25,11 +25,11 @@ class EmailConfiguration(BaseConfigurationData):
 
     def __init__(self):
         BaseConfigurationData.__init__(self, name="email")
-        self._host      = None
-        self._port      = None
-        self._username  = None
-        self._password  = None
-        self._from_addr  = None
+        self._host = None
+        self._port = None
+        self._username = None
+        self._password = None
+        self._from_addr = None
 
     @property
     def host(self):
@@ -52,11 +52,19 @@ class EmailConfiguration(BaseConfigurationData):
         return self._from_addr
 
     def check_for_license_keys(self, license_keys):
-        self._username = self._extract_license_key(self._username, license_keys)
-        self._password = self._extract_license_key(self._password, license_keys)
-        BaseConfigurationData.check_for_license_keys(license_keys)
+        username = self._extract_license_key(self._username, license_keys)
+        if username is not None:
+            self._username = username
+
+        password = self._extract_license_key(self._password, license_keys)
+        if password is not None:
+            self._password = password
+
+        super(EmailConfiguration, self).check_for_license_keys(license_keys)
 
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
+        del bot_root
+        del subs
         email = configuration_file.get_section(self._section_name, configuration)
         if email is not None:
             self._host = configuration_file.get_option(email, "host", missing_value=None)

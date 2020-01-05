@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,13 +14,9 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.utils.logging.ylogger import YLogger
-
 from programy.parser.template.nodes.base import TemplateNode
-from programy.parser.template.nodes.richmedia.button import TemplateButtonNode
-from programy.parser.exceptions import ParserException
 from programy.utils.text.text import TextUtils
+from programy.parser.exceptions import ParserException
 
 
 class TemplateCardNode(TemplateNode):
@@ -33,14 +29,20 @@ class TemplateCardNode(TemplateNode):
         self._buttons = []
 
     def resolve_to_string(self, client_context):
-        str = "<card>"
-        str += "<image>%s</image>" % self._image.resolve(client_context)
-        str += "<title>%s</title>" % self._title.resolve(client_context)
-        str += "<subtitle>%s</subtitle>" % self._subtitle.resolve(client_context)
+        resolved = "<card>"
+        resolved += "<title>%s</title>" % self._title.resolve(client_context)
+
+        if self._subtitle is not None:
+            resolved += "<subtitle>%s</subtitle>" % self._subtitle.resolve(client_context)
+
+        if self._image is not None:
+            resolved += "<image>%s</image>" % self._image.resolve(client_context)
+
         for button in self._buttons:
-            str += button.resolve_to_string(client_context)
-        str += "</card>"
-        return str
+            resolved += button.resolve_to_string(client_context)
+
+        resolved += "</card>"
+        return resolved
 
     def to_string(self):
         return "[CARD %d]" % (len(self._buttons))
@@ -79,8 +81,13 @@ class TemplateCardNode(TemplateNode):
                 button.parse_expression(graph, child)
                 self._buttons.append(button)
             else:
-                graph.parse_tag_expression(child, self)
+                raise ParserException("Unsupport child elements of card")
 
             tail_text = self.get_tail_from_element(child)
             self.parse_text(graph, tail_text)
 
+        if self._title is None:
+            raise ParserException("Not title in card")
+
+        if len(self._buttons) == 0:
+            raise ParserException("No buttons in card")

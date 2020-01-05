@@ -25,15 +25,24 @@ class TwitterTests(unittest.TestCase):
         self.assertEqual('2', twitter.last_status_id)
         self.assertEqual({'_id': '666', 'last_direct_message_id': '1', 'last_status_id': '2'}, twitter.to_document())
 
-    def test_from_document(self):
+    def test_from_document_no_id(self):
         twitter1 = Twitter.from_document({'last_direct_message_id': '1', 'last_status_id': '2'})
         self.assertIsNone(twitter1.id)
         self.assertEqual('1', twitter1.last_direct_message_id)
         self.assertEqual('2', twitter1.last_status_id)
 
+    def test_from_document_with_id(self):
         twitter2 = Twitter.from_document({'_id': '666', 'last_direct_message_id': '1', 'last_status_id': '2'})
         self.assertIsNotNone(twitter2)
         self.assertIsNotNone(twitter2.id)
         self.assertEqual('666', twitter2.id)
         self.assertEqual('1', twitter2.last_direct_message_id)
         self.assertEqual('2', twitter2.last_status_id)
+
+    def test_repr_no_id(self):
+        twitter1 = Twitter.from_document({'last_direct_message_id': '1', 'last_status_id': '2'})
+        self.assertEquals("<Twitter(id='n/a', last_direct_message_id='1', last_status_id='2')>", str(twitter1))
+
+    def test_repr_with_id(self):
+        twitter2 = Twitter.from_document({'_id': '666', 'last_direct_message_id': '1', 'last_status_id': '2'})
+        self.assertEquals("<Twitter(id='666', last_direct_message_id='1', last_status_id='2')>", str(twitter2))

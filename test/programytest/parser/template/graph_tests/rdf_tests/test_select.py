@@ -1,10 +1,11 @@
-import xml.etree.ElementTree as ET
 import json
+import xml.etree.ElementTree as ET
 
+from programy.parser.exceptions import ParserException
 from programy.parser.template.nodes.base import TemplateNode
-from programy.parser.template.nodes.word import TemplateWordNode
-from programy.parser.template.nodes.select import TemplateSelectNode
 from programy.parser.template.nodes.select import Query, NotQuery
+from programy.parser.template.nodes.select import TemplateSelectNode
+from programy.parser.template.nodes.word import TemplateWordNode
 from programytest.parser.template.graph_tests.graph_test_client import TemplateGraphTestClient
 
 
@@ -514,3 +515,132 @@ class TemplateGraphSelectTests(TemplateGraphTestClient):
         self.assertEqual(1, len(query_results))
 
         self.assertTrue([["?x", "BIRD"]] in query_results)
+
+    def test_parse_query_subj_not_in_vars(self):
+        template = ET.fromstring("""
+                <template>
+                    <select>
+                        <vars>?x</vars>
+                        <q><subj>?y</subj><pred>LEGS</pred><obj>2</obj></q>
+                    </select>
+                </template>
+                """)
+
+        ast = self._graph.parse_template_expression(template)
+
+    def test_parse_query_pred_not_in_vars(self):
+        template = ET.fromstring("""
+                <template>
+                    <select>
+                        <vars>?x</vars>
+                        <q><subj>MONKEY</subj><pred>?y</pred><obj>2</obj></q>
+                    </select>
+                </template>
+                """)
+
+        ast = self._graph.parse_template_expression(template)
+
+    def test_parse_query_obj_not_in_vars(self):
+        template = ET.fromstring("""
+                <template>
+                    <select>
+                        <vars>?x</vars>
+                        <q><subj>MONKEY</subj><pred>LEGS</pred><obj>?y</obj></q>
+                    </select>
+                </template>
+                """)
+
+        ast = self._graph.parse_template_expression(template)
+
+    def test_parse_query_obj_in_vars(self):
+        template = ET.fromstring("""
+                <template>
+                    <select>
+                        <vars>?y</vars>
+                        <q><subj>MONKEY</subj><pred>LEGS</pred><obj>?y</obj></q>
+                    </select>
+                </template>
+                """)
+
+        ast = self._graph.parse_template_expression(template)
+
+    def test_parse_subj_missing(self):
+        template = ET.fromstring("""
+                <template>
+                    <select>
+                        <vars>?x</vars>
+                        <q><pred>LEGS</pred><obj>2</obj></q>
+                    </select>
+                </template>
+                """)
+
+        with self.assertRaises(ParserException):
+            _ = self._graph.parse_template_expression(template)
+
+    def test_parse_pred_missing(self):
+        template = ET.fromstring("""
+                <template>
+                    <select>
+                        <vars>?x</vars>
+                        <q><subj>MONKEY</subj><obj>?y</obj></q>
+                    </select>
+                </template>
+                """)
+
+        with self.assertRaises(ParserException):
+            _ = self._graph.parse_template_expression(template)
+
+    def test_parse_obj_missing(self):
+        template = ET.fromstring("""
+                <template>
+                    <select>
+                        <vars>?x</vars>
+                        <q><subj>MONKEY</subj><pred>LEGS</pred></q>
+                    </select>
+                </template>
+                """)
+
+        with self.assertRaises(ParserException):
+            _ = self._graph.parse_template_expression(template)
+
+    def test_parse_extra(self):
+        template = ET.fromstring("""
+                <template>
+                    <select>
+                        <vars>?x</vars>
+                        <q><subj>MONKEY</subj><pred>LEGS</pred><obj>?y</obj><other>?z</other></q>
+                    </select>
+                </template>
+                """)
+
+        with self.assertRaises(ParserException):
+            _ = self._graph.parse_template_expression(template)
+
+    def test_parse_multi_vars(self):
+        template = ET.fromstring("""
+                <template>
+                    <select>
+                        <vars>?x</vars>
+                        <q><subj>MONKEY</subj><pred>LEGS</pred></q>
+                        <vars>?y</vars>
+                    </select>
+                </template>
+                """)
+
+        with self.assertRaises(ParserException):
+            _ = self._graph.parse_template_expression(template)
+
+    def test_parse_other_children(self):
+        template = ET.fromstring("""
+                <template>
+                    <select>
+                        <vars>?x</vars>
+                        <q><subj>MONKEY</subj><pred>LEGS</pred></q>
+                        <id />>
+                    </select>
+                </template>
+                """)
+
+        with self.assertRaises(ParserException):
+            _ = self._graph.parse_template_expression(template)
+

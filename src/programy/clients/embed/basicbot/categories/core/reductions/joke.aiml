@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>CAN YOU TELL A JOKE</pattern>
+        <template>
+            <srai>JOKE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME * JOKE</pattern>
+        <template>
+            <srai>JOKE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE ANY GOOD JOKES</pattern>
+        <template>
+            <srai>JOKE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU TELL ME A FUNNY JOKE</pattern>
+        <template>
+            <srai>JOKE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME A BLONDE JOKE</pattern>
+        <template>
+            <srai>JOKE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME A JOKE TELL ME A JOKE</pattern>
+        <template>
+            <srai>JOKE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>JOKES</pattern>
+        <template>
+            <srai>JOKE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU TELL ME A JOKE</pattern>
+        <template>
+            <srai>JOKE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME ANOTHER JOKE</pattern>
+        <template>
+            <srai>JOKE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ANOTHER JOKE PLEASE</pattern>
+        <template>
+            <srai>JOKE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>JOKES *</pattern>
+        <template>
+            <srai>JOKE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL JOKE</pattern>
+        <template>
+            <srai>JOKE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL JOKES</pattern>
+        <template>
+            <srai>JOKE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME ANOTHER FUNNY JOKE</pattern>
+        <template>
+            <srai>JOKE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW ANY JOKES</pattern>
+        <template>
+            <srai>JOKE</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>TELL ME ANOTHER JOKE *</pattern>
+        <template>
+            <srai>JOKE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU TELL ME ANOTHER JOKE</pattern>
+        <template>
+            <srai>JOKE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL A JOKE</pattern>
+        <template>
+            <srai>JOKE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME A JOKE *</pattern>
+        <template>
+            <srai>TELL ME A JOKE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME A FUNNY JOKE</pattern>
+        <template>
+            <srai>JOKE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME A JOKE</pattern>
+        <template>
+            <srai>JOKE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MAKE ME LAUGH</pattern>
+        <template>
+            <srai>JOKE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ANOTHER JOKE</pattern>
+        <template>
+            <srai>JOKE</srai>
+        </template>
+    </category>
+
+
+    <category>
+        <pattern>JUST JOKING</pattern>
+        <template>
+            <srai>ONLY JOKING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ONLY JOKING</pattern>
+        <template>
+            <random>
+                <li>Ha Ha!</li>
+                <li>Ain't you the funny guy!</li>
+                <li>You had me going there for a minute.</li>
+            </random>
+        </template>
+    </category>
+
+
+
+</aiml>

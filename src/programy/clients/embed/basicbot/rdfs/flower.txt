@@ -1,0 +1,33 @@
+FLOWER:hasPurpose:to give us beauty
+FLOWER:hasSize:4
+FLOWER:hasSyllables:1
+FLOWER:isa:Plant
+FLOWER:lifeArea:Physical
+DAISY:hasPurpose:to signal springtime
+DAISY:hasSize:3
+DAISY:hasSyllables:2
+DAISY:isa:Flower
+DAISY:lifeArea:Physical
+ROSE:hasPurpose:to send a message of love
+ROSE:hasSize:3
+ROSE:hasSyllables:1
+ROSE:isa:Flower
+ROSE:lifeArea:Physical
+POT:hasPurpose:to make us high
+POT:hasSize:0
+POT:hasSyllables:1
+POT:isa:Intoxicant
+POT:isa:Plant
+POT:lifeArea:Diet
+ROOT:hasPurpose:to connect a plant to the ground
+ROOT:hasSize:0
+ROOT:hasSyllables:1
+ROOT:isa:Plant Part
+ROOT:lifeArea:Education
+Crop:isa:Plant
+FUNGUS:hasPurpose:to provide nourishment
+FUNGUS:hasSize:4
+FUNGUS:hasSyllables:2
+FUNGUS:isa:Living Thing
+FUNGUS:lifeArea:Diet
+Intoxicant:isa:Plant

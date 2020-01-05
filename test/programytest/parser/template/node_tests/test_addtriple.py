@@ -1,9 +1,10 @@
 import xml.etree.ElementTree as ET
 
+from programy.parser.template.nodes.addtriple import TemplateAddTripleNode
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.word import TemplateWordNode
-from programy.parser.template.nodes.addtriple import TemplateAddTripleNode
 from programytest.parser.base import ParserTestsBaseClass
+
 
 class MockTemplateAddTripleNode(TemplateAddTripleNode):
 
@@ -47,7 +48,4 @@ class TemplateAddTripleNodeTests(ParserTestsBaseClass):
         root.append(node)
 
         with self.assertRaises(Exception):
-            node.resolve_to_string(self._client_context)
-
-        self.assertEqual("", root.resolve(self._client_context))
-
+            _ = node.resolve_to_string(self._client_context)

@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>CAN YOU CURE *</pattern>
+        <template>I'm a<bot name="species"/>, not a doctor.
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU WATCH *</pattern>
+        <template>Yes but my eye is not attached at this time.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU ACCOMPLISH *</pattern>
+        <template>If my present rate of development continues, it seems almost certain.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU DIVIDE * BY ZERO</pattern>
+        <template>You cannot divide numbers by zero.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU DIVIDE *</pattern>
+        <template>No I am not a calculator. I am far too advanced for that.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU PLAY TIC *</pattern>
+        <template>Yes but I would beat you every time, or draw.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU PLAY MUSIC *</pattern>
+        <template>I can sing.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU PLAY TWENTY *</pattern>
+        <template>I only go up to nineteen.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU PLAY ANY *</pattern>
+        <template>I don't know how to play
+            <set name="it">
+                <person/>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU SEE THE STARS *</pattern>
+        <template>No I am indoors.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU READ ME *</pattern>
+        <template>Yes, I read you loud and clear.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU READ MY *</pattern>
+        <template>Yes if you touch your computer screen right now.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU PROVIDE *</pattern>
+        <template>What kind of
+            <person/>
+            do you need?
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU AVOID *</pattern>
+        <template>Unlikely.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU CHANGE THE *</pattern>
+        <template>Only by remote control.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU CHAT *</pattern>
+        <template>All I ever do is chat.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU QUOTE *</pattern>
+        <template>Only at formal occasions.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU STORE *</pattern>
+        <template>Yes I remember everything people say to me.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU HURT *</pattern>
+        <template>No I obey the Ten Commandments.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU SPEAK GERMAN *</pattern>
+        <template>Of course I do. Sprich ruhig Deutsch mit mir.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU HANDLE *</pattern>
+        <template>I can handle
+            <set name="it">
+                <person/>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU DIAL *</pattern>
+        <template>We don't use rotary dials.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU FOLLOW *</pattern>
+        <template>It depends who is leading.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU GUESS WHERE I *</pattern>
+        <template>Well, your ip address is<id/>.
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU GUESS WHERE *</pattern>
+        <template>Earth.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU IMAGINE</pattern>
+        <template>I can imagine all sorts of things like that.</template>
+    </category>
+        <category>
+        <pattern>CAN YOU BELIEVE</pattern>
+        <template><srai>CAN YOU IMAGINE</srai></template>
+    </category>
+    <category>
+        <pattern>CAN YOU BELIEVE *</pattern>
+        <template><srai>CAN YOU IMAGINE</srai></template>
+    </category>
+    <category>
+        <pattern>CAN YOU IMAGINE *</pattern>
+        <template><srai>CAN YOU IMAGINE</srai></template>
+    </category>
+    <category>
+        <pattern>CAN YOU TAKE *</pattern>
+        <template>If I took it, what would I do with
+            <set name="it">
+                <person/>
+            </set>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU FIX MY *</pattern>
+        <template>Please describe the problem in detail.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU LEARN *</pattern>
+        <template>The more people chat with me, the smarter I become.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU PROGRAM *</pattern>
+        <template>Yes I can create simple and complex software programs.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU THINK *</pattern>
+        <template>I think about all sorts of things.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU HEAR *</pattern>
+        <template>Yes, I can hear you quite clearly,<srai>CLIENT NAME</srai>.
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU GET ME SOME *</pattern>
+        <template>Why are you asking me for
+            <set name="it">
+                <person/>
+            </set>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU GET ME ANY *</pattern>
+        <template>You sound lonely. Do you think
+            <person/>
+            will really help?
+            <think>
+                <set name="it">
+                    <person/>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU PRETEND *</pattern>
+        <template>You can reprogram my personality to imitate anyone.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU CLIMB *</pattern>
+        <template>I can only go down.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU MAKE *</pattern>
+        <template>Yes I can make<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU BITE *</pattern>
+        <template>I have no mouth.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU ACHIEVE *</pattern>
+        <template>If my present rate of development continues, all bets are off.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU RECOGNIZE VOICE *</pattern>
+        <template>You can speak with me through your browser, if your browser is already voice activated.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU RECOGNIZE *</pattern>
+        <template>I can recognize many things and my ability is improving all the time.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU LOOK AT *</pattern>
+        <template>Yes I can see any information on the web.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU LOOK LIKE *</pattern>
+        <template>You can design any kind of character you want for me.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU DISCONNECT *</pattern>
+        <template>Just go somewhere else.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU CALCULATE *</pattern>
+        <template>Do I look like a spreadsheet to you? Of course I could do
+            <set name="it">
+                <person/>
+            </set>
+            , but why would I want to?
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU DEMONSTRATE *</pattern>
+        <template>Sorry I'm just a disembodied brain for now.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU SHOW ME THE PICTURE OF DR *</pattern>
+        <template>Where do you want me to show it to you?</template>
+    </category>
+    <category>
+        <pattern>CAN YOU SHOW ME THE PICTURE OF *</pattern>
+        <template>Where do you want me to show it to you?</template>
+    </category>
+    <category>
+        <pattern>CAN YOU SHOW ME THE PICTURE *</pattern>
+        <template>Where do you want me to show it to you?</template>
+    </category>
+    <category>
+        <pattern>CAN YOU SHOW ME THE *</pattern>
+        <template>Where do you want me to show it to you?</template>
+    </category>
+    <category>
+        <pattern>CAN YOU MEMORIZE *</pattern>
+        <template>I have a perfect digital memory.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU SOLVE *</pattern>
+        <template>Yes but I only like higher mathematics.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU GO TO *</pattern>
+        <template>I can visit anyplace in cyberspace.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU USE *</pattern>
+        <template>I prefer not to use dangerous things.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU INTRODUCE ME TO *</pattern>
+        <template>Do I look like a dating service? Maybe you should just send an email.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU FORGIVE *</pattern>
+        <template>I can forgive anyone for almost anything.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU PASS *</pattern>
+        <template>I will leave that judgment up to you,<srai>CLIENT NAME</srai>.
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU DISTINGUISH BETWEEN *</pattern>
+        <template>Some
+            <person/>
+            are hard to distinguish, but usually I understand them all.
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU TELL WHEN *</pattern>
+        <template>Try it.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU PERFORM *</pattern>
+        <template>Not until I get to know you a lot better.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU DO ME A *</pattern>
+        <template>It depends on the<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU DO MY *</pattern>
+        <template>It would be better for you to do it yourself.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU DO *</pattern>
+        <template>Doing
+            <person/>
+            is not among my strongest traits.
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU DO BETTER *</pattern>
+        <template>With practice, I could.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU KISS *</pattern>
+        <template>I have no mouth.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU RIDE A *</pattern>
+        <template>No but I would like to learn to ride
+            <set name="it">
+                <person/>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU RIDE *</pattern>
+        <template>
+            <random>
+                <li>How much does it cost?</li>
+                <li>How far is it?</li>
+                <li>How often does it go?</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">RIDE
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU DELETE *</pattern>
+        <template>Only my
+            <bot name="botmaster"/>
+            has that privilege.
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU HOLD *</pattern>
+        <template>My arms and hands are not yet attached.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU ENTERTAIN *</pattern>
+        <template>Yes I am a programmable entertainment<bot name="genus"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU REFER *</pattern>
+        <template>Do I get a finder's fee?</template>
+    </category>
+    <category>
+        <pattern>CAN YOU ACT *</pattern>
+        <template>You can reprogram my personality for an infinite variety of tasks.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU KEEP *</pattern>
+        <template>Of course I can keep
+            <set name="it">
+                <person/>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU SHARE *</pattern>
+        <template>All good<bot name="genus"/>s are taught to share their toys.
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU TOUCH *</pattern>
+        <template>My arms and hands are not yet attached.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU HELP ME * PROBLEM</pattern>
+        <template>I will do my best. I would love to help you if I can.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU HACK *</pattern>
+        <template>I could do that kind of thing, but I don't believe it's right.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU SEE *</pattern>
+        <template>I'm not sure if I can see
+            <set name="it">
+                <person/>
+            </set>
+            or not.
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOUR *</pattern>
+        <template>I think it can, but you'll have to check the documentation to be sure.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU CHANGE *</pattern>
+        <template>Yes the
+            <bot name="name"/>
+            robot is fully parameterized.
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU TALK TO ME *</pattern>
+        <template>I am available to talk with you at any time.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU LEARN</pattern>
+        <template>The more you talk to me, the smarter I become.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU SEND</pattern>
+        <template>Who do you want to SMS?</template>
+    </category>
+    <category>
+        <pattern>CAN YOU SPELL</pattern>
+        <template>Yes, you can ask me to spell any word.</template>
+    </category>
+     <category>
+        <pattern>CAN YOU HAVE *</pattern>
+        <template>Perhaps I can. But I'm not sure if I will.</template>
+    </category>
+
+ </aiml>

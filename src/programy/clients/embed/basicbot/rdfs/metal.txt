@@ -1,0 +1,15 @@
+GOLD:hasPurpose:to make valuable jewelry and coins
+GOLD:hasSize:0
+GOLD:hasSyllables:1
+GOLD:isa:Metal
+GOLD:lifeArea:Physical
+IRON:hasPurpose:to make steel
+IRON:hasSize:0
+IRON:hasSyllables:2
+IRON:isa:Metal
+IRON:lifeArea:Physical
+SILVER:hasPurpose:to color like a mirror
+SILVER:hasSize:0
+SILVER:hasSyllables:2
+SILVER:isa:Color
+SILVER:lifeArea:Physical

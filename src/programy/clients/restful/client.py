@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,21 +14,21 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from abc import ABC
+from abc import abstractmethod
 from programy.utils.logging.ylogger import YLogger
-from abc import ABCMeta, abstractmethod
-
 from programy.clients.client import BotClient
 from programy.clients.restful.config import RestConfiguration
-from programy.clients.restful.apihandlers import APIHandler_V1_0, APIHandler_V2_0
+from programy.clients.restful.apihandlers import APIHandler_V1_0
+from programy.clients.restful.apihandlers import APIHandler_V2_0
 from programy.clients.restful.apikeys import APIKeysHandler
 from programy.clients.restful.auth import RestAuthorizationHandler
 
 
-class RestBotClient(BotClient):
-    __metaclass__ = ABCMeta
+class RestBotClient(BotClient, ABC):
 
-    def __init__(self, id, argument_parser=None):
-        BotClient.__init__(self, id, argument_parser)
+    def __init__(self, botid, argument_parser=None):
+        BotClient.__init__(self, botid, argument_parser)
         self._api_keys = APIKeysHandler(self.configuration.client_configuration)
         self._authorization = None
         self._v1_0_handler = APIHandler_V1_0(self)
@@ -40,6 +40,9 @@ class RestBotClient(BotClient):
 
     def get_client_configuration(self):
         return RestConfiguration(self.id)
+
+    def _render_callback(self):
+        return False
 
     def initialise(self):
         self._api_keys.load_api_keys()
@@ -67,11 +70,11 @@ class RestBotClient(BotClient):
 
     @abstractmethod
     def server_abort(self, message, status_code):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     @abstractmethod
     def create_response(self, response_data, status_code, version=1.0):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     def _get_metadata(self, client_context, metadata):
 
@@ -88,7 +91,7 @@ class RestBotClient(BotClient):
         if client_context.brain.properties.has_property("copyright"):
             metadata['copyright'] = client_context.brain.properties.property("copyright")
         else:
-            metadata['copyright'] = "Copyright 2016-2019 keithsterling.com"
+            metadata['copyright'] = "Copyright 2016-2020 keithsterling.com"
 
         if client_context.brain.properties.has_property("botmaster"):
             metadata['authors'] = [client_context.brain.properties.property("botmaster")]
@@ -122,10 +125,10 @@ class RestBotClient(BotClient):
                     return 'Unauthorized access', 401
 
         if version == 1.0:
-            return self._v1_0_handler.process_request(request)
+            return self._v1_0_handler.process_request(self, request)
 
         elif version == 2.0:
-            return self._v2_0_handler.process_request(request)
+            return self._v2_0_handler.process_request(self, request)
 
         else:
             return 'Invalid API version', 400

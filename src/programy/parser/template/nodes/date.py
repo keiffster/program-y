@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,11 +14,9 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.utils.logging.ylogger import YLogger
 import datetime
 import locale
-
+from programy.utils.logging.ylogger import YLogger
 from programy.parser.exceptions import ParserException
 from programy.parser.template.nodes.attrib import TemplateAttribNode
 from programy.parser.template.nodes.word import TemplateWordNode
@@ -39,6 +37,33 @@ class TemplateDateNode(TemplateAttribNode):
         if locale is not None:
             self._locale = TemplateWordNode(locale)
 
+    @property
+    def date_format(self):
+        return self._format
+
+    @date_format.setter
+    def date_format(self, fmt):
+        if isinstance(fmt, TemplateNode):
+            self._format = fmt
+        else:
+            self._format = TemplateWordNode(str(fmt))
+
+    @property
+    def locale(self):
+        return self._locale
+
+    @locale.setter
+    def locale(self, lcl):
+        if isinstance(lcl, TemplateNode):
+            self._locale = lcl
+        else:
+            self._locale = TemplateWordNode(str(lcl))
+
+    def _set_locate(self, client_context):
+        local_locale = self._locale.resolve_to_string(client_context)
+        locale.setlocale(locale.LC_TIME, local_locale)
+        return local_locale
+
     def resolve_to_string(self, client_context):
         time_now = datetime.datetime.now()
 
@@ -46,11 +71,17 @@ class TemplateDateNode(TemplateAttribNode):
         if self._locale is not None:
             local_time = locale.setlocale(locale.LC_TIME)
 
+        local_locale = ""
+        resolved = ""
         try:
             if self._locale is not None:
-                locale.setlocale(locale.LC_TIME, self._locale.resolve_to_string(client_context))
+                local_locale = self._set_locate(client_context)
+
             resolved_format = self._format.resolve_to_string(client_context)
             resolved = time_now.strftime(resolved_format)
+
+        except Exception as exep:
+            YLogger.exception(self, "Failed to set locale to [%s]", exep, local_locale)
 
         finally:
             if local_time is not None:
@@ -61,11 +92,12 @@ class TemplateDateNode(TemplateAttribNode):
 
     def to_string(self):
         if self._locale is None:
-            return "[DATE format=%s]" %self._format.to_string()
+            return "[DATE format=%s]" % self._format.to_string()
         else:
-            return "[DATE format=%s locale=%s]"%(self._format.to_string(), self._locale.to_string())
+            return "[DATE format=%s locale=%s]" % (self._format.to_string(), self._locale.to_string())
 
     def set_attrib(self, attrib_name, attrib_value):
+
         if attrib_name == 'format':
             if isinstance(attrib_value, TemplateNode):
                 self._format = attrib_value
@@ -77,6 +109,7 @@ class TemplateDateNode(TemplateAttribNode):
                 self._locale = attrib_value
             else:
                 self._locale = TemplateWordNode(attrib_value)
+
         else:
             raise ParserException("Invalid attribute name %s for this node" % (attrib_name))
 
@@ -84,7 +117,8 @@ class TemplateDateNode(TemplateAttribNode):
         if self._locale is None:
             xml = '<date format="%s" >' % self._format.to_xml(client_context)
         else:
-            xml = '<date format="%s" locale="%s">'%(self._formatto_xml(client_context), self._localeto_xml(client_context))
+            xml = '<date format="%s" locale="%s">' % (self._format.to_xml(client_context),
+                                                      self._locale.to_xml(client_context))
 
         xml += self.children_to_xml(client_context)
         xml += "</date>"

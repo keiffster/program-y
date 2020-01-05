@@ -1,5 +1,5 @@
-import unittest
 import os
+import unittest
 
 from programytest.client import TestClient
 
@@ -25,4 +25,4 @@ class RegexTemplatesAIMLTests(unittest.TestCase):
     def test_regex_template(self):
         response = self._client_context.bot.ask_question(self._client_context, "I AM 27 YEARS OLD")
         self.assertIsNotNone(response)
-        self.assertEquals(response, "Thats Great! You are 27.")
+        self.assertEqual(response, "Thats Great! You are 27.")

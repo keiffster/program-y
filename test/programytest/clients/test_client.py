@@ -1,7 +1,6 @@
 import unittest.mock
 
 from programy.clients.client import BotClient
-
 from programytest.clients.arguments import MockArgumentParser
 from programytest.clients.mocks import MockBotClient, MockConfigFiles
 
@@ -11,7 +10,7 @@ class BotClientTests(unittest.TestCase):
     def test_client_init(self):
         arguments = MockArgumentParser()
         with self.assertRaises(Exception):
-            client = BotClient("test", arguments)
+            _ = BotClient("test", arguments)
 
     def test_sub_classed_client(self):
 

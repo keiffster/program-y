@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -17,46 +17,43 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 This is an example extension that allow you to call an external service to retreive the energy consumption data
 of the customer. Currently contains no authentication
 """
-
 from programy.utils.logging.ylogger import YLogger
-
 from programy.extensions.base import Extension
+
 
 class SpellingExtension(Extension):
 
     # execute() is the interface that is called from the <extension> tag in the AIML
-    def execute(self, context, data):
-        YLogger.debug(context, "Spelling - Calling external service for with extra data [%s]", data)
+    def execute(self, client_context, data):
+        YLogger.debug(client_context, "Spelling - Calling external service for with extra data [%s]", data)
 
         # SPELLING CORRECT <TEXT STRING>
         # SPELLING ENABLED
 
         words = data.split(" ")
-        if words:
+        if words[0] == "SPELLING":
 
-            if words[0] == "SPELLING":
+            if len(words) > 2:
 
-                if len(words) > 2:
+                if words[1] == "CORRECT":
 
-                    if words[1] == "CORRECT":
+                    text = " ".join(words[2:])
 
-                        text = " ".join(words[2:])
+                    if client_context.bot.spell_checker is not None:
+                        corrected = client_context.bot.spell_checker.correct(text)
 
-                        if context.bot.spell_checker is not None:
-                            corrected = context.bot.spell_checker.correct(text)
+                        return "SPELLING CORRECTED %s"%corrected
 
-                            return "SPELLING CORRECTED %s"%corrected
+                    else:
+                        return "SPELLING UNCORRECTED %s" % text
 
-                        else:
-                            return "SPELLING UNCORRECTED %s" % text
+            elif len(words) == 2:
 
-                elif len(words) == 2:
+                if words[1] == 'ENABLED':
 
-                    if words[1] == 'ENABLED':
-
-                        if context.bot.spell_checker is not None:
-                            return "SPELLING ENABLED"
-                        else:
-                            return "SPELLING DISABLED"
+                    if client_context.bot.spell_checker is not None:
+                        return "SPELLING ENABLED"
+                    else:
+                        return "SPELLING DISABLED"
 
         return "SPELLING CORRECT INVALID COMMAND"

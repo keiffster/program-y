@@ -1,6 +1,5 @@
-
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -16,8 +15,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.utils.logging.ylogger import YLogger
-import os
-
 from programy.config.section import BaseSectionConfigurationData
 from programy.utils.substitutions.substitues import Substitutions
 
@@ -37,14 +34,13 @@ class BrainDebugFilesConfiguration(BaseSectionConfigurationData):
     def save_duplicates(self):
         return self._save_duplicates
 
-    def check_for_license_keys(self, license_keys):
-        BaseSectionConfigurationData.check_for_license_keys(self, license_keys)
-
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         debugfiles = configuration_file.get_section("debugfiles", configuration)
         if debugfiles is not None:
-            self._save_errors = configuration_file.get_bool_option(debugfiles, "save-errors", missing_value=False, subs=subs)
-            self._save_duplicates = configuration_file.get_bool_option(debugfiles, "save-duplicates", missing_value=False, subs=subs)
+            self._save_errors = configuration_file.get_bool_option(debugfiles, "save_errors", missing_value=False,
+                                                                   subs=subs)
+            self._save_duplicates = configuration_file.get_bool_option(debugfiles, "save_duplicates",
+                                                                       missing_value=False, subs=subs)
         else:
             YLogger.warning(self, "'debugfiles' section missing from brain config, using debugfile defaults")
 
@@ -52,6 +48,7 @@ class BrainDebugFilesConfiguration(BaseSectionConfigurationData):
         if defaults is True:
             data['save_errors'] = False
             data['save_duplicates'] = False
+
         else:
             data['save_errors'] = self._save_errors
             data['save_duplicates'] = self._save_duplicates

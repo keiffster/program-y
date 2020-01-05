@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -21,18 +21,17 @@ from programy.storage.stores.nosql.mongo.dao.duplicate import Duplicate
 
 
 class MongoDuplicatesStore(MongoStore, DuplicatesStore):
-
     DUPLICATES = 'duplicates'
 
     def __init__(self, storage_engine):
         MongoStore.__init__(self, storage_engine)
+        DuplicatesStore.__init__(self)
 
     def collection_name(self):
         return MongoDuplicatesStore.DUPLICATES
 
-    def save_duplicates(self, duplicates):
+    def save_duplicates(self, duplicates, commit=True):
         YLogger.info(self, "Saving duplicates to Mongo")
         for duplicate in duplicates:
             db_duplicate = Duplicate(duplicate=duplicate[0], file=duplicate[1], start=duplicate[2], end=duplicate[3])
             self.add_document(db_duplicate)
-

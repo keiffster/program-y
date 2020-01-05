@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,28 +14,26 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.utils.logging.ylogger import YLogger
-
 import re
-
+from programy.utils.logging.ylogger import YLogger
 from programy.utils.classes.loader import ClassLoader
 from programy.config.bot.splitter import BotSentenceSplitterConfiguration
 from programy.activate import Activatable
 
-class SentenceSplitter(Activatable):
 
+class SentenceSplitter(Activatable):
     ALL_PUNCTUATION = re.compile(r'[:\'";,.?!\(\)\-"]')
 
     def __init__(self, splitter_config):
         Activatable.__init__(self)
 
-        assert (splitter_config is not None)
-        assert (isinstance(splitter_config, BotSentenceSplitterConfiguration))
+        assert splitter_config is not None
+        assert isinstance(splitter_config, BotSentenceSplitterConfiguration)
 
         self._configuration = splitter_config
 
     def split(self, text):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     def remove_punctuation(self, text):
         return SentenceSplitter.ALL_PUNCTUATION.sub('', text)
@@ -48,8 +46,10 @@ class SentenceSplitter(Activatable):
                 splitter_class = ClassLoader.instantiate_class(splitter_config.classname)
                 sentence_splitter = splitter_class(splitter_config)
                 return sentence_splitter
+
             except Exception as excep:
                 YLogger.exception(None, "Failed to initiate sentence splitter", excep)
+
         else:
             YLogger.warning(None, "No configuration setting for sentence splitter!")
 

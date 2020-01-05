@@ -1,11 +1,11 @@
 import unittest
-from programy.storage.stores.nosql.mongo.engine import MongoStorageEngine
-from programy.storage.stores.nosql.mongo.config import MongoStorageConfiguration
+from unittest.mock import patch
+import programytest.storage.engines as Engines
 from programy.security.linking.accountlinker import BasicAccountLinkerService
-
+from programy.storage.stores.nosql.mongo.config import MongoStorageConfiguration
+from programy.storage.stores.nosql.mongo.engine import MongoStorageEngine
 from programytest.client import TestClient
 from programytest.security.linking.extension_asserts import AccountLinkerExtensionAsserts
-import programytest.storage.engines as Engines
 
 
 class MongoAccountLinkerExtensionTests(AccountLinkerExtensionAsserts):
@@ -27,6 +27,21 @@ class MongoAccountLinkerExtensionTests(AccountLinkerExtensionAsserts):
     def test_primary_account_link_success(self):
         self.assert_primary_account_link_success(self.context)
 
+    def patch_get_account_linker_service(self, context):
+        return None
+
+    @unittest.skipIf(Engines.mongo is False, Engines.mongo_disabled)
+    @patch('programy.security.linking.extension.AccountLinkingExtension.get_account_linker_service', patch_get_account_linker_service)
+    def test_primary_account_link_no_service(self):
+        self.assert_primary_account_link_no_service(self.context)
+
+    def patch_link_user_to_client(self, userid, account_name):
+        return False
+
+    @patch('programy.security.linking.accountlinker.BasicAccountLinkerService.link_user_to_client', patch_link_user_to_client)
+    def test_primary_account_link_link_user_to_client_fails(self):
+        self.assert_primary_account_link_user_to_client_fails(self.context)
+
     @unittest.skipIf(Engines.mongo is False, Engines.mongo_disabled)
     def test_primary_account_link_failures(self):
         self.assert_primary_account_link_failures(self.context)
@@ -38,3 +53,9 @@ class MongoAccountLinkerExtensionTests(AccountLinkerExtensionAsserts):
     @unittest.skipIf(Engines.mongo is False, Engines.mongo_disabled)
     def test_secondary_account_link_failures(self):
         self.assert_secondary_account_link_failures(self.context)
+
+    @unittest.skipIf(Engines.mongo is False, Engines.mongo_disabled)
+    @patch('programy.security.linking.extension.AccountLinkingExtension.get_account_linker_service', patch_get_account_linker_service)
+    def test_secondary_account_link_no_service(self):
+        self.assert_secondary_account_link_no_service(self.context)
+

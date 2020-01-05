@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation dirs (the "Software"), to deal in the Software without restriction, including without limitation
@@ -15,14 +15,14 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.utils.logging.ylogger import YLogger
-
 from programy.config.section import BaseSectionConfigurationData
 from programy.utils.substitutions.substitues import Substitutions
 
 
 class FileStoreConfiguration(BaseSectionConfigurationData):
-    
-    def __init__(self, name='storage', dirs=None, extension=None, subdirs=False, format=None, encoding=None, delete_on_start=False, file=None):
+
+    def __init__(self, name='storage', dirs=None, extension=None, subdirs=False, fileformat=None, encoding=None,
+                 delete_on_start=False, file=None):
         BaseSectionConfigurationData.__init__(self, name)
 
         self._dirs = None
@@ -32,9 +32,11 @@ class FileStoreConfiguration(BaseSectionConfigurationData):
             if isinstance(dirs, (list,)) is False:
                 self._dirs = [dirs]
                 self._has_single_file = True
+
             else:
                 self._dirs = dirs[:]
                 self._has_single_file = False
+
         elif file is not None:
             self._dirs = [file]
             self._has_single_file = True
@@ -42,9 +44,9 @@ class FileStoreConfiguration(BaseSectionConfigurationData):
         self._extension = extension
         self._subdirs = subdirs
 
-        self._format = format
+        self._format = fileformat
         self._encoding = encoding
-        
+
         self._delete_on_start = delete_on_start
 
     def has_multiple_dirs(self):
@@ -84,9 +86,6 @@ class FileStoreConfiguration(BaseSectionConfigurationData):
     def delete_on_start(self):
         return self._delete_on_start
 
-    def check_for_license_keys(self, license_keys):
-        BaseSectionConfigurationData.check_for_license_keys(self, license_keys)
-
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         dirs_config = configuration_file.get_option(configuration, self.section_name)
         if dirs_config is not None:
@@ -114,21 +113,29 @@ class FileStoreConfiguration(BaseSectionConfigurationData):
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:
-            data['dirs'] = "./storage/%s"%self.id
+
+            if self._has_single_file is True:
+                data['file'] = "./storage/%s" % self.id
+
+            else:
+                data['dirs'] = "./storage/%s" % self.id
+
             data['extension'] = ".txt"
             data['subdirs'] = False
-
-            data['file'] = None
 
             data['format'] = None
             data['encoding'] = None
             data['delete_on_start'] = False
+
         else:
-            data['dirs'] = self._dirs
+            if self._has_single_file is True:
+                data['file'] = self._dirs[0]
+
+            else:
+                data['dirs'] = self._dirs
+
             data['extension'] = self._extension
             data['subdirs'] = self._subdirs
-
-            data['file'] = None
 
             data['format'] = self._format
             data['encoding'] = self._encoding

@@ -1,9 +1,18 @@
 import unittest
 import xml.etree.ElementTree as ET
 
-from programy.parser.exceptions import ParserException
 from programy.parser.exceptions import DuplicateGrammarException
 from programy.parser.exceptions import MatcherException
+from programy.parser.exceptions import ParserException
+
+
+class MockElement(ET.Element):
+
+    def __init__(self, tag, attrib={}):
+        ET.Element.__init__(self, tag, attrib)
+        self._end_line_number = 0
+        self._end_column_number = 0
+
 
 class ExceptionTests(unittest.TestCase):
 
@@ -28,6 +37,19 @@ class ExceptionTests(unittest.TestCase):
         self.assertEqual("xml_exception_error", exception.xml_exception)
         self.assertEqual(element, exception._xml_element)
         self.assertEqual("message in [test.xml] : xml_exception_error", exception.format_message())
+
+    def test_parser_exception_with_line_numbers(self):
+        element = MockElement("aiml")
+        element._end_line_number = 99
+        element._end_column_number = 999
+
+        exception = ParserException("message", filename="test.xml", xml_exception="xml_exception_error", xml_element=element)
+
+        self.assertEqual("message", exception.message)
+        self.assertEqual("test.xml", exception.filename)
+        self.assertEqual("xml_exception_error", exception.xml_exception)
+        self.assertEqual(element, exception._xml_element)
+        self.assertEqual("message in [test.xml] : xml_exception_error at [line(99), column(999)]", exception.format_message())
 
     def test_parser_exception_xml(self):
         element = ET.fromstring("<template />")

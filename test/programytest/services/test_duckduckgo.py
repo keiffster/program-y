@@ -1,11 +1,9 @@
 import unittest
-import os
 
-from programy.services.duckduckgo import DuckDuckGoService
 from programy.services.duckduckgo import DuckDuckGoAPI
+from programy.services.duckduckgo import DuckDuckGoService
 from programy.services.requestsapi import RequestsAPI
 from programy.services.service import BrainServiceConfiguration
-
 from programytest.client import TestClient
 
 

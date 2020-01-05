@@ -1,7 +1,8 @@
-import unittest
 import os
+import unittest
 
 from programytest.client import TestClient
+
 
 class SentimentTestClient(TestClient):
 
@@ -69,7 +70,7 @@ class SentimentAIMLTests(unittest.TestCase):
 
         response = self._client_context.bot.ask_question(self._client_context,  "CALCULATE SENTIMENT FEELING LAST 1")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'SENTIMENT FEELING NEUTRAL AND NEUTRAL.')
+        self.assertEqual(response, 'SENTIMENT FEELING POSITIVE AND NEUTRAL.')
 
     def test_calc_sentiment_feeling_overall(self):
         response = self._client_context.bot.ask_question(self._client_context,  "CALCULATE SENTIMENT FEELING OVERALL")

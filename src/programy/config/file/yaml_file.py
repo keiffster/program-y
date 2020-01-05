@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,10 +14,8 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.utils.logging.ylogger import YLogger
 import yaml
-
+from programy.utils.logging.ylogger import YLogger
 from programy.config.file.file import BaseConfigurationFile
 from programy.config.programy import ProgramyConfiguration
 from programy.utils.substitutions.substitues import Substitutions
@@ -29,7 +27,7 @@ class YamlConfigurationFile(BaseConfigurationFile):
         BaseConfigurationFile.__init__(self)
         self.yaml_data = None
 
-    def load_from_text(self, text, client_configuration, bot_root, subs: Substitutions=None):
+    def load_from_text(self, text, client_configuration, bot_root, subs: Substitutions = None):
         self.yaml_data = yaml.load(text, Loader=yaml.FullLoader)
         if self.yaml_data is None:
             raise Exception("Yaml data is missing")
@@ -37,7 +35,7 @@ class YamlConfigurationFile(BaseConfigurationFile):
         configuration.load_config_data(self, bot_root, subs=subs)
         return configuration
 
-    def load_from_file(self, filename, client_configuration, bot_root, subs: Substitutions=None):
+    def load_from_file(self, filename, client_configuration, bot_root, subs: Substitutions = None):
         configuration = ProgramyConfiguration(client_configuration)
         try:
             with open(filename, 'r+', encoding="utf-8") as yml_data_file:
@@ -89,45 +87,48 @@ class YamlConfigurationFile(BaseConfigurationFile):
             option_value = section[option_name]
             if isinstance(option_value, int):
                 return option_value
-            return int(self._replace_subs(subs, option_value))
 
         if missing_value is None:
             YLogger.warning(self, "Missing value for [%s] in config, return None", option_name)
         else:
-            YLogger.warning(self, "Missing value for [%s] in config, return default value %d", option_name, missing_value)
+            YLogger.warning(self, "Missing value for [%s] in config, return default value %d", option_name,
+                            missing_value)
         return missing_value
 
-    def get_multi_option(self, section, option_name, missing_value=None, subs: Substitutions = None):
-
-        if missing_value is None:
-            missing_value = []
+    def get_multi_option(self, section, option_name, missing_value=[], subs: Substitutions = None):
 
         if option_name in section:
             values = section[option_name]
-            splits = values.split('\n')
-            multis = []
-            for value in splits:
-                if value is not None and value != '':
-                    multis.append(self._replace_subs(subs, value))
-            return multis
+            if isinstance(values, str):
+                splits = values.split('\n')
+                multis = []
+                for value in splits:
+                    if value is not None and value != '':
+                        multis.append(self._replace_subs(subs, value))
+                return multis
+
+            elif isinstance(values, list):
+                return values
 
         YLogger.warning(self, "Missing value for [%s] in config, return default value", option_name)
-        return [missing_value]
+        return missing_value
 
-    def get_multi_file_option(self, section, option_name, bot_root, missing_value=None, subs: Substitutions = None):
-
-        if missing_value is None:
-            missing_value = []
+    def get_multi_file_option(self, section, option_name, bot_root, missing_value=[], subs: Substitutions = None):
 
         if option_name in section:
             values = section[option_name]
-            splits = values.split('\n')
-            multis = []
-            for value in splits:
-                if value is not None and value != '':
-                    value = self._replace_subs(subs, value)
-                    multis.append(value.replace('$BOT_ROOT', bot_root))
-            return multis
+            if isinstance(values, str):
+                splits = values.split('\n')
+                multis = []
+                for value in splits:
+                    if value is not None and value != '':
+                        value = self._replace_subs(subs, value)
+                        multis.append(value.replace('$BOT_ROOT', bot_root))
+
+                return multis
+
+            elif isinstance(values, list):
+                return [value.replace('$BOT_ROOT', bot_root) for value in values]
 
         YLogger.warning(self, "Missing value for [%s] in config, return default value", option_name)
         return missing_value

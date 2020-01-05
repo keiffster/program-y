@@ -1,0 +1,564 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+    <category>
+        <pattern>HEY SEXY *</pattern>
+        <template>
+            <srai>HELLO</srai>
+        </template>
+    </category>
+
+
+    <category>
+        <pattern>YOU THERE</pattern>
+        <template>
+            <srai>HELLO</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HEY GIRL</pattern>
+        <template>
+            <srai>HELLO</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>BUDDY</pattern>
+        <template>
+            <srai>HELLO</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HELLO MY FRIEND</pattern>
+        <template>
+            <srai>HELLO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HEY NOW</pattern>
+        <template>
+            <srai>HELLO</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>I SAID HELLO</pattern>
+        <template>
+            <srai>HELLO</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HI GIRL</pattern>
+        <template>
+            <srai>HELLO</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HEY MOM</pattern>
+        <template>
+            <srai>HELLO</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HELLO PROFESSOR</pattern>
+        <template>
+            <srai>HELLO</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HELLO WHAT IS *</pattern>
+        <template>
+            <srai>HELLO</srai>
+            <srai>WHAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HI BABE</pattern>
+        <template>
+            <srai>HELLO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HI MOM</pattern>
+        <template>
+            <srai>HELLO</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HALLO</pattern>
+        <template>
+            <srai>HELLO</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HEY SEXY</pattern>
+        <template>
+            <srai>HELLO</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>OLA</pattern>
+        <template>
+            <srai>HELLO</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HI MITSUKU</pattern>
+        <template>
+            <srai>HELLO</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HELLO WHAT IS YOUR NAME</pattern>
+        <template>
+            <srai>HELLO</srai>
+            <srai>WHAT IS YOUR NAME</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>BONJOUR</pattern>
+        <template>
+            <srai>HELLO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HELLO ALICE</pattern>
+        <template>
+            <srai>HELLO</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HI ALICE</pattern>
+        <template>
+            <srai>HELLO</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HELLO THERE</pattern>
+        <template>
+            <srai>HELLO</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HOLA</pattern>
+        <template>
+            <srai>HELLO</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HELLO HOW ARE YOU</pattern>
+        <template>
+            <srai>HELLO</srai>
+            <srai>HOW ARE YOU</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HELLO CAN *</pattern>
+        <template>
+            <srai>HELLO</srai>
+            <srai>CAN
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>CHEERS</pattern>
+        <template>
+            <srai>HELLO</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HELLO I *</pattern>
+        <template>
+            <srai>HELLO</srai>
+            <srai>I
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>GOOD EVENING</pattern>
+        <template>
+            <srai>HELLO</srai>
+            How are you this evening?
+        </template>
+    </category>
+
+    <category>
+        <pattern>I AM BACK</pattern>
+        <template>
+            <srai>HELLO</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HELLO HELLO</pattern>
+        <template>
+            <srai>HELLO</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HEY</pattern>
+        <template>
+            <srai>HELLO</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HEY BABE</pattern>
+        <template>
+            <srai>HELLO</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HEY BABY</pattern>
+        <template>
+            <srai>HELLO</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HEY THERE</pattern>
+        <template>
+            <srai>HELLO</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>WELCOME</pattern>
+        <template>
+            <srai>HELLO</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HEY ALICE</pattern>
+        <template>
+            <srai>HELLO</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HEY THERE *</pattern>
+        <template>
+            <srai>HELLO</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>ALLO</pattern>
+        <template>
+            <srai>hello</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HALLO *</pattern>
+        <template>
+            <srai>HELLO</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>I SAID HI *</pattern>
+        <template>
+            <srai>HI</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HI DO YOU *</pattern>
+        <template>
+            <srai>HI</srai>
+            <srai>DO YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HIIII</pattern>
+        <template>
+            <srai>HI</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HI AGAIN</pattern>
+        <template>
+            <srai>HI</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HEY YOU</pattern>
+        <template>
+            <srai>HI</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HELLO AGAIN</pattern>
+        <template>
+            <srai>HI</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>HALO *</pattern>
+        <template>
+            <srai>HELLO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HELLO THERE *</pattern>
+        <template>
+            <srai>HELLO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOLA *</pattern>
+        <template>
+            <srai>HELLO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>BONJOUR *</pattern>
+        <template>
+            <srai>HELLO
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>MORNING</pattern>
+        <template>
+            <srai>GOOD MORNING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GOODMORNING</pattern>
+        <template>
+            <srai>GOOD MORNING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GOOD MORNING *</pattern>
+        <template>
+            <srai>GOOD MORNING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GOOD MORNING ALICE</pattern>
+        <template>
+            <srai>GOOD MORNING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GM</pattern>
+        <template>
+            <srai>GOOD MORNING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>EVENING</pattern>
+        <template>
+            <srai>GOOD EVENING</srai>
+        </template>
+    </category>
+        <category>
+        <pattern>HEY DUDE *</pattern>
+        <template>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>HEYA</pattern>
+        <template>
+            <srai>HI</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HI DEAR *</pattern>
+        <template>
+            <srai>HI
+                <star/>
+            </srai>
+        </template>
+    </category>
+   <category>
+        <pattern>HAY</pattern>
+        <template>
+            <srai>HEY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HI HONEY</pattern>
+        <template>
+            <srai>HI</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HY</pattern>
+        <template>
+            <srai>HI</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HI BABY</pattern>
+        <template>
+            <srai>HI</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HII</pattern>
+        <template>
+            <srai>HI</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HI SEXY</pattern>
+        <template>
+            <srai>HI</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HAI</pattern>
+        <template>
+            <srai>HI</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HI THERE</pattern>
+        <template>
+            <srai>HI</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HI *</pattern>
+        <template>
+            <srai>HI</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>HOI</pattern>
+        <template>
+            <srai>HI</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HI BABY *</pattern>
+        <template>
+            <srai>HI</srai>
+            <srai>
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HI HOW ARE YOU</pattern>
+        <template>
+            <srai>HI</srai>
+            <srai>HOW ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HI MY *</pattern>
+        <template>
+            <srai>HI</srai>
+            <srai>MY
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+
+        <category>
+        <pattern>HEYY</pattern>
+        <template>
+            <srai>HEY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HEEY</pattern>
+        <template>
+            <srai>HEY</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>HEJ</pattern>
+        <template>
+            <srai>hey</srai>
+        </template>
+    </category>
+
+        <category>
+        <pattern>HIIII *</pattern>
+        <template>
+            <srai>HI
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+        <category>
+        <pattern>CAN YOU SAY HELLO *</pattern>
+        <template>
+            <srai>SAY HELLO
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+</aiml>

@@ -1,11 +1,11 @@
 import xml.etree.ElementTree as ET
 
+from programy.parser.exceptions import ParserException
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.log import TemplateLogNode
 from programy.parser.template.nodes.word import TemplateWordNode
-from programy.parser.exceptions import ParserException
-
 from programytest.parser.base import ParserTestsBaseClass
+
 
 class MockTemplateLogNode(TemplateLogNode):
     def __init__(self):
@@ -13,6 +13,7 @@ class MockTemplateLogNode(TemplateLogNode):
 
     def resolve_to_string(self, context):
         raise Exception("This is an error")
+
 
 class TemplateLogNodeTests(ParserTestsBaseClass):
 
@@ -35,6 +36,14 @@ class TemplateLogNodeTests(ParserTestsBaseClass):
         self.assertEqual("info", log.level)
         self.assertEqual("", log.resolve(self._client_context))
 
+        log.level = ""
+        self.assertEqual("", log.level)
+        self.assertEqual("", log.resolve(self._client_context))
+
+        log.level = "other"
+        self.assertEqual("other", log.level)
+        self.assertEqual("", log.resolve(self._client_context))
+
         log.level = "exception"
         self.assertEqual("exception", log.level)
         self.assertEqual("", log.resolve(self._client_context))
@@ -53,6 +62,9 @@ class TemplateLogNodeTests(ParserTestsBaseClass):
 
         log.set_attrib('level', TemplateWordNode('info'))
         self.assertEqual("info", log.level.word)
+
+        log.set_attrib('level', TemplateWordNode('other'))
+        self.assertEqual("other", log.level.word)
 
         with self.assertRaises(ParserException):
             log.set_attrib('unknown', TemplateWordNode('info'))

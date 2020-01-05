@@ -1,0 +1,62 @@
+CITY:hasPurpose:to provide culture and civilization
+CITY:hasSize:10
+CITY:hasSyllables:2
+City:isa:Geographic Location
+CITY:isa:Geographic Location
+City:isa:Georgaphical Feature
+CITY:isa:Political Unit
+CITY:lifeArea:Education
+BRAZIL:hasPurpose:to form a nation
+BRAZIL:hasSize:11
+BRAZIL:hasSyllables:2
+BRAZIL:isa:Country
+BRAZIL:isa:Geographic Location
+BRAZIL:lifeArea:Education
+DELHI:hasPurpose:to form a city
+DELHI:hasSize:10
+DELHI:hasSyllables:2
+DELHI:isa:City
+DELHI:isa:Geographic Location
+DELHI:lifeArea:Education
+EGYPT:hasPurpose:to form a nation
+EGYPT:hasSize:11
+EGYPT:hasSyllables:2
+EGYPT:isa:Country
+EGYPT:isa:Geographic Location
+EGYPT:lifeArea:Education
+ISTANBUL:hasPurpose:to form a city
+ISTANBUL:hasSize:10
+ISTANBUL:hasSyllables:3
+ISTANBUL:isa:City
+ISTANBUL:isa:Geographic Location
+ISTANBUL:lifeArea:Education
+JAKARTA:hasPurpose:to form a city
+JAKARTA:hasSize:10
+JAKARTA:hasSyllables:3
+JAKARTA:isa:City
+JAKARTA:isa:Geographic Location
+JAKARTA:lifeArea:Education
+SYDNEY:hasPurpose:to form a city
+SYDNEY:hasSize:10
+SYDNEY:hasSyllables:2
+SYDNEY:isa:City
+SYDNEY:isa:Geographic Location
+SYDNEY:lifeArea:Education
+SHANGHAI:hasPurpose:to form a city
+SHANGHAI:hasSize:10
+SHANGHAI:hasSyllables:2
+SHANGHAI:isa:City
+SHANGHAI:isa:Geographic Location
+SHANGHAI:lifeArea:Education
+TOKYO:hasPurpose:to form a city
+TOKYO:hasSize:10
+TOKYO:hasSyllables:2
+TOKYO:isa:City
+TOKYO:isa:Geographic Location
+TOKYO:lifeArea:Education
+MELBOURNE:hasPurpose:to form a city
+MELBOURNE:hasSize:10
+MELBOURNE:hasSyllables:2
+MELBOURNE:isa:City
+MELBOURNE:isa:Geographic Location
+MELBOURNE:lifeArea:Education

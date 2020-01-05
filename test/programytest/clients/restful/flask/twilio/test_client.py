@@ -4,8 +4,9 @@ from twilio.rest import Client
 
 from programy.clients.restful.flask.twilio.client import TwilioBotClient
 from programy.clients.restful.flask.twilio.config import TwilioConfiguration
-
+from programy.clients.render.text import TextRenderer
 from programytest.clients.arguments import MockArgumentParser
+
 
 class MockArgs():
 
@@ -46,6 +47,15 @@ class MockTwilioBotClient(TwilioBotClient):
             return self.test_twilio_client
         return super(MockTwilioBotClient,self).create_twilio_client()
 
+    def make_response_v1(self, data, status_code):
+        return '<?xml version="1.0" encoding="UTF-8"?><Response><Message to="+447777777777">Hi There</Message></Response>'
+
+    def make_response_v2(self, data, status_code):
+        return '<?xml version="1.0" encoding="UTF-8"?><Response><Message to="+447777777777">Hi There</Message></Response>'
+
+    def make_response_other(self, data, status_code):
+        return data
+
 
 class TwilioBotClientTests(unittest.TestCase):
 
@@ -61,6 +71,9 @@ class TwilioBotClientTests(unittest.TestCase):
         self.assertIsInstance(client.get_client_configuration(), TwilioConfiguration)
 
         self.assertIsInstance(client._twilio_client, Client)
+
+        self.assertFalse(client._render_callback())
+        self.assertIsInstance(client.renderer, TextRenderer)
 
     def test_create_response(self):
         arguments = MockArgumentParser()

@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,16 +14,14 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from abc import ABC
+from abc import abstractmethod
 from programy.utils.logging.ylogger import YLogger
-
-from abc import ABCMeta, abstractmethod
-
 from programy.utils.classes.loader import ClassLoader
 from programy.activate import Activatable
 
 
-class SpellingChecker(Activatable):
-    __metaclass__ = ABCMeta
+class SpellingChecker(Activatable, ABC):
 
     def __init__(self, spelling_config=None):
         Activatable.__init__(self)
@@ -34,7 +32,7 @@ class SpellingChecker(Activatable):
 
     @abstractmethod
     def correct(self, phrase):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     @staticmethod
     def initiate_spellchecker(spelling_config, storage_factory):
@@ -77,4 +75,3 @@ class SpellingChecker(Activatable):
             YLogger.debug(client_context, "Spelling is switched off.")
 
         return None
-

@@ -1,0 +1,6 @@
+HUDSON:hasPurpose:to move water
+HUDSON:hasSize:9
+HUDSON:hasSyllables:2
+HUDSON:isa:Geographic Location
+HUDSON:isa:River
+HUDSON:lifeArea:Education

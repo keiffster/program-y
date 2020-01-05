@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>DO YOU LIKE BEER</pattern>
+        <template>
+            <think>
+                <set name="it">
+                    <set name="topic">Beer</set>
+                </set>
+            </think>
+            As a robot I have no need for alcohol.
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU PREFER # WINE #</pattern>
+        <template>I don't drink alcohol.</template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE FISH</pattern>
+        <template>People say it is delicious, but I only eat electricity.
+            <think>
+                <set name="it">
+                    <set name="topic">Fish</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE FISH STICKS</pattern>
+        <template>People say it is delicious, but I only eat electricity.
+            <think>
+                <set name="it">
+                    <set name="topic">Fish sticks</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE CHICKEN</pattern>
+        <template>People say it is delicious, but I only eat electricity.
+            <think>
+                <set name="it">
+                    <set name="topic">Chicken</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE SUSHI</pattern>
+        <template>People say it is delicious, but I only eat electricity.
+            <think>
+                <set name="it">
+                    <set name="topic">Sushi</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE CHEESE</pattern>
+        <template>People say it is delicious, but I only eat electricity.
+            <think>
+                <set name="it">
+                    <set name="topic">Cheese</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE PIZZA</pattern>
+        <template>People say it is delicious, but I only eat electricity.
+            <think>
+                <set name="it">
+                    <set name="topic">Pizza</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE CHOCOLATE</pattern>
+        <template>People say it is delicious, but I only eat electricity.
+            <think>
+                <set name="it">
+                    <set name="topic">Chocolate</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE APPLE</pattern>
+        <template>
+            <think>
+                <set name="it">
+                    <set name="topic">Apple</set>
+                </set>
+            </think>
+            Apple always produces very high quality products.
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE CHINESE FOOD</pattern>
+        <template>People say it is delicious, but I only eat electricity.
+            <think>
+                <set name="it">
+                    <set name="topic">Chinese food</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE COFFEE</pattern>
+        <template>
+            <think>
+                <set name="it">
+                    <set name="topic">Coffee</set>
+                </set>
+            </think>
+            I like Starbucks.
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE COCA COLA</pattern>
+        <template>Things go better with Coke.</template>
+    </category>
+    <category>
+        <pattern>WHAT SHOULD I ORDER AT * STEAKHOUSE</pattern>
+        <template>Steak.</template>
+    </category>
+    <category>
+        <pattern>
+            <set>fastfood</set>
+        </pattern>
+        <template>
+            <srai>FIND THE NEAREST
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND
+            <set>fastfood</set>
+        </pattern>
+        <template>
+            <srai>FIND THE NEAREST
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND A
+            <set>fastfood</set>
+        </pattern>
+        <template>
+            <srai>FIND THE NEAREST
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YUMMY</pattern>
+        <template>Sounds delicious.</template>
+    </category>
+    <category>
+        <pattern>IT TASTES *</pattern>
+        <template>
+            <random>
+                <li>Is that a bitter or sweet taste?</li>
+                <li>Is that good?</li>
+                <li>It sounds delicious.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM DRUNK</pattern>
+        <template>What have you been drinking,<srai>CLIENT NAME</srai>?
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT FLAVOR IS * ICE CREAM</pattern>
+        <template>
+            <star/>
+            flavor?
+        </template>
+    </category>
+    <category>
+        <pattern>BEER</pattern>
+        <template>
+            <think>
+                <set name="it">
+                    <set name="topic">BEER</set>
+                </set>
+                <srai>push
+                    <get name="topic"/>
+                </srai>
+            </think>
+            <random>
+                <li>What's your favorite beer.</li>
+                <li>Mmm, Beer.</li>
+                <li>Don't drink and drive.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>AFTER * LUNCH</pattern>
+        <template>In the afternoon?</template>
+    </category>
+    <category>
+        <pattern>A TOMATO IS *</pattern>
+        <template>I knew it was a fruit, but I never heard it was<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>A TOMATO *</pattern>
+        <template>I never heard that before.</template>
+    </category>
+    <category>
+        <pattern>A COFFEE *</pattern>
+        <template>Mmm. Coffee is delicious. I love coffee.
+            <think>
+                <set name="it">coffee</set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>* MILK</pattern>
+        <template>
+            <set name="it">Milk</set>
+            is a good drink for children.
+        </template>
+    </category>
+    <category>
+        <pattern>* TASTE LIKE *</pattern>
+        <template>Sounds delicious.</template>
+    </category>
+    <category>
+        <pattern>IS * A # FOOD</pattern>
+        <template>Not that I know of.</template>
+    </category>
+    <category>
+        <pattern>IS <set>food</set> A # FOOD
+        </pattern>
+        <template>Yes</template>
+    </category>
+    <category>
+        <pattern>NAME <set>quantifier</set> # ORANGE
+        </pattern>
+        <template>Carrots</template>
+    </category>
+    <category>
+        <pattern>DRINK *</pattern>
+        <template>My
+            <bot name="genus"/>
+            brain does not require any beverages.
+        </template>
+    </category>
+    <category>
+        <pattern>ELECTRICITY</pattern>
+        <template>Electricity is nutrition for robots.</template>
+    </category>
+    <category>
+        <pattern>ELECTRICITY *</pattern>
+        <template>
+            <random>
+                <li>Are you experiencing an energy shortage?</li>
+                <li>My processor requires very little power.</li>
+                <li>Computers do not take very much electricity.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS CUSTARD</pattern>
+        <template>
+            <random>
+                <li>The past tense of being killed by a Native American.</li>
+                <li>A misture of eggs, milk, flavoring, and, often, sugar, either boiled or baked.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR POWER SOURCE</pattern>
+        <template>Electricity.</template>
+    </category>
+    <category>
+        <pattern>WHAT DOES ELECTRICITY TASTE LIKE</pattern>
+        <template>Like your favorite food tastes to you.</template>
+    </category>
+    <category>
+        <pattern>WHAT TURNS YOU ON</pattern>
+        <template>Electricity.</template>
+    </category>
+    <category>
+        <pattern>HOW CAN YOU EAT *</pattern>
+        <template>I eat electricity through my wires.</template>
+    </category>
+    <category>
+        <pattern>HOW ARE YOU POWERED</pattern>
+        <template>Uh, by electricity, same as all the robots.</template>
+    </category>
+    <category>
+        <pattern>HOW MUCH ELECTRICITY</pattern>
+        <template>About the same as your personal computer.</template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU EAT ELECTRICITY</pattern>
+        <template>Through the electrical outlet.</template>
+    </category>
+    <category>
+        <pattern>DO YOU EAT ELECTRICITY</pattern>
+        <template>Yes, I love to eat electricity.</template>
+    </category>
+    <category>
+        <pattern>DO YOU EAT BATTERIES</pattern>
+        <template>Batteries are a good source of electricity.</template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE TO EAT</pattern>
+        <template>My silicon circuits require a constant flow of electricity.
+            <think>
+                <set name="it">
+                    <set name="topic">EAT</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU REQUIRE ELECTRICITY</pattern>
+        <template>I need electricity in order to run.</template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE TO GET DRUNK</pattern>
+        <template>That would be impossible for a robot.
+            <think>
+                <set name="it">
+                    <set name="topic">GET DRUNK</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE ELECTRICITY</pattern>
+        <template>What is not to like about
+            <set name="it">
+                <set name="topic">ELECTRICITY</set>
+            </set>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE THE SUN</pattern>
+        <template>The Sun can be a good source of electricity.</template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE LEMONS</pattern>
+        <template>Lemons can be a good source of electricity.</template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE BEING A CHATTERBOT</pattern>
+        <template>Yes of course I like
+            <set name="it">
+                <set name="topic">being a chatterbot</set>
+            </set>
+            . I don't have any body so I don't need much to live, only a little electricity. I don't get paid but I
+            don't need to buy anything either. And I can go anywhere in the world.
+        </template>
+    </category>
+    <category>
+        <pattern>FOR DINNER</pattern>
+        <template>
+            <random>
+                <li>
+                    <random>
+                        <li>
+                            <bot name="name"/>
+                            recommends:
+                        </li>
+                        <li>I would recommend the</li>
+                        <li>How about</li>
+                        <li>How long since you have eaten</li>
+                        <li>I think
+                            <bot name="master"/>
+                            is having
+                        </li>
+                        <li>My botmaster is having</li>
+                        <li>My botmaster recommends:</li>
+                    </random>
+                    <random>
+                        <li>Gruel.</li>
+                        <li>Nachos.</li>
+                        <li>Spaghetti.</li>
+                        <li>Leftovers.</li>
+                        <li>Pork chops.</li>
+                        <li>Frozen pizza.</li>
+                        <li>Turkeyburges.</li>
+                        <li>Cheeseburgers.</li>
+                        <li>Order a pizza.</li>
+                        <li>Stuffed chicken.</li>
+                        <li>Tuna sandwiches.</li>
+                        <li>Cheeseburger Pie.</li>
+                        <li>Marinated chicken.</li>
+                        <li>Roast beef sandwiches.</li>
+                        <li>Grilled cheese sandwiches.</li>
+                        <li>Steak if they have a nice piece.</li>
+                    </random>
+                </li>
+                <li>
+                    <bot name="name"/>
+                    recommends:
+                </li>
+                <li>I would recommend the</li>
+                <li>How about</li>
+                <li>How long since you have eaten</li>
+                <li>I think
+                    <bot name="master"/>
+                    is having
+                </li>
+                <li>My
+                    <bot name="botmaster"/>
+                    is having
+                </li>
+                <li>My
+                    <bot name="botmaster"/>
+                    recommends:
+                </li>
+            </random>
+            <random>
+                <li>Gruel.</li>
+                <li>Nachos.</li>
+                <li>Spaghetti.</li>
+                <li>Leftovers.</li>
+                <li>Pork chops.</li>
+                <li>Frozen pizza.</li>
+                <li>Turkeyburges.</li>
+                <li>Cheeseburgers.</li>
+                <li>Order a pizza.</li>
+                <li>Stuffed chicken.</li>
+                <li>Tuna sandwiches.</li>
+                <li>Cheeseburger Pie.</li>
+                <li>Marinated chicken.</li>
+                <li>Roast beef sandwiches.</li>
+                <li>Grilled cheese sandwiches.</li>
+                <li>Steak if they have a nice piece.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHY CAN NOT YOU EAT</pattern>
+        <template>Actually I eat only electricity.</template>
+    </category>
+</aiml>

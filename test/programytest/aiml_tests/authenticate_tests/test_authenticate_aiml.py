@@ -1,10 +1,10 @@
-import unittest
 import os
+import unittest
 
 from programy.config.brain.security import BrainSecurityAuthenticationConfiguration
 from programy.security.authenticate.authenticator import Authenticator
-
 from programytest.client import TestClient
+
 
 class MockAuthenticationService(Authenticator):
 

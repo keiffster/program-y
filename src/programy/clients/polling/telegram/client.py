@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,15 +14,13 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.utils.logging.ylogger import YLogger
-
 from telegram.ext import Updater
 from telegram.ext import CommandHandler
 from telegram.ext import MessageHandler, Filters
-
+from programy.utils.logging.ylogger import YLogger
 from programy.clients.polling.client import PollingBotClient
 from programy.clients.polling.telegram.config import TelegramConfiguration
+from programy.utils.console.console import outputLog
 
 
 def start(telegram_bot, update):
@@ -49,6 +47,7 @@ class TelegramBotClient(PollingBotClient):
 
     def __init__(self, argument_parser=None):
         self._updater = None
+        self._telegram_token = None
         PollingBotClient.__init__(self, "telegram", argument_parser)
 
     def get_client_configuration(self):
@@ -80,7 +79,8 @@ class TelegramBotClient(PollingBotClient):
     def ask_question(self, userid, question):
         self._questions += 1
         client_context = self.create_client_context(userid)
-        return client_context.bot.ask_question(client_context, question, responselogger=self)
+        response = client_context.bot.ask_question(client_context, question, responselogger=self)
+        return self.renderer.render(client_context, response)
 
     def start(self, telegram_bot, update):
         try:
@@ -127,12 +127,16 @@ class TelegramBotClient(PollingBotClient):
             YLogger.exception(self, "Failed to handle unknown", e)
 
     def display_connected_message(self):
-        print ("Telegram Bot connected and running...")
+        outputLog(self, "Telegram Bot connected and running...")
 
     def connect(self):
-        self.create_updater(self._telegram_token)
-        self.register_handlers()
-        return True
+        if self._telegram_token is not None:
+            self.create_updater(self._telegram_token)
+            self.register_handlers()
+            return True
+
+        outputLog(self, "No telegram token defined, unable to connect")
+        return False
 
     def poll_and_answer(self):
 
@@ -142,8 +146,8 @@ class TelegramBotClient(PollingBotClient):
             # Without this the system goes into 100% CPU utilisation
             self._updater.idle()
 
-        except KeyboardInterrupt as keye:
-            print("Telegram client stopping....")
+        except KeyboardInterrupt:
+            outputLog(self, "Telegram client stopping....")
             running = False
             self._updater.stop()
 
@@ -155,7 +159,7 @@ class TelegramBotClient(PollingBotClient):
 
 if __name__ == '__main__':
 
-    print("Initiating Telegram Client...")
+    outputLog(None, "Initiating Telegram Client...")
 
     TelegramBotClient.TELEGRAM_CLIENT = TelegramBotClient()
     TelegramBotClient.TELEGRAM_CLIENT.run()

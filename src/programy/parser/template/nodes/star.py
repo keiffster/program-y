@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,9 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.utils.logging.ylogger import YLogger
-
 from programy.parser.template.nodes.indexed import TemplateIndexedNode
 
 
@@ -28,6 +26,7 @@ class TemplateStarNode(TemplateIndexedNode):
     def resolve_to_string(self, client_context):
         conversation = client_context.bot.get_conversation(client_context)
 
+        resolved = ""
         if conversation.has_current_question():
 
             current_question = conversation.current_question()
@@ -37,19 +36,13 @@ class TemplateStarNode(TemplateIndexedNode):
             matched_context = current_sentence.matched_context
             if matched_context is None:
                 YLogger.error(client_context, "Star node has no matched context for clientid %s", client_context.userid)
-                resolved = ""
+
             else:
                 int_index = int(self.index.resolve(client_context))
-                try:
-                    resolved = matched_context.star(client_context, int_index)
-                    if resolved is None:
-                        YLogger.error(client_context, "Star index not in range [%d]", int_index)
-                        resolved = ""
-                except Exception:
+                resolved = matched_context.star(client_context, int_index)
+
+                if resolved is None:
                     YLogger.error(client_context, "Star index not in range [%d]", int_index)
-                    resolved = ""
-        else:
-            resolved = ""
 
         YLogger.debug(client_context, "Star Node [%s] resolved to [%s]", self.to_string(), resolved)
         return resolved

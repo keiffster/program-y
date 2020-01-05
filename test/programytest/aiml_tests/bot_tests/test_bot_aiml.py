@@ -1,5 +1,5 @@
-import unittest
 import os
+import unittest
 
 from programytest.client import TestClient
 
@@ -41,9 +41,9 @@ class BotAIMLTests(unittest.TestCase):
             sign:Virgo
             logo:<img src="http://www.keithsterling.com/aiml/logo.png" width="128"/>
             religion:Atheist
-            default-get:Unknown.
-            default-property:Unknown.
-            default-map:Unknown.
+            default_get:Unknown.
+            default_property:Unknown.
+            default_map:Unknown.
             learn-filename:learn.aiml
         """)
 

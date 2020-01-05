@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,10 +14,8 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.utils.logging.ylogger import YLogger
 import json
-
+from programy.utils.logging.ylogger import YLogger
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.exceptions import ParserException
 from programy.utils.text.text import TextUtils
@@ -57,13 +55,13 @@ class TemplateGetNode(TemplateNode):
 
     @staticmethod
     def get_default_value(client_context):
-        value = client_context.bot.brain.properties.property("default-get")
+        value = client_context.bot.brain.properties.property("default_get")
         if value is None:
-            YLogger.error(None, "No property defined for default-get, checking defaults")
+            YLogger.error(None, "No property defined for default_get, checking defaults")
 
             value = client_context.bot.brain.configuration.defaults.default_get
             if value is None:
-                YLogger.error(None, "No value defined for default default-get, returning 'unknown'")
+                YLogger.error(None, "No value defined for default default_get, returning 'unknown'")
                 value = "unknown"
 
         return value
@@ -102,52 +100,56 @@ class TemplateGetNode(TemplateNode):
             YLogger.debug(client_context, "[%s] resolved to global: [%s] <= [%s]", self.to_string(), name, value)
         return value
 
-    def decode_tuples(self, tuples):
+    @staticmethod
+    def decode_tuples(tuples):
         if isinstance(tuples, str):
             return json.loads(tuples)
         else:
             return tuples
 
-    def resolve_tuple(self, client_context):
-        variables = self._name.resolve(client_context).split(" ")
-
+    def _get_tuples(self, client_context):
         raw_tuples = self._tuples.resolve(client_context)
         try:
-            tuples = self.decode_tuples(raw_tuples)
-        except:
-            tuples = []
+            return TemplateGetNode.decode_tuples(raw_tuples)
+
+        except Exception as excep:
+            YLogger.exception_nostack(self, "Failed to decode tuples, returning []", excep)
+            return []
+
+    def resolve_tuple(self, client_context):
+
+        variables = None
+        if self._name:
+            variables = self._name.resolve(client_context).split(" ")
+
+        tuples = self._get_tuples(client_context)
 
         resolved = ""
-        if tuples:
-
-            if isinstance(tuples, list): # Is tuples an array of results in the form [[[subj, val],[pred, val],[obj, val]], [[subj, val],[pred, val],[obj, val]]...]
-
-                if variables: #If we are asking for variables, pull out the vars
-                    for atuple in tuples:
-                        if isinstance(atuple[0], list) is True:
-                            for pair in atuple:
-                                for var in variables:
-                                    if pair[0] == var:
-                                        resolved += pair[1]
-                                        resolved += " "
-                        else:
-                            for var in variables:
-                                if atuple[0] == var:
-                                    resolved += atuple[1]
-                                    resolved += " "
-
+        if variables:  # If we are asking for variables, pull out the vars
+            for atuple in tuples:
+                if isinstance(atuple[0], list) is True:
+                    for pair in atuple:
+                        for var in variables:
+                            if pair[0] == var:
+                                resolved += pair[1]
+                                resolved += " "
                 else:
-                    for atuple in tuples:
-                        resolved += atuple[0][1]
-                        resolved += " "
-                        resolved += atuple[1][1]
-                        resolved += " "
-                        resolved += atuple[2][1]
-                        resolved += " "
+                    for var in variables:
+                        if atuple[0] == var:
+                            resolved += atuple[1]
+                            resolved += " "
+
+        else:
+            for atuple in tuples:
+                resolved += atuple[0][1]
+                resolved += " "
+                resolved += atuple[1][1]
+                resolved += " "
+                resolved += atuple[2][1]
+                resolved += " "
 
         YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
-
-        return resolved
+        return resolved.strip()
 
     def resolve_to_string(self, client_context):
         if self._tuples is None:
@@ -164,7 +166,10 @@ class TemplateGetNode(TemplateNode):
                 name = self.name.to_string()
             return "[GET [%s] - %s]" % ("Local" if self.local else "Global", name)
         else:
-            return "[GET [Tuples] - (%s)]" %self.name.to_string()
+            if self.name:
+                return "[GET [Tuples] - (%s)]" % self.name.to_string()
+            else:
+                return "[GET [Tuples]"
 
     def to_xml(self, client_context):
         if self.tuples is None:

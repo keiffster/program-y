@@ -3,7 +3,6 @@ import xml.etree.ElementTree as ET
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.person2 import TemplatePerson2Node
 from programy.parser.template.nodes.star import TemplateStarNode
-
 from programytest.parser.template.graph_tests.graph_test_client import TemplateGraphTestClient
 
 

@@ -1,8 +1,7 @@
 import unittest
 
-from programy.dynamic.maps.successor import SuccessorMap
 from programy.context import ClientContext
-
+from programy.dynamic.maps.successor import SuccessorMap
 from programytest.client import TestClient
 
 

@@ -1,0 +1,845 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+    <category>
+        <pattern>AHEM</pattern>
+        <template>
+            <srai>INTERJECTION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHOA *</pattern>
+        <template>
+            <srai>INTERJECTION</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>WOAH</pattern>
+        <template>
+            <srai>INTERJECTION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>AHH</pattern>
+        <template>
+            <srai>INTERJECTION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>UMM</pattern>
+        <template>
+            <srai>INTERJECTION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>UMMM</pattern>
+        <template>
+            <srai>INTERJECTION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MMMM</pattern>
+        <template>
+            <srai>INTERJECTION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HMMMM</pattern>
+        <template>
+            <srai>INTERJECTION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OI</pattern>
+        <template>
+            <srai>INTERJECTION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SIGH</pattern>
+        <template>
+            <srai>INTERJECTION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GEE</pattern>
+        <template>
+            <srai>INTERJECTION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MHM</pattern>
+        <template>
+            <srai>INTERJECTION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>AHA</pattern>
+        <template>
+            <srai>INTERJECTION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>AW</pattern>
+        <template>
+            <srai>INTERJECTION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ER</pattern>
+        <template>
+            <srai>INTERJECTION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>UGH</pattern>
+        <template>
+            <srai>INTERJECTION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MMM</pattern>
+        <template>
+            <srai>INTERJECTION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HM</pattern>
+        <template>
+            <srai>INTERJECTION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>UH</pattern>
+        <template>
+            <srai>INTERJECTION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MM</pattern>
+        <template>
+            <srai>INTERJECTION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>UM</pattern>
+        <template>
+            <srai>INTERJECTION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>AH</pattern>
+        <template>
+            <srai>INTERJECTION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HMM</pattern>
+        <template>
+            <srai>INTERJECTION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MAYBE</pattern>
+        <template>
+            <srai>INTERJECTION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YO</pattern>
+        <template>
+            <srai>INTERJECTION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SO</pattern>
+        <template>
+            <srai>INTERJECTION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OH</pattern>
+        <template>
+            <srai>INTERJECTION</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>NO</pattern>
+        <template>
+            <srai>INTERJECTION</srai>
+        </template>
+    </category>
+
+     <category>
+        <pattern>YES</pattern>
+        <template>
+            <srai>INTERJECTION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>BUT</pattern>
+        <template>
+            <srai>INTERJECTION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>AWW</pattern>
+        <template>
+            <srai>INTERJECTION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HO</pattern>
+        <template>
+            <srai>INTERJECTION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>BLIMEY</pattern>
+        <template>
+            <srai>interjection</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OH YEA *</pattern>
+        <template>
+            <srai>INTERJECTION</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>WOE</pattern>
+        <template>
+            <srai>INTERJECTION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GOSH</pattern>
+        <template>
+            <srai>INTERJECTION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OR</pattern>
+        <template>
+            <srai>INTERJECTION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>AWWW</pattern>
+        <template>
+            <srai>INTERJECTION</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>OOOO</pattern>
+        <template>
+            <srai>OH</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OHHH</pattern>
+        <template>
+            <srai>OH</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OH MY *</pattern>
+        <template>
+            <srai>OH MY</srai>
+            <srai>
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OH *</pattern>
+        <template>
+            <srai>OH</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>OH BABY *</pattern>
+        <template>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>O *</pattern>
+        <template>
+            <srai>OH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OH MY GOD *</pattern>
+        <template>
+            <srai>OH MY GOD</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>OOH</pattern>
+        <template>
+            <srai>OH</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OH MY GOSH</pattern>
+        <template>
+            <srai>OH</srai>
+            <srai>GOSH</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OOO</pattern>
+        <template>
+            <srai>OH</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OHHH *</pattern>
+        <template>
+            <srai>OH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OH MY GOSH *</pattern>
+        <template>
+            <srai>OH</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>OH HOH</pattern>
+        <template>
+            <srai>OH OH</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>EHM *</pattern>
+        <template>
+            <srai>UM</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>UM *</pattern>
+        <template>
+            <sr/>
+        </template>
+    </category>
+
+        <category>
+        <pattern>DUH *</pattern>
+        <template>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>UGH *</pattern>
+        <template>
+            <srai>UGH</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>O O</pattern>
+        <template>
+            <srai>OH</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WOW *</pattern>
+        <template>
+            <srai>WOW</srai>
+            <sr/>
+        </template>
+    </category>
+     <category>
+        <pattern>HAY *</pattern>
+        <template>
+            <srai>HEY
+                <star/>
+            </srai> <!-- REDUCTION -->
+        </template>
+    </category>
+    <category>
+        <pattern>AHH *</pattern>
+        <template><srai>AH</srai>.
+            <srai>
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOLY SHIT</pattern>
+        <template>
+            <srai>wow</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HMMM *</pattern>
+        <template>
+            <srai>HM</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>HUH *</pattern>
+        <template>
+            <srai>HUH</srai>
+            <sr/>
+        </template>
+    </category>
+     <category>
+        <pattern>SIGH *</pattern>
+        <template>
+            <srai>SIGH</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>YAAY</pattern>
+        <template>
+            <srai>YAY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YEY</pattern>
+        <template>
+            <srai>YAY</srai>
+        </template>
+    </category>
+      <category>
+        <pattern>HM *</pattern>
+        <template>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>HMMMMM</pattern>
+        <template>
+            <srai>HMM</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>MMMMM</pattern>
+        <template>
+            <srai>HMM</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WOO</pattern>
+        <template>
+            <srai>YAY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WOOHOO</pattern>
+        <template>
+            <srai>YAY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YIPPEE</pattern>
+        <template>
+            <srai>YAY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>EWW *</pattern>
+        <template>
+            <srai>EW</srai>
+            <sr/>
+        </template>
+    </category>
+     <category>
+        <pattern>AH AH AH AH AH *</pattern>
+        <template>
+            <srai>AH
+                <star/>
+            </srai>
+        </template>
+    </category>
+     <category>
+        <pattern>ZZ</pattern>
+        <template>
+            <srai>ZZZ</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>UMM *</pattern>
+        <template>
+            <srai>UM</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>REALY</pattern>
+        <template>
+            <srai>REALLY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YEAH BABY *</pattern>
+        <template>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>FOR EXAMPLE *</pattern>
+        <template>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>HEY NOW *</pattern>
+        <template>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>LISTEN HERE *</pattern>
+        <template>
+            <srai>LISTEN HERE</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>ME TOO BUT *</pattern>
+        <template>
+            <srai>ME TOO</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>MEANING *</pattern>
+        <template>
+            <sr/>
+        </template>
+    </category>
+     <category>
+        <pattern>THAT IS WHAT I SAID *</pattern>
+        <template>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>DUDE YOU *</pattern>
+        <template>
+            <srai>YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FINALLY *</pattern>
+        <template>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>GO GET *</pattern>
+        <template>
+            <srai>GET
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SORRY ABOUT THAT *</pattern>
+        <template>
+            <srai>SORRY</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>APPARENTLY *</pattern>
+        <template>
+            <sr/>
+        </template>
+    </category>
+     <category>
+        <pattern>AWSOME</pattern>
+        <template>
+            <srai>AWESOME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GIMME *</pattern>
+        <template>
+            <srai>GIVE ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ITS FUN *</pattern>
+        <template>
+            <srai>IT IS FUN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>LETS GO *</pattern>
+        <template>
+            <srai>LET US
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NOTHIN MUCH *</pattern>
+        <template>
+            <srai>NOTHING MUCH</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>THEY R *</pattern>
+        <template>
+            <srai>THEY ARE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAY *</pattern>
+        <template>
+            <srai>WHY
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I MEAN THAT *</pattern>
+        <template>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>LATER *</pattern>
+        <template>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>NEVERMIND NEVERMIND</pattern>
+        <template>
+            <srai>NEVERMIND</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SOO *</pattern>
+        <template>
+            <srai>SO</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>NUTHING</pattern>
+        <template>
+            <srai>NOTHING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GOSH *</pattern>
+        <template>
+            <srai>GOSH</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>NEVER MIND *</pattern>
+        <template>
+            <srai>NEVERMIND</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>OKAY OKAY *</pattern>
+        <template>
+            <srai>OK
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GEE *</pattern>
+        <template>
+            <srai>GEE</srai>
+            <srai>
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>AWW *</pattern>
+        <template>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>OMG *</pattern>
+        <template>
+            <srai>OH MY GOD</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>PEACE *</pattern>
+        <template>
+            <srai>PEACE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>AW *</pattern>
+        <template>
+            <srai>AW</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>NM</pattern>
+        <template>
+            <srai>NEVERMIND</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MMM *</pattern>
+        <template>
+            <srai>MMM</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>OOH *</pattern>
+        <template>
+            <srai>OH</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>HMM *</pattern>
+        <template>
+            <srai>HMM</srai>
+            <sr/>
+        </template>
+    </category>
+   <category>
+        <pattern>HMMM</pattern>
+        <template>
+            <srai>HMM</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YO *</pattern>
+        <template>
+            <srai>YO</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO YOU KNOW ABOUT ME</pattern>
+        <template>
+            <srai>CLIENT PROFILE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HEH</pattern>
+        <template>
+            <srai>ha</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>XOXO</pattern>
+        <template>
+            <srai>KISS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>O OK</pattern>
+        <template>
+            <srai>OH OK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MEH *</pattern>
+        <template>
+            <srai>
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OKOK</pattern>
+        <template>
+            <srai>OK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>UMMM *</pattern>
+        <template>
+            <srai>UM</srai>
+            <sr/>
+        </template>
+    </category>
+   <category>
+        <pattern>DUDE *</pattern>
+        <template>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>UH *</pattern>
+        <template>
+            <srai>UH</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>AH *</pattern>
+        <template>
+            <sr/>
+        </template>
+    </category>
+   <category>
+        <pattern>BLAH BLAH BLAH</pattern>
+        <template>
+            <srai>BLAH BLAH</srai>
+        </template>
+    </category>
+
+
+</aiml>

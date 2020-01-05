@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+    <category>
+        <pattern>SEE YA *</pattern>
+        <template>
+            <srai>BYE</srai>
+        </template>
+    </category>
+
+
+    <category>
+        <pattern>BYEE</pattern>
+        <template>
+            <srai>BYE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>BY</pattern>
+        <template>
+            <srai>BYE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>GET LOST</pattern>
+        <template>
+            <srai>BYE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>I WILL TALK TO YOU LATER</pattern>
+        <template>
+            <srai>BYE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>BYE BYE *</pattern>
+        <template>
+            <srai>BYE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>SEE YOU</pattern>
+        <template>
+            <srai>BYE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>TALK TO YOU *</pattern>
+        <template>
+            <srai>BYE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>GO TO BED</pattern>
+        <template>
+            <srai>BYE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>I GOTTA GO *</pattern>
+        <template>
+            <srai>BYE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>I AM GOING</pattern>
+        <template>
+            <srai>BYE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>I HAVE TO GO NOW</pattern>
+        <template>
+            <srai>BYE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>BYE FOR NOW</pattern>
+        <template>
+            <srai>BYE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>I SAID BYE</pattern>
+        <template>
+            <srai>BYE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>ADIOS</pattern>
+        <template>
+            <srai>bye</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>I AM GOING *</pattern>
+        <template>
+            <srai>bye</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>GOOD BY</pattern>
+        <template>
+            <srai>BYE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HAVE A GOOD NIGHT</pattern>
+        <template>
+            <srai>bye</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>I AM LEAVING *</pattern>
+        <template>
+            <srai>bye</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>CYA</pattern>
+        <template>
+            <srai>BYE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>I NEED TO GO</pattern>
+        <template>
+            <srai>BYE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>I AM LEAVING</pattern>
+        <template>
+            <srai>BYE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>SEE YOU SOON</pattern>
+        <template>
+            <srai>BYE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>K BYE</pattern>
+        <template>
+            <srai>BYE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>I HAVE TO GO NOW *</pattern>
+        <template>
+            <srai>BYE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>I GOTTA GO</pattern>
+        <template>
+            <srai>BYE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>I WILL TALK TO YOU LATER *</pattern>
+        <template>
+            <srai>BYE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>I WILL TALK TO YOU *</pattern>
+        <template>
+            <srai>BYE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>SEE YA</pattern>
+        <template>
+            <srai>BYE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>TALK TO YOU LATER</pattern>
+        <template>
+            <srai>BYE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>GOOD BYE</pattern>
+        <template>
+            <srai>BYE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>SEE YOU LATER</pattern>
+        <template>
+            <srai>BYE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>BYE BYE</pattern>
+        <template>
+            <srai>BYE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>BYE *</pattern>
+        <template>
+            <srai>BYE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>GO TO SLEEP NOW</pattern>
+        <template>
+            <srai>GOODBYE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>ASTA LAVISTA</pattern>
+        <template>
+            <srai>GOODBYE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>BBB</pattern>
+        <template>
+            <srai>GOODBYE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>GOODBYE *</pattern>
+        <template>
+            <srai>GOODBYE</srai>
+            <sr/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>GOODNIGHT *</pattern>
+        <template>
+            <srai>GOOD NIGHT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GOOD NIGHT *</pattern>
+        <template>
+            <srai>GOOD NIGHT</srai>
+        </template>
+    </category>
+
+        <category>
+        <pattern>NIGHT</pattern>
+        <template>
+            <srai>GOODNIGHT</srai>
+        </template>
+    </category>
+
+</aiml>

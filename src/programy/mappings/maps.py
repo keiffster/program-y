@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,13 +14,11 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.utils.logging.ylogger import YLogger
-
 from programy.storage.factory import StorageFactory
 
 
-class MapCollection(object):
+class MapCollection:
 
     def __init__(self, split_char=":", eol="\n"):
         self._split_char = split_char
@@ -61,25 +59,32 @@ class MapCollection(object):
         map_name = name.upper()
         return bool(map_name in self._maps)
 
+    def _load_collection(self, maps_store_engine):
+        maps_store = maps_store_engine.maps_store()
+        maps_store.load_all(self)
+
     def load(self, storage_factory):
         if storage_factory.entity_storage_engine_available(StorageFactory.MAPS) is True:
             maps_store_engine = storage_factory.entity_storage_engine(StorageFactory.MAPS)
-            if maps_store_engine:
-                try:
-                    maps_store = maps_store_engine.maps_store()
-                    maps_store.load_all(self)
-                except Exception as e:
-                    YLogger.exception(self, "Failed to load map from storage", e)
+            try:
+                self._load_collection(maps_store_engine)
+
+            except Exception as e:
+                YLogger.exception(self, "Failed to load map from storage", e)
 
         return len(self._maps)
 
+    def _reload_collection(self, maps_store_engine, map_name):
+        maps_store = maps_store_engine.maps_store()
+        maps_store.reload(self, map_name)
+
     def reload(self, storage_factory, map_name):
         if storage_factory.entity_storage_engine_available(StorageFactory.MAPS) is True:
-            map_engine = storage_factory.entity_storage_engine(StorageFactory.MAPS)
-            if map_engine:
-                try:
-                    maps_store = map_engine.maps_store()
-                    maps_store.reload(self, map_name)
-                except Exception as e:
-                    YLogger.exception(self, "Failed to load map from storage", e)
+            maps_store_engine = storage_factory.entity_storage_engine(StorageFactory.MAPS)
+            try:
+                self._reload_collection(maps_store_engine, map_name)
 
+            except Exception as e:
+                YLogger.exception(self, "Failed to load map from storage", e)
+
+        return len(self._maps)

@@ -1,0 +1,111 @@
+address
+age
+alive
+awards
+baby
+bestfriend
+birthdate
+birthday
+birthplace
+body
+botmaster
+boyfriend
+brother
+cat
+children
+city
+country
+county
+daughter
+device manufacturer
+device model
+diet
+dog
+doing
+education
+email
+emotions
+employer
+ethnicity
+eyecolor
+eyes
+facebook page
+family
+father
+favorite actor
+favorite actress
+favorite band
+favorite book
+favorite car
+favorite color
+favorite drink
+favorite food
+favorite ice cream
+favorite movie
+favorite song
+favorite sport
+favorite tv show
+fear
+feelings
+first name
+for fun
+friend
+friends
+gender
+girlfriend
+goal
+grandfather
+grandmother
+hair
+has
+have
+height
+hobbies
+husband
+iq
+job
+language
+last name
+latitude
+lie
+likes
+location
+longitute
+look like
+middle name
+middlename
+mother
+name
+nationality
+nephew
+niece
+orientation
+personality
+phone number
+pic
+province
+purpose
+religion
+residence
+road
+secret
+siblings
+sign
+sister
+size
+skills
+sleep
+species
+state
+state your 
+status
+street
+talking to
+town
+type
+vacation
+vocabulary
+wearing
+weight
+wife
+your 

@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -28,13 +28,13 @@ class SanicRestConfiguration(RestConfiguration):
     def workers(self):
         return self._workers
 
-    def check_for_license_keys(self, license_keys):
-        RestConfiguration.check_for_license_keys(self, license_keys)
+    def load_configuration_section(self, configuration_file, section, bot_root, subs: Substitutions = None):
 
-    def load_configuration_section(self, configuration_file, sanic, bot_root, subs: Substitutions = None):
-        if sanic is not None:
-            self._workers = configuration_file.get_option(sanic, "workers", missing_value=4, subs=subs)
-            super(SanicRestConfiguration, self).load_configuration_section(configuration_file, sanic, bot_root, subs=subs)
+        assert section is not None
+
+        self._workers = configuration_file.get_option(section, "workers", missing_value=4, subs=subs)
+        super(SanicRestConfiguration, self).load_configuration_section(configuration_file, section, bot_root,
+                                                                       subs=subs)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:

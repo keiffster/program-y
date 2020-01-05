@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -21,7 +21,6 @@ from programy.storage.stores.nosql.mongo.dao.conversation import Conversation
 
 
 class MongoConversationStore(MongoStore, ConversationStore):
-
     CONVERSATIONS = 'conversations'
     CONVERSATION = 'conversation'
     CLIENITD = 'clientid'
@@ -29,16 +28,19 @@ class MongoConversationStore(MongoStore, ConversationStore):
 
     def __init__(self, storage_engine):
         MongoStore.__init__(self, storage_engine)
+        ConversationStore.__init__(self)
 
     def collection_name(self):
         return MongoConversationStore.CONVERSATIONS
 
-    def store_conversation(self, client_context, conversation):
-        YLogger.info(client_context, "Storing conversation to Mongo [%s] [%s]", client_context.client.id, client_context.userid)
+    def store_conversation(self, client_context, conversation, commit=True):
+        YLogger.info(client_context, "Storing conversation to Mongo [%s] [%s]", client_context.client.id,
+                     client_context.userid)
         return self.add_document(Conversation(client_context, conversation))
 
     def load_conversation(self, client_context, conversation):
-        YLogger.info(client_context, "Loading conversation from Mongo [%s] [%s]", client_context.client.id, client_context.userid)
+        YLogger.info(client_context, "Loading conversation from Mongo [%s] [%s]", client_context.client.id,
+                     client_context.userid)
         collection = self.collection()
         document = collection.find_one({MongoConversationStore.CLIENITD: client_context.client.id,
                                         MongoConversationStore.USERID: client_context.userid})

@@ -1,11 +1,11 @@
+import os
 import unittest
 import unittest.mock
-import os
 
-from programytest.client import TestClient
-from programy.services.service import Service
 from programy.config.brain.service import BrainServiceConfiguration
+from programy.services.service import Service
 from programy.services.service import ServiceFactory
+from programytest.client import TestClient
 
 
 class SraixTestClient(TestClient):

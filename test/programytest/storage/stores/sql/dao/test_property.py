@@ -1,7 +1,7 @@
 import unittest
 
-from programy.storage.stores.sql.dao.property import Property
 from programy.storage.stores.sql.dao.property import DefaultVariable
+from programy.storage.stores.sql.dao.property import Property
 from programy.storage.stores.sql.dao.property import Regex
 
 

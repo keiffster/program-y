@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -15,8 +15,13 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
+class StorageEngineException(Exception):
 
-class StorageEngine(object):
+    def __init__(self, msg):
+        Exception.__init__(self, msg)
+
+
+class StorageEngine:
 
     def __init__(self, configuration):
         self._configuration = configuration
@@ -26,97 +31,97 @@ class StorageEngine(object):
         return self._configuration
 
     def user_store(self):
-        raise NotImplementedError("Engine does not support user storage")
+        raise StorageEngineException("Engine does not support user storage")
 
     def linked_account_store(self):
-        raise NotImplementedError("Engine does not support linked account storage")
+        raise StorageEngineException("Engine does not support linked account storage")
 
     def link_store(self):
-        raise NotImplementedError("Engine does not support link storage")
+        raise StorageEngineException("Engine does not support link storage")
 
     def category_store(self):
-        raise NotImplementedError("Engine does not support category storage")
+        raise StorageEngineException("Engine does not support category storage")
 
     def errors_store(self):
-        raise NotImplementedError("Engine does not support errors storage")
+        raise StorageEngineException("Engine does not support errors storage")
 
     def duplicates_store(self):
-        raise NotImplementedError("Engine does not support duplicates storage")
+        raise StorageEngineException("Engine does not support duplicates storage")
 
     def learnf_store(self):
-        raise NotImplementedError("Engine does not support learnf storage")
+        raise StorageEngineException("Engine does not support learnf storage")
 
     def conversation_store(self):
-        raise NotImplementedError("Engine does not support conversation storage")
+        raise StorageEngineException("Engine does not support conversation storage")
 
     def sets_store(self):
-        raise NotImplementedError("Engine does not support sets storage")
+        raise StorageEngineException("Engine does not support sets storage")
 
     def maps_store(self):
-        raise NotImplementedError("Engine does not support maps storage")
+        raise StorageEngineException("Engine does not support maps storage")
 
     def rdf_store(self):
-        raise NotImplementedError("Engine does not support rdf storage")
+        raise StorageEngineException("Engine does not support rdf storage")
 
     def denormal_store(self):
-        raise NotImplementedError("Engine does not support denormal storage")
+        raise StorageEngineException("Engine does not support denormal storage")
 
     def normal_store(self):
-        raise NotImplementedError("Engine does not support normal storage")
+        raise StorageEngineException("Engine does not support normal storage")
 
     def gender_store(self):
-        raise NotImplementedError("Engine does not support gender storage")
+        raise StorageEngineException("Engine does not support gender storage")
 
     def person_store(self):
-        raise NotImplementedError("Engine does not support person storage")
+        raise StorageEngineException("Engine does not support person storage")
 
     def person2_store(self):
-        raise NotImplementedError("Engine does not support person2 storage")
+        raise StorageEngineException("Engine does not support person2 storage")
 
     def regex_store(self):
-        raise NotImplementedError("Engine does not support regex storage")
+        raise StorageEngineException("Engine does not support regex storage")
 
     def property_store(self):
-        raise NotImplementedError("Engine does not support property storage")
+        raise StorageEngineException("Engine does not support property storage")
 
     def defaults_store(self):
-        raise NotImplementedError("Engine does not support variables storage")
+        raise StorageEngineException("Engine does not support variables storage")
 
     def variables_store(self):
-        raise NotImplementedError("Engine does not support variables storage")
+        raise StorageEngineException("Engine does not support variables storage")
 
     def twitter_store(self):
-        raise NotImplementedError("Engine does not support twitter storage")
+        raise StorageEngineException("Engine does not support twitter storage")
 
     def spelling_store(self):
-        raise NotImplementedError("Engine does not support spelling storage")
+        raise StorageEngineException("Engine does not support spelling storage")
 
     def license_store(self):
-        raise NotImplementedError("Engine does not support license storage")
+        raise StorageEngineException("Engine does not support license storage")
 
     def pattern_nodes_store(self):
-        raise NotImplementedError("Engine does not support pattern nodes storage")
+        raise StorageEngineException("Engine does not support pattern nodes storage")
 
     def template_nodes_store(self):
-        raise NotImplementedError("Engine does not support template nodes storage")
+        raise StorageEngineException("Engine does not support template nodes storage")
 
     def binaries_store(self):
-        raise NotImplementedError("Engine does not support binaries storage")
+        raise StorageEngineException("Engine does not support binaries storage")
 
     def braintree_store(self):
-        raise NotImplementedError("Engine does not support braintree storage")
+        raise StorageEngineException("Engine does not support braintree storage")
 
     def preprocessors_store(self):
-        raise NotImplementedError("Engine does not support preprocessor storage")
+        raise StorageEngineException("Engine does not support preprocessor storage")
 
     def postprocessors_store(self):
-        raise NotImplementedError("Engine does not support postprocessor storage")
+        raise StorageEngineException("Engine does not support postprocessor storage")
 
     def postquestionprocessors_store(self):
-        raise NotImplementedError("Engine does not support postprocessor storage")
+        raise StorageEngineException("Engine does not support postprocessor storage")
 
     def usergroups_store(self):
-        raise NotImplementedError("Engine does not support user groups storage")
+        raise StorageEngineException("Engine does not support user groups storage")
 
     def triggers_store(self):
-        raise NotImplementedError("Engine does not support trigger storage")
+        raise StorageEngineException("Engine does not support trigger storage")

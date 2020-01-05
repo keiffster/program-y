@@ -1,8 +1,9 @@
 import unittest
 
-from programy.config.file.yaml_file import YamlConfigurationFile
 from programy.clients.events.console.config import ConsoleConfiguration
 from programy.config.bot.bot import BotConfiguration
+from programy.config.file.yaml_file import YamlConfigurationFile
+
 
 class ConsoleConfigurationTests(unittest.TestCase):
     
@@ -11,7 +12,6 @@ class ConsoleConfigurationTests(unittest.TestCase):
         self.assertIsNotNone(yaml)
         yaml.load_from_text("""
         console:
-          bot: bot
           default_userid: console
           prompt: $
         """, ConsoleConfiguration(), ".")
@@ -48,19 +48,23 @@ class ConsoleConfigurationTests(unittest.TestCase):
         self.assertEqual('console', data['default_userid'])
         self.assertEqual('>>>', data['prompt'])
 
-        self.assertEqual(data['bot'], 'bot')
-        self.assertEqual(data['bot_selector'], "programy.clients.client.DefaultBotSelector")
         self.assertEqual(data['renderer'], "programy.clients.render.text.TextRenderer")
+
+        self.assertTrue('bots' in data)
+        self.assertTrue('bot' in data['bots'])
+        self.assertEqual(data['bot_selector'], "programy.clients.botfactory.DefaultBotSelector")
+
+        self.assertTrue('brains' in data['bots']['bot'])
+        self.assertTrue('brain' in data['bots']['bot']['brains'])
 
     def test_to_yaml_without_defaults(self):
         yaml = YamlConfigurationFile()
         self.assertIsNotNone(yaml)
         yaml.load_from_text("""
         console:
-          bot: bot
           default_userid: console
           prompt: $
-          bot_selector: programy.clients.client.DefaultBotSelector
+          bot_selector: programy.clients.botfactory.DefaultBotSelector
           renderer: programy.clients.render.text.TextRenderer
         """, ConsoleConfiguration(), ".")
 
@@ -73,6 +77,28 @@ class ConsoleConfigurationTests(unittest.TestCase):
         self.assertEqual('console', data['default_userid'])
         self.assertEqual('$', data['prompt'])
 
-        self.assertEqual(data['bot'], 'bot')
-        self.assertEqual(data['bot_selector'], "programy.clients.client.DefaultBotSelector")
+        self.assertEqual(data['bot_selector'], "programy.clients.botfactory.DefaultBotSelector")
         self.assertEqual(data['renderer'], "programy.clients.render.text.TextRenderer")
+
+        self.assertTrue('bots' in data)
+        self.assertTrue('bot' in data['bots'])
+        self.assertEqual(data['bot_selector'], "programy.clients.botfactory.DefaultBotSelector")
+
+        self.assertTrue('brains' in data['bots']['bot'])
+        self.assertTrue('brain' in data['bots']['bot']['brains'])
+
+    def test_to_yaml_no_data(self):
+        yaml = YamlConfigurationFile()
+        self.assertIsNotNone(yaml)
+        yaml.load_from_text("""
+        other:
+        """, ConsoleConfiguration(), ".")
+
+        config = ConsoleConfiguration()
+        config.load_configuration(yaml, ".")
+
+        data = {}
+        config.to_yaml(data, False)
+
+        self.assertEqual('console', data['default_userid'])
+        self.assertEqual('>>>', data['prompt'])

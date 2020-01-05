@@ -1,14 +1,22 @@
 import unittest.mock
 
-from programy.brain import Brain
-from programy.bot import BrainFactory
 from programy.bot import Bot
+from programy.brain import Brain
+from programy.clients.events.console.config import ConsoleConfiguration
 from programy.config.bot.bot import BotConfiguration
 from programy.config.programy import ProgramyConfiguration
-from programy.clients.events.console.config import ConsoleConfiguration
 from programy.context import ClientContext
-
+from programy.dialog.sentence import Sentence
 from programytest.client import TestClient
+
+
+class MockTriggerManager:
+
+    def __init__(self):
+        self._triggered = False
+
+    def trigger(self, type, client_context):
+        self._triggered = True
 
 
 class MockBrain(Brain):
@@ -23,28 +31,25 @@ class MockBrain(Brain):
 
 class MockBot(Bot):
 
-    def __init__(self, config: BotConfiguration, client):
+    def __init__(self, config: BotConfiguration, client, pre_processed=None, post_processed=None):
         Bot.__init__(self, config, client)
+        self._pre_processed = pre_processed
+        self._post_processed = post_processed
 
     def loads_brains(self, bot):
         self._brains["mock"] = MockBrain(self, self.configuration.configurations[0])
 
+    def _brain_pre_process_question(self, client_context, text):
+        if self._pre_processed is not None:
+            return self._pre_processed
+        else:
+            super(MockBot, self)._brain_pre_process_question(client_context, text)
 
-class BrainFactoryTests(unittest.TestCase):
-
-    def test_empty_config_init(self):
-        configuration = BotConfiguration()
-        configuration._bot_selector = "programy.clients.client.DefaultBrainSelector"
-
-        client = TestClient()
-        bot = Bot(configuration, client)
-
-        factory = BrainFactory(bot)
-        self.assertIsNotNone(factory)
-
-        brain = factory.select_brain()
-        self.assertIsNotNone(brain)
-        self.assertIsInstance(brain, Brain)
+    def _brain_post_process_question(self, client_context, question):
+        if self._post_processed is not None:
+            return self._post_processed
+        else:
+            super(MockBot, self)._brain_post_process_question(client_context, question)
 
 
 class BotTests(unittest.TestCase):
@@ -640,3 +645,75 @@ class BotTests(unittest.TestCase):
         response_logger = unittest.mock.Mock()
 
         bot.log_answer(self._client_context, "Hello", "Test", response_logger)
+
+    def test_pre_process_text_without_srai(self):
+        bot_config = BotConfiguration()
+        client = TestClient()
+        bot = MockBot(bot_config, client, pre_processed="DLROW OLLEH")
+
+        result = bot.pre_process_text(self._client_context, "HELLO WORLD", False)
+        self.assertIsNotNone(result)
+        self.assertEqual("DLROW OLLEH", result)
+
+    def test_pre_process_text_with_srai(self):
+        bot_config = BotConfiguration()
+        client = TestClient()
+        bot = Bot(bot_config, client)
+
+        result = bot.pre_process_text(self._client_context, "HELLO WORLD", True)
+        self.assertIsNotNone(result)
+        self.assertEqual("HELLO WORLD", result)
+
+    def test_post_process_question_without_srai(self):
+        bot_config = BotConfiguration()
+        client = TestClient()
+        bot = MockBot(bot_config, client, post_processed="DLROW OLLEH")
+
+        result = bot.post_process_question(self._client_context, "HELLO WORLD", False)
+        self.assertIsNotNone(result)
+        self.assertEqual("DLROW OLLEH", result)
+
+    def test_post_process_question_without_srai_and_none_post_process_response(self):
+        bot_config = BotConfiguration()
+        client = TestClient()
+        bot = MockBot(bot_config, client, post_processed=None)
+        bot.configuration._default_response = "Default Hello"
+        result = bot.post_process_question(self._client_context, "HELLO WORLD", False)
+        self.assertIsNotNone(result)
+        self.assertEqual("Default Hello", result)
+
+    def test_post_process_question_with_srai(self):
+        bot_config = BotConfiguration()
+        client = TestClient()
+        bot = Bot(bot_config, client)
+
+        result = bot.post_process_question(self._client_context, "HELLO WORLD", True)
+        self.assertIsNotNone(result)
+        self.assertEqual("HELLO WORLD", result)
+
+    def test_ask_question_without_triggermgr(self):
+        bot_config = BotConfiguration()
+        client = TestClient()
+        client._trigger_mgr = None
+        bot = Bot(bot_config, client)
+
+        bot.ask_question(self._client_context, "HELLO WORLD")
+
+    def test_handle_none_respons_withtriggermgr(self):
+        bot_config = BotConfiguration()
+        client = TestClient()
+        client._trigger_mgr = MockTriggerManager()
+        bot = Bot(bot_config, client)
+
+        bot.ask_question(self._client_context, "HELLO WORLD")
+        self.assertTrue(client._trigger_mgr._triggered)
+
+    def test_handle_none_response(self):
+        bot_config = BotConfiguration()
+        client = TestClient()
+        bot = MockBot(bot_config, client, post_processed=None)
+        bot.configuration._default_response = "Default Hello"
+
+        result = bot.handle_none_response(self._client_context, Sentence(self._client_context, "Hello", None), None)
+        self.assertIsNotNone(result)
+        self.assertEqual("Default Hello", result)

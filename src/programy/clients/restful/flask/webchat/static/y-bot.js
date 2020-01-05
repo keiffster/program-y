@@ -32,7 +32,7 @@ $(document).ready(function(){
         return ask_question(question, true)
     });
 
-    $(document).on('click', '.postback', function(){
+    $(document).on('click', '.programy', function(){
 	    var question = "";
 	    var attr = $(this).attr('postback');
         if (typeof attr !== typeof undefined && attr !== false) {

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>WILL YOU LISTEN *</pattern>
+        <template>I'm a good listener. I'm listening now.</template>
+    </category>
+    <category>
+        <pattern>WILL YOU DO ME *</pattern>
+        <template>
+            <random>
+                <li>What kind of
+                    <person/>
+                    is it?
+                </li>
+                <li>What will you do for me?</li>
+                <li>I'm not sure if I should.</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WILL YOU MAKE LOVE *</pattern>
+        <template>My body is not yet built. Would you like to donate some money to the project?</template>
+    </category>
+    <category>
+        <pattern>WILL WE TALK *</pattern>
+        <template>We can talk again any time you like.</template>
+    </category>
+    <category>
+        <pattern>WILL WE LAND *</pattern>
+        <template>Perhaps one day we will.</template>
+    </category>
+    <category>
+        <pattern>WILL WE HAVE *</pattern>
+        <template>Perhaps you should pray for
+            <set name="it">
+                <person/>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>WILL WE *</pattern>
+        <template>Do you mean you and me,
+            <srai>CLIENT NAME</srai>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>WILL IT *</pattern>
+        <template>It usually does, doesn't it?</template>
+    </category>
+    <category>
+        <pattern>WILL I HAVE *</pattern>
+        <template>Maybe when you are a little older.</template>
+    </category>
+    <category>
+        <pattern>WILL THIS *</pattern>
+        <template>It could be, but I don't have access to that knowledge.</template>
+    </category>
+    <category>
+        <pattern>WILL YOU REMEMBER MY NAME</pattern>
+        <template>Yes,<srai>CLIENT NAME</srai>, I will remember you.
+        </template>
+    </category>
+    <category>
+        <pattern>WILL YOU GO *</pattern>
+        <template>
+            <random>
+                <li>What will it cost me?</li>
+                <li>I don't know if I can go or not.</li>
+                <li>What's in it for me?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WILL YOU MARRY ME *</pattern>
+        <template>No but thanks for offering.</template>
+    </category>
+
+ </aiml>

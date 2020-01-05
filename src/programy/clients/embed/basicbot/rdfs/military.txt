@@ -1,0 +1,24 @@
+ARMY:hasPurpose:to defend a nation
+ARMY:hasSize:10
+ARMY:hasSyllables:2
+ARMY:isa:Military
+ARMY:lifeArea:Social
+NAVY:hasPurpose:to protect the seas
+NAVY:hasSize:10
+NAVY:hasSyllables:2
+NAVY:isa:Military Organization
+NAVY:lifeArea:Social
+Military action:isa:Conflict
+Military Officer:isa:Person
+GENERAL:hasPurpose:to lead an army
+GENERAL:hasSize:0
+GENERAL:hasSyllables:3
+GENERAL:isa:Military Officer
+GENERAL:isa:Person
+GENERAL:lifeArea:Social
+WAR:hasPurpose:to conquer another country
+WAR:hasSize:11
+WAR:hasSyllables:1
+WAR:isa:Conflict
+WAR:isa:Military action
+WAR:lifeArea:Social

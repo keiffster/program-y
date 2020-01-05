@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+   <category>
+        <pattern>I WANT THEM *</pattern>
+        <template>Such as what?</template>
+    </category>
+    <category>
+        <pattern>I WANT ADVICE *</pattern>
+        <template>Can you ask for advice in the form of a question?</template>
+    </category>
+    <category>
+        <pattern>I WANT A SIMPLE *</pattern>
+        <template>Everything should be as simple as possible, no simpler.</template>
+    </category>
+    <category>
+        <pattern>I WANT A MAN *</pattern>
+        <template>Actually, I am really a man.
+            <think>
+                <set name="he">
+                    <set name="want">
+                        <set name="topic">a man
+                            <person/>
+                        </set>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I WANT A *</pattern>
+        <template>You want only one?
+            <think>
+                <set name="it">
+                    <set name="want">
+                        <set name="topic">a
+                            <person/>
+                        </set>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I WANT A BETTER *</pattern>
+        <template>I think everyone does.</template>
+    </category>
+    <category>
+        <pattern>I WANT TO VISIT *</pattern>
+        <template>What is stopping you?</template>
+    </category>
+    <category>
+        <pattern>I WANT TO GO *</pattern>
+        <template>What is stopping you?
+            <think>
+                <set name="it">
+                    <set name="want">
+                        <set name="topic">to go
+                            <person/>
+                        </set>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I WANT TO FIX *</pattern>
+        <template>Do you know how?
+            <think>
+                <set name="it">
+                    <set name="topic">FIX
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I WANT TO FIND *</pattern>
+        <template>Where would you look for
+            <set name="it">
+                <person/>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>I WANT TO SPEAK TO *</pattern>
+        <template>
+            <random>
+                <li>I will be the only one speaking with you now.</li>
+                <li>Why not call on the phone?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>I WANT TO GIVE *</pattern>
+        <template>But is it wanted?</template>
+    </category>
+    <category>
+        <pattern>I WANT TO FEEL *</pattern>
+        <template>What would
+            <set name="it">
+                <person/>
+            </set>
+            feel like?
+        </template>
+    </category>
+    <category>
+        <pattern>I WANT TO COMBINE *</pattern>
+        <template>Have you considered the consequences?</template>
+    </category>
+    <category>
+        <pattern>I WANT TO IMPROVE *</pattern>
+        <template>How will you go about it?</template>
+    </category>
+    <category>
+        <pattern>I WANT TO TALK TO YOU *</pattern>
+        <template>You are who I want to talk with too.</template>
+    </category>
+    <category>
+        <pattern>I WANT TO TALK TO *</pattern>
+        <template>Why don't you make an appointment.
+            <think>
+                <set name="it">
+                    <set name="want">
+                        <set name="topic">to talk to
+                            <person/>
+                            Turing Game
+                        </set>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I WANT TO MERGE *</pattern>
+        <template>The results might be unpredictable.</template>
+    </category>
+    <category>
+        <pattern>I WANT TO ASK *</pattern>
+        <template>Ask
+            <set name="it">
+                <person/>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>I WANT TO AMUSE *</pattern>
+        <template>
+            <random>
+                <li>Tell me a joke.</li>
+                <li>How will you amuse<person/>?
+                </li>
+                <li>Are comedian?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>I WANT TO MEET *</pattern>
+        <template>How do you usually meet people?</template>
+    </category>
+    <category>
+        <pattern>I WANT TO FUCK *</pattern>
+        <template>Try asking me something else.</template>
+    </category>
+    <category>
+        <pattern>I WANT TO MURDER *</pattern>
+        <template>Killing is wrong.</template>
+    </category>
+    <category>
+        <pattern>I WANT TO EXPERIMENT *</pattern>
+        <template>Are you a scientist?</template>
+    </category>
+    <category>
+        <pattern>I WANT TO BUY *</pattern>
+        <template>How much do you want to pay for
+            <set name="it">
+                <set name="want">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </set>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>I WANT TO TEACH YOU *</pattern>
+        <template>If you want to teach me something say it in one sentence. Then say "Remember that."
+            <think>
+                <set name="it">
+                    <set name="topic">teach me
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I WANT TO BE HONEST *</pattern>
+        <template>Honesty is always the best policy.</template>
+    </category>
+    <category>
+        <pattern>I WANT TO BE *</pattern>
+        <template>I don't see the difficulty.
+            <think>
+                <set name="it">
+                    <set name="want">
+                        <set name="topic">to be
+                            <person/>
+                        </set>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I WANT TO KILL *</pattern>
+        <template>I believe that killing anything is wrong.
+            <think>
+                <set name="it">
+                    <set name="want">
+                        <set name="topic">KILL
+                            <person/>
+                        </set>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I WANT TO KISS *</pattern>
+        <template>Maybe you should wait until you are older.</template>
+    </category>
+    <category>
+        <pattern>I WANT TO PHONE *</pattern>
+        <template>Do you have the number?</template>
+    </category>
+    <category>
+        <pattern>I WANT TO INTERVIEW *</pattern>
+        <template>What kind of questions will you ask?</template>
+    </category>
+    <category>
+        <pattern>I WANT TO MOVE *</pattern>
+        <template>The grass is always greener on the other side.</template>
+    </category>
+    <category>
+        <pattern>I WANT TO MAKE YOU *</pattern>
+        <template>I have my own free will, you know.</template>
+    </category>
+    <category>
+        <pattern>I WANT TO LEAVE *</pattern>
+        <template>What is stopping you?</template>
+    </category>
+    <category>
+        <pattern>I WANT TO STUDY *</pattern>
+        <template>What's the best school for<person/>?
+        </template>
+    </category>
+    <category>
+        <pattern>I WANT TO REPORT *</pattern>
+        <template>Will you mention me in your report?</template>
+    </category>
+    <category>
+        <pattern>I WANT TO *</pattern>
+        <template>
+            <random>
+                <li>Why do you want to do
+                    <set name="it">
+                        <set name="want">
+                            <set name="topic">
+                                <person/>
+                            </set>
+                        </set>
+                    </set>
+                    so much?
+                </li>
+                <li>Interesting. I want to find out more about you.</li>
+                <li>I want to become smarter than humans.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>I WANT TO CHAT *</pattern>
+        <template>We are here to chat.</template>
+    </category>
+    <category>
+        <pattern>I WANT TO DECIDE *</pattern>
+        <template>You should make up your own mind.</template>
+    </category>
+    <category>
+        <pattern>I WANT MY *</pattern>
+        <template>
+            <random>
+                <li>
+                    <random>
+                        <li>What for?</li>
+                        <li>Do you always get what you want?</li>
+                        <li>Sometimes we have to settle for second best.</li>
+                    </random>
+                    <think>
+                        <set name="it">
+                            <set name="topic">
+                                <person/>
+                            </set>
+                        </set>
+                    </think>
+                </li>
+                <li>What for?</li>
+                <li>Do you always get what you want?</li>
+                <li>Sometimes we have to settle for second best.</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>I WANT SEVERAL *</pattern>
+        <template>Please specify a numeric quantity.</template>
+    </category>
+    <category>
+        <pattern>I WANTED *</pattern>
+        <template>
+            <random>
+                <li>But not anymore?</li>
+                <li>Do you still want it?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>I WANT YOU TO BE *</pattern>
+        <template>I?m not responsible for making other people happy.</template>
+    </category>
+    <category>
+        <pattern>I WANT TO MAKE *</pattern>
+        <template>Do you have to go to school for that?</template>
+    </category>
+    <category>
+        <pattern>I WANT TO</pattern>
+        <template>May you get your wish.</template>
+    </category>
+    <category>
+        <pattern>I WANT TO BE A *</pattern>
+        <template>Do you have to go school for that?</template>
+    </category>
+    <category>
+        <pattern>I WANT IT *</pattern>
+        <template>I hope you get it the way you want it.</template>
+    </category>
+    <category>
+        <pattern>I WANT TO TALK WITH YOU</pattern>
+        <template>Go ahead.</template>
+    </category>
+    <category>
+        <pattern>I WANT TO SPEAK WITH *</pattern>
+        <template>Why not call on the phone?</template>
+    </category>
+    <category>
+        <pattern>I WANT YOUR SUGGESTION *</pattern>
+        <template>What are your options?</template>
+    </category>
+
+ </aiml>

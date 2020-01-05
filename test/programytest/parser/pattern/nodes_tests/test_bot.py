@@ -1,8 +1,9 @@
-from programytest.parser.base import ParserTestsBaseClass
-
-from programy.parser.pattern.nodes.bot import PatternBotNode
 from programy.dialog.sentence import Sentence
 from programy.parser.exceptions import ParserException
+from programy.parser.pattern.nodes.bot import PatternBotNode
+from programy.parser.pattern.nodes.word import PatternWordNode
+from programytest.parser.base import ParserTestsBaseClass
+
 
 class PatternBotNodeTests(ParserTestsBaseClass):
 
@@ -32,9 +33,6 @@ class PatternBotNodeTests(ParserTestsBaseClass):
         self.assertEqual(str(raised.exception), "Invalid bot node, neither name or property specified as attribute or text")
 
     def test_init(self):
-
-        self._client_context.brain.properties.add_property("test1", "value1")
-
         node = PatternBotNode({}, "test1")
         self.assertIsNotNone(node)
 
@@ -49,9 +47,22 @@ class PatternBotNodeTests(ParserTestsBaseClass):
         self.assertFalse(node.is_that())
         self.assertFalse(node.is_topic())
         self.assertFalse(node.is_wildcard())
+        self.assertEqual(node.to_string(), "BOT [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] property=[test1]")
+        self.assertEqual('<bot property="test1">\n</bot>', node.to_xml(self._client_context))
+
+    def test_equivalent(self):
+        node = PatternBotNode({}, "test1")
+        self.assertIsNotNone(node)
 
         self.assertTrue(node.equivalent(PatternBotNode([], "test1")))
         self.assertFalse(node.equivalent(PatternBotNode([], "test2")))
+        self.assertFalse(node.equivalent(PatternWordNode("test2")))
+
+    def test_equals(self):
+        node = PatternBotNode({}, "test1")
+        self.assertIsNotNone(node)
+
+        self._client_context.brain.properties.add_property("test1", "value1")
 
         sentence = Sentence(self._client_context, "value1 value2")
 
@@ -63,8 +74,14 @@ class PatternBotNodeTests(ParserTestsBaseClass):
         self.assertFalse(result.matched)
         self.assertEqual(1, result.word_no)
 
-        self.assertEqual(node.to_string(), "BOT [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] property=[test1]")
-        self.assertEqual('<bot property="test1">\n</bot>', node.to_xml(self._client_context))
+    def test_not_equals(self):
+        node = PatternBotNode({}, "test1")
+        self.assertIsNotNone(node)
+
+        sentence = Sentence(self._client_context, "value1 value2")
+
+        result = node.equals(self._client_context, sentence, 0)
+        self.assertFalse(result.matched)
 
     def test_to_xml(self):
         bot1 = PatternBotNode({}, "bot1")

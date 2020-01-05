@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -19,49 +19,45 @@ from programy.storage.entities.store import Store
 
 
 class MongoStore(Store):
-
     MONGO = "mongo"
 
     def __init__(self, storage_engine):
+        Store.__init__(self)
         self._storage_engine = storage_engine
-
-    def store_name(self):
-        return MongoStore.MONGO
 
     @property
     def storage_engine(self):
         return self._storage_engine
 
     def drop(self):
-        YLogger.info(self, "Dropping storage [%s]", self.store_name())
-        self.collection().drop ()
+        YLogger.info(self, "Dropping mongo storage")
+        self.collection().drop()
 
-    def commit(self):
-        YLogger.info(self, "Commit collection [%s] not supported on Mongo", self.collection_name())
+    def commit(self, commit=True):
+        del commit
+        YLogger.info(self, "Commit collection not supported on Mongo")
 
-    def rollback(self):
-        YLogger.info(self, "Rollback collection [%s] not supported on Mongo", self.collection_name())
+    def rollback(self, commit=True):
+        del commit
+        YLogger.info(self, "Rollback collection not supported on Mongo")
 
     def collection_name(self):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     def collection(self):
-        return self._storage_engine._database[self.collection_name()]
+        return self._storage_engine.database[self.collection_name()]
 
     def empty(self):
         YLogger.info(self, "Emptying collection [%s]", self.collection_name())
         collection = self.collection()
         collection.delete_many({})
 
+    def _add_to_collection(self, collection, document):
+        result = collection.insert_one(document.to_document())
+        return result.inserted_id
+
     def add_document(self, document):
         YLogger.debug(self, "Adding document to collection [%s]", self.collection_name())
         collection = self.collection()
-        result = collection.insert_one(document.to_document())
-        document.id = result.inserted_id
-        return True
-
-    def replace_document(self, document):
-        YLogger.debug(self, "Replacing document in collection [%s]", self.collection_name())
-        collection = self.collection()
-        collection.replace_one({'_id': document.id}, document.to_document())
-        return True
+        document.id = self._add_to_collection(collection, document)
+        return bool(document.id is not None)

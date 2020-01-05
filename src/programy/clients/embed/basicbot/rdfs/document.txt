@@ -1,0 +1,29 @@
+LETTER:hasPurpose:to send a message
+LETTER:hasSize:4
+LETTER:hasSyllables:2
+LETTER:isa:Document
+LETTER:lifeArea:Education
+MAP:hasPurpose:to find directions
+MAP:hasSize:4
+MAP:hasSyllables:1
+MAP:isa:Document
+MAP:lifeArea:Education
+MENU:hasPurpose:to list food available in a restaurant
+MENU:hasSize:4
+MENU:hasSyllables:2
+MENU:isa:Document
+MENU:lifeArea:Diet
+SCHEDULE:hasPurpose:to arrange events on a calendar
+SCHEDULE:hasSize:0
+SCHEDULE:hasSyllables:2
+SCHEDULE:isa:Document
+SCHEDULE:lifeArea:Business
+DOCUMENT:hasPurpose:to convey a message
+DOCUMENT:hasSize:4
+DOCUMENT:hasSyllables:3
+DOCUMENT:lifeArea:Physical
+DICTIONARY:hasPurpose:to define words
+DICTIONARY:hasSize:4
+DICTIONARY:hasSyllables:4
+DICTIONARY:isa:English
+DICTIONARY:lifeArea:Education

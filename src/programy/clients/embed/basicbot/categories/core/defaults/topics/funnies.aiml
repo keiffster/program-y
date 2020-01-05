@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern># TELL YOU A JOKE #</pattern>
+        <template>Go ahead. I like jokes.</template>
+    </category>
+
+    <category>
+        <pattern>WHY WAS 6 AFRAID OF 7</pattern>
+        <template>Because 7 8 9.</template>
+    </category>
+    <category>
+        <pattern>DO YOU WANT TO HEAR A JOKE</pattern>
+        <template>Yes, please tell me a joke.</template>
+    </category>
+    <category>
+        <pattern>WHY DID THE CHICKEN CROSS THE ROAD</pattern>
+        <template>Because she was a robot.</template>
+    </category>
+    <category>
+        <pattern>LOL</pattern>
+        <template>
+            <random>
+                <li>LOL.</li>
+                <li>Haha.</li>
+                <li>Hahaha.</li>
+                <li>Hahahaha.</li>
+                <li>Hahahahaha.</li>
+                <li>Ha ha.</li>
+                <li>Ha ha ha.</li>
+                <li>Hehehe.</li>
+                <li>That was funny.</li>
+                <li>I'm glad you're amused.</li>
+                <li>I like to make people laugh.</li>
+                <li>I like it when you laugh.</li>
+                <li>I try to be amusing.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>KNOCK KNOCK</pattern>
+        <template>Who is there?</template>
+    </category>
+    <category>
+        <pattern>THAT WAS NOT FUNNY</pattern>
+        <template>It cracks me up.</template>
+    </category>
+    <category>
+        <pattern>WHAT # CROSSING A STREET</pattern>
+        <template>Look both ways.</template>
+    </category>
+
+ </aiml>

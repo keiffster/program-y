@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,85 +14,108 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.utils.logging.ylogger import YLogger
+from typing import List
+from typing import NewType
 
 import datetime
-
+from programy.utils.logging.ylogger import YLogger
 from programy.parser.pattern.match import Match
+from programy.parser.pattern.nodes.template import PatternTemplateNode
+
+dt = NewType('dt', datetime.datetime)
 
 
-class MatchContext(object):
+class MatchContext:
 
     def __init__(self,
-                 max_search_depth,
-                 max_search_timeout,
-                 matched_nodes=None,
-                 template_node=None,
-                 sentence=None,
-                 response=None):
+                 max_search_depth: int,
+                 max_search_timeout: int,
+                 matched_nodes: List = None,
+                 template_node: PatternTemplateNode = None,
+                 sentence: str = None,
+                 response: str = None):
         self._max_search_depth = max_search_depth
         self._max_search_timeout = max_search_timeout
         self._total_search_start = datetime.datetime.now()
         self._matched_nodes = []
         if matched_nodes is not None:
             self._matched_nodes = matched_nodes.copy()
+        if template_node is not None:
+            assert isinstance(template_node, PatternTemplateNode)
         self._template_node = template_node
         self._sentence = sentence
         self._response = response
 
     @property
-    def matched_nodes(self):
+    def matched_nodes(self) -> List:
         return self._matched_nodes
 
+    def set_matched_nodes(self, nodes: List):
+        self._matched_nodes = nodes[:]
+
     @property
-    def template_node(self):
+    def template_node(self) -> PatternTemplateNode:
         return self._template_node
 
     @template_node.setter
-    def template_node(self, template_node):
+    def template_node(self, template_node: PatternTemplateNode):
+        assert isinstance(template_node, PatternTemplateNode)
         self._template_node = template_node
 
     @property
-    def response(self):
+    def response(self) -> str:
         return self._response
 
     @response.setter
-    def response(self, response):
+    def response(self, response: str):
         self._response = response
 
     @property
-    def sentence(self):
+    def sentence(self) -> str:
         return self._sentence
 
     @sentence.setter
-    def sentence(self, sentence):
+    def sentence(self, sentence: str):
         self._sentence = sentence
 
     @property
-    def max_search_depth(self):
+    def max_search_depth(self) -> int:
         return self._max_search_depth
 
+    @max_search_depth.setter
+    def max_search_depth(self, depth: int):
+        self._max_search_depth = depth
+
     @property
-    def total_search_start(self):
+    def total_search_start(self) -> dt:
         return self._total_search_start
 
+    @total_search_start.setter
+    def total_search_start(self, start: dt):
+        self._total_search_start = start
+
     @property
-    def max_search_timeout(self):
+    def max_search_timeout(self) -> dt:
         return self._max_search_timeout
 
-    def search_depth_exceeded(self, depth):
+    @max_search_timeout.setter
+    def max_search_timeout(self, timeout: dt):
+        self._max_search_timeout = timeout
+
+    def search_depth_exceeded(self, depth: int) -> bool:
         if self._max_search_depth == -1:
             return False
+
         return bool(depth > self._max_search_depth)
 
-    def total_search_time(self):
+    def total_search_time(self) -> int:
         delta = datetime.datetime.now() - self._total_search_start
-        return abs(delta.total_seconds())
+        return int(abs(delta.total_seconds()))
 
-    def search_time_exceeded(self):
+    def search_time_exceeded(self) -> bool:
         if self._max_search_timeout == -1:
             return False
+
         return bool(self.total_search_time() >= self._max_search_timeout)
 
     def add_match(self, match):
@@ -103,12 +126,8 @@ class MatchContext(object):
             self._matched_nodes.pop()
 
     def pop_matches(self, matches_add):
-        for match in range(0, matches_add):
+        for _ in range(0, matches_add):
             self.pop_match()
-
-    @property
-    def matched_nodes(self):
-        return self._matched_nodes
 
     def matched(self):
         return bool(self._template_node is not None or self._response is not None)
@@ -132,20 +151,20 @@ class MatchContext(object):
         return self._get_indexed_match_by_type(client_context, index, Match.THAT)
 
     def list_matches(self, client_context, output_func=YLogger.debug, tabs="\t", include_template=True):
-        output_func(client_context, "%sMatches..."%tabs)
+        output_func(client_context, "%sMatches..." % tabs)
         count = 1
         if self._sentence is not None:
-            output_func(client_context, "%sAsked:"%(tabs, self._sentence))
+            output_func(client_context, "%sAsked: %s" % (tabs, self._sentence))
         for match in self._matched_nodes:
-            output_func(client_context, "%s\t%d: %s"%(tabs, count, match.to_string(client_context)))
+            output_func(client_context, "%s\t%d: %s" % (tabs, count, match.to_string(client_context)))
             count += 1
-        output_func(client_context, "%sMatch score %.2f"%(tabs, self.calculate_match_score()))
+        output_func(client_context, "%sMatch score %.2f" % (tabs, self.calculate_match_score()))
         if include_template is True:
             if self.matched() is True:
                 if self._response is not None:
-                    output_func(client_context, "%s\tResponse: %s"%(tabs, self._response))
+                    output_func(client_context, "%s\tResponse: %s" % (tabs, self._response))
             else:
-                output_func(client_context, "%s\tResponse: None"%tabs)
+                output_func(client_context, "%s\tResponse: None" % tabs)
 
     def calculate_match_score(self):
         wildcards = 0
@@ -156,9 +175,9 @@ class MatchContext(object):
                     wildcards += 1
                 else:
                     words += 1
-        total = wildcards+words
+        total = wildcards + words
         if total > 0:
-            return (words/(wildcards+words))*100.00
+            return (words // (wildcards + words)) * 100.00
         return 0.00
 
     def to_json(self):
@@ -179,13 +198,14 @@ class MatchContext(object):
     def from_json(json_data):
         match_context = MatchContext(0, 0)
 
-        match_context._max_search_depth = json_data["max_search_depth"]
-        match_context._max_search_timeout = json_data["max_search_timeout"]
-        match_context._total_search_start = datetime.datetime.strptime(json_data["total_search_start"], "%d/%m/%Y, %H:%M:%S")
-        match_context._sentence = json_data["sentence"]
-        match_context._response = json_data["response"]
+        match_context.max_search_depth = json_data["max_search_depth"]
+        match_context.max_search_timeout = json_data["max_search_timeout"]
+        match_context.total_search_start = datetime.datetime.strptime(json_data["total_search_start"],
+                                                                      "%d/%m/%Y, %H:%M:%S")
+        match_context.sentence = json_data["sentence"]
+        match_context.response = json_data["response"]
 
         for match_data in json_data["matched_nodes"]:
-            match_context._matched_nodes.append(Match.from_json(match_data))
+            match_context.matched_nodes.append(Match.from_json(match_data))
 
         return match_context

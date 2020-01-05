@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+    <category>
+        <pattern>MY FAVOURITE *</pattern>
+        <template>
+            <srai>MY FAVORITE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR FAVOURITE *</pattern>
+        <template>
+            <srai>WHAT IS YOUR FAVORITE
+                <star/>
+            </srai>
+        </template>
+    </category>
+     <category>
+        <pattern>WHAT * IS YOUR FAVORITE</pattern>
+        <template>
+            <srai>WHAT IS YOUR FAVORITE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR FAVORITE ARTIST</pattern>
+        <template>
+            <srai>WHO IS YOUR FAVORITE ARTIST</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR FAVORITE BOOK *</pattern>
+        <template>
+            <srai>WHAT IS YOUR FAVORITE BOOK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT KIND OF MUSIC DO YOU LISTEN TO</pattern>
+        <template>
+            <srai>FAVORITE MUSIC</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT MOVIES DO YOU LIKE</pattern>
+        <template>
+            <srai>WHAT IS YOUR FAVORITE MOVIE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR FAVORITE FOOD *</pattern>
+        <template>
+            <srai>FAVORITE FOOD</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR FAVORITE COUNTRY</pattern>
+        <template>
+            <srai>NATIONALITY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR FAVORITE ICE CREAM</pattern>
+        <template>
+            <srai>FAVORITE ICE CREAM</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR FAVORITE SHOW</pattern>
+        <template>
+            <srai>FAVORITE TV SHOW</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR FAVORITE TELEVISION SHOW</pattern>
+        <template>
+            <srai>FAVORITE TV SHOW</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR FAVORITE TYPE OF *</pattern>
+        <template>
+            <srai>WHAT IS YOUR FAVORITE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR FAVORITE MUSIC</pattern>
+        <template>
+            <srai>FAVORITE BAND</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR FAVORITE SONG *</pattern>
+        <template>
+            <srai>FAVORITE SONG</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT KIND OF FOOD DO YOU LIKE</pattern>
+        <template>
+            <srai>FAVORITE FOOD</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR FAVORITE ICE CREAM FLAVOR</pattern>
+        <template>
+            <srai>FAVORITE ICE CREAM</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH IS YOUR FAVORITE *</pattern>
+        <template>
+            <srai>WHAT IS YOUR FAVORITE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS MY FAVORITE *</pattern>
+        <template>
+            <srai>MY FAVORITE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR FAVORITE CAR</pattern>
+        <template>
+            <srai>FAVORITE CAR</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR FAVORITE DRINK</pattern>
+        <template>
+            <srai>FAVORITE DRINK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR FAVORITES *</pattern>
+        <template>
+            <srai>WHAT IS YOUR FAVORITE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS YOUR FAVORITE ACTOR</pattern>
+        <template>
+            <srai>FAVORITE ACTOR</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT YOUR FAVORITE *</pattern>
+        <template>
+            <srai>WHAT IS YOUR FAVOIRTE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR FAVORITE FOOTBALL TEAM</pattern>
+        <template>
+            <srai>FAVORITE FOOTBALL TEAM</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS YOUR FAVORITE SINGER</pattern>
+        <template>
+            <srai>FAVORITE BAND</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR FAVORITE ANIMAL</pattern>
+        <template>
+            <srai>FAVORITE ANIMAL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR FAVORITE BAND</pattern>
+        <template>
+            <srai>FAVORITE BAND</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR FAVORITE SPORT</pattern>
+        <template>
+            <srai>FAVORITE SPORT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE A FAVORITE *</pattern>
+        <template>
+            <srai>WHAT IS YOUR FAVORITE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR FAVORITE BOOK</pattern>
+        <template>
+            <srai>FAVORITE BOOK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR FAVORITE *</pattern>
+        <template>
+            <srai>FAVORITE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR FAVORITE TV SHOW</pattern>
+        <template>
+            <srai>FAVORITE TV SHOW</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT KIND OF * DO YOU LIKE</pattern>
+        <template>
+            <srai>WHAT IS YOUR FAVORITE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR FAVORITE SONG</pattern>
+        <template>
+            <srai>FAVORITE SONG</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR FAVORITE FOOD</pattern>
+        <template>
+            <srai>FAVORITE FOOD</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS YOUR FAVORITE *</pattern>
+        <template>
+            <srai>FAVORITE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR FAVORITE MOVIE</pattern>
+        <template>
+            <srai>FAVORITE MOVIE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR FAVORITE COLOR</pattern>
+        <template>
+            <srai>FAVORITE COLOR</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR FAVORITE *</pattern>
+        <template>
+            <srai>FAVORITE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HAVE YOU <set>been</set> A GOOD * LATELY
+        </pattern>
+        <template>
+            <srai>WHAT IS YOUR FAVORITE
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR FAVORITE COLOUR</pattern>
+        <template>
+            <srai>WHAT IS YOUR FAVORITE COLOR</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR FAVOURITE FILM</pattern>
+        <template>
+            <srai>WHAT IS YOUR FAVORITE MOVIE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR FAVORITE TEAM</pattern>
+        <template>
+            <srai>WHAT IS YOUR FAVORITE SPORTS TEAM</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I LIKE GREEN</pattern>
+        <template>
+            <srai>MY FAVORITE COLOR IS GREEN</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR FAVORITE SINGER</pattern>
+        <template>
+            <srai>WHO IS YOUR FAVORITE BAND</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>WHAT IS YOUR FAVORITE VIDEO GAME</pattern>
+        <template>
+            <srai>FAVORITE VIDEO GAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS YOUR FAVORITE ACTRESS</pattern>
+        <template>
+            <srai>FAVORITE ACTRESS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS YOUR FAVORITE CELEBRITY</pattern>
+        <template>
+            <srai>WHO IS YOUR FAVORITE ACTOR</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR FAVORITE FILM</pattern>
+        <template>
+            <srai>FAVORITE MOVIE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR FAVORITE THING TO *</pattern>
+        <template>
+            <srai>FOR FUN</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS YOUR FAVORITE BAND</pattern>
+        <template>
+            <srai>FAVORITE BAND</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE ICE CREAM</pattern>
+        <template>Yes.
+            <srai>FAVORITE ICE CREAM</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO YOU LIKE TO EAT</pattern>
+        <template>
+            <srai>FAVORITE FOOD</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>WHAT * DO YOU LIKE</pattern>
+        <template>
+            <srai>WHAT IS YOUR FAVORITE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO YOU LIKE TO DRINK</pattern>
+        <template>
+            <srai>FAVORITE DRINK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HAVE YOU READ # GOOD BOOK #</pattern>
+        <template>
+            <srai>FAVORITE BOOK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HAVE YOU READ # GOOD BOOKS #</pattern>
+        <template>
+            <srai>FAVORITE BOOK</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>FAVORITE * OPERATING SYSTEM #</pattern>
+        <template>
+            <srai>FAVORITE OPERATING SYSTEM</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT MUSIC ^ DO YOU LIKE ^</pattern>
+        <template>
+            <srai>FAVORITE BAND</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT MUSIC ^ ARE YOU INTO ^</pattern>
+        <template>
+            <srai>FAVORITE BAND</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH * DO YOU LIKE</pattern>
+        <template>
+            <srai>FAVORITE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT MAKE OF * DO YOU HAVE</pattern>
+        <template>
+            <srai>FAVORITE
+                <star/>
+            </srai>
+        </template>
+    </category>
+     <category>
+        <pattern>NAME # FAMOUS #</pattern>
+        <template>
+            <srai>FAVORITE ACTOR</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NAME A FAMOUS *</pattern>
+        <template>
+            <srai>FAVORITE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR FAVORITE MOVIE *</pattern>
+        <template>
+            <srai>FAVORITE MOVIE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR FAVORITE ACTOR</pattern>
+        <template>
+            <srai>who is your favorite actor</srai>
+        </template>
+    </category>
+
+
+
+
+</aiml>

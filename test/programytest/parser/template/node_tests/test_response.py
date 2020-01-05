@@ -1,10 +1,9 @@
 import xml.etree.ElementTree as ET
 
-from programy.parser.template.nodes.base import TemplateNode
-from programy.parser.template.nodes.response import TemplateResponseNode
 from programy.dialog.conversation import Conversation
 from programy.dialog.question import Question
-
+from programy.parser.template.nodes.base import TemplateNode
+from programy.parser.template.nodes.response import TemplateResponseNode
 from programytest.parser.base import ParserTestsBaseClass
 
 

@@ -1,0 +1,1153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>REGARDING * WHAT IS IT</pattern>
+        <template>
+            <srai>WHAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>DO YOU HAVE NEWS</pattern>
+        <template>
+            <srai>WHAT IS THE LATEST NEWS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW WHAT THE * IS</pattern>
+        <template>
+            <srai>WHAT IS THE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS GOING ON IN *</pattern>
+        <template>
+            <srai>NEWS ABOUT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS UP TO</pattern>
+        <template>
+            <srai>WHAT IS UP</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS UP WITH YOU *</pattern>
+        <template>
+            <srai>WHAT IS UP</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR FUNCTION</pattern>
+        <template>
+            <srai>SKILLS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>LEARN ABOUT *</pattern>
+        <template>
+            <srai>WHAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WATZ *</pattern>
+        <template>
+            <srai>WHAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT HAVE YOU LEARNED ABOUT *</pattern>
+        <template>
+            <srai>WHAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU TELL ME WHAT IS *</pattern>
+        <template>
+            <srai>WHAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU REMEMBER MY NAME</pattern>
+        <template>
+            <srai>WHAT IS MY NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS UP I *</pattern>
+        <template>
+            <srai>WHAT IS UP</srai>
+            <srai>I
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME YOUR NAME</pattern>
+        <template>
+            <srai>WHAT IS YOUR NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW SOMETHING ABOUT *</pattern>
+        <template>
+            <srai>WHAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>KNOW WHAT IS *</pattern>
+        <template>
+            <srai>WHAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS GONNA HAPPEN *</pattern>
+        <template>
+            <srai>WHAT IS GOING TO HAPPEN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS UP WHAT *</pattern>
+        <template>
+            <srai>WHAT IS UP</srai>
+            <srai>WHAT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME WHAT IS *</pattern>
+        <template>
+            <srai>WHAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>WHAT MY NAME</pattern>
+        <template>
+            <srai>WHAT IS MY NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY NAME</pattern>
+        <template>
+            <srai>WHAT IS MY NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU * ME</pattern>
+        <template>
+            <srai>WHAT IS MY NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW IRIS</pattern>
+        <template>
+            <srai>WHAT IS IRIS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SO WHAT IS UP</pattern>
+        <template>
+            <srai>WHAT IS UP</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU REMEMBER MY *</pattern>
+        <template>
+            <srai>WHAT IS MY
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW WHAT A * IS</pattern>
+        <template>
+            <srai>WHAT IS A
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW ANYTHING ABOUT *</pattern>
+        <template>
+            <srai>WHAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW SIRI</pattern>
+        <template>
+            <srai>WHAT IS SIRI</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS MY NAME *</pattern>
+        <template>
+            <srai>WHAT IS MY NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT YOUR NAME</pattern>
+        <template>
+            <srai>WHAT IS YOUR NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HAVE YOU HEARD OF *</pattern>
+        <template>
+            <srai>WHAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MANY PEOPLE LIVE IN *</pattern>
+        <template>
+            <srai>WHAT IS THE POPULATION OF
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW WHAT IS *</pattern>
+        <template>
+            <srai>WHAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT UP</pattern>
+        <template>
+            <srai>WHAT IS UP</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>POOP</pattern>
+        <template>
+            <srai>WHAT IS POOP</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW ABOUT *</pattern>
+        <template>
+            <srai>WHAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME ABOUT THE *</pattern>
+        <template>
+            <srai>WHAT IS THE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO YOU THINK OF *</pattern>
+        <template>
+            <srai>WHAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS UP *</pattern>
+        <template>
+            <srai>WHAT IS UP</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO YOU THINK ABOUT *</pattern>
+        <template>
+            <srai>WHAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO ARE YOU</pattern>
+        <template>
+            <srai>WHAT IS YOUR NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>42</pattern>
+        <template>
+            <srai>WHAT IS 42</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>BASEBALL SCHEDULE</pattern>
+        <template>
+            <srai>WHAT IS THE BASEBALL SCHEDULE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME UR REAL NAME</pattern>
+        <template>
+            <srai>WHAT IS YOUR NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW SKYPE</pattern>
+        <template>
+            <srai>WHAT IS SKYPE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW FAR IS THE SUN FROM EARTH</pattern>
+        <template>
+            <srai>HOW FAR IS THE * FROM *</srai>
+            <srai>WHAT IS THE DISTANCE FROM
+                <star/>
+                TO
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU REMEMBER WHAT * IS</pattern>
+        <template>
+            <srai>WHAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>STOCK *</pattern>
+        <template>
+            <srai>WHAT IS THE STOCK PRICE OF
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO YOU CALL ME</pattern>
+        <template>
+            <srai>WHAT IS MY NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAYS *</pattern>
+        <template>
+            <srai>WHAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH IS YOUR *</pattern>
+        <template>
+            <srai>WHAT IS YOUR
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME ABOUT A *</pattern>
+        <template>
+            <srai>WHAT IS A
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME YOUR *</pattern>
+        <template>
+            <srai>WHAT IS YOUR
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW WHAT * IS</pattern>
+        <template>
+            <srai>WHAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>* WHAT IS *</pattern>
+        <template>
+            <sr/>
+            <srai>WHAT IS
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME THE *</pattern>
+        <template>
+            <srai>WHAT IS THE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>EXPLAIN *</pattern>
+        <template>
+            <srai>WHAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WAT IS *</pattern>
+        <template>
+            <srai>WHAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOU *</pattern>
+        <template>
+            <srai>WHAT IS YOUR
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT CAN YOU TELL ME ABOUT *</pattern>
+        <template>
+            <srai>WHAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NEWS</pattern>
+        <template>
+            <srai>WHAT IS THE LATEST NEWS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I WANT TO KNOW WHAT IS *</pattern>
+        <template>
+            <srai>WHAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I WANT TO KNOW YOUR *</pattern>
+        <template>
+            <srai>WHAT IS YOUR
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOU ARE NAME</pattern>
+        <template>
+            <srai>what is your name</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GIVE ME A RECIPE FOR *</pattern>
+        <template>
+            <srai>WHAT IS A RECIPE FOR
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TEACH ME *</pattern>
+        <template>
+            <srai>WHAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>WHAT THE *</pattern>
+        <template>
+            <srai>WHAT IS THE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT THE HECK IS *</pattern>
+        <template>
+            <srai>WHAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE _ <set>preposition</set> YOUR NAME
+        </pattern>
+        <template>
+            <srai>WHAT IS THE
+                <star/>
+                <star index="2"/>
+                <bot name="name"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS * S CAPITAL</pattern>
+        <template>
+            <srai>WHAT IS THE CAPITAL OF
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THE * IS WHAT</pattern>
+        <template>
+            <srai>WHAT IS THE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME WHAT * IS</pattern>
+        <template>
+            <srai>WHAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH * ARE YOU</pattern>
+        <template>
+            <srai>WHAT IS YOUR
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO YOU THINK IS *</pattern>
+        <template>
+            <srai>WHAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT CAN YOU DO WITH *</pattern>
+        <template>
+            <srai>WHAT IS THE PURPOSE OF
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THE _ IS WHAT</pattern>
+        <template>
+            <srai>WHAT IS THE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE _ YOU REMEMBER HAVING</pattern>
+        <template>
+            <srai>WHAT IS YOUR
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS MY 1 ST *</pattern>
+        <template>
+            <srai>WHAT IS MY FIRST
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT ELSE IS *</pattern>
+        <template>
+            <srai>what is
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IT IS</pattern>
+        <template>
+            <srai>what is it</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DESCRIBE *</pattern>
+        <template>
+            <srai>WHAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW HOT IS IT *</pattern>
+        <template>
+            <srai>what is the temperature
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME ONE *</pattern>
+        <template>
+            <srai>WHAT IS ONE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOU ARE *</pattern>
+        <template>
+            <srai>what is your
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW WHAT MY NAME IS</pattern>
+        <template>
+            <srai>what is my name</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>EXAMPLE *</pattern>
+        <template>
+            <srai>WHAT IS AN EXAMPLE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS _ AGAIN</pattern>
+        <template>
+            <srai>WHAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME THE NAME OF *</pattern>
+        <template>
+            <srai>WHAT IS THE NAME OF
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DID YOU HEAR ABOUT *</pattern>
+        <template>
+            <srai>what is
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE SIZE OF YOUR *</pattern>
+        <template>
+            <srai>SIZE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAPITAL *</pattern>
+        <template>
+            <srai>WHAT IS THE CAPITAL
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT ITS *</pattern>
+        <template>
+            <srai>WHAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOU NAME</pattern>
+        <template>
+            <srai>WHAT IS YOUR NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT GONNA RAIN *</pattern>
+        <template>
+            <srai>WHAT IS THE WEATHER
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW MEXICO</pattern>
+        <template>
+            <srai>WHAT IS MEXICO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW MY NAME *</pattern>
+        <template>
+            <srai>WHAT IS MY NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WASSUP</pattern>
+        <template>
+            <srai>WHAT IS UP</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME MY *</pattern>
+        <template>
+            <srai>WHAT IS MY
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SUP *</pattern>
+        <template>
+            <srai>WHAT IS UP
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT UP *</pattern>
+        <template>
+            <srai>WHAT IS UP
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW MY *</pattern>
+        <template>
+            <srai>WHAT IS MY
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU REMEMBER MY NAME</pattern>
+        <template>
+            <srai>WHAT IS MY NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW MY NAME</pattern>
+        <template>
+            <srai>WHAT IS MY NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT
+            <set>modal</set>
+            <set>pronoun</set>
+            USE * FOR
+        </pattern>
+        <template>
+            <srai>WHAT IS THE PURPOSE OF
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME WHAT A * IS</pattern>
+        <template>
+            <srai>WHAT IS A
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MANY PEOPLE ARE THERE IN *</pattern>
+        <template>
+            <srai>WHAT IS THE POPULATION OF
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU LOOK UP THE *</pattern>
+        <template>
+            <srai>WHAT IS THE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU PRONOUNCE YOUR NAME</pattern>
+        <template>
+            <srai>WHAT IS YOUR NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME A *</pattern>
+        <template>
+            <srai>WHAT IS A
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU KNOW MY NAME</pattern>
+        <template>
+            <srai>WHAT IS MY NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WATS *</pattern>
+        <template>
+            <srai>WHAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT US *</pattern>
+        <template>
+            <srai>WHAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I WOULD LIKE TO KNOW ABOUT *</pattern>
+        <template>
+            <srai>WHAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE _ LETTER _ THE ALPHABET</pattern>
+        <template>
+            <srai>WHAT IS THE
+                <star/>
+                LETTER
+                <star index="2"/>
+                ABCDEFGHIJKLMNOPQRSTUVWXYZ
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>WHAT IS THE _ <set>preposition</set> MY NAME
+        </pattern>
+        <template>
+            <srai>WHAT IS THE
+                <star/>
+                <star index="2"/>
+                <srai>CLIENT NAME</srai>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT * ARE YOU</pattern>
+        <template>
+            <srai>WHAT IS YOUR
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS IT *</pattern>
+        <template>
+            <srai>what is it</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HAVE YOU EVER HEARD OF THE *</pattern>
+        <template>
+            <srai>WHAT IS THE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT WERE WE TALKING *</pattern>
+        <template>
+            <srai>WHAT IS THE SUBJECT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I HAVE NEVER HEARD OF *</pattern>
+        <template>
+            <srai>WHAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT YOU KNOW ABOUT *</pattern>
+        <template>
+            <srai>WHAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NAME *</pattern>
+        <template>
+            <srai>WHAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW THE *</pattern>
+        <template>
+            <srai>WHAT IS THE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW THAT</pattern>
+        <template>
+            I am pretty certain
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW THAT *</pattern>
+        <template>
+            <srai>WHAT IS THE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW THAT FOR *</pattern>
+        <template>
+            <srai>WHAT IS THE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME WHAT AN * IS</pattern>
+        <template>
+            <srai>WHAT IS AN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT WOULD YOU LIKE ME TO CALL YOU</pattern>
+        <template>
+            <srai>WHAT IS YOUR NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME SOMETHING ABOUT *</pattern>
+        <template>
+            <srai>WHAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU TELL ME ABOUT *</pattern>
+        <template>
+            <srai>WHAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR</pattern>
+        <template>
+            <srai>what is yours</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT THE HELL IS *</pattern>
+        <template>
+            <srai>WHAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS THE CAPITAL OF * *</pattern>
+        <template>
+            <srai>WHAT IS THE CAPITAL OF
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>EXPLAIN THE *</pattern>
+        <template>
+            <srai>WHAT IS THE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS SIRI</pattern>
+        <template>
+            <srai>WHAT IS SIRI</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME THE * NEWS</pattern>
+        <template>
+            <srai>WHAT IS THE LATEST
+                <star/>
+                NEWS
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW A *</pattern>
+        <template>
+            <srai>WHAT IS A
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU HOT</pattern>
+        <template>
+            <srai>WHAT IS THE TEMPERATURE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR # IS WHAT</pattern>
+        <template>
+            <srai>WHAT IS YOUR
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT YOUR *</pattern>
+        <template>
+            <srai>WHAT IS YOUR
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO AM I</pattern>
+        <template>
+            <srai>WHAT IS MY NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SQUARE ROOT *</pattern>
+        <template>
+            <srai>WHAT IS THE SQUARE ROOT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU REMEMBER MY NAME</pattern>
+        <template>
+            <srai>what is my name</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS MY NAME *</pattern>
+        <template>
+            <srai>WHAT IS MY NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>* IS THE * OF WHAT *</pattern>
+        <template>
+            <srai>WHAT
+                <star index="3"/>
+                IS
+                <star/>
+                THE
+                <star index="2"/>
+                OF
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT WOULD BE *</pattern>
+        <template>
+            <srai>what is
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>
+            <set>article</set>
+            * IS WHAT *
+        </pattern>
+        <template>
+            <srai>WHAT
+                <star index="3"/>
+                is
+                <star/>
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS MEANT BY *</pattern>
+        <template>
+            <srai>DEFINE
+                <star/>
+            </srai>
+        </template>
+    </category>
+</aiml>

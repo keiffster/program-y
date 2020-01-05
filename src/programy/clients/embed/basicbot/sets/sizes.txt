@@ -1,0 +1,9 @@
+big
+small
+massive
+tiny
+huge
+minute
+average
+long
+short

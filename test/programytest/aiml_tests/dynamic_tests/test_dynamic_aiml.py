@@ -1,5 +1,5 @@
-import unittest
 import os
+import unittest
 
 from programytest.client import TestClient
 
@@ -21,7 +21,7 @@ class DynamicAIMLTests(unittest.TestCase):
         client = DynamicAIMLTestClient()
         self._client_context = client.create_client_context("testid")
         self._client_context.brain.properties.load_from_text("""
-             default-get:unknown
+             default_get:unknown
          """)
         self._client_context.bot.brain.dynamics.add_dynamic_var('gettime', "programy.dynamic.variables.datetime.GetTime", None)
 

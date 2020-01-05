@@ -1,11 +1,10 @@
-import unittest
 import json
+import unittest
 
-from programy.services.openchatbot.service import OpenChatRESTService
-from programy.services.openchatbot.service import OpenChatMetaBotRESTService
 from programy.config.brain.service import BrainServiceConfiguration
 from programy.services.openchatbot.openchatbot import OpenChatBot
-
+from programy.services.openchatbot.service import OpenChatMetaBotRESTService
+from programy.services.openchatbot.service import OpenChatRESTService
 from programytest.client import TestClient
 
 
@@ -50,7 +49,7 @@ class OpenChatRESTServiceTests(unittest.TestCase):
 
         response = service.ask_question(self._client_context, "chatbot1 Hello")
         self.assertIsNotNone(response)
-        self.assertEquals("Hi there from chatbot1", response)
+        self.assertEqual("Hi there from chatbot1", response)
 
     def test_ask_question_get_with_authorization(self):
         client = TestClient()
@@ -74,7 +73,7 @@ class OpenChatRESTServiceTests(unittest.TestCase):
 
         response = service.ask_question(self._client_context, "chatbot1 Hello")
         self.assertIsNotNone(response)
-        self.assertEquals("Hi there from chatbot1", response)
+        self.assertEqual("Hi there from chatbot1", response)
 
 
     def test_ask_question_post(self):
@@ -100,7 +99,7 @@ class OpenChatRESTServiceTests(unittest.TestCase):
 
         response = service.ask_question(self._client_context, "chatbot1 Hello")
         self.assertIsNotNone(response)
-        self.assertEquals('{"response": {"text": "Hi there from chatbot1"}, "status": {"code": 200, "text": "success"}}', response)
+        self.assertEqual('{"response": {"text": "Hi there from chatbot1"}, "status": {"code": 200, "text": "success"}}', response)
 
     def test_ask_question_post_with_authorization(self):
         client = TestClient()
@@ -127,7 +126,7 @@ class OpenChatRESTServiceTests(unittest.TestCase):
 
         response = service.ask_question(self._client_context, "chatbot1 Hello")
         self.assertIsNotNone(response)
-        self.assertEquals("Hi there from chatbot1", response)
+        self.assertEqual("Hi there from chatbot1", response)
 
 
 class OpenChatMetaBotRESTServiceTests(unittest.TestCase):
@@ -152,4 +151,4 @@ class OpenChatMetaBotRESTServiceTests(unittest.TestCase):
 
         response = service.ask_question(self._client_context, "chatbot1 Hello")
         self.assertIsNotNone(response)
-        self.assertEquals('{"response": {"text": "Hi there from chatbot1"}, "status": {"code": 200, "text": "success"}}', response)
+        self.assertEqual('{"response": {"text": "Hi there from chatbot1"}, "status": {"code": 200, "text": "success"}}', response)

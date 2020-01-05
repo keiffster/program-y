@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,20 +14,21 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from abc import abstractmethod
+from abc import ABC
 from programy.bot import Bot
 from programy.utils.classes.loader import ClassLoader
-from abc import abstractmethod, ABCMeta
+from programy.utils.logging.ylogger import YLogger
 
 
-class BotSelector(object):
-    __metaclass__ = ABCMeta
+class BotSelector(ABC):
 
     def __init__(self, configuration):
         self._configuration = configuration
 
     @abstractmethod
-    def select_bot(self, bots):
-        raise NotImplementedError()
+    def select_bot(self):
+        raise NotImplementedError()  # pragma: no cover
 
 
 class DefaultBotSelector(BotSelector):
@@ -45,7 +46,7 @@ class DefaultBotSelector(BotSelector):
     def select_bot(self):
         try:
             if self._iterator:
-                return next (self._iterator)
+                return next(self._iterator)
 
         except StopIteration:
             self._set_iterator()
@@ -59,7 +60,7 @@ class DefaultBotSelector(BotSelector):
         return None
 
 
-class BotFactory(object):
+class BotFactory():
 
     def __init__(self, client, configuration):
         self._client = client
@@ -70,11 +71,11 @@ class BotFactory(object):
         self.load_bot_selector(configuration)
 
     def botids(self):
-        return self._bots.keys()
+        return list(self._bots.keys())
 
-    def bot(self, id):
-        if id in self._bots:
-            return self._bots[id]
+    def bot(self, botid):
+        if botid in self._bots:
+            return self._bots[botid]
         else:
             return None
 
@@ -88,8 +89,10 @@ class BotFactory(object):
             self._bot_selector = DefaultBotSelector(configuration, self._bots)
         else:
             try:
-                self._bot_selector = ClassLoader.instantiate_class(configuration.bot_selector)(configuration, self._bots)
-            except Exception as e:
+                self._bot_selector = ClassLoader.instantiate_class(configuration.bot_selector)(configuration,
+                                                                                               self._bots)
+            except Exception as excep:
+                YLogger.exception(self, "Failed to loadbot selector [%s]", excep)
                 self._bot_selector = DefaultBotSelector(configuration, self._bots)
 
     def select_bot(self):
@@ -103,4 +106,3 @@ class BotFactory(object):
                          "questions": bot.num_questions,
                          "brains": brains})
         return bots
-

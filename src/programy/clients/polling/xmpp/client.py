@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,13 +14,11 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import sleekxmpp
-
 from programy.utils.logging.ylogger import YLogger
-
 from programy.clients.polling.client import PollingBotClient
 from programy.clients.polling.xmpp.config import XmppConfiguration
 from programy.clients.polling.xmpp.xmpp import XmppClient
+from programy.utils.console.console import outputLog
 
 
 class XmppBotClient(PollingBotClient):
@@ -63,18 +61,18 @@ class XmppBotClient(PollingBotClient):
         return False
 
     def display_connected_message(self):
-        print ("XMPP Bot connected and running...")
+        outputLog(self, "XMPP Bot connected and running...")
 
     def poll_and_answer(self):
 
         running = True
         try:
             self._xmpp_client.process(block=True)
-            print("XMPP client exiting cleanly....")
+            outputLog(self, "XMPP client exiting cleanly....")
             running = False
 
         except KeyboardInterrupt:
-            print("XMPP client stopping via keyboard....")
+            outputLog(self, "XMPP client stopping via keyboard....")
             running = False
 
         except Exception as excep:
@@ -85,7 +83,7 @@ class XmppBotClient(PollingBotClient):
 
 if __name__ == '__main__':
 
-    print("Initiating XMPP Client...")
+    outputLog(None, "Initiating XMPP Client...")
 
     xmpp_app = XmppBotClient()
     xmpp_app.run()

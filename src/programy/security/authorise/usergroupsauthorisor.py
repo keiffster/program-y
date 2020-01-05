@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -21,6 +21,7 @@ from programy.security.authorise.authorisor import Authoriser
 from programy.security.authorise.authorisor import AuthorisationException
 from programy.config.brain.security import BrainSecurityAuthorisationConfiguration
 from programy.storage.factory import StorageFactory
+
 
 class BasicUserGroupAuthorisationService(Authoriser):
 
@@ -50,9 +51,6 @@ class BasicUserGroupAuthorisationService(Authoriser):
 
     def authorise(self, userid, role):
         if userid not in self._users:
-            raise AuthorisationException("User [%s] unknown to system!"%userid)
+            raise AuthorisationException("User [%s] unknown to system!" % userid)
 
-        if userid in self._users:
-            user = self._users[userid]
-            return user.has_role(role)
-        return False
+        return self._users[userid].has_role(role)

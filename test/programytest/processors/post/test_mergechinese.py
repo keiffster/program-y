@@ -1,8 +1,7 @@
 import unittest
 
-from programy.processors.post.mergechinese import MergeChinesePostProcessor
 from programy.context import ClientContext
-
+from programy.processors.post.mergechinese import MergeChinesePostProcessor
 from programytest.client import TestClient
 
 

@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -17,6 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.storage.engine import StorageEngine
 from programy.storage.stores.logger.store.conversations import LoggerConversationStore
 
+
 class LoggerStorageEngine(StorageEngine):
 
     def __init__(self, configuration):
@@ -27,4 +28,3 @@ class LoggerStorageEngine(StorageEngine):
 
     def conversation_store(self):
         return LoggerConversationStore(self)
-

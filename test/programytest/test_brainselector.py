@@ -1,12 +1,11 @@
 import unittest
 
-from programy.config.brain.brain import BrainConfiguration
-from programy.brain import Brain
-from programy.config.bot.bot import BotConfiguration
 from programy.bot import Bot
+from programy.brain import Brain
 from programy.brainfactory import DefaultBrainSelector
 from programy.clients.config import ClientConfigurationData
-
+from programy.config.bot.bot import BotConfiguration
+from programy.config.brain.brain import BrainConfiguration
 from programytest.client import TestClient
 
 
@@ -36,12 +35,12 @@ class DefaultBrainSelectorTests(unittest.TestCase):
         selected = selector.select_brain()
 
         self.assertIsNotNone(selected)
-        self.assertEquals(selected, brain1)
+        self.assertEqual(selected, brain1)
 
         selected = selector.select_brain()
 
         self.assertIsNotNone(selected)
-        self.assertEquals(selected, brain1)
+        self.assertEqual(selected, brain1)
 
     def test_selection_multi_brain(self):
 
@@ -59,16 +58,16 @@ class DefaultBrainSelectorTests(unittest.TestCase):
 
         selected = selector.select_brain()
         self.assertIsNotNone(selected)
-        self.assertEquals(selected, brain1)
+        self.assertEqual(selected, brain1)
 
         selected = selector.select_brain()
         self.assertIsNotNone(selected)
-        self.assertEquals(selected, brain2)
+        self.assertEqual(selected, brain2)
 
         selected = selector.select_brain()
         self.assertIsNotNone(selected)
-        self.assertEquals(selected, brain3)
+        self.assertEqual(selected, brain3)
 
         selected = selector.select_brain()
         self.assertIsNotNone(selected)
-        self.assertEquals(selected, brain1)
+        self.assertEqual(selected, brain1)

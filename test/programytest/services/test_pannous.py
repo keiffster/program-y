@@ -1,12 +1,10 @@
-import unittest
-import os
 import json
+import unittest
 
 from programy.services.pannous import PannousService, PannousAPI
 from programy.services.service import BrainServiceConfiguration
-from programytest.services.mock_requests import MockRequestsAPI
-
 from programytest.client import TestClient
+from programytest.services.mock_requests import MockRequestsAPI
 
 
 class PannousAPITests(unittest.TestCase):

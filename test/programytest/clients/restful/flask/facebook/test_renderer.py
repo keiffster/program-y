@@ -1,7 +1,7 @@
 import unittest
 
-from programy.clients.restful.flask.facebook.renderer import FacebookRenderer
 from programy.clients.restful.flask.facebook.client import FacebookBotClient
+from programy.clients.restful.flask.facebook.renderer import FacebookRenderer
 from programytest.clients.arguments import MockArgumentParser
 
 

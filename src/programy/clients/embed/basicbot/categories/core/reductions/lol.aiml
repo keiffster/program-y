@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+    <category>
+        <pattern>HAHA FUNNY *</pattern>
+        <template>
+            <srai>LOL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HAHA THAT IS FUNNY</pattern>
+        <template>
+            <srai>LOL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HEHEHE *</pattern>
+        <template>
+            <srai>LOL</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>HAHAHAHA *</pattern>
+        <template>
+            <srai>LOL
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>VERY FUNNY *</pattern>
+        <template>
+            <srai>LOL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>P</pattern>
+        <template>
+            <srai>LOL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>LOLOL</pattern>
+        <template>
+            <srai>LOL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HAHA FUNNY</pattern>
+        <template>
+            <srai>LOL</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HAHAHAHAHA</pattern>
+        <template>
+            <srai>LOL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HEHEHE</pattern>
+        <template>
+            <srai>LOL</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HEHE *</pattern>
+        <template>
+            <srai>LOL</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>HEHE</pattern>
+        <template>
+            <srai>LOL</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HEH *</pattern>
+        <template>
+            <srai>LOL</srai>
+            <sr/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HA HA HA HA HA HA</pattern>
+        <template>
+            <srai>LOL</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>ROFL</pattern>
+        <template>
+            <srai>LOL</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HAH *</pattern>
+        <template>
+            <srai>LOL</srai>
+            <sr/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>LMFAO *</pattern>
+        <template>
+            <srai>LOL</srai>
+            <sr/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>L O L</pattern>
+        <template>
+            <srai>LOL</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HAHAHAHA</pattern>
+        <template>
+            <srai>LOL</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>CAN YOU LAUGH</pattern>
+        <template>
+            <srai>LOL</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>THAT IS FUNNY *</pattern>
+        <template>
+            <srai>LOL</srai>
+            <sr/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HAHAHA</pattern>
+        <template>
+            <srai>LOL</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>YOU ARE FUNNY</pattern>
+        <template>
+            <srai>LOL</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HAHA *</pattern>
+        <template>
+            <srai>LOL</srai>
+            <sr/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>THAT WAS FUNNY</pattern>
+        <template>
+            <srai>LOL</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HA HA</pattern>
+        <template>
+            <srai>LOL</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>THAT IS FUNNY</pattern>
+        <template>
+            <srai>LOL</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>FUNNY</pattern>
+        <template>
+            <srai>LOL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HA HA HA</pattern>
+        <template>
+            <srai>LOL</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HAHA</pattern>
+        <template>
+            <srai>LOL</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>LOL *</pattern>
+        <template>
+            <srai>LOL</srai>
+            <sr/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HA</pattern>
+        <template>
+            <srai>LOL</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HAHAH</pattern>
+        <template>
+            <srai>LOL</srai>
+            <sr/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>AHAHA</pattern>
+        <template>
+            <srai>LOL</srai>
+            <sr/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HAHAHA *</pattern>
+        <template>
+            <srai>LOL</srai>
+            <sr/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>FUNNY *</pattern>
+        <template>
+            <srai>LOL</srai>
+            <sr/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HA *</pattern>
+        <template>
+            <srai>LOL</srai>
+            <sr/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HA HA HA HA</pattern>
+        <template>
+            <srai>LOL</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HAH</pattern>
+        <template>
+            <srai>LOL</srai>
+        </template>
+    </category>
+
+</aiml>

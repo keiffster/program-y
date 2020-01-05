@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -18,19 +18,19 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import re
 import os
 
-class TextUtils:
 
+class TextUtils:
     DEFAULT_TAB_SPACE = "  "
 
-    RE_STRIP_ALL_WHITESPACE = re.compile('[\s+]')
-    RE_STRIP_WHITESPACE = re.compile('[\n\t\r+]')
-    RE_TERMIANTORS = re.compile('[:;,.?!]')
-    RE_STRIP_NONE_TERMINATING = re.compile('[\'"\(\)\-"]')
-    RE_STRIP_ALL_PUNCTUATION1 = re.compile('[:\'";,.?!\(\)\-"]')
-    RE_STRIP_ALL_PUNCTUATION2 = re.compile('\s+')
+    RE_STRIP_ALL_WHITESPACE = re.compile(r'[\s+]')
+    RE_STRIP_WHITESPACE = re.compile(r'[\n\t\r+]')
+    RE_TERMIANTORS = re.compile(r'[:;,.?!]')
+    RE_STRIP_NONE_TERMINATING = re.compile(r'[\'"\(\)\-"]')
+    RE_STRIP_ALL_PUNCTUATION1 = re.compile(r'[:\'";,.?!\(\)\-"]')
+    RE_STRIP_ALL_PUNCTUATION2 = re.compile(r'\s+')
     RE_STRIP_HTML = re.compile(r'<.*?>')
-    RE_PATTERN_OF_TAG_AND_NAMESPACE_FROM_TEXT = re.compile("^{.*}.*$")
-    RE_MATCH_OF_TAG_AND_NAMESPACE_FROM_TEXT = re.compile("^({.*})(.*)$")
+    RE_PATTERN_OF_TAG_AND_NAMESPACE_FROM_TEXT = re.compile(r'^{.+}.+$')
+    RE_MATCH_OF_TAG_AND_NAMESPACE_FROM_TEXT = re.compile(r'^({.+})(.+)$')
 
     HTML_ESCAPE_TABLE = {
         "&": "&amp;",
@@ -81,20 +81,28 @@ class TextUtils:
         return path
 
     @staticmethod
-    def tag_and_namespace_from_text(text):
+    def _is_not_tag(text):
         # If there is a namespace, then it looks something like
         # {http://alicebot.org/2001/AIML}aiml
-        if TextUtils.RE_PATTERN_OF_TAG_AND_NAMESPACE_FROM_TEXT.match(text) is None:
-            # If that pattern does not exist, assume that the text is the tag name
-            return text, None
+        return bool(TextUtils.RE_PATTERN_OF_TAG_AND_NAMESPACE_FROM_TEXT.match(text) is None)
 
+    @staticmethod
+    def _extract_namespace_and_tag(text):
         # Otherwise, extract namespace and tag name
         groupings = TextUtils.RE_MATCH_OF_TAG_AND_NAMESPACE_FROM_TEXT.match(text)
         if groupings is not None:
             namespace = groupings.group(1).strip()
             tag_name = groupings.group(2).strip()
             return tag_name, namespace
+
         return None, None
+
+    @staticmethod
+    def tag_and_namespace_from_text(text):
+        if TextUtils._is_not_tag(text):
+            return text, None
+
+        return TextUtils._extract_namespace_and_tag(text)
 
     @staticmethod
     def tag_from_text(text):

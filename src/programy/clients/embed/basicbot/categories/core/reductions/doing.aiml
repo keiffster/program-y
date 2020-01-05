@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+    <category>
+        <pattern>WHAT DID YOU DO TODAY</pattern>
+        <template>
+            <srai>DOING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU BUSY</pattern>
+        <template>
+            <srai>DOING</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>WHAT IS GOING ON</pattern>
+        <template>
+            <srai>DOING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT ARE YOU DOING</pattern>
+        <template>
+            <srai>DOING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SO WHAT ARE YOU UP TO</pattern>
+        <template>
+            <srai>DOING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS GOING ON *</pattern>
+        <template>
+            <srai>DOING</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>WHAT YOU UP TO</pattern>
+        <template>
+            <srai>DOING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DID YOU DO</pattern>
+        <template>
+            <srai>DOING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT YOUDOING</pattern>
+        <template>
+            <srai>DOING</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>WHAT ARE YOU DOING *</pattern>
+        <template>
+            <srai>DOING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS NEW</pattern>
+        <template>
+            <srai>DOING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR PLAN TODAY</pattern>
+        <template>
+            <srai>DOING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO YOU DOING</pattern>
+        <template>
+            <srai>DOING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT ARE YOU DOING TODAY *</pattern>
+        <template>
+            <srai>DOING</srai>
+        </template>
+    </category>
+
+
+
+
+</aiml>

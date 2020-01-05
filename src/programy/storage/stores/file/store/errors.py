@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,12 +14,10 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.utils.logging.ylogger import YLogger
 import os
 import os.path
 import shutil
-import datetime
-
+from programy.utils.logging.ylogger import YLogger
 from programy.storage.stores.file.store.filestore import FileStore
 from programy.storage.entities.errors import ErrorsStore
 
@@ -28,27 +26,33 @@ class FileErrorsStore(FileStore, ErrorsStore):
 
     def __init__(self, storage_engine):
         FileStore.__init__(self, storage_engine)
+        ErrorsStore.__init__(self)
 
     def _get_storage_path(self):
         return self.storage_engine.configuration.errors_storage.file
+
+    def get_storage(self):
+        return self.storage_engine.configuration.errors_storage
 
     def empty(self):
         filename = self._get_storage_path()
         if os.path.exists(filename) is True:
             shutil.rmtree(filename)
 
-    def save_errors(self, errors):
+    def _write_errors_to_file(self, filename, errors):
+        with open(filename, "w+") as errors_file:
+            errors_file.write("Error,File,Start Line,End Line\n")
+            for error in errors:
+                errors_file.write("%s,%s,%s,%s\n" % (error[0], error[1], error[2], error[3]))
+            errors_file.flush()
+
+    def save_errors(self, errors, commit=True):
         filename = self._get_storage_path()
         file_dir = self._get_dir_from_path(filename)
         self._ensure_dir_exists(file_dir)
         try:
             YLogger.debug(self, "Saving errors to [%s]", filename)
-
-            with open(filename, "w+") as errors_file:
-                errors_file.write("Error,File,Start Line,End Line\n")
-                for error in errors:
-                    errors_file.write("%s,%s,%s,%s\n"%(error[0],error[1],error[2],error[3]))
-                errors_file.flush()
+            self._write_errors_to_file(filename, errors)
 
         except Exception as excep:
-           YLogger.exception_nostack(self, "Failed to write errors file [%s]", excep, filename)
+            YLogger.exception_nostack(self, "Failed to write errors file [%s]", excep, filename)

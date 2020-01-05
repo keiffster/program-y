@@ -3,6 +3,7 @@ import unittest
 
 from programy.storage.stores.sql.dao.license import LicenseKey
 
+
 class LicenseKeyTests(unittest.TestCase):
     
     def test_init(self):

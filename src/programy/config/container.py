@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,22 +14,16 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from abc import ABCMeta, abstractmethod
-
+from abc import abstractmethod
 from programy.config.base import BaseConfigurationData
 from programy.utils.substitutions.substitues import Substitutions
 
 
 class BaseContainerConfigurationData(BaseConfigurationData):
-    __metaclass__ = ABCMeta
 
     def __init__(self, name):
         BaseConfigurationData.__init__(self, name)
 
     @abstractmethod
     def load_configuration(self, configuration_file, bot_root, subs: Substitutions = None):
-        """
-        Never Implemented
-        """
-        raise NotImplementedError()
-
+        raise NotImplementedError()  # pragma: no cover

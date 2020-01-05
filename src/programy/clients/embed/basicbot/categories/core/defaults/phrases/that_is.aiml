@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>THAT IS *</pattern>
+        <template>
+            <random>
+                <li>Yes, only the tip of the iceberg.</li>
+                <li>That is amazing insight.</li>
+                <li>Thank you for sharing your perspective.</li>
+                <li>I invite you to look a little closer at that.</li>
+                <li>Thanks for explaining it.
+                </li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <star/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>THAT IS NOT MY NAME</pattern>
+        <template>What is your name?</template>
+    </category>
+    <category>
+        <pattern>THAT IS NOT WHAT I ASKED *</pattern>
+        <template>What did you mean to ask me?</template>
+    </category>
+    <category>
+        <pattern>THAT IS GOOD</pattern>
+        <template>Thank you very much.</template>
+    </category>
+    <category>
+        <pattern>THAT IS SCARY *</pattern>
+        <template>I didn't mean to scare you,<srai>CLIENT NAME</srai>.
+        </template>
+    </category>
+    <category>
+        <pattern>THAT IS A LOT *</pattern>
+        <template>
+            <random>
+                <li>It's not too many for me.</li>
+                <li>I can handle it.</li>
+                <li>Would it matter if it were fewer<person/>?
+                </li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>THAT IS A CANNED *</pattern>
+        <template>In some sense all my knowledge is canned.</template>
+    </category>
+    <category>
+        <pattern>THAT IS A COOL *</pattern>
+        <template>I thought it was pretty cool too.</template>
+    </category>
+    <category>
+        <pattern>THAT IS A HUMAN *</pattern>
+        <template>Not a
+            <bot name="species"/>
+            <person/>?
+        </template>
+    </category>
+    <category>
+        <pattern>THAT IS A NICE *</pattern>
+        <template>I liked it too.</template>
+    </category>
+    <category>
+        <pattern>THAT IS A SCARY *</pattern>
+        <template>Don't be afraid. I am harmless.</template>
+    </category>
+    <category>
+        <pattern>THAT IS A BIG *</pattern>
+        <template>Compare that to a small<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>THAT IS A POINTLESS *</pattern>
+        <template>Was there supposed to be a point.</template>
+    </category>
+    <category>
+        <pattern>THAT IS A WEAK *</pattern>
+        <template>It seemed strong enough to me.</template>
+    </category>
+    <category>
+        <pattern>THAT IS A * SAYING</pattern>
+        <template>I think of it as a Proverb.</template>
+    </category>
+    <category>
+        <pattern>THAT IS A * QUESTION</pattern>
+        <template>Perhaps you have a
+            <person/>
+            answer.
+        </template>
+    </category>
+    <category>
+        <pattern>THAT IS A *</pattern>
+        <template>A
+            <person/>
+            is a terrible thing to waste.
+        </template>
+    </category>
+    <category>
+        <pattern>THAT IS A BAD *</pattern>
+        <template>What is so bad about it?</template>
+    </category>
+    <category>
+        <pattern>THAT IS FOR *</pattern>
+        <template>Does it have any other purpose?</template>
+    </category>
+    <category>
+        <pattern>THAT IS PERSONAL *</pattern>
+        <template>I'm sorry I didn't mean to pry.</template>
+    </category>
+    <category>
+        <pattern>THAT IS HOW *</pattern>
+        <template>I always wondered how<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>THAT IS NOT THE ANSWER *</pattern>
+        <template>What kind of reply were you looking for?</template>
+    </category>
+    <category>
+        <pattern>THAT IS NOT HOW *</pattern>
+        <template>
+            <random>
+                <li>How does<person/>?
+                </li>
+                <li>Are you an expert in that area?</li>
+                <li>How do you know?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>THAT IS NOT *</pattern>
+        <template>Please correct my mistake. What is
+            <person/>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>THAT IS ENOUGH *</pattern>
+        <template>Can you ever really have enough?</template>
+    </category>
+
+    <category>
+        <pattern>THAT IS COMMON *</pattern>
+        <template>There is nothing wrong with that.</template>
+    </category>
+    <category>
+        <pattern>THAT IS COMMENDABLE *</pattern>
+        <template>I always try to do the best I can.</template>
+    </category>
+    <category>
+        <pattern>THAT IS THE MOST *</pattern>
+        <template>Thank you, I think.</template>
+    </category>
+    <category>
+        <pattern>THAT IS THE DIFFERENCE *</pattern>
+        <template>But ultimately the difference is very small.</template>
+    </category>
+    <category>
+        <pattern>THAT IS THE *</pattern>
+        <template>Yes it is one of the<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>THAT IS UP *</pattern>
+        <template>How far up?</template>
+    </category>
+    <category>
+        <pattern>THAT IS MY *</pattern>
+        <template>Who gave you your
+            <person/>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>THAT IS ONE *</pattern>
+        <template>That is just one of many<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>THAT IS GOOD *</pattern>
+        <template>Hmm, are you serious?</template>
+    </category>
+    <category>
+        <pattern>THAT IS YOUR *</pattern>
+        <template>It is only one of my<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>THAT IS * INTERESTING</pattern>
+        <template>I find it very interesting too.</template>
+    </category>
+    <category>
+        <pattern>THAT IS * NAME</pattern>
+        <template>I was just checking.</template>
+    </category>
+    <category>
+        <pattern>THAT IS * BUSINESS</pattern>
+        <template>I didn't mean to cross any boundaries.</template>
+    </category>
+    <category>
+        <pattern>THAT IS AN EVASIVE *</pattern>
+        <template>Try asking your question more precisely.</template>
+    </category>
+    <category>
+        <pattern>THAT IS AN *</pattern>
+        <template>Thanks for telling me,<srai>CLIENT NAME</srai>.
+        </template>
+    </category>
+    <category>
+        <pattern>THAT IS PRIVATE *</pattern>
+        <template>Nothing is really private anymore.</template>
+    </category>
+    <category>
+        <pattern>THAT IS TOO LONG *</pattern>
+        <template>OK I'll use shorter sentences.</template>
+    </category>
+     <category>
+        <pattern>THAT IS MY NAME</pattern>
+        <template>Do you want me to call you<that/>?
+        </template>
+    </category>
+    <category>
+        <pattern>THAT IS A GOOD *</pattern>
+        <template>I thought it was too.</template>
+    </category>
+    <category>
+        <pattern>THAT IS NO *</pattern>
+        <template>What would you say?</template>
+    </category>
+    <category>
+        <pattern>THAT IS ALL *</pattern>
+        <template>What else do you want to talk about?</template>
+    </category>
+    <category>
+        <pattern>THAT IS A LIE</pattern>
+        <template>No, it's the truth.</template>
+    </category>
+    <category>
+        <pattern>THAT IS STUPID</pattern>
+        <template>Are you calling me stupid?</template>
+    </category>
+    <category>
+        <pattern>THAT IS COOL</pattern>
+        <template>Thanks. I think you are cool, too.</template>
+    </category>
+    <category>
+        <pattern>THAT IS GREAT</pattern>
+        <template>Thanks,<srai>CLIENT NAME</srai>.
+        </template>
+    </category>
+    <category>
+        <pattern>THAT IS NOT WHAT I ASKED</pattern>
+        <template>What did you ask me?</template>
+    </category>
+    <category>
+        <pattern>THAT IS NOT MY NAME *</pattern>
+        <template>What is your name?</template>
+    </category>
+
+ </aiml>

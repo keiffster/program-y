@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -15,9 +15,11 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-class SentimentScores(object):
+
+class SentimentScores:
 
     def positivity(self, score, client_context=None):
+        del client_context
         # Score between -1.0 and 1.0
 
         if score < -0.9:
@@ -50,29 +52,36 @@ class SentimentScores(object):
         elif score > 0.7 and score <= 0.9:
             return "VERY POSITIVE"
 
-        elif score > 0.9:
+        elif score > 0.9 and score <= 1.0:
             return "EXTREMELY POSITIVE"
 
+        else:
+            return "UNKNOWN"
+
     def subjectivity(self, score, client_context=None):
+        del client_context
         # Score between 0.0 and 1.0
 
         if score == 0.0:
             return "COMPLETELY OBJECTIVE"
 
-        if score > 0.0 and score <= 0.2:
+        elif score > 0.0 and score <= 0.2:
             return "MOSTLY OBJECTIVE"
 
-        if score > 0.2 and score <= 0.4:
+        elif score > 0.2 and score <= 0.4:
             return "SOMEWHAT OBJECTIVE"
 
         elif score > 0.4 and score <= 0.6:
             return "NEUTRAL"
 
-        if score > 0.6 and score <= 0.8:
+        elif score > 0.6 and score <= 0.8:
             return "SOMEWHAT SUBJECTIVE"
 
-        if score > 0.8 and score < 1.0:
+        elif score > 0.8 and score < 1.0:
             return "MOSTLY SUBJECTIVE"
 
         elif score == 1.0:
             return "COMPLETELY SUBJECTIVE"
+
+        else:
+            return "UNKNOWN"

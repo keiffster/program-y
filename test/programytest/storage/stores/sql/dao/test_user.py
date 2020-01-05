@@ -3,6 +3,7 @@ import unittest
 
 from programy.storage.stores.sql.dao.user import User
 
+
 class UserTests(unittest.TestCase):
     
     def test_init(self):

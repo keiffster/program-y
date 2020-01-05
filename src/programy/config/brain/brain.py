@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -103,8 +103,7 @@ class BrainConfiguration(BaseContainerConfigurationData):
         self._debugfiles.check_for_license_keys(license_keys)
         BaseContainerConfigurationData.check_for_license_keys(self, license_keys)
 
-    def load_configuration(self, configuration_file, bot_root, subs: Substitutions = None):
-        brain_config = configuration_file.get_section(self.section_name)
+    def load_configuration(self, configuration_file, brain_config, bot_root, subs: Substitutions = None):
         if brain_config is not None:
             self._overrides.load_config_section(configuration_file, brain_config, bot_root, subs=subs)
             self._defaults.load_config_section(configuration_file, brain_config, bot_root, subs=subs)
@@ -119,14 +118,14 @@ class BrainConfiguration(BaseContainerConfigurationData):
             self._debugfiles.load_config_section(configuration_file, brain_config, bot_root, subs=subs)
 
     def to_yaml(self, data, defaults=True):
-        self.config_to_yaml(data, BrainOverridesConfiguration(), defaults)
-        self.config_to_yaml(data, BrainDefaultsConfiguration(), defaults)
-        self.config_to_yaml(data, BrainBinariesConfiguration(), defaults)
-        self.config_to_yaml(data, BrainBraintreeConfiguration(), defaults)
-        self.config_to_yaml(data, BrainServicesConfiguration(), defaults)
-        self.config_to_yaml(data, BrainOpenChatBotsConfiguration(), defaults)
-        self.config_to_yaml(data, BrainSecuritiesConfiguration(), defaults)
-        self.config_to_yaml(data, BrainOOBSConfiguration(), defaults)
-        self.config_to_yaml(data, BrainDynamicsConfiguration(), defaults)
-        self.config_to_yaml(data, BrainTokenizerConfiguration(), defaults)
-        self.config_to_yaml(data, BrainDebugFilesConfiguration(), defaults)
+            self.config_to_yaml(data, BrainOverridesConfiguration(), defaults)
+            self.config_to_yaml(data, BrainDefaultsConfiguration(), defaults)
+            self.config_to_yaml(data, BrainBinariesConfiguration(), defaults)
+            self.config_to_yaml(data, BrainBraintreeConfiguration(), defaults)
+            self.config_to_yaml(data, BrainServicesConfiguration(), defaults)
+            self.config_to_yaml(data, BrainOpenChatBotsConfiguration(), defaults)
+            self.config_to_yaml(data, BrainSecuritiesConfiguration(), defaults)
+            self.config_to_yaml(data, BrainOOBSConfiguration(), defaults)
+            self.config_to_yaml(data, BrainDynamicsConfiguration(), defaults)
+            self.config_to_yaml(data, BrainTokenizerConfiguration(), defaults)
+            self.config_to_yaml(data, BrainDebugFilesConfiguration(), defaults)

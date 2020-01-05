@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+   <category>
+        <pattern>WHAT IT MEANS</pattern>
+        <template>
+            <srai>WHAT DOES IT MEAN</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MEANING</pattern>
+        <template>
+            <srai>WHAT DOES THAT MEAN</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IT WHAT DOES IT MEAN</pattern>
+        <template>
+            <srai>WHAT DOES IT MEAN</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THAT MEAN</pattern>
+        <template>
+            <srai>WHAT DOES THAT MEAN</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DOES THAT MEAN *</pattern>
+        <template>
+            <srai>what does that mean</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW WHAT * <set>is</set> *
+        </pattern>
+        <template>
+            <srai>WHAT DOES
+                <star/>
+                <map>
+                    <name>is2be</name>
+                    <star index="2"/>
+                </map>
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>* WHAT DOES IT MEAN</pattern>
+        <template>
+            <srai>WHAT DOES
+                <star/>
+                MEAN
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WUT DOES *</pattern>
+        <template>
+            <srai>WHAT DOES
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WAT DOES *</pattern>
+        <template>
+            <srai>WHAT DOES
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW WHAT * <set>name</set>
+            <set>is</set> *
+        </pattern>
+        <template>
+            <srai>WHAT
+                <star/>
+                DOES
+                <star index="2"/>
+                <map>
+                    <name>is2be</name>
+                    <star index="3"/>
+                </map>
+                <star index="4"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DOES THE WORD * MEAN</pattern>
+        <template>
+            <srai>DEFINE
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+</aiml>

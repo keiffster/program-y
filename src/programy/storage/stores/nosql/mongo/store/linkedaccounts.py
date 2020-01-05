@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -21,13 +21,13 @@ from programy.storage.stores.nosql.mongo.dao.linked import LinkedAccount
 
 
 class MongoLinkedAccountStore(MongoStore, LinkedAccountStore):
-
     LINKEDACCOUNTS = 'linkedaccounts'
     PRIMARY_USERID = "primary_userid"
     LINKED_USERID = "linked_userid"
 
     def __init__(self, storage_engine):
         MongoStore.__init__(self, storage_engine)
+        LinkedAccountStore.__init__(self)
 
     def collection_name(self):
         return MongoLinkedAccountStore.LINKEDACCOUNTS
@@ -35,14 +35,13 @@ class MongoLinkedAccountStore(MongoStore, LinkedAccountStore):
     def link_accounts(self, primary_userid, linked_userid):
         YLogger.info(self, "Linking accounts [%s] [%s] in Mongo", primary_userid, linked_userid)
         linked = LinkedAccount(primary_userid, linked_userid)
-        self.add_document(linked)
-        return True
+        return self.add_document(linked)
 
     def unlink_accounts(self, primary_userid):
         YLogger.info(self, "Unlinking accounts [%s] in Mongo", primary_userid)
         collection = self.collection()
-        collection.delete_many({MongoLinkedAccountStore.PRIMARY_USERID: primary_userid})
-        return True
+        result = collection.delete_many({MongoLinkedAccountStore.PRIMARY_USERID: primary_userid})
+        return bool(result.deleted_count > 0)
 
     def linked_accounts(self, primary_userid):
         collection = self.collection()

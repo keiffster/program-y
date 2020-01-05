@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -19,47 +19,47 @@ from programy.storage.entities.store import Store
 from programy.storage.stores.nosql.mongo.store.mongostore import MongoStore
 from programy.storage.entities.spelling import SpellingStore
 from programy.storage.stores.nosql.mongo.dao.corpus import Corpus
+from programy.utils.console.console import outputLog
 
 
 class MongoSpellingStore(MongoStore, SpellingStore):
-
     SPELLING = 'spelling'
 
     def __init__(self, storage_engine):
         MongoStore.__init__(self, storage_engine)
+        SpellingStore.__init__(self)
 
     def collection_name(self):
         return MongoSpellingStore.SPELLING
 
-    def upload_from_file(self, filename, format=Store.TEXT_FORMAT, commit=True, verbose=False):
+    def _read_corpus_from_file(self, filename, verbose):
+        corpus_words = []
+        with open(filename, "r") as text_file:
+            for lines in text_file:
+                words = lines.split(' ')
+                for word in words:
+                    corpus_words.append(word)
+
+        corpus = Corpus(words=corpus_words)
+        if self.add_document(corpus) is False:
+            return 0, 0
+
+        count = len(corpus_words)
+        return count, count
+
+    def upload_from_file(self, filename, fileformat=Store.TEXT_FORMAT, commit=True, verbose=False):
 
         YLogger.info(self, "Uplading spelling corpus file [%s] to Mongo", filename)
 
-        count = 0
+        count = success = 0
         try:
-            corpus_words = []
-            with open(filename, "r") as text_file:
-                for lines in text_file:
-                    words = lines.split(' ')
-                    for word in words:
-                        corpus_words.append(word)
-
-            corpus = Corpus(words=corpus_words)
-            self.add_document(corpus)
-
-            if verbose is True:
-                print(corpus_words)
-
-            if commit is True:
-                self.commit()
-
-            count = len(corpus_words)
+            count, success = self._read_corpus_from_file(filename, verbose)
 
         except Exception as excep:
-            YLogger.expception(self, "Failed to load spelling corpus from [%s]", excep, filename)
+            YLogger.exception(self, "Failed to load spelling corpus from [%s]", excep, filename)
 
         # Assume all words loaded are success, no need for additional count
-        return count, count
+        return count, success
 
     def load_spelling(self, spell_checker):
         YLogger.info(self, "Loading spelling corpus from Mongo")

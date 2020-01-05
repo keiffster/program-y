@@ -1,0 +1,135 @@
+MANAGER:hasPurpose:to be a boss
+MANAGER:hasSize:7
+MANAGER:hasSyllables:3
+MANAGER:isa:Person
+MANAGER:lifeArea:Business
+LESBIAN:hasPurpose:to be a woman who loves a woman
+LESBIAN:hasSize:7
+LESBIAN:hasSyllables:3
+LESBIAN:isa:Female Person
+LESBIAN:isa:Person
+LESBIAN:lifeArea:Social
+KING:hasPurpose:to be the leader of a country
+KING:hasSize:7
+KING:hasSyllables:1
+KING:isa:Person
+KING:isa:Politician
+KING:lifeArea:Social
+QUEEN:hasPurpose:to serve as a monarch
+QUEEN:hasSize:7
+QUEEN:hasSyllables:1
+QUEEN:isa:Person
+QUEEN:isa:Politician
+QUEEN:lifeArea:Social
+PROFESSIONAL:hasPurpose:to work for money
+PROFESSIONAL:hasSize:7
+PROFESSIONAL:hasSyllables:4
+PROFESSIONAL:isa:Person
+PROFESSIONAL:lifeArea:Business
+PROFESSOR:hasPurpose:to teach college
+PROFESSOR:hasSize:7
+PROFESSOR:hasSyllables:3
+PROFESSOR:isa:Person
+PROFESSOR:isa:Teacher
+PROFESSOR:lifeArea:Education
+PRESIDENT:hasPurpose:to serve as head of state
+PRESIDENT:hasSize:7
+PRESIDENT:hasSyllables:3
+PRESIDENT:isa:Person
+PRESIDENT:isa:Politician
+PRESIDENT:lifeArea:Social
+Officer:isa:Person
+POLICE:hasPurpose:to stop crime
+POLICE:hasSize:7
+POLICE:hasSyllables:2
+POLICE:isa:Person
+POLICE:lifeArea:Social
+MESSENGER:hasPurpose:to deliver information
+MESSENGER:hasSize:7
+MESSENGER:hasSyllables:3
+MESSENGER:isa:Person
+MESSENGER:lifeArea:Business
+MASTER:hasPurpose:to be the boss
+MASTER:hasSize:7
+MASTER:hasSyllables:1
+MASTER:isa:Person
+MASTER:lifeArea:Social
+HOOKER:hasPurpose:to sell sex
+HOOKER:hasSize:7
+HOOKER:hasSyllables:2
+HOOKER:isa:Person
+HOOKER:lifeArea:Social
+CAPTAIN:hasPurpose:to command a ship
+CAPTAIN:hasSize:7
+CAPTAIN:hasSyllables:2
+CAPTAIN:isa:Officer
+CAPTAIN:isa:Person
+CAPTAIN:lifeArea:Social
+CELEBRITY:hasPurpose:to be famous
+CELEBRITY:hasSize:7
+CELEBRITY:hasSyllables:1
+CELEBRITY:isa:Person
+CELEBRITY:lifeArea:Recreation
+CHARACTER:hasPurpose:to serve a role in a story
+CHARACTER:hasSize:7
+CHARACTER:hasSyllables:3
+CHARACTER:isa:Entity
+CHARACTER:lifeArea:Recreation
+Philosopher:isa:Person
+Politician:isa:Person
+STUDENT:hasPurpose:to study in school
+STUDENT:hasSize:7
+STUDENT:hasSyllables:2
+STUDENT:lifeArea:Education
+Teacher:isa:Person
+Team Member:isa:Person
+Visiting Person:isa:Person
+BUDDY:hasPurpose:to be a friend
+BUDDY:hasSize:7
+BUDDY:hasSyllables:2
+BUDDY:isa:Friend
+BUDDY:lifeArea:Social
+Citizen:isa:Person
+Entertainer:isa:Person
+Explorer:isa:Person
+GUEST:hasPurpose:to visit us
+GUEST:hasSize:7
+GUEST:hasSyllables:1
+GUEST:isa:Person
+GUEST:isa:Visiting Person
+GUEST:lifeArea:Social
+KILLER:hasPurpose:to murder
+KILLER:hasSize:7
+KILLER:hasSyllables:2
+KILLER:isa:Criminal
+KILLER:isa:Person
+KILLER:lifeArea:Social
+LEADER:hasPurpose:to be the boss
+LEADER:hasSize:7
+LEADER:hasSyllables:2
+LEADER:isa:Person
+LEADER:lifeArea:Social
+LOVER:hasPurpose:to be a boyfriend or girlfriend
+LOVER:hasSize:7
+LOVER:hasSyllables:2
+LOVER:isa:Person
+LOVER:lifeArea:Social
+SPEAKER:hasPurpose:to address an audience
+SPEAKER:hasSize:7
+SPEAKER:hasSyllables:2
+SPEAKER:isa:Person
+SPEAKER:lifeArea:Social
+STALKER:hasPurpose:to follow us around
+STALKER:hasSize:7
+STALKER:hasSyllables:2
+STALKER:isa:Criminal
+STALKER:isa:Person
+STALKER:lifeArea:Social
+BOSS:hasPurpose:to manage people
+BOSS:hasSize:7
+BOSS:hasSyllables:1
+BOSS:isa:Person
+BOSS:lifeArea:Business
+Criminal:isa:Person
+
+

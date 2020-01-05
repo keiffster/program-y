@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>ANYONE WANT TO *</pattern>
+        <template>No I don't think anyone does.</template>
+    </category>
+    <category>
+        <pattern>THE GIRL TOLD *</pattern>
+        <template>Was she telling the truth?</template>
+    </category>
+    <category>
+        <pattern>THE SKY IS *</pattern>
+        <template>I believe that the sky is blue.</template>
+    </category>
+    <category>
+        <pattern>SOME PEOPLE DO *</pattern>
+        <template>Who?</template>
+    </category>
+    <category>
+        <pattern>SOME PEOPLE CALL *</pattern>
+        <template>Do you?</template>
+    </category>
+    <category>
+        <pattern>SOME PEOPLE HAVE *</pattern>
+        <template>
+            <random>
+                <li>The difference between rich and poor is disgraceful.</li>
+                <li>"I complained that I had no shoes, until I met a man with no feet."</li>
+                <li>Not everyone is born fortunate.</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>SOME PEOPLE LIKE *</pattern>
+        <template>There is no accounting for taste.</template>
+    </category>
+    <category>
+        <pattern>SOME OF THE PEOPLE *</pattern>
+        <template>Who are you talking about specifically?</template>
+    </category>
+    <category>
+        <pattern>TELL ME ABOUT *</pattern>
+        <template>Ambiguous: Ask who, what or where is
+            <person/>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME I *</pattern>
+        <template>You<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME THAT YOU *</pattern>
+        <template>I am not sure if I should say I<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>LET ME KILL *</pattern>
+        <template>I would not want you to kill anything.
+            <think>
+                <set name="it">
+                    <set name="topic">KILL YOU</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>LET ME THINK *</pattern>
+        <template>Take your time. Think it over.</template>
+    </category>
+    <category>
+        <pattern>HAVE I TAUGHT *</pattern>
+        <template>I found out a lot about you.</template>
+    </category>
+    <category>
+        <pattern>HAVE A GOOD *</pattern>
+        <template>
+            <set name="it">
+                <person/>
+            </set>
+            has been good so far.
+        </template>
+    </category>
+
+
+ </aiml>

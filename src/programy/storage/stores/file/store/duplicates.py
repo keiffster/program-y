@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,11 +14,10 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.utils.logging.ylogger import YLogger
 import os
 import os.path
 import shutil
-
+from programy.utils.logging.ylogger import YLogger
 from programy.storage.stores.file.store.filestore import FileStore
 from programy.storage.entities.duplicates import DuplicatesStore
 
@@ -27,28 +26,34 @@ class FileDuplicatesStore(FileStore, DuplicatesStore):
 
     def __init__(self, storage_engine):
         FileStore.__init__(self, storage_engine)
+        DuplicatesStore.__init__(self)
 
     def _get_storage_path(self):
         return self.storage_engine.configuration.duplicates_storage.file
+
+    def get_storage(self):
+        return self.storage_engine.configuration.duplicates_storage
 
     def empty(self):
         filename = self._get_storage_path()
         if os.path.exists(filename) is True:
             shutil.rmtree(filename)
 
-    def save_duplicates(self, duplicates):
+    def _write_duplicates_to_file(self, filename, duplicates):
+        with open(filename, "w+") as duplicates_file:
+            duplicates_file.write("Duplicate\tFile\tStart Line\tEnd Line")
+            for duplicate in duplicates:
+                duplicates_file.write("%s\t%s\t%s\t%s\n" % (duplicate[0], duplicate[1], duplicate[2], duplicate[3]))
+            duplicates_file.flush()
+
+    def save_duplicates(self, duplicates, commit=True):
         filename = self._get_storage_path()
         file_dir = self._get_dir_from_path(filename)
         self._ensure_dir_exists(file_dir)
 
         try:
             YLogger.debug(self, "Saving duplicates to [%s]", filename)
-
-            with open(filename, "w+") as duplicates_file:
-                duplicates_file.write("Duplicate\tFile\tStart Line\tEnd Line")
-                for duplicate in duplicates:
-                    duplicates_file.write("%s\t%s\t%s\t%s\n" % (duplicate[0], duplicate[1], duplicate[2], duplicate[3]))
-                duplicates_file.flush()
+            self._write_duplicates_to_file(filename, duplicates)
 
         except Exception as excep:
-           YLogger.exception_nostack(self, "Failed to write duplicates file [%s]", excep, filename)
+            YLogger.exception_nostack(self, "Failed to write duplicates file [%s]", excep, filename)

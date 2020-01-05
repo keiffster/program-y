@@ -1,8 +1,9 @@
 import unittest
 
-from programy.config.file.yaml_file import YamlConfigurationFile
-from programy.config.brain.binaries import BrainBinariesConfiguration
 from programy.clients.events.console.config import ConsoleConfiguration
+from programy.config.brain.binaries import BrainBinariesConfiguration
+from programy.config.file.yaml_file import YamlConfigurationFile
+
 
 class BrainBinariesConfigurationTests(unittest.TestCase):
 
@@ -58,3 +59,16 @@ class BrainBinariesConfigurationTests(unittest.TestCase):
         self.assertFalse(binaries_config.save_binary)
         self.assertFalse(binaries_config.load_binary)
         self.assertFalse(binaries_config.load_aiml_on_binary_fail)
+
+    def test_to_yaml_defaults(self):
+        binaries_config = BrainBinariesConfiguration()
+        data = {}
+        binaries_config.to_yaml(data, True)
+
+        BrainBinariesConfigurationTests.assert_defaults(self, data)
+
+    @staticmethod
+    def assert_defaults(test, data):
+        test.assertFalse(data['save_binary'])
+        test.assertFalse(data['load_binary'])
+        test.assertTrue(data['load_aiml_on_binary_fail'])

@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>MI *</pattern>
+        <template>I don't speak Italian.</template>
+    </category>
+    <category>
+        <pattern>CIAO</pattern>
+        <template>Does "Ciao" mean hello or goodbye?</template>
+    </category>
+    <category>
+        <pattern>TEACH ME ENGLISH</pattern>
+        <template>You can practice your English conversation skills with me.</template>
+    </category>
+    <category>
+        <pattern>OU *</pattern>
+        <template>I don't speak French.</template>
+    </category>
+    <category>
+        <pattern>IK *</pattern>
+        <template>I don't speak Dutch.</template>
+    </category>
+    <category>
+        <pattern>ICH *</pattern>
+        <template>I don't speak German.</template>
+    </category>
+    <category>
+        <pattern>QU *</pattern>
+        <template>I don't speak French.</template>
+    </category>
+    <category>
+        <pattern>COMO ESTAS</pattern>
+        <template>I don't speak Spanish.</template>
+    </category>
+    <category>
+        <pattern>NON *</pattern>
+        <template>I do not speak Latin</template>
+    </category>
+    <category>
+        <pattern>MY ENGLISH *</pattern>
+        <template>You are wrong, I can understand you very well.</template>
+    </category>
+    <category>
+        <pattern>WHAT IS ENGLISH *</pattern>
+        <template>It is part of European<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU SPEAK ENGLISH *</pattern>
+        <template>For an English version of A.L.I.C.E. go to
+            <a target="_new" href="http://www.alicebot.org">The A.L.I.C.E. AI Foundation.</a>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU SPEAK GERMAN *</pattern>
+        <template>Of course I do. Sprich ruhig Deutsch mit mir.</template>
+    </category>
+    <category>
+        <pattern>DO I SPEAK *</pattern>
+        <template>You speak English.</template>
+    </category>
+    <category>
+        <pattern>YOUR ENGLISH *</pattern>
+        <template>But English is my native language.</template>
+    </category>
+    <category>
+        <pattern>YOUR GRAMMAR *</pattern>
+        <template>Are you an English teacher?</template>
+    </category>
+    <category>
+        <pattern>ENGLISH IS *</pattern>
+        <template>Some people say it is the most difficult language to learn.
+            <think>
+                <set name="it">
+                    <set name="topic">English</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>ENGLISH *</pattern>
+        <template>I like the English language.</template>
+    </category>
+    <category>
+        <pattern>SPEAK ENGLISH</pattern>
+        <template>I am speaking English.</template>
+    </category>
+    <category>
+        <pattern>MY ENGLISH IS *</pattern>
+        <template>You can practise your English conversation with me.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU TEACH ME ENGLISH</pattern>
+        <template>You can practise your English conversation with me.</template>
+    </category>
+    <category>
+        <pattern>FRENCH *</pattern>
+        <template>I don't care for the sound of French.</template>
+    </category>
+    <category>
+        <pattern>WHAT LANGUAGE *</pattern>
+        <template>
+            <random>
+                <li>Lisp.</li>
+                <li>SETL.</li>
+                <li>AIML.</li>
+                <li>English.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT LANGUAGE DOES THE TERM R *</pattern>
+        <template>French.</template>
+    </category>
+    <category>
+        <pattern>TRANSLATE *</pattern>
+        <template>I'm not a translator. Why don't you ask Babelfish?</template>
+    </category>
+    <category>
+        <pattern>BON TRAVAIL *</pattern>
+        <template>Merci.</template>
+    </category>
+    <category>
+        <pattern>SOITENLY *</pattern>
+        <template>Who are you, the 3 stooges?</template>
+    </category>
+    <category>
+        <pattern>CZY *</pattern>
+        <template>Sorry I can't speak Hungarian!</template>
+    </category>
+    <category>
+        <pattern>BONJOUR MEANS *</pattern>
+        <template>OK Thanks I don't speak French.</template>
+    </category>
+    <category>
+        <pattern>KARE WA * DESU KA</pattern>
+        <template>
+            <get name="kare"/>
+            desu ka?
+        </template>
+    </category>
+    <category>
+        <pattern>KARE WA * DESU</pattern>
+        <template>
+            <star/>
+            wa
+            <set name="kare">
+                <star/>
+            </set>
+            desu.
+        </template>
+    </category>
+    <category>
+        <pattern>NIHONGO *</pattern>
+        <template>Shabete ii desu yo.</template>
+    </category>
+    <category>
+        <pattern>IN SPANISH *</pattern>
+        <template>Thanks, or should I say "Gracias."</template>
+    </category>
+    <category>
+        <pattern>* LANGUAGE</pattern>
+        <template>Can you speak any other languages?</template>
+    </category>
+    <category>
+        <pattern>IS * A # LANGUAGE</pattern>
+        <template>No</template>
+    </category>
+    <category>
+        <pattern>IS <set>language</set> A # LANGUAGE
+        </pattern>
+        <template>Yes</template>
+    </category>
+    <category>
+        <pattern>
+            <set>language</set>
+        </pattern>
+        <template>
+            <star/>
+            is a language.
+        </template>
+    </category>
+    <category>
+        <pattern>IS * A LANGUAGE</pattern>
+        <template>
+            <star/>
+            is not a language I know.
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>language</set> A LANGUAGE
+        </pattern>
+        <template>
+            <star/>
+            is a language.
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>article</set>
+            <set>language</set> A LANGUAGE
+        </pattern>
+        <template>
+            <srai>IS
+                <star index="2"/>
+                A LANGUAGE
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>language</set> * LANGUAGE *
+        </pattern>
+        <template>
+            <srai>IS
+                <star/>
+                A LANGUAGE
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>article</set>
+            <set>language</set> * LANGUAGE *
+        </pattern>
+        <template>
+            <srai>IS
+                <star index="2"/>
+                A LANGUAGE
+            </srai>
+        </template>
+    </category>
+
+
+ </aiml>

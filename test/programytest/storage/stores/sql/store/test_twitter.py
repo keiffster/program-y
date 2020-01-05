@@ -1,12 +1,10 @@
 import unittest
 
-from programytest.storage.asserts.store.assert_twitter import TwitterStoreAsserts
-
-from programy.storage.stores.sql.store.twitter import SQLTwitterStore
-from programy.storage.stores.sql.engine import SQLStorageEngine
-from programy.storage.stores.sql.config import SQLStorageConfiguration
-
 import programytest.storage.engines as Engines
+from programy.storage.stores.sql.config import SQLStorageConfiguration
+from programy.storage.stores.sql.engine import SQLStorageEngine
+from programy.storage.stores.sql.store.twitter import SQLTwitterStore
+from programytest.storage.asserts.store.assert_twitter import TwitterStoreAsserts
 
 
 class SQLTwitterStoreTests(TwitterStoreAsserts):

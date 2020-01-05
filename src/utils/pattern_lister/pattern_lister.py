@@ -1,7 +1,7 @@
-import xml.etree.ElementTree as ET
 import sys
-import os
 import os.path
+import xml.etree.ElementTree as ET
+
 
 if __name__ == '__main__':
 
@@ -76,7 +76,6 @@ if __name__ == '__main__':
                             pattern_text = pattern_text.strip()
                             if len(pattern_text) > 0:
                                 questions.append([aiml_file, pattern_text])
-
 
             except Exception as e:
                 print(e)

@@ -1,0 +1,37 @@
+BEATLES:hasPurpose:to play popular music
+BEATLES:hasSize:8
+BEATLES:hasSyllables:2
+BEATLES:isa:Band
+BEATLES:isa:Rock Band
+BEATLES:lifeArea:Recreation
+JAZZ:hasPurpose:to define a style of music
+JAZZ:hasSize:0
+JAZZ:hasSyllables:2
+JAZZ:isa:Music Genre
+JAZZ:lifeArea:Recreation
+FUNK:hasPurpose:to make life difficult
+FUNK:hasSize:0
+FUNK:hasSyllables:1
+FUNK:isa:Spiritual State
+FUNK:lifeArea:Spiritual
+MUSIC:hasPurpose:to bring out our musical voice
+MUSIC:hasSize:0
+MUSIC:hasSyllables:2
+MUSIC:isa:Sound
+MUSIC:lifeArea:Creative
+SONATA:hasPurpose:to please the ear
+SONATA:hasSize:0
+SONATA:hasSyllables:3
+SONATA:lifeArea:Recreation
+SONG:hasPurpose:to entertain us
+SONG:hasSize:0
+SONG:hasSyllables:1
+SONG:isa:Creative Work
+SONG:lifeArea:Creative
+Rock Band:isa:Band
+SINGER:hasPurpose:to perform with her voice
+SINGER:hasSize:7
+SINGER:hasSyllables:2
+SINGER:isa:Entertainer
+SINGER:isa:Person
+SINGER:lifeArea:Recreation

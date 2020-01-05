@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -18,8 +18,7 @@ from programy.utils.logging.ylogger import YLogger
 from programy.clients.restful.config import RestConfiguration
 
 
-class APIKeysHandler(object):
-
+class APIKeysHandler:
     API_KEY_HEADER = "PROGRAMY-API-KEY"
     API_KEY_ARG = 'apikey'
 
@@ -44,27 +43,22 @@ class APIKeysHandler(object):
                             self.api_keys.append(api_key.strip())
 
                 except Exception as excep:
-                    YLogger.exception(self, "Failed to open license key file [%s]", excep, self._configuration.api_key_file)
+                    YLogger.exception(self, "Failed to open license key file [%s]", excep,
+                                      self._configuration.api_key_file)
 
     def use_api_keys(self):
         return self._configuration.use_api_keys
 
     def get_api_key(self, rest_request, method='GET'):
         if method == 'GET':
-            if APIKeysHandler.API_KEY_ARG not in rest_request.args:
-                return None
-
-            if rest_request.args[APIKeysHandler.API_KEY_ARG] is None:
-                return None
-
-            return rest_request.args[APIKeysHandler.API_KEY_ARG]
+            if APIKeysHandler.API_KEY_ARG in rest_request.args and \
+                    rest_request.args[APIKeysHandler.API_KEY_ARG] is not None:
+                return rest_request.args[APIKeysHandler.API_KEY_ARG]
 
         elif method == 'POST':
-            if APIKeysHandler.APIKeysHandler not in rest_request.headers or \
-                    rest_request.headers [APIKeysHandler.APIKeysHandler] is None:
-                return None
-
-            return rest_request.headers [APIKeysHandler.APIKeysHandler]
+            if APIKeysHandler.API_KEY_HEADER in rest_request.headers and \
+                    rest_request.headers[APIKeysHandler.API_KEY_HEADER] is not None:
+                return rest_request.headers[APIKeysHandler.API_KEY_HEADER]
 
         return None
 
@@ -84,4 +78,3 @@ class APIKeysHandler(object):
                 return False
 
         return True
-

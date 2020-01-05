@@ -1,7 +1,8 @@
 import unittest
 
-from programy.dialog.splitter.splitter import SentenceSplitter
 from programy.config.bot.splitter import BotSentenceSplitterConfiguration
+from programy.dialog.splitter.splitter import SentenceSplitter
+
 
 class SentenceSplitterTests(unittest.TestCase):
 
@@ -10,9 +11,12 @@ class SentenceSplitterTests(unittest.TestCase):
         config = BotSentenceSplitterConfiguration()
         self.assertIsNotNone(config)
 
-        splitter = SentenceSplitter.initiate_sentence_splitter(config)
+        splitter = SentenceSplitter(config)
         self.assertIsNotNone(splitter)
         self.assertIsInstance(splitter, SentenceSplitter)
+
+        with self.assertRaises(NotImplementedError):
+            splitter.split("This sentence")
 
     def test_remove_punctuation(self):
 
@@ -22,6 +26,6 @@ class SentenceSplitterTests(unittest.TestCase):
         splitter = SentenceSplitter.initiate_sentence_splitter(config)
         self.assertIsNotNone(splitter)
 
-        self.assertEquals("", splitter.remove_punctuation(""))
-        self.assertEquals("", splitter.remove_punctuation("()"))
-        self.assertEquals("Hello world", splitter.remove_punctuation("(Hello, world)"))
+        self.assertEqual("", splitter.remove_punctuation(""))
+        self.assertEqual("", splitter.remove_punctuation("()"))
+        self.assertEqual("Hello world", splitter.remove_punctuation("(Hello, world)"))

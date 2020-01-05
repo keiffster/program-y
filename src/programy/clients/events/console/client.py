@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,9 +14,8 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.utils.logging.ylogger import YLogger
-
+from programy.utils.console.console import outputLog
 from programy.clients.events.client import EventBotClient
 from programy.clients.events.console.config import ConsoleConfiguration
 
@@ -27,6 +26,9 @@ class ConsoleBotClient(EventBotClient):
         self.running = False
         EventBotClient.__init__(self, "Console", argument_parser)
 
+    def _render_callback(self):
+        return True
+
     def get_client_configuration(self):
         return ConsoleConfiguration()
 
@@ -36,9 +38,13 @@ class ConsoleBotClient(EventBotClient):
     def parse_args(self, arguments, parsed_args):
         return
 
-    def get_question(self, client_context, input_func=input):
-        ask = "%s " % self.get_client_configuration().prompt
-        return input_func(ask)
+    def get_question(self, client_context, input_func=None):
+        del client_context
+        ask = "%s " % self._configuration.client_configuration.prompt
+        if input_func:
+            return input_func(ask)
+
+        return input(ask)       #pylint: disable=input-builtin
 
     def display_startup_messages(self, client_context):
         self.process_response(client_context, client_context.bot.get_version_string(client_context))
@@ -54,7 +60,8 @@ class ConsoleBotClient(EventBotClient):
         self._renderer.render(client_context, response)
 
     def process_response(self, client_context, response):
-        print(response)
+        del client_context
+        outputLog(self, response)
 
     def process_question_answer(self, client_context):
         question = self.get_question(client_context)
@@ -66,12 +73,15 @@ class ConsoleBotClient(EventBotClient):
         try:
             client_context = self.create_client_context(self._configuration.client_configuration.default_userid)
             self.process_question_answer(client_context)
-        except KeyboardInterrupt as keye:
+
+        except KeyboardInterrupt:
             running = False
             client_context = self.create_client_context(self._configuration.client_configuration.default_userid)
             self._renderer.render(client_context, client_context.bot.get_exit_response(client_context))
+
         except Exception as excep:
             YLogger.exception(self, "Oops something bad happened !", excep)
+
         return running
 
     def prior_to_run_loop(self):
@@ -81,7 +91,7 @@ class ConsoleBotClient(EventBotClient):
 
 if __name__ == '__main__':
 
-    print("Initiating Console Client...")
+    outputLog(None, "Initiating Console Client...")
 
     def run():
         console_app = ConsoleBotClient()

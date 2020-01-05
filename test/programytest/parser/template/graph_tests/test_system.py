@@ -1,9 +1,8 @@
-import xml.etree.ElementTree as ET
 import os
+import xml.etree.ElementTree as ET
 
 from programy.parser.template.nodes.system import TemplateSystemNode
 from programy.parser.template.nodes.word import TemplateWordNode
-
 from programytest.parser.template.graph_tests.graph_test_client import TemplateGraphTestClient
 
 

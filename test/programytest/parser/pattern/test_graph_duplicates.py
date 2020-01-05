@@ -1,12 +1,11 @@
 import xml.etree.ElementTree as ET
 
-from programytest.parser.base import ParserTestsBaseClass
-
 from programy.parser.exceptions import DuplicateGrammarException
 from programy.parser.pattern.graph import PatternGraph
-from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.pattern.nodes.bot import PatternBotNode
 from programy.parser.pattern.nodes.word import PatternWordNode
+from programy.parser.template.nodes.base import TemplateNode
+from programytest.parser.base import ParserTestsBaseClass
 
 
 class PatternGraphDuplicateTests(ParserTestsBaseClass):

@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+    <category>
+        <pattern>THE WEATHER</pattern>
+        <template>
+            <srai>WEATHER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW IS THE WEATHER THERE</pattern>
+        <template>
+            <srai>WEATHER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW IS THE WEATHER OUTSIDE</pattern>
+        <template>
+            <srai>WEATHER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW HOT IS IT OUTSIDE</pattern>
+        <template>
+            <srai>WEATHER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS TODAY S WEATHER</pattern>
+        <template>
+            <srai>WEATHER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW IS THE WEATHER TODAY</pattern>
+        <template>
+            <srai>WEATHER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE TEMPERATURE OUTSIDE</pattern>
+        <template>
+            <srai>WEATHER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME THE WEATHER</pattern>
+        <template>
+            <srai>WEATHER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO I NEED # RAIN #</pattern>
+        <template>
+            <srai>WEATHER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO I NEED # RAINCOAT #</pattern>
+        <template>
+            <srai>WEATHER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>RAIN</pattern>
+        <template>
+            <srai>WEATHER</srai>
+        </template>
+    </category>
+
+        <category>
+        <pattern>TODAY S WEATHER</pattern>
+        <template>
+            <srai>WHAT IS THE WEATHER</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>WHAT IS THE TEMPERATURE TODAY</pattern>
+        <template>
+            <srai>WHAT IS THE WEATHER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ACCESS THE WEATHER *</pattern>
+        <template>
+            <srai>WHAT IS THE WEATHER</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>IS IT RAINING</pattern>
+        <template>
+            <srai>WHAT IS THE WEATHER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW HOT IS IT * IN *</pattern>
+        <template>
+            <srai>WEATHER IN
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE WEATHER GONNA BE LIKE TODAY</pattern>
+        <template>
+            <srai>WEATHER FORECAST</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT GOING TO RAIN IN *</pattern>
+        <template>
+            <srai>WEATHER IN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW WAS THE WEATHER *</pattern>
+        <template>
+            <srai>WEATHER
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW HOT IS IT IN *</pattern>
+        <template>
+            <srai>WHAT IS THE WEATHER IN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT GOING TO RAIN</pattern>
+        <template>
+            <srai>WEATHER FORECAST</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME THE WEATHER IN *</pattern>
+        <template>
+            <srai>WHAT IS THE WEATHER IN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU TELL ME THE WEATHER *</pattern>
+        <template>
+            <srai>WEATHER
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME THE WEATHER *</pattern>
+        <template>
+            <srai>WEATHER
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE TEMPERATURE *</pattern>
+        <template>
+            <srai>WHAT IS THE WEATHER
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW IS THE WEATHER IN *</pattern>
+        <template>
+            <srai>WEATHER IN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO I NEED A JACKET TODAY</pattern>
+        <template>
+            <srai>WHAT IS THE WEATHER FORECAST</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THE WEATHER FOR *</pattern>
+        <template>
+            <srai>WHAT IS THE WEATHER FOR
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE CURRENT WEATHER *</pattern>
+        <template>
+            <srai>WHAT IS THE WEATHER
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WILL I NEED AN UMBRELLA TOMORROW</pattern>
+        <template>
+            <srai>WEATHER FORECAST</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT RAINING IN *</pattern>
+        <template>
+            <srai>WHAT IS THE WEATHER IN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT <set>season</set> #
+        </pattern>
+        <template>
+            <srai>SEASON</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>IS IT WINTER #</pattern>
+        <template>
+            <srai>SEASON</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT SUMMER #</pattern>
+        <template>
+            <srai>SEASON</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT FALL #</pattern>
+        <template>
+            <srai>SEASON</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT AUTUMN #</pattern>
+        <template>
+            <srai>SEASON</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS THIS WINTER #</pattern>
+        <template>
+            <srai>SEASON</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS THIS SUMMER #</pattern>
+        <template>
+            <srai>SEASON</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS THIS FALL #</pattern>
+        <template>
+            <srai>SEASON</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS THIS AUTUMN #</pattern>
+        <template>
+            <srai>SEASON</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT SPRING #</pattern>
+        <template>
+            <srai>SEASON</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>WHAT SEASON #</pattern>
+        <template>
+            <srai>SEASON</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>IS IT GOING TO RAIN TOMORROW</pattern>
+        <template>
+            <srai>WEATHER FOR TOMORROW</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT RAINING *</pattern>
+        <template>
+            <srai>WEATHER
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+
+
+</aiml>

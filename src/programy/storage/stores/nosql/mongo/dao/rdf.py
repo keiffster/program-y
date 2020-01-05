@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,18 +14,25 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from programy.storage.stores.utils import DAOUtils
 
-class RDF(object):
 
-    def __init__(self, name, subject, predicate, object):
+class RDF:
+
+    def __init__(self, name, subject, predicate, obj):
         self.id = None
         self.name = name
         self.subject = subject
         self.predicate = predicate
-        self.object = object
+        self.object = obj
 
     def __repr__(self):
-        return "<RDF(id='%d', name='%s', subject='%s', predicate='%s', object='%s')>" % (self.id, self.name, self.subject, self.predicate, self.object)
+        return "<RDF(id='%s', name='%s', subject='%s', predicate='%s', object='%s')>" % \
+               (DAOUtils.valid_id(self.id),
+                self.name,
+                self.subject,
+                self.predicate,
+                self.object)
 
     def to_document(self):
         document = {"name": self.name,
@@ -39,14 +46,9 @@ class RDF(object):
     @staticmethod
     def from_document(data):
         rdf = RDF(None, None, None, None)
-        if '_id' in data:
-            rdf.id = data['_id']
-        if 'name' in data:
-            rdf.name = data['name']
-        if 'subject' in data:
-            rdf.subject = data['subject']
-        if 'predicate' in data:
-            rdf.predicate = data['predicate']
-        if 'object' in data:
-            rdf.object = data['object']
+        rdf.id = DAOUtils.get_value_from_data(data, '_id')
+        rdf.name = DAOUtils.get_value_from_data(data, 'name')
+        rdf.subject = DAOUtils.get_value_from_data(data, 'subject')
+        rdf.predicate = DAOUtils.get_value_from_data(data, 'predicate')
+        rdf.object = DAOUtils.get_value_from_data(data, 'object')
         return rdf

@@ -1,18 +1,39 @@
 import unittest
 import re
-from programy.processors.post.denormalize import DenormalizePostProcessor
-from programy.processors.post.formatpunctuation import FormatPunctuationProcessor
-from programy.processors.post.formatnumbers import FormatNumbersPostProcessor
-from programy.processors.post.multispaces import RemoveMultiSpacePostProcessor
-from programy.processors.post.emojize import EmojizePostProcessor
+import os
 from programy.bot import Bot
 from programy.config.bot.bot import BotConfiguration
 from programy.context import ClientContext
-
+from programy.processors.post.denormalize import DenormalizePostProcessor
+from programy.processors.post.emojize import EmojizePostProcessor
+from programy.processors.post.formatnumbers import FormatNumbersPostProcessor
+from programy.processors.post.formatpunctuation import FormatPunctuationProcessor
+from programy.processors.post.multispaces import RemoveMultiSpacePostProcessor
 from programytest.client import TestClient
+from programy.storage.factory import StorageFactory
+from programy.storage.stores.file.config import FileStorageConfiguration
+from programy.storage.stores.file.config import FileStoreConfiguration
+from programy.storage.stores.file.engine import FileStorageEngine
+from programy.processors.processing import PostProcessorCollection
 
 
 class PostProcessingTests(unittest.TestCase):
+
+    def test_load(self):
+        storage_factory = StorageFactory()
+
+        file_store_config = FileStorageConfiguration()
+        file_store_config._postprocessors_storage = FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "test_files" + os.sep + "postprocessors.conf", fileformat="text", extension="txt", encoding="utf-8", delete_on_start=False)
+
+        storage_engine = FileStorageEngine(file_store_config)
+
+        storage_factory._storage_engines[StorageFactory.POSTPROCESSORS] = storage_engine
+        storage_factory._store_to_engine_map[StorageFactory.POSTPROCESSORS] = storage_engine
+
+        collection = PostProcessorCollection()
+        self.assertIsNotNone(collection)
+
+        self.assertTrue(collection.load(storage_factory))
 
     def post_process(self, output_str):
         self.client = TestClient()

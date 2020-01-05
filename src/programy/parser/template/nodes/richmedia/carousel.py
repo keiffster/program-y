@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,13 +14,9 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.utils.logging.ylogger import YLogger
-
 from programy.parser.template.nodes.base import TemplateNode
-from programy.parser.template.nodes.richmedia.card import TemplateCardNode
-from programy.parser.exceptions import ParserException
 from programy.utils.text.text import TextUtils
+from programy.parser.exceptions import ParserException
 
 
 class TemplateCarouselNode(TemplateNode):
@@ -30,11 +26,11 @@ class TemplateCarouselNode(TemplateNode):
         self._cards = []
 
     def resolve_to_string(self, client_context):
-        str = "<carousel>"
+        resolved = "<carousel>"
         for card in self._cards:
-            str += card.resolve_to_string(client_context)
-        str += "</carousel>"
-        return str
+            resolved += card.resolve_to_string(client_context)
+        resolved += "</carousel>"
+        return resolved
 
     def to_string(self):
         return "[CAROUSEL %d]" % (len(self._cards))
@@ -58,8 +54,10 @@ class TemplateCarouselNode(TemplateNode):
                 card.parse_expression(graph, child)
                 self._cards.append(card)
             else:
-                graph.parse_tag_expression(child, self)
+                raise ParserException("Only card allowed in carousel")
 
             tail_text = self.get_tail_from_element(child)
             self.parse_text(graph, tail_text)
 
+        if len(self._cards) == 0:
+            raise ParserException("No cards found in in carousel")

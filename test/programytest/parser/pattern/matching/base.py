@@ -1,8 +1,8 @@
 import xml.etree.ElementTree as ET
 
-from programytest.parser.base import ParserTestsBaseClass, TestBot
 from programy.dialog.sentence import Sentence
 from programy.parser.template.nodes.word import TemplateWordNode
+from programytest.parser.base import ParserTestsBaseClass
 
 
 class PatternMatcherBaseClass(ParserTestsBaseClass):

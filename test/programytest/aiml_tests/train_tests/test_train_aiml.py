@@ -1,8 +1,5 @@
-import unittest
 import os
-
-from programy.config.file.factory import ConfigurationFactory
-from programy.clients.events.console.config import ConsoleConfiguration
+import unittest
 
 from programytest.client import TestClient
 

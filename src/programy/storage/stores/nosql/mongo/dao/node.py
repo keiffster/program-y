@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.storage.stores.utils import DAOUtils
 
 
-class Node(object):
+class Node():
 
     def __init__(self, name, node_class):
         self.id = None
@@ -32,7 +32,6 @@ class Node(object):
         return document
 
 
-
 class PatternNode(Node):
 
     def __init__(self, name, node_class):
@@ -40,16 +39,14 @@ class PatternNode(Node):
 
     def __repr__(self):
         return "<PatternNode(id='%s', name='%s', node_class='%s')>" % (
-        DAOUtils.valid_id(self.id), self.name, self.node_class)
+            DAOUtils.valid_id(self.id), self.name, self.node_class)
 
+    @staticmethod
     def from_document(data):
         node = PatternNode(None, None)
-        if '_id' in data:
-            node.id = data['_id']
-        if 'name' in data:
-            node.name = data['name']
-        if 'node_class' in data:
-            node.node_class = data['node_class']
+        node.id = DAOUtils.get_value_from_data(data, '_id')
+        node.name = DAOUtils.get_value_from_data(data, 'name')
+        node.node_class = DAOUtils.get_value_from_data(data, 'node_class')
         return node
 
 
@@ -60,14 +57,12 @@ class TemplateNode(Node):
 
     def __repr__(self):
         return "<TemplateNode(id='%s', name='%s', node_class='%s')>" % (
-        DAOUtils.valid_id(self.id), self.name, self.node_class)
+            DAOUtils.valid_id(self.id), self.name, self.node_class)
 
+    @staticmethod
     def from_document(data):
-        node = PatternNode(None, None)
-        if '_id' in data:
-            node.id = data['_id']
-        if 'name' in data:
-            node.name = data['name']
-        if 'node_class' in data:
-            node.node_class = data['node_class']
+        node = TemplateNode(None, None)
+        node.id = DAOUtils.get_value_from_data(data, '_id')
+        node.name = DAOUtils.get_value_from_data(data, 'name')
+        node.node_class = DAOUtils.get_value_from_data(data, 'node_class')
         return node

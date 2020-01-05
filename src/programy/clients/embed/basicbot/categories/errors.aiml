@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- basic_chat.aiml -->
+
+    <category>
+        <pattern>BROKEN GRAMMAR 1</pattern>
+    </category>
+
+</aiml>

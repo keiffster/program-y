@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,7 +14,6 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.utils.logging.ylogger import YLogger
 from programy.utils.text.text import TextUtils
 from programy.parser.template.nodes.base import TemplateNode
@@ -27,7 +26,7 @@ class TemplateAttribNode(TemplateNode):
         TemplateNode.__init__(self)
 
     def set_attrib(self, attrib_name: str, attrib_value):
-        raise NotImplementedError("Should not call this base method, implementation missing")
+        raise NotImplementedError("Should not call this base method, implementation missing")  # pragma: no cover
 
     #######################################################################################################
 

@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,8 +14,10 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from programy.storage.stores.utils import DAOUtils
 
-class Map(object):
+
+class Map():
 
     def __init__(self, name, key_values):
         self.id = None
@@ -23,7 +25,7 @@ class Map(object):
         self.key_values = key_values
 
     def __repr__(self):
-        return "<Map(id='%d', name='%s')>" % (self.id, self.name)
+        return "<Map(id='%s', name='%s', values='%s')>" % (DAOUtils.valid_id(self.id), self.name, ", ".join(self.key_values))
 
     def to_document(self):
         document = {"name": self.name,
@@ -35,10 +37,7 @@ class Map(object):
     @staticmethod
     def from_document(data):
         amap = Map(None, None)
-        if '_id' in data:
-            amap.id = data['_id']
-        if 'name' in data:
-            amap.name = data['name']
-        if 'key_values' in data:
-            amap.key_values = data['key_values']
+        amap.id = DAOUtils.get_value_from_data(data, '_id')
+        amap.name = DAOUtils.get_value_from_data(data, 'name')
+        amap.key_values = DAOUtils.get_value_from_data(data, 'key_values', [])
         return amap

@@ -1,19 +1,27 @@
-import unittest
 import os
-
-from programy.parser.pattern.nodes.root import PatternRootNode
-from programy.parser.pattern.nodes.topic import PatternTopicNode
-from programy.parser.pattern.nodes.that import PatternThatNode
-from programy.parser.pattern.nodes.word import PatternWordNode
-from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
-from programy.parser.pattern.nodes.template import PatternTemplateNode
-
+import unittest
+from programy.utils.parsing.linenumxml import LineNumberingParser
+import xml.etree.ElementTree as ET  # pylint: disable=wrong-import-order
+from programy.parser.aiml_parser import AIMLParser
 from programy.dialog.sentence import Sentence
-from programy.bot import Bot
-from programy.config.bot.bot import BotConfiguration
-from programy.context import ClientContext
-
+from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
+from programy.parser.pattern.nodes.root import PatternRootNode
+from programy.parser.pattern.nodes.template import PatternTemplateNode
+from programy.parser.pattern.nodes.that import PatternThatNode
+from programy.parser.pattern.nodes.topic import PatternTopicNode
+from programy.parser.pattern.nodes.word import PatternWordNode
 from programytest.client import TestClient
+from programy.parser.exceptions import ParserException
+from programy.parser.exceptions import DuplicateGrammarException
+
+
+class MockElement(ET.Element):
+
+    def __init__(self, tag, attrib={}):
+        ET.Element.__init__(self, tag, attrib)
+        self._start_line_number = 0
+        self._end_line_number = 0
+
 
 class AIMLParserTestClient(TestClient):
 
@@ -32,14 +40,92 @@ class AIMLParserTests(unittest.TestCase):
         self._client_context = self._client.create_client_context("testid")
         self.parser = self._client_context.brain.aiml_parser
 
-    def test_tag_name_from_namespace(self):
-        tag, namespace = self.parser.tag_and_namespace_from_text("aiml")
-        self.assertEqual("aiml", tag)
-        self.assertIsNone(namespace)
+    def test__getstate__(self):
+        self.assertIsNotNone(self.parser.__getstate__()['_aiml_loader'])
+        self.assertIsNotNone(self.parser.__getstate__()['_template_parser'])
+        self.assertIsNotNone(self.parser.__getstate__()['_aiml_loader'])
+        self.assertIsNotNone(self.parser.__getstate__()['_num_categories'])
+        self.assertIsNone(self.parser.__getstate__().get('_brain', None))
+        self.assertIsNone(self.parser.__getstate__().get('_errors', None))
+        self.assertIsNone(self.parser.__getstate__().get('_duplicates', None))
 
-        tag, namespace = self.parser.tag_and_namespace_from_text("{http://alicebot.org/2001/AIML}aiml")
-        self.assertEqual("aiml", tag)
-        self.assertEqual("{http://alicebot.org/2001/AIML}", namespace)
+    def test__getstate__with_errors_and_duplicates(self):
+        self.parser._errors = []
+        self.parser._duplicates = []
+        self.assertIsNotNone(self.parser.__getstate__()['_aiml_loader'])
+        self.assertIsNotNone(self.parser.__getstate__()['_template_parser'])
+        self.assertIsNotNone(self.parser.__getstate__()['_aiml_loader'])
+        self.assertIsNotNone(self.parser.__getstate__()['_num_categories'])
+        self.assertIsNone(self.parser.__getstate__().get('_brain', None))
+        self.assertIsNone(self.parser.__getstate__().get('_errors', None))
+        self.assertIsNone(self.parser.__getstate__().get('_duplicates', None))
+
+    def test__getstate__without_errors_and_duplicates(self):
+
+        if '_errors' in self.parser.__dict__:
+            del self.parser.__dict__['_errors']
+        if '_duplicates' in self.parser.__dict__:
+            del self.parser.__dict__['_duplicates']
+
+        self.assertIsNotNone(self.parser.__getstate__()['_aiml_loader'])
+        self.assertIsNotNone(self.parser.__getstate__()['_template_parser'])
+        self.assertIsNotNone(self.parser.__getstate__()['_aiml_loader'])
+        self.assertIsNotNone(self.parser.__getstate__()['_num_categories'])
+        self.assertIsNone(self.parser.__getstate__().get('_brain', None))
+        self.assertIsNone(self.parser.__getstate__().get('_errors', None))
+        self.assertIsNone(self.parser.__getstate__().get('_duplicates', None))
+
+    def test_check_aiml_tag(self):
+        aiml = ET.fromstring( """<?xml version="1.0" encoding="ISO-8859-1"?>
+            <aiml version="1.01"
+                  xmlns="http://alicebot.org/2001/AIML"
+                  xmlns:aiml="http://alicebot.org/2001/AIML"
+                  xmlns:html="http://www.w3.org/TR/REC-html40">
+                <category>
+                    <pattern>*</pattern>
+                    <template>RESPONSE</template>
+                </category>
+            </aiml>
+        """)
+
+        tag_name, namespace = AIMLParser.check_aiml_tag(aiml)
+        self.assertEquals("aiml", tag_name)
+        self.assertEquals("{http://alicebot.org/2001/AIML}", namespace)
+
+    def test_check_aiml_tag_no_aiml(self):
+        aiml = None
+        with self.assertRaises(ParserException):
+            tag_name, namespace = AIMLParser.check_aiml_tag(aiml)
+
+    def test_check_aiml_tag_no_namespace(self):
+        aiml = ET.fromstring( """<?xml version="1.0" encoding="ISO-8859-1"?>
+            <aiml version="1.01">
+                <category>
+                    <pattern>*</pattern>
+                    <template>RESPONSE</template>
+                </category>
+            </aiml>
+        """)
+
+        tag_name, namespace = AIMLParser.check_aiml_tag(aiml)
+        self.assertEquals("aiml", tag_name)
+        self.assertEquals(None, namespace)
+
+    def test_check_aiml_tag_not_aiml(self):
+        aiml = ET.fromstring( """<?xml version="1.0" encoding="ISO-8859-1"?>
+            <aipl version="1.01"
+                  xmlns="http://alicebot.org/2001/AIML"
+                  xmlns:aiml="http://alicebot.org/2001/AIML"
+                  xmlns:html="http://www.w3.org/TR/REC-html40">
+                <category>
+                    <pattern>*</pattern>
+                    <template>RESPONSE</template>
+                </category>
+            </aipl>
+        """)
+
+        with self.assertRaises(ParserException):
+            _, _ = AIMLParser.check_aiml_tag(aiml)
 
     def test_parse_from_file_valid(self):
         filename = os.path.dirname(__file__)+ '/valid.aiml'
@@ -629,26 +715,324 @@ class AIMLParserTests(unittest.TestCase):
             </aiml>
             """)
 
-    def test_duplicate_topics(self):
+    def test_duplicate_categories_in_topic(self):
+        self.parser._errors = []
+        self.parser._duplicates = []
 
+        self.assertEquals(0, len(self.parser._duplicates))
         self.parser.parse_from_text(
             """<?xml version="1.0" encoding="UTF-8"?>
             <aiml>
-                <topic name="TOPIC1">
+                <topic name="Topic1">
                     <category>
-                        <pattern>*</pattern>
-                        <template>
-                            Test Text
-                        </template>
+                        <pattern>HELLO</pattern>
+                        <template>Hi There</template>
                     </category>
-                </topic>
-                <topic name="TOPIC2">
                     <category>
-                        <pattern>*</pattern>
-                        <template>
-                            Test Text
-                        </template>
+                        <pattern>HELLO</pattern>
+                        <template>Hi There</template>
                     </category>
                 </topic>
             </aiml>
             """)
+        self.assertEquals(1, len(self.parser._duplicates))
+
+    def test_duplicate_topic(self):
+        self.parser._errors = []
+        self.parser._duplicates = []
+
+        self.assertEquals(0, len(self.parser._errors))
+        self.parser.parse_from_text(
+            """<?xml version="1.0" encoding="UTF-8"?>
+            <aiml>
+               <category>
+                    <topic name="TOPIC1" />
+                    <topic name="TOPIC1" />
+                    <pattern>*</pattern>
+                    <template>
+                        Test Text
+                    </template>
+                </category>
+            </aiml>
+            """)
+        self.assertEquals(1, len(self.parser._errors))
+
+    def test_duplicate_that(self):
+        self.parser._errors = []
+        self.parser._duplicates = []
+
+        self.assertEquals(0, len(self.parser._errors))
+        self.parser.parse_from_text(
+            """<?xml version="1.0" encoding="UTF-8"?>
+            <aiml>
+               <category>
+                    <topic name="TOPIC1" />
+                    <that name="THAT1" />
+                    <that name="THAT1" />
+                    <pattern>*</pattern>
+                    <template>
+                        Test Text
+                    </template>
+                </category>
+            </aiml>
+            """)
+        self.assertEquals(1, len(self.parser._errors))
+
+    def test_duplicate_pattern(self):
+        self.parser._errors = []
+        self.parser._duplicates = []
+
+        self.assertEquals(0, len(self.parser._errors))
+        self.parser.parse_from_text(
+            """<?xml version="1.0" encoding="UTF-8"?>
+            <aiml>
+               <category>
+                    <topic name="TOPIC1" />
+                    <that name="THAT1" />
+                    <pattern>*</pattern>
+                    <pattern>*</pattern>
+                    <template>
+                        Test Text
+                    </template>
+                </category>
+            </aiml>
+            """)
+        self.assertEquals(1, len(self.parser._errors))
+
+    def test_no_pattern(self):
+        self.parser._errors = []
+        self.parser._duplicates = []
+
+        self.assertEquals(0, len(self.parser._errors))
+        self.parser.parse_from_text(
+            """<?xml version="1.0" encoding="UTF-8"?>
+            <aiml>
+               <category>
+                    <topic name="TOPIC1" />
+                    <that name="THAT1" />
+                    <template>
+                        Test Text
+                    </template>
+                </category>
+            </aiml>
+            """)
+        self.assertEquals(1, len(self.parser._errors))
+
+    def test_duplicate_template(self):
+        self.parser._errors = []
+        self.parser._duplicates = []
+
+        self.assertEquals(0, len(self.parser._errors))
+        self.parser.parse_from_text(
+            """<?xml version="1.0" encoding="UTF-8"?>
+            <aiml>
+               <category>
+                    <topic name="TOPIC1" />
+                    <that name="THAT1" />
+                    <pattern>*</pattern>
+                    <template>
+                        Test Text
+                    </template>
+                    <template>
+                        Test Text
+                    </template>
+                </category>
+            </aiml>
+            """)
+        self.assertEquals(1, len(self.parser._errors))
+
+    def test_no_template(self):
+        self.parser._errors = []
+        self.parser._duplicates = []
+
+        self.assertEquals(0, len(self.parser._errors))
+        self.parser.parse_from_text(
+            """<?xml version="1.0" encoding="UTF-8"?>
+            <aiml>
+               <category>
+                    <topic name="TOPIC1" />
+                    <that name="THAT1" />
+                    <pattern>*</pattern>
+                </category>
+            </aiml>
+            """)
+        self.assertEquals(1, len(self.parser._errors))
+
+    def test_no_topic_no_category(self):
+        with self.assertRaises(ParserException):
+            self.parser.parse_from_text(
+                """<?xml version="1.0" encoding="UTF-8"?>
+                <aiml>
+                   <categoryX>
+                        <topic name="TOPIC1" />
+                        <that name="THAT1" />
+                        <pattern>*</pattern>
+                        <template>
+                            Test Text
+                        </template>
+                    </categoryX>
+                </aiml>
+                """)
+
+    def get_temp_dir(self):
+        if os.name == 'posix':
+            return '/tmp'
+        elif os.name == 'nt':
+            import tempfile
+            return tempfile.gettempdir()
+        else:
+            raise Exception("Unknown operating system [%s]" % os.name)
+
+    def test_save_debug_files(self):
+        tmpdir = self.get_temp_dir()
+        errors_file = tmpdir + os.sep + "debug/errors.txt"
+        duplicates_file = tmpdir + os.sep + "debug/duplicates.txt"
+
+        self._client.add_debug_stores(errors_file, duplicates_file)
+
+        if os.path.exists(errors_file):
+            os.remove(errors_file)
+
+        if os.path.exists(duplicates_file):
+            os.remove(duplicates_file)
+
+        self.parser.brain.configuration.debugfiles._save_errors = True
+        self.parser.brain.configuration.debugfiles._save_duplicates = True
+
+        self.parser._errors = []
+        self.parser._errors.append(["test error message", "test.aiml1", 100, 106])
+        self.parser._duplicates = []
+        self.parser._duplicates.append(["test duplicate message", "test.aiml2", 200, 206])
+
+        self.parser.save_debug_files()
+
+        self.assertTrue(os.path.exists(errors_file))
+        self.assertTrue(os.path.exists(duplicates_file))
+
+        if os.path.exists(errors_file):
+            os.remove(errors_file)
+
+        if os.path.exists(duplicates_file):
+            os.remove(duplicates_file)
+
+        self.parser.display_debug_info()
+
+    def test_save_debug_files_no_storage(self):
+        tmpdir = self.get_temp_dir()
+        errors_file = tmpdir + os.sep + "debug/errors.txt"
+        duplicates_file = tmpdir + os.sep + "debug/duplicates.txt"
+
+        if os.path.exists(errors_file):
+            os.remove(errors_file)
+
+        if os.path.exists(duplicates_file):
+            os.remove(duplicates_file)
+
+        self.parser.brain.configuration.debugfiles._save_errors = True
+        self.parser.brain.configuration.debugfiles._save_duplicates = True
+
+        self.parser._errors = []
+        self.parser._errors.append(["test error message", "test.aiml1", 100, 106])
+        self.parser._duplicates = []
+        self.parser._duplicates.append(["test duplicate message", "test.aiml2", 200, 206])
+
+        self.parser.save_debug_files()
+
+        self.assertFalse(os.path.exists(errors_file))
+        self.assertFalse(os.path.exists(duplicates_file))
+
+    def test_handle_aiml_duplicate_no_expression(self):
+        self.parser._duplicates = []
+        duplicate = DuplicateGrammarException("test duplicate message")
+        self.parser.handle_aiml_duplicate(duplicate, "test.aiml", None)
+
+        self.assertEquals([['test duplicate message', 'test.aiml', None, None]], self.parser._duplicates)
+
+    def test_handle_aiml_error_no_expression(self):
+        self.parser._errors = []
+        duplicate = DuplicateGrammarException("test duplicate message")
+        self.parser.handle_aiml_error(duplicate, "test.aiml", None)
+
+        self.assertEquals([['test duplicate message', 'test.aiml', None, None]], self.parser._errors)
+
+    def test_handle_aiml_duplicate_no_duplicates(self):
+        aiml = ET.fromstring( """<?xml version="1.0" encoding="ISO-8859-1"?>
+            <aiml version="1.01">
+                <category>
+                    <pattern>*</pattern>
+                    <template>RESPONSE</template>
+                </category>
+            </aiml>
+        """)
+
+        duplicate = DuplicateGrammarException("test duplicate message")
+        self.parser.handle_aiml_duplicate(duplicate, "test.aiml", aiml)
+
+        self.assertEquals(None, self.parser._duplicates)
+
+    def test_handle_aiml_error_no_errors(self):
+        aiml = ET.fromstring( """<?xml version="1.0" encoding="ISO-8859-1"?>
+            <aiml version="1.01">
+                <category>
+                    <pattern>*</pattern>
+                    <template>RESPONSE</template>
+                </category>
+            </aiml>
+        """)
+
+        error = ParserException("test parser exception")
+        self.parser.handle_aiml_error(error, "test.aiml", aiml)
+
+        self.assertEquals(None, self.parser._errors)
+
+    def test_handle_aiml_duplicate_without_line_numbers(self):
+        aiml = ET.fromstring( """<?xml version="1.0" encoding="ISO-8859-1"?>
+            <aiml version="1.01">
+                <category>
+                    <pattern>*</pattern>
+                    <template>RESPONSE</template>
+                </category>
+            </aiml>
+        """)
+
+        self.parser._duplicates = []
+        duplicate = DuplicateGrammarException("test duplicate message")
+        self.parser.handle_aiml_duplicate(duplicate, "test.aiml", aiml)
+
+        self.assertEquals([['test duplicate message', 'test.aiml', None, None]], self.parser._duplicates)
+
+    def test_handle_aiml_error_without_line_numbers(self):
+        aiml = ET.fromstring( """<?xml version="1.0" encoding="ISO-8859-1"?>
+            <aiml version="1.01">
+                <category>
+                    <pattern>*</pattern>
+                    <template>RESPONSE</template>
+                </category>
+            </aiml>
+        """)
+
+        error = ParserException("test parser exception")
+        self.parser.handle_aiml_error(error, "test.aiml", aiml)
+
+        self.assertEquals([['test parser exception', 'test.aiml', '0', '0']], self.parser._errors)
+
+    def test_handle_aiml_duplicate_with_line_numbers(self):
+        aiml = MockElement("aiml")
+        aiml._start_line_number = 99
+        aiml._end_line_number = 999
+        self.parser._duplicates = []
+        duplicate = DuplicateGrammarException("test duplicate message")
+        self.parser.handle_aiml_duplicate(duplicate, "test.aiml", aiml)
+
+        self.assertEquals([['test duplicate message', 'test.aiml', '99', '999']], self.parser._duplicates)
+
+    def test_handle_aiml_error_without_line_numbers(self):
+        aiml = MockElement("aiml")
+        aiml._start_line_number = 99
+        aiml._end_line_number = 999
+        self.parser._errors = []
+        error = ParserException("test parser exception")
+        self.parser.handle_aiml_error(error, "test.aiml", aiml)
+
+        self.assertEquals([['test parser exception', 'test.aiml', '99', '999']], self.parser._errors)
+

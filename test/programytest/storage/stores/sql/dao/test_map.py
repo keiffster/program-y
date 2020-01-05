@@ -3,6 +3,7 @@ import unittest
 
 from programy.storage.stores.sql.dao.map import Map
 
+
 class MapTests(unittest.TestCase):
 
     def test_init(self):

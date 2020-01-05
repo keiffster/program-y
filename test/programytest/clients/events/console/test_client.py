@@ -1,7 +1,7 @@
 import unittest
 
 from programy.clients.events.console.client import ConsoleBotClient
-
+from programy.clients.render.text import TextRenderer
 from programytest.clients.arguments import MockArgumentParser
 
 
@@ -16,6 +16,9 @@ class MockConsoleBotClient(ConsoleBotClient):
         self.process_question_answer_do_nothing = False
         self.process_question_answer_keyboard_interrupt = False
         self.process_question_answer_exception = False
+
+    def _render_callback(self):
+        return True
 
     def get_question(self, client_context, input_func=input):
         return self.question
@@ -54,6 +57,9 @@ class ConsoleBotClientTests(unittest.TestCase):
         self.assertIsNotNone(client.arguments)
         self.assertEqual(client.id, "Console")
         self.assertEqual('ProgramY AIML2.0 Client', client.get_description())
+
+        self.assertTrue(client._render_callback())
+        self.assertIsInstance(client.renderer, TextRenderer)
 
     def test_get_question(self):
         arguments = MockArgumentParser()

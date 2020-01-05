@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,8 +14,10 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from programy.storage.stores.utils import DAOUtils
 
-class LinkedAccount(object):
+
+class LinkedAccount():
 
     def __init__(self, primary_userid, linked_userid):
         self.id = None
@@ -23,7 +25,9 @@ class LinkedAccount(object):
         self.linked_userid = linked_userid
 
     def __repr__(self):
-       return "<Linked(id='%d', primary='%s', linked='%s')>" % (self.id, self.primary_userid, self.linked_userid)
+        return "<Linked(id='%s', primary='%s', linked='%s')>" % (DAOUtils.valid_id(self.id),
+                                                                 self.primary_userid,
+                                                                 self.linked_userid)
 
     def to_document(self):
         document = {"primary_userid": self.primary_userid,
@@ -35,10 +39,7 @@ class LinkedAccount(object):
     @staticmethod
     def from_document(data):
         linked = LinkedAccount(None, None)
-        if '_id' in data:
-            linked.id = data['_id']
-        if 'primary_userid' in data:
-            linked.primary_userid = data['primary_userid']
-        if 'linked_userid' in data:
-            linked.linked_userid = data['linked_userid']
+        linked.id = DAOUtils.get_value_from_data(data, '_id')
+        linked.primary_userid = DAOUtils.get_value_from_data(data, 'primary_userid')
+        linked.linked_userid = DAOUtils.get_value_from_data(data, 'linked_userid')
         return linked

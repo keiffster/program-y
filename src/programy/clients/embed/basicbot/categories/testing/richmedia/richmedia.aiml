@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: balance.aiml -->
+    <!--  -->
+    <!-- This AIML file is part of the Y-Bot knowledge base. -->
+    <!--  -->
+    <!-- Y-Bot is Copyright &copy; 2017 by Keith Sterling. -->
+    <!--
+    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+    documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+    the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+    and to permit persons to whom the Software is furnished to do so, subject to the follo§wing conditions:
+
+    The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+    THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+    TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    -->
+
+
+    <category>
+        <pattern>RCS LIST TESTS</pattern>
+        <template>
+            <list>
+                <item><button><text>RCS LIST TESTS</text><postback>RCS LIST TESTS</postback></button></item>
+                <item><button><text>RCS SHOW LINK BUTTON</text><postback>RCS SHOW LINK BUTTON</postback></button></item>
+                <item><button><text>RCS SHOW POSTBACK BUTTON</text><postback>RCS SHOW POSTBACK BUTTON</postback></button></item>
+                <item><button><text>RCS SHOW LINK</text><postback>RCS SHOW LINK</postback></button></item>
+                <item><button><text>RCS SHOW IMAGE</text><postback>RCS SHOW IMAGE</postback></button></item>
+                <item><button><text>RCS SHOW VIDEO</text><postback>RCS SHOW VIDEO</postback></button></item>
+                <item><button><text>RCS SHOW CARD</text><postback>RCS SHOW CARD</postback></button></item>
+                <item><button><text>RCS SHOW CARD</text><postback>RCS SHOW CARD</postback></button></item>
+                <item><button><text>RCS SHOW CAROUSEL</text><postback>RCS SHOW CAROUSEL</postback></button></item>
+                <item><button><text>RCS SHOW REPLY</text><postback>RCS SHOW REPLY</postback></button></item>
+                <item><button><text>RCS SHOW POSTBACK REPLY</text><postback>RCS SHOW POSTBACK REPLY</postback></button></item>
+                <item><button><text>RCS SHOW DELAY</text><postback>RCS SHOW DELAY</postback></button></item>
+                <item><button><text>RCS SHOW LIST</text><postback>RCS SHOW LIST</postback></button></item>
+                <item><button><text>RCS SHOW ORDERED LIST</text><postback>RCS SHOW ORDERED LIST</postback></button></item>
+                <item><button><text>RCS SHOW LOCATION</text><postback>RCS SHOW LOCATION</postback></button></item>
+                <item><button><text>RCS SHOW MIXED</text><postback>RCS SHOW MIXED</postback></button></item>
+            </list>
+        </template>
+    </category>
+
+     <category>
+        <pattern>RCS SHOW LINK BUTTON</pattern>
+        <template>
+            <button>
+                <text>Servusai</text>
+                <url>http://www.servusai.com</url>
+            </button>
+        </template>
+    </category>
+
+     <category>
+        <pattern>RCS SHOW POSTBACK BUTTON</pattern>
+        <template>
+            <button>
+                <text>Servusai</text>
+                <postback>SERVUSAI</postback>
+            </button>
+        </template>
+    </category>
+
+    <category>
+        <pattern>RCS SHOW LINK</pattern>
+        <template>
+            <link>
+                <text>Servusai</text>
+                <url>http://www.servusai.com</url>
+            </link>
+        </template>
+    </category>
+
+    <category>
+        <pattern>RCS SHOW IMAGE</pattern>
+        <template>
+            <image>
+                https://chatilly.com/images/cta01.jpg
+            </image>
+        </template>
+    </category>
+
+    <category>
+        <pattern>RCS SHOW VIDEO</pattern>
+        <template>
+            <video>
+                https://chatilly.com/images/cta01.jpg
+            </video>
+        </template>
+    </category>
+
+    <category>
+        <pattern>RCS SHOW CARD</pattern>
+        <template>
+            <card>
+                <image>https://chatilly.com/images/cta01.jpg</image>
+                <title>Servusai</title>
+                <subtitle>The home of Program Y</subtitle>
+                <button>
+                    <text>Servusai</text>
+                    <url>http://www.servusai.com</url>
+                </button>
+                <button>
+                    <text>AIML</text>
+                    <url>http://aiml.foundation</url>
+                </button>
+            </card>
+        </template>
+    </category>
+
+    <category>
+        <pattern>RCS SHOW CAROUSEL</pattern>
+        <template>
+            <carousel>
+                <card>
+                    <image>https://chatilly.com/images/cta01.jpg</image>
+                    <title>Servusai</title>
+                    <subtitle>The home of Program Y</subtitle>
+                    <button>
+                        <text>Servusai</text>
+                        <url>http://www.servusai.com</url>
+                    </button>
+                    <button>
+                        <text>AIML</text>
+                        <url>http://aiml.foundation</url>
+                    </button>
+                </card>
+                <card>
+                    <image>https://chatilly.com/images/cta01.jpg</image>
+                    <title>Servusai</title>
+                    <subtitle>The home of Program Y</subtitle>
+                    <button>
+                        <text>Servusai</text>
+                        <url>http://www.servusai.com</url>
+                    </button>
+                    <button>
+                        <text>AIML</text>
+                        <url>http://aiml.foundation</url>
+                    </button>
+                </card>
+            </carousel>
+        </template>
+    </category>
+
+    <category>
+        <pattern>RCS SHOW REPLY</pattern>
+        <template>
+            <reply>
+                <text>Servusai</text>
+            </reply>
+        </template>
+    </category>
+
+    <category>
+        <pattern>RCS SHOW POSTBACK REPLY</pattern>
+        <template>
+            <reply>
+                <text>Servusai</text>
+                <postback>SERVUSAI</postback>
+            </reply>
+        </template>
+    </category>
+
+     <category>
+        <pattern>RCS SHOW DELAY</pattern>
+        <template>
+            <delay>
+                <seconds>5</seconds>
+            </delay>
+        </template>
+    </category>
+
+    <category>
+        <pattern>RCS SHOW LIST</pattern>
+        <template>
+            <list>
+                <item>
+                    Item 1
+                </item>
+                <item>
+                    Item 2
+                </item>
+            </list>
+        </template>
+    </category>
+
+     <category>
+        <pattern>RCS SHOW ORDERED LIST</pattern>
+        <template>
+            <olist>
+                <item>
+                    Item 1
+                </item>
+                <item>
+                    Item 2
+                </item>
+                <item>
+                    Item 3
+                </item>
+            </olist>
+        </template>
+    </category>
+
+    <category>
+        <pattern>RCS SHOW LOCATION</pattern>
+        <template><location /></template>
+    </category>
+
+    <category>
+        <pattern>RCS XLATLONG LOCATION XLAT * XLONG *</pattern>
+        <template>
+            Thanks for that, I'll remember it
+        </template>
+    </category>
+
+    <category>
+        <pattern>RCS SHOW MIXED</pattern>
+        <template>
+            Here is a button to go to Servusai
+            <br />
+            <button>
+                <text>Servusai</text>
+                <postback>SERVUSAI</postback>
+            </button>
+            <br />
+            Click it if you like.
+        </template>
+    </category>
+
+
+</aiml>

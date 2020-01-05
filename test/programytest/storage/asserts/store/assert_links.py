@@ -1,5 +1,6 @@
-import unittest
 import datetime
+import unittest
+
 
 class LinkStoreAsserts(unittest.TestCase):
 
@@ -38,3 +39,21 @@ class LinkStoreAsserts(unittest.TestCase):
 
         link.expired = True
         store.update_link(link)
+
+    def assert_remove_link_with_exception(self, store):
+        store.empty()
+
+        link1 = store.create_link('user1', 'Password123', 'ABCDEF', expires=datetime.datetime.now())
+
+        self.assertTrue(store.link_exists('user1', 'Password123', 'ABCDEF'))
+
+        self.assertFalse(store.remove_link(link1))
+
+    def assert_update_link_not_found(self, store):
+        store.empty()
+
+        link1 = store.create_link('user1', 'Password123', 'ABCDEF', expires=datetime.datetime.now())
+
+        self.assertTrue(store.link_exists('user1', 'Password123', 'ABCDEF'))
+
+        self.assertFalse(store.update_link(link1))

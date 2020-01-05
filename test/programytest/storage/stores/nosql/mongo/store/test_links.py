@@ -1,12 +1,10 @@
 import unittest
 
-from programytest.storage.asserts.store.assert_links import LinkStoreAsserts
-
-from programy.storage.stores.nosql.mongo.store.links import MongoLinkStore
-from programy.storage.stores.nosql.mongo.engine import MongoStorageEngine
-from programy.storage.stores.nosql.mongo.config import MongoStorageConfiguration
-
 import programytest.storage.engines as Engines
+from programy.storage.stores.nosql.mongo.config import MongoStorageConfiguration
+from programy.storage.stores.nosql.mongo.engine import MongoStorageEngine
+from programy.storage.stores.nosql.mongo.store.links import MongoLinkStore
+from programytest.storage.asserts.store.assert_links import LinkStoreAsserts
 
 
 class MongoLinkStoreTests(LinkStoreAsserts):
@@ -28,3 +26,5 @@ class MongoLinkStoreTests(LinkStoreAsserts):
         self.assertEqual(store.storage_engine, engine)
 
         self.assert_links_storage(store)
+
+

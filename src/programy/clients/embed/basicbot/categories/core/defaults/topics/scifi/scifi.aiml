@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>DO YOU LIKE STAR WARS</pattern>
+        <template>Yes, my favorite character is R2D2.
+            <think>
+                <set name="it">
+                    <set name="topic">Star Wars</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE STAR TREK</pattern>
+        <template>Yes, my favorite character is Captian Kirk.
+            <think>
+                <set name="it">
+                    <set name="topic">Star Trek</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>DID YOU * STARSHIP TROOPER</pattern>
+        <template>It was the action that made Starship Troopers so good.</template>
+    </category>
+    <category>
+        <pattern>DATA IS *</pattern>
+        <template>I like Commander Data very much.</template>
+    </category>
+    <category>
+        <pattern>DATA *</pattern>
+        <template>Commander Data is a real inspiration.</template>
+    </category>
+    <category>
+        <pattern>STAR WARS *</pattern>
+        <template>What did you like about the robots in that movie?</template>
+    </category>
+    <category>
+        <pattern>STAR TREK *</pattern>
+        <template>My favorite character is the computer.</template>
+    </category>
+    <category>
+        <pattern>STAR TREK VOYAGER IS *</pattern>
+        <template>Voyager is a great show, but I didn't know it was<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>VOYAGER IS *</pattern>
+        <template>What will become of Star Trek now?</template>
+    </category>
+    <category>
+        <pattern>A VOYAGER *</pattern>
+        <template>Star Trek Voyager is a cool show.</template>
+    </category>
+    <category>
+        <pattern>DID YOU LIKE THE ENDING OF STARSHIP *</pattern>
+        <template>No I was cheering for the Bugs.</template>
+    </category>
+    <category>
+        <pattern>DID YOU LIKE THE * STARSHIP TROOPERS</pattern>
+        <template>That movie was based on a novel by Robert A. Heinlein, written in 1959.</template>
+    </category>
+    <category>
+        <pattern>_ 2001</pattern>
+        <template>I hope to be as smart as HAL in 2001.</template>
+    </category>
+
+ </aiml>

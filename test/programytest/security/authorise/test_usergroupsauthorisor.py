@@ -1,10 +1,11 @@
-import unittest
 import os
+import unittest
 
-from programy.security.authorise.usergroupsauthorisor import BasicUserGroupAuthorisationService
 from programy.config.brain.security import BrainSecurityAuthorisationConfiguration
 from programy.security.authorise.authorisor import AuthorisationException
+from programy.security.authorise.usergroupsauthorisor import BasicUserGroupAuthorisationService
 from programytest.client import TestClient
+
 
 class BasicUserGroupAuthorisationServiceTests(unittest.TestCase):
 

@@ -1,6 +1,6 @@
 import unittest
-from programy.processors.postquestion.lemmatize import LemmatizePostQuestionProcessor
 
+from programy.processors.postquestion.lemmatize import LemmatizePostQuestionProcessor
 from programytest.client import TestClient
 
 

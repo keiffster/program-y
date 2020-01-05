@@ -1,11 +1,11 @@
-import unittest
 import os
-
+import unittest
+from unittest.mock import patch
 from programy.mappings.maps import MapCollection
 from programy.storage.factory import StorageFactory
 from programy.storage.stores.file.config import FileStorageConfiguration
-from programy.storage.stores.file.engine import FileStorageEngine
 from programy.storage.stores.file.config import FileStoreConfiguration
+from programy.storage.stores.file.engine import FileStorageEngine
 
 
 class MapTests(unittest.TestCase):
@@ -55,7 +55,7 @@ class MapTests(unittest.TestCase):
         collection = MapCollection()
         self.assertIsNotNone(collection)
 
-        collection.load(storage_factory)
+        self.assertTrue(collection.load(storage_factory) > 0)
 
         self.assertTrue(collection.contains("TEST_MAP"))
 
@@ -72,10 +72,60 @@ class MapTests(unittest.TestCase):
         collection = MapCollection()
         self.assertIsNotNone(collection)
 
-        collection.load(storage_factory)
+        self.assertTrue(collection.load(storage_factory) > 0)
 
         self.assertTrue(collection.contains("TEST_MAP"))
 
-        collection.reload(storage_factory, "TEST_MAP")
+        self.assertTrue(collection.reload(storage_factory, "TEST_MAP") > 0 )
 
         self.assertTrue(collection.contains("TEST_MAP"))
+
+    def patch_load_collection(self, lookups_engine):
+        raise Exception("Mock Exception")
+
+    @patch("programy.mappings.maps.MapCollection._load_collection", patch_load_collection)
+    def test_load_with_exception(self):
+        storage_factory = StorageFactory()
+
+        file_store_config = FileStorageConfiguration()
+        file_store_config._maps_storage = FileStoreConfiguration(dirs=[os.path.dirname(__file__) + os.sep + "test_files" + os.sep + "maps"])
+        storage_engine = FileStorageEngine(file_store_config)
+
+        storage_factory._storage_engines[StorageFactory.MAPS] = storage_engine
+        storage_factory._store_to_engine_map[StorageFactory.MAPS] = storage_engine
+
+        collection = MapCollection()
+        self.assertIsNotNone(collection)
+
+        self.assertTrue(collection.load(storage_factory) == 0)
+
+    def patch_reload_collection(self, lookups_engine, map_name):
+        raise Exception("Mock Exception")
+
+    @patch("programy.mappings.maps.MapCollection._reload_collection", patch_reload_collection)
+    def test_reload_with_exception(self):
+        storage_factory = StorageFactory()
+
+        file_store_config = FileStorageConfiguration()
+        file_store_config._maps_storage = FileStoreConfiguration(dirs=[os.path.dirname(__file__) + os.sep + "test_files" + os.sep + "maps"])
+        storage_engine = FileStorageEngine(file_store_config)
+
+        storage_factory._storage_engines[StorageFactory.MAPS] = storage_engine
+        storage_factory._store_to_engine_map[StorageFactory.MAPS] = storage_engine
+
+        collection = MapCollection()
+        self.assertIsNotNone(collection)
+
+        self.assertTrue(collection.load(storage_factory) > 0)
+
+        self.assertTrue(collection.reload(storage_factory, "TEST_MAP") > 0)
+
+    def test_reload_no_engine(self):
+        storage_factory = StorageFactory()
+
+        file_store_config = FileStorageConfiguration()
+        file_store_config._maps_storage = FileStoreConfiguration(dirs=[os.path.dirname(__file__) + os.sep + "test_files" + os.sep + "maps"])
+        collection = MapCollection()
+        self.assertIsNotNone(collection)
+
+        self.assertTrue(collection.reload(storage_factory, "TEST_MAP") == 0)

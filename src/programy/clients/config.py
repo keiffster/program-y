@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -15,7 +15,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.utils.logging.ylogger import YLogger
-
 from programy.config.container import BaseContainerConfigurationData
 from programy.config.bot.bot import BotConfiguration
 from programy.scheduling.config import SchedulerConfiguration
@@ -24,6 +23,7 @@ from programy.utils.substitutions.substitues import Substitutions
 from programy.utils.email.config import EmailConfiguration
 from programy.triggers.config import TriggerConfiguration
 from programy.clients.ping.config import PingResponderConfig
+from programy.config.brain.brain import BrainConfiguration
 
 
 class ClientConfigurationData(BaseContainerConfigurationData):
@@ -31,15 +31,22 @@ class ClientConfigurationData(BaseContainerConfigurationData):
     def __init__(self, name):
         BaseContainerConfigurationData.__init__(self, name)
         self._description = 'ProgramY AIML2.0 Client'
-        self._bot_configs = []
-        self._bot_configs.append(BotConfiguration("bot"))
-        self._bot_selector = None
-        self._renderer = None
+        self._renderer = self._get_renderer_class()
         self._scheduler = SchedulerConfiguration()
         self._storage = StorageConfiguration()
         self._email = EmailConfiguration()
         self._triggers = TriggerConfiguration()
         self._responder = PingResponderConfig()
+
+        self._bot_selector = self._get_bot_selector_class()
+        bot_config = BotConfiguration('bot')
+        self._bot_configs = [bot_config]
+
+    def _get_renderer_class(self):
+        return "programy.clients.render.text.TextRenderer"
+
+    def _get_bot_selector_class(self):
+        return "programy.clients.botfactory.DefaultBotSelector"
 
     @property
     def description(self):
@@ -77,9 +84,6 @@ class ClientConfigurationData(BaseContainerConfigurationData):
     def responder(self):
         return self._responder
 
-    def check_for_license_keys(self, license_keys):
-        BaseContainerConfigurationData.check_for_license_keys(self, license_keys)
-
     def load_configuration(self, configuration_file, bot_root, subs: Substitutions = None):
         client = configuration_file.get_section(self.section_name)
         if client is None:
@@ -88,68 +92,87 @@ class ClientConfigurationData(BaseContainerConfigurationData):
 
         if client is not None:
             self.load_configuration_section(configuration_file, client, bot_root, subs)
+
         else:
             YLogger.error(None, 'No client section not found!')
 
     def load_configuration_section(self, configuration_file, section, bot_root, subs: Substitutions = None):
 
-        assert(configuration_file is not None)
+        assert configuration_file is not None
+        assert section is not None
 
-        if section is not None:
-            self._description = configuration_file.get_option(section, "description",
-                                                              missing_value='ProgramY AIML2.0 Client', subs=subs)
+        self._description = configuration_file.get_option(section, "description",
+                                                          missing_value='ProgramY AIML2.0 Client', subs=subs)
 
-            bot_names = configuration_file.get_multi_option(section, "bot", missing_value="bot", subs=subs)
+        self._scheduler.load_config_section(configuration_file, section, bot_root, subs=subs)
+
+        self._storage.load_config_section(configuration_file, section, bot_root, subs=subs)
+
+        self._renderer = configuration_file.get_option(section, "renderer", subs=subs)
+
+        self._email.load_config_section(configuration_file, section, bot_root, subs=subs)
+
+        self._triggers.load_config_section(configuration_file, section, bot_root, subs=subs)
+
+        self._responder.load_config_section(configuration_file, section, bot_root, subs=subs)
+
+        self._load_bot_configurations(configuration_file, section, bot_root, subs)
+
+    def _load_bot_configurations(self, configuration_file, section, bot_root, subs):
+        bots = configuration_file.get_section("bots", section)
+        if bots is not None:
+            bot_keys = configuration_file.get_keys(bots)
             first = True
-            for name in bot_names:
+            for name in bot_keys:
                 if first is True:
-                    config = self._bot_configs[0]
+                    self._bot_configs.clear()
                     first = False
+                bot_config = configuration_file.get_section(name, bots)
+                config = BotConfiguration(name)
+                config.load_configuration_section(configuration_file, bot_config, bot_root, subs=subs)
+                self._bot_configs.append(config)
 
-                else:
-                    config = BotConfiguration(name)
-                    self._bot_configs.append(config)
-
-                config.load_configuration(configuration_file, bot_root, subs=subs)
-
-            self._bot_selector = configuration_file.get_option(section, "bot_selector",
-                                                               missing_value="programy.clients.client.DefaultBotSelector",
-                                                               subs=subs)
-
-            self._scheduler.load_config_section(configuration_file, section, bot_root, subs=subs)
-
-            self._storage.load_config_section(configuration_file, section, bot_root, subs=subs)
-
-            self._renderer = configuration_file.get_option(section, "renderer", subs=subs)
-
-            self._email.load_config_section(configuration_file, section, bot_root, subs=subs)
-
-            self._triggers.load_config_section(configuration_file, section, bot_root, subs=subs)
-
-            self._responder.load_config_section(configuration_file, section, bot_root, subs=subs)
-
-        else:
+        if len(self._bot_configs) == 0:
             YLogger.warning(self, "No bot name defined for client [%s], defaulting to 'bot'.", self.section_name)
-            self._bot_configs[0]._section_name = "bot"
-            self._bot_configs[0].load_configuration(configuration_file, bot_root, subs=subs)
+            self._bot_configs.append(BotConfiguration("bot"))
+            self._bot_configs[0].configurations.append(BrainConfiguration("brain"))
+
+        self._bot_selector = configuration_file.get_option(section, "bot_selector",
+                       missing_value="programy.clients.botfactory.DefaultBotSelector",
+                       subs=subs)
 
     def to_yaml(self, data, defaults=True):
 
-        assert (data is not None)
+        assert data is not None
 
         if defaults is True:
             data['description'] = 'ProgramY AIML2.0 Client'
-            data['bot'] = 'bot'
-            data['bot_selector'] = "programy.clients.client.DefaultBotSelector"
+            data['bot_selector'] = "programy.clients.botfactory.DefaultBotSelector"
 
-            data[self._scheduler.id] = {}
-            self._scheduler.to_yaml(data[self._scheduler.id], defaults)
+            data['scheduler'] = {}
+            self._scheduler.to_yaml(data['scheduler'], defaults)
+
+            data['email'] = {}
+            self._email.to_yaml(data['email'], defaults)
+
+            data['triggers'] = {}
+            self._triggers.to_yaml(data['triggers'], defaults)
+
+            data['responder'] = {}
+            self._responder.to_yaml(data['responder'], defaults)
 
             data['renderer'] = "programy.clients.render.text.TextRenderer"
 
+            data['storage'] = {}
+            self._storage.to_yaml(data['storage'], defaults)
+
+            data['bots'] = {}
+            data['bots']['bot'] = {}
+            bot_config = BotConfiguration('bot')
+            bot_config.to_yaml(data['bots']['bot'], defaults)
+
         else:
             data['description'] = self._description
-            data['bot'] = self._bot_configs[0].id
             data['bot_selector'] = self.bot_selector
 
             data[self._scheduler.id] = {}
@@ -159,9 +182,18 @@ class ClientConfigurationData(BaseContainerConfigurationData):
             self._email.to_yaml(data['email'], defaults)
 
             data['triggers'] = {}
-            self._email.to_yaml(data['triggers'], defaults)
+            self._triggers.to_yaml(data['triggers'], defaults)
 
             data['responder'] = {}
-            self._email.to_yaml(data['responder'], defaults)
+            self._responder.to_yaml(data['responder'], defaults)
 
             data['renderer'] = self.renderer
+
+            data['storage'] = {}
+            self._storage.to_yaml(data['storage'], defaults)
+
+            data['bots'] = {}
+            for botconfig in self._bot_configs:
+                data['bots'][botconfig.id] = {}
+                botconfig.to_yaml(data['bots'][botconfig.id], defaults)
+

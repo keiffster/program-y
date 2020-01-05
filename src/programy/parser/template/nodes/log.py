@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,14 +14,11 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.utils.logging.ylogger import YLogger
-
-
 from programy.parser.exceptions import ParserException
 from programy.parser.template.nodes.attrib import TemplateAttribNode
 from programy.parser.template.nodes.word import TemplateWordNode
-
+from programy.utils.console.console import outputLog
 
 
 class TemplateLogNode(TemplateAttribNode):
@@ -58,7 +55,7 @@ class TemplateLogNode(TemplateAttribNode):
             else:
                 YLogger.info(client_context, resolved)
         else:
-            print(resolved)
+            outputLog(self, resolved)
 
         return ""
 
@@ -67,7 +64,7 @@ class TemplateLogNode(TemplateAttribNode):
 
     def set_attrib(self, attrib_name, attrib_value):
         if attrib_name != 'level' and attrib_name != 'output':
-            raise ParserException("Invalid attribute name %s for this node", attrib_name)
+            raise ParserException("Invalid attribute name [%s] for this node" % attrib_name)
 
         if attrib_name == 'level':
             if isinstance(attrib_value, TemplateWordNode):
@@ -95,4 +92,4 @@ class TemplateLogNode(TemplateAttribNode):
     #
 
     def parse_expression(self, graph, expression):
-        self._parse_node_with_attribs(graph, expression, [["level", "debug"],["output", "logging"]])
+        self._parse_node_with_attribs(graph, expression, [["level", "debug"], ["output", "logging"]])

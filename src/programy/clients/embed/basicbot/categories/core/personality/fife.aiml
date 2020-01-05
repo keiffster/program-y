@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>WHERE IS FIFE</pattern>
+        <template>
+            <srai>FIFE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>WHAT IS FIFE</pattern>
+        <template>
+            <srai>FIFE</srai>
+        </template>
+    </category>
+
+
+    <category>
+        <pattern>FIFE</pattern>
+        <template>
+            Fife is a council area and historic county of Scotland. It is situated between the Firth of Tay and the
+            Firth of Forth, with inland boundaries to Perth and Kinross and Clackmannanshire. By custom it is widely
+            held to have been one of the major Pictish kingdoms, known as Fib, and is still commonly known as the
+            Kingdom of Fife within Scotland. Fife is one of the six local authorities part of the Edinburgh and
+            South East Scotland city region.
+        </template>
+    </category>
+
+ </aiml>

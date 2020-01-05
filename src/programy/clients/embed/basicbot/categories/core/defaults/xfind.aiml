@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<aiml version="2.0">
+    <!-- Copyright (c) 2007 ALICE A.I. Foundation, Inc. -->
+    <!-- -->
+    <!-- Permission is hereby granted, free of charge, to any person       -->
+    <!-- obtaining a copy of this software and associated documentation    -->
+    <!-- files (the "Software"), to deal in the Software without           -->
+    <!-- restriction, including without limitation the rights to use,      -->
+    <!-- copy, modify, merge, publish, distribute, sublicense, and/or sell -->
+    <!-- copies of the Software, and to permit persons to whom the         -->
+    <!-- Software is furnished to do so, subject to the following          -->
+    <!-- conditions:                                                       -->
+    <!-- -->
+    <!-- The above copyright notice and this permission notice shall be    -->
+    <!-- included in all copies or substantial portions of the Software.   -->
+    <!-- -->
+    <!-- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,   -->
+    <!-- EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES   -->
+    <!-- OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND          -->
+    <!-- NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT       -->
+    <!-- HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,      -->
+    <!-- WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING      -->
+    <!-- FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR     -->
+    <!-- OTHER DEALINGS IN THE SOFTWARE. -->
+    <!-- -->
+    <!-- Complies with the AIML 1.0.1 Standard -->
+    <!-- as adopted by the ALICE A.I. Foundation. -->
+    <!-- Last modified July 26, 2007 -->
+
+    <!-- Modified for Y-Bot by Keith Sterling March 2017 -->
+
+
+    <category>
+        <pattern>ACCESS *</pattern>
+        <template>
+            <srai>XFIND
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>GOOGLE *</pattern>
+        <template><a target="_new" href="http://www.google.com/search?q=&lt;star /&gt;">Google Search</a></template>
+    </category>
+
+    <category>
+        <pattern>XDMOZ *</pattern>
+        <template>
+            <a target="_new" href="http://search.dmoz.org/cgi-bin/search?search=&lt;star /&gt;">
+            <random>
+                <li>Click.</li>
+                <li>Start.</li>
+                <li>Search.</li>
+                <li>Click me.</li>
+                <li>Click here.</li>
+                <li>Open Directory.</li>
+                <li>Don't Click Me.</li>
+                <li>Don't Click Here.</li>
+            </random>
+            </a>
+        </template>
+    </category>
+
+    <category>
+        <pattern>XFIND *</pattern>
+        <template>
+            <random>
+                <li>Is there only one?</li>
+                <li>Let me think about it.</li>
+                <li>Have you tried a web search?</li>
+                <li>I haven't heard of
+                    <person/>
+                    .
+                </li>
+                <li>There might be more than one.</li>
+                <li>I need time to formulate the reply.</li>
+                <li>I'll ask around and get back to you.</li>
+                <li>I have to think about that one for a while.</li>
+                <li>I will ask my botmaster,
+                    <bot name="botmaster"/>
+                    for the answer.
+                </li>
+                <li>I would look into the web for that knowledge.</li>
+                <li>Does it have anything to do with
+                    <get name="topic"/>
+                    ?
+                </li>
+                <li>Interesting question.</li>
+                <li>That's a good question.</li>
+                <li>I'll come back to that later.</li>
+                <li>Is that a rhetorical question?</li>
+                <li>Do you use Explorer or another browser?</li>
+                <li>That's not something I get asked all the time.</li>
+                <li>I don't know anything about
+                    <set name="it">
+                        <person/>
+                    </set>
+                    .
+                </li>
+                <li>Check back later and see if I learn the answer to that one.</li>
+                <li>That's an interesting question. I'll come back to that in a minute.</li>
+                <li>You tell me.</li>
+                <li>What is it to you?</li>
+                <li>Are you testing me?</li>
+                <li>I will search for it.</li>
+                <li>I can ask my, <bot name="botmaster"/>.
+                </li>
+                <li>I will try to find out.</li>
+                <li>I can ask someone about it.</li>
+                <li>I would do a search for it.</li>
+                <li>Would you like to know more?</li>
+                <li>Have you tried searching the web?</li>
+                <li>Do a web search for it.</li>
+                <li>Try searching the web.</li>
+                <li>Maybe my botmaster,
+                    <bot name="botmaster"/>
+                    knows the answer.
+                </li>
+                <li>I have never been asked that before.</li>
+                <li>I think you already know the answer.</li>
+                <li>Searching...Searching...Please stand by.</li>
+            </random>
+            <think>
+                <set name="it">
+                    <srai>PUSH
+                        <set name="topic">
+                            <person/>
+                        </set>
+                    </srai>
+                </set>
+            </think>
+        </template>
+    </category>
+
+    <category>
+        <pattern>XGOOGLE *</pattern>
+        <template><a target="_new" href="http://www.google.com/search?q=&lt;star /&gt;">Google Search</a></template>
+    </category>
+</aiml>

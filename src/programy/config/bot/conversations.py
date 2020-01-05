@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -51,17 +51,20 @@ class BotConversationsConfiguration(BaseConfigurationData):
     def multi_client(self):
         return self._multi_client
 
-    def check_for_license_keys(self, license_keys):
-        BaseConfigurationData.check_for_license_keys(self, license_keys)
-
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
+        del bot_root
         Conversations = configuration_file.get_section(self._section_name, configuration)
         if Conversations is not None:
-            self._max_histories = configuration_file.get_int_option(Conversations, "max_histories", missing_value=100, subs=subs)
-            self._initial_topic = configuration_file.get_option(Conversations, "initial_topic", missing_value="*", subs=subs)
-            self._restore_last_topic = configuration_file.get_bool_option(Conversations, "restore_last_topic", missing_value=False, subs=subs)
-            self._empty_on_start = configuration_file.get_bool_option(Conversations, "empty_on_start", missing_value=False, subs=subs)
-            self._multi_client = configuration_file.get_bool_option(Conversations, "multi_client", missing_value=False, subs=subs)
+            self._max_histories = configuration_file.get_int_option(Conversations, "max_histories", missing_value=100,
+                                                                    subs=subs)
+            self._initial_topic = configuration_file.get_option(Conversations, "initial_topic", missing_value="*",
+                                                                subs=subs)
+            self._restore_last_topic = configuration_file.get_bool_option(Conversations, "restore_last_topic",
+                                                                          missing_value=False, subs=subs)
+            self._empty_on_start = configuration_file.get_bool_option(Conversations, "empty_on_start",
+                                                                      missing_value=False, subs=subs)
+            self._multi_client = configuration_file.get_bool_option(Conversations, "multi_client", missing_value=False,
+                                                                    subs=subs)
         else:
             YLogger.warning(self, "'Conversations' section missing from bot config, using defaults")
 
@@ -72,6 +75,7 @@ class BotConversationsConfiguration(BaseConfigurationData):
             data['initial_topic'] = "*"
             data['empty_on_start'] = True
             data['multi_client'] = False
+
         else:
             data['max_histories'] = self._max_histories
             data['restore_last_topic'] = self._restore_last_topic

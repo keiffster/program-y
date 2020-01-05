@@ -1,15 +1,16 @@
+import os
 import unittest
 import unittest.mock
-import os
 
+from programy.bot import Bot
 from programy.clients.polling.twitter.client import TwitterBotClient
 from programy.clients.polling.twitter.config import TwitterConfiguration
-from programy.bot import Bot
-from programytest.clients.arguments import MockArgumentParser
 from programy.storage.config import FileStorageConfiguration
+from programy.storage.factory import StorageFactory
 from programy.storage.stores.file.config import FileStoreConfiguration
 from programy.storage.stores.file.engine import FileStorageEngine
-from programy.storage.factory import StorageFactory
+from programy.clients.render.text import TextRenderer
+from programytest.clients.arguments import MockArgumentParser
 
 
 class MockMessage(object):
@@ -104,6 +105,9 @@ class TwitterBotClientTests(unittest.TestCase):
         self.assertEqual("consumer_secret", client._consumer_secret)
         self.assertEqual("access_token", client._access_token)
         self.assertEqual("access_secret", client._access_token_secret)
+
+        self.assertFalse(client._render_callback())
+        self.assertIsInstance(client.renderer, TextRenderer)
 
     #############################################################################################
     # Direct Messages
@@ -317,7 +321,7 @@ class TwitterBotClientTests(unittest.TestCase):
 
         #TODO this writes to local storage rather than /tmp
         file_store_config = FileStorageConfiguration()
-        file_store_config._twitter_storage = FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "test_files" + os.sep + "gender.txt", format="text", extension="txt", encoding="utf-8", delete_on_start=False)
+        file_store_config._twitter_storage = FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "test_files" + os.sep + "gender.txt", fileformat="text", extension="txt", encoding="utf-8", delete_on_start=False)
 
         storage_engine = FileStorageEngine(file_store_config)
 

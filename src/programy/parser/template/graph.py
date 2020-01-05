@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,11 +14,11 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.parser.exceptions import ParserException
 from programy.utils.text.text import TextUtils
 
-class TemplateGraph(object):
+
+class TemplateGraph:
 
     def __init__(self, aiml_parser):
         self._aiml_parser = aiml_parser
@@ -44,7 +44,7 @@ class TemplateGraph(object):
         if self._template_factory.exists(name):
             return self._template_factory.new_node_class(name)
         else:
-            raise ParserException("No node [%s] registered in Template Node Factory"%(name))
+            raise ParserException("No node [%s] registered in Template Node Factory" % (name))
 
     # Helper function to return TemplateNode
     def get_base_node(self):

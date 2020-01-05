@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -25,7 +25,7 @@ from programy.dynamic.maps.predecessor import PredecessorMap
 from programy.dynamic.maps.successor import SuccessorMap
 
 
-class DynamicsCollection(object):
+class DynamicsCollection:
 
     def __init__(self):
         self._dynamic_sets = {}
@@ -75,6 +75,7 @@ class DynamicsCollection(object):
             self._dynamic_maps[PredecessorMap.NAME] = PredecessorMap(dynamics_configuration)
 
     def load_default_dynamic_vars(self, dynamics_configuration):
+        del dynamics_configuration
         return
 
     ###################################################################################################
@@ -135,13 +136,23 @@ class DynamicsCollection(object):
         if name in self._dynamic_vars:
             dynamic_var = self._dynamic_vars[name]
             return dynamic_var.get_value(client_context, value)
+
         return None
+
+    def _set_value(self, client_context, name, value):
+        name = name.upper()
+        if name in self._dynamic_vars:
+            dynamic_var = self._dynamic_vars[name]
+            dynamic_var.set_value(client_context, value)
+            return True
+
+        return False
 
     def set_dynamic_var(self, client_context, name, value):
         try:
-            name = name.upper()
-            if name in self._dynamic_vars:
-                dynamic_var = self._dynamic_vars[name]
-                dynamic_var.set_value(client_context, value)
+            return self._set_value(client_context, name, value)
+
         except Exception as e:
             YLogger.exception(self, "Unable to set value for dynamic var %s", e, name)
+
+        return False

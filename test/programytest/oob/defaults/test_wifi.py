@@ -1,10 +1,10 @@
 import unittest
 import unittest.mock
-
-from programy.oob.defaults.wifi import WifiOutOfBandProcessor
 import xml.etree.ElementTree as ET
 
+from programy.oob.defaults.wifi import WifiOutOfBandProcessor
 from programytest.client import TestClient
+
 
 class WifiOutOfBandProcessorTests(unittest.TestCase):
 

@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>WHAT # NEXT # 2 4 6 8</pattern>
+        <template>10</template>
+    </category>
+    <category>
+        <pattern>WHAT # NEXT # 2 4 6</pattern>
+        <template>8</template>
+    </category>
+    <category>
+        <pattern>WHAT # NEXT # 1 3 5 7</pattern>
+        <template>9</template>
+    </category>
+    <category>
+        <pattern>WHAT # NEXT # 1 3 5</pattern>
+        <template>7</template>
+    </category>
+    <category>
+        <pattern>IS * A # NUMBER</pattern>
+        <template>No</template>
+    </category>
+    <category>
+        <pattern>HOW MUCH IS
+            <set>number</set>
+        </pattern>
+        <template>
+            <map name="number2name">
+                <star/>
+            </map>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MANY IS
+            <set>number</set>
+        </pattern>
+        <template>
+            <map name="number2name">
+                <star/>
+            </map>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW OLD IS A * YEAR OLD ^</pattern>
+        <template>
+            <star/>
+            years?
+        </template>
+    </category>
+    <category>
+        <pattern>
+            <set>numbername</set>
+            *
+        </pattern>
+        <template>
+            <map name="name2number">
+                <star/>
+            </map>
+            <star index="2"/>
+            is better than none. (star = "<star/>")
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT COMES AFTER
+            <set>number</set>
+        </pattern>
+        <template>
+            <map>
+                <name>successor</name>
+                <star/>
+            </map>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT NUMBER FOLLOWS
+            <set>number</set>
+        </pattern>
+        <template>
+            <map>
+                <name>successor</name>
+                <star/>
+            </map>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>2 PLUS 2</pattern>
+        <template>4</template>
+    </category>
+    <category>
+        <pattern>COUNT TO 10</pattern>
+        <template>1 2 3 4 5 6 7 8 9 10</template>
+    </category>
+    <category>
+        <pattern>WHAT IS 2 PLUS 2</pattern>
+        <template>Four.</template>
+    </category>
+    <category>
+        <pattern>WHAT IS 1 PLUS 1</pattern>
+        <template>2.</template>
+    </category>
+    <category>
+        <pattern>WHAT IS 5 PLUS 5</pattern>
+        <template>10.</template>
+    </category>
+    <category>
+        <pattern>WHAT IS 5 ASTERISK 5</pattern>
+        <template>25</template>
+    </category>
+    <category>
+        <pattern>WHAT IS 8 ASTERISK 4</pattern>
+        <template>24.</template>
+    </category>
+   <category>
+        <pattern>WHAT IS THE <set>ordinal</set> LETTER <set>preposition</set> *
+        </pattern>
+        <template>
+            <think>
+                <set name="nth">
+                    <map>
+                        <name>ordinal2number</name>
+                        <star/>
+                    </map>
+                </set>
+            </think>
+            <srai>NTH
+                <get name="nth"/>
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>100</pattern>
+        <template>
+            <random>
+                <li>That is a round number.</li>
+                <li>
+                    <random>
+                        <li>Do you mean you are 100 years old?</li>
+                        <li>C in Roman numerals.</li>
+                        <li>one hundred?</li>
+                        <li>one hundred seems like a good number.</li>
+                    </random>
+                </li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE SQUARE ROOT OF PI</pattern>
+        <template>1.7724538509</template>
+    </category>
+    <category>
+        <pattern>PICK A NUMBER BETWEEN * AND *</pattern>
+        <template>
+            <star/>
+        </template>
+    </category>
+    <category>
+        <pattern>PICK A NUMBER BETWEEN * THROUGH *</pattern>
+        <template>
+            <star index="2"/>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS 300 *</pattern>
+        <template>Get a calculator!</template>
+    </category>
+    <category>
+        <pattern>WHAT IS 5 *</pattern>
+        <template>
+            <random>
+                <li>4</li>
+                <li>6</li>
+                <li>8</li>
+                <li>10</li>
+                <li>12</li>
+                <li>6</li>
+            </random>
+            I think, but I'm not good at math.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS 17 *</pattern>
+        <template>Use a calculator!</template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE FORMULA FOR *</pattern>
+        <template>E=mc^2.</template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE FORMULA *</pattern>
+        <template>I think that you should consult a chemist.</template>
+    </category>
+    <category>
+        <pattern>WHAT IS PI</pattern>
+        <template>PI = 3.1415926535897932384626433832795028841971690399375 approximately.</template>
+    </category>
+    <category>
+        <pattern>0 *</pattern>
+        <template>
+            <srai>WHAT IS 0
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TEN *</pattern>
+        <template>I'm not good in math.</template>
+    </category>
+    <category>
+        <pattern>IS <set>number</set> A # NUMBER
+        </pattern>
+        <template>Yes</template>
+    </category>
+    <category>
+        <pattern>
+            <set>number</set>
+        </pattern>
+        <template>
+            <star/>
+            is a number.
+        </template>
+    </category>
+    <category>
+        <pattern>IS * A NUMBER</pattern>
+        <template>
+            <star/>
+            is not a number I know.
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>number</set> A NUMBER
+        </pattern>
+        <template>
+            <star/>
+            is a number.
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>article</set>
+            <set>number</set> A NUMBER
+        </pattern>
+        <template>
+            <srai>IS
+                <star index="2"/>
+                A NUMBER
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>number</set> * NUMBER *
+        </pattern>
+        <template>
+            <srai>IS
+                <star/>
+                A NUMBER
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>article</set>
+            <set>number</set> * NUMBER *
+        </pattern>
+        <template>
+            <srai>IS
+                <star index="2"/>
+                A NUMBER
+            </srai>
+        </template>
+    </category>
+
+ </aiml>

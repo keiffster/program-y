@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,12 +14,8 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.utils.logging.ylogger import YLogger
-
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.exceptions import ParserException
-from programy.utils.text.text import TextUtils
 
 
 class TemplateVideoNode(TemplateNode):
@@ -28,8 +24,7 @@ class TemplateVideoNode(TemplateNode):
         TemplateNode.__init__(self)
 
     def resolve_to_string(self, client_context):
-        str = "<video>%s</video>"%self.resolve_children_to_string(client_context)
-        return str
+        return "<video>%s</video>" % self.resolve_children_to_string(client_context)
 
     def to_string(self):
         return "[VIDEO %d]" % (len(self._children))
@@ -37,8 +32,5 @@ class TemplateVideoNode(TemplateNode):
     def to_xml(self, client_context):
         return self.resolve_to_string(client_context)
 
-    #######################################################################################################
-    #
     def parse_expression(self, graph, expression):
         self._parse_node(graph, expression)
-

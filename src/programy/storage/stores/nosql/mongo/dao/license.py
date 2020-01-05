@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.storage.stores.utils import DAOUtils
 
 
-class LicenseKey(object):
+class LicenseKey():
 
     def __init__(self, name, key):
         self.id = None
@@ -26,7 +26,7 @@ class LicenseKey(object):
 
     def __repr__(self):
         return "<LicenseKey(id='%s', name='%s', key='%s')>" % (
-        DAOUtils.valid_id(self.id), self.name, self.key)
+            DAOUtils.valid_id(self.id), self.name, self.key)
 
     def to_document(self):
         document = {"name": self.name,
@@ -37,11 +37,8 @@ class LicenseKey(object):
 
     @staticmethod
     def from_document(data):
-        lookup = LicenseKey(None, None)
-        if '_id' in data:
-            lookup.id = data['_id']
-        if 'name' in data:
-            lookup.name = data['name']
-        if 'key' in data:
-            lookup.key = data['key']
-        return lookup
+        license = LicenseKey(None, None)
+        license.id = DAOUtils.get_value_from_data(data, '_id')
+        license.name = DAOUtils.get_value_from_data(data, 'name')
+        license.key = DAOUtils.get_value_from_data(data, 'key')
+        return license

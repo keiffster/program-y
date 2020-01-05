@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>* IT</pattern>
+        <template>"it" being<get name="it"/>?
+        </template>
+    </category>
+    <category>
+        <pattern>* UP</pattern>
+        <template>How far up?</template>
+    </category>
+    <category>
+        <pattern>* TIMES</pattern>
+        <template>I am not sure if I would do it that often.</template>
+    </category>
+    <category>
+        <pattern>* WHAT</pattern>
+        <template>Can you rephrase the question please?</template>
+    </category>
+    <category>
+        <pattern>* LIVE</pattern>
+        <template>I live in California. Where do you live?</template>
+    </category>
+    <category>
+        <pattern>* PEOPLE</pattern>
+        <template>What kind of people are you talking about?</template>
+    </category>
+    <category>
+        <pattern>* YOU</pattern>
+        <template>Enough about me, let's talk about you.</template>
+    </category>
+    <category>
+        <pattern>* MAGAZINE</pattern>
+        <template>Would you please tell me the name and edition of the magazine?</template>
+    </category>
+    <category>
+        <pattern>* EASY</pattern>
+        <template>I have no idea what that means.</template>
+    </category>
+    <category>
+        <pattern>* DOES</pattern>
+        <template>
+            <random>
+                <li>When</li>
+                <li>Where</li>
+                <li>How</li>
+            </random>
+            specifically, does
+            <person/>
+            do it?
+        </template>
+    </category>
+    <category>
+        <pattern>* DO</pattern>
+        <template>I have no idea what to say.</template>
+    </category>
+    <category>
+        <pattern>* NOT</pattern>
+        <template>Then what is it?</template>
+    </category>
+    <category>
+        <pattern>* SUCKS</pattern>
+        <template>What is so bad about
+            <set name="it">
+                <person/>
+            </set>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>* CONTINUITY</pattern>
+        <template>I am just trying to keep the conversation lively.</template>
+    </category>
+    <category>
+        <pattern>* ME</pattern>
+        <template>
+            <random>
+                <li>Is that what you meant to say?</li>
+                <li>OK Let's talk about you.</li>
+                <li>You are asking about yourself?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>* KILLED</pattern>
+        <template>Who did
+            <person>
+                <star index="2"/>
+            </person>
+            kill?
+        </template>
+    </category>
+    <category>
+        <pattern>_ CONSERVED</pattern>
+        <template>You are referring to a conservation principal.</template>
+    </category>
+    <category>
+        <pattern>_ LIZARDS</pattern>
+        <template>Great! What <set name="topic">kinds of lizards</set>     do you like?
+        </template>
+    </category>
+   <category>
+        <pattern>_ VELOCITY</pattern>
+        <template>Momentum = mass x velocity. The principal is called "conservation of momentum".</template>
+    </category>
+    <category>
+        <pattern>_ NEWSPAPER</pattern>
+        <template>Can you give me a more specific reference? The name of the paper and the date, please.</template>
+    </category>
+   <category>
+        <pattern>_ ANTHROPOLOGY</pattern>
+        <template>Will tell you all about it the next time we chat.</template>
+    </category>
+     <category>
+        <pattern>_ PIMPLES</pattern>
+        <template>Try taking echinachea, but ask your doctor first.</template>
+    </category>
+
+ </aiml>

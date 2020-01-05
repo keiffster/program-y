@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -19,9 +19,11 @@ import logging
 import argparse
 
 
-class ClientArguments(object):
+class ClientArguments():
 
     def __init__(self, client, parser=None):
+        del client
+        del parser
         self._bot_root = "."
         self._logging = logging.DEBUG
         self._config_name = "config.yaml"
@@ -30,7 +32,7 @@ class ClientArguments(object):
         self._substitutions = None
 
     def parse_args(self, client):
-        pass
+        pass    # pragma: no cover
 
     @property
     def bot_root(self):

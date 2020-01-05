@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -15,7 +15,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.utils.logging.ylogger import YLogger
-
 from programy.utils.geo.google import GoogleMaps
 from programy.extensions.base import Extension
 
@@ -23,35 +22,51 @@ from programy.extensions.base import Extension
 class GeoCodeExtension(Extension):
 
     def get_geo_locator(self):
-        return  GoogleMaps()
+        return GoogleMaps()
 
     # execute() is the interface that is called from the <extension> tag in the AIML
-    def execute(self, context, data):
-        YLogger.debug(context, "GeoCode [%s]", data)
+    def execute(self, client_context, data):
+        YLogger.debug(client_context, "GeoCode [%s]", data)
 
-        words = data.split(" ")
-        if words[0] == 'POSTCODE1':
-            location = words[1]
-        elif words[0] == 'POSTCODE2':
-            location = words[1] + words[2]
-        elif words[0] == 'LOCATION':
-            location = " ".join(words[1:])
-        else:
-            return None
+        try:
+            words = data.split(" ")
+            if words[0] == 'POSTCODE1':
+                if len(words) == 2:
+                    location = words[1]
+                else:
+                    raise Exception("Invalid POSTCODE1 command")
 
-        googlemaps = self.get_geo_locator()
+            elif words[0] == 'POSTCODE2':
+                if len(words) == 3:
+                    location = words[1] + words[2]
+                else:
+                    raise Exception("Invalid POSTCODE2 command")
 
-        latlng = googlemaps.get_latlong_for_location(location)
-        if latlng is not None:
-            str_lat = str(latlng.latitude)
-            str_lng = str(latlng.longitude)
+            elif words[0] == 'LOCATION':
+                if len(words) > 1:
+                    location = " ".join(words[1:])
+                else:
+                    raise Exception("Invalid LOCATION command")
 
-            lats = str_lat.split(".")
-            lngs = str_lng.split(".")
+            else:
+                raise Exception("Invalid GEOCODE command")
 
-            return "LATITUDE DEC %s FRAC %s LONGITUDE DEC %s FRAC %s"%(
-                lats[0], lats[1],
-                lngs[0], lngs[1]
-            )
+            googlemaps = self.get_geo_locator()
+
+            latlng = googlemaps.get_latlong_for_location(location)
+            if latlng is not None:
+                str_lat = str(latlng.latitude)
+                str_lng = str(latlng.longitude)
+
+                lats = str_lat.split(".")
+                lngs = str_lng.split(".")
+
+                return "LATITUDE DEC %s FRAC %s LONGITUDE DEC %s FRAC %s" % (
+                    lats[0], lats[1],
+                    lngs[0], lngs[1]
+                )
+
+        except Exception as e:
+            YLogger.exception(client_context, "Failed to execute geocode extension", e)
 
         return None

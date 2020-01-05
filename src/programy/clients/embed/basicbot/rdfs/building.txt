@@ -1,0 +1,148 @@
+HUT:hasPurpose:to provide a home
+HUT:hasSize:9
+HUT:hasSyllables:1
+HUT:isa:Dwelling
+HUT:lifeArea:Physical
+HOUSE:hasPurpose:to live in
+HOUSE:hasSize:8
+HOUSE:hasSyllables:1
+HOUSE:isa:Building
+HOUSE:isa:Dwelling
+HOUSE:lifeArea:Physical
+INN:hasPurpose:to provide shelter when traveling
+INN:hasSize:9
+INN:hasSyllables:1
+INN:isa:Building
+INN:lifeArea:Recreation
+LIBRARY:hasPurpose:to load books
+LIBRARY:hasSize:9
+LIBRARY:hasSyllables:3
+LIBRARY:isa:Building
+LIBRARY:lifeArea:Education
+RESTAURANT:hasPurpose:to serve food
+RESTAURANT:hasSize:9
+RESTAURANT:hasSyllables:4
+RESTAURANT:isa:Business
+RESTAURANT:lifeArea:Diet
+BANK:hasPurpose:to save and borrow money
+BANK:hasSize:9
+BANK:hasSyllables:1
+BANK:isa:Business
+BANK:lifeArea:Finances
+BAR:hasPurpose:to serve alcohol
+BAR:hasSize:9
+BAR:hasSyllables:1
+BAR:isa:Business
+BAR:lifeArea:Recreation
+TEMPLE:hasPurpose:to gather worshippers
+TEMPLE:hasSize:9
+TEMPLE:hasSyllables:1
+TEMPLE:isa:Building
+TEMPLE:isa:Worship Facility
+TEMPLE:lifeArea:Spiritual
+Supermarket:isa:Retail Business
+MALL:hasPurpose:to gather shoppers and stores
+MALL:hasSize:9
+MALL:hasSyllables:1
+MALL:isa:Building
+MALL:lifeArea:Business
+BUILDING:hasPurpose:to provide shelter
+BUILDING:hasSize:9
+BUILDING:hasSyllables:2
+BUILDING:isa:Shelter
+BUILDING:lifeArea:Physical
+CINEMA:hasPurpose:to show movies
+CINEMA:hasSize:9
+CINEMA:hasSyllables:3
+CINEMA:isa:Building
+CINEMA:isa:Entertainment Facility
+CINEMA:lifeArea:Recreation
+COLLEGE:hasPurpose:to provide higher education
+COLLEGE:hasSize:9
+COLLEGE:hasSyllables:2
+COLLEGE:isa:School
+COLLEGE:lifeArea:Education
+OFFICE:hasPurpose:to provide a place to work
+OFFICE:hasSize:9
+OFFICE:hasSyllables:2
+OFFICE:isa:Room
+OFFICE:lifeArea:Business
+POD:hasPurpose:to contain something
+POD:hasSize:0
+POD:hasSyllables:1
+POD:lifeArea:Physical
+HOTEL:hasPurpose:to provide shelter when traveling
+HOTEL:hasSize:9
+HOTEL:hasSyllables:2
+HOTEL:isa:Building
+HOTEL:lifeArea:Recreation
+HOME:hasPurpose:to provide a place to live
+HOME:hasSize:9
+HOME:hasSyllables:1
+HOME:lifeArea:Family
+SHACK:hasPurpose:to provide shelter
+SHACK:hasSize:9
+SHACK:hasSyllables:1
+SHACK:isa:Dwelling
+SHACK:lifeArea:Physical
+Department Store:isa:Retail Business
+DEPOT:hasPurpose:to wait for a train
+DEPOT:hasSize:9
+DEPOT:hasSyllables:2
+DEPOT:isa:Building
+DEPOT:isa:Train Station
+DEPOT:lifeArea:Physical
+Dwelling:isa:Building
+FACTORY:hasPurpose:to manufacture things
+FACTORY:hasSize:9
+FACTORY:hasSyllables:3
+FACTORY:isa:Building
+FACTORY:lifeArea:Business
+SCHOOL:hasPurpose:to provide education
+SCHOOL:hasSize:9
+SCHOOL:hasSyllables:1
+SCHOOL:isa:Organization
+SCHOOL:lifeArea:Education
+STATION:hasPurpose:to be a stop along the way
+STATION:hasSize:9
+STATION:hasSyllables:2
+STATION:lifeArea:Physical
+STORE:hasPurpose:to sell things
+STORE:hasSize:9
+STORE:hasSyllables:1
+STORE:isa:Retail Business
+STORE:lifeArea:Business
+ROOM:hasPurpose:to divide a house or buidling
+ROOM:hasSize:8
+ROOM:hasSyllables:1
+ROOM:lifeArea:Physical
+SHOP:hasPurpose:to sell things
+SHOP:hasSize:9
+SHOP:hasSyllables:1
+SHOP:isa:Retail Business
+SHOP:lifeArea:Business
+SUBWAY:hasPurpose:to move us underground
+SUBWAY:hasSize:9
+SUBWAY:hasSyllables:2
+SUBWAY:isa:Railroad
+SUBWAY:isa:Transportation
+SUBWAY:lifeArea:Physical
+UNIVERSITY:hasPurpose:to provide higher education
+UNIVERSITY:hasSize:9
+UNIVERSITY:hasSyllables:5
+UNIVERSITY:isa:School
+UNIVERSITY:lifeArea:Education
+Entertainment Facility:isa:Building
+GALLERY:hasPurpose:to display art
+GALLERY:hasSize:9
+GALLERY:hasSyllables:3
+GALLERY:isa:Building
+GALLERY:lifeArea:Creative
+LOUNGE:hasPurpose:to provide a place for rest
+LOUNGE:hasSize:8
+LOUNGE:hasSyllables:1
+LOUNGE:lifeArea:Social
+INSIDE:hasPurpose:to be the unseen part
+INSIDE:hasSize:0
+INSIDE:hasSyllables:2
+INSIDE:lifeArea:Education

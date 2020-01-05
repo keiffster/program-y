@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -18,15 +18,14 @@ from programy.utils.logging.ylogger import YLogger
 from programy.clients.restful.config import RestConfiguration
 
 
-class RestAuthorizationHandler(object):
-
+class RestAuthorizationHandler:
     AUTHORIZATION = "Authorization"
 
     def __init__(self, configuration: RestConfiguration):
         self._configuration = configuration
 
     def initialise(self, client):
-        pass
+        pass    # pragma: no cover
 
     @staticmethod
     def load_authorisation(client):
@@ -37,12 +36,12 @@ class RestAuthorizationHandler(object):
                 auth.initialise(client)
                 return auth
             else:
-                YLogger.error(client, "Unsupported Authentication [%s]", client.configuration.client_configuration.authorization)
+                YLogger.error(client, "Unsupported Authentication [%s]",
+                              client.configuration.client_configuration.authorization)
         return None
 
 
 class RestBasicAuthorizationHandler(RestAuthorizationHandler):
-
     BASIC = "Basic"
     BASIC_AUTH_TOKEN = 'BASIC_AUTH_TOKEN'
 
@@ -57,7 +56,8 @@ class RestBasicAuthorizationHandler(RestAuthorizationHandler):
     @staticmethod
     def add_authorisation_header(client_context, headers):
         headers[RestBasicAuthorizationHandler.AUTHORIZATION] = "Basic %s" % \
-                            client_context.client.license_keys.get_key(RestBasicAuthorizationHandler.BASIC_AUTH_TOKEN)
+                                                               client_context.client.license_keys.get_key(
+                                                                   RestBasicAuthorizationHandler.BASIC_AUTH_TOKEN)
 
     @staticmethod
     def get_license_key(client):
@@ -71,11 +71,10 @@ class RestBasicAuthorizationHandler(RestAuthorizationHandler):
             authorization = request.headers[RestBasicAuthorizationHandler.AUTHORIZATION]
             parts = authorization.split(" ")
             if len(parts) > 1:
-                type = parts[0].strip()
-                if type == RestBasicAuthorizationHandler.BASIC:
+                authtype = parts[0].strip()
+                if authtype == RestBasicAuthorizationHandler.BASIC:
                     token = " ".join(parts[1:])
                     if token == self._basic_auth_token:
                         return True
 
         return False
-

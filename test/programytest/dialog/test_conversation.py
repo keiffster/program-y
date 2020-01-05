@@ -1,19 +1,127 @@
 import unittest
 
-from programy.dialog.sentence import Sentence
-from programy.dialog.question import Question
-from programy.dialog.conversation import Conversation
-from programy.parser.pattern.matchcontext import MatchContext
-from programy.parser.pattern.match import Match
-from programy.parser.pattern.nodes.word import PatternWordNode
 from programy.bot import Bot
 from programy.config.bot.bot import BotConfiguration
 from programy.context import ClientContext
-
+from programy.dialog.conversation import Conversation
+from programy.dialog.question import Question
+from programy.dialog.sentence import Sentence
+from programy.parser.pattern.match import Match
+from programy.parser.pattern.matchcontext import MatchContext
+from programy.parser.pattern.nodes.word import PatternWordNode
 from programytest.client import TestClient
 
 
 class ConversationTests(unittest.TestCase):
+
+    def test_pop_methods(self):
+        client = TestClient()
+        client_context = ClientContext(client, "testid")
+        client_context.bot = Bot(BotConfiguration(), client)
+        client_context.bot.configuration.conversations._max_histories = 3
+        client_context.brain = client_context.bot.brain
+
+        conversation = Conversation(client_context)
+
+        question1 = Question.create_from_text(client_context, "Hello There")
+        conversation.record_dialog(question1)
+        self.assertEquals(1, len(conversation.questions))
+
+        question2 = Question.create_from_text(client_context, "How are you")
+        conversation.record_dialog(question2)
+        self.assertEquals(2, len(conversation.questions))
+
+        conversation.pop_dialog()
+        self.assertEquals(1, len(conversation.questions))
+
+        conversation.pop_dialog()
+        self.assertEquals(0, len(conversation.questions))
+
+        conversation.pop_dialog()
+        self.assertEquals(0, len(conversation.questions))
+
+    def test_properties(self):
+        client = TestClient()
+        client_context = ClientContext(client, "testid")
+        client_context.bot = Bot(BotConfiguration(), client)
+        client_context.bot.configuration.conversations._max_histories = 3
+        client_context.brain = client_context.bot.brain
+
+        conversation = Conversation(client_context)
+
+        conversation.set_property("name1", "value1")
+        self.assertEquals("value1", conversation.property("name1"))
+        conversation.set_property("name2", "value2")
+        self.assertEquals("value2", conversation.property("name2"))
+        conversation.set_property("name2", "value3")
+        self.assertEquals("value3", conversation.property("name2"))
+        self.assertEquals(None, conversation.property("name3"))
+
+    def test_topic_pattern(self):
+        client = TestClient()
+        client_context = ClientContext(client, "testid")
+        client_context.bot = Bot(BotConfiguration(), client)
+        client_context.bot.configuration.conversations._max_histories = 3
+        client_context.brain = client_context.bot.brain
+
+        conversation = Conversation(client_context)
+
+        self.assertEquals("*", conversation.get_topic_pattern(client_context))
+
+        conversation.set_property("topic", "TOPIC1")
+
+        self.assertEquals("TOPIC1", conversation.get_topic_pattern(client_context))
+
+    def test_topic_pattern_topic_none(self):
+        client = TestClient()
+        client_context = ClientContext(client, "testid")
+        client_context.bot = Bot(BotConfiguration(), client)
+        client_context.bot.configuration.conversations._max_histories = 3
+        client_context.brain = client_context.bot.brain
+
+        conversation = Conversation(client_context)
+        conversation.set_property("topic", None)
+
+        self.assertEquals("*", conversation.get_topic_pattern(client_context))
+
+        conversation.set_property("topic", "TOPIC1")
+
+        self.assertEquals("TOPIC1", conversation.get_topic_pattern(client_context))
+
+
+    def test_parse_last_sentences_from_response(self):
+        client = TestClient()
+        client_context = ClientContext(client, "testid")
+        client_context.bot = Bot(BotConfiguration(), client)
+        client_context.bot.configuration.conversations._max_histories = 3
+        client_context.brain = client_context.bot.brain
+
+        conversation = Conversation(client_context)
+
+        self.assertEquals("*", conversation.parse_last_sentences_from_response(""))
+        self.assertEquals("*", conversation.parse_last_sentences_from_response("."))
+        self.assertEquals("HELLO", conversation.parse_last_sentences_from_response("HELLO"))
+        self.assertEquals("HELLO THERE", conversation.parse_last_sentences_from_response("HELLO THERE"))
+        self.assertEquals("THERE", conversation.parse_last_sentences_from_response("HELLO. THERE"))
+        self.assertEquals("THERE", conversation.parse_last_sentences_from_response("HELLO. THERE!"))
+
+    def test_that_pattern(self):
+        client = TestClient()
+        client_context = ClientContext(client, "testid")
+        client_context.bot = Bot(BotConfiguration(), client)
+        client_context.bot.configuration.conversations._max_histories = 3
+        client_context.brain = client_context.bot.brain
+
+        conversation = Conversation(client_context)
+
+        self.assertEquals("*", conversation.parse_last_sentences_from_response(""))
+        self.assertEquals("HELLO", conversation.parse_last_sentences_from_response("HELLO"))
+        self.assertEquals("HELLO", conversation.parse_last_sentences_from_response(".HELLO"))
+        self.assertEquals("HELLO", conversation.parse_last_sentences_from_response("HELLO."))
+        self.assertEquals("HELLO", conversation.parse_last_sentences_from_response(".HELLO."))
+        self.assertEquals("HELLO THERE", conversation.parse_last_sentences_from_response("HELLO THERE"))
+        self.assertEquals("THERE", conversation.parse_last_sentences_from_response("HELLO. THERE"))
+        self.assertEquals("THERE", conversation.parse_last_sentences_from_response("HELLO. THERE!"))
 
     def test_conversation(self):
 
@@ -107,51 +215,51 @@ class ConversationTests(unittest.TestCase):
         json_data = conversation1.to_json()
         self.assertIsNotNone(json_data)
 
-        self.assertEquals("testclient", json_data['client_context']['clientid'])
-        self.assertEquals("testid", json_data['client_context']['userid'])
-        self.assertEquals("bot", json_data['client_context']['botid'])
-        self.assertEquals("brain", json_data['client_context']['brainid'])
-        self.assertEquals(0, json_data['client_context']['depth'])
+        self.assertEqual("testclient", json_data['client_context']['clientid'])
+        self.assertEqual("testid", json_data['client_context']['userid'])
+        self.assertEqual("bot", json_data['client_context']['botid'])
+        self.assertEqual("brain", json_data['client_context']['brainid'])
+        self.assertEqual(0, json_data['client_context']['depth'])
 
         conversation2 = Conversation.from_json(client_context, json_data)
 
-        self.assertEquals(conversation1._client_context.client.id, conversation2._client_context.client.id)
-        self.assertEquals(conversation1._client_context.userid, conversation2._client_context.userid)
-        self.assertEquals(conversation1._client_context.bot.id, conversation2._client_context.bot.id)
-        self.assertEquals(conversation1._client_context.brain.id, conversation2._client_context.brain.id)
-        self.assertEquals(conversation1._client_context._question_start_time,
+        self.assertEqual(conversation1._client_context.client.id, conversation2._client_context.client.id)
+        self.assertEqual(conversation1._client_context.userid, conversation2._client_context.userid)
+        self.assertEqual(conversation1._client_context.bot.id, conversation2._client_context.bot.id)
+        self.assertEqual(conversation1._client_context.brain.id, conversation2._client_context.brain.id)
+        self.assertEqual(conversation1._client_context._question_start_time,
                           conversation2._client_context._question_start_time)
-        self.assertEquals(conversation1._client_context._question_depth, conversation2._client_context._question_depth)
-        self.assertEquals(conversation1._client_context._id, conversation2._client_context._id)
+        self.assertEqual(conversation1._client_context._question_depth, conversation2._client_context._question_depth)
+        self.assertEqual(conversation1._client_context._id, conversation2._client_context._id)
 
-        self.assertEquals(conversation1.properties, conversation2.properties)
-        self.assertEquals(conversation1.max_histories, conversation2.max_histories)
+        self.assertEqual(conversation1.properties, conversation2.properties)
+        self.assertEqual(conversation1.max_histories, conversation2.max_histories)
 
         self.assertNotEquals(0, len(conversation1.questions))
         self.assertNotEquals(0, len(conversation2.questions))
-        self.assertEquals(len(conversation1.questions), len(conversation2.questions))
+        self.assertEqual(len(conversation1.questions), len(conversation2.questions))
 
         for i in range(len(conversation2.questions)):
             q1 = conversation1.questions[i]
             q2 = conversation2.questions[i]
 
-            self.assertEquals(q1.srai, q2.srai)
-            self.assertEquals(q1._current_sentence_no, q2._current_sentence_no)
+            self.assertEqual(q1.srai, q2.srai)
+            self.assertEqual(q1._current_sentence_no, q2._current_sentence_no)
 
-            self.assertEquals(q1.properties, q2.properties)
+            self.assertEqual(q1.properties, q2.properties)
 
             self.assertNotEquals(0, len(q1.sentences))
             self.assertNotEquals(0, len(q2.sentences))
-            self.assertEquals(len(q1.sentences), len(q2.sentences))
+            self.assertEqual(len(q1.sentences), len(q2.sentences))
 
             for j in range(len(q2.sentences)):
                 s1 = q1.sentences[j]
                 s2 = q2.sentences[j]
 
-                self.assertEquals(s1.words, s2.words)
-                self.assertEquals(s1.response, s2.response)
-                self.assertEquals(s1.positivity, s2.positivity)
-                self.assertEquals(s1.subjectivity, s2.subjectivity)
+                self.assertEqual(s1.words, s2.words)
+                self.assertEqual(s1.response, s2.response)
+                self.assertEqual(s1.positivity, s2.positivity)
+                self.assertEqual(s1.subjectivity, s2.subjectivity)
 
                 mc1 = s1.matched_context
                 mc2 = s2.matched_context

@@ -1,0 +1,18 @@
+ESSEX:hasPurpose:to form a city
+ESSEX:hasSize:10
+ESSEX:hasSyllables:2
+ESSEX:isa:City
+ESSEX:isa:Geographic Location
+ESSEX:lifeArea:Education
+YORKSHIRE:hasPurpose:to form a city
+YORKSHIRE:hasSize:10
+YORKSHIRE:hasSyllables:2
+YORKSHIRE:isa:City
+YORKSHIRE:isa:Geographic Location
+YORKSHIRE:lifeArea:Education
+MIDDLESEX:hasPurpose:to form a city
+MIDDLESEX:hasSize:10
+MIDDLESEX:hasSyllables:3
+MIDDLESEX:isa:City
+MIDDLESEX:isa:Geographic Location
+MIDDLESEX:lifeArea:Education

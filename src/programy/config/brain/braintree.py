@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -35,21 +35,20 @@ class BrainBraintreeConfiguration(BaseSectionConfigurationData):
     def save_as_user(self):
         return self._save_as_user
 
-    def check_for_license_keys(self, license_keys):
-        BaseSectionConfigurationData.check_for_license_keys(self, license_keys)
-
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         braintree = configuration_file.get_section("braintree", configuration)
         if braintree is not None:
             self._create = configuration_file.get_option(braintree, "create", missing_value=None, subs=subs)
-            self._save_as_user = configuration_file.get_option(braintree, "save_as_user", missing_value="system", subs=subs)
+            self._save_as_user = configuration_file.get_option(braintree, "save_as_user", missing_value="system",
+                                                               subs=subs)
         else:
             YLogger.warning(self, "'braintree' section missing from bot config, using to defaults")
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:
             data['create'] = False
-            data['create'] = "system"
+            data['save_as_user'] = "system"
+
         else:
             data['create'] = self._create
-            data['create'] = self._save_as_user
+            data['save_as_user'] = self._save_as_user

@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -15,13 +15,11 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 import re
-
 from programy.utils.logging.ylogger import YLogger
 
 
-class Substitutions(object):
-
-    PATTERN = re.compile("(\$[A-Z]+)")
+class Substitutions:
+    PATTERN = re.compile(r"(\$[A-Z]+)")
 
     def __init__(self):
         self._substitutes = {}
@@ -41,7 +39,7 @@ class Substitutions(object):
         if name in self._substitutes:
             return self._substitutes[name]
         else:
-            raise ValueError("No substitute named [%s]"%name)
+            raise ValueError("No substitute named [%s]" % name)
 
     def load_substitutions(self, substitutions):
         if substitutions is not None:
@@ -53,8 +51,8 @@ class Substitutions(object):
                         if len(namevalue) > 1:
                             self.add_substitute(namevalue[0], ":".join(namevalue[1:]))
 
-            except Exception as e:
-                YLogger.error(None, "Failed to load substitutions file")
+            except Exception as excep:
+                YLogger.exception_nostack(None, "Failed to load substitutions file", excep)
 
     def replace(self, string: str) -> str:
         splits = Substitutions.PATTERN.split(string)

@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,14 +14,13 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.utils.logging.ylogger import YLogger
 import requests
-
+from programy.utils.logging.ylogger import YLogger
 from programy.services.service import Service
 from programy.config.brain.service import BrainServiceConfiguration
 
 
-class RestAPI(object):
+class RestAPI:
 
     def get(self, url, headers=None):
         if headers is None:
@@ -57,30 +56,38 @@ class GenericRESTService(Service):
 
         self.port = None
         if config.port is not None:
-           self.port = config.port
+            self.port = config.port
 
         self.url = None
         if config.url is not None:
-           self.url = config.url
+            self.url = config.url
 
     def _format_url(self):
         if self.port is not None:
-            host_port = "http://%s:%s"%(self.host, self.port)
+            host_port = "http://%s:%s" % (self.host, self.port)
         else:
-            host_port = "http://%s"%self.host
+            host_port = "http://%s" % self.host
 
         if self.url is not None:
-            return "%s%s"%(host_port, self.url)
+            return "%s%s" % (host_port, self.url)
         else:
             return host_port
 
     def _format_payload(self, client_context, question):
+        del client_context
+        del question
         return {}
 
-    def _format_get_url(self, url, client_context, question):
+    def _format_get_url(self, url, client_context, question, lang=None, location=None, api_key=None):
+        del client_context
+        del question
+        del lang
+        del location
+        del api_key
         return url
 
-    def _parse_response(self, text):
+    def _parse_response(self, client_context, text):
+        del client_context
         return text
 
     def ask_question(self, client_context, question: str):
@@ -95,12 +102,12 @@ class GenericRESTService(Service):
                 payload = self._format_payload(client_context, question)
                 response = self.api.post(url, data=payload)
             else:
-                raise Exception("Unsupported REST method [%s]"%self.method)
+                raise Exception("Unsupported REST method [%s]" % self.method)
 
             if response.status_code != 200:
                 YLogger.error(client_context, "[%s] return status code [%d]", self.host, response.status_code)
             else:
-                return self._parse_response(response.text)
+                return self._parse_response(client_context, response.text)
 
         except Exception as excep:
             YLogger.exception(client_context, "Failed to resolve", excep)

@@ -1,0 +1,5 @@
+WALNUT:hasPurpose:to provide nourishment
+WALNUT:hasSize:3
+WALNUT:hasSyllables:2
+WALNUT:isa:Nut
+WALNUT:lifeArea:Diet

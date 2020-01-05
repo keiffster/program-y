@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,14 +14,10 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.utils.logging.ylogger import YLogger
-
 from programy.parser.template.nodes.indexed import TemplateIndexedNode
 
 
-#####################################################################################################################
-#
 class TemplateThatStarNode(TemplateIndexedNode):
 
     def __init__(self, index=1):
@@ -31,6 +27,7 @@ class TemplateThatStarNode(TemplateIndexedNode):
 
         conversation = client_context.bot.get_conversation(client_context)
 
+        resolved = ""
         if conversation.has_current_question():
 
             current_question = conversation.current_question()
@@ -41,34 +38,13 @@ class TemplateThatStarNode(TemplateIndexedNode):
             if matched_context is None:
                 YLogger.error(client_context, "ThatStar node has no matched context for clientid %s",
                               client_context.userid)
-                resolved = ""
             else:
                 int_index = int(self.index.resolve(client_context))
-                try:
-                    resolved = matched_context.thatstar(client_context, int_index)
-                    if resolved is None:
-                        YLogger.error(client_context, "ThatStar index not in range [%d]", int_index)
-                        resolved = ""
-                except Exception as excep:
+                resolved = matched_context.thatstar(client_context, int_index)
+                if resolved is None:
                     YLogger.error(client_context, "ThatStar index not in range [%d]", int_index)
-                    resolved = ""
-        else:
-            resolved = ""
 
         YLogger.debug(client_context, "ThatStar Node [%s] resolved to [%s]", self.to_string(), resolved)
-
-        """
-        conversation = client_context.bot.get_conversation(client_context)
-
-        question = conversation.previous_nth_question(self.question - 1)
-
-        sentence = question.current_sentence()
-
-        resolved = sentence.matched_context.thatstar(client_context, self.sentence)
-
-        YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
-        """
-
         return resolved
 
     def to_string(self):

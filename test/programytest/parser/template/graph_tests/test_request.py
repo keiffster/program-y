@@ -1,11 +1,10 @@
 import xml.etree.ElementTree as ET
 
+from programy.parser.exceptions import ParserException
 from programy.parser.template.nodes.base import TemplateNode
-from programy.parser.template.nodes.word import TemplateWordNode
 from programy.parser.template.nodes.get import TemplateGetNode
 from programy.parser.template.nodes.request import TemplateRequestNode
-from programy.parser.exceptions import ParserException
-
+from programy.parser.template.nodes.word import TemplateWordNode
 from programytest.parser.template.graph_tests.graph_test_client import TemplateGraphTestClient
 
 
@@ -68,7 +67,7 @@ class TemplateGraphRequestTests(TemplateGraphTestClient):
         self.assertIsNotNone(req_node.index)
         self.assertIsInstance(req_node.index, TemplateNode)
 
-        self.assertEquals(1, len(req_node.index.children))
+        self.assertEqual(1, len(req_node.index.children))
         self.assertIsInstance(req_node.index.children[0], TemplateGetNode)
 
     def test_request_with_children(self):

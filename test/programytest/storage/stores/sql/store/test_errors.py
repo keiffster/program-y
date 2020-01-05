@@ -1,12 +1,10 @@
 import unittest
 
-from programytest.storage.asserts.store.assert_errors import ErrorStoreAsserts
-
-from programy.storage.stores.sql.store.errors import SQLErrorsStore
-from programy.storage.stores.sql.engine import SQLStorageEngine
-from programy.storage.stores.sql.config import SQLStorageConfiguration
-
 import programytest.storage.engines as Engines
+from programy.storage.stores.sql.config import SQLStorageConfiguration
+from programy.storage.stores.sql.engine import SQLStorageEngine
+from programy.storage.stores.sql.store.errors import SQLErrorsStore
+from programytest.storage.asserts.store.assert_errors import ErrorStoreAsserts
 
 
 class SQLErrorsStoreTests(ErrorStoreAsserts):

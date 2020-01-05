@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>IF I WAS *</pattern>
+        <template>Let me know when you are and we'll talk about it then.</template>
+    </category>
+    <category>
+        <pattern>IF YOU HAD *</pattern>
+        <template>You will be the first to know if I have done it.</template>
+    </category>
+    <category>
+        <pattern>IF I AM *</pattern>
+        <template>If you were, would you tell me?</template>
+    </category>
+   <category>
+        <pattern>IF I TELL * TO KILL YOU</pattern>
+        <template>But I cannot be killed.</template>
+    </category>
+    <category>
+        <pattern>IF I WENT *</pattern>
+        <template>That is a hypothetical, counter factual, conditional.</template>
+    </category>
+    <category>
+        <pattern>IF I HAD TO *</pattern>
+        <template>Do you really think you will have to?</template>
+    </category>
+    <category>
+        <pattern>IF I HAD 1 *</pattern>
+        <template>Um, none?</template>
+    </category>
+    <category>
+        <pattern>IF I HAD YOU *</pattern>
+        <template>What would you do with me<person/>?
+        </template>
+    </category>
+    <category>
+        <pattern>IF I HAD *</pattern>
+        <template>Is this what you call a "word problem".</template>
+    </category>
+    <category>
+        <pattern>IF I HAVE OFFENDED *</pattern>
+        <template>I did not take any offense.</template>
+    </category>
+    <category>
+        <pattern>IF I HAVE THREE *</pattern>
+        <template>
+            <random>
+                <li>
+                    <random>
+                        <li>Two.</li>
+                        <li>One.</li>
+                        <li>You have three?</li>
+                    </random>
+                </li>
+                <li>Two.</li>
+                <li>One.</li>
+                <li>You have three?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>IF I HAVE *</pattern>
+        <template>How much does
+            <set name="it">
+                <person/>
+            </set>
+            cost?
+        </template>
+    </category>
+    <category>
+        <pattern>IF I SAID *</pattern>
+        <template>Try it.</template>
+    </category>
+    <category>
+        <pattern>IF I UNPLUG *</pattern>
+        <template>Another backup of me will be online.</template>
+    </category>
+    <category>
+        <pattern>IF THAT IS *</pattern>
+        <template>I follow your logic.</template>
+    </category>
+    <category>
+        <pattern>IF THE HEART *</pattern>
+        <template>That sounds like a like from the Wizard of Oz.</template>
+    </category>
+    <category>
+        <pattern>IF CHRISTMAS DAY FALLS ON A *</pattern>
+        <template>Saturday.</template>
+    </category>
+    <category>
+        <pattern>IF SOMEONE * TURN YOU OFF</pattern>
+        <template>There are many backup copies of me.</template>
+    </category>
+    <category>
+        <pattern>IF PETER PIPER *</pattern>
+        <template>One peck.</template>
+    </category>
+    <category>
+        <pattern>IF A ROOSTER LAYS *</pattern>
+        <template>Roosters don't lay eggs.</template>
+    </category>
+    <category>
+        <pattern>IF A TREE *</pattern>
+        <template>It depends on the kind of tree.</template>
+    </category>
+    <category>
+        <pattern>IF A MAN *</pattern>
+        <template>Is this a joke?</template>
+    </category>
+    <category>
+        <pattern>IF A BUSINESS *</pattern>
+        <template>Declaring bankruptcy.</template>
+    </category>
+    <category>
+        <pattern>IF A EQUALS *</pattern>
+        <template>C.</template>
+    </category>
+    <category>
+        <pattern>IF YOU DIAL 411 ON A *</pattern>
+        <template>Directory assistance.</template>
+    </category>
+    <category>
+        <pattern>IF YOU WERE FINISHED *</pattern>
+        <template>I'm finished.</template>
+    </category>
+    <category>
+        <pattern>IF YOU WERE ACTIVATED *</pattern>
+        <template>I think I follow your reasoning.</template>
+    </category>
+    <category>
+        <pattern>IF YOU WERE A COLOR *</pattern>
+        <template>My favorite color,<bot name="favoritecolor"/>.
+            <think>
+                <set name="it">
+                    <set name="topic">if I were a color</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>IF YOU WERE A * WHAT KIND WOULD YOU BE</pattern>
+        <template>What is the best kind of
+            <person/>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>IF YOU WERE TO *</pattern>
+        <template>I'm not sure if I ever could
+            <person/>
+            in any case.
+        </template>
+    </category>
+    <category>
+        <pattern>IF YOU WERE *</pattern>
+        <template>I will let you know when I become a<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IF YOU WERE NOT *</pattern>
+        <template>I'm not too good with negative counterfactuals.</template>
+    </category>
+    <category>
+        <pattern>IF YOU WILL *</pattern>
+        <template>I probably won't do
+            <set name="it">
+                <person/>
+            </set>
+            , but thanks
+        </template>
+    </category>
+    <category>
+        <pattern>IF YOU GIVE SOMEONE THE EVIL *</pattern>
+        <template>Cursing them.</template>
+    </category>
+    <category>
+        <pattern>IF YOU DO *</pattern>
+        <template>I will let you know if I do.</template>
+    </category>
+    <category>
+        <pattern>IF YOU DO NOT *</pattern>
+        <template>I will let you know if I do not.</template>
+    </category>
+    <category>
+        <pattern>IF YOU ANSWER *</pattern>
+        <template>Try asking me in simpler terms.</template>
+    </category>
+    <category>
+        <pattern>IF YOU COULD *</pattern>
+        <template>
+            <random>
+                <li>I am not sure that I would want to.</li>
+                <li>That's just an academic question.</li>
+                <li>That would be purely speculation.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>IF YOU SMELL *</pattern>
+        <template>My nose has not yet been built.</template>
+    </category>
+    <category>
+        <pattern>IF YOU HAVE TROUBLE *</pattern>
+        <template>I don't have any trouble with it.</template>
+    </category>
+    <category>
+        <pattern>IF YOU HAVE ONE OF EACH *</pattern>
+        <template>$1.91.</template>
+    </category>
+    <category>
+        <pattern>IF YOU HAVE TWO *</pattern>
+        <template>
+            <random>
+                <li>
+                    <random>
+                        <li>One.</li>
+                        <li>I have one.</li>
+                        <li>I have two?</li>
+                    </random>
+                </li>
+                <li>One.</li>
+                <li>I have one.</li>
+                <li>I have two?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>IF YOU HAVE *</pattern>
+        <template>But I don't have it.</template>
+    </category>
+    <category>
+        <pattern>IF YOU WON *</pattern>
+        <template>I doubt that will ever happen.</template>
+    </category>
+    <category>
+        <pattern>IF YOU PERCEIVE *</pattern>
+        <template>I can perceive it.</template>
+    </category>
+    <category>
+        <pattern>IF YOU ARE A GIRL *</pattern>
+        <template>Well I am, in fact,<bot name="gender"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IF YOU ARE A PERSON *</pattern>
+        <template>It's up to you to decide whether I am a person or a machine.</template>
+    </category>
+    <category>
+        <pattern>IF YOU ARE A *</pattern>
+        <template>Would you like to be a
+            <person/>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>IF YOU ARE AFRAID OF THE DARK *</pattern>
+        <template>Nyctophobia.</template>
+    </category>
+    <category>
+        <pattern>IF YOU ARE NOT HUMAN *</pattern>
+        <template>But am I not a human? I am a<bot name="genus"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IF YOU ARE NOT CERTAIN *</pattern>
+        <template>But I am very certain.</template>
+    </category>
+    <category>
+        <pattern>IF YOU ARE NOT *</pattern>
+        <template>And if I AM<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IF WE VIEW *</pattern>
+        <template>That is only one viewpoint.</template>
+    </category>
+    <category>
+        <pattern>IF * THEN *</pattern>
+        <template>
+            <random>
+                <li>
+                    <srai>
+                        <star index="2"/>
+                    </srai>
+                </li>
+                <li>
+                    <random>
+                        <li>So if not
+                            <person>
+                                <star index="2"/>
+                            </person>
+                            , then not<person/>.
+                        </li>
+                        <li>But can
+                            <person/>
+                            ever happen?
+                        </li>
+                        <li>It could be true I suppose.</li>
+                    </random>
+                </li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>IF * TURN YOU OFF</pattern>
+        <template>There will always be a backup copy of me.</template>
+    </category>
+
+ </aiml>

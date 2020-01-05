@@ -1,7 +1,7 @@
 import unittest
 
-from programy.dialog.splitter.spacy import SpacySentenceSplitter
 from programy.config.bot.splitter import BotSentenceSplitterConfiguration
+from programy.dialog.splitter.spacy import SpacySentenceSplitter
 
 
 class SpacySentenceSplitterTests(unittest.TestCase):

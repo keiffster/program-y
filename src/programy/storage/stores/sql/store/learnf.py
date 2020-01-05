@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -18,10 +18,15 @@ from programy.storage.stores.sql.store.sqlstore import SQLStore
 from programy.storage.entities.learnf import LearnfStore
 from programy.storage.stores.sql.dao.category import Category
 
+
 class SQLLearnfStore(SQLStore, LearnfStore):
 
     def __init__(self, storage_engine):
         SQLStore.__init__(self, storage_engine)
+        LearnfStore.__init__(self)
+
+    def _get_all(self):
+        raise Exception("Learnf _get_all not possible, call Category _get_all instead!")
 
     def save_learnf(self, client_context, category):
         pattern = category.pattern
@@ -34,4 +39,3 @@ class SQLLearnfStore(SQLStore, LearnfStore):
 
         category = Category(groupid=groupid, userid=userid, pattern=pattern, topic=topic, that=that, template=template)
         self.storage_engine.session.add(category)
-

@@ -1,10 +1,12 @@
 import re
 
-from programytest.parser.base import ParserTestsBaseClass
-
-from programy.parser.pattern.nodes.regex import PatternRegexNode
-from programy.parser.exceptions import ParserException
 from programy.dialog.sentence import Sentence
+from programy.parser.exceptions import ParserException
+from programy.parser.pattern.nodes.regex import PatternRegexNode
+from programy.parser.pattern.nodes.word import PatternWordNode
+from programy.parser.template.nodes.base import TemplateNode
+from programy.parser.template.nodes.word import TemplateWordNode
+from programytest.parser.base import ParserTestsBaseClass
 
 
 class PatternRegexNodeTests(ParserTestsBaseClass):
@@ -12,20 +14,20 @@ class PatternRegexNodeTests(ParserTestsBaseClass):
     def test_init_with_text(self):
         node = PatternRegexNode({}, "^LEGION$")
         self.assertIsNotNone(node)
-        self.assertIsNone(node._pattern_template)
-        self.assertEqual("^LEGION$", node._pattern_text)
+        self.assertIsNone(node.pattern_template)
+        self.assertEqual("^LEGION$", node.pattern_text)
 
     def test_init_with_pattern_attrib(self):
         node = PatternRegexNode({"pattern": "^LEGION$"}, "")
         self.assertIsNotNone(node)
-        self.assertIsNone(node._pattern_template)
-        self.assertEqual("^LEGION$", node._pattern_text)
+        self.assertIsNone(node.pattern_template)
+        self.assertEqual("^LEGION$", node.pattern_text)
 
     def test_init_with_template_attrib(self):
         node = PatternRegexNode({"template": "PhoneNumber"}, "")
         self.assertIsNotNone(node)
-        self.assertIsNone(node._pattern_text)
-        self.assertEqual("PhoneNumber", node._pattern_template)
+        self.assertIsNone(node.pattern_text)
+        self.assertEqual("PhoneNumber", node.pattern_template)
 
     def test_init_with_invalid_attribs(self):
         with self.assertRaises(ParserException) as raised:
@@ -171,6 +173,14 @@ class PatternRegexNodeTests(ParserTestsBaseClass):
         self.assertIsNotNone(match3)
         self.assertFalse(match3.matched)
 
+    def test_not_equals_template(self):
+        self._client_context.brain.regex_templates.add_regex("LEGION", re.compile("^LEGION$", re.IGNORECASE))
+
+        node1 = PatternRegexNode({"template": "OTHER"}, "")
+        match = node1.equals(self._client_context, Sentence(self._client_context, 'LEGION'), 0)
+        self.assertIsNotNone(match)
+        self.assertFalse(match.matched)
+
     def test_equivalent_mixed(self):
         node1 = PatternRegexNode({}, "^LEGION$")
         node2 = PatternRegexNode({}, "^LEGION$", userid="testid")
@@ -185,3 +195,55 @@ class PatternRegexNodeTests(ParserTestsBaseClass):
         self.assertFalse(node1.equivalent(node4))
         self.assertFalse(node2.equivalent(node5))
         self.assertFalse(node3.equivalent(node6))
+
+    def test_equivalent_none_regex(self):
+        node1 = PatternRegexNode({}, "^LEGION$")
+        node2 = PatternWordNode("test")
+
+        self.assertFalse(node1.equivalent(node2))
+
+    def test_equivalent_at_template_level(self):
+        node1 = PatternRegexNode({}, "^LEGION$")
+        template1 = TemplateNode()
+        template1.append(TemplateWordNode("test"))
+        node1.add_template(template1)
+
+        node2 = PatternRegexNode({}, "^LEGION$")
+        template2 = TemplateNode()
+        template2.append(TemplateWordNode("test"))
+        node1.add_template(template2)
+
+        self.assertTrue(node1.equivalent(node2))
+
+    def test_not_at_equivalent_at_template_level(self):
+        node1 = PatternRegexNode({}, "^LEGION$")
+        template1 = TemplateNode()
+        template1.append(TemplateWordNode("test1"))
+        node1.add_template(template1)
+
+        node2 = PatternRegexNode({}, "^LEGION$")
+        template2 = TemplateNode()
+        template2.append(TemplateWordNode("test2"))
+        node1.add_template(template2)
+
+        self.assertTrue(node1.equivalent(node2))
+
+    def test_equivalent_at_pattern_template_level(self):
+        node1 = PatternRegexNode({"template": ".*"}, "^LEGION$")
+        node2 = PatternRegexNode({"template": ".*"}, "^LEGION$")
+        self.assertTrue(node1.equivalent(node2))
+
+    def test_not_equivalent_at_pattern_template_level(self):
+        node1 = PatternRegexNode({"template": ".*"}, "^LEGION$")
+        node2 = PatternRegexNode({"template": "[A-Z]"}, "^LEGION$")
+        self.assertFalse(node1.equivalent(node2))
+
+    def test_equivalent_at_pattern_template_missing_lhs(self):
+        node1 = PatternRegexNode({}, "^LEGION$")
+        node2 = PatternRegexNode({"template": "[A-Z]"}, "^LEGION$")
+        self.assertFalse(node1.equivalent(node2))
+
+    def test_equivalent_at_pattern_template_missing_rhs(self):
+        node1 = PatternRegexNode({"template": "[A-Z]"}, "^LEGION$")
+        node2 = PatternRegexNode({}, "^LEGION$")
+        self.assertFalse(node1.equivalent(node2))

@@ -2,7 +2,6 @@ import xml.etree.ElementTree as ET
 
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.word import TemplateWordNode
-
 from programytest.parser.base import ParserTestsBaseClass
 
 
@@ -38,3 +37,18 @@ class TemplateWordNodeTests(ParserTestsBaseClass):
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template>Hello</template>", xml_str)
 
+    def test_resolve_no_word(self):
+        node = TemplateWordNode(None)
+        self.assertEquals("", node.resolve(self._client_context))
+
+    def test_resolve_to_string_no_word(self):
+        node = TemplateWordNode(None)
+        self.assertEquals("", node.resolve_to_string(self._client_context))
+
+    def test_to_string(self):
+        node = TemplateWordNode("Hello")
+        self.assertEquals("[WORD]Hello", node.to_string())
+
+    def test_to_string_no_word(self):
+        node = TemplateWordNode(None)
+        self.assertEquals("[WORD]", node.to_string())

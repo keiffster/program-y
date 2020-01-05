@@ -3,6 +3,7 @@ import unittest
 
 from programy.storage.stores.sql.dao.linked import LinkedAccount
 
+
 class LinkedAccountTests(unittest.TestCase):
     
     def test_init(self):

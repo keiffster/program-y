@@ -1,6 +1,6 @@
 import unittest
-from programy.processors.pre.lemmatize import LemmatizePreProcessor
 
+from programy.processors.pre.lemmatize import LemmatizePreProcessor
 from programytest.client import TestClient
 
 

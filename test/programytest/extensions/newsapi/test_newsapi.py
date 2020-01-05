@@ -1,9 +1,8 @@
 import unittest
 import unittest.mock
 
-from programy.extensions.newsapi.newsapi import NewsAPIExtension
 from programy.extensions.newsapi.newsapi import NewsAPI
-
+from programy.extensions.newsapi.newsapi import NewsAPIExtension
 from programytest.client import TestClient
 
 
@@ -48,6 +47,18 @@ class NewsAPIExtensionTests(unittest.TestCase):
     def setUp(self):
         client = TestClient()
         self.context = client.create_client_context("testid")
+
+    def test_init_with_keys(self):
+        self.context.client.license_keys.add_key("NEWSAPI_API_KEY", "DUMMYVALUE")
+        extension = NewsAPIExtension()
+        self.assertIsNotNone(extension)
+        self.assertIsNotNone(extension.get_news_api_api(self.context))
+
+    def test_init_without_keys(self):
+        extension = NewsAPIExtension()
+        self.assertIsNotNone(extension)
+        with self.assertRaises(Exception):
+            _ = extension.get_news_api_api(self.context)
 
     def test_get_news(self):
 

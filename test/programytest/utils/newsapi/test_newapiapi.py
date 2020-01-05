@@ -2,6 +2,7 @@ import unittest
 
 from programy.utils.newsapi.newsapi import NewsApiApi
 
+
 class RequestsAPITests(unittest.TestCase):
 
     def test_requestsapi(self):

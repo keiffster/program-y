@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,12 +14,9 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.utils.logging.ylogger import YLogger
-
 from programy.parser.template.nodes.base import TemplateNode
-from programy.parser.exceptions import ParserException
 from programy.utils.text.text import TextUtils
+from programy.parser.exceptions import ParserException
 
 
 class TemplateListNode(TemplateNode):
@@ -29,16 +26,16 @@ class TemplateListNode(TemplateNode):
         self._items = []
 
     def resolve_list_items(self, client_context):
-        str = ""
+        resolved = ""
         for item in self._items:
-            str += "<item>%s</item>"%item.resolve(client_context)
-        return str
+            resolved += "<item>%s</item>" % item.resolve(client_context)
+        return resolved
 
     def resolve_to_string(self, client_context):
-        str = "<list>"
-        str += self.resolve_list_items(client_context)
-        str += "</list>"
-        return str
+        resolved = "<list>"
+        resolved += self.resolve_list_items(client_context)
+        resolved += "</list>"
+        return resolved
 
     def to_string(self):
         return "[LIST %d]" % (len(self._items))
@@ -60,8 +57,10 @@ class TemplateListNode(TemplateNode):
                 item = self.parse_children_as_word_node(graph, child)
                 self._items.append(item)
             else:
-                graph.parse_tag_expression(child, self)
+                raise ParserException("Invalid child node in list")
 
             tail_text = self.get_tail_from_element(child)
             self.parse_text(graph, tail_text)
 
+        if len(self._items) == 0:
+            raise ParserException("No items in list")

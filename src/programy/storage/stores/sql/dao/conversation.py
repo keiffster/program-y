@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,17 +14,12 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from sqlalchemy import Column, Integer, String, Boolean
-
+from sqlalchemy import Column
+from sqlalchemy import Integer
+from sqlalchemy import String
+from sqlalchemy import Boolean
 from programy.storage.stores.sql.base import Base
 from programy.storage.stores.utils import DAOUtils
-
-from programy.dialog.conversation import Conversation
-from programy.dialog.question import Question
-from programy.dialog.sentence import Sentence
-from programy.parser.pattern.matchcontext import MatchContext
-from programy.parser.pattern.match import Match as MatchObject
 
 
 class Conversation(Base):
@@ -77,9 +72,9 @@ class Sentence(Base):
     def __repr__(self):
         return "<Sentence(id='%s', questionid='%d', sentenceno='%d', sentence='%s', response='%s', " \
                "positivity='%s', subjectivity='%s'>" % (DAOUtils.valid_id(self.id),
-                                                                        self.questionid, self.sentenceno,
-                                                                        self.sentence, self.response,
-                                                                        self.positivity, self.subjectivity)
+                                                        self.questionid, self.sentenceno,
+                                                        self.sentence, self.response,
+                                                        self.positivity, self.subjectivity)
 
 
 class ConversationProperty(Base):

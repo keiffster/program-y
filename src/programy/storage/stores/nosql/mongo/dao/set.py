@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,8 +14,10 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from programy.storage.stores.utils import DAOUtils
 
-class Set(object):
+
+class Set():
 
     def __init__(self, name, values):
         self.id = None
@@ -23,7 +25,7 @@ class Set(object):
         self.values = values
 
     def __repr__(self):
-        return "<Set(id='%d', name='%s')>" % (self.id, self.name)
+        return "<Set(id='%s', name='%s', values='%s')>" % (DAOUtils.valid_id(self.id), self.name, ", ".join(self.values))
 
     def to_document(self):
         document = {"name": self.name,
@@ -34,11 +36,8 @@ class Set(object):
 
     @staticmethod
     def from_document(data):
-        lookup = Set(None, None)
-        if '_id' in data:
-            lookup.id = data['_id']
-        if 'name' in data:
-            lookup.name = data['name']
-        if 'values' in data:
-            lookup.values = data['values']
-        return lookup
+        aset = Set(None, None)
+        aset.id = DAOUtils.get_value_from_data(data, '_id')
+        aset.name = DAOUtils.get_value_from_data(data, 'name')
+        aset.values = DAOUtils.get_value_from_data(data, 'values', [])
+        return aset

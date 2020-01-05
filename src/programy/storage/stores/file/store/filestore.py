@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,15 +14,15 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.utils.logging.ylogger import YLogger
 import os
 import os.path
 import shutil
-
+from programy.utils.logging.ylogger import YLogger
 from programy.storage.entities.store import Store
+from programy.utils.console.console import outputLog
+
 
 class FileStore(Store):
-
     FILE = "file"
 
     CATEGORIES_STORAGE = 'categories_storage'
@@ -70,34 +70,34 @@ class FileStore(Store):
     def __init__(self, storage_engine):
         self._storage_engine = storage_engine
 
-    def store_name(self):
-        return FileStore.FILE
-
     def empty(self):
-        pass
+        pass    # pragma: no cover
 
     def empty_named(self, name):
-        pass
+        pass    # pragma: no cover
 
     @property
     def storage_engine(self):
         return self._storage_engine
 
     def _get_storage_path(self):
-        raise NotImplementedError("Implement _get_storage_path to return storage specific folder from config")
+        raise NotImplementedError("Implement _get_storage_path to return storage specific "
+                                  "folder from config")  # pragma: no cover
+
+    def _drop_folder(self, folder):
+        if os.path.exists(folder):
+            shutil.rmtree(folder)
 
     def drop(self):
         try:
-            storage_path = self._get_storage_path()
-            if os.path.exists(storage_path):
-                shutil.rmtree(storage_path)
+            self._drop_folder(self._get_storage_path())
         except Exception as e:
             YLogger.exception_nostack(self, "Error dropping storage", e)
 
     @staticmethod
     def _get_dir_from_path(file_path):
         splits = file_path.split(os.sep)
-        paths = splits[:len(splits)-1]
+        paths = splits[:len(splits) - 1]
         path = "/".join(paths)
         return path
 
@@ -111,10 +111,11 @@ class FileStore(Store):
     def _file_exists(path):
         return os.path.exists(path)
 
-    def commit(self):
-        pass
+    def commit(self, commit=True):
+        del commit
+        pass    # pragma: no cover
 
-    def load_all(self, collection):
+    def load_all(self, collector):
         col_storage = self.get_storage()
 
         if col_storage.has_multiple_dirs():
@@ -126,50 +127,24 @@ class FileStore(Store):
                     for filename in paths:
                         if col_ext is None or filename.endswith(col_ext):
                             YLogger.debug(self, "Loading file contents from [%s]", filename)
-                            self._load_file_contents(collection, os.path.join(col_dir, filename))
+                            self._load_file_contents(collector, os.path.join(col_dir, filename))
                 else:
                     for dirpath, _, filenames in os.walk(col_dir):
                         for filename in [f for f in filenames if f.endswith(col_ext)]:
                             YLogger.debug(self, "Loading file contents from [%s]", filename)
-                            self._load_file_contents(collection, os.path.join(dirpath, filename))
+                            self._load_file_contents(collector, os.path.join(dirpath, filename))
 
         else:
-            self.load(collection)
+            self.load(collector)
 
-    def load(self, collection):
+    def load(self, collector, name=None):
+        del name
         col_storage = self.get_storage()
-        collection.empty()
-        self._load_file_contents(collection, col_storage.file)
+        collector.empty()
+        self._load_file_contents(collector, col_storage.file)
 
-    def _load_file_contents(self, processor_collection, filename):
-        pass
+    def _load_file_contents(self, collection, filename):
+        pass    # pragma: no cover
 
     def get_storage(self):
-        raise NotImplementedError("get_storage must be implemented in child class")
-
-    def upload_from_file(self, filename, format=Store.TEXT_FORMAT, commit=True, verbose=False):
-
-        YLogger.debug(self, "Oploading from file [%s]", filename)
-
-        file_processor = None
-        try:
-            name = self.get_just_filename_from_filepath(filename)
-            if verbose is True:
-                print(name)
-
-            file_processor = self.get_file_processor(format, filename)
-            file_processor.process_lines(name, self, verbose=verbose)
-
-            if commit is True:
-                self.commit()
-
-        except Exception as e:
-            YLogger.exception_nostack(self, "Error uploading from file [%s]", e, filename)
-
-            if commit is True:
-                self.rollback()
-
-        finally:
-            if file_processor is not None:
-                file_processor.close()
-
+        raise NotImplementedError("get_storage must be implemented in child class")  # pragma: no cover

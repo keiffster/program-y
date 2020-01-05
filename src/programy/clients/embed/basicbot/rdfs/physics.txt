@@ -1,0 +1,74 @@
+QUANTUM:hasPurpose:to form subatomic particles
+QUANTUM:hasSize:1
+QUANTUM:hasSyllables:2
+QUANTUM:isa:Particle
+QUANTUM:isa:Physical Unit
+QUANTUM:lifeArea:Education
+PHYSICS:hasPurpose:to study the physical world
+PHYSICS:hasSize:0
+PHYSICS:hasSyllables:2
+PHYSICS:isa:Field of Study
+PHYSICS:lifeArea:Education
+MATTER:hasPurpose:to make up physical things
+MATTER:hasSize:0
+MATTER:hasSyllables:2
+MATTER:lifeArea:Physical
+NEWTON:hasPurpose:to measure force
+NEWTON:hasSize:0
+NEWTON:hasSyllables:2
+NEWTON:isa:Measurement
+NEWTON:isa:Physical Unit
+NEWTON:lifeArea:Education
+MASS:hasPurpose:to measure matter
+MASS:hasSize:0
+MASS:hasSyllables:1
+MASS:isa:Physical Measurement
+MASS:lifeArea:Physical
+CHARGE:hasPurpose:to store electricity
+CHARGE:hasSize:0
+CHARGE:hasSyllables:1
+CHARGE:isa:Electrical Measurement
+CHARGE:isa:Physical Unit
+CHARGE:lifeArea:Education
+Particle:isa:Physical Unit
+Power Storage:isa:Electrical device
+RADAR:hasPurpose:to measure distance to objects
+RADAR:hasSize:0
+RADAR:hasSyllables:2
+RADAR:lifeArea:Physical
+RADIO:hasPurpose:to transmit music and voice wirelessly
+RADIO:hasSize:3
+RADIO:hasSyllables:3
+RADIO:lifeArea:Physical
+BATTERY:hasPurpose:to store electricity
+BATTERY:hasSize:4
+BATTERY:hasSyllables:3
+BATTERY:isa:Electrical device
+BATTERY:isa:Power Storage
+BATTERY:lifeArea:Education
+CURRENT:hasSize:0
+CURRENT:hasSyllables:2
+CURRENT:isa:Measurement
+CURRENT:isa:Physical Unit
+CURRENT:lifeArea:Education
+CURRENT:hasPurpose:to measure electricity
+Electrical Measurement:isa:Physical Unit
+ELECTRICITY:hasPurpose:to provide power
+ELECTRICITY:hasSize:0
+ELECTRICITY:hasSyllables:5
+ELECTRICITY:lifeArea:Physical
+ELECTRON:hasPurpose:to make up an atom
+ELECTRON:hasSize:1
+ELECTRON:hasSyllables:3
+ELECTRON:isa:Entity
+ELECTRON:lifeArea:Physical
+Light Effect:isa:Physical Effect
+LIGHT:hasPurpose:to provide illumination
+LIGHT:hasSize:0
+LIGHT:hasSyllables:1
+LIGHT:lifeArea:Physical
+BEAM:hasPurpose:to carry light
+BEAM:hasSize:0
+BEAM:hasSyllables:1
+BEAM:isa:Physical Effect
+BEAM:lifeArea:Education

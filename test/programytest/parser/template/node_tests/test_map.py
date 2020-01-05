@@ -3,7 +3,6 @@ import xml.etree.ElementTree as ET
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.map import TemplateMapNode
 from programy.parser.template.nodes.word import TemplateWordNode
-
 from programytest.parser.base import ParserTestsBaseClass
 
 
@@ -40,7 +39,7 @@ class TemplateMapNodeTests(ParserTestsBaseClass):
 
     def test_no_var_defaultmap_set(self):
         self._client_context.brain.maps._maps['COLOURS'] = {'BLACK': 'WHITE'}
-        self._client_context.brain.properties.add_property('default-map', "test_value")
+        self._client_context.brain.properties.add_property('default_map', "test_value")
 
         node = TemplateMapNode()
         node.name = TemplateWordNode("COLOURS")
@@ -67,7 +66,7 @@ class TemplateMapNodeTests(ParserTestsBaseClass):
 
     def test_no_map_for_name_defaultmap_set(self):
         self._client_context.brain.maps._maps['COLOURS'] = {'BLACK': 'WHITE'}
-        self._client_context.brain.properties.add_property('default-map', "test_value")
+        self._client_context.brain.properties.add_property('default_map', "test_value")
 
         node = TemplateMapNode()
         node.name = TemplateWordNode("UNKNOWN")
@@ -180,3 +179,4 @@ class TemplateMapNodeTests(ParserTestsBaseClass):
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEqual("", result)
+

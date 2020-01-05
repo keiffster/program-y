@@ -1,11 +1,10 @@
 import unittest
 import unittest.mock
-
 import xml.etree.ElementTree as ET
 
 from programy.oob.defaults.dial import DialOutOfBandProcessor
-
 from programytest.client import TestClient
+
 
 class DialOutOfBandProcessorTests(unittest.TestCase):
 

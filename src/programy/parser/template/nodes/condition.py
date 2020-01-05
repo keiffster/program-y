@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -23,8 +23,8 @@ from programy.parser.template.nodes.bot import TemplateBotNode
 from programy.parser.exceptions import ParserException
 from programy.utils.text.text import TextUtils
 
-class TemplateConditionVariable(TemplateNode):
 
+class TemplateConditionVariable(TemplateNode):
     DEFAULT = 0
     GLOBAL = 1
     LOCAL = 2
@@ -41,13 +41,25 @@ class TemplateConditionVariable(TemplateNode):
     def name(self):
         return self._name
 
+    @name.setter
+    def name(self, name):
+        self._name = name
+
     @property
     def value(self):
         return self._value
 
+    @value.setter
+    def value(self, value):
+        self._value = value
+
     @property
     def var_type(self):
         return self._var_type
+
+    @var_type.setter
+    def var_type(self, var_type):
+        self._var_type = var_type
 
     @property
     def loop(self):
@@ -56,6 +68,9 @@ class TemplateConditionVariable(TemplateNode):
     @loop.setter
     def loop(self, loop):
         self._loop = loop
+
+    def parse_expression(self, graph, expression):
+        raise NotImplementedError("Never call this directly, call the subclass instead!")  # pragma: no cover
 
 
 class TemplateConditionListItemNode(TemplateConditionVariable):
@@ -67,10 +82,19 @@ class TemplateConditionListItemNode(TemplateConditionVariable):
         return bool(self.value is None)
 
     def to_string(self):
-        if self.name is not None:
-            return "[CONDITIONLIST(%s=%s)]" % (self.name, self.value.to_string())
+        valuestr = ""
         if self.value is not None:
-            return "[CONDITIONLIST(%s)]" % (self.value.to_string())
+            valuestr = self.value.to_string()
+
+        if self.name is not None and self.value is not None:
+            return "[CONDITIONLIST(%s=%s)]" % (self.name, valuestr)
+
+        if self.name is not None:
+            return "[CONDITIONLIST(%s)]" % self.name
+
+        if self.value is not None:
+            return "[CONDITIONLIST(%s)]" % valuestr
+
         return "[CONDITIONLIST]"
 
     def to_xml(self, client_context):
@@ -79,14 +103,19 @@ class TemplateConditionListItemNode(TemplateConditionVariable):
         if self.name is not None:
             if self.var_type == TemplateConditionListItemNode.GLOBAL:
                 xml += ' name="%s"' % self.name
+
             elif self.var_type == TemplateConditionListItemNode.LOCAL:
                 xml += ' var="%s"' % self.name
+
             elif self.var_type == TemplateConditionListItemNode.BOT:
                 xml += ' bot="%s"' % self.name
+
             elif self.var_type == TemplateConditionListItemNode.DEFAULT:
                 xml += ' default="%s"' % self.name
+
             else:
                 xml += ' unknown="%s"' % self.name
+
         xml += ">"
 
         if self.value is not None:
@@ -103,14 +132,17 @@ class TemplateConditionListItemNode(TemplateConditionVariable):
 
         return xml
 
+    def parse_expression(self, graph, expression):
+        raise NotImplementedError("Never call this directly, call the subclass instead!")  # pragma: no cover
+
 
 class TemplateConditionNode(TemplateConditionVariable):
-
     BLOCK = 1
     SINGLE = 2
     MULTIPLE = 3
 
-    def __init__(self, name=None, value=None, var_type=TemplateConditionVariable.GLOBAL, loop=False, condition_type=BLOCK):
+    def __init__(self, name=None, value=None, var_type=TemplateConditionVariable.GLOBAL, loop=False,
+                 condition_type=BLOCK):
         TemplateConditionVariable.__init__(self, name, value, var_type, loop)
         self._condition_type = condition_type
 
@@ -121,7 +153,8 @@ class TemplateConditionNode(TemplateConditionVariable):
         return None
 
     #######################################################################################################
-    # CONDITION_ITEM_COMPONENT ::== <name>TEMPLATE_EXPRESSION</name> | <value>TEMPLATE_EXPRESSION</value> | <loop/> | TEMPLATE_EXPRESSION
+    # CONDITION_ITEM_COMPONENT ::== <name>TEMPLATE_EXPRESSION</name> | <value>TEMPLATE_EXPRESSION</value> | 
+    #                                       <loop/> | TEMPLATE_EXPRESSION
     # CONDITION_ITEM_EXPRESSION ::== <li( CONDITION_ATTRIBUTES)*>(CONDITION_ITEM_COMPONENT)*</li>
     # CONDITION_ATTRIBUTES ::== (name="NAME") | (value="NORMALIZED_TEXT")
     # CONDITION_EXPRESSION ::== <condition( CONDITION_ATTRIBUTES)>(CONDITION_ITEM_EXPRESSION)*</condition>
@@ -146,9 +179,9 @@ class TemplateConditionNode(TemplateConditionVariable):
                 name_text = self.get_text_from_element(condition.find('name'))
                 return name_text, TemplateConditionVariable.GLOBAL
 
-            vars = condition.findall('var')
-            if vars:
-                if len(vars) > 1:
+            variables = condition.findall('var')
+            if variables:
+                if len(variables) > 1:
                     raise ParserException("Condition element has multiple var elements", xml_element=condition)
                 var_text = self.get_text_from_element(condition.find('var'))
                 return var_text, TemplateConditionVariable.LOCAL
@@ -162,18 +195,22 @@ class TemplateConditionNode(TemplateConditionVariable):
 
         return None, TemplateConditionVariable.DEFAULT
 
-    def get_condition_value(self, graph, condition):
+    @staticmethod
+    def get_condition_value(graph, condition):
 
         if 'value' in condition.attrib:
             value_node = graph.get_base_node()
             value_node.append(graph.get_word_node(condition.attrib['value']))
             return value_node
+
         else:
             values = condition.findall('value')
             if not values:
                 return None
+
             elif len(values) > 1:
                 raise ParserException("Element has multiple value elements", xml_element=condition)
+
             value_node = graph.get_base_node()
             value_node.parse_template_node(graph, values[0])
             return value_node
@@ -223,7 +260,7 @@ class TemplateConditionNode(TemplateConditionVariable):
     def parse_expression(self, graph, expression):
 
         name, var_type = self.get_condition_name(expression)
-        value = self.get_condition_value(graph, expression)
+        value = TemplateConditionNode.get_condition_value(graph, expression)
 
         if name is not None:
             self._name = name
@@ -232,9 +269,11 @@ class TemplateConditionNode(TemplateConditionVariable):
                 self._condition_type = TemplateConditionNode.BLOCK
                 self._value = value
                 self.parse_type1_condition(graph, expression)
+
             else:
                 self._condition_type = TemplateConditionNode.SINGLE
                 self.parse_type2_condition(graph, expression)
+
         else:
             self._condition_type = TemplateConditionNode.MULTIPLE
             self.parse_type3_condition(graph, expression)
@@ -274,8 +313,8 @@ class TemplateConditionNode(TemplateConditionVariable):
 
                 list_item = TemplateConditionListItemNode()
 
-                list_item._value = self.get_condition_value(graph, child)
-                list_item._var_type = self._var_type
+                list_item.value = TemplateConditionNode.get_condition_value(graph, child)
+                list_item.var_type = self._var_type
 
                 self.children.append(list_item)
                 list_item.parse_text(graph, self.get_text_from_element(child))
@@ -295,24 +334,20 @@ class TemplateConditionNode(TemplateConditionVariable):
                     list_item.parse_text(graph, tail_text)
 
             else:
-                raise ParserException("Invalid element <%s> in condition element" % (tag_name),
+                raise ParserException("Invalid element <%s> in condition element" % tag_name,
                                       xml_element=expression)
 
     def parse_type3_condition(self, graph, expression):
         for child in expression:
             tag_name = TextUtils.tag_from_text(child.tag)
-
-            if tag_name in ['name', 'var', 'bot']:
-                pass
-
-            elif tag_name == 'li':
+            if tag_name == 'li':
                 list_item = TemplateConditionListItemNode()
 
                 name, var_type = self.get_condition_name(child)
-                list_item._name = name
-                list_item._var_type = var_type
+                list_item.name = name
+                list_item.var_type = var_type
 
-                list_item._value = self.get_condition_value(graph, child)
+                list_item.value = TemplateConditionNode.get_condition_value(graph, child)
 
                 self.children.append(list_item)
 
@@ -332,21 +367,28 @@ class TemplateConditionNode(TemplateConditionVariable):
                     list_item.parse_text(graph, tail_text)
 
             else:
-                raise ParserException("Invalid element <%s> in condition element" % (tag_name), xml_element=expression)
-
+                raise ParserException("Invalid element <%s> in condition element" % tag_name, xml_element=expression)
 
     def to_string(self):
         text = "[CONDITION"
         if self.var_type == TemplateConditionListItemNode.GLOBAL:
             text += ' name="%s"' % self.name
+
         elif self.var_type == TemplateConditionListItemNode.LOCAL:
             text += ' var="%s"' % self.name
+
         elif self.var_type == TemplateConditionListItemNode.BOT:
             text += ' bot="%s"' % self.name
+
+        elif self.var_type == TemplateConditionListItemNode.DEFAULT:
+            text += ' default="%s"' % self.name
+
         else:
             text += ' unknown="%s"' % self.name
+
         if self.value is not None:
-            text += " value=%s" % (self.value)
+            text += " value=%s" % self.value
+
         text += "]"
         return text
 
@@ -356,10 +398,16 @@ class TemplateConditionNode(TemplateConditionVariable):
         if self.name is not None:
             if self.var_type == TemplateConditionListItemNode.GLOBAL:
                 xml += ' name="%s"' % self.name
+
             elif self.var_type == TemplateConditionListItemNode.LOCAL:
                 xml += ' var="%s"' % self.name
+
             elif self.var_type == TemplateConditionListItemNode.BOT:
                 xml += ' bot="%s"' % self.name
+
+            elif self.var_type == TemplateConditionListItemNode.DEFAULT:
+                xml += ' default="%s"' % self.name
+
             else:
                 xml += ' unknown="%s"' % self.name
 
@@ -371,112 +419,141 @@ class TemplateConditionNode(TemplateConditionVariable):
             xml += '</value>'
 
         xml += self.children_to_xml(client_context)
-
         xml += "</condition>"
-
         return xml
 
     def resolve(self, client_context):
         if self._condition_type == TemplateConditionNode.BLOCK:
             return self.resolve_type1_condition(client_context)
+
         elif self._condition_type == TemplateConditionNode.SINGLE:
             return self.resolve_type2_condition(client_context)
-        elif self._condition_type == TemplateConditionNode.MULTIPLE:
+
+        else:
             return self.resolve_type3_condition(client_context)
-        return None
 
     def get_condition_variable_value(self, client_context, var_type, name):
         if var_type == TemplateConditionVariable.GLOBAL:
             return TemplateGetNode.get_property_value(client_context, False, name)
+
         elif var_type == TemplateConditionVariable.LOCAL:
             return TemplateGetNode.get_property_value(client_context, True, name)
-        elif var_type == TemplateConditionVariable.BOT:
-            return TemplateBotNode.get_bot_variable(client_context, name)
+
         else:
-            return"unknown"
+            return TemplateBotNode.get_bot_variable(client_context, name)
+
+    def _resolve_type1_to_string(self, client_context):
+        value = self.get_condition_variable_value(client_context, self.var_type, self.name)
+        condition_value = self.value.resolve(client_context).upper()
+
+        # Condition comparison is always case insensetive
+        if value.upper() == condition_value:
+            resolved = client_context.brain.tokenizer.words_to_texts([child.resolve(client_context)
+                                                                      for child in self.children])
+        else:
+            resolved = ""
+
+        YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
+        return resolved
 
     def resolve_type1_condition(self, client_context):
         try:
-            value = self.get_condition_variable_value(client_context, self.var_type, self.name)
-            condition_value = self.value.resolve(client_context).upper()
-
-            # Condition comparison is always case insensetive
-            if value.upper() == condition_value:
-                resolved = client_context.brain.tokenizer.words_to_texts([child.resolve(client_context) for child in self.children])
-            else:
-                resolved = ""
-
-            YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
-            return resolved
+            return self._resolve_type1_to_string(client_context)
 
         except Exception as excep:
             YLogger.exception(client_context, "Failed to resolve type1 condition", excep)
-            return ""
+
+        return ""
+
+    def _resolve_type2_to_string(self, client_context):
+        value = self.get_condition_variable_value(client_context, self.var_type, self.name)
+
+        for condition in self.children:
+            if condition.is_default() is False:
+                condition_value = condition.value.resolve(client_context)
+
+                # Condition comparison is always case insensetive
+                if client_context.brain.tokenizer.compare(value.upper(), condition_value.upper()):
+                    resolved = client_context.brain.tokenizer.words_to_texts([child_node.resolve(client_context)
+                                                                              for child_node in condition.children])
+                    YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
+
+                    if condition.loop is True:
+                        self._pre_condition_loop_check(client_context)
+                        resolved = resolved.strip() + " " + self.resolve(client_context)
+
+                    return resolved
+
+        default = self.get_default()
+        if default is not None:
+            resolved = client_context.brain.tokenizer.words_to_texts([child_node.resolve(client_context)
+                                                                      for child_node in default.children])
+
+            if default.loop is True:
+                resolved = resolved.strip() + " " + self.resolve(client_context)
+        else:
+            resolved = ""
+
+        YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
+        return resolved
 
     def resolve_type2_condition(self, client_context):
         try:
-            value = self.get_condition_variable_value(client_context, self.var_type, self.name)
-
-            for condition in self.children:
-                if condition.is_default() is False:
-                    condition_value = condition.value.resolve(client_context)
-
-                    # Condition comparison is always case insensetive
-                    if client_context.brain.tokenizer.compare(value.upper(), condition_value.upper()):
-                        resolved = client_context.brain.tokenizer.words_to_texts([child_node.resolve(client_context) for child_node in condition.children])
-                        YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
-
-                        if condition.loop is True:
-                            resolved = resolved.strip() + " " + self.resolve(client_context)
-
-                        return resolved
-
-            default = self.get_default()
-            if default is not None:
-                resolved = client_context.brain.tokenizer.words_to_texts([child_node.resolve(client_context) for child_node in default.children])
-
-                if default.loop is True:
-                    resolved = resolved.strip() + " " + self.resolve(client_context)
-            else:
-                resolved = ""
-
-            YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
-            return resolved
+            return self._resolve_type2_to_string(client_context)
 
         except Exception as excep:
             YLogger.exception(client_context, "Failed to resolve type2 condition", excep)
-            return ""
+
+        return ""
+
+    def _resolve_type3_to_string(self, client_context):
+        for condition in self.children:
+            value = self.get_condition_variable_value(client_context, condition.var_type, condition.name)
+            if condition.value is not None:
+                condition_value = condition.value.resolve(client_context)
+
+                # Condition comparison is always case insensetive
+                if value.upper() == condition_value.upper():
+                    resolved = client_context.brain.tokenizer.words_to_texts([child_node.resolve(client_context)
+                                                                              for child_node in condition.children])
+                    YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
+
+                    if condition.loop is True:
+                        resolved = resolved.strip()
+                        self._pre_condition_loop_check(client_context)
+                        text = self.resolve(client_context)
+                        resolved += " " + text.strip()
+
+                    return resolved
+
+        default = self.get_default()
+        if default is not None:
+            resolved = client_context.brain.tokenizer.words_to_texts([child_node.resolve(client_context)
+                                                                      for child_node in default.children])
+
+            if default.loop is True:
+                resolved = resolved.strip()
+                self._pre_default_loop_check(client_context)
+                text = self.resolve(client_context)
+                resolved += " " + text.strip()
+
+        else:
+            resolved = ""
+
+        YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
+        return resolved
+
+    def _pre_condition_loop_check(self, client_context):
+        pass    #pragma: no cover
+
+    def _pre_default_loop_check(self, client_context):
+        pass    #pragma: no cover
 
     def resolve_type3_condition(self, client_context):
         try:
-            for condition in self.children:
-                value = self.get_condition_variable_value(client_context, condition.var_type, condition.name)
-                if condition.value is not None:
-                    condition_value = condition.value.resolve(client_context)
-
-                    # Condition comparison is always case insensetive
-                    if value.upper() == condition_value.upper():
-                        resolved = client_context.brain.tokenizer.words_to_texts([child_node.resolve(client_context) for child_node in condition.children])
-                        YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
-
-                        if condition.loop is True:
-                            resolved = resolved.strip() + " " + self.resolve(client_context).strip()
-
-                        return resolved
-
-            default = self.get_default()
-            if default is not None:
-                resolved = client_context.brain.tokenizer.words_to_texts([child_node.resolve(client_context) for child_node in default.children])
-
-                if default.loop is True:
-                    resolved = resolved.strip() + " " + self.resolve(client_context).strip()
-
-            else:
-                resolved = ""
-
-            YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
-            return resolved
+            return self._resolve_type3_to_string(client_context)
 
         except Exception as excep:
             YLogger.exception(client_context, "Failed to resolve type3 condition", excep)
-            return ""
+
+        return ""

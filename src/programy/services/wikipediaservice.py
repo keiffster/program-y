@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,13 +14,12 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.utils.logging.ylogger import YLogger
 import wikipedia
-
+from programy.utils.logging.ylogger import YLogger
 from programy.services.service import Service
 
 
-class WikipediaAPI(object):
+class WikipediaAPI:
 
     # Provide a summary of a single article
     def summary(self, title, sentences=0, chars=0, auto_suggest=True, redirect=True):
@@ -44,7 +43,7 @@ class WikipediaService(Service):
 
     def ask_question(self, client_context, question: str):
         try:
-            words  = question.split()
+            words = question.split()
             question = " ".join(words[1:])
             if words[0] == 'SUMMARY':
                 search = self._api.summary(question, sentences=1)

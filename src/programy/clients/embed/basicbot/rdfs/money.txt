@@ -1,0 +1,58 @@
+CHECK:hasPurpose:to pay from a bank account
+CHECK:hasSize:0
+CHECK:hasSyllables:1
+CHECK:isa:Contract
+CHECK:isa:Payment Instrument
+CHECK:lifeArea:Finances
+Currency:isa:Money
+DOLLAR:hasPurpose:to pay for things
+DOLLAR:hasSize:4
+DOLLAR:hasSyllables:2
+DOLLAR:isa:Currency
+DOLLAR:isa:Money
+DOLLAR:lifeArea:Physical
+MONEY:hasPurpose:to pay for things
+MONEY:hasSize:0
+MONEY:hasSyllables:2
+Money:isa:Currency
+MONEY:lifeArea:Finances
+Payment Instrument:isa:Contract
+Payment:isa:Money Amount
+PRICE:hasPurpose:to provide a cost
+PRICE:hasSize:0
+PRICE:hasSyllables:1
+PRICE:isa:Money Amount
+PRICE:lifeArea:Business
+RATE:hasPurpose:to provide a percentage in payment
+RATE:hasSize:0
+RATE:hasSyllables:1
+RATE:isa:Money Amount
+RATE:lifeArea:Business
+CASH:hasPurpose:to pay for things
+CASH:hasSize:4
+CASH:hasSyllables:1
+CASH:isa:Currency
+CASH:isa:Money
+CASH:lifeArea:Finances
+BOND:hasPurpose:to raise money
+BOND:hasSize:4
+BOND:hasSyllables:1
+BOND:isa:Contract
+BOND:lifeArea:Finances
+COST:hasPurpose:to provide a price
+COST:hasSize:0
+COST:hasSyllables:1
+COST:isa:Money Amount
+COST:lifeArea:Business
+INTEREST:hasPurpose:to charge a percentage
+INTEREST:hasSize:0
+INTEREST:hasSyllables:3
+INTEREST:lifeArea:Finances
+LOTTERY:hasPurpose:to gamble
+LOTTERY:hasSize:0
+LOTTERY:hasSyllables:3
+LOTTERY:lifeArea:Social
+SPECIAL:hasPurpose:to decrease prices
+SPECIAL:hasSize:0
+SPECIAL:hasSyllables:2
+SPECIAL:lifeArea:Business

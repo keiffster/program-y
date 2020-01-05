@@ -1,10 +1,10 @@
 import unittest
 import unittest.mock
-
-from programy.oob.defaults.map import MapOutOfBandProcessor
 import xml.etree.ElementTree as ET
 
+from programy.oob.defaults.map import MapOutOfBandProcessor
 from programytest.client import TestClient
+
 
 class MapOutOfBandProcessorTests(unittest.TestCase):
 

@@ -1,11 +1,10 @@
-import unittest
 import os
+import unittest
 
-from programytest.client import TestClient
-from programy.spelling.base import SpellingChecker
-from programy.config.bot.spelling import BotSpellingConfiguration
-from programy.dialog.splitter.splitter import SentenceSplitter
 from programy.config.bot.splitter import BotSentenceSplitterConfiguration
+from programy.dialog.splitter.splitter import SentenceSplitter
+from programy.spelling.base import SpellingChecker
+from programytest.client import TestClient
 
 
 class MockSpellingChecker(SpellingChecker):
@@ -34,7 +33,7 @@ class SystemSetAIMLTests(unittest.TestCase):
         client = SystemSetAIMLTestClient()
         self._client_context = client.create_client_context("testid")
         self._client_context.brain.properties.load_from_text("""
-             default-get:unknown
+             default_get:unknown
          """)
         self._client_context.bot.brain.dynamics.add_dynamic_var('gettime', "programy.dynamic.variables.datetime.GetTime", None)
         self._client_context.bot.brain.dynamics.add_dynamic_var('spelling', "programy.dynamic.variables.system.spelling.Spelling", None)
@@ -46,17 +45,17 @@ class SystemSetAIMLTests(unittest.TestCase):
     def test_dynamic_splitter_on(self):
         response = self._client_context.bot.ask_question(self._client_context, "START USERNAME WITH SPLITTER ON")
         self.assertIsNotNone(response)
-        self.assertEquals("What is your username?", response)
+        self.assertEqual("What is your username?", response)
 
         response = self._client_context.bot.ask_question(self._client_context, "fred.smith")
         self.assertIsNotNone(response)
-        self.assertEquals("Thanks, you entered fred. Thanks, you entered smith.", response)
+        self.assertEqual("Thanks, you entered fred. Thanks, you entered smith.", response)
 
     def test_dynamic_splitter_off(self):
         response = self._client_context.bot.ask_question(self._client_context, "START USERNAME WITH SPLITTER OFF")
         self.assertIsNotNone(response)
-        self.assertEquals("What is your username?", response)
+        self.assertEqual("What is your username?", response)
 
         response = self._client_context.bot.ask_question(self._client_context, "fred.smith")
         self.assertIsNotNone(response)
-        self.assertEquals("Thanks, you entered fred.smith.", response)
+        self.assertEqual("Thanks, you entered fred.smith.", response)

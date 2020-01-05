@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: hotreload.aiml -->
+    <!--  -->
+    <!-- This AIML file is part of the Y-Bot knowledge base. -->
+    <!--  -->
+    <!-- Y-Bot is Copyright &copy; 2017-2018 by Keith Sterling. -->
+    <!--
+    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+    documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+    the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+    and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+    THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+    TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    -->
+
+    <!--
+    RELOAD [DENORMAL|NORMAL|GENDER|PERSON|PERSON2|PROPERTIES|DEFAULTS|REGEX|PATTERNS|TEMPLATES] | [SET|MAP|RDF] NAME | ALL [AIML|MAPS|SETS|RDFS]
+    -->
+
+    <category>
+        <pattern>YADMIN RELOAD COMMANDS</pattern>
+        <template>
+            YADMIN
+            <extension path="programy.extensions.admin.hotreload.HotReloadAdminExtension">
+               COMMANDS
+            </extension>
+        </template>
+    </category>
+
+    <category>
+        <pattern>YADMIN RELOAD DENORMAL</pattern>
+        <template>
+            <srai>
+                <extension path="programy.extensions.admin.hotreload.HotReloadAdminExtension">
+                   RELOAD DENORMAL
+                </extension>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>YADMIN RELOAD NORMAL</pattern>
+        <template>
+            <srai>
+                <extension path="programy.extensions.admin.hotreload.HotReloadAdminExtension">
+                   RELOAD NORMAL
+                </extension>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>YADMIN RELOAD GENDER</pattern>
+        <template>
+            <srai>
+                <extension path="programy.extensions.admin.hotreload.HotReloadAdminExtension">
+                   RELOAD GENDER
+                </extension>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>YADMIN RELOAD PERSON</pattern>
+        <template>
+            <srai>
+                <extension path="programy.extensions.admin.hotreload.HotReloadAdminExtension">
+                   RELOAD PERSON
+                </extension>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>YADMIN RELOAD PROPERTIES</pattern>
+        <template>
+            <srai>
+                <extension path="programy.extensions.admin.hotreload.HotReloadAdminExtension">
+                   RELOAD PROPERTIES
+                </extension>
+            </srai>
+        </template>
+    </category>
+
+
+    <category>
+        <pattern>YADMIN RELOAD DEFAULTS</pattern>
+        <template>
+            <srai>
+                <extension path="programy.extensions.admin.hotreload.HotReloadAdminExtension">
+                   RELOAD DEFAULTS
+                </extension>
+            </srai>
+        </template>
+    </category>
+
+
+    <category>
+        <pattern>YADMIN RELOAD REGEX</pattern>
+        <template>
+            <srai>
+                <extension path="programy.extensions.admin.hotreload.HotReloadAdminExtension">
+                   RELOAD REGEX
+                </extension>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>YADMIN RELOAD PERSON2</pattern>
+        <template>
+            <srai>
+                <extension path="programy.extensions.admin.hotreload.HotReloadAdminExtension">
+                   RELOAD PERSON2
+                </extension>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>YADMIN RELOAD PATTERNS</pattern>
+        <template>
+            <srai>
+                <extension path="programy.extensions.admin.hotreload.HotReloadAdminExtension">
+                   RELOAD PATTERNS
+                </extension>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>YADMIN RELOAD TEMPLATES</pattern>
+        <template>
+            <srai>
+                <extension path="programy.extensions.admin.hotreload.HotReloadAdminExtension">
+                   RELOAD TEMPLATES
+                </extension>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>YADMIN RELOAD SET *</pattern>
+        <template>
+            <srai>
+                <extension path="programy.extensions.admin.hotreload.HotReloadAdminExtension">
+                   RELOAD SET <star />
+                </extension>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>YADMIN RELOAD MAP *</pattern>
+        <template>
+            <srai>
+                <extension path="programy.extensions.admin.hotreload.HotReloadAdminExtension">
+                   RELOAD MAP <star />
+                </extension>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>YADMIN RELOAD RDF *</pattern>
+        <template>
+            <srai>
+                <extension path="programy.extensions.admin.hotreload.HotReloadAdminExtension">
+                   RELOAD RDF <star />
+                </extension>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>YADMIN RELOAD ALL SETS</pattern>
+        <template>
+            <srai>
+                <extension path="programy.extensions.admin.hotreload.HotReloadAdminExtension">
+                   RELOAD ALL SETS
+                </extension>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>YADMIN RELOAD ALL MAPS</pattern>
+        <template>
+            <srai>
+                <extension path="programy.extensions.admin.hotreload.HotReloadAdminExtension">
+                   RELOAD AL MAPS
+                </extension>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>YADMIN RELOAD ALL RDFS</pattern>
+        <template>
+            <srai>
+                <extension path="programy.extensions.admin.hotreload.HotReloadAdminExtension">
+                   RELOAD ALL RDFS
+                </extension>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>YADMIN RELOAD ALL AIML</pattern>
+        <template>
+            <srai>
+                <extension path="programy.extensions.admin.hotreload.HotReloadAdminExtension">
+                   RELOAD ALL AIML
+                </extension>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            HOTRELOAD OK
+        </pattern>
+        <template>
+            Those have now been reloaded for you.
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            HOTRELOAD ERR
+        </pattern>
+        <template>
+            Sorry, I was unload to reload that data, please check logs for details!
+        </template>
+    </category>
+
+</aiml>

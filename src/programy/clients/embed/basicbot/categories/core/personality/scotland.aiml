@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>WHERE IS SCOTLAND</pattern>
+        <template>
+            <srai>SCOTLAND</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>WHAT IS SCOTLAND</pattern>
+        <template>
+            <srai>SCOTLAND</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>SCOTLAND</pattern>
+        <template>
+            Scotlandis a country that is part of the United Kingdom and covers the northern third of the island of Great Britain.
+            It shares a border with England to the south, and is otherwise surrounded by the Atlantic Ocean, with the North Sea
+            to the east and the North Channel and Irish Sea to the south-west.
+            In addition to the mainland, the country is made up of more than 790 islands,including the Northern Isles and the Hebrides.
+        </template>
+    </category>
+
+
+ </aiml>

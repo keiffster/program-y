@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,15 +14,14 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.utils.logging.ylogger import YLogger
 import json
 import urllib.request
-
+from programy.utils.logging.ylogger import YLogger
 from programy.utils.geo.latlong import LatLong
 from programy.utils.text.text import TextUtils
 
-class GoogleAddressComponent(object):
+
+class GoogleAddressComponent:
     def __init__(self):
         self.long_name = None
         self.short_name = None
@@ -36,7 +35,7 @@ class GoogleAddressComponent(object):
             self.types.append(address_type)
 
 
-class GoogleBounds(object):
+class GoogleBounds:
     def __init__(self):
         self.northeast = None
         self.southwest = None
@@ -46,7 +45,7 @@ class GoogleBounds(object):
         self.southwest = LatLong(data['southwest']['lat'], data['southwest']['lng'])
 
 
-class GoogleGeometry(object):
+class GoogleGeometry:
     def __init__(self):
         self.location_type = None
         self.location = None
@@ -55,14 +54,15 @@ class GoogleGeometry(object):
 
     def parse_json(self, data):
         self.location_type = data['location_type']
-        self.location = LatLong(data['location']['lat'], data['location']['lng'])
+        if 'location' in data:
+            self.location = LatLong(data['location']['lat'], data['location']['lng'])
         self.bounds = GoogleBounds()
         self.bounds.parse_json(data['bounds'])
         self.viewport = GoogleBounds()
         self.viewport.parse_json(data['bounds'])
 
 
-class GoogleGeoLocation(object):
+class GoogleGeoLocation:
     def __init__(self):
         self.place_id = None
         self.formatted_address = None
@@ -88,7 +88,7 @@ class GoogleGeoLocation(object):
             self.types.append(type_data)
 
 
-class GoogelMapsResult(object):
+class GoogelMapsResult:
     def __init__(self):
         self.locations = []
         self.status = None
@@ -101,7 +101,7 @@ class GoogelMapsResult(object):
             self.locations.append(location)
 
 
-class GoogleDistance(object):
+class GoogleDistance:
     def __init__(self, origin, destination, country="UK", mode="driving", units="imperial"):
         self._origin = origin
         self._destination = destination
@@ -137,7 +137,7 @@ class GoogleDistance(object):
         self._duration_text = result['elements'][0]['duration']['text']
 
 
-class DirectionLegStep(object):
+class DirectionLegStep:
     def __init__(self):
         self._distance = None
         self._distance_text = None
@@ -157,7 +157,7 @@ class DirectionLegStep(object):
         self._instructions = TextUtils.strip_html(data['html_instructions'])
 
 
-class DirectionLeg(object):
+class DirectionLeg:
     def __init__(self):
         self._distance = None
         self._distance_text = None
@@ -179,7 +179,7 @@ class DirectionLeg(object):
         return ", ".join([step.instructions for step in self._steps])
 
 
-class GoogleDirections(object):
+class GoogleDirections:
     def __init__(self, origin, destination, country="UK", mode="driving", units="imperial"):
         self._origin = origin
         self._destination = destination
@@ -199,25 +199,24 @@ class GoogleDirections(object):
         return ", ".join([leg.steps_as_a_string() for leg in self._legs])
 
 
-class GoogleMaps(object):
-
+class GoogleMaps:
     DIRECTIONS = "http://maps.googleapis.com/maps/api/directions/json?origin={0}&destination={1}" \
                  "&country={2}&sensor=false&mode={3}"
     DISTANCE = "http://maps.googleapis.com/maps/api/distancematrix/json?origins={0}&destinations={1}" \
                "&country={2}&sensor=false&mode={3}&units={4}"
     GEOCODE = "http://maps.google.com/maps/api/geocode/json?address={0}&sensor=false"
 
-    ##################
+    def _make_http_request(self, url):
+        response = urllib.request.urlopen(url)      # pragma: no cover
+        content = response.read()                   # pragma: no cover
+        decoded = content.decode('utf8')            # pragma: no cover
+        return json.loads(decoded)                  # pragma: no cover
 
     def _get_response_as_json(self, url):
         YLogger.debug(self, "GoogleMaps Request = [%s]", url)
-        response = urllib.request.urlopen(url)
-        content = response.read()
-        decoded = content.decode('utf8')
-        YLogger.debug(self, "GoogleMaps Response = [%s]", decoded)
-        return json.loads(decoded)
-
-    ##################
+        content = self._make_http_request(url)
+        YLogger.debug(self, "GoogleMaps Response = [%s]", content)
+        return content
 
     def _get_latlong_for_location_response(self, location):
         location = TextUtils.urlify(location)
@@ -226,7 +225,7 @@ class GoogleMaps(object):
 
     def is_error_response(self, response):
         if 'status' in response:
-            if response['status'] == 'OVER_QUERY_LIMIT' :
+            if response['status'] == 'OVER_QUERY_LIMIT':
                 return True
         return False
 
@@ -239,9 +238,10 @@ class GoogleMaps(object):
 
         geodata = GoogelMapsResult()
         geodata.parse_json(response)
-        return geodata.locations[0].geometry.location
 
-    ##################
+        location = geodata.locations[0]
+
+        return location.geometry.location
 
     def _get_distance_between_addresses(self, origin, destination, country, mode, units):
         origin = TextUtils.urlify(origin)
@@ -253,6 +253,9 @@ class GoogleMaps(object):
         YLogger.debug(self, "get_distance_between_addresses - calling service")
         response = self._get_distance_between_addresses(origin, destination, country, mode, units)
 
+        if self.is_error_response(response):
+            raise Exception(response['status'])
+
         if response['status'] == 'OK':
             YLogger.debug(self, "get_distance_between_addresses - OK")
             distance = GoogleDistance(origin, destination, country, mode, units)
@@ -261,8 +264,6 @@ class GoogleMaps(object):
         else:
             YLogger.error(self, "get_distance_between_addresses - [%s]", response['status'])
             return None
-
-    ##################
 
     def _get_directions_between_addresses_response(self, origin, destination, country, mode, units):
         origin = TextUtils.urlify(origin)
@@ -274,6 +275,9 @@ class GoogleMaps(object):
         YLogger.debug(self, "get_directions_between_addresses - calling live service")
         response = self._get_directions_between_addresses_response(origin, destination, country, mode, units)
 
+        if self.is_error_response(response):
+            raise Exception(response['status'])
+
         if response['status'] == 'OK':
             YLogger.debug(self, "get_directions_between_addresses - OK")
             directions = GoogleDirections(origin, destination, country, mode, units)
@@ -282,4 +286,3 @@ class GoogleMaps(object):
         else:
             YLogger.error(self, "get_directions_between_addresses - %s", response['status'])
             return None
-

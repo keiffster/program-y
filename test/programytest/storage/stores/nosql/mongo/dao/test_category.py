@@ -3,7 +3,7 @@ import unittest
 from programy.storage.stores.nosql.mongo.dao.category import Category
 
 
-class CategoryTests(unittest.TestCase):
+class CategoryReadOnlyTests(unittest.TestCase):
 
     def test_init(self):
         category1 = Category("groupid", "userid", "topic", "that", "pattern", "template")
@@ -13,14 +13,14 @@ class CategoryTests(unittest.TestCase):
         self.assertIsNotNone(doc1)
         self.assertEqual({'groupid': 'groupid', 'pattern': 'pattern', 'template': 'template', 'that': 'that', 'topic': 'topic', 'userid': 'userid'}, doc1)
 
-        category2 = Category("groupid", "userid", "topic", "that", "pattern", "template", id=None)
+        category2 = Category("groupid", "userid", "topic", "that", "pattern", "template", categoryid=None)
         self.assertIsNotNone(category2)
         self.assertEqual("<Category(id='n/a', groupid='groupid', userid='userid', topic='topic', that='that', pattern='pattern', template='template'>", str(category2))
         doc2 = category1.to_document()
         self.assertIsNotNone(doc2)
         self.assertEqual({'groupid': 'groupid', 'pattern': 'pattern', 'template': 'template', 'that': 'that', 'topic': 'topic', 'userid': 'userid'}, doc2)
 
-        category3 = Category("groupid", "userid", "topic", "that", "pattern", "template", id=666)
+        category3 = Category("groupid", "userid", "topic", "that", "pattern", "template", categoryid=666)
         self.assertIsNotNone(category3)
         self.assertEqual("<Category(id='666', groupid='groupid', userid='userid', topic='topic', that='that', pattern='pattern', template='template'>", str(category3))
         doc3 = category3.to_document()

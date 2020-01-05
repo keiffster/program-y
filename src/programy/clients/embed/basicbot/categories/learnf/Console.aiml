@@ -1,0 +1,2 @@
+<aiml version="2.0">
+<category><pattern>HAS LEARNF TEST PASSED</pattern><topic>*</topic><that>*</that><template>YES</template></category></aiml>

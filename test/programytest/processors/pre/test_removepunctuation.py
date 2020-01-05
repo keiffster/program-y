@@ -1,7 +1,7 @@
 import unittest
-from programy.processors.pre.removepunctuation import RemovePunctuationPreProcessor
-from programy.context import ClientContext
 
+from programy.context import ClientContext
+from programy.processors.pre.removepunctuation import RemovePunctuationPreProcessor
 from programytest.client import TestClient
 
 

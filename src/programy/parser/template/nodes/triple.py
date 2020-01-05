@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,9 +14,9 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.parser.template.nodes.base import TemplateNode
 from programy.utils.text.text import TextUtils
+from programy.parser.exceptions import ParserException
 
 
 class TemplateTripleNode(TemplateNode):
@@ -37,12 +37,15 @@ class TemplateTripleNode(TemplateNode):
         if self._subj is not None:
             subj = self._subj.resolve(client_context)
             xml += "<subj>" + subj + "</subj>"
+
         if self._pred is not None:
             pred = self._pred.resolve(client_context)
             xml += "<pred>" + pred + "</pred>"
+
         if self._obj is not None:
             obj = self._obj.resolve(client_context)
             xml += "<obj>" + obj + "</obj>"
+
         return xml
 
     def parse_expression(self, graph, expression):
@@ -64,13 +67,15 @@ class TemplateTripleNode(TemplateNode):
 
             if tag_name == 'subj':
                 self._subj = self.parse_children_as_word_node(graph, child)
+
             elif tag_name == 'pred':
                 self._pred = self.parse_children_as_word_node(graph, child)
+
             elif tag_name == 'obj':
                 self._obj = self.parse_children_as_word_node(graph, child)
+
             else:
-                graph.parse_tag_expression(child, self)
+                raise ParserException("Invalid child item in triple")
 
             tail_text = self.get_tail_from_element(child)
             self.parse_text(graph, tail_text)
-

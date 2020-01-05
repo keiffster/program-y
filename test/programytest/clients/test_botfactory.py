@@ -1,10 +1,9 @@
 import unittest
 import unittest.mock
 
+from programy.bot import Bot
 from programy.clients.client import BotFactory
 from programy.config.bot.bot import BotConfiguration
-from programy.bot import Bot
-
 from programytest.clients.arguments import MockArgumentParser
 from programytest.clients.mocks import MockBotClient
 
@@ -19,7 +18,7 @@ class BotFactoryTests(unittest.TestCase):
 
         configuration.configurations = []
 
-        configuration.bot_selector = "programy.clients.client.DefaultBotSelector"
+        configuration.bot_selector = "programy.clients.botfactory.DefaultBotSelector"
 
         factory = BotFactory(client, configuration)
         self.assertIsNotNone(factory)
@@ -35,7 +34,7 @@ class BotFactoryTests(unittest.TestCase):
 
         configuration.configurations = [BotConfiguration()]
 
-        configuration.bot_selector = "programy.clients.client.DefaultBotSelector"
+        configuration.bot_selector = "programy.clients.botfactory.DefaultBotSelector"
 
         factory = BotFactory(client, configuration)
         self.assertIsNotNone(factory)

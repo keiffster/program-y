@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.storage.stores.utils import DAOUtils
 
 
-class Error(object):
+class Error():
 
     def __init__(self, error, file, start, end):
         self.id = None
@@ -28,7 +28,7 @@ class Error(object):
 
     def __repr__(self):
         return "<Error(id='%s', error='%s', file='%s', start='%s', end='%s')>" % (
-        DAOUtils.valid_id(self.id), self.error, self.file, self.start, self.end)
+            DAOUtils.valid_id(self.id), self.error, self.file, self.start, self.end)
 
     def to_document(self):
         document = {"error": self.error,
@@ -41,15 +41,10 @@ class Error(object):
 
     @staticmethod
     def from_document(data):
-        lookup = Error(None, None, None, None)
-        if '_id' in data:
-            lookup.id = data['_id']
-        if 'error' in data:
-            lookup.error = data['error']
-        if 'file' in data:
-            lookup.file = data['file']
-        if 'start' in data:
-            lookup.start = data['start']
-        if 'end' in data:
-            lookup.end = data['end']
-        return lookup
+        error = Error(None, None, None, None)
+        error.id = DAOUtils.get_value_from_data(data, '_id')
+        error.error = DAOUtils.get_value_from_data(data, 'error')
+        error.file = DAOUtils.get_value_from_data(data, 'file')
+        error.start = DAOUtils.get_value_from_data(data, 'start')
+        error.end = DAOUtils.get_value_from_data(data, 'end')
+        return error

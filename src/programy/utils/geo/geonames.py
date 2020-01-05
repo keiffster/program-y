@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -21,10 +21,13 @@ from programy.utils.logging.ylogger import YLogger
 from programy.utils.geo.latlong import LatLong
 
 
-class GeoNamesApi(object):
-
+class GeoNamesApi:
     POSTALCODESEARCH = "http://api.geonames.org/postalCodeSearchJSON?postalcode={0}&country={1}&maxRows=10&username={2}"
-    get_latlong_for_postcode_response_file = None
+
+    def __init__(self):
+        self.latlong_response_file = None
+        self.account_name = None
+        self.country = None
 
     def check_for_license_keys(self, license_keys):
 
@@ -38,61 +41,37 @@ class GeoNamesApi(object):
         else:
             raise Exception("No valid license key GEO_NAMES_COUNTRY")
 
-        self.latlong_response_file = None
-        if license_keys.has_key('GEONAMES_LATLONG'):
-            self.country = license_keys.get_key('GEONAMES_LATLONG')
+    def _format_postcode(self, postcode):
+        return "".join(postcode.split(" "))
 
+    def _format_url(self, postcode):
+        postcode = self._format_postcode(postcode)
+        return GeoNamesApi.POSTALCODESEARCH.format(postcode, self.country, self.account_name)
 
-    def _get_latlong_for_postcode_response(self, postcode):
+    def _get_latlong_for_postcode_response(self, url):
 
-        if self.latlong_response_file is not None:
-            return self.load_get_latlong_for_postcode_from_file(self.latlong_response_file)
+        response = urllib.request.urlopen(url)                          # pragma: no cover
+        if response is None:                                            # pragma: no cover
+            raise Exception("Invalid url: ", url)                       # pragma: no cover
 
-        postcode = "".join(postcode.split(" "))
-        url = GeoNamesApi.POSTALCODESEARCH.format(postcode, self.country, self.account_name)
+        content = response.read()                                       # pragma: no cover
+        if response is None:                                            # pragma: no cover
+            raise Exception("Invalid response from GeoNames")           # pragma: no cover
 
-        response = urllib.request.urlopen(url)
-        if response is None:
-            raise Exception("Invalid url: ", url)
-
-        content = response.read()
-        if response is None:
-            raise Exception("Invalid response from GeoNames")
-
-        return json.loads(content.decode('utf8'))
-
-    def load_get_latlong_for_postcode_from_file(self, filename):
-        try:
-            with open(filename, "r", encoding="utf-8") as response_file:
-                return json.load(response_file)
-
-        except FileNotFoundError:
-            YLogger.error(self, "File not found [%s]", filename)
-
-    def store_get_latlong_for_postcode_to_file(self, postcode, filename):
-        content = self._get_latlong_for_postcode_response(postcode)
-        try:
-            with open(filename, "w+", encoding="utf-8") as response_file:
-                json.dump(content, response_file, sort_keys=True, indent=2)
-
-        except FileNotFoundError:
-            YLogger.error(self, "Failed to write to [%s]", filename)
+        return json.loads(content.decode('utf8'))                       # pragma: no cover
 
     def get_latlong_for_postcode(self, postcode):
 
-        if GeoNamesApi.get_latlong_for_postcode_response_file is None:
-            data = self._get_latlong_for_postcode_response(postcode)
-        else:
-            try:
-                with open(GeoNamesApi.get_latlong_for_postcode_response_file, "r", encoding="utf-8") as datafile:
-                    data = json.load(datafile)
-            except FileNotFoundError:
-                YLogger.error(self, "File not found [%s]", GeoNamesApi.get_latlong_for_postcode_response_file)
+        url = self._format_url(postcode)
+
+        data = self._get_latlong_for_postcode_response(url)
 
         if 'postalCodes' not in data:
             raise Exception("Invalid/Unknown post code")
+
         if not data['postalCodes']:
             raise Exception("Invalid/Unknown post code")
+
         if 'lat' not in data['postalCodes'][0] or 'lng' not in data['postalCodes'][0]:
             raise Exception("Invalid/Unknown post code")
 

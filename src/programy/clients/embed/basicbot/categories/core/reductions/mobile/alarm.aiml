@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+       <category>
+        <pattern>SET THE ALARM *</pattern>
+        <template>
+            <srai>SET ALARM
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SET AN ALARM *</pattern>
+        <template>
+            <srai>SET ALARM
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SET TIMER FOR *</pattern>
+        <template>
+            <srai>SET ALARM FOR
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ALARM AT *</pattern>
+        <template>
+            <srai>SET AN ALARM FOR
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ALARM ME AT *</pattern>
+        <template>
+            <srai>SET AN ALARM FOR
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ALARM ON *</pattern>
+        <template>
+            <srai>SET AN ALARM FOR
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU SET MY ALARM</pattern>
+        <template>
+            <srai>SET ALARM</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU SET MY ALARM *</pattern>
+        <template>
+            <srai>SET MY ALARM
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SET ALARM FOR *</pattern>
+        <template>
+            <srai>ALARMMESSAGE
+                <star/>
+                ALARMREQUEST SET ALARM FOR
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+
+    <category>
+        <pattern>CAN YOU WAKE ME UP *</pattern>
+        <template>
+            <srai>WAKE ME UP
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU WAKE ME UP AT *</pattern>
+        <template>
+            <srai>WAKE ME UP AT
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+
+</aiml>

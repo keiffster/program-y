@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -16,21 +16,21 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 from programy.utils.logging.ylogger import YLogger
 from programy.storage.stores.nosql.mongo.store.mongostore import MongoStore
-from programy.storage.entities.category import CategoryStore
+from programy.storage.entities.category import CategoryReadWriteStore
 from programy.storage.stores.nosql.mongo.dao.category import Category
 
 
-class MongoCategoryStore(CategoryStore, MongoStore):
-
-    CATEGORIES  = 'categories'
-    GROUPID     = 'groupid'
-    PATTERN     = 'pattern'
-    TOPIC       = 'topic'
-    THAT        = 'that'
-    TEMPLATE    = 'template'
+class MongoCategoryStore(CategoryReadWriteStore, MongoStore):
+    CATEGORIES = 'categories'
+    GROUPID = 'groupid'
+    PATTERN = 'pattern'
+    TOPIC = 'topic'
+    THAT = 'that'
+    TEMPLATE = 'template'
 
     def __init__(self, storage_engine):
         MongoStore.__init__(self, storage_engine)
+        CategoryReadWriteStore.__init__(self)
 
     def collection_name(self):
         return MongoCategoryStore.CATEGORIES
@@ -38,19 +38,23 @@ class MongoCategoryStore(CategoryStore, MongoStore):
     def empty_named(self, name):
         YLogger.info(self, "Emptying Category from Mongo[%s]", name)
         collection = self.collection()
-        collection.delete_many({MongoCategoryStore.GROUPID, name})
+        collection.delete_many({MongoCategoryStore.GROUPID: name})
 
     def store_category(self, groupid, userid, topic, that, pattern, template):
-        YLogger.debug(self, "Storing category in Mongo [%s] [%s] [%s] [%s] [%s]", groupid, pattern, topic, that, template)
+        YLogger.debug(self, "Storing category in Mongo [%s] [%s] [%s] [%s] [%s]", groupid, pattern, topic, that,
+                      template)
         category = Category(groupid=groupid, userid=userid, topic=topic, that=that, pattern=pattern, template=template)
-        self.add_document(category)
-        return True
+        return self.add_document(category)
 
-    def load_all(self, parser):
+    def load(self, collector, name=None):
+        del name
+        self.load_all(collector)
+
+    def load_all(self, collector):
         YLogger.info(self, "Loading all categories from Mongo")
         collection = self.collection()
         documents = collection.find()
-        self._load_documents(documents, parser)
+        self._load_documents(documents, collector)
 
     def load_categories(self, groupid, parser):
         YLogger.info(self, "Loading categories for [%s] from Mongo", groupid)
@@ -62,11 +66,11 @@ class MongoCategoryStore(CategoryStore, MongoStore):
         for doc in documents:
             category = Category.from_document(doc)
             YLogger.debug(self, "Loading category [%s] [%s] [%s] [%s] [%s]",
-                                category.groupid,
-                                category.pattern,
-                                category.topic,
-                                category.that,
-                                category.template)
+                          category.groupid,
+                          category.pattern,
+                          category.topic,
+                          category.that,
+                          category.template)
             self._load_category(category.groupid,
                                 category.pattern,
                                 category.topic,

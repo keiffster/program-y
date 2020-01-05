@@ -1,10 +1,11 @@
 import unittest
 import unittest.mock
+from unittest.mock import patch
 from datetime import datetime
 
 from programy.extensions.admin.scheduler import SchedulerAdminExtension
-
 from programytest.client import TestClient
+
 
 class MockScheduler(object):
 
@@ -62,6 +63,15 @@ class SchedulerAdminExtensionTests(unittest.TestCase):
 
         self.assertEqual("> Job ID:1, Next Run: 2018-04-11 19:02:00, Args: ('Arg1', 'Arg2', 'Arg3', 'Arg4', 'Arg5')\n", extension.execute(client_context, "LIST JOBS"))
 
+    def test_scheduler_list_invalid(self):
+        client = SchedulerAdminExtensionClient()
+        client_context = client.create_client_context("testid")
+
+        extension = SchedulerAdminExtension()
+
+        self.assertEqual("Invalid LIST commands, LIST JOBS", extension.execute(client_context, "LIST"))
+        self.assertEqual("Unknown LIST sub command [OTHER]", extension.execute(client_context, "LIST OTHER"))
+
     def test_scheduler_kill_job(self):
         client = SchedulerAdminExtensionClient()
         client_context = client.create_client_context("testid")
@@ -75,6 +85,16 @@ class SchedulerAdminExtensionTests(unittest.TestCase):
 
         self.assertEqual("Job removed", extension.execute(client_context, "KILL JOB 1"))
 
+    def test_scheduler_kill_invalid(self):
+        client = SchedulerAdminExtensionClient()
+        client_context = client.create_client_context("testid")
+
+        extension = SchedulerAdminExtension()
+
+        self.assertEqual("Invalid KILL commands, LIST JOB JOBID", extension.execute(client_context, "KILL"))
+        self.assertEqual("Invalid KILL commands, LIST JOB JOBID", extension.execute(client_context, "KILL JOB"))
+        self.assertEqual("Unknown KILL sub command [OTHER]", extension.execute(client_context, "KILL OTHER XXX"))
+
     def test_scheduler_pause_resume(self):
         client = SchedulerAdminExtensionClient()
         client_context = client.create_client_context("testid")
@@ -86,3 +106,23 @@ class SchedulerAdminExtensionTests(unittest.TestCase):
 
         self.assertEqual("Scheduler resumed", extension.execute(client_context, "RESUME"))
         self.assertFalse(client.scheduler._paused)
+
+    def test_scheduler_other(self):
+        client = SchedulerAdminExtensionClient()
+        client_context = client.create_client_context("testid")
+
+        extension = SchedulerAdminExtension()
+
+        self.assertEqual("Invalid Scheduler Admin command [OTHER]", extension.execute(client_context, "OTHER"))
+
+    def patch_commands(self):
+        raise Exception("Mock Exception")
+
+    @patch ("programy.extensions.admin.scheduler.SchedulerAdminExtension._commands", patch_commands)
+    def test_scheduler_exception(self):
+        client = SchedulerAdminExtensionClient()
+        client_context = client.create_client_context("testid")
+
+        extension = SchedulerAdminExtension()
+
+        self.assertEqual("Scheduler Admin Error", extension.execute(client_context, "COMMANDS"))

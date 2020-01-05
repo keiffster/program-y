@@ -4,6 +4,7 @@ import os
 from programy.utils.license.keys import LicenseKeys
 from programy.services.wikipediaservice import WikipediaService
 
+
 class TestBot:
 
     def __init__(self):

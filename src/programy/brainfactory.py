@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,21 +14,21 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
+from abc import ABC
+from abc import abstractmethod
 from programy.brain import Brain
 from programy.utils.classes.loader import ClassLoader
-from abc import abstractmethod, ABCMeta
+from programy.utils.logging.ylogger import YLogger
 
 
-class BrainSelector(object):
-    __metaclass__ = ABCMeta
+class BrainSelector(ABC):
 
     def __init__(self, configuration):
         self._configuration = configuration
 
     @abstractmethod
-    def select_brain(self, brains):
-        raise NotImplementedError()
+    def select_brain(self):
+        raise NotImplementedError()  # pragma: no cover
 
 
 class DefaultBrainSelector(BrainSelector):
@@ -40,27 +40,24 @@ class DefaultBrainSelector(BrainSelector):
         self._set_iterator()
 
     def _set_iterator(self):
-        if self._brains:
-            self._iterator = iter(self._brains.values())
+        self._iterator = iter(self._brains.values())
 
     def select_brain(self):
         try:
-            if self._iterator:
-                return next(self._iterator)
+            return next(self._iterator)
 
         except StopIteration:
             self._set_iterator()
 
             try:
-                if self._iterator:
-                    return next(self._iterator)
+                return next(self._iterator)
             except StopIteration:
                 pass
 
         return None
 
 
-class BrainFactory(object):
+class BrainFactory:
 
     def __init__(self, bot):
         self._brains = {}
@@ -69,11 +66,11 @@ class BrainFactory(object):
         self.load_brain_selector(bot.configuration)
 
     def brainids(self):
-        return self._brains.keys()
+        return list(self._brains.keys())
 
-    def brain(self, id):
-        if id in self._brains:
-            return self._brains[id]
+    def brain(self, brainid):
+        if brainid in self._brains:
+            return self._brains[brainid]
         else:
             return None
 
@@ -87,8 +84,10 @@ class BrainFactory(object):
             self._brain_selector = DefaultBrainSelector(configuration, self._brains)
         else:
             try:
-                self._brain_selector = ClassLoader.instantiate_class(configuration.brain_selector)(configuration, self._brains)
-            except Exception as e:
+                self._brain_selector = ClassLoader.instantiate_class(configuration.brain_selector)(configuration,
+                                                                                                   self._brains)
+            except Exception as excep:
+                YLogger.exception_nostack(self, "Failed to load defined brain selector, loadiing default", excep)
                 self._brain_selector = DefaultBrainSelector(configuration, self._brains)
 
     def select_brain(self):
@@ -98,5 +97,5 @@ class BrainFactory(object):
         brains = []
         for brainid, brain in self._brains.items():
             brains.append({"id": brainid,
-                            "questions": brain.num_questions})
+                           "questions": brain.num_questions})
         return brains

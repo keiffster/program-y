@@ -2,6 +2,7 @@ import unittest
 
 from programy.storage.stores.nosql.mongo.dao.link import Link
 
+
 class LinkTests(unittest.TestCase):
 
     def test_init_no_id_no_expiration(self):
@@ -44,7 +45,7 @@ class LinkTests(unittest.TestCase):
 
         self.assertEqual({'_id': '666', 'expired': False, 'expires': "12/12/2012", 'generated_key': 'ABCDEF123', 'primary_user': 'keiffster', 'provided_key': 'PASSWORD123', 'retry_count': 0}, link.to_document())
 
-    def test_from_document(self):
+    def test_from_document_no_id(self):
         data1 = {"primary_user": "user1", "generated_key": "ABCDEFG", "provided_key": "1234567890", "expired": False, "expires": "12/12/2012", 'retry_count': 0}
         link1 = Link.from_document(data1)
         self.assertIsNotNone(link1)
@@ -55,6 +56,7 @@ class LinkTests(unittest.TestCase):
         self.assertEqual("12/12/2012", link1.expires)
         self.assertEqual(0, link1.retry_count)
 
+    def test_from_document_with_id(self):
         data2 = {"_id": "666", "primary_user": "user1", "generated_key": "ABCDEFG", "provided_key": "1234567890", "expired": False, "expires": "12/12/2012", 'retry_count': 0}
         link2 = Link.from_document(data2)
         self.assertIsNotNone(link2)
@@ -63,4 +65,25 @@ class LinkTests(unittest.TestCase):
         self.assertEqual("1234567890", link2.provided_key)
         self.assertEqual(False, link2.expired)
         self.assertEqual("12/12/2012", link2.expires)
-        self.assertEqual(0, link1.retry_count)
+        self.assertEqual(0, link2.retry_count)
+
+    def test_from_document_with_no_data(self):
+        data2 = {"_id": "666"}
+        link2 = Link.from_document(data2)
+        self.assertIsNotNone(link2)
+        self.assertIsNone(link2.primary_user)
+        self.assertIsNone(link2.generated_key)
+        self.assertIsNone(link2.provided_key)
+        self.assertFalse(link2.expired)
+        self.assertIsNone(link2.expires)
+        self.assertEquals(0, link2.retry_count)
+
+    def test_repr_no_id(self):
+        data1 = {"primary_user": "user1", "generated_key": "ABCDEFG", "provided_key": "1234567890", "expired": False, "expires": "12/12/2012", 'retry_count': 0}
+        link1 = Link.from_document(data1)
+        self.assertEquals("<Linked(id='n/a', primary='user1', generated='ABCDEFG', provided='1234567890', expired='12/12/2012', expires='False')>", str(link1))
+
+    def test_repr_wit_id(self):
+        data2 = {"_id": "666", "primary_user": "user1", "generated_key": "ABCDEFG", "provided_key": "1234567890", "expired": False, "expires": "12/12/2012", 'retry_count': 0}
+        link2 = Link.from_document(data2)
+        self.assertEquals("<Linked(id='666', primary='user1', generated='ABCDEFG', provided='1234567890', expired='12/12/2012', expires='False')>", str(link2))

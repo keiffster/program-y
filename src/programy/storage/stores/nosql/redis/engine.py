@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,9 +14,8 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 import redis
-
+from programy.utils.logging.ylogger import YLogger
 from programy.storage.engine import StorageEngine
 from programy.storage.stores.nosql.redis.store.conversations import RedisConversationStore
 
@@ -25,7 +24,7 @@ class RedisStorageEngine(StorageEngine):
 
     def __init__(self, configuration):
         StorageEngine.__init__(self, configuration)
-        self._prefix = "programy"       # Default value
+        self._prefix = "programy"  # Default value
         self._sessions_set_key = self._create_sessions_set_key()
         self._redis = None
 
@@ -42,7 +41,7 @@ class RedisStorageEngine(StorageEngine):
         return self._sessions_set_key
 
     def _create_sessions_set_key(self):
-        return "{prefix}:sessions".format( prefix=self._prefix )
+        return "{prefix}:sessions".format(prefix=self._prefix)
 
     def initialise(self):
         self._prefix = self.configuration.prefix
@@ -63,9 +62,8 @@ class RedisStorageEngine(StorageEngine):
         if self.configuration.drop_all_first is True:
             try:
                 self.conversation_store().empty()
-            except Exception as e:
-                print("Failed deleting conversation redis data - ", e)
+            except Exception as excep:
+                YLogger.exception(self, "Failed deleting conversation redis data - ", excep)
 
     def conversation_store(self):
         return RedisConversationStore(self)
-

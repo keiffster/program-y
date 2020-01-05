@@ -1,9 +1,9 @@
 import unittest
-from programy.processors.post.emojize import EmojizePostProcessor
+
 from programy.bot import Bot
 from programy.config.bot.bot import BotConfiguration
 from programy.context import ClientContext
-
+from programy.processors.post.emojize import EmojizePostProcessor
 from programytest.client import TestClient
 
 

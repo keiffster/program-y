@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -35,10 +35,7 @@ class BrainServicesConfiguration(BaseSectionConfigurationData):
         return None
 
     def services(self):
-        return self._services.keys()
-
-    def check_for_license_keys(self, license_keys):
-        BaseSectionConfigurationData.check_for_license_keys(self, license_keys)
+        return list(self._services.keys())
 
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         services = configuration_file.get_section(self.section_name, configuration)
@@ -74,3 +71,8 @@ class BrainServicesConfiguration(BaseSectionConfigurationData):
             data['DuckDuckGo'] = {}
             data['DuckDuckGo']['classname'] = 'programy.services.duckduckgo.DuckDuckGoService'
             data['DuckDuckGo']['url'] = 'http://api.duckduckgo.com'
+
+        else:
+
+            for _, config in self._services:
+                self.config_to_yaml(data, config, defaults)

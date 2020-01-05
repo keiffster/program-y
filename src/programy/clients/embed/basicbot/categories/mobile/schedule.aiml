@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: rsvp.aiml -->
+    <!-- Author: Dr. Richard S. Wallace -->
+    <!-- Last modified: July 19, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the ALICE2 0.0.5 chat bot knowledge base. -->
+    <!--  -->
+    <!-- The ALICE2 brain is Copyright &copy; 2014 by ALICE AI Foundation. -->
+    <!--  -->
+    <!-- The ALICE2 brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information see http://www.alicebot.org -->
+    <!--  -->
+    <category>
+        <pattern>MAKE AN APPOINTMENT *</pattern>
+        <template>
+            <srai>SCHEDULEDESCRIPTION
+                <star/>
+                SCHEDULEREQUEST MAKE AN APPOINTMENT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MAKE ME * APPOINTMENT *</pattern>
+        <template>
+            <srai>SCHEDULEDESCRIPTION
+                <star/>
+                APPOINTMENT SCHEDULEREQUEST MAKE ME
+                <star/>
+                APPOINTMENT
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MAKE A * APPOINTMENT *</pattern>
+        <template>
+            <srai>SCHEDULEDESCRIPTION
+                <star/>
+                APPOINTMENT SCHEDULEREQUEST MAKE A
+                <star/>
+                APPOINTMENT
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SET AN APPOINTMENT *</pattern>
+        <template>
+            <srai>SCHEDULEDESCRIPTION
+                <star/>
+                SCHEDULEREQUEST SET AN APPOINTMENT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>REMIND ME <set>preposition</set> *
+        </pattern>
+        <template>
+            <srai>SCHEDULEDESCRIPTION
+                <star index="2"/>
+                SCHEDULEREQUEST REMIND ME
+                <star/>
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>REMIND ME *</pattern>
+        <template>
+            <srai>SCHEDULEDESCRIPTION
+                <star/>
+                SCHEDULEREQUEST REMIND ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>REMIND ME TO GET *</pattern>
+        <template>
+            <srai>SCHEDULEDESCRIPTION
+                <star/>
+                SCHEDULEREQUEST REMIND ME TO GET
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>REMIND ME TO CALL *</pattern>
+        <template>
+            <srai>SCHEDULEDESCRIPTION
+                <star/>
+                SCHEDULEREQUEST REMIND ME TO CALL
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>REMIND ME TO TAKE *</pattern>
+        <template>
+            <srai>SCHEDULEDESCRIPTION
+                <star/>
+                SCHEDULEREQUEST REMIND ME TO TAKE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>REMIND ME TO PICK UP *</pattern>
+        <template>
+            <srai>SCHEDULEDESCRIPTION
+                <star/>
+                SCHEDULEREQUEST REMIND ME TO PICK UP
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>REMIND ME TO GO TO *</pattern>
+        <template>
+            <srai>SCHEDULEDESCRIPTION
+                <star/>
+                SCHEDULEREQUEST REMIND ME TO GO TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>REMIND ME TO GO TO THE *</pattern>
+        <template>
+            <srai>SCHEDULEDESCRIPTION
+                <star/>
+                SCHEDULEREQUEST REMIND ME TO GO TO THE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>REMIND ME TO GO *</pattern>
+        <template>
+            <srai>SCHEDULEDESCRIPTION
+                <star/>
+                SCHEDULEREQUEST REMIND ME TO GO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>REMIND ME TO *</pattern>
+        <template>
+            <srai>SCHEDULEDESCRIPTION
+                <star/>
+                SCHEDULEREQUEST REMIND ME TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>REMIND ME TO WAKE UP AT *</pattern>
+        <template>
+            <srai>ALARMMESSAGE Wake up ALARMREQUEST REMIND ME TO WAKE UP AT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>REMIND ME TO WAKE UP AT * TOMORROW</pattern>
+        <template>
+            <srai>ALARMMESSAGE Wake up ALARMREQUEST REMIND ME TO WAKE UP AT
+                <star/>
+                TOMORROW
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>REMIND ME TO WAKE UP TOMORROW</pattern>
+        <template>
+            <srai>ALARMMESSAGE Wake up ALARMREQUEST REMIND ME TO WAKE UP TOMORROW</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>REMIND ME TOMORROW AT * TO WAKE UP</pattern>
+        <template>
+            <srai>ALARMMESSAGE Wake up ALARMREQUEST REMIND ME TOMORROW AT
+                <star/>
+                TO WAKE UP
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>REMIND ME TOMORROW *</pattern>
+        <template>
+            <srai>SCHEDULEDESCRIPTION
+                <star/>
+                SCHEDULEREQUEST REMIND ME TOMORROW
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>APPOINTMENT *</pattern>
+        <template>
+            <srai>SCHEDULEDESCRIPTION
+                <star/>
+                SCHEDULEREQUEST APPOINTMENT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WAKE ME UP AT *</pattern>
+        <template>
+            <srai>ALARMMESSAGE Wake up ALARMREQUEST WAKE ME UP AT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WAKE ME UP IN *</pattern>
+        <template>
+            <srai>ALARMMESSAGE
+                <star/>
+                ALARMREQUEST WAKE ME UP IN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WAKE ME UP IN * HOURS</pattern>
+        <template>
+            <srai>ALARMMESSAGE Wake up ALARMREQUEST WAKE ME UP IN
+                <star/>
+                HOURS
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WAKE ME UP *</pattern>
+        <template>
+            <srai>ALARMMESSAGE Wake me up ALARMREQUEST WAKE ME UP
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WAKE ME UP TOMORROW AT *</pattern>
+        <template>
+            <srai>ALARMMESSAGE Wake up ALARMREQUEST WAKE ME UP TOMORROW AT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WAKE ME UP TOMORROW *</pattern>
+        <template>
+            <srai>ALARMMESSAGE Wake up ALARMREQUEST WAKE ME UP TOMORROW
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WAKE ME *</pattern>
+        <template>
+            <srai>ALARMMESSAGE
+                <star/>
+                ALARMREQUEST WAKE ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SCHEDULE *</pattern>
+        <template>
+            <srai>SCHEDULEDESCRIPTION
+                <star/>
+                SCHEDULEREQUEST SCHEDULE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SET CALENDAR *</pattern>
+        <template>
+            <srai>SCHEDULEDESCRIPTION
+                <star/>
+                SCHEDULEREQUEST SET CALENDAR
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SET A REMINDER FOR *</pattern>
+        <template>
+            <srai>SCHEDULEDESCRIPTION
+                <star/>
+                SCHEDULEREQUEST SET A REMINDER FOR
+                <star/>
+            </srai>
+        </template>
+    </category>
+</aiml>

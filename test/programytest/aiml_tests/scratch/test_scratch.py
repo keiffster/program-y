@@ -1,8 +1,7 @@
-import unittest
 import os
+import unittest
 
 from programytest.client import TestClient
-
 
 """
 A set of scratch aiml_tests to provide a unit test framework for testing adhoc grammars

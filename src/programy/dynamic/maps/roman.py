@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -19,15 +19,12 @@ from programy.dynamic.maps.map import DynamicMap
 
 # Code stolen from http://code.activestate.com/recipes/81611-roman-numerals/
 
-NUMERAL_MAP = zip(
-    (1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1),
-    ('M', 'CM', 'D', 'CD', 'C', 'XC', 'L', 'XL', 'X', 'IX', 'V', 'IV', 'I')
-)
-
 
 class MapRomanToDecimal(DynamicMap):
 
     NAME = "ROMANTODEC"
+    NUMS = ('M', 'D', 'C', 'L', 'X', 'V', 'I')
+    INTS = (1000, 500, 100, 50, 10, 5, 1)
 
     def __init__(self, config):
         DynamicMap.__init__(self, config)
@@ -36,19 +33,17 @@ class MapRomanToDecimal(DynamicMap):
         if not isinstance(input_value, str):
             raise TypeError("expected string, got %s" % type(input_value))
         input_value = input_value.upper()
-        nums = ['M', 'D', 'C', 'L', 'X', 'V', 'I']
-        ints = [1000, 500, 100, 50, 10, 5, 1]
         places = []
         for char in input_value:
-            if char not in nums:
+            if char not in MapRomanToDecimal.NUMS:
                 raise ValueError("input_value is not a valid roman numeral: %s" % input_value)
 
         charnum = 0
         for char in input_value:
-            value = ints[nums.index(char)]
+            value = MapRomanToDecimal.INTS[MapRomanToDecimal.NUMS.index(char)]
             # If the next place holds a larger number, this value is negative.
             try:
-                nextvalue = ints[nums.index(input_value[charnum + 1])]
+                nextvalue = MapRomanToDecimal.INTS[MapRomanToDecimal.NUMS.index(input_value[charnum + 1])]
                 if nextvalue > value:
                     value *= -1
             except IndexError:
@@ -65,6 +60,8 @@ class MapRomanToDecimal(DynamicMap):
 class MapDecimalToRoman(DynamicMap):
 
     NAME = "DECTOROMAN"
+    INTS = (1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1)
+    NUMS = ('M', 'CM', 'D', 'CD', 'C', 'XC', 'L', 'XL', 'X', 'IX', 'V', 'IV', 'I')
 
     def __init__(self, config):
         DynamicMap.__init__(self, config)
@@ -73,13 +70,12 @@ class MapDecimalToRoman(DynamicMap):
         input_value = int(input_value)
         if not 0 < input_value < 4000:
             raise ValueError("Argument must be between 1 and 3999")
-        ints = (1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1)
-        nums = ('M', 'CM', 'D', 'CD', 'C', 'XC', 'L', 'XL', 'X', 'IX', 'V', 'IV', 'I')
         result = ""
         num = 0
-        for num_str in nums:
-            count = int(input_value / ints[num])
+        for num_str in MapDecimalToRoman.NUMS:
+            # No need to check for div by 0 as the sets of ints does not contain 0
+            count = input_value // MapDecimalToRoman.INTS[num]
             result += num_str * count
-            input_value -= ints[num] * count
+            input_value -= MapDecimalToRoman.INTS[num] * count
             num += 1
         return result

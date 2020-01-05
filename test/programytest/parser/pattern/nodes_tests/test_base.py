@@ -1,21 +1,28 @@
-import unittest.mock
-
+from programy.dialog.sentence import Sentence
+from programy.parser.pattern.match import Match
+from programy.parser.pattern.matchcontext import MatchContext
+from programy.parser.pattern.nodes.base import PatternNode
+from programy.parser.pattern.nodes.bot import PatternBotNode
+from programy.parser.pattern.nodes.iset import PatternISetNode
+from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
+from programy.parser.pattern.nodes.priority import PatternPriorityWordNode
+from programy.parser.pattern.nodes.regex import PatternRegexNode
+from programy.parser.pattern.nodes.set import PatternSetNode
+from programy.parser.pattern.nodes.template import PatternTemplateNode
+from programy.parser.pattern.nodes.that import PatternThatNode
+from programy.parser.pattern.nodes.topic import PatternTopicNode
+from programy.parser.pattern.nodes.word import PatternWordNode
+from programy.parser.pattern.nodes.zeroormore import PatternZeroOrMoreWildCardNode
+from programy.parser.template.nodes.base import TemplateNode
+from programy.utils.logging.ylogger import YLogger
 from programytest.parser.base import ParserTestsBaseClass
 
-from programy.parser.template.nodes.base import TemplateNode
-from programy.parser.pattern.nodes.base import PatternNode
-from programy.parser.pattern.nodes.word import PatternWordNode
-from programy.parser.pattern.nodes.priority import PatternPriorityWordNode
-from programy.parser.pattern.nodes.topic import PatternTopicNode
-from programy.parser.pattern.nodes.that import PatternThatNode
-from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
-from programy.parser.pattern.nodes.zeroormore import PatternZeroOrMoreWildCardNode
-from programy.parser.pattern.nodes.set import PatternSetNode
-from programy.parser.pattern.nodes.iset import PatternISetNode
-from programy.parser.pattern.nodes.bot import PatternBotNode
-from programy.parser.pattern.nodes.regex import PatternRegexNode
-from programy.parser.pattern.nodes.template import PatternTemplateNode
+str1 = ""
 
+
+def output_func1(text):
+    global str1
+    str1 += text
 
 
 class PatternBotNodeTests(ParserTestsBaseClass):
@@ -549,3 +556,173 @@ class PatternBotNodeTests(ParserTestsBaseClass):
         node._remove_node(child_node)
         self.assertEqual(0, len(node.children))
         self.assertEqual(0, len(node._children_words))
+
+    def test_remove_template_node(self):
+        node = PatternNode()
+        self.assertIsNotNone(node)
+
+        child_node = PatternTemplateNode(TemplateNode())
+        node.add_child(child_node)
+        self.assertIsNotNone(node.template)
+
+        node._remove_node(child_node)
+        self.assertIsNone(node.template)
+
+    def test_remove_set_node(self):
+        node = PatternNode()
+        self.assertIsNotNone(node)
+
+        child_node = PatternSetNode({"name": "test"}, "testtext")
+        node.add_child(child_node)
+        self.assertTrue(node._set_node_exist(child_node))
+
+        node._remove_node(child_node)
+        self.assertFalse(node._set_node_exist(child_node))
+
+    def test_remove_iset_node(self):
+        node = PatternNode()
+        self.assertIsNotNone(node)
+
+        child_node = PatternISetNode({"name": "test"}, "testtext")
+        node.add_child(child_node)
+        self.assertTrue(node._iset_node_exist(child_node))
+
+        node._remove_node(child_node)
+        self.assertFalse(node._iset_node_exist(child_node))
+
+    def test_remove_bot_node(self):
+        node = PatternNode()
+        self.assertIsNotNone(node)
+
+        child_node = PatternBotNode({"name": "test"}, "testtext")
+        node.add_child(child_node)
+        self.assertTrue(node._bot_node_exist(child_node))
+
+        node._remove_node(child_node)
+        self.assertFalse(node._bot_node_exist(child_node))
+
+    def test_remove_regex_node(self):
+        node = PatternNode()
+        self.assertIsNotNone(node)
+
+        child_node = PatternRegexNode({"name": ".*"}, "testtext")
+        node.add_child(child_node)
+        self.assertTrue(node._regex_node_exist(child_node))
+
+        node._remove_node(child_node)
+        self.assertFalse(node._regex_node_exist(child_node))
+
+    def test_dump_no_caller(self):
+        global str1
+
+        node = PatternNode()
+        self.assertIsNotNone(node)
+
+        node.add_child(PatternWordNode("test"))
+        node.add_child(PatternPriorityWordNode("pTest"))
+        node.add_child(PatternZeroOrMoreWildCardNode("^"))
+        node.add_child(PatternZeroOrMoreWildCardNode("#"))
+        node.add_child(PatternOneOrMoreWildCardNode("*"))
+        node.add_child(PatternOneOrMoreWildCardNode("_"))
+        node.add_child(PatternTemplateNode(TemplateNode()))
+        node.add_child(PatternSetNode({"name": "test"}, "testtext"))
+        node.add_child(PatternISetNode({"name": "test"}, "testtext"))
+        node.add_child(PatternBotNode({"name": "test"}, "testtext"))
+        node.add_child(PatternRegexNode({"name": ".*"}, "testtext"))
+
+        node.dump("", output_func1)
+
+        self.assertEquals("NODE [*] [P(1)^(1)#(1)C(5)_(1)*(1)To(0)Th(0)Te(1)]	"
+                          "PWORD [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] word=[pTest]	"
+                          "ZEROORMORE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] wildcard=[^]	"
+                          "ZEROORMORE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] wildcard=[#]	"
+                          "ONEORMORE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] wildcard=[_]	"
+                          "ONEORMORE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] wildcard=[*]	"
+                          "PTEMPLATE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)]	"
+                          "WORD [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] word=[test]	"
+                          "SET [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] name=[TESTTEXT]	"
+                          "ISET [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] words=[TESTTEXT]	"
+                          "BOT [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] property=[test]	"
+                          "REGEX [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] pattern=[testtext]", str1)
+
+    def test_dump_with_caller(self):
+        node = PatternNode()
+        self.assertIsNotNone(node)
+
+        node.add_child(PatternWordNode("test"))
+        node.add_child(PatternPriorityWordNode("pTest"))
+        node.add_child(PatternZeroOrMoreWildCardNode("^"))
+        node.add_child(PatternZeroOrMoreWildCardNode("#"))
+        node.add_child(PatternOneOrMoreWildCardNode("*"))
+        node.add_child(PatternOneOrMoreWildCardNode("_"))
+        node.add_child(PatternTemplateNode(TemplateNode()))
+        node.add_child(PatternSetNode({"name": "test"}, "testtext"))
+        node.add_child(PatternISetNode({"name": "test"}, "testtext"))
+        node.add_child(PatternBotNode({"name": "test"}, "testtext"))
+        node.add_child(PatternRegexNode({"name": ".*"}, "testtext"))
+
+        node.dump("", YLogger.debug)
+
+    def test_consume_search_time_exceeded(self):
+        node = PatternNode()
+        self.assertIsNotNone(node)
+
+        match_context = MatchContext(max_search_depth=100, max_search_timeout=0)
+        words = Sentence(self._client_context)
+
+        result = node.consume(self._client_context, match_context, words, 0, Match.WORD, 1, parent=False)
+        self.assertIsNone(result)
+
+    def test_consume_search_depth_exceeded(self):
+        node = PatternNode()
+        self.assertIsNotNone(node)
+
+        match_context = MatchContext(max_search_depth=0, max_search_timeout=100)
+        words = Sentence(self._client_context)
+
+        result = node.consume(self._client_context, match_context, words, 0, Match.WORD, 1, parent=False)
+        self.assertIsNone(result)
+
+    def test_consume_out_of_words_with_template(self):
+        node = PatternNode()
+        self.assertIsNotNone(node)
+        node.add_template(PatternTemplateNode(TemplateNode()))
+
+        match_context = MatchContext(max_search_depth=100, max_search_timeout=100)
+        words = Sentence(self._client_context)
+
+        result = node.consume(self._client_context, match_context, words, 0, Match.WORD, 1, parent=False)
+        self.assertIsNotNone(result)
+
+    def test_consume_out_of_words_without_template(self):
+        node = PatternNode()
+        self.assertIsNotNone(node)
+
+        match_context = MatchContext(max_search_depth=100, max_search_timeout=100)
+        words = Sentence(self._client_context)
+
+        result = node.consume(self._client_context, match_context, words, 0, Match.WORD, 1, parent=False)
+        self.assertIsNone(result)
+
+    def test_consume_topic(self):
+        node = PatternNode()
+        self.assertIsNotNone(node)
+        node.add_topic(PatternTopicNode())
+
+        match_context = MatchContext(max_search_depth=100, max_search_timeout=100)
+        words = Sentence(self._client_context, text="__TOPIC__")
+
+        result = node.consume(self._client_context, match_context, words, 0, Match.WORD, 1, parent=False)
+        self.assertIsNone(result)
+
+    def test_consume_that(self):
+        node = PatternNode()
+        self.assertIsNotNone(node)
+        node.add_that(PatternThatNode())
+
+        match_context = MatchContext(max_search_depth=100, max_search_timeout=100)
+        words = Sentence(self._client_context, text="__THAT__")
+
+        result = node.consume(self._client_context, match_context, words, 0, Match.WORD, 1, parent=False)
+        self.assertIsNone(result)
+

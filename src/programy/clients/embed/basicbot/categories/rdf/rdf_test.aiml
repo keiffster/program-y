@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+
+    <!-- File: triple.aiml -->
+    <!-- Author: Dr. Richard S. Wallace -->
+    <!-- Last modified: July 19, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the ALICE2 0.0.5 chat bot knowledge base. -->
+    <!--  -->
+    <!-- The ALICE2 brain is Copyright &copy; 2014 by ALICE AI Foundation. -->
+    <!--  -->
+    <!-- The ALICE2 brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information see http://www.alicebot.org -->
+	<!--
+	     Modified by Keith Sterling Oct 2017
+	-->
+    <!--  -->
+
+    <category>
+		<pattern>TRIPLE TEST * *</pattern>
+		<template>
+			<select>
+				<vars>?x</vars>
+				<q><subj><star index="1"/></subj><pred><star index="2"/></pred><obj>?x</obj></q>
+			</select>
+		</template>
+	</category>
+
+    <category>
+        <pattern>UNIQ TEST</pattern>
+        <template>
+            <uniq>
+                <subj>York</subj>
+                <pred>isa</pred>
+                <obj>?object</obj>
+            </uniq>
+        </template>
+    </category>
+
+    <category>
+        <pattern>UNIQ TEST 2</pattern>
+        <template>
+            <addtriple>
+                <subj>10099</subj>
+                <pred>hasFirstName</pred>
+                <obj>Alan</obj>
+            </addtriple>
+            <addtriple>
+                <subj>10099</subj>
+                <pred>hasLastName</pred>
+                <obj>Turing</obj>
+            </addtriple>
+            <addtriple>
+                <subj>10099</subj>
+                <pred>hasMobileNumber</pred>
+                <obj>2125551212</obj>
+            </addtriple>
+            <set var="id">
+                <uniq>
+                    <subj>?id</subj>
+                    <pred>hasFirstName</pred>
+                    <obj>Alan</obj>
+                </uniq>
+            </set>
+            <uniq>
+                <subj>
+                    <get var="id"/>
+                </subj>
+                <pred>hasMobileNumber</pred>
+                <obj>?number</obj>
+            </uniq>
+        </template>
+    </category>
+
+    <category>
+        <pattern>UNIQ TEST 3</pattern>
+        <template>
+            <addtriple>
+                <subj>X</subj>
+                <pred>Y</pred>
+                <obj>Z</obj>
+            </addtriple>
+            <set var="uniqvar">?x</set>
+            <uniq>
+                <subj>
+                    <get var="uniqvar"/>
+                </subj>
+                <pred>Y</pred>
+                <obj>Z</obj>
+            </uniq>
+        </template>
+    </category>
+
+    <category>
+        <pattern>ADDTRIPLE TEST</pattern>
+        <template>Adding triples:
+            <addtriple>
+                <subj>Sacramento</subj>
+                <pred>capitalOf</pred>
+                <obj>California</obj>
+            </addtriple>
+            <addtriple>
+                <subj>Austin</subj>
+                <pred>capitalOf</pred>
+                <obj>Texas</obj>
+            </addtriple>
+            <addtriple>
+                <subj>Reno</subj>
+                <pred>capitalOf</pred>
+                <obj>Nevada</obj>
+            </addtriple>
+            <addtriple>
+                <subj>Austin</subj>
+                <pred>capitalOf</pred>
+                <obj>Texas</obj>
+            </addtriple>
+            <addtriple>
+                <subj>Los Angeles</subj>
+                <pred>capitalOf</pred>
+                <obj>California</obj>
+            </addtriple>
+        </template>
+    </category>
+
+    <category>
+        <pattern>DELETETRIPLE TEST</pattern>
+        <template>Adding triples:
+            <addtriple>
+                <subj>FIDO</subj>
+                <pred>ISA</pred>
+                <obj>DOG</obj>
+            </addtriple>
+            <addtriple>
+                <subj>ROVER</subj>
+                <pred>ISA</pred>
+                <obj>DOG</obj>
+            </addtriple>
+            <addtriple>
+                <subj>SNOOPY</subj>
+                <pred>ISA</pred>
+                <obj>DOG</obj>
+            </addtriple>
+            Select:
+            <select>
+                <vars>?x ?y</vars>
+                <q>
+                    <subj>?x</subj>
+                    <pred>?y</pred>
+                    <obj>DOG</obj>
+                </q>
+            </select>
+            Deleting triples:
+            <deletetriple>
+                <subj>FIDO</subj>
+                <pred>ISA</pred>
+                <obj>DOG</obj>
+            </deletetriple>
+            <deletetriple>
+                <subj>ROVER</subj>
+                <pred>ISA</pred>
+                <obj>DOG</obj>
+            </deletetriple>
+            <deletetriple>
+                <subj>REX</subj>
+                <pred>ISA</pred>
+                <obj>DOG</obj>
+            </deletetriple>
+            <deletetriple>
+                <subj>FIDO</subj>
+                <obj>DOG</obj>
+            </deletetriple>
+            Select:
+            <select>
+                <vars>?x ?y</vars>
+                <q>
+                    <subj>?x</subj>
+                    <pred>?y</pred>
+                    <obj>DOG</obj>
+                </q>
+            </select>
+        </template>
+    </category>
+
+    <category>
+        <pattern>SELECT TEST</pattern>
+        <template>
+            <set var="tuples">
+                <select>
+                    <vars>?x</vars>
+                    <q>
+                        <subj>?x</subj>
+                        <pred>hasSize</pred>
+                        <obj>7</obj>
+                    </q>
+                    <q>
+                        <subj>?x</subj>
+                        <pred>lifeArea</pred>
+                        <obj>Physical</obj>
+                    </q>
+                </select>
+            </set>
+            <condition var="tuples">
+                <li value="NIL"/>
+                <li>
+                    <think>
+                        <set var="head">
+                            <first>
+                                <get var="tuples"/>
+                            </first>
+                        </set>
+                        <set var="tuples">
+                            <rest>
+                                <get var="tuples"/>
+                            </rest>
+                        </set>
+                    </think>
+                    <get var="?x">
+                        <tuple>
+                            <get var="head"/>
+                        </tuple>
+                    </get>
+                    <loop/>
+                </li>
+            </condition>
+        </template>
+    </category>
+
+    <category>
+        <pattern>SELECT TEST NOTQ</pattern>
+        <template>
+            <set var="tuples">
+                <select>
+                    <vars>?x</vars>
+                    <notq>
+                        <subj>?x</subj>
+                        <pred>isa</pred>
+                        <obj>Person</obj>
+                    </notq>
+                </select>
+            </set>
+        </template>
+    </category>
+
+    <category>
+        <pattern>SELECT TEST NOT</pattern>
+        <template>
+            <set var="tuples">
+                <select>
+                    <vars>?x</vars>
+                    <q>
+                        <subj>?x</subj>
+                        <pred>hasSize</pred>
+                        <obj>7</obj>
+                    </q>
+                    <notq>
+                        <subj>?x</subj>
+                        <pred>isa</pred>
+                        <obj>Person</obj>
+                    </notq>
+                </select>
+            </set>
+            <condition var="tuples">
+                <li value="NIL"/>
+                <li>
+                    <think>
+                        <set var="head">
+                            <first>
+                                <get var="tuples"/>
+                            </first>
+                        </set>
+                        <set var="tuples">
+                            <rest>
+                                <get var="tuples"/>
+                            </rest>
+                        </set>
+                    </think>
+                    <get var="?x">
+                        <tuple>
+                            <get var="head"/>
+                        </tuple>
+                    </get>
+                    <loop/>
+                </li>
+            </condition>
+        </template>
+    </category>
+
+    <category>
+        <pattern>SELECT TEST NOT 2</pattern>
+        <template>
+            <set var="tuples">
+                <select>
+                    <vars>?x</vars>
+                    <q>
+                        <subj>?x</subj>
+                        <pred>hasSize</pred>
+                        <obj>7</obj>
+                    </q>
+                    <notq>
+                        <subj>?x</subj>
+                        <pred>isa</pred>
+                        <obj>Person</obj>
+                    </notq>
+                    <notq>
+                        <subj>?x</subj>
+                        <pred>isa</pred>
+                        <obj>Parent</obj>
+                    </notq>
+                    <notq>
+                        <subj>?x</subj>
+                        <pred>lifeArea</pred>
+                        <obj>Family</obj>
+                    </notq>
+                </select>
+            </set>
+            <condition var="tuples">
+                <li value="NIL"/>
+                <li>
+                    <think>
+                        <set var="head">
+                            <first>
+                                <get var="tuples"/>
+                            </first>
+                        </set>
+                        <set var="tuples">
+                            <rest>
+                                <get var="tuples"/>
+                            </rest>
+                        </set>
+                    </think>
+                    <get var="?x">
+                        <tuple>
+                            <get var="head"/>
+                        </tuple>
+                    </get>
+                    <loop/>
+                </li>
+            </condition>
+        </template>
+    </category>
+
+    <category>
+        <pattern>SELECT TEST NOT 3</pattern>
+        <template>
+            <set var="tuples">
+                <select>
+                    <vars>?x</vars>
+                    <q>
+                        <subj>?x</subj>
+                        <pred>hasSize</pred>
+                        <obj>7</obj>
+                    </q>
+                    <q>
+                        <subj>?x</subj>
+                        <pred>isa</pred>
+                        <obj>?y</obj>
+                    </q>
+                    <notq>
+                        <subj>?y</subj>
+                        <pred>isa</pred>
+                        <obj>Person</obj>
+                    </notq>
+                    <notq>
+                        <subj>?x</subj>
+                        <pred>isa</pred>
+                        <obj>Person</obj>
+                    </notq>
+                </select>
+            </set>
+            <condition var="tuples">
+                <li value="NIL"/>
+                <li>
+                    <think>
+                        <set var="head">
+                            <first>
+                                <get var="tuples"/>
+                            </first>
+                        </set>
+                        <set var="tuples">
+                            <rest>
+                                <get var="tuples"/>
+                            </rest>
+                        </set>
+                    </think>
+                    <get var="?x">
+                        <tuple>
+                            <get var="head"/>
+                        </tuple>
+                    </get>
+                    <loop/>
+                </li>
+            </condition>
+        </template>
+    </category>
+
+    <category>
+        <pattern>SELECT TEST 3</pattern>
+        <template>
+            <set var="tuples">
+                <select>
+                    <vars>?entity ?lifeArea ?purpose</vars>
+                    <q>
+                        <subj>?entity</subj>
+                        <pred>lifeArea</pred>
+                        <obj>?lifeArea</obj>
+                    </q>
+                    <q>
+                        <subj>?entity</subj>
+                        <pred>hasPurpose</pred>
+                        <obj>?purpose</obj>
+                    </q>
+                    <q>
+                        <subj>?entity</subj>
+                        <pred>isA</pred>
+                        <obj>plant</obj>
+                    </q>
+                </select>
+            </set>
+            <condition var="tuples">
+                <li value="NIL"/>
+                <li>
+                    <think>
+                        <set var="head">
+                            <first>
+                                <get var="tuples"/>
+                            </first>
+                        </set>
+                        <set var="tuples">
+                            <rest>
+                                <get var="tuples"/>
+                            </rest>
+                        </set>
+                    </think>
+                    ["
+                    <get var="?entity">
+                        <tuple>
+                            <get var="head"/>
+                        </tuple>
+                    </get>
+                    ",
+                    "
+                    <get var="?lifeArea">
+                        <tuple>
+                            <get var="head"/>
+                        </tuple>
+                    </get>
+                    ",
+                    "
+                    <get var="?purpose">
+                        <tuple>
+                            <get var="head"/>
+                        </tuple>
+                    </get>
+                    "]
+                    <loop/>
+                </li>
+            </condition>
+        </template>
+    </category>
+
+    <category>
+        <pattern>SELECT TEST 2</pattern>
+        <template>
+            <set var="tuples">
+                <select>
+                    <vars>?x</vars>
+                    <q>
+                        <subj>?x</subj>
+                        <pred>hasSize</pred>
+                        <obj>7</obj>
+                    </q>
+                    <q>
+                        <subj>?x</subj>
+                        <pred>lifeArea</pred>
+                        <obj>Physical</obj>
+                    </q>
+                    <q>
+                        <subj>?x</subj>
+                        <pred>isa</pred>
+                        <obj>Person</obj>
+                    </q>
+                </select>
+            </set>
+            <condition var="tuples">
+                <li value="NIL"/>
+                <li>
+                    <think>
+                        <set var="head">
+                            <first>
+                                <get var="tuples"/>
+                            </first>
+                        </set>
+                        <set var="tuples">
+                            <rest>
+                                <get var="tuples"/>
+                            </rest>
+                        </set>
+                    </think>
+                    <get var="?x">
+                        <tuple>
+                            <get var="head"/>
+                        </tuple>
+                    </get>
+                    <loop/>
+                </li>
+            </condition>
+        </template>
+    </category>
+
+    <category>
+        <pattern>GREEK TEST</pattern>
+        <template>
+            <think>
+                <srai>Socrates is older than Plato</srai>
+                <srai>Plato is older than Aristotle</srai>
+            </think>
+            Who is older Socrates or Plato?
+            <srai>Who is older Socrates or Plato</srai>
+            Who is older Plato or Socrates?
+            <srai>Who is older Plato or Socrates</srai>
+            Who is older Aristotle or Plato?
+            <srai>Who is older Aristotle or Plato</srai>
+            Who is older Plato or Aritstotle?
+            <srai>Who is older Plato or Aristotle</srai>
+            Who is older Socrates or Aristotle?
+            <srai>Who is older Socrates or Aristotle</srai>
+            Who is older Aristotle or Socrates?
+            <srai>Who is older Aristotle or Socrates</srai>
+            Who is younger Socrates or Aristotle?
+            <srai>Who is younger Socrates or Aristotle</srai>
+            Who is younger Aristotle or Socrates?
+            <srai>Who is younger Aristotle or Socrates</srai>
+        </template>
+    </category>
+
+</aiml>

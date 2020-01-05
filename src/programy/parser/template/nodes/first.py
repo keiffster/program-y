@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,10 +14,10 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
+import json
 from programy.utils.logging.ylogger import YLogger
 from programy.parser.template.nodes.base import TemplateNode
-import json
+
 
 class TemplateFirstNode(TemplateNode):
 
@@ -26,6 +26,7 @@ class TemplateFirstNode(TemplateNode):
 
     def resolve_to_string(self, client_context):
         result = self.resolve_children_to_string(client_context)
+        result = result.strip()
         resolved = "NIL"
         if result != "":
             try:
@@ -33,12 +34,14 @@ class TemplateFirstNode(TemplateNode):
                 if isinstance(data, list):
                     if len(data) > 0:
                         resolved = json.dumps(data[0])
+
                 else:
-                    raise Exception("Not what I wanted")
-            except Exception as e:
+                    raise Exception("Invalid JSON, reverting to result as text")
+
+            except Exception as excep:
+                YLogger.exception_nostack(self, "Failed to load JSON", excep)
                 words = result.split(" ")
-                if len(words) > 0:
-                    resolved = words[0]
+                resolved = words[0]
 
         YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
 

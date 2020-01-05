@@ -1,12 +1,12 @@
 import unittest.mock
 
-from linebot.models import TextSendMessage
 from linebot import LineBotApi, WebhookParser
+from linebot.models import TextSendMessage
 from linebot.webhook import SignatureValidator
 
 from programy.clients.restful.flask.line.client import LineBotClient
 from programy.clients.restful.flask.line.config import LineConfiguration
-
+from programy.clients.render.text import TextRenderer
 from programytest.clients.arguments import MockArgumentParser
 
 
@@ -73,6 +73,9 @@ class LineBotClientTests(unittest.TestCase):
 
         self.assertIsInstance(client.get_client_configuration(), LineConfiguration)
         self.assertEqual('ProgramY AIML2.0 Client', client.get_description())
+
+        self.assertFalse(client._render_callback())
+        self.assertIsInstance(client.renderer, TextRenderer)
 
     def test_handle_text_message(self):
         arguments = MockArgumentParser()

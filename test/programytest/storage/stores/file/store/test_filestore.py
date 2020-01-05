@@ -1,11 +1,11 @@
-import unittest
 import os
 import os.path
 import shutil
-
-from programy.storage.stores.file.store.filestore import FileStore
-from programy.storage.stores.file.engine import FileStorageEngine
+import unittest
+from unittest.mock import patch
 from programy.storage.stores.file.config import FileStorageConfiguration
+from programy.storage.stores.file.engine import FileStorageEngine
+from programy.storage.stores.file.store.filestore import FileStore
 
 
 class MockFileStore(FileStore):
@@ -45,3 +45,45 @@ class FileStoreTests(unittest.TestCase):
         store._ensure_dir_exists(store._get_storage_path())
 
         self.assertTrue(os.path.exists(store._get_storage_path()))
+
+    def test_drop(self):
+        config = FileStorageConfiguration()
+        engine = FileStorageEngine(config)
+        store = MockFileStore(engine)
+
+        if os.path.exists(store._get_storage_path()):
+            shutil.rmtree(store._get_storage_path())
+
+        os.mkdir(store._get_storage_path())
+        os.mkdir(store._get_storage_path() + os.sep + "subdir1")
+        store.drop()
+
+        self.assertFalse(os.path.exists(store._get_storage_path()))
+
+    def test_drop_no_dir(self):
+        config = FileStorageConfiguration()
+        engine = FileStorageEngine(config)
+        store = MockFileStore(engine)
+
+        if os.path.exists(store._get_storage_path()):
+            shutil.rmtree(store._get_storage_path())
+
+        store.drop()
+
+        self.assertFalse(os.path.exists(store._get_storage_path()))
+
+    def patch_drop_folder(self, folder):
+        raise Exception("Mock Exception")
+
+    @patch('programy.storage.stores.file.store.filestore.FileStore._drop_folder', patch_drop_folder)
+    def test_drop_exception(self):
+        config = FileStorageConfiguration()
+        engine = FileStorageEngine(config)
+        store = MockFileStore(engine)
+
+        if os.path.exists(store._get_storage_path()):
+            shutil.rmtree(store._get_storage_path())
+
+        store.drop()
+
+        self.assertFalse(os.path.exists(store._get_storage_path()))

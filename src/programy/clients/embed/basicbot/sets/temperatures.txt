@@ -1,0 +1,5 @@
+hot
+cold
+frozen
+melting
+boiling

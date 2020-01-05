@@ -1,0 +1,27 @@
+AUTUMN:hasPurpose:to make leaves fall
+AUTUMN:hasSize:0
+AUTUMN:hasSyllables:1
+AUTUMN:isa:Season
+AUTUMN:lifeArea:Physical
+WINTER:hasPurpose:to freeze everything
+WINTER:hasPurpose:to give us snowstorms
+WINTER:hasSize:0
+WINTER:hasSyllables:2
+WINTER:isa:Season
+WINTER:isa:Time Quantity
+WINTER:lifeArea:Physical
+SUMMER:hasPurpose:to go to the beach
+SUMMER:hasSize:0
+SUMMER:hasSyllables:2
+SUMMER:isa:Season
+SUMMER:lifeArea:Physical
+SPRING:hasPurpose:to make new things grow
+SPRING:hasSize:0
+SPRING:hasSyllables:1
+SPRING:isa:Season
+SPRING:lifeArea:Physical
+FALL:hasPurpose:to make leaves fall
+FALL:hasSize:0
+FALL:hasSyllables:1
+FALL:isa:Season
+FALL:lifeArea:Physical

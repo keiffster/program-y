@@ -1,0 +1,24 @@
+BERLIN:hasPurpose:to form a city
+BERLIN:hasSize:10
+BERLIN:hasSyllables:2
+BERLIN:isa:City
+BERLIN:isa:Geographic Location
+BERLIN:lifeArea:Education
+MADRID:hasPurpose:to form a city
+MADRID:hasSize:10
+MADRID:hasSyllables:2
+MADRID:isa:City
+MADRID:isa:Geographic Location
+MADRID:lifeArea:Education
+PARIS:hasPurpose:to form a city
+PARIS:hasSize:10
+PARIS:hasSyllables:2
+PARIS:isa:City
+PARIS:isa:Geographic Location
+PARIS:lifeArea:Education
+ROME:hasPurpose:to form a city
+ROME:hasSize:10
+ROME:hasSyllables:1
+ROME:isa:City
+ROME:isa:Geographic Location
+ROME:lifeArea:Education

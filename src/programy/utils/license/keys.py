@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -15,10 +15,9 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.utils.logging.ylogger import YLogger
-from programy.storage.stores.file.store.licensekeys import FileLicenseStore
 
 
-class LicenseKeys(object):
+class LicenseKeys:
 
     def __init__(self):
         self._keys = {}
@@ -38,4 +37,4 @@ class LicenseKeys(object):
         if name in self._keys:
             return self._keys[name]
         else:
-            raise ValueError("No license key named [%s]"%name)
+            raise ValueError("No license key named [%s]" % name)

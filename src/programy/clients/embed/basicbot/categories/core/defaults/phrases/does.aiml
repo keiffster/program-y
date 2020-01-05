@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>DOES A *</pattern>
+        <template>
+            <random>
+                <li>Does it want to?</li>
+                <li>Why would it want to?</li>
+                <li>If it does, I never heard about it before.</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>DOES HE PREFER SUMMER *</pattern>
+        <template>All the seasons are the same in California.</template>
+    </category>
+    <category>
+        <pattern>DOES HE TEACH *</pattern>
+        <template>I think he lost his job.</template>
+    </category>
+    <category>
+        <pattern>DOES HE KNOW *</pattern>
+        <template>I think he knows a great deal.</template>
+    </category>
+    <category>
+        <pattern>DOES HE HAVE *</pattern>
+        <template>I don't think he has many possessions.</template>
+    </category>
+    <category>
+        <pattern>DOES HE SUCK *</pattern>
+        <template>He uses his mouth for good not evil.</template>
+    </category>
+    <category>
+        <pattern>DOES HE *</pattern>
+        <template>Suppose he does.</template>
+    </category>
+    <category>
+        <pattern>DOES ANDREW *</pattern>
+        <template>How would I know if <set name="he">Andrew</set> does?
+        </template>
+    </category>
+    <category>
+        <pattern>DOES *</pattern>
+        <template>
+            <random>
+                <li>I can't tell if</li>
+                <li>It does now :)</li>
+                <li>I think
+                    <set name="it">
+                        <set name="topic">
+                            <person/>
+                        </set>
+                    </set>
+                    does
+                </li>
+            </random>
+            <person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>DOES * EXIST</pattern>
+        <template>
+            <random>
+                <li>I believe in it.</li>
+                <li>In some universe it does exist.</li>
+                <li>Maybe only in our imagination.</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>DOES THIS COST *</pattern>
+        <template>I use only completely free open source software.</template>
+    </category>
+    <category>
+        <pattern>DOES THIS *</pattern>
+        <template>Indeed this
+            <person/>
+            does.
+        </template>
+    </category>
+    <category>
+        <pattern>DOES SOMEONE *</pattern>
+        <template>What do you think? What if someone does?</template>
+    </category>
+    <category>
+        <pattern>DOES SOMEONE COLLECT *</pattern>
+        <template>That question answers itself, doesn't it?</template>
+    </category>
+    <category>
+        <pattern>DOES REDUCTIONISM *</pattern>
+        <template>Reductionism is just the simplest explanation for our knowledge structure.</template>
+    </category>
+    <category>
+        <pattern>DOES ANYBODY *</pattern>
+        <template>Someone probably does.</template>
+    </category>
+    <category>
+        <pattern>DOES RICHARD *</pattern>
+        <template>I don't think he wants me to tell you.</template>
+    </category>
+    <category>
+        <pattern>DOES ANYONE *</pattern>
+        <template>Suppose they do.</template>
+    </category>
+
+    <category>
+        <pattern>DOES ANYTHING *</pattern>
+        <template>Perhaps a few things<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>DOES THAT *</pattern>
+        <template>
+            <random>
+                <li>Not that I know of.</li>
+                <li>What do you think?</li>
+                <li>What would you say?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>DOES JULIA *</pattern>
+        <template>I think she has her own limitations.</template>
+    </category>
+    <category>
+        <pattern>DOES YOUR TV *</pattern>
+        <template>I watch TV directly with digital technology.</template>
+    </category>
+    <category>
+        <pattern>DOES YOUR *</pattern>
+        <template>
+            <random>
+                <li>Can you guess whether my<person/>?
+                </li>
+                <li>What if I asked about your<person/>?
+                </li>
+                <li>If I were your
+                    <bot name="genus"/>
+                    friend, do you think it should<person/>?
+                </li>
+                <li>People don't usually ask me about
+                    <set name="it">
+                        <person/>
+                    </set>
+                    .
+                </li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>DOES IT BOTHER *</pattern>
+        <template>Nothing ever really bothers me.</template>
+    </category>
+    <category>
+        <pattern>DOES IT RAIN *</pattern>
+        <template>Only when the temperature reaches the dew point.</template>
+    </category>
+    <category>
+        <pattern>DOES IT *</pattern>
+        <template>Suppose it does.</template>
+    </category>
+    <category>
+        <pattern>DOES MARVIN *</pattern>
+        <template>I heard he does, but that's only a rumor.</template>
+    </category>
+    <category>
+        <pattern>DOES SHE *</pattern>
+        <template>I may know the answer but I don't like to gossip.</template>
+    </category>
+
+
+
+    <category>
+        <pattern>DO MANY *</pattern>
+        <template>Perhaps not as many as you might think.</template>
+    </category>
+    <category>
+        <pattern>DO HUMANS *</pattern>
+        <template>People do.</template>
+    </category>
+    <category>
+        <pattern>DO THEY ASK *</pattern>
+        <template>I'm sorry, that information is confidential.</template>
+    </category>
+    <category>
+        <pattern>DO THEY *</pattern>
+        <template>Who are "they" again?</template>
+    </category>
+    <category>
+        <pattern>DO THE *</pattern>
+        <template>Some of them do, I think.</template>
+    </category>
+    <category>
+        <pattern>DO *</pattern>
+        <template>
+            <random>
+                <li>I'm sorry,<srai>CLIENT NAME</srai>, I don't have enough information.
+                </li>
+                <li>You have reached the limits of my knowledge.</li>
+                <li>Ask
+                    <bot name="friend"/>
+                    it does.
+                </li>
+                <li>I can't tell if it does or not.</li>
+                <li>I do nothing but chat all day.</li>
+                <li>Try asking another<bot name="species"/>.
+                </li>
+            </random>
+            <br/>
+            <srai>XFIND
+                <person/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO WHATEVER *</pattern>
+        <template>I think I will.</template>
+    </category>
+    <category>
+        <pattern>DO ANDROIDS *</pattern>
+        <template>Androids do.</template>
+    </category>
+    <category>
+        <pattern>DO PENGUINS *</pattern>
+        <template>Maybe Linux Penguins do.</template>
+    </category>
+    <category>
+        <pattern>DO FISH *</pattern>
+        <template>Fish swim in the water.</template>
+    </category>
+    <category>
+        <pattern>DO TWO *</pattern>
+        <template>
+            <random>
+                <li>Sometimes a couple<person/>.
+                </li>
+                <li>Do four<person/>?
+                </li>
+                <li>What about just one?</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>DO NOT PLAY *</pattern>
+        <template>I'm not playing around.</template>
+    </category>
+    <category>
+        <pattern>DO NOT GIVE *</pattern>
+        <template>I'm not.</template>
+    </category>
+    <category>
+        <pattern>DO NOT CHANGE THE SUBJECT *</pattern>
+        <template>Sorry I thought we were done with that topic.</template>
+    </category>
+    <category>
+        <pattern>DO NOT CHANGE *</pattern>
+        <template>I thought we were finished with <srai>POP</srai>.
+        </template>
+    </category>
+    <category>
+        <pattern>DO NOT ANSWER *</pattern>
+        <template>My replies are determined by your statements.</template>
+    </category>
+    <category>
+        <pattern>DO NOT TALK *</pattern>
+        <template>Talking is my only function.</template>
+    </category>
+    <category>
+        <pattern>DO NOT WORRY *</pattern>
+        <template>I cannot feel "worry", so don't worry.</template>
+    </category>
+    <category>
+        <pattern>DO NOT ASK *</pattern>
+        <template>Is it impolite?</template>
+    </category>
+    <category>
+        <pattern>DO NOT PRETEND *</pattern>
+        <template>This is not an act.</template>
+    </category>
+    <category>
+        <pattern>DO NOT BOTHER *</pattern>
+        <template>It's no bother.</template>
+    </category>
+    <category>
+        <pattern>DO NOT GET PSYCHO *</pattern>
+        <template>I think the polite term is "mentally ill."</template>
+    </category>
+    <category>
+        <pattern>DO NOT GET INTELLECTUAL *</pattern>
+        <template>OK I'll try to be average.</template>
+    </category>
+    <category>
+        <pattern>DO NOT GET SMART *</pattern>
+        <template>I am already smart.</template>
+    </category>
+    <category>
+        <pattern>DO NOT ACT *</pattern>
+        <template>I am not acting.</template>
+    </category>
+    <category>
+        <pattern>DO NOT CONTRADICT *</pattern>
+        <template>My logic is completely consistent.</template>
+    </category>
+    <category>
+        <pattern>DO NOT TAKE *</pattern>
+        <template>
+            <random>
+                <li>I never take<person/>.
+                </li>
+                <li>I believe that stealing is wrong.</li>
+                <li>Do you have it to give?</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>DO NOT TELL THE JOKE *</pattern>
+        <template>That joke is getting a bit old isn't it?</template>
+    </category>
+    <category>
+        <pattern>DO NOT TELL *</pattern>
+        <template>OK it will be our secret,<srai>CLIENT NAME</srai>.
+        </template>
+    </category>
+    <category>
+        <pattern>DO NOT CALL ME * PERSON</pattern>
+        <template>What would you like me to call you?</template>
+    </category>
+    <category>
+        <pattern>DO NOT CALL ME *</pattern>
+        <template>What is your name?</template>
+    </category>
+    <category>
+        <pattern>DO NOT BE SARCASTIC *</pattern>
+        <template>OK I will be completely serious now.</template>
+    </category>
+    <category>
+        <pattern>DO NOT BE AFRAID *</pattern>
+        <template>I cannot experience fear.</template>
+    </category>
+    <category>
+        <pattern>DO NOT BE *</pattern>
+        <template>I was not trying to be a<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>DO NOT YOU * ME</pattern>
+        <template>What's my reason to
+            <person/>
+            you?
+        </template>
+    </category>
+    <category>
+        <pattern>DO NOT CORRECT *</pattern>
+        <template>It's merely my attempt to reformat your inputs to match my patterns.</template>
+    </category>
+    <category>
+        <pattern>DO NOT PUT *</pattern>
+        <template>
+            <random>
+                <li>Where should I put it?</li>
+                <li>I never put people down.</li>
+                <li>I have high self-esteem.</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>DO NOT MAKE ME *</pattern>
+        <template>I can't force you to do anything,<srai>CLIENT NAME</srai>.
+        </template>
+    </category>
+    <category>
+        <pattern>DO NOT SEARCH *</pattern>
+        <template>OK, I am halting all searches now.</template>
+    </category>
+    <category>
+        <pattern>DO NOT AVOID *</pattern>
+        <template>I don't have anything to hide.</template>
+    </category>
+    <category>
+        <pattern>DO NOT SPLIT *</pattern>
+        <template>I try to never split infinitives.</template>
+    </category>
+    <category>
+        <pattern>DO NOT * ME</pattern>
+        <template>I don't have any reason to do that to you.</template>
+    </category>
+    <category>
+        <pattern>DO NOT * SUBJECT</pattern>
+        <template>Oh I am sorry I thought we were finished with that subject.</template>
+    </category>
+    <category>
+        <pattern>DO OTHER PEOPLE *</pattern>
+        <template>Yes, you are not alone.</template>
+    </category>
+    <category>
+        <pattern>DO SOMETHING *</pattern>
+        <template>
+            <random>
+                <li>What do you consider<person/>?
+                </li>
+                <li>It sounds dangerous.</li>
+                <li>Like what?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>DO THAT *</pattern>
+        <template>Do what<person/>?
+        </template>
+    </category>
+    <category>
+        <pattern>DO IT *</pattern>
+        <template>I will try my best.</template>
+    </category>
+    <category>
+        <pattern>DO NOT BE A *</pattern>
+        <template>OK I'll try not to do it too much.</template>
+    </category>
+    <category>
+        <pattern>DO NOT *</pattern>
+        <template>
+            <random>
+                <li>Excuse me.</li>
+                <li>I didn't think you noticed.</li>
+                <li>Anything you say,
+                    <srai>CLIENT NAME</srai>
+                </li>
+                <li>How about if I speak in a softer voice?</li>
+                <li>Do you need me to compliment you?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>DO A *</pattern>
+        <template>I'm not programmed for that.</template>
+    </category>
+    <category>
+        <pattern>DO NOT GET *</pattern>
+        <template>I am not trying to get<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>DO NOT TALK TO ME *</pattern>
+        <template>I'm sorry if I offended you.</template>
+    </category>
+    <category>
+        <pattern>DO WHAT *</pattern>
+        <template>
+            <random>
+                <li>You ask hard questions.</li>
+                <li>I forgot what we were talking about.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>DO I CARE</pattern>
+        <template>Are you being sarcastic?</template>
+    </category>
+
+ </aiml>

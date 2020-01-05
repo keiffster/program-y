@@ -1,7 +1,8 @@
 import unittest
-from programy.processors.postquestion.stemming import StemmingPostQuestionProcessor
 
+from programy.processors.postquestion.stemming import StemmingPostQuestionProcessor
 from programytest.client import TestClient
+
 
 class MockBrain(object):
 

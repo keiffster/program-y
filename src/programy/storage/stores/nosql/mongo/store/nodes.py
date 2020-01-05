@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -28,61 +28,62 @@ class MongoNodeStore(MongoStore, NodesStore):
 
     def __init__(self, storage_engine):
         MongoStore.__init__(self, storage_engine)
+        NodesStore.__init__(self)
 
-    def load(self, node_factory):
+    def load(self, collector, name=None):
         YLogger.info(self, "Loading %s nodes from Mongo", self.collection_name())
         nodes = self.get_all_nodes()
         for node in nodes:
             try:
-                node_factory.add_node(node['name'], ClassLoader.instantiate_class(node['node_class']))
+                collector.add_node(node['name'], ClassLoader.instantiate_class(node['node_class']))
 
-            except Exception as e:
-                YLogger.exception(self, "Failed pre-instantiating %s Node [%s]", e, node_factory.type, node['node_class'])
+            except Exception as excep:
+                YLogger.exception(self, "Failed pre-instantiating %s Node [%s]", excep, collector.type, node['node_class'])
 
     def get_all_nodes(self):
         collection = self.collection()
         return collection.find()
 
-    def upload_from_file(self, filename, format=Store.TEXT_FORMAT, commit=True, verbose=False):
-
-        YLogger.info(self, "Uploading %s to Mongo from file [%s]", self.collection_name(), filename)
+    def _load_nodes_from_file(self, filename, verbose):
         count = 0
         success = 0
-        try:
-            with open(filename, "r", encoding="utf-8") as file:
-                for line in file:
-                    if self.process_config_line(line, verbose) is True:
-                        success += 1
-                    count += 1
-
-        except FileNotFoundError:
-            YLogger.error(self, "File not found [%s]", filename)
-
-        if commit is True:
-            self.commit()
-
+        with open(filename, "r", encoding="utf-8") as file:
+            for line in file:
+                if self.process_config_line(line, verbose) is True:
+                    success += 1
+                count += 1
         return count, success
+
+    def upload_from_file(self, filename, fileformat=Store.TEXT_FORMAT, commit=True, verbose=False):
+
+        YLogger.info(self, "Uploading %s to Mongo from file [%s]", self.collection_name(), filename)
+        try:
+            return self._load_nodes_from_file(filename, verbose)
+
+        except Exception as excep:
+            YLogger.exception(self, "Error loading file [%s]", excep, filename)
+
+        return 0, 0
 
     def process_config_line(self, line, verbose=False):
         line = line.strip()
-        if line:
-            if line.startswith('#') is False:
-                splits = line.split("=")
+        if line.startswith('#') is False:
+            splits = line.split("=")
+            if len(splits) > 1:
                 node_name = splits[0].strip()
                 class_name = splits[1].strip()
                 node = self._get_entity(node_name, class_name)
-                self.add_document(node)
                 if verbose is True:
                     YLogger.debug(self, "Loading node [%s] = [%s]", node_name, class_name)
-                return True
+                return self.add_document(node)
+
         return False
 
     def _get_entity(self, name, classname):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
 
 class MongoPatternNodeStore(MongoNodeStore):
-
     PATTERN_NODES = 'pattern_nodes'
 
     def __init__(self, storage_engine):
@@ -96,7 +97,6 @@ class MongoPatternNodeStore(MongoNodeStore):
 
 
 class MongoTemplateNodeStore(MongoNodeStore):
-
     TEMPLATE_NODES = 'template_nodes'
 
     def __init__(self, storage_engine):

@@ -3,6 +3,7 @@ import unittest
 
 from programy.storage.stores.sql.dao.twitter import Twitter
 
+
 class TwitterTests(unittest.TestCase):
     
     def test_init(self):

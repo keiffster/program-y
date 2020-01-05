@@ -1,10 +1,10 @@
 import unittest
 import unittest.mock
-
-from programy.oob.defaults.clear import ClearOutOfBandProcessor
 import xml.etree.ElementTree as ET
 
+from programy.oob.defaults.clear import ClearOutOfBandProcessor
 from programytest.client import TestClient
+
 
 class ClearOutOfBandProcessorTests(unittest.TestCase):
 

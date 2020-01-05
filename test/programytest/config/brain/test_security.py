@@ -1,9 +1,9 @@
 import unittest
-
 from programy.config.file.yaml_file import YamlConfigurationFile
-from programy.config.brain.security import BrainSecurityAuthorisationConfiguration
-from programy.config.brain.security import BrainSecurityAuthenticationConfiguration
 from programy.clients.events.console.config import ConsoleConfiguration
+from programy.config.brain.security import BrainSecurityAuthenticationConfiguration
+from programy.config.brain.security import BrainSecurityAuthorisationConfiguration
+from programy.config.brain.security import BrainSecurityAccountLinkerConfiguration
 
 class BrainSecurityConfigurationTests(unittest.TestCase):
 
@@ -142,3 +142,40 @@ class BrainSecurityConfigurationTests(unittest.TestCase):
         self.assertEqual("programy.security.authenticate.passthrough.PassThroughAuthenticationService", service_config.classname)
         self.assertEqual(BrainSecurityAuthenticationConfiguration.DEFAULT_ACCESS_DENIED, service_config.denied_text)
         self.assertEqual(BrainSecurityAuthenticationConfiguration.DEFAULT_ACCESS_DENIED, service_config.denied_text)
+
+    def test_defaults(self):
+        authenticate_config = BrainSecurityAuthenticationConfiguration()
+        data = {}
+        authenticate_config.to_yaml(data, True)
+
+        BrainSecurityConfigurationTests.assert_authenticate_defaults(self, data)
+
+        authorise_config = BrainSecurityAuthorisationConfiguration()
+        data = {}
+        authorise_config.to_yaml(data, True)
+
+        BrainSecurityConfigurationTests.assert_authorise_defaults(self, data)
+
+        accountlinker_config = BrainSecurityAccountLinkerConfiguration()
+        data = {}
+        accountlinker_config.to_yaml(data, True)
+
+        BrainSecurityConfigurationTests.assert_accountlinker_defaults(self, data)
+
+    @staticmethod
+    def assert_authenticate_defaults(test, data):
+        test.assertEqual(data['classname'], "programy.security.authenticate.passthrough.BasicPassThroughAuthenticationService")
+        test.assertEqual(data['denied_srai'], "AUTHENTICATION_FAILED")
+        test.assertEqual(data['denied_text'], "Access Denied!")
+
+    @staticmethod
+    def assert_authorise_defaults(test, data):
+        test.assertEqual(data['classname'], "programy.security.authorise.usergroupsauthorisor.BasicUserGroupAuthorisationService")
+        test.assertEqual(data['denied_srai'], "AUTHORISATION_FAILED")
+        test.assertEqual(data['denied_text'], "Access Denied!")
+
+    @staticmethod
+    def assert_accountlinker_defaults(test, data):
+        test.assertEqual(data['classname'], "programy.security.linking.accountlinker.BasicAccountLinkerService")
+        test.assertEqual(data['denied_srai'], "ACCOUNT_LINKING_FAILED")
+        test.assertEqual(data['denied_text'], "Unable to link accounts!")

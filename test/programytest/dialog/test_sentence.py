@@ -1,14 +1,13 @@
+import datetime
 import unittest
 
-import datetime
-
 from programy.dialog.sentence import Sentence
-from programy.parser.pattern.matchcontext import MatchContext
 from programy.parser.pattern.match import Match
+from programy.parser.pattern.matchcontext import MatchContext
 from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
+from programy.parser.pattern.nodes.template import PatternTemplateNode
 from programy.parser.pattern.nodes.word import PatternWordNode
 from programy.parser.template.nodes.word import TemplateWordNode
-
 from programytest.client import TestClient
 
 
@@ -17,6 +16,25 @@ class SentenceTests(unittest.TestCase):
     def setUp(self):
         client = TestClient()
         self._client_context = client.create_client_context("test1")
+
+    def test_split_into_words1(self):
+        self.assertEqual([], Sentence._split_into_words(self._client_context.brain.tokenizer, []))
+
+    def test_split_into_words2(self):
+        self.assertEqual([], Sentence._split_into_words(self._client_context.brain.tokenizer, None))
+
+    def test_split_into_words3(self):
+        self.assertEqual([], Sentence._split_into_words(None, "word1"))
+
+    def test_split_into_words4(self):
+        self.assertEqual([], Sentence._split_into_words(None, None))
+
+    def test_split_into_words5(self):
+        self.assertEqual(["word1"], Sentence._split_into_words(self._client_context.brain.tokenizer, "word1"))
+
+    def test_split_into_words6(self):
+        self.assertEqual(["word1", "word2", "word3"], Sentence._split_into_words(self._client_context.brain.tokenizer,
+                                                                             "word1 word2 word3"))
 
     def test_sentence_creation_empty(self):
         sentence = Sentence(self._client_context, "")
@@ -88,7 +106,7 @@ class SentenceTests(unittest.TestCase):
         word1 = PatternWordNode("Hi")
         word2 = PatternWordNode("There")
         context = MatchContext(max_search_depth=100, max_search_timeout=60,
-                               template_node=TemplateWordNode("Hello"))
+                               template_node=PatternTemplateNode(TemplateWordNode("Hello")))
         context.add_match(Match(Match.TOPIC, topic, None))
         context.add_match(Match(Match.WORD, word1, "Hi"))
         context.add_match(Match(Match.WORD, word2, "There"))
@@ -127,8 +145,8 @@ class SentenceTests(unittest.TestCase):
         sentence = Sentence.from_json(self._client_context, json_data)
 
         self.assertIsNotNone(sentence)
-        self.assertEquals(sentence.words, ['One', 'Two', 'Three'])
-        self.assertEquals(sentence.response, "Hello")
-        self.assertEquals(sentence.positivity, 0.0)
-        self.assertEquals(sentence.subjectivity, 0.5)
+        self.assertEqual(sentence.words, ['One', 'Two', 'Three'])
+        self.assertEqual(sentence.response, "Hello")
+        self.assertEqual(sentence.positivity, 0.0)
+        self.assertEqual(sentence.subjectivity, 0.5)
         self.assertIsNotNone(sentence.matched_context)

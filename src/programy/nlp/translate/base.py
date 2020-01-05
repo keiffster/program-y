@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -18,25 +18,25 @@ from programy.utils.logging.ylogger import YLogger
 from programy.utils.classes.loader import ClassLoader
 
 
-class BaseTranslator(object):
+class BaseTranslator:
 
     def initialise(self):
-        pass
+        pass    # pragma: no cover
 
     def languages(self):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     def supports_language(self, language):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     def language_code(self, code):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     def detect(self, text, default='EN'):
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
-    def translate(self, language, text):
-        raise NotImplementedError()
+    def translate(self, text, from_lang, to_lang="EN"):
+        raise NotImplementedError()  # pragma: no cover
 
     @staticmethod
     def initiate_translator(translator_config):
@@ -44,7 +44,7 @@ class BaseTranslator(object):
             try:
                 YLogger.info(None, "Loading translator from class [%s]", translator_config.classname)
                 translator_config = ClassLoader.instantiate_class(translator_config.classname)
-                translator= translator_config()
+                translator = translator_config()
                 translator.initialise()
                 return translator
             except Exception as excep:

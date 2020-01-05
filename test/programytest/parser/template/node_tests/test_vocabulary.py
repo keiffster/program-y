@@ -1,10 +1,10 @@
 import xml.etree.ElementTree as ET
 
 from programy.parser.template.nodes.base import TemplateNode
-from programy.parser.template.nodes.word import TemplateWordNode
 from programy.parser.template.nodes.vocabulary import TemplateVocabularyNode
-
+from programy.parser.template.nodes.word import TemplateWordNode
 from programytest.parser.base import ParserTestsBaseClass
+
 
 class MockTemplateVocabularyNode(TemplateVocabularyNode):
     def __init__(self):

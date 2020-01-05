@@ -5,6 +5,6 @@ SUBST Y: Z:\Development\Python\Projects\AIML\program-y
 
 SET PYTHONPATH=Y:\src;Y:\bots\y-bot
 
-nosetests --with-coverage --cover-erase --with-xunit --cover-branches --cover-package=programy
+nosetests --config=nose.cfg
 
-coverage html -d cover --omit=src\programy\clients\facebook.py,src\programy\clients\test_runner.py,*__init__.py
+coverage --rcfile=coverage.cfg html

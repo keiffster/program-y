@@ -1,0 +1,5 @@
+ADOBE:hasPurpose:to provide shelter
+ADOBE:hasSize:9
+ADOBE:hasSyllables:3
+ADOBE:isa:Dwelling
+ADOBE:lifeArea:Physical

@@ -1,8 +1,7 @@
 import unittest
 
-from programytest.client import TestClient
 from programy.clients.ping.responder import PingResponder
-from programy.clients.ping.responder import PingResponderConfig
+from programytest.client import TestClient
 
 
 class PingResponderTests(unittest.TestCase):

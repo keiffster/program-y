@@ -1,5 +1,5 @@
-import unittest
 import time
+import unittest
 
 from programy.context import ClientContext
 
@@ -44,10 +44,26 @@ class MockBot:
         return self._config
 
 
+class MockPatternParser:
+
+    def __init__(self):
+        self.dumped = False
+
+    def dump(self, output_func, verbose=False):
+        self.dumped = True
+
+
+class MockAimlParser:
+
+    def __init__(self):
+        self.pattern_parser = MockPatternParser()
+
+
 class MockBrain:
 
     def __init__(self, id):
         self._id = id
+        self.aiml_parser = MockAimlParser()
 
     @property
     def id(self):
@@ -137,3 +153,15 @@ class ClientContextTests(unittest.TestCase):
 
         with self.assertRaises(Exception):
             context.check_max_timeout()
+
+    def test_dump(self):
+        client = MockClient("clientid")
+        bot_config = MockBotConfiguration(999, 1)
+        bot = MockBot("botid", bot_config)
+        brain = MockBrain("brainid")
+        context = ClientContext(client, "testid")
+        context.bot = bot
+        context.brain = brain
+
+        context.dump(print, verbose=False)
+        self.assertTrue(context.brain.aiml_parser.pattern_parser.dumped)

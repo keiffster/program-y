@@ -1,10 +1,10 @@
 import unittest
 import unittest.mock
-
-from programy.oob.defaults.search import SearchOutOfBandProcessor
 import xml.etree.ElementTree as ET
 
+from programy.oob.defaults.search import SearchOutOfBandProcessor
 from programytest.client import TestClient
+
 
 class SearchOutOfBandProcessorTests(unittest.TestCase):
 

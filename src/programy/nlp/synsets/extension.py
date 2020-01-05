@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,16 +14,27 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.utils.logging.ylogger import YLogger
-
 from programy.extensions.base import Extension
 from programy.nlp.synsets.synsets import Synsets
+from programy.utils.logging.ylogger import YLogger
 
 
 class SynsetsExtension(Extension):
 
+    def __init__(self):
+        self._synsets = Synsets()
+
+    def _get_similarities(self, word1, word2, weight):
+        results = self._synsets.get_similarity(word1, word2)
+        for result in results:
+            if result[2] >= weight:
+                return True
+
+        return False
+
     # execute() is the interface that is called from the <extension> tag in the AIML
-    def execute(self, context, data):
+    def execute(self, client_context, data):
+        del client_context
 
         words = data.split(" ")
         if words[0] == 'SIMILAR':
@@ -34,36 +45,36 @@ class SynsetsExtension(Extension):
             elif len(words) == 6:
                 word1 = words[1]
                 word2 = words[2]
-                weight = float("%s.%s"%(words[3], words[5]))
+                weight = float("%s.%s" % (words[3], words[5]))
             else:
                 return "FALSE"
 
             try:
-                results = Synsets.get_similarity(word1, word2)
-                for result in results:
-                    if result[2] >= weight:
-                        return "TRUE"
+                if self._get_similarities(word1, word2, weight) is True:
+                    return "TRUE"
+
             except Exception as e:
-                print(e)
+                YLogger.exception_nostack(self, "Failed to get similarity", e)
 
         elif words[0] == 'SIMILARS':
 
-            word_type = words[1]
-            word = words[2]
+            if len(words) == 3:
+                word_type = words[1]
+                word = words[2]
 
-            if word_type == 'WORDS':
-                results = Synsets.get_similar_words(word)
-            elif word_type == 'VERBS':
-                results = Synsets.get_similar_verbs(word)
-            elif word_type == 'NOUNS':
-                results = Synsets.get_similar_nouns(word)
-            elif word_type == 'ADJECTIVES':
-                results = Synsets.get_similar_adjectives(word)
-            elif word_type == 'ADVERBS':
-                results = Synsets.get_similar_adverbs(word)
-            else:
-                return "FALSE"
+                if word_type == 'WORDS':
+                    results = self._synsets.get_similar_words(word)
+                elif word_type == 'VERBS':
+                    results = self._synsets.get_similar_verbs(word)
+                elif word_type == 'NOUNS':
+                    results = self._synsets.get_similar_nouns(word)
+                elif word_type == 'ADJECTIVES':
+                    results = self._synsets.get_similar_adjectives(word)
+                elif word_type == 'ADVERBS':
+                    results = self._synsets.get_similar_adverbs(word)
+                else:
+                    return "FALSE"
 
-            return "TRUE %s"%" ".join([word.upper() for word in results])
+                return "TRUE %s" % " ".join([word.upper() for word in results])
 
         return "FALSE"

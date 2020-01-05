@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -20,12 +20,12 @@ from programy.dialog.sentence import Sentence
 from programy.config.brain.securities import BrainSecuritiesConfiguration
 
 
-class SecurityManager(object):
+class SecurityManager:
 
     def __init__(self, security_configuration):
 
-        assert (security_configuration is not None)
-        assert (isinstance(security_configuration, BrainSecuritiesConfiguration))
+        assert security_configuration is not None
+        assert isinstance(security_configuration, BrainSecuritiesConfiguration)
 
         self._configuration = security_configuration
         self._authentication = None
@@ -45,59 +45,64 @@ class SecurityManager(object):
         return self._account_linker
 
     def load_security_services(self, client):
-        if self._configuration is not None:
-            self.load_authentication_service(client)
-            self.load_authorisation_service(client)
-            self.load_account_linking_service(client)
-        else:
-            YLogger.debug(self, "No security configuration defined, running open...")
+        self.load_authentication_service(client)
+        self.load_authorisation_service(client)
+        self.load_account_linking_service(client)
 
-    def load_authentication_service(self, client):
+    def _load_authentication_class(self, client):
         if self._configuration.authentication is not None:
             if self._configuration.authentication.classname is not None:
-                try:
-                    classobject = ClassLoader.instantiate_class(self._configuration.authentication.classname)
-                    self._authentication = classobject(self._configuration.authentication)
-                    self._authentication.initialise(client)
-                except Exception as excep:
-                    YLogger.exception(self, "Failed to load security services", excep)
-        else:
-            YLogger.debug(self, "No authentication configuration defined")
+                classobject = ClassLoader.instantiate_class(self._configuration.authentication.classname)
+                self._authentication = classobject(self._configuration.authentication)
+                self._authentication.initialise(client)
 
-    def load_authorisation_service(self, client):
+    def load_authentication_service(self, client):
+        try:
+            self._load_authentication_class(client)
+
+        except Exception as excep:
+            YLogger.exception(self, "Failed to load security services", excep)
+
+    def _load_authorisation_class(self, client):
         if self._configuration.authorisation is not None:
             if self._configuration.authorisation.classname is not None:
-                try:
-                    classobject = ClassLoader.instantiate_class(self._configuration.authorisation.classname)
-                    self._authorisation = classobject(self._configuration.authorisation)
-                    self._authorisation.initialise(client)
-                except Exception as excep:
-                    YLogger.exception(self, "Failed to instatiate authorisation class", excep)
-        else:
-            YLogger.debug(self, "No authorisation configuration defined")
+                classobject = ClassLoader.instantiate_class(self._configuration.authorisation.classname)
+                self._authorisation = classobject(self._configuration.authorisation)
+                self._authorisation.initialise(client)
 
-    def load_account_linking_service(self, client):
+    def load_authorisation_service(self, client):
+        try:
+            self._load_authorisation_class(client)
+
+        except Exception as excep:
+            YLogger.exception(self, "Failed to instatiate authorisation class", excep)
+
+    def _load_account_linking_class(self, client):
         if self._configuration.account_linker is not None:
             if self._configuration.account_linker.classname is not None:
-                try:
-                    classobject = ClassLoader.instantiate_class(self._configuration.account_linker.classname)
-                    self._account_linker = classobject(self._configuration.account_linker)
-                    self.account_linker.initialise(client)
-                except Exception as excep:
-                    YLogger.exception(self, "Failed to instatiate authorisation class", excep)
-        else:
-            YLogger.debug(self, "No authorisation configuration defined")
+                classobject = ClassLoader.instantiate_class(self._configuration.account_linker.classname)
+                self._account_linker = classobject(self._configuration.account_linker)
+                self.account_linker.initialise(client)
 
+    def load_account_linking_service(self, client):
+        try:
+            self._load_account_linking_class(client)
+
+        except Exception as excep:
+            YLogger.exception(self, "Failed to instatiate authorisation class", excep)
 
     def failed_authentication(self, client_context):
         YLogger.error(client_context, "[%s] failed authentication!")
 
         # If we have an SRAI defined, then use that
         if self.authentication.configuration.denied_srai is not None:
-            match_context = client_context.brain.aiml_parser.match_sentence(client_context,
-                                                             Sentence(client_context, self.authentication.configuration.denied_srai),
-                                                             topic_pattern="*",
-                                                             that_pattern="*")
+            match_context = client_context.brain.aiml_parser.\
+                match_sentence(client_context,
+                               Sentence(client_context,
+                                        self.authentication.configuration.denied_srai),
+                               topic_pattern="*",
+                               that_pattern="*")
+
             # If the SRAI matched then return the result
             if match_context is not None:
                 return client_context.brain.resolve_matched_template(client_context, match_context)
@@ -112,4 +117,3 @@ class SecurityManager(object):
             if self.authentication.authenticate(client_context) is False:
                 return self.failed_authentication(client_context)
         return None
-

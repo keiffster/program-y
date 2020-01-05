@@ -1,10 +1,10 @@
 import unittest
 import unittest.mock
-
-from programy.oob.defaults.url import URLOutOfBandProcessor
 import xml.etree.ElementTree as ET
 
+from programy.oob.defaults.url import URLOutOfBandProcessor
 from programytest.client import TestClient
+
 
 class URLOutOfBandProcessorTests(unittest.TestCase):
 

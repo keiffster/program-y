@@ -1,7 +1,8 @@
-import unittest
 import os
+import unittest
 
 from programy.utils.text.text import TextUtils
+
 
 #############################################################################
 #
@@ -69,6 +70,19 @@ class TextUtilsTests(unittest.TestCase):
         self.assertEqual("&lt;&gt;", TextUtils.html_escape("<>"))
         self.assertEqual("&lt;regex/&gt;", TextUtils.html_escape("<regex/>"))
 
+    def test_is_not_tag(self):
+        self.assertTrue(TextUtils._is_not_tag("{http://alicebot.org/2001/AIML}"))
+        self.assertFalse(TextUtils._is_not_tag("{http://alicebot.org/2001/AIML}aiml"))
+
+    def test_extract_namespace_and_tag(self):
+        tag, namespace = TextUtils._extract_namespace_and_tag("{http://alicebot.org/2001/AIML}")
+        self.assertEquals(None, namespace)
+        self.assertEquals(None, tag)
+
+        tag, namespace = TextUtils._extract_namespace_and_tag("{http://alicebot.org/2001/AIML}aiml")
+        self.assertEquals("{http://alicebot.org/2001/AIML}", namespace)
+        self.assertEquals("aiml", tag)
+
     def test_tag_and_namespace_from_text(self):
         tag, name = TextUtils.tag_and_namespace_from_text("")
         self.assertIsNotNone(tag)
@@ -80,8 +94,19 @@ class TextUtilsTests(unittest.TestCase):
         self.assertEqual("text", tag)
         self.assertIsNone(name)
 
-        tag, name = TextUtils.tag_and_namespace_from_text("{http://alicebot.org/2001/AIML}aiml ")
+        tag, name = TextUtils.tag_and_namespace_from_text("{}")
+        self.assertIsNotNone(tag)
+        self.assertEqual("{}", tag)
+        self.assertIsNone(name)
+
+        tag, name = TextUtils.tag_and_namespace_from_text("{http://alicebot.org/2001/AIML}")
+        self.assertIsNotNone(tag)
+        self.assertEqual("{http://alicebot.org/2001/AIML}", tag)
+        self.assertIsNone(name)
+
+        tag, name = TextUtils.tag_and_namespace_from_text("{http://alicebot.org/2001/AIML}aiml")
         self.assertIsNotNone(tag)
         self.assertEqual("aiml", tag)
         self.assertIsNotNone(name)
         self.assertEqual("{http://alicebot.org/2001/AIML}", name)
+

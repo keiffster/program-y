@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+
+    <category>
+        <pattern>HOW HAPPY ARE YOU</pattern>
+        <template>
+            <extension path="programy.sentiment.extension.SentimentExtension">
+                SENTIMENT POSITIVITY <get name="positivity" />
+            </extension>
+            and
+            <extension path="programy.sentiment.extension.SentimentExtension">
+                SENTIMENT SUBJECTIVITY <get name="positivity" />
+            </extension>
+        </template>
+    </category>
+
+</aiml>

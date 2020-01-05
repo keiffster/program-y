@@ -1,5 +1,5 @@
 """
-Copyright(c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright(c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files(the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,13 +14,11 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.utils.logging.ylogger import YLogger
-
 from programy.storage.factory import StorageFactory
 
 
-class SetCollection(object):
+class SetCollection:
 
     def __init__(self):
         self._sets = {}
@@ -71,38 +69,40 @@ class SetCollection(object):
             return self._sets[set_name]
         return None
 
-    def store_name(self, set_name):
-        if set_name in self._stores:
-            return self._stores[set_name]
-        return None
-
     def count_words_in_sets(self):
         count = 0
-        for name, aset in self._sets.items():
+        for _, aset in self._sets.items():
             for value in aset:
                 for variant in value:
                     count += len(variant)
         return count
 
+    def _load_collection(self, storage_engine):
+        sets_store = storage_engine.sets_store()
+        sets_store.load_all(self)
+
     def load(self, storage_factory):
         if storage_factory.entity_storage_engine_available(StorageFactory.SETS) is True:
-            sets_store_engine = storage_factory.entity_storage_engine(StorageFactory.SETS)
-            if sets_store_engine:
-                try:
-                    sets_store = sets_store_engine.sets_store()
-                    sets_store.load_all(self)
-                except Exception as e:
-                    YLogger.exception(self, "Failed to load set from storage", e)
+            storage_engine = storage_factory.entity_storage_engine(StorageFactory.SETS)
+            try:
+                self._load_collection(storage_engine)
+
+            except Exception as e:
+                YLogger.exception(self, "Failed to load set from storage", e)
 
         return len(self._sets)
 
+    def _reload_collection(self, storage_engine, set_name):
+        sets_store = storage_engine.sets_store()
+        sets_store.reload(self, set_name)
+
     def reload(self, storage_factory, set_name):
         if storage_factory.entity_storage_engine_available(StorageFactory.SETS) is True:
-            set_engine = storage_factory.entity_storage_engine(StorageFactory.SETS)
-            if set_engine:
-                try:
-                    sets_store = set_engine.sets_store()
-                    sets_store.reload(self, set_name)
-                except Exception as e:
-                    YLogger.exception(self, "Failed to load set from storage", e)
+            storage_engine = storage_factory.entity_storage_engine(StorageFactory.SETS)
+            try:
+                self._reload_collection(storage_engine, set_name)
 
+            except Exception as e:
+                YLogger.exception(self, "Failed to load set from storage", e)
+
+        return len(self._sets)

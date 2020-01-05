@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -18,7 +18,7 @@ import nltk
 from nltk.corpus import stopwords
 
 
-class StopWords(object):
+class StopWords:
 
     # To use this you need to
     # import nltk
@@ -26,12 +26,13 @@ class StopWords(object):
 
     @staticmethod
     def download_stopwords():
-        nltk.download("stopwords")
+        nltk.download("stopwords")      # pragma: no cover
 
-    @staticmethod
-    def remove(words: list, language="english"):
-        return [x for x in words if x not in stopwords.words(language)]
+    def __init__(self, language="english"):
+        self._words = stopwords.words(language)
 
-    @staticmethod
-    def is_stopword(string, language="english"):
-        return bool(string in stopwords.words(language))
+    def remove(self, words: list, language="english"):
+        return [x for x in words if x not in self._words]
+
+    def is_stopword(self, string, language="english"):
+        return bool(string in self._words)

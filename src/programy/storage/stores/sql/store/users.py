@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,21 +14,26 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
+from programy.utils.logging.ylogger import YLogger
 from programy.storage.stores.sql.store.sqlstore import SQLStore
 from programy.storage.entities.user import UserStore
 from programy.storage.stores.sql.dao.user import User
+
 
 class SQLUserStore(SQLStore, UserStore):
 
     def __init__(self, storage_engine):
         SQLStore.__init__(self, storage_engine)
+        UserStore.__init__(self)
+
+    def _get_all(self):
+        return self._storage_engine.session.query(User)
 
     def empty(self):
-        self._storage_engine.session.query(User).delete()
+        self._get_all().delete()
 
-    def add_user(self, userid, client):
-        user = User(userid=userid, client=client)
+    def add_user(self, userid, clientid):
+        user = User(userid=userid, client=clientid)
         self._storage_engine.session.add(user)
         return user
 
@@ -46,21 +51,29 @@ class SQLUserStore(SQLStore, UserStore):
             links.append(user.client)
         return links
 
+    def _remove_user_from_db(self, userid, clientid):
+        rowcount = self._storage_engine.session.query(User).filter(User.userid == userid,
+                                                                   User.client == clientid).delete()
+        return bool(rowcount > 0)
+
     def remove_user(self, userid, clientid):
         try:
-            self._storage_engine.session.query(User).filter(User.userid == userid, User.client == clientid).delete()
-            return True
-        except:
-            pass
+            return self._remove_user_from_db(userid, clientid)
+
+        except Exception as excep:
+            YLogger.exception_nostack(self, "Failed to remove user", excep)
 
         return False
+
+    def _remove_user_from_all_clients_from_db(self, userid):
+        rowcount = self._storage_engine.session.query(User).filter(User.userid == userid).delete()
+        return bool(rowcount > 0)
 
     def remove_user_from_all_clients(self, userid):
         try:
-            self._storage_engine.session.query(User).filter(User.userid == userid).delete()
-            return True
-        except:
-            pass
+            return self._remove_user_from_all_clients_from_db(userid)
+
+        except Exception as excep:
+            YLogger.exception_nostack(self, "Failed to remove user from all clients", excep)
 
         return False
-

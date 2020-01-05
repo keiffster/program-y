@@ -1,8 +1,8 @@
 import xml.etree.ElementTree as ET
 
-from programy.parser.template.nodes.base import TemplateNode
+from programy.parser.exceptions import ParserException
 from programy.parser.template.nodes.addtriple import TemplateAddTripleNode
-
+from programy.parser.template.nodes.base import TemplateNode
 from programytest.parser.template.graph_tests.graph_test_client import TemplateGraphTestClient
 
 
@@ -33,6 +33,8 @@ class TemplateGraphAddTripleTests(TemplateGraphTestClient):
         self.assertIsNotNone(result)
         self.assertTrue(self._client_context.brain.rdf.has_object("X", "Y", "Z"))
 
+        self.assertEquals("<addtriple><subj>X</subj><pred>Y</pred><obj>Z</obj></addtriple>", ast.children_to_xml(self._client_context))
+
     def test_add_triple_type2(self):
         template = ET.fromstring("""
 			<template>
@@ -55,6 +57,8 @@ class TemplateGraphAddTripleTests(TemplateGraphTestClient):
         self.assertIsNotNone(result)
         self.assertTrue(self._client_context.brain.rdf.has_object("X", "Y", "Z"))
 
+        self.assertEquals("<addtriple><subj>X</subj><pred>Y</pred><obj>Z</obj></addtriple>", ast.children_to_xml(self._client_context))
+
     def test_add_triple_type3(self):
         template = ET.fromstring("""
 			<template>
@@ -75,3 +79,35 @@ class TemplateGraphAddTripleTests(TemplateGraphTestClient):
         result = ast.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertTrue(self._client_context.brain.rdf.has_object("X", "Y", "Z"))
+
+        self.assertEquals("<addtriple><subj>X</subj><pred>Y</pred><obj>Z</obj></addtriple>", ast.children_to_xml(self._client_context))
+
+    def test_add_triple_missing_subj(self):
+        template = ET.fromstring("""
+			<template>
+			    <addtriple pred="Y" obj="Z" />
+			</template>
+			""")
+
+        with self.assertRaises(ParserException):
+            _ = self._graph.parse_template_expression(template)
+
+    def test_add_triple_missing_pred(self):
+        template = ET.fromstring("""
+			<template>
+			    <addtriple subj="X" obj="Z" />
+			</template>
+			""")
+
+        with self.assertRaises(ParserException):
+            _ = self._graph.parse_template_expression(template)
+
+    def test_add_triple_missing_obj(self):
+        template = ET.fromstring("""
+			<template>
+			    <addtriple subj="X" pred="Y" />
+			</template>
+			""")
+
+        with self.assertRaises(ParserException):
+            _ = self._graph.parse_template_expression(template)

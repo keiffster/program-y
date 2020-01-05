@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,16 +14,13 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.utils.logging.ylogger import YLogger
-
 from programy.parser.pattern.nodes.base import PatternNode
 from programy.parser.pattern.equalsmatch import EqualsMatch
 from programy.parser.exceptions import ParserException
 
 
 class PatternISetNode(PatternNode):
-
     iset_count = 1
 
     def __init__(self, attribs, text, userid='*'):
@@ -38,7 +35,7 @@ class PatternISetNode(PatternNode):
             raise ParserException("Invalid iset node, no words specified as attribute or text")
 
         self._parse_words(words)
-        self._iset_name = "iset_%d"%(PatternISetNode.iset_count)
+        self._iset_name = "iset_%d" % (PatternISetNode.iset_count)
         PatternISetNode.iset_count += 1
 
     def _parse_words(self, words):
@@ -60,9 +57,9 @@ class PatternISetNode(PatternNode):
     def to_xml(self, client_context, include_user=False):
         string = ""
         if include_user is True:
-            string += '<iset userid="%s" words="%s">'%(self.userid, ". ".join(self.words))
+            string += '<iset userid="%s" words="%s">' % (self.userid, ". ".join(self.words))
         else:
-            string += '<iset words="%s">'% ". ".join(self.words)
+            string += '<iset words="%s">' % ". ".join(self.words)
         string += super(PatternISetNode, self).to_xml(client_context)
         string += "</iset>\n"
         return string

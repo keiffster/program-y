@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,8 +14,10 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from programy.storage.stores.utils import DAOUtils
 
-class Lookup(object):
+
+class Lookup():
 
     def __init__(self, key, value):
         self.id = None
@@ -23,7 +25,7 @@ class Lookup(object):
         self.value = value
 
     def __repr__(self):
-        return "<Lookup(id='%d', key='%s', value='%s')>" % (self.id, self.key, self.value)
+        return "<Lookup(id='%s', key='%s', value='%s')>" % (DAOUtils.valid_id(self.id), self.key, self.value)
 
     def to_document(self):
         document = {"key": self.key,
@@ -35,11 +37,7 @@ class Lookup(object):
     @staticmethod
     def from_document(data):
         lookup = Lookup(None, None)
-        if '_id' in data:
-            lookup.id = data['_id']
-        if 'key' in data:
-            lookup.key = data['key']
-        if 'value' in data:
-            lookup.value = data['value']
+        lookup.id = DAOUtils.get_value_from_data(data, '_id')
+        lookup.key = DAOUtils.get_value_from_data(data, 'key')
+        lookup.value = DAOUtils.get_value_from_data(data, 'value')
         return lookup
-

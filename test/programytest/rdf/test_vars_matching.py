@@ -305,7 +305,73 @@ class RDFCollectionVarsMatchingTests(unittest.TestCase):
         self.assertTrue([['subj', 'ZEBRA'], ['pred', 'LEGS'], ['?x', '4']] in matched)
         self.assertTrue([['subj', 'BIRD'], ['pred', 'LEGS'], ['?x', '2']] in matched)
 
-    def match_only_vars(self):
+    def test_match_only_subject_only(self):
+        collection = RDFCollection()
+        self.assertIsNotNone(collection)
+
+        self.add_data(collection)
+
+        matched = collection.match_only_vars(subject="?x")
+        self.assertIsNotNone(matched)
+        self.assertEquals([[['?x', 'MONKEY']], [['?x', 'MONKEY']], [['?x', 'ZEBRA']], [['?x', 'BIRD']], [['?x', 'ELEPHANT']]], matched)
+
+    def test_match_only_predicate_only(self):
+        collection = RDFCollection()
+        self.assertIsNotNone(collection)
+
+        self.add_data(collection)
+
+        matched = collection.match_only_vars(predicate="?x")
+        self.assertIsNotNone(matched)
+        self.assertEquals([[['?x', 'LEGS']], [['?x', 'HASFUR']], [['?x', 'LEGS']], [['?x', 'LEGS']], [['?x', 'TRUNK']]], matched)
+
+    def test_match_only_object_only(self):
+        collection = RDFCollection()
+        self.assertIsNotNone(collection)
+
+        self.add_data(collection)
+
+        matched = collection.match_only_vars(obj="?x")
+        self.assertIsNotNone(matched)
+        self.assertEquals([[['?x', '2']], [['?x', 'true']], [['?x', '4']], [['?x', '2']], [['?x', 'true']]], matched)
+
+    def test_match_only_subject_and_predicate(self):
+        collection = RDFCollection()
+        self.assertIsNotNone(collection)
+
+        self.add_data(collection)
+
+        matched = collection.match_only_vars(subject="?x", predicate="?y")
+        self.assertIsNotNone(matched)
+        self.assertEquals(
+            [[['?x', 'MONKEY'], ['?y', 'LEGS']], [['?x', 'MONKEY'], ['?y', 'HASFUR']], [['?x', 'ZEBRA'], ['?y', 'LEGS']], [['?x', 'BIRD'], ['?y', 'LEGS']], [['?x', 'ELEPHANT'], ['?y', 'TRUNK']]],
+            matched)
+
+    def test_match_only_subject_and_object(self):
+        collection = RDFCollection()
+        self.assertIsNotNone(collection)
+
+        self.add_data(collection)
+
+        matched = collection.match_only_vars(subject="?x", obj="?y")
+        self.assertIsNotNone(matched)
+        self.assertEquals(
+            [[['?x', 'MONKEY'], ['?y', '2']], [['?x', 'MONKEY'], ['?y', 'true']], [['?x', 'ZEBRA'], ['?y', '4']], [['?x', 'BIRD'], ['?y', '2']], [['?x', 'ELEPHANT'], ['?y', 'true']]],
+            matched)
+
+    def test_match_only_predicate_and_object(self):
+        collection = RDFCollection()
+        self.assertIsNotNone(collection)
+
+        self.add_data(collection)
+
+        matched = collection.match_only_vars(predicate="?x", obj="?y")
+        self.assertIsNotNone(matched)
+        self.assertEquals(
+            [[['?x', 'LEGS'], ['?y', '2']], [['?x', 'HASFUR'], ['?y', 'true']], [['?x', 'LEGS'], ['?y', '4']], [['?x', 'LEGS'], ['?y', '2']], [['?x', 'TRUNK'], ['?y', 'true']]],
+            matched)
+
+    def test_match_only_vars_subject_objectvar(self):
         collection = RDFCollection()
         self.assertIsNotNone(collection)
 
@@ -316,6 +382,69 @@ class RDFCollectionVarsMatchingTests(unittest.TestCase):
         self.assertEqual(2, len(matched))
         self.assertTrue([['?x', '2']] in matched)
         self.assertTrue([['?x', 'true']] in matched)
+
+    def test_match_only_vars_predicte_objectvar(self):
+        collection = RDFCollection()
+        self.assertIsNotNone(collection)
+
+        self.add_data(collection)
+
+        matched = collection.match_only_vars(predicate="LEGS", obj="?x")
+        self.assertIsNotNone(matched)
+        self.assertEqual(3, len(matched))
+        self.assertTrue([['?x', '2']] in matched)
+        self.assertTrue([['?x', '4']] in matched)
+
+    def test_match_only_vars_subjectvar_predicte_objectvar(self):
+        collection = RDFCollection()
+        self.assertIsNotNone(collection)
+
+        self.add_data(collection)
+
+        matched = collection.match_only_vars(subject="?x", predicate="LEGS", obj="?y")
+        self.assertIsNotNone(matched)
+        self.assertEqual(3, len(matched))
+        self.assertTrue([['?x', 'MONKEY'], ['?y', '2']] in matched)
+        self.assertTrue([['?x', 'ZEBRA'], ['?y', '4']] in matched)
+        self.assertTrue([['?x', 'BIRD'], ['?y', '2']] in matched)
+
+    def test_match_only_vars_subjectvar_predictevar_objectvar(self):
+        collection = RDFCollection()
+        self.assertIsNotNone(collection)
+
+        self.add_data(collection)
+
+        matched = collection.match_only_vars(subject="?x", predicate="?y", obj="?z")
+        self.assertIsNotNone(matched)
+        self.assertEqual(5, len(matched))
+
+        self.assertTrue([['?x', 'MONKEY'], ['?y', 'LEGS'], ['?z', '2']] in matched)
+        self.assertTrue([['?x', 'MONKEY'], ['?y', 'HASFUR'], ['?z', 'true']] in matched)
+        self.assertTrue([['?x', 'ZEBRA'], ['?y', 'LEGS'], ['?z', '4']] in matched)
+        self.assertTrue([['?x', 'BIRD'], ['?y', 'LEGS'], ['?z', '2']] in matched)
+        self.assertTrue([['?x', 'ELEPHANT'], ['?y', 'TRUNK'], ['?z', 'true']] in matched)
+
+    def test_match_only_vars_subject_predictevar_object(self):
+        collection = RDFCollection()
+        self.assertIsNotNone(collection)
+
+        self.add_data(collection)
+
+        matched = collection.match_only_vars(subject="MONKEY", predicate="?x", obj="2")
+        self.assertIsNotNone(matched)
+        self.assertEqual(1, len(matched))
+        self.assertEquals([[['?x', 'LEGS']]], matched)
+
+    def test_match_only_vars_no_match(self):
+        collection = RDFCollection()
+        self.assertIsNotNone(collection)
+
+        self.add_data(collection)
+
+        matched = collection.match_only_vars(subject="MONKEYX", predicate="?x", obj="2")
+        self.assertIsNotNone(matched)
+        self.assertEqual(0, len(matched))
+        self.assertEquals([], matched)
 
     def test_chungyilinxrspace_issue_175(self):
         collection = RDFCollection()
@@ -328,3 +457,4 @@ class RDFCollectionVarsMatchingTests(unittest.TestCase):
 
         self.assertTrue([['subj', 'ACTOR'], ['pred', 'ISA'], ['?x', 'MAN']] in set1)
         self.assertTrue([['subj', 'ACTOR'], ['pred', 'ISA'], ['?x', 'PERSON']] in set1)
+

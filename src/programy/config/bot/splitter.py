@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -21,7 +21,6 @@ from programy.utils.substitutions.substitues import Substitutions
 
 
 class BotSentenceSplitterConfiguration(BaseConfigurationData):
-
     DEFAULT_CLASSNAME = "programy.dialog.splitter.regex.RegexSentenceSplitter"
     DEFAULT_SPLITCHARS = '[:;,.?!]'
     JAPANESE_SPLITTERS = "。"
@@ -41,14 +40,16 @@ class BotSentenceSplitterConfiguration(BaseConfigurationData):
     def split_chars(self):
         return self._split_chars
 
-    def check_for_license_keys(self, license_keys):
-        BaseConfigurationData.check_for_license_keys(self, license_keys)
-
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
+        del bot_root
         splitter = configuration_file.get_section(self._section_name, configuration)
         if splitter is not None:
-            self._classname = configuration_file.get_option(splitter, "classname", missing_value=BotSentenceSplitterConfiguration.DEFAULT_CLASSNAME, subs=subs)
-            self._split_chars = configuration_file.get_option(splitter, "split_chars", missing_value=BotSentenceSplitterConfiguration.DEFAULT_SPLITCHARS, subs=subs)
+            self._classname = configuration_file.\
+                get_option(splitter, "classname", missing_value=BotSentenceSplitterConfiguration.DEFAULT_CLASSNAME,
+                           subs=subs)
+            self._split_chars = configuration_file.\
+                get_option(splitter, "split_chars",
+                           missing_value=BotSentenceSplitterConfiguration.DEFAULT_SPLITCHARS, subs=subs)
         else:
             YLogger.warning(self, "'splitter' section missing from bot config, using defaults")
 
@@ -56,6 +57,7 @@ class BotSentenceSplitterConfiguration(BaseConfigurationData):
         if defaults is True:
             data['classname'] = BotSentenceSplitterConfiguration.DEFAULT_CLASSNAME
             data['split_chars'] = BotSentenceSplitterConfiguration.DEFAULT_SPLITCHARS
+
         else:
             data['classname'] = self._classname
             data['split_chars'] = self._split_chars

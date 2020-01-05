@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -16,26 +16,28 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 from programy.utils.logging.ylogger import YLogger
 from programy.storage.stores.nosql.mongo.store.mongostore import MongoStore
-from programy.storage.entities.category import CategoryStore
+from programy.storage.entities.learnf import LearnfStore
 from programy.storage.stores.nosql.mongo.dao.category import Category
 from programy.storage.stores.nosql.mongo.store.categories import MongoCategoryStore
 
-class MongoLearnfStore(MongoStore, CategoryStore):
+
+class MongoLearnfStore(MongoStore, LearnfStore):
 
     def __init__(self, storage_engine):
         MongoStore.__init__(self, storage_engine)
+        LearnfStore.__init__(self)
 
     def collection_name(self):
         return MongoCategoryStore.CATEGORIES
 
     def save_learnf(self, client_context, category):
         YLogger.debug(self, "Storing learnf category in Mongo [%s] [%s] [%s] [%s] [%s] [%s]",
-                            client_context.client.id,
-                            client_context.userid,
-                            category.pattern,
-                            category.topic,
-                            category.that,
-                            category.template)
+                      client_context.client.id,
+                      client_context.userid,
+                      category.pattern,
+                      category.topic,
+                      category.that,
+                      category.template)
 
         pattern = category.pattern
         topic = category.topic
@@ -46,4 +48,4 @@ class MongoLearnfStore(MongoStore, CategoryStore):
         userid = client_context.userid
 
         category = Category(groupid=groupid, userid=userid, pattern=pattern, topic=topic, that=that, template=template)
-        self.add_document(category)
+        return self.add_document(category)

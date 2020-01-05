@@ -2,8 +2,8 @@ import xml.etree.ElementTree as ET
 
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.size import TemplateSizeNode
-
 from programytest.parser.base import ParserTestsBaseClass
+
 
 class MockTemplateSizeNode(TemplateSizeNode):
     def __init__(self):

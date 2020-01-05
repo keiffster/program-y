@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.storage.stores.utils import DAOUtils
 
 
-class Twitter(object):
+class Twitter:
 
     def __init__(self, last_direct_message_id, last_status_id):
         self.id = None
@@ -37,11 +37,8 @@ class Twitter(object):
 
     @staticmethod
     def from_document(data):
-        lookup = Twitter(None, None)
-        if '_id' in data:
-            lookup.id = data['_id']
-        if 'last_direct_message_id' in data:
-            lookup.last_direct_message_id = data['last_direct_message_id']
-        if 'last_status_id' in data:
-            lookup.last_status_id = data['last_status_id']
-        return lookup
+        twitter = Twitter(None, None)
+        twitter.id = DAOUtils.get_value_from_data(data, '_id')
+        twitter.last_direct_message_id = DAOUtils.get_value_from_data(data, 'last_direct_message_id')
+        twitter.last_status_id = DAOUtils.get_value_from_data(data, 'last_status_id')
+        return twitter

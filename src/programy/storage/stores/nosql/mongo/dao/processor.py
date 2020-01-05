@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.storage.stores.utils import DAOUtils
 
 
-class Processor(object):
+class Processor():
 
     def __init__(self, classname):
         self.id = None
@@ -37,16 +37,14 @@ class PreProcessor(Processor):
 
     def __repr__(self):
         return "<PreProcessor(id='%s', classname='%s')>" % (
-        DAOUtils.valid_id(self.id), self.classname)
+            DAOUtils.valid_id(self.id), self.classname)
 
     @staticmethod
     def from_document(data):
-        lookup = PreProcessor(None)
-        if '_id' in data:
-            lookup.id = data['_id']
-        if 'classname' in data:
-            lookup.classname = data['classname']
-        return lookup
+        processor = PreProcessor(None)
+        processor.id = DAOUtils.get_value_from_data(data, '_id')
+        processor.classname = DAOUtils.get_value_from_data(data, 'classname')
+        return processor
 
 
 class PostProcessor(Processor):
@@ -56,16 +54,14 @@ class PostProcessor(Processor):
 
     def __repr__(self):
         return "<PostProcessor(id='%s', classname='%s')>" % (
-        DAOUtils.valid_id(self.id), self.classname)
+            DAOUtils.valid_id(self.id), self.classname)
 
     @staticmethod
     def from_document(data):
-        lookup = PostProcessor(None)
-        if '_id' in data:
-            lookup.id = data['_id']
-        if 'classname' in data:
-            lookup.classname = data['classname']
-        return lookup
+        processor = PostProcessor(None)
+        processor.id = DAOUtils.get_value_from_data(data, '_id')
+        processor.classname = DAOUtils.get_value_from_data(data, 'classname')
+        return processor
 
 
 class PostQuestionProcessor(Processor):
@@ -75,13 +71,11 @@ class PostQuestionProcessor(Processor):
 
     def __repr__(self):
         return "<PostQuestionProcessor(id='%s', classname='%s')>" % (
-        DAOUtils.valid_id(self.id), self.classname)
+            DAOUtils.valid_id(self.id), self.classname)
 
     @staticmethod
     def from_document(data):
-        lookup = PostQuestionProcessor(None)
-        if '_id' in data:
-            lookup.id = data['_id']
-        if 'classname' in data:
-            lookup.classname = data['classname']
-        return lookup
+        processor = PostQuestionProcessor(None)
+        processor.id = DAOUtils.get_value_from_data(data, '_id')
+        processor.classname = DAOUtils.get_value_from_data(data, 'classname')
+        return processor

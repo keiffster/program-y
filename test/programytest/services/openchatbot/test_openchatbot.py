@@ -1,5 +1,5 @@
-import unittest
 import json
+import unittest
 
 from programy.services.openchatbot.openchatbot import OpenChatBot
 
@@ -18,9 +18,9 @@ class OpenChatBotTests(unittest.TestCase):
         domaincb = OpenChatBot.create("openchatbot", payload)
         self.assertIsNotNone(domaincb)
 
-        self.assertEquals(["GET", "POST"], domaincb.methods)
+        self.assertEqual(["GET", "POST"], domaincb.methods)
 
-        self.assertEquals("https://website1.com:80/api/mybot/v1.0/ask", domaincb.url)
+        self.assertEqual("https://website1.com:80/api/mybot/v1.0/ask", domaincb.url)
 
     def test_construction_with_valid_json_no_port(self):
         payload = json.loads("""{
@@ -33,9 +33,9 @@ class OpenChatBotTests(unittest.TestCase):
         domaincb = OpenChatBot.create("openchatbot", payload)
         self.assertIsNotNone(domaincb)
 
-        self.assertEquals(["GET", "POST"], domaincb.methods)
+        self.assertEqual(["GET", "POST"], domaincb.methods)
 
-        self.assertEquals("https://website1.com/api/mybot/v1.0/ask", domaincb.url)
+        self.assertEqual("https://website1.com/api/mybot/v1.0/ask", domaincb.url)
 
     def test_construction_with_uri_no_slash(self):
         payload = json.loads("""{
@@ -49,6 +49,6 @@ class OpenChatBotTests(unittest.TestCase):
         domaincb = OpenChatBot.create("openchatbot", payload)
         self.assertIsNotNone(domaincb)
 
-        self.assertEquals(["GET", "POST"], domaincb.methods)
+        self.assertEqual(["GET", "POST"], domaincb.methods)
 
-        self.assertEquals("https://website1.com:80/api/mybot/v1.0/ask", domaincb.url)
+        self.assertEqual("https://website1.com:80/api/mybot/v1.0/ask", domaincb.url)

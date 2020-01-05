@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,11 +14,9 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.utils.logging.ylogger import YLogger
-
+from typing import Dict
 import requests
-import json
-
+from programy.utils.logging.ylogger import YLogger
 from programy.triggers.config import TriggerConfiguration
 from programy.context import ClientContext
 from programy.triggers.manager import TriggerManager
@@ -30,9 +28,9 @@ class RestTriggerManager(TriggerManager):
         TriggerManager.__init__(self, config)
 
     def post_data(self, api_url_base, headers, payload):
-        return requests.post(api_url_base, headers=headers, json=payload)
+        return requests.post(api_url_base, headers=headers, json=payload)   # pragma: no cover
 
-    def trigger(self, event: str, client_context: ClientContext = None, additional: {} = None) -> bool:
+    def trigger(self, event: str, client_context: ClientContext = None, additional: Dict[str, str] = None) -> bool:
 
         if client_context is not None:
             assert isinstance(client_context, ClientContext)
@@ -54,14 +52,18 @@ class RestTriggerManager(TriggerManager):
 
         headers = {'Content-Type': 'application/json'}
         if api_token is not None:
-            headers['Authorisation'] = 'Bearer %s'%api_token
+            headers['Authorisation'] = 'Bearer %s' % api_token
 
         if api_method is None or api_method.upper() == 'POST':
-            response = self.post_data(api_url_base, headers=headers, payload=payload)
+            try:
+                response = self.post_data(api_url_base, headers=headers, payload=payload)
 
-            if response.status_code == 200:
-                return True
+                if response.status_code == 200:
+                    return True
 
-            YLogger.error(None, "Failed to send trigger info via REST [%d]", response.status_code)
+                YLogger.error(None, "Failed to send trigger info via REST [%d]", response.status_code)
+
+            except Exception as error:
+                YLogger.exception(client_context, "Failed to post data", error)
 
         return False
