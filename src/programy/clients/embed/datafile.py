@@ -14,6 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+import os
 from programy.clients.events.console.client import ConsoleBotClient
 from programy.config.programy import ProgramyConfiguration
 from programy.clients.args import CommandLineClientArguments
@@ -43,13 +44,23 @@ class EmbeddedDataFileBot(ConsoleBotClient):
 
         client_config.storage.storage_configurations['file'] = FileStorageConfiguration()
 
+        filepath = os.path.dirname(__file__) + os.sep
+
         if 'patterns' in self._files:
             client_config.storage.entity_store[StorageFactory.PATTERN_NODES] = 'file'
             client_config.storage.storage_configurations['file']._pattern_nodes_storage = FileStoreConfiguration(file=self._files['patterns'], fileformat="text")
+        else:
+            # Default if pattern node file not specified
+            client_config.storage.entity_store[StorageFactory.PATTERN_NODES] = 'file'
+            client_config.storage.storage_configurations['file']._pattern_nodes_storage = FileStoreConfiguration(file=filepath + 'basicbot/nodes/pattern_nodes.conf', fileformat="text")
 
         if 'templates' in self._files:
             client_config.storage.entity_store[StorageFactory.TEMPLATE_NODES] = 'file'
             client_config.storage.storage_configurations['file']._template_nodes_storage = FileStoreConfiguration(file=self._files['templates'], fileformat="text")
+        else:
+            # Default if template node file not specified
+            client_config.storage.entity_store[StorageFactory.TEMPLATE_NODES] = 'file'
+            client_config.storage.storage_configurations['file']._template_nodes_storage = FileStoreConfiguration(file=filepath + 'basicbot/nodes/template_nodes.conf', fileformat="text")
 
         if 'aiml' in self._files:
             client_config.storage.entity_store[StorageFactory.CATEGORIES] = 'file'
@@ -180,8 +191,6 @@ if __name__ == '__main__':
 
     files = {'aiml'         : ['/Users/keith/Documents/Development/Python/Projects/AIML/y-bot/storage/categories'],
              'learnf'       : ['/Users/keith/Documents/Development/Python/Projects/AIML/y-bot/storage/learnf'],
-             'patterns'     : '/Users/keith/Documents/Development/Python/Projects/AIML/y-bot/storage/nodes/pattern_nodes.conf',
-             'templates'    : '/Users/keith/Documents/Development/Python/Projects/AIML/y-bot/storage/nodes/template_nodes.conf',
              'properties'   : '/Users/keith/Documents/Development/Python/Projects/AIML/y-bot/storage/properties/properties.txt',
              'defaults'     : '/Users/keith/Documents/Development/Python/Projects/AIML/y-bot/storage/properties/defaults.txt',
              'sets'         : ['/Users/keith/Documents/Development/Python/Projects/AIML/y-bot/storage/sets'],
