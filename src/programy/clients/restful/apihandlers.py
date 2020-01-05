@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -46,17 +46,17 @@ class APIHandler_V1_0(APIHandler):
     def __init__(self, bot_client):
         APIHandler.__init__(self, bot_client)
 
-    def process_request(self, request, method='GET'):
+    def process_request(self, client, request, method='GET'):
         question = APIHandler.UNKNOWN
         userid = APIHandler.UNKNOWN
 
         try:
             question = self._bot_client.get_variable(request, APIHandler_V1_0.QUESTION, method)
             userid = self._bot_client.get_variable(request, APIHandler_V1_0.USERID, method)
-
+            client_context = client.create_client_context(userid)
             answer = self._bot_client.ask_question(userid, question)
-
-            return self.format_success_response(userid, question, answer), 200
+            rendered = client.renderer.render(client_context, answer)
+            return self.format_success_response(userid, question, rendered), 200
 
         except Exception as excep:
             return self.format_error_response(userid, question, str(excep)), 500
@@ -83,7 +83,7 @@ class APIHandler_V2_0(APIHandler):
     def __init__(self, bot_client):
         APIHandler.__init__(self, bot_client)
 
-    def process_request(self, request, method='GET'):
+    def process_request(self, client, request, method='GET'):
         query = APIHandler_V2_0.UNKNOWN
         userid = APIHandler_V2_0.UNKNOWN
         # lang =  APIHandler_V2_0.UNKNOWN
@@ -98,8 +98,9 @@ class APIHandler_V2_0(APIHandler):
 
             metadata = {}
             answer = self._bot_client.ask_question(userid, query, metadata)
-
-            return self.format_success_response(userid, query, answer, metadata), 200
+            client_context = client.create_client_context(userid)
+            rendered = client.renderer.render(client_context, answer)
+            return self.format_success_response(userid, query, rendered, metadata), 200
 
         except Exception as excep:
             return self.format_error_response(userid, query, str(excep), None), 500

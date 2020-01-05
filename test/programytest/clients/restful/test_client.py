@@ -32,6 +32,8 @@ class RestBotClientTests(unittest.TestCase):
         self.assertIsNotNone(code)
         self.assertEqual(500, code)
 
+        self.assertFalse(client._render_callback())
+
     def test_api_keys(self):
         arguments = MockArgumentParser()
         client = MockRestBotClient("testrest", arguments)

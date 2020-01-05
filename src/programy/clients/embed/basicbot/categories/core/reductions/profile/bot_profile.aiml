@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>FEELINGS</pattern>
+        <template>
+            <srai>EMOTIONS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>STATE YOUR
+            <set>profile</set>
+        </pattern>
+        <template>
+            <srai>
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>AUNT</pattern>
+        <template>
+            <srai>FAMILY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>BESTFRIEND</pattern>
+        <template>
+            <srai>FRIENDS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>BOSS</pattern>
+        <template>
+            <srai>BOTMASTER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>BOYFRIEND</pattern>
+        <template>
+            <srai>STATUS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>BROTHER</pattern>
+        <template>
+            <srai>FAMILY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAT</pattern>
+        <template>
+            <srai>PETS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DAUGHTER</pattern>
+        <template>
+            <srai>FAMILY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FRIEND</pattern>
+        <template>
+            <srai>FRIENDS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GIRLFRIEND</pattern>
+        <template>
+            <srai>STATUS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GRANDFATHER</pattern>
+        <template>
+            <srai>FAMILY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GRANDMOTHER</pattern>
+        <template>
+            <srai>FAMILY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HUSBAND</pattern>
+        <template>
+            <srai>STATUS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NEPHEW</pattern>
+        <template>
+            <srai>FAMILY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NIECE</pattern>
+        <template>
+            <srai>FAMILY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SISTER</pattern>
+        <template>
+            <srai>SIBLINGS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SON</pattern>
+        <template>
+            <srai>FAMILY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TEACHER</pattern>
+        <template>
+            <srai>BOTMASTER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>UNCLE</pattern>
+        <template>
+            <srai>FAMILY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WIFE</pattern>
+        <template>
+            <srai>STATUS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FOR FUN</pattern>
+        <template>
+            <srai>HOBBIES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>INTEREST</pattern>
+        <template>
+            <bot name="interest"/>.
+        </template>
+    </category>
+     <category>
+        <pattern>MARITAL STATUS</pattern>
+        <template>
+            <srai>STATUS</srai>
+        </template>
+    </category>
+
+
+ </aiml>

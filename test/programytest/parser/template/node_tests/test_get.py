@@ -35,7 +35,7 @@ class TemplateGetNodeTests(ParserTestsBaseClass):
         self.assertEquals([], node._get_tuples(self._client_context))
 
     def test_default_value_properties(self):
-        self._client_context.bot.brain.properties.add_property("default-get", "test123")
+        self._client_context.bot.brain.properties.add_property("default_get", "test123")
         self.assertEqual("test123", TemplateGetNode.get_default_value(self._client_context))
 
     def test_default_value_default_get(self):
@@ -99,7 +99,7 @@ class TemplateGetNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        self._client_context.brain.properties.add_property("default-get", "unknown")
+        self._client_context.brain.properties.add_property("default_get", "unknown")
 
         conversation = self._client_context.bot.get_conversation(self._client_context)
         self.assertIsNotNone(conversation)
@@ -164,7 +164,7 @@ class TemplateGetNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        self._client_context.brain.properties.add_property("default-get", "unknown")
+        self._client_context.brain.properties.add_property("default_get", "unknown")
 
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
@@ -184,7 +184,7 @@ class TemplateGetNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        self._client_context.brain.properties.add_property("default-get", "unknown")
+        self._client_context.brain.properties.add_property("default_get", "unknown")
 
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)

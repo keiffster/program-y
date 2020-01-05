@@ -25,7 +25,7 @@ class FileRegexStoreTests(unittest.TestCase):
         engine.initialise()
         store = FileRegexStore(engine)
 
-        self.assertEquals('/tmp/lookups/regex.txt', store._get_storage_path())
+        self.assertEquals('/tmp/regex/regex-templates.txt', store._get_storage_path())
         self.assertIsInstance(store.get_storage(), FileStoreConfiguration)
 
     def test_load_regex(self):

@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -132,6 +132,15 @@ class StorageConfiguration(BaseConfigurationData):
 
     @staticmethod
     def add_default_stores_as_yaml(store_configs, file=True, sqlite=False, mongo=False, redis=False, logger=False):
+
+        if file is True:
+            store_configs['file'] = {}
+            store_configs['file']['type'] = 'file'
+            store_configs['file']['config'] = {}
+
+            store = FileStorageConfiguration()
+            store.to_yaml(store_configs['file']['config'], defaults=True)
+
         if sqlite is True:
             store_configs['sqlite'] = {}
             store = SQLStorageConfiguration()
@@ -146,11 +155,6 @@ class StorageConfiguration(BaseConfigurationData):
             store_configs['redis'] = {}
             store = RedisStorageConfiguration()
             store.to_yaml(store_configs['redis'], defaults=True)
-
-        if file is True:
-            store_configs['file'] = {}
-            store = FileStorageConfiguration()
-            store.to_yaml(store_configs['file'], defaults=True)
 
         if logger is True:
             store_configs['logger'] = {}

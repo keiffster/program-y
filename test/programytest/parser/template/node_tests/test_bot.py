@@ -46,7 +46,7 @@ class TemplateBotNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        self._client_context.brain.properties.add_property("default-property", "unknown")
+        self._client_context.brain.properties.add_property("default_property", "unknown")
 
         result = node.resolve(self._client_context)
         self.assertIsNotNone(result)

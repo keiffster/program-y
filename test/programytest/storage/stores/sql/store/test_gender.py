@@ -44,7 +44,7 @@ class SQLGenderStoreTests(GenderStoreAsserts):
 
         self.assert_upload_from_text_file(store)
 
-    @unittest.skip("CSV not supported yet")
+    @unittest.skipIf(Engines.sql is False, Engines.sql_disabled)
     def test_upload_csv_file(self):
         config = SQLStorageConfiguration()
         engine = SQLStorageEngine(config)

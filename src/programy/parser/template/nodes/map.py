@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -40,9 +40,9 @@ class TemplateMapNode(TemplateNode):
         return ""
 
     def get_default_value(self, client_context):
-        value = client_context.brain.properties.property("default-map")
+        value = client_context.brain.properties.property("default_map")
         if value is None:
-            YLogger.error(client_context, "No value for default-map defined, empty string returned")
+            YLogger.error(client_context, "No value for default_map defined, empty string returned")
             value = ""
         return value
 
@@ -54,14 +54,14 @@ class TemplateMapNode(TemplateNode):
             value = client_context.brain.dynamics.dynamic_map(client_context, name, var)
         else:
             if client_context.brain.maps.contains(name) is False:
-                YLogger.error(client_context, "No map defined for [%s], using default-map as value", var)
+                YLogger.error(client_context, "No map defined for [%s], using default_map as value", var)
                 value = self.get_default_value(client_context)
             else:
                 the_map = client_context.brain.maps.map(name)
                 if var in the_map:
                     value = the_map[var]
                 else:
-                    YLogger.error(client_context, "No value defined for [%s], using default-map as value", var)
+                    YLogger.error(client_context, "No value defined for [%s], using default_map as value", var)
                     value = self.get_default_value(client_context)
 
         YLogger.debug(client_context, "MAP [%s] resolved to [%s] = [%s]", self.to_string(), name, value)

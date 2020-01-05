@@ -691,3 +691,44 @@ class SchedulerConfigurationTests(unittest.TestCase):
         config._create_job_defaults_config(data)
         self.assertEquals(data['apscheduler.job_defaults'],  {})
 
+    def test_defaults(self):
+        config = SchedulerConfiguration()
+        data = {}
+        config.to_yaml(data, True)
+
+        SchedulerConfigurationTests.assert_defaults(self, data)
+
+    @staticmethod
+    def assert_defaults(test, data):
+        test.assertEqual(data['name'], "scheduler")
+        test.assertEqual(data['debug_level'], 0)
+        test.assertFalse(data['add_listeners'])
+        test.assertFalse(data['remove_all_jobs'])
+
+        test.assertTrue('jobstore' in data)
+        SchedulerConfigurationTests.assert_jobstore_defaults(test, data['jobstore'])
+
+        test.assertTrue('threadpool' in data)
+        SchedulerConfigurationTests.assert_threadpool_defaults(test, data['threadpool'])
+
+        test.assertTrue('processpool' in data)
+        SchedulerConfigurationTests.assert_processpool_defaults(test, data['processpool'])
+
+        test.assertTrue('job_defaults' in data)
+        SchedulerConfigurationTests.assert_job_defaults_defaults(test, data['job_defaults'])
+
+    def assert_jobstore_defaults(test, data):
+        test.assertEqual(data['name'], "mongo")
+        test.assertTrue('mongo' in data)
+        test.assertEqual(data['mongo']['collection'], "programy")
+
+    def assert_threadpool_defaults(test, data):
+        test.assertEqual(data['max_workers'], 20)
+
+    def assert_processpool_defaults(test, data):
+        test.assertEqual(data['max_workers'], 5)
+
+    def assert_job_defaults_defaults(test, data):
+        test.assertFalse(data['coalesce'])
+        test.assertEqual(data['max_instances'], 3)
+

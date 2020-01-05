@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -51,7 +51,7 @@ class MapsReadWriteStore(MapsReadOnlyStore):
 
     def process_line(self, name, fields, verbose=False):
         if fields:
-            return self.add_to_map(name, fields[0], fields[1])
+            return self.add_to_map(name, fields[0].upper(), fields[1].upper())
         return False
 
     def add_to_map(self, name, key, value, overwrite_existing=False):

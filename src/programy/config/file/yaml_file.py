@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -95,10 +95,7 @@ class YamlConfigurationFile(BaseConfigurationFile):
                             missing_value)
         return missing_value
 
-    def get_multi_option(self, section, option_name, missing_value=None, subs: Substitutions = None):
-
-        if missing_value is None:
-            missing_value = []
+    def get_multi_option(self, section, option_name, missing_value=[], subs: Substitutions = None):
 
         if option_name in section:
             values = section[option_name]
@@ -110,13 +107,13 @@ class YamlConfigurationFile(BaseConfigurationFile):
                         multis.append(self._replace_subs(subs, value))
                 return multis
 
+            elif isinstance(values, list):
+                return values
+
         YLogger.warning(self, "Missing value for [%s] in config, return default value", option_name)
         return missing_value
 
-    def get_multi_file_option(self, section, option_name, bot_root, missing_value=None, subs: Substitutions = None):
-
-        if missing_value is None:
-            missing_value = []
+    def get_multi_file_option(self, section, option_name, bot_root, missing_value=[], subs: Substitutions = None):
 
         if option_name in section:
             values = section[option_name]
@@ -127,7 +124,11 @@ class YamlConfigurationFile(BaseConfigurationFile):
                     if value is not None and value != '':
                         value = self._replace_subs(subs, value)
                         multis.append(value.replace('$BOT_ROOT', bot_root))
+
                 return multis
+
+            elif isinstance(values, list):
+                return [value.replace('$BOT_ROOT', bot_root) for value in values]
 
         YLogger.warning(self, "Missing value for [%s] in config, return default value", option_name)
         return missing_value

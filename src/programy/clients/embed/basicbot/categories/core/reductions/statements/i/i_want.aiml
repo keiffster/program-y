@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+    <category>
+        <pattern>MAY I HAVE *</pattern>
+        <template>
+            <srai>I WANT
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>I WANT TO HAVE A *</pattern>
+        <template>
+            <srai>I WANT A
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I WANTED TO *</pattern>
+        <template>
+            <srai>I WANT TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I WANA *</pattern>
+        <template>
+            <srai>I WANT TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I WOULD LIKE TO MEET *</pattern>
+        <template>
+            <srai>I WANT TO MEET
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I WOULD LOVE TO *</pattern>
+        <template>
+            <srai>I WANT TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHY CAN NOT I *</pattern>
+        <template>
+            <srai>I WANT TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I NEED SOME *</pattern>
+        <template>
+            <srai>I WANT SOME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I WOULD LIKE *</pattern>
+        <template>
+            <srai>I WANT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN I HAVE A *</pattern>
+        <template>
+            <srai>I WANT A
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN I GET *</pattern>
+        <template>
+            <srai>I WANT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM TRYING TO *</pattern>
+        <template>
+            <srai>I WANT TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN WE *</pattern>
+        <template>
+            <srai>I WANT TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I WOULD LIKE TO *</pattern>
+        <template>
+            <srai>I WANT TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN I HAVE *</pattern>
+        <template>
+            <srai>I WANT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I WOULD LIKE FOR YOU TO *</pattern>
+        <template>
+            <srai>I WANT YOU TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I WOULD LIKE TO PLAY *</pattern>
+        <template>
+            <srai>I WANT TO PLAY
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I LIKE HAVING *</pattern>
+        <template>
+            <srai>I WANT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I WANT 1 *</pattern>
+        <template>
+            <srai>I WANT ONE
+                <star/>
+            </srai>
+        </template>
+    </category>
+     <category>
+        <pattern>I WOULD LIKE A *</pattern>
+        <template>
+            <srai>I WANT A
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I NEED A *</pattern>
+        <template>
+            <srai>I WANT A
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I NEED TO *</pattern>
+        <template>
+            <srai>I WANT TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TALK TO YOU</pattern>
+        <template>
+            <srai>I want to talk to you</srai>
+        </template>
+    </category>
+
+
+
+
+</aiml>

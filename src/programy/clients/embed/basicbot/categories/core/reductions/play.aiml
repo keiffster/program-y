@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>PLAY A GAME *</pattern>
+        <template>
+            <srai>PLAY A GAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I WANT TO PLAY GAMES</pattern>
+        <template>
+            <srai>PLAY A GAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>COULD YOU PLAY *</pattern>
+        <template>
+            <srai>PLAY
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU PLAY THE SONG *</pattern>
+        <template>
+            <srai>PLAY
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>PLAY TIC TAC TOE</pattern>
+        <template>
+            <srai>FEATURE REQUEST TIC TAC TOE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU PLAY A SONG *</pattern>
+        <template>
+            <srai>PLAY A SONG</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>PLAY A GAME</pattern>
+        <template>
+            <srai>FEATURE REQUEST PLAY GAMES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I WANT TO PLAY *</pattern>
+        <template>
+            <srai>PLAY
+                <star/>
+            </srai>
+        </template>
+    </category>
+     <category>
+        <pattern>PLAY SOME *</pattern>
+        <template>
+            <srai>PLAY
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU PLAY *</pattern>
+        <template>
+            <srai>PLAY
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>LET US PLAY A GAME</pattern>
+        <template>
+            <srai>PLAY A GAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I WANT TO LISTEN TO *</pattern>
+        <template>
+            <srai>PLAY
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I WANT TO HEAR *</pattern>
+        <template>
+            <srai>PLAY
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SING ME A SONG *</pattern>
+        <template>
+            <srai>PLAY A SONG
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>PLAY SOME MUSIC BY *</pattern>
+        <template>
+            <srai>PLAY SOME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I WOULD LIKE TO LISTEN TO *</pattern>
+        <template>
+            <srai>PLAY
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>PLAY ME A SONG BY *</pattern>
+        <template>
+            <srai>PLAY
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>PLAY THE SONG *</pattern>
+        <template>
+            <srai>PLAY
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>PLAY SONG *</pattern>
+        <template>
+            <srai>PLAY
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU PLAY ME A SONG</pattern>
+        <template>
+            <srai>PLAY A SONG</srai>
+        </template>
+    </category>
+
+
+
+
+
+</aiml>

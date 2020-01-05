@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -74,9 +74,12 @@ class TwilioBotClient(FlaskRestBotClient):
 
         YLogger.debug(self, "Twillio received [%s] from [%s]", question, client_number)
 
-        answer = self.ask_question(client_number, question)
+        client_context = self.create_client_context(client_number)
 
-        response = self.create_twilio_response(client_number, answer)
+        answer = self.ask_question(client_number, question)
+        rendered = self.renderer.render(client_context, answer)
+
+        response = self.create_twilio_response(client_number, rendered)
 
         YLogger.debug(self, "Twillio sending [%s] to [%s]", answer, client_number)
 

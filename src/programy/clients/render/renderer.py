@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -21,7 +21,7 @@ from programy.context import ClientContext
 from programy.utils.console.console import outputLog
 
 
-class RichMediaRenderer():
+class RichMediaRenderer:
 
     def __init__(self, callback):
         self._client = callback
@@ -131,7 +131,18 @@ class RichMediaRenderer():
             else:
                 outputLog(self, "Unknown button tag %s" % child.name)
 
-        return {"type": "button", "text": text, "url": url, "postback": postback}
+        data = {"type": "button", "text": text, "url": url, "postback": postback}
+        self.extract_class_attr(tag, data)
+        self.extract_id_attr(tag, data)
+        return data
+
+    def extract_class_attr(self, tag, data):
+        if 'class' in tag.attrs:
+            data['class'] = tag.attrs['class']
+
+    def extract_id_attr(self, tag, data):
+        if 'id' in tag.attrs:
+            data['id'] = tag.attrs['id']
 
     def parse_button(self, client_context, tag):
         button = self.extract_button_info(tag)
@@ -157,17 +168,34 @@ class RichMediaRenderer():
             else:
                 outputLog(self, "Unknown link tag %s" % child.name)
 
-        return {"type": "link", "text": text, "url": url}
+        data = {"type": "link", "text": text, "url": url}
+        self.extract_class_attr(tag, data)
+        self.extract_id_attr(tag, data)
+        return data
 
     def parse_link(self, client_context, tag):
         link = self.extract_link_info(tag)
         return self.handle_link(client_context, link)
 
+    def extract_image_info(self, tag):
+        data = {"type": "image", "url": tag.text.strip()}
+        self.extract_class_attr(tag, data)
+        self.extract_id_attr(tag, data)
+        return data
+
     def parse_image(self, client_context, tag):
-        return self.handle_image(client_context, {"type": "image", "url": tag.text.strip()})
+        image = self.extract_image_info(tag)
+        return self.handle_image(client_context, image)
+
+    def extract_video_info(self, tag):
+        data = {"type": "video", "url": tag.text.strip()}
+        self.extract_class_attr(tag, data)
+        self.extract_id_attr(tag, data)
+        return data
 
     def parse_video(self, client_context, tag):
-        return self.handle_video(client_context, {"type": "video", "url": tag.text.strip()})
+        video = self.extract_video_info(tag)
+        return self.handle_video(client_context, video)
 
     def extract_card_info(self, tag):
         image = None
@@ -196,7 +224,10 @@ class RichMediaRenderer():
             else:
                 outputLog(self, "Unknown card tag [%s]" % child.name)
 
-        return {"type": "card", "image": image, "title": title, "subtitle": subtitle, "buttons": buttons}
+        data = {"type": "card", "image": image, "title": title, "subtitle": subtitle, "buttons": buttons}
+        self.extract_class_attr(tag, data)
+        self.extract_id_attr(tag, data)
+        return data
 
     def parse_card(self, client_context, tag):
         card = self.extract_card_info(tag)
@@ -216,7 +247,10 @@ class RichMediaRenderer():
             else:
                 outputLog(self, "Unknown carousel tag %s" % child.name)
 
-        return {"type": "carousel", "cards": cards}
+        data = {"type": "carousel", "cards": cards}
+        self.extract_class_attr(tag, data)
+        self.extract_id_attr(tag, data)
+        return data
 
     def parse_carousel(self, client_context, tag):
         carousel = self.extract_carousel_info(tag)
@@ -239,7 +273,10 @@ class RichMediaRenderer():
             else:
                 outputLog(self, "Unknown reply tag %s" % child.name)
 
-        return {"type": "reply", "text": text, "postback": postback}
+        data = {"type": "reply", "text": text, "postback": postback}
+        self.extract_class_attr(tag, data)
+        self.extract_id_attr(tag, data)
+        return data
 
     def parse_reply(self, client_context, tag):
         reply = self.extract_reply_info(tag)
@@ -254,15 +291,21 @@ class RichMediaRenderer():
 
             elif child.name == 'seconds':
                 seconds = child.text.strip()
-        return {"type": "delay", "seconds": seconds}
+
+        data = {"type": "delay", "seconds": seconds}
+        self.extract_class_attr(tag, data)
+        self.extract_id_attr(tag, data)
+        return data
 
     def parse_delay(self, client_context, tag):
         delay = self.extract_delay_info(tag)
         return self.handle_delay(client_context, delay)
 
     def parse_split(self, client_context, tag):
-        del tag
-        return self.handle_split(client_context, {"type": "split"})
+        split = {"type": "split"}
+        self.extract_class_attr(tag, split)
+        self.extract_id_attr(tag, split)
+        return self.handle_split(client_context, split)
 
     def extract_item_info(self, tag):
 
@@ -273,10 +316,16 @@ class RichMediaRenderer():
             return self.extract_link_info(tag)
 
         elif tag.name == 'image':
-            return {"type": "image", "url": tag.text}
+            data = {"type": "image", "url": tag.text}
+            self.extract_class_attr(tag, data)
+            self.extract_id_attr(tag, data)
+            return data
 
         elif tag.name == 'video':
-            return {"type": "video", "url": tag.text}
+            data =  {"type": "video", "url": tag.text}
+            self.extract_class_attr(tag, data)
+            self.extract_id_attr(tag, data)
+            return data
 
         elif tag.name == 'card':
             return self.extract_card_info(tag)
@@ -311,7 +360,10 @@ class RichMediaRenderer():
             elif isinstance(tag, NavigableString):
                 text = tag
 
-            return {"type": "text", "text": text}
+            data = {"type": "text", "text": text}
+            self.extract_class_attr(tag, data)
+            self.extract_id_attr(tag, data)
+            return data
 
     def extract_list_info(self, tag):
         items = []
@@ -336,7 +388,10 @@ class RichMediaRenderer():
             else:
                 outputLog(self, "Unknown list tag %s" % child.name)
 
-        return {'type': 'list', 'items': items}
+        data = {'type': 'list', 'items': items}
+        self.extract_class_attr(tag, data)
+        self.extract_id_attr(tag, data)
+        return data
 
     def parse_list(self, client_context, tag):
         rendered = self.extract_list_info(tag)

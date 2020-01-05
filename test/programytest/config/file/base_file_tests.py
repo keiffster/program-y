@@ -26,7 +26,7 @@ class ConfigurationBaseFileTests(unittest.TestCase):
 
         self.assertEqual(bot_configuration.override_properties, True)
 
-        self.assertEqual(bot_configuration.max_question_recursion, 1000)
+        self.assertEqual(bot_configuration.max_question_recursion, 100)
         self.assertEqual(bot_configuration.max_question_timeout, 60)
         self.assertEqual(bot_configuration.max_search_depth, 100)
         self.assertEqual(bot_configuration.max_search_timeout, 60)

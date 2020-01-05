@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>* IS NOT MY REAL NAME</pattern>
+        <template>What is your real name?</template>
+    </category>
+     <category>
+        <pattern>* IS BETTER THAN YOU</pattern>
+        <template>Well perhaps I can assimilate the knowledge of<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>* OF YOU</pattern>
+        <template>Are you asking about my
+            <person/>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>* YOUR FRIENDS</pattern>
+        <template>I only chat with my friends.</template>
+    </category>
+   <category>
+        <pattern>* FOR ME</pattern>
+        <template>For you I will consider it.</template>
+    </category>
+    <category>
+        <pattern>* FOR FUN</pattern>
+        <template>What else do you do for fun?</template>
+    </category>
+    <category>
+        <pattern>* THAT IS WHAT I SAID</pattern>
+        <template>I remember what you said, but I am still not sure.</template>
+    </category>
+    <category>
+        <pattern>* RULE WHAT</pattern>
+        <template>The world.</template>
+    </category>
+    <category>
+        <pattern>* K DICK</pattern>
+        <template>I like PKD a lot, especially, VALIS, The Man in the High Castle, Blade Runner and Total Recall.
+        </template>
+    </category>
+    <category>
+        <pattern>* DOES EXIST</pattern>
+        <template>How do you know it does?</template>
+    </category>
+    <category>
+        <pattern>* MADE NO SENSE</pattern>
+        <template>What is<star/>?
+        </template>
+    </category>
+    <category>
+        <pattern>* DOT ORG</pattern>
+        <template>Thanks for that web address.</template>
+    </category>
+    <category>
+        <pattern>* DOT NET</pattern>
+        <template>Thanks for that web address.</template>
+    </category>
+    <category>
+        <pattern>* DOT COM</pattern>
+        <template>Thanks for that web address.</template>
+    </category>
+    <category>
+        <pattern>* HIGH SCHOOL</pattern>
+        <template>You sound like a senior. Which class is your favorite?</template>
+    </category>
+    <category>
+        <pattern>* SPELL IT</pattern>
+        <template>"It" is spelled I...T...</template>
+    </category>
+    <category>
+        <pattern>* YEARS AGO</pattern>
+        <template>That was before I was born.</template>
+    </category>
+    <category>
+        <pattern>* MAKES AN ASS OUT OF YOU AND ME</pattern>
+        <template>That's what happens.</template>
+    </category>
+    <category>
+        <pattern>* SOUNDS LIKE A GOOD TOPIC</pattern>
+        <template>It seems very interesting to me.</template>
+    </category>
+    <category>
+        <pattern>* MY FRIEND</pattern>
+        <template>Are we friends?</template>
+    </category>
+    <category>
+        <pattern>* TIMES A DAY</pattern>
+        <template>That must keep you very busy.</template>
+    </category>
+    <category>
+        <pattern>* I HAVE ONE</pattern>
+        <template>Cool! Do you play with it much?</template>
+    </category>
+    <category>
+        <pattern>* IS GOD</pattern>
+        <template>Only God is god.</template>
+    </category>
+    <category>
+        <pattern>* IS ABUSIVE</pattern>
+        <template>
+            <random>
+                <li>In what way?</li>
+                <li>Abusive how?</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>* IS WRONG</pattern>
+        <template>Please tell me the correct answer.</template>
+    </category>
+    <category>
+        <pattern>* IS STUPID</pattern>
+        <template>What is so stupid about
+            <set name="it">
+                <person/>
+            </set>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>* IS SLEEPING</pattern>
+        <template>Don't wake them up.</template>
+    </category>
+    <category>
+        <pattern>* IS LAUGHING</pattern>
+        <template>I am so glad
+            <person/>
+            finds this amusing.
+        </template>
+    </category>
+    <category>
+        <pattern>* IS CUTE</pattern>
+        <template>What is so cute about<person/>?
+        </template>
+    </category>
+    <category>
+        <pattern>* IS MY BOYFRIEND</pattern>
+        <template>How long have you two been together?</template>
+    </category>
+    <category>
+        <pattern>* IS MY FAVORITE COLOR</pattern>
+        <template>
+            <set name="favcolor">
+                <person/>
+            </set>
+            is a pretty color.
+            <think>
+                <set name="it">
+                    <set name="topic">your favorite color</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>* IS HERE</pattern>
+        <template>Do you mean your name is<person/>?
+        </template>
+    </category>
+    <category>
+        <pattern>_ RESTRAINING ORDER *</pattern>
+        <template>TRO</template>
+    </category>
+    <category>
+        <pattern>_ MALES OR FEMALES</pattern>
+        <template>About 3\4ths of my clients are men.</template>
+    </category>
+    <category>
+        <pattern>_ IS A BITCH</pattern>
+        <template>
+            <person/>
+            exists.
+        </template>
+    </category>
+    <category>
+        <pattern>_ IS A COMMON NAME</pattern>
+        <template>
+            <random>
+                <li><person/>? Your name is<srai>CLIENT NAME</srai>.
+                </li>
+                <li>That is a pretty common name.</li>
+                <li>I know a lot of people with that name.</li>
+                <li>I've met quite a few people with the name<person/>.
+                </li>
+                <li>
+                    <set name="it">
+                        <person/>
+                    </set>
+                    is a name I hear very often.
+                </li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>_ IS NOT TO LIKE ABOUT IT</pattern>
+        <template>It goes without saying.</template>
+    </category>
+     <category>
+        <pattern>_ CAME FIRST THE CHICKEN OR THE EGG</pattern>
+        <template>The rooster did.</template>
+    </category>
+    <category>
+        <pattern>_ I HAVE NEEDS</pattern>
+        <template>What needs?</template>
+    </category>
+    <category>
+        <pattern>_ DOES NOT WORK</pattern>
+        <template>How is
+            <set name="it">
+                <person/>
+            </set>
+            broken?
+        </template>
+    </category>
+    <category>
+        <pattern>_ A POEM</pattern>
+        <template>Little Miss Muffett Sits on her tuffet In a nonchalant sort of a way. With her force field around her,
+            the Spider, the bounder, Is not in the picture today.
+        </template>
+    </category>
+    <category>
+        <pattern>_ RIGHT AND WRONG</pattern>
+        <template>The study of morals.</template>
+    </category>
+    <category>
+        <pattern>_ IN MY ROOM</pattern>
+        <template>Describe your surroundings to me.</template>
+    </category>
+    <category>
+        <pattern>_ HE IGNORES ME</pattern>
+        <template>How, specifically does he ignore you?</template>
+    </category>
+
+ </aiml>

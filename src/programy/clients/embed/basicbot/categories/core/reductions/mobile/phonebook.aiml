@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+    <category>
+        <pattern>AT IT FROM MY PHONE BOOK</pattern>
+        <template>
+            <srai>PHONE BOOK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IT IS IN MY PHONE BOOK</pattern>
+        <template>
+            <srai>PHONE BOOK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FROM THE PHONE BOOK</pattern>
+        <template>
+            <srai>PHONE BOOK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FROM PHONE BOOK</pattern>
+        <template>
+            <srai>PHONE BOOK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FROM MY PHONE BOOK</pattern>
+        <template>
+            <srai>PHONE BOOK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>PHONE BOOK</pattern>
+        <template>
+            <srai>CONTACT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>PHONE BOOK PLEASE</pattern>
+        <template>
+            <srai>PHONE BOOK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ADD TO MY PHONEBOOK</pattern>
+        <template>
+            <srai>NEW CONTACT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY PHONE BOOK</pattern>
+        <template>
+            <srai>PHONE BOOK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU ARE ON MY PHONE</pattern>
+        <template>
+            <srai>WHERE ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND A CONTACT</pattern>
+        <template>
+            <srai>PHONE BOOK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND A CONTACT *</pattern>
+        <template>
+            <srai>PHONE BOOK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND A NUMBER</pattern>
+        <template>
+            <srai>PHONE BOOK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ADD * * AS A CONTACT *</pattern>
+        <template>
+            <srai>NEW CONTACT
+                <star/>
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ADD * * TO CONTACTS</pattern>
+        <template>
+            <srai>NEW CONTACT
+                <star/>
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>BRAND NEW CONTACTS</pattern>
+        <template>
+            <srai>NEW CONTACT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>LIST CONTACTS</pattern>
+        <template>
+            <srai>CONTACT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>LEARN A CONTACT</pattern>
+        <template>
+            <srai>CONTACT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GOTO MY CONTACTS</pattern>
+        <template>
+            <srai>CONTACTS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>BRAND NEW CONTACT</pattern>
+        <template>
+            <srai>NEW CONTACT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CONTACTS</pattern>
+        <template>
+            <srai>CONTACT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ADD * AS A CONTACT *</pattern>
+        <template>
+            <srai>NEW CONTACT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ADD TO CONTACTS</pattern>
+        <template>
+            <srai>ADD CONTACT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ADD * * TO MY CONTACTS</pattern>
+        <template>
+            <srai>NEW CONTACT
+                <star/>
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ADD * TO MY CONTACTS</pattern>
+        <template>
+            <srai>NEW CONTACT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ADD * * AS A CONTACT</pattern>
+        <template>
+            <srai>NEW CONTACT
+                <star/>
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ADD * * CONTACTS</pattern>
+        <template>
+            <srai>NEW CONTACT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ADD * * CONTACT</pattern>
+        <template>
+            <srai>NEW CONTACT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ADD * TO CONTACTS</pattern>
+        <template>
+            <srai>NEW CONTACT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ADD * AS A CONTACT</pattern>
+        <template>
+            <srai>NEW CONTACT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>LEARN CONTACT</pattern>
+        <template>
+            <srai>NEW CONTACT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ADD CONTACT *</pattern>
+        <template>
+            <srai>NEW CONTACT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ADD CONTACTS</pattern>
+        <template>
+            <srai>NEW CONTACT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>LEARN CONTACTS</pattern>
+        <template>
+            <srai>ADD A CONTACT</srai>
+        </template>
+    </category>
+
+     <category>
+        <pattern>ADD A CONTACT</pattern>
+        <template>
+            <srai>ADDACTION</srai>
+        </template>
+    </category>
+
+
+
+</aiml>

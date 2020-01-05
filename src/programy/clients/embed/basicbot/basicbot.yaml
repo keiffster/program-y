@@ -1,0 +1,422 @@
+console:
+  default_userid: console
+  prompt: '>>>'
+  description: ProgramY AIML2.0 Client
+  bot_selector: programy.clients.botfactory.DefaultBotSelector
+  scheduler:
+    name: scheduler
+    debug_level: 0
+    add_listeners: false
+    remove_all_jobs: false
+    jobstore:
+      name: mongo
+      mongo:
+        collection: programy
+    threadpool:
+      max_workers: 20
+    processpool:
+      max_workers: 5
+    job_defaults:
+      coalesce: false
+      max_instances: 3
+  email:
+    host: null
+    port: null
+    username: null
+    password: null
+    from_addr: null
+  triggers:
+    manager: programy.triggers.local.LocalTriggerManager
+  responder:
+    name: Client Ping Responder
+    host: null
+    port: null
+    ssl_cert_file: null
+    ssl_key_file: null
+    url: null
+    shutdown: null
+    register: null
+    unregister: null
+    debug: false
+  renderer: programy.clients.render.text.TextRenderer
+  storage:
+    entities:
+      categories: file
+      errors: file
+      duplicates: file
+      learnf: file
+      conversations: file
+      maps: file
+      sets: file
+      rdf: file
+      denormal: file
+      normal: file
+      gender: file
+      person: file
+      person2: file
+      regex_templates: file
+      properties: file
+      defaults: file
+      variables: file
+      twitter: file
+      spelling_corpus: file
+      license_keys: file
+      pattern_nodes: file
+      template_nodes: file
+      binaries: file
+      braintree: file
+      preprocessors: file
+      postprocessors: file
+      postquestionprocessors: file
+      usergroups: file
+      triggers: file
+    stores:
+      file:
+        type: file
+        config:
+          categories_storage:
+            dirs:
+            - ./categories
+            extension: aiml
+            subdirs: true
+            format: xml
+            encoding: utf-8
+            delete_on_start: false
+          errors_storage:
+            file: ./debug/errors.txt
+            extension: null
+            subdirs: false
+            format: text
+            encoding: utf-8
+            delete_on_start: false
+          duplicates_storage:
+            file: ./debug/duplicates.txt
+            extension: null
+            subdirs: false
+            format: text
+            encoding: utf-8
+            delete_on_start: false
+          learnf_storage:
+            dirs:
+            - ./categories/learnf
+            extension: aiml
+            subdirs: false
+            format: xml
+            encoding: utf-8
+            delete_on_start: false
+          conversation_storage:
+            dirs:
+            - ./conversations
+            extension: txt
+            subdirs: false
+            format: text
+            encoding: utf-8
+            delete_on_start: false
+          sets_storage:
+            dirs:
+            - ./sets
+            extension: txt
+            subdirs: false
+            format: text
+            encoding: utf-8
+            delete_on_start: false
+          maps_storage:
+            dirs:
+            - ./maps
+            extension: txt
+            subdirs: false
+            format: text
+            encoding: utf-8
+            delete_on_start: false
+          rdf_storage:
+            dirs:
+            - ./rdfs
+            extension: txt
+            subdirs: true
+            format: text
+            encoding: utf-8
+            delete_on_start: false
+          denormal_storage:
+            file: ./lookups/denormal.txt
+            extension: null
+            subdirs: false
+            format: text
+            encoding: utf-8
+            delete_on_start: false
+          normal_storage:
+            file: ./lookups/normal.txt
+            extension: null
+            subdirs: false
+            format: text
+            encoding: utf-8
+            delete_on_start: false
+          gender_storage:
+            file: ./lookups/gender.txt
+            extension: null
+            subdirs: false
+            format: text
+            encoding: utf-8
+            delete_on_start: false
+          person_storage:
+            file: ./lookups/person.txt
+            extension: null
+            subdirs: false
+            format: text
+            encoding: utf-8
+            delete_on_start: false
+          person2_storage:
+            file: ./lookups/person2.txt
+            extension: null
+            subdirs: false
+            format: text
+            encoding: utf-8
+            delete_on_start: false
+          regex_storage:
+            file: ./regex/regex-templates.txt
+            extension: null
+            subdirs: false
+            format: text
+            encoding: utf-8
+            delete_on_start: false
+          properties_storage:
+            file: ./properties/properties.txt
+            extension: null
+            subdirs: false
+            format: text
+            encoding: utf-8
+            delete_on_start: false
+          defaults_storage:
+            file: ./properties/defaults.txt
+            extension: null
+            subdirs: false
+            format: text
+            encoding: utf-8
+            delete_on_start: false
+          twitter_storage:
+            dirs:
+            - ./twitter
+            extension: txt
+            subdirs: false
+            format: text
+            encoding: utf-8
+            delete_on_start: false
+          spelling_storage:
+            file: ./spelling/corpus.txt
+            extension: null
+            subdirs: false
+            format: text
+            encoding: utf-8
+            delete_on_start: false
+          license_storage:
+            file: ./licenses/license.keys
+            extension: null
+            subdirs: false
+            format: text
+            encoding: utf-8
+            delete_on_start: false
+          pattern_nodes_storage:
+            file: ./nodes/pattern_nodes.conf
+            extension: null
+            subdirs: false
+            format: text
+            encoding: utf-8
+            delete_on_start: false
+          template_nodes_storage:
+            file: ./nodes/template_nodes.conf
+            extension: null
+            subdirs: false
+            format: text
+            encoding: utf-8
+            delete_on_start: false
+          binaries_storage:
+            file: ./braintree/braintree.bin
+            extension: null
+            subdirs: false
+            format: binary
+            encoding: utf-8
+            delete_on_start: false
+          braintree_storage:
+            file: ./braintree/braintree.xml
+            extension: null
+            subdirs: false
+            format: xml
+            encoding: utf-8
+            delete_on_start: false
+          preprocessors_storage:
+            file: ./processing/preprocessors.conf
+            extension: null
+            subdirs: false
+            format: text
+            encoding: utf-8
+            delete_on_start: false
+          postprocessors_storage:
+            file: ./processing/postprocessors.conf
+            extension: null
+            subdirs: false
+            format: text
+            encoding: utf-8
+            delete_on_start: false
+          postquestionprocessors_storage:
+            file: ./processing/postquestionprocessors.conf
+            extension: null
+            subdirs: false
+            format: text
+            encoding: utf-8
+            delete_on_start: false
+          usergroups_storage:
+            file: ./security/usergroups.yaml
+            extension: null
+            subdirs: false
+            format: text
+            encoding: utf-8
+            delete_on_start: false
+          triggers_storage:
+            file: ./triggers/triggers.txt
+            extension: null
+            subdirs: false
+            format: text
+            encoding: utf-8
+            delete_on_start: false
+  bots:
+    bot:
+      bot_root: .
+      default_response: ''
+      default_response_srai: ''
+      exit_response: Bye!
+      exit_response_srai: ''
+      initial_question: Hello
+      initial_question_srai: ''
+      empty_string: ''
+      override_properties: true
+      max_question_recursion: 100
+      max_question_timeout: -1
+      max_search_depth: 100
+      max_search_timeout: -1
+      tab_parse_output: true
+      spelling:
+        classname: programy.spelling.norvig.NorvigSpellingChecker
+        alphabet: ABCDEFGHIJKLMNOPQRSTUVWXYZ
+        check_before: false
+        check_and_retry: false
+      conversations:
+        max_histories: 100
+        restore_last_topic: true
+        initial_topic: '*'
+        empty_on_start: true
+        multi_client: false
+      splitter:
+        classname: programy.dialog.splitter.regex.RegexSentenceSplitter
+        split_chars: '[:;,.?!]'
+      joiner:
+        classname: programy.dialog.joiner.joiner.SentenceJoiner
+        join_chars: .?!
+        terminator: .
+      from_translator:
+        classname: programy.nlp.translate.textblob_translator.TextBlobTranslator
+        from: null
+        to: null
+      to_translator:
+        classname: programy.nlp.translate.textblob_translator.TextBlobTranslator
+        from: null
+        to: null
+      sentiment:
+        classname: programy.nlp.sentiment.textblob_sentiment.TextBlobSentimentAnalyser
+        scores: programy.nlp.sentiment.scores.SentimentScores
+      brains:
+        brain:
+          overrides:
+            allow_system_aiml: false
+            allow_learn_aiml: false
+            allow_learnf_aiml: false
+          defaults:
+            default_get: unknown
+            default_property: unknown
+            default_map: unknown
+          binaries:
+            save_binary: false
+            load_binary: false
+            load_aiml_on_binary_fail: true
+          braintree:
+            create: false
+            save_as_user: system
+          services:
+            REST:
+              classname: programy.services.rest.GenericRESTService
+              method: GET
+              host: 0.0.0.0
+            Pannous:
+              classname: programy.services.pannous.PannousService
+              url: http://weannie.pannous.com/api
+            Pandora:
+              classname: programy.services.pandora.PandoraService
+              url: http://www.pandorabots.com/pandora/talk-xml
+            Wikipedia:
+              classname: programy.services.wikipediaservice.WikipediaService
+            DuckDuckGo:
+              classname: programy.services.duckduckgo.DuckDuckGoService
+              url: http://api.duckduckgo.com
+          openchatbots:
+            openchatbots: {}
+            protocols:
+            - http
+            domains: []
+          security:
+            authentication:
+              classname: programy.security.authenticate.passthrough.BasicPassThroughAuthenticationService
+              denied_srai: AUTHENTICATION_FAILED
+              denied_text: Access Denied!
+            authorisation:
+              classname: programy.security.authorise.usergroupsauthorisor.BasicUserGroupAuthorisationService
+              denied_srai: AUTHORISATION_FAILED
+              denied_text: Access Denied!
+            account_linker:
+              classname: programy.security.linking.accountlinker.BasicAccountLinkerService
+              denied_srai: ACCOUNT_LINKING_FAILED
+              denied_text: Unable to link accounts!
+          oob:
+            default:
+              classname: programy.oob.defaults.default.DefaultOutOfBandProcessor
+            alarm:
+              classname: programy.oob.defaults.alarm.AlarmOutOfBandProcessor
+            camera:
+              classname: programy.oob.defaults.camera.CameraOutOfBandProcessor
+            clear:
+              classname: programy.oob.defaults.clear.ClearOutOfBandProcessor
+            dial:
+              classname: programy.oob.defaults.dial.DialOutOfBandProcessor
+            dialog:
+              classname: programy.oob.defaults.dialog.DialogOutOfBandProcessor
+            email:
+              classname: programy.oob.defaults.email.EmailOutOfBandProcessor
+            geomap:
+              classname: programy.oob.defaults.map.MapOutOfBandProcessor
+            schedule:
+              classname: programy.oob.defaults.schedule.ScheduleOutOfBandProcessor
+            search:
+              classname: programy.oob.defaults.search.SearchOutOfBandProcessor
+            sms:
+              classname: programy.oob.defaults.sms.SMSOutOfBandProcessor
+            url:
+              classname: programy.oob.defaults.url.URLOutOfBandProcessor
+            wifi:
+              classname: programy.oob.defaults.wifi.WifiOutOfBandProcessor
+          dynamic:
+            sets:
+              NUMBER: programy.dynamic.sets.numeric.IsNumeric
+              ROMAN: programy.dynamic.sets.roman.IsRomanNumeral
+              STOPWORD: programy.dynamic.sets.stopword.IsStopWord
+              SYNSETS: programy.dynamic.sets.synsets.IsSynset
+            maps:
+              ROMANTODDEC: programy.dynamic.maps.roman.MapRomanToDecimal
+              DECTOROMAN: programy.dynamic.maps.roman.MapDecimalToRoman
+              LEMMATIZE: programy.dynamic.maps.lemmatize.LemmatizeMap
+              STEMMER: programy.dynamic.maps.stemmer.StemmerMap
+            variables:
+              GETTIME: programy.dynamic.variables.datetime.GetTime
+          tokenizer:
+            classname: programy.dialog.tokenizer.tokenizer.Tokenizer
+            split_chars: ' '
+          debugfiles:
+            save_errors: false
+            save_duplicates: false
+      brain_selector: programy.brainfactory.DefaultBrainSelector

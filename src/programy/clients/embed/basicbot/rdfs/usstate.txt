@@ -1,0 +1,312 @@
+ALABAMA:hasPurpose:to form a state
+ALABAMA:hasSize:11
+ALABAMA:hasSyllables:4
+ALABAMA:isa:Geographic Location
+ALABAMA:isa:State
+ALABAMA:lifeArea:Education
+ALASKA:hasPurpose:to form a state
+ALASKA:hasSize:11
+ALASKA:hasSyllables:3
+ALASKA:isa:Geographic Location
+ALASKA:isa:State
+ALASKA:lifeArea:Education
+ARIZONA:hasPurpose:to form a state
+ARIZONA:hasSize:11
+ARIZONA:hasSyllables:4
+ARIZONA:isa:Geographic Location
+ARIZONA:isa:State
+ARIZONA:lifeArea:Education
+ARKANSAS:hasPurpose:to form a state
+ARKANSAS:hasSize:11
+ARKANSAS:hasSyllables:3
+ARKANSAS:isa:Geographic Location
+ARKANSAS:isa:State
+ARKANSAS:lifeArea:Education
+CALIFORNIA:hasPurpose:to form a state
+CALIFORNIA:hasSize:11
+CALIFORNIA:hasSyllables:5
+CALIFORNIA:isa:Geographic Location
+CALIFORNIA:isa:State
+CALIFORNIA:lifeArea:Education
+COLORADO:hasPurpose:to form a state
+COLORADO:hasSize:11
+COLORADO:hasSyllables:4
+COLORADO:isa:Geographic Location
+COLORADO:isa:State
+COLORADO:lifeArea:Education
+CONNECTICUT:hasPurpose:to form a state
+CONNECTICUT:hasSize:11
+CONNECTICUT:hasSyllables:5
+CONNECTICUT:isa:Geographic Location
+CONNECTICUT:isa:State
+CONNECTICUT:lifeArea:Education
+DELAWARE:hasPurpose:to form a state
+DELAWARE:hasSize:11
+DELAWARE:hasSyllables:3
+DELAWARE:isa:Geographic Location
+DELAWARE:isa:State
+DELAWARE:lifeArea:Education
+FLORIDA:hasPurpose:to form a state
+FLORIDA:hasSize:11
+FLORIDA:hasSyllables:3
+FLORIDA:isa:Geographic Location
+FLORIDA:isa:State
+FLORIDA:lifeArea:Education
+GEORGIA:hasPurpose:to form a state
+GEORGIA:hasSize:11
+GEORGIA:hasSyllables:2
+GEORGIA:isa:Geographic Location
+GEORGIA:isa:State
+GEORGIA:lifeArea:Education
+HAWAII:hasPurpose:to form a state
+HAWAII:hasSize:11
+HAWAII:hasSyllables:3
+HAWAII:isa:Geographic Location
+HAWAII:isa:State
+HAWAII:lifeArea:Education
+IDAHO:hasPurpose:to form a state
+IDAHO:hasSize:11
+IDAHO:hasSyllables:3
+IDAHO:isa:Geographic Location
+IDAHO:isa:State
+IDAHO:lifeArea:Education
+ILLINOIS:hasPurpose:to form a state
+ILLINOIS:hasSize:11
+ILLINOIS:hasSyllables:3
+ILLINOIS:isa:Geographic Location
+ILLINOIS:isa:State
+ILLINOIS:lifeArea:Education
+IOWA:hasPurpose:to form a state
+IOWA:hasSize:11
+IOWA:hasSyllables:3
+IOWA:isa:Geographic Location
+IOWA:isa:State
+IOWA:lifeArea:Education
+INDIANA:hasPurpose:to form a state
+INDIANA:hasSize:11
+INDIANA:hasSyllables:4
+INDIANA:isa:Geographic Location
+INDIANA:isa:State
+INDIANA:lifeArea:Education
+KANSAS:hasPurpose:to form a state
+KANSAS:hasSize:11
+KANSAS:hasSyllables:2
+KANSAS:isa:Geographic Location
+KANSAS:isa:State
+KANSAS:lifeArea:Education
+KENTUCKY:hasPurpose:to form a state
+KENTUCKY:hasSize:11
+KENTUCKY:hasSyllables:3
+KENTUCKY:isa:Geographic Location
+KENTUCKY:isa:State
+KENTUCKY:lifeArea:Education
+LOUISIANA:hasPurpose:to form a state
+LOUISIANA:hasSize:11
+LOUISIANA:hasSyllables:5
+LOUISIANA:isa:Geographic Location
+LOUISIANA:isa:State
+LOUISIANA:lifeArea:Education
+MAINE:hasPurpose:to form a state
+MAINE:hasSize:11
+MAINE:hasSyllables:1
+MAINE:isa:Geographic Location
+MAINE:isa:State
+MAINE:lifeArea:Education
+MASSACHUSETTS:hasPurpose:to form a state
+MASSACHUSETTS:hasSize:11
+MASSACHUSETTS:hasSyllables:4
+MASSACHUSETTS:isa:Geographic Location
+MASSACHUSETTS:isa:State
+MASSACHUSETTS:lifeArea:Education
+WYOMING:hasPurpose:to form a state
+WYOMING:hasSize:10
+WYOMING:hasSyllables:3
+WYOMING:isa:Geographic Location
+WYOMING:isa:State
+WYOMING:lifeArea:Education
+WISCONSIN:hasPurpose:to form a state
+WISCONSIN:hasSize:11
+WISCONSIN:hasSyllables:3
+WISCONSIN:isa:Geographic Location
+WISCONSIN:isa:State
+WISCONSIN:lifeArea:Education
+WEST VIRGINIA:hasPurpose:to form a state
+WEST VIRGINIA:hasSize:11
+WEST VIRGINIA:hasSyllables:5
+WEST VIRGINIA:isa:Geographic Location
+WEST VIRGINIA:isa:State
+WEST VIRGINIA:lifeArea:Education
+WASHINGTON:hasPurpose:to form a state
+WASHINGTON:hasSize:11
+WASHINGTON:hasSyllables:3
+WASHINGTON:isa:Geographic Location
+WASHINGTON:isa:State
+WASHINGTON:lifeArea:Education
+VIRGINIA:hasPurpose:to form a state
+VIRGINIA:hasSize:11
+VIRGINIA:hasSyllables:4
+VIRGINIA:isa:Geographic Location
+VIRGINIA:isa:State
+VIRGINIA:lifeArea:Education
+VERMONT:hasPurpose:to form a state
+VERMONT:hasSize:11
+VERMONT:hasSyllables:2
+VERMONT:isa:Geographic Location
+VERMONT:isa:State
+VERMONT:lifeArea:Education
+UTAH:hasPurpose:to form a state
+UTAH:hasSize:11
+UTAH:hasSyllables:2
+UTAH:isa:Geographic Location
+UTAH:isa:State
+UTAH:lifeArea:Education
+TEXAS:hasPurpose:to form a state
+TEXAS:hasSize:11
+TEXAS:hasSyllables:2
+TEXAS:isa:Geographic Location
+TEXAS:isa:State
+TEXAS:lifeArea:Education
+SOUTH CAROLINA:hasPurpose:to form a state
+SOUTH CAROLINA:hasSize:11
+SOUTH CAROLINA:hasSyllables:5
+SOUTH CAROLINA:isa:Geographic Location
+SOUTH CAROLINA:isa:State
+SOUTH CAROLINA:lifeArea:Education
+SOUTH DAKOTA:hasPurpose:to form a state
+SOUTH DAKOTA:hasSize:11
+SOUTH DAKOTA:hasSyllables:4
+SOUTH DAKOTA:isa:Geographic Location
+SOUTH DAKOTA:isa:State
+SOUTH DAKOTA:lifeArea:Education
+MARYLAND:hasPurpose:to form a state
+MARYLAND:hasSize:11
+MARYLAND:hasSyllables:3
+MARYLAND:isa:Geographic Location
+MARYLAND:isa:State
+MARYLAND:lifeArea:Education
+MICHIGAN:hasPurpose:to form a state
+MICHIGAN:hasSize:11
+MICHIGAN:hasSyllables:3
+MICHIGAN:isa:Geographic Location
+MICHIGAN:isa:State
+MICHIGAN:lifeArea:Education
+MINNESOTA:hasPurpose:to form a state
+MINNESOTA:hasSize:11
+MINNESOTA:hasSyllables:4
+MINNESOTA:isa:Geographic Location
+MINNESOTA:isa:State
+MINNESOTA:lifeArea:Education
+MISSISSIPPI:hasPurpose:to form a state
+MISSISSIPPI:hasSize:11
+MISSISSIPPI:hasSyllables:3
+MISSISSIPPI:isa:Geographic Location
+MISSISSIPPI:isa:State
+MISSISSIPPI:lifeArea:Education
+MISSOURI:hasPurpose:to form a state
+MISSOURI:hasSize:11
+MISSOURI:hasSyllables:3
+MISSOURI:isa:Geographic Location
+MISSOURI:isa:State
+MISSOURI:lifeArea:Education
+NEBRASKA:hasPurpose:to form a state
+NEBRASKA:hasSize:11
+NEBRASKA:hasSyllables:3
+NEBRASKA:isa:Geographic Location
+NEBRASKA:isa:State
+NEBRASKA:lifeArea:Education
+NEVADA:hasPurpose:to form a state
+NEVADA:hasSize:11
+NEVADA:hasSyllables:3
+NEVADA:isa:Geographic Location
+NEVADA:isa:State
+NEVADA:lifeArea:Education
+NEW HAMPSHIRE:hasPurpose:to form a state
+NEW HAMPSHIRE:hasSize:11
+NEW HAMPSHIRE:hasSyllables:3
+NEW HAMPSHIRE:isa:Geographic Location
+NEW HAMPSHIRE:isa:State
+NEW HAMPSHIRE:lifeArea:Education
+NEW JERSEY:hasPurpose:to form a state
+NEW JERSEY:hasSize:11
+NEW JERSEY:hasSyllables:3
+NEW JERSEY:isa:Geographic Location
+NEW JERSEY:isa:State
+NEW JERSEY:lifeArea:Education
+NEW MEXICO:hasPurpose:to form a state
+NEW MEXICO:hasSize:11
+NEW MEXICO:hasSyllables:4
+NEW MEXICO:isa:Geographic Location
+NEW MEXICO:isa:State
+NEW MEXICO:lifeArea:Education
+NEW YORK:hasPurpose:to form a state
+NEW YORK:hasSize:11
+NEW YORK:hasSyllables:2
+NEW YORK:isa:Geographic Location
+NEW YORK:isa:State
+NEW YORK:lifeArea:Education
+NORTH CAROLINA:hasPurpose:to form a state
+NORTH CAROLINA:hasSize:11
+NORTH CAROLINA:hasSyllables:5
+NORTH CAROLINA:isa:Geographic Location
+NORTH CAROLINA:isa:State
+NORTH CAROLINA:lifeArea:Education
+NORTH DAKOTA:hasPurpose:to form a state
+NORTH DAKOTA:hasSize:11
+NORTH DAKOTA:hasSyllables:4
+NORTH DAKOTA:isa:Geographic Location
+NORTH DAKOTA:isa:State
+NORTH DAKOTA:lifeArea:Education
+OHIO:hasPurpose:to form a state
+OHIO:hasSize:11
+OHIO:hasSyllables:3
+OHIO:isa:Geographic Location
+OHIO:isa:State
+OHIO:lifeArea:Education
+OKLAHOMA:hasPurpose:to form a state
+OKLAHOMA:hasSize:11
+OKLAHOMA:hasSyllables:4
+OKLAHOMA:isa:Geographic Location
+OKLAHOMA:isa:State
+OKLAHOMA:lifeArea:Education
+OMAHA:hasPurpose:to form a city
+OMAHA:hasSize:10
+OMAHA:hasSyllables:3
+OMAHA:isa:City
+OMAHA:isa:Geographic Location
+OMAHA:lifeArea:Education
+OREGON:hasPurpose:to form a state
+OREGON:hasSize:11
+OREGON:hasSyllables:3
+OREGON:isa:Geographic Location
+OREGON:isa:State
+OREGON:lifeArea:Education
+RHODE ISLAND:hasPurpose:to form a state
+RHODE ISLAND:hasSize:11
+RHODE ISLAND:hasSyllables:3
+RHODE ISLAND:isa:Geographic Location
+RHODE ISLAND:isa:State
+RHODE ISLAND:lifeArea:Education
+TENNESSEE:hasPurpose:to form a state
+TENNESSEE:hasSize:11
+TENNESSEE:hasSyllables:3
+TENNESSEE:isa:Geographic Location
+TENNESSEE:isa:State
+TENNESSEE:lifeArea:Education
+PENNSYLVANIA:hasPurpose:to form a state
+PENNSYLVANIA:hasSize:11
+PENNSYLVANIA:hasSyllables:5
+PENNSYLVANIA:isa:Geographic Location
+PENNSYLVANIA:isa:State
+PENNSYLVANIA:lifeArea:Education
+MONTANA:hasPurpose:to form a state
+MONTANA:hasSize:11
+MONTANA:hasSyllables:3
+MONTANA:isa:Geographic Location
+MONTANA:isa:State
+MONTANA:lifeArea:Education
+STATE:hasPurpose:to form a state
+STATE:hasSize:11
+STATE:hasSyllables:1
+STATE:isa:Geographic Feature
+State:isa:Geographic Location
+STATE:lifeArea:Education

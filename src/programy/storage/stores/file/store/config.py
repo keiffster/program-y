@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation dirs (the "Software"), to deal in the Software without restriction, including without limitation
@@ -113,21 +113,29 @@ class FileStoreConfiguration(BaseSectionConfigurationData):
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:
-            data['dirs'] = "./storage/%s" % self.id
+
+            if self._has_single_file is True:
+                data['file'] = "./storage/%s" % self.id
+
+            else:
+                data['dirs'] = "./storage/%s" % self.id
+
             data['extension'] = ".txt"
             data['subdirs'] = False
-
-            data['file'] = None
 
             data['format'] = None
             data['encoding'] = None
             data['delete_on_start'] = False
+
         else:
-            data['dirs'] = self._dirs
+            if self._has_single_file is True:
+                data['file'] = self._dirs[0]
+
+            else:
+                data['dirs'] = self._dirs
+
             data['extension'] = self._extension
             data['subdirs'] = self._subdirs
-
-            data['file'] = None
 
             data['format'] = self._format
             data['encoding'] = self._encoding

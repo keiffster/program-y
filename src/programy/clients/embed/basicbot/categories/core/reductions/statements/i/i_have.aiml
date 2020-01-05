@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>GOTTA *</pattern>
+        <template>
+            <srai>I HAVE TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+     <category>
+        <pattern>I DO HAVE *</pattern>
+        <template>
+            <srai>I HAVE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I HAVE ALREADY *</pattern>
+        <template>
+            <srai>I HAVE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I ALREADY HAVE *</pattern>
+        <template>
+            <srai>I HAVE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I HAVE GOT A *</pattern>
+        <template>
+            <srai>I HAVE A
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HAVE TO *</pattern>
+        <template>
+            <srai>I HAVE TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WE HAVE A FLAT TIRE</pattern>
+        <template>
+            <srai>I HAVE A FLAT TIRE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I GOT MY *</pattern>
+        <template>
+            <srai>I HAVE MY
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I KNOW I HAVE *</pattern>
+        <template>
+            <srai>I HAVE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I ONLY HAVE *</pattern>
+        <template>
+            <srai>I HAVE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I GOTTA *</pattern>
+        <template>
+            <srai>I HAVE TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I HAV *</pattern>
+        <template>
+            <srai>I HAVE
+                <star/>
+            </srai>
+        </template>
+    </category>
+     <category>
+        <pattern>GOT *</pattern>
+        <template>
+            <srai>I HAVE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I GOT *</pattern>
+        <template>
+            <srai>I HAVE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I HAVE GOT *</pattern>
+        <template>
+            <srai>I HAVE
+                <star/>
+            </srai>
+        </template>
+    </category>
+     <category>
+        <pattern>I GOT A *</pattern>
+        <template>
+            <srai>I HAVE A
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>BEEN *</pattern>
+        <template>
+            <srai>I HAVE BEEN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I GOT TO *</pattern>
+        <template>
+            <srai>I HAVE TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I HAVE A LOT OF *</pattern>
+        <template>
+            <srai>I have
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I HAVE A NEW *</pattern>
+        <template>
+            <srai>I have a
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I WOULD HAVE TO *</pattern>
+        <template>
+            <srai>I have to
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HAD A *</pattern>
+        <template>
+            <srai>I HAD A
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+
+
+
+
+</aiml>

@@ -1,0 +1,6 @@
+HONDA:hasPurpose:to transport us on the ground
+HONDA:hasSize:8
+HONDA:hasSyllables:2
+HONDA:isa:Automobile
+HONDA:isa:Transportation
+HONDA:lifeArea:Physical

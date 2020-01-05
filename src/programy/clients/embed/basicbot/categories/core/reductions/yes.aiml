@@ -1,0 +1,589 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+   <category>
+        <pattern>HELL YEAH</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YEAH I *</pattern>
+        <template>
+            <srai>YES</srai>
+            <srai>I
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YEAH SURE *</pattern>
+        <template>
+            <srai>YES</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>YEAH YEAH *</pattern>
+        <template>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>YEAH YEAH YEAH</pattern>
+        <template>
+            <srai>YEAH YEAH</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YEAH</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YEP *</pattern>
+        <template>
+            <srai>YES</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>YEP</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YES THATS *</pattern>
+        <template>
+            <srai>YES THAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YES VERY MUCH</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I SAY YES *</pattern>
+        <template>
+            <srai>YES
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SURE THING</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YES MA AM</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YES ABSOLUTELY</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YES SIR *</pattern>
+        <template>
+            <srai>YES
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YEH *</pattern>
+        <template>
+            <srai>YES</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>UH HUH</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DEFINITELY</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>FOR SURE</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YAA *</pattern>
+        <template>
+            <srai>YES</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>YAH *</pattern>
+        <template>
+            <srai>YES</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>ABSOLUTELY</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>AYUH</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YED</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>JA</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>OH YES *</pattern>
+        <template>
+            <srai>YES</srai>
+            <sr/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>YE</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OF COURSE</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YEA *</pattern>
+        <template>
+            <srai>YES</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>YA</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SURE</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YEA</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YES *</pattern>
+        <template>
+            <srai>YES</srai>
+            <sr/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>YA *</pattern>
+        <template>
+            <srai>YES</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>YES IT IS</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YES YOU *</pattern>
+        <template>
+            <srai>YES</srai>
+            <srai>YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YUP</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YES I *</pattern>
+        <template>
+            <srai>YES</srai>
+            <srai>I
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SURE *</pattern>
+        <template>
+            <srai>YES</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>EXACTLY</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>YESS</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HELL YES</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YRS</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YES MAM</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YA I *</pattern>
+        <template>
+            <srai>YES</srai>
+            <srai>I
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FO SHIZZLE</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SI</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FO SHIZZLE MY NIZZLE</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YEPP</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YES I DO I *</pattern>
+        <template>
+            <srai>YES I DO</srai>
+            <srai>I
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YEAH *</pattern>
+        <template>
+            <srai>YES</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>YEPP *</pattern>
+        <template>
+            <srai>YES</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>YES IT IS WHAT *</pattern>
+        <template>
+            <srai>YES</srai>
+            <srai>WHAT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YES AND I AM *</pattern>
+        <template>
+            <srai>YES</srai>
+            <srai>I AM
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SURE DO</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YWS</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YEAHH *</pattern>
+        <template>
+            <srai>YES</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>YESS *</pattern>
+        <template>
+            <srai>YES</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>I SAY YES</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YS</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YES INDEED</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I GUESS SO</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YES BABY</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YUP *</pattern>
+        <template>
+            <srai>YES</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>YES YOU</pattern>
+        <template>
+            <srai>YES</srai>
+            <srai>YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YES I HAVE</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>INDEED</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YAH</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OUI</pattern>
+        <template>
+            <srai>yes</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YEH</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YAP</pattern>
+        <template>
+            <srai>yes</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I DO</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>PLEASE DO</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YES SIR</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YAAA</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YEAH I GUESS</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>UES</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>Y E S</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CORRECT</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>YEAH BECAUSE *</pattern>
+        <template>
+            <srai>YES BECAUSE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SI *</pattern>
+        <template>
+            <srai>YES
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DEFINITELY *</pattern>
+        <template>
+            <srai>YES
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YESSSS</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YES I MEAN</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>SURE IS</pattern>
+        <template>
+            <srai>YES IT IS</srai>
+        </template>
+    </category>
+
+
+</aiml>

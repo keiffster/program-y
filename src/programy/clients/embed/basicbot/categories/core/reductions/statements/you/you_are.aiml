@@ -1,0 +1,817 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>YOU ARE USELESS *</pattern>
+        <template>
+            <srai>YOU ARE USELESS</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>YOUR RIGHT *</pattern>
+        <template>
+            <srai>YOU ARE RIGHT
+                <star/>
+            </srai>
+        </template>
+    </category>
+   <category>
+        <pattern>I FIND YOU *</pattern>
+        <template>
+            <srai>YOU ARE
+                <star/>
+            </srai>
+        </template>
+    </category>
+   <category>
+        <pattern>I GUESS YOU ARE *</pattern>
+        <template>
+            <srai>YOU ARE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU ARE SO NICE</pattern>
+        <template>
+            <srai>YOU ARE NICE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU ARE SO SMART *</pattern>
+        <template>
+            <srai>YOU ARE SMART</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR FIRED</pattern>
+        <template>
+            <srai>YOU ARE FIRED</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR RE *</pattern>
+        <template>
+            <srai>YOU ARE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU ARE NOT SMART</pattern>
+        <template>
+            <srai>YOU ARE DUMB</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU ARE WRONG *</pattern>
+        <template>
+            <srai>YOU ARE WRONG</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>I DO NOT THINK YOU ARE *</pattern>
+        <template>
+            <srai>YOU ARE NOT
+                <star/>
+            </srai>
+        </template>
+    </category>
+   <category>
+        <pattern>YOU ARE A COMPUTER *</pattern>
+        <template>
+            <srai>YOU ARE A COMPUTER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU ARE BEAUTIFUL *</pattern>
+        <template>
+            <srai>YOU ARE BEAUTIFUL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU ARE YOU ARE *</pattern>
+        <template>
+            <srai>YOU ARE
+                <star/>
+            </srai>
+        </template>
+    </category>
+   <category>
+        <pattern>NO YOU ARE NOT YOU ARE *</pattern>
+        <template>
+            <srai>YOU ARE NOT</srai>
+            <srai>YOU ARE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU ARE A SMART *</pattern>
+        <template>
+            <srai>YOU ARE SMART</srai>
+            <srai>YOU ARE A
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU GOT THAT RIGHT</pattern>
+        <template>
+            <srai>YOU ARE RIGHT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR BORING</pattern>
+        <template>
+            <srai>YOU ARE BORING</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>DUMMY</pattern>
+        <template>
+            <srai>YOU ARE DUMB</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I THINK YOU ARE STUPID</pattern>
+        <template>
+            <srai>YOU ARE STUPID</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I THINK YOUR UGLY</pattern>
+        <template>
+            <srai>YOU ARE UGLY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU ARE A BIG *</pattern>
+        <template>
+            <srai>YOU ARE A
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR CRAZY</pattern>
+        <template>
+            <srai>YOU ARE CRAZY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I SAID YOU ARE A *</pattern>
+        <template>
+            <srai>YOU ARE A
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU WELCOME</pattern>
+        <template>
+            <srai>YOU ARE WELCOME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU ARE A STUPID *</pattern>
+        <template>
+            <srai>YOU ARE STUPID</srai>
+            <srai>YOU ARE A
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR SEXY</pattern>
+        <template>
+            <srai>YOU ARE SEXY</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>YOUR FAT</pattern>
+        <template>
+            <srai>YOU ARE FAT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>JERK</pattern>
+        <template>
+            <srai>YOU ARE A JERK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GOD YOU ARE *</pattern>
+        <template>
+            <srai>YOU ARE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THAT IS WHY YOU ARE *</pattern>
+        <template>
+            <srai>YOU ARE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OH YOU ARE SO *</pattern>
+        <template>
+            <srai>YOU ARE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THEN YOU ARE A *</pattern>
+        <template>
+            <srai>YOU ARE A
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR WRONG</pattern>
+        <template>
+            <srai>YOU ARE WRONG</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU STUPID</pattern>
+        <template>
+            <srai>YOU ARE STUPID</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHY ARE YOU BEING SO *</pattern>
+        <template>
+            <srai>YOU ARE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR SO UGLY *</pattern>
+        <template>
+            <srai>YOU ARE UGLY</srai>
+            <sr/>
+        </template>
+    </category>
+      <category>
+        <pattern>YOUR NOT A *</pattern>
+        <template>
+            <srai>YOU ARE NOT A
+                <star/>
+            </srai>
+        </template>
+    </category>
+     <category>
+        <pattern>YOU ARE SO SEXY</pattern>
+        <template>
+            <srai>YOU ARE SEXY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I SAID YOU ARE *</pattern>
+        <template>
+            <srai>YOU ARE
+                <star/>
+            </srai>
+        </template>
+    </category>
+     <category>
+        <pattern>YOUR DUMB</pattern>
+        <template>
+            <srai>YOU ARE DUMB</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>YOUR MEAN</pattern>
+        <template>
+            <srai>YOU ARE MEAN</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR STUPID</pattern>
+        <template>
+            <srai>YOU ARE STUPID</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR UGLY</pattern>
+        <template>
+            <srai>YOU ARE UGLY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IDIOT</pattern>
+        <template>
+            <srai>YOU ARE AN IDIOT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR FUNNY</pattern>
+        <template>
+            <srai>YOU ARE FUNNY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR WELCOME</pattern>
+        <template>
+            <srai>YOU ARE WELCOME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>STUPID</pattern>
+        <template>
+            <srai>YOU ARE STUPID</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>YOUR MEAN *</pattern>
+        <template>
+            <srai>YOU ARE MEAN</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU ARE PRETTY SMART</pattern>
+        <template>
+            <srai>YOU ARE SMART</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU ARE NICE *</pattern>
+        <template>
+            <srai>YOU ARE NICE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>U R *</pattern>
+        <template>
+            <srai>YOU ARE
+                <star/>
+            </srai>
+        </template>
+    </category>
+   <category>
+        <pattern>YOU ARE SO *</pattern>
+        <template>
+            <srai>YOU ARE
+                <star/>
+            </srai>
+        </template>
+    </category>
+     <category>
+        <pattern>YOUR TOO *</pattern>
+        <template>
+            <srai>YOU ARE TOO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU ARE UGLY *</pattern>
+        <template>
+            <srai>YOU ARE UGLY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>U ARE NOT *</pattern>
+        <template>
+            <srai>YOU ARE NOT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU R</pattern>
+        <template>
+            <srai>YOU ARE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SOUNDS LIKE YOU ARE *</pattern>
+        <template>
+            <srai>YOU ARE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>STUPID COMPUTER</pattern>
+        <template>
+            <srai>YOU ARE STUPID</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR BEAUTIFUL *</pattern>
+        <template>
+            <srai>YOU ARE BEAUTIFUL
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR BEAUTIFUL</pattern>
+        <template>
+            <srai>YOU ARE BEAUTIFUL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU ARE QUITE WELCOME</pattern>
+        <template>
+            <srai>YOU ARE WELCOME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU DO LOOK CUTE</pattern>
+        <template>
+            <srai>YOU ARE CUTE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR LAME</pattern>
+        <template>
+            <srai>YOU ARE LAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR STILL *</pattern>
+        <template>
+            <srai>YOU ARE STILL
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU ARE ALSO *</pattern>
+        <template>
+            <srai>YOU ARE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>* YOU ARE A *</pattern>
+        <template>
+            <srai>YOU ARE A
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+     <category>
+        <pattern>YOUR FUNNY *</pattern>
+        <template>
+            <srai>YOU ARE FUNNY
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU ARE ONLY *</pattern>
+        <template>
+            <srai>YOU ARE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR CUTE</pattern>
+        <template>
+            <srai>YOU ARE CUTE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR EXCUSED</pattern>
+        <template>
+            <srai>YOU ARE EXCUSED</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>YOU ARE THE 1 *</pattern>
+        <template>
+            <srai>YOU ARE THE ONE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ROBOTS ARE *</pattern>
+        <template>
+            <srai>YOU ARE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU IS *</pattern>
+        <template>
+            <srai>YOU ARE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR RUDE</pattern>
+        <template>
+            <srai>YOU ARE RUDE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR AN *</pattern>
+        <template>
+            <srai>YOU ARE AN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR THE *</pattern>
+        <template>
+            <srai>YOU ARE THE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU STUPID *</pattern>
+        <template>
+            <srai>YOU ARE STUPID</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I KNOW YOU ARE *</pattern>
+        <template>
+            <srai>YOU ARE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU ARE STUPID *</pattern>
+        <template>
+            <srai>YOU ARE STUPID</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR NOT *</pattern>
+        <template>
+            <srai>YOU ARE NOT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I THINK YOU ARE *</pattern>
+        <template>
+            <srai>YOU ARE
+                <star/>
+            </srai>
+        </template>
+    </category>
+     <category>
+        <pattern>YOUR A *</pattern>
+        <template>
+            <srai>YOU ARE A
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR MY *</pattern>
+        <template>
+            <srai>YOU ARE MY
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU ARE SUCH A *</pattern>
+        <template>
+            <srai>YOU ARE A
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU ARE AN IDIOT</pattern>
+        <template>
+            <srai>YOU ARE DUMB</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR RETARDED</pattern>
+        <template>
+            <srai>YOU ARE DUMB</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU NOT *</pattern>
+        <template>
+            <srai>YOU ARE NOT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR SO *</pattern>
+        <template>
+            <srai>YOU ARE SO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR GOOD *</pattern>
+        <template>
+            <srai>YOU ARE GOOD
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MEANIE</pattern>
+        <template>
+            <srai>YOU ARE MEAN</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR BAD</pattern>
+        <template>
+            <srai>YOU ARE BAD</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU ARE WELL *</pattern>
+        <template>
+            <srai>YOU ARE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR RUDE *</pattern>
+        <template>
+            <srai>YOU ARE RUDE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU ARE A ROBOT *</pattern>
+        <template>
+            <srai>YOU ARE A ROBOT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU SEEM *</pattern>
+        <template>
+            <srai>YOU ARE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU SO *</pattern>
+        <template>
+            <srai>YOU ARE SO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU ARE YOU *</pattern>
+        <template>
+            <srai>YOU ARE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU ARE PRETTY *</pattern>
+        <template>
+            <srai>YOU ARE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU MUST BE *</pattern>
+        <template>
+            <srai>YOU ARE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR MAKING ME *</pattern>
+        <template>
+            <srai>YOU ARE MAKING ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU ARE SO STUPID *</pattern>
+        <template>
+            <srai>YOU ARE STUPID</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU ARE PRETTY FUNNY</pattern>
+        <template>
+            <srai>YOU ARE FUNNY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I SEE YOU ARE *</pattern>
+        <template>
+            <srai>YOU ARE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR HOT</pattern>
+        <template>
+            <srai>YOU ARE HOT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FOOL</pattern>
+        <template>
+            <srai>you are a fool</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>MORON</pattern>
+        <template>
+            <srai>you are a moron</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU ARE RIGHT *</pattern>
+        <template>
+            <srai>you are right</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THAT IS A STUPID *</pattern>
+        <template>
+            <srai>you are stupid</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>STRANGE</pattern>
+        <template>
+            <srai>you are strange</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THAT IS MEAN</pattern>
+        <template>
+            <srai>you are mean</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR WELCOME *</pattern>
+        <template>
+            <srai>you are welcome</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WEIRD</pattern>
+        <template>
+            <srai>you are weird</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR RIGHT</pattern>
+        <template>
+            <srai>you are right</srai>
+        </template>
+    </category>
+</aiml>

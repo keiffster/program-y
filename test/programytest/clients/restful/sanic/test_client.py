@@ -2,6 +2,7 @@ import os
 import unittest
 import unittest.mock
 
+from programy.clients.render.text import TextRenderer
 from programytest.clients.arguments import MockArgumentParser
 
 if os.name != "nt":
@@ -26,12 +27,15 @@ if os.name != "nt":
 
 
     class SanicRestBotClientTests(unittest.TestCase):
-    
+
         def test_rest_client_init(self):
             arguments = MockArgumentParser()
             client = SanicRestBotClient("flask", arguments)
             self.assertIsNotNone(client)
-    
+
+            self.assertFalse(client._render_callback())
+            self.assertIsInstance(client.renderer, TextRenderer)
+
         def test_verify_api_key_usage_inactive(self):
             arguments = MockArgumentParser()
             client = SanicRestBotClient("flask", arguments)
@@ -39,17 +43,17 @@ if os.name != "nt":
             client.configuration.client_configuration._use_api_keys = False
             request = unittest.mock.Mock()
             self.assertTrue(client.api_keys.verify_api_key_usage(request))
-    
+
         def test_get_api_key(self):
             arguments = MockArgumentParser()
             client = SanicRestBotClient("flask", arguments)
-    
+
             request = unittest.mock.Mock()
             request.args = {}
             request.args['apikey'] = '11111111'
-    
+
             self.assertEqual('11111111', client.api_keys.get_api_key(request))
-    
+
         def test_verify_api_key_usage_active(self):
             arguments = MockArgumentParser()
             client = SanicRestBotClient("flask", arguments)
@@ -61,7 +65,7 @@ if os.name != "nt":
             request.args = {}
             request.args['apikey'] = '11111111'
             self.assertTrue(client.api_keys.verify_api_key_usage(request))
-    
+
         def test_verify_api_key_usage_active_no_apikey(self):
             arguments = MockArgumentParser()
             client = MockSanicRestBotClient(arguments)
@@ -70,17 +74,17 @@ if os.name != "nt":
 
             request = unittest.mock.Mock()
             request.args = {}
-    
+
             self.assertFalse(client.api_keys.verify_api_key_usage(request))
 
         def test_verify_api_key_usage_active_invalid_apikey(self):
             arguments = MockArgumentParser()
             client = MockSanicRestBotClient(arguments)
             client.configuration.client_configuration._use_api_keys = True
-    
+
             request = unittest.mock.Mock()
             request.args = {}
             request.args['apikey'] = 'invalid'
-    
+
             self.assertFalse(client.api_keys.verify_api_key_usage(request))
 

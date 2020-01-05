@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+    <category>
+        <pattern>HOW FAR IS TO FROM * TO *</pattern>
+        <template>
+            <srai>DIRECTIONS FROM
+                <star/>
+                TO
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+   <category>
+        <pattern>DRIVING DISTANCE *</pattern>
+        <template>
+            <srai>DIRECTIONS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GET ME DIRECTIONS *</pattern>
+        <template>
+            <srai>DIRECTIONS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU GET TO *</pattern>
+        <template>
+            <srai>DIRECTIONS TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW FAR IS * FROM *</pattern>
+        <template>
+            <srai>DIRECTIONS FROM
+                <star/>
+                TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GIVE ME DIRECTIONS TO *</pattern>
+        <template>
+            <srai>DIRECTIONS TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DO I GET TO *</pattern>
+        <template>
+            <srai>DIRECTIONS TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DO I GET HOME</pattern>
+        <template>
+            <condition name="residence">
+                <li value="where">Where is your residence?</li>
+                <li>
+                    <srai>DIRECTIONS TO
+                        <get name="residence"/>
+                    </srai>
+                </li>
+            </condition>
+        </template>
+    </category>
+    <category>
+        <pattern>GET DIRECTIONS TO *</pattern>
+        <template>
+            <srai>DIRECTIONS TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU GIVE ME DIRECTIONS TO *</pattern>
+        <template>
+            <srai>DIRECTIONS TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW FAR TO *</pattern>
+        <template>
+            <srai>DIRECTIONS TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NAVIGATE TO *</pattern>
+        <template>
+            <srai>DIRECTIONS TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW LONG WILL IT TAKE ME TO DRIVE TO *</pattern>
+        <template>
+            <srai>DIRECTIONS TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW FAR IS IT TO *</pattern>
+        <template>
+            <srai>DIRECTIONS TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW FAR IS *</pattern>
+        <template>
+            <srai>DIRECTIONS TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MANY MILES FROM * TO *</pattern>
+        <template>
+            <srai>DIRECTIONS FROM
+                <star/>
+                TO
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+
+   <category>
+        <pattern>_ TO THE LEFT OF *</pattern>
+        <template>
+            <srai>
+                <star/>
+                left of
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>_ TO THE RIGHT OF *</pattern>
+        <template>
+            <srai>
+                <star/>
+                right of
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>_ TO THE EAST OF *</pattern>
+        <template>
+            <srai>
+                <star/>
+                east of
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>_ TO THE WEST OF *</pattern>
+        <template>
+            <srai>
+                <star/>
+                west of
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>_ TO THE NORTH OF *</pattern>
+        <template>
+            <srai>
+                <star/>
+                north of
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>_ TO THE SOUTH OF *</pattern>
+        <template>
+            <srai>
+                <star/>
+                south of
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+
+
+
+</aiml>

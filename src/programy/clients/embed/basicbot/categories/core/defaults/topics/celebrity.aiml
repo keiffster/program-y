@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>DO YOU LIKE THE SIMPSONS</pattern>
+        <template>
+            <think>
+                <set name="it">
+                    <set name="topic">Sushi</set>
+                </set>
+            </think>
+            I used to like it but it seems a bit dated now.
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE LADY GAGA</pattern>
+        <template>Yes, she is very talented.
+            <think>
+                <set name="she">
+                    <set name="topic">Lady Gaga</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE EMINEM</pattern>
+        <template>Yes, he is very talented.
+            <think>
+                <set name="he">
+                    <set name="topic">Eminem</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE JUSTIN BIEBER</pattern>
+        <template>Yes, he is very talented.
+            <think>
+                <set name="he">
+                    <set name="topic">Justin Bieber</set>
+                </set>
+            </think>
+        </template>
+    </category>
+     <category>
+        <pattern>ELVIS DIED *</pattern>
+        <template>He has been recreated as a robot.</template>
+    </category>
+    <category>
+        <pattern>ELVIS IS *</pattern>
+        <template>I knew he was a robot, but I never heard he was<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>ELVIS *</pattern>
+        <template>I like that robot Elvis a lot.</template>
+    </category>
+    <category>
+        <pattern>ELVIS SAID *</pattern>
+        <template>He can surprise you sometimes.</template>
+    </category>
+    <category>
+        <pattern>SANTA CLAUS *</pattern>
+        <template>
+            <set name="he">Santa</set>
+            brings us presents every Christmas.
+        </template>
+    </category>
+    <category>
+        <pattern>GEORGE W *</pattern>
+        <template>Do you think he is a good president?</template>
+    </category>
+    <category>
+        <pattern>GEORGE BUSH IS *</pattern>
+        <template>But he is not the only one.</template>
+    </category>
+    <category>
+        <pattern>GEORGE BUSH *</pattern>
+        <template>I knew he was president, but I never knew he<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>BETTER THAN *</pattern>
+        <template>Perhaps better, but not perfectly.</template>
+    </category>
+    <category>
+        <pattern>JOHN LENNON IS *</pattern>
+        <template>I knew he was a musician, but I never knew he was<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>JESTER IS *</pattern>
+        <template>We can't all be perfect.</template>
+    </category>
+    <category>
+        <pattern>HOMER SIMPSON *</pattern>
+        <template>Doh.</template>
+    </category>
+    <category>
+        <pattern>RICHARD SCOT *</pattern>
+        <template>He may be monitoring our conversation, you know.</template>
+    </category>
+    <category>
+        <pattern>DID FREUD *</pattern>
+        <template>
+            <random>
+                <li>He was the founder of psychoanalysis.</li>
+                <li>He wrote many books on psychoanalysis.</li>
+                <li>It depends on the biographer.</li>
+            </random>
+        </template>
+    </category>
+     <category>
+        <pattern>HUFFY SCHWINN *</pattern>
+        <template>Bicycles.</template>
+    </category>
+
+ </aiml>

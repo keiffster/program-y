@@ -6,6 +6,7 @@ from telegram.ext import MessageHandler
 from programy.clients.polling.telegram.client import TelegramBotClient
 from programy.clients.polling.telegram.client import start, message, unknown
 from programy.clients.polling.telegram.config import TelegramConfiguration
+from programy.clients.render.text import TextRenderer
 from programytest.clients.arguments import MockArgumentParser
 
 
@@ -111,6 +112,9 @@ class TelegramBotClientTests(unittest.TestCase):
         self.assertEqual(client.id, "telegram")
         self.assertEqual('ProgramY AIML2.0 Client', client.get_description())
         self.assertEqual("TELEGRAM_TOKEN", client._telegram_token)
+
+        self.assertFalse(client._render_callback())
+        self.assertIsInstance(client.renderer, TextRenderer)
 
     def test_register_handlers(self):
         arguments = MockArgumentParser()

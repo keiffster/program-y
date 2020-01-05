@@ -164,3 +164,18 @@ class BrainServiceConfigurationTests(unittest.TestCase):
                            'method': 'GET',
                            'port': None,
                            'url': None}, data)
+
+    def test_defaults(self):
+        service_config = BrainServiceConfiguration("REST")
+        data = {}
+        service_config.to_yaml(data, True)
+
+        BrainServiceConfigurationTests.assert_defaults(self, data)
+
+    @staticmethod
+    def assert_defaults(test, data):
+        test.assertIsNone(data['classname'])
+        test.assertIsNone(data['method'])
+        test.assertIsNone(data['host'])
+        test.assertIsNone(data['port'])
+        test.assertIsNone(data['url'])

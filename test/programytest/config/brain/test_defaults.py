@@ -5,7 +5,7 @@ from programy.config.brain.defaults import BrainDefaultsConfiguration
 from programy.config.file.yaml_file import YamlConfigurationFile
 
 
-class BrainDefaultsBinariesConfigurationTests(unittest.TestCase):
+class BrainDefaultsDefaultsConfigurationTests(unittest.TestCase):
 
     def test_with_data(self):
         yaml = YamlConfigurationFile()
@@ -13,9 +13,9 @@ class BrainDefaultsBinariesConfigurationTests(unittest.TestCase):
         yaml.load_from_text("""
         brain:
             defaults:
-                default-get: unknown
-                default-property: unknown
-                default-map: unknown
+                default_get: unknown
+                default_property: unknown
+                default_map: unknown
         """, ConsoleConfiguration(), ".")
 
         brain_config = yaml.get_section("brain")
@@ -55,3 +55,16 @@ class BrainDefaultsBinariesConfigurationTests(unittest.TestCase):
 
         defaults_config = BrainDefaultsConfiguration()
         defaults_config.load_config_section(yaml, brain_config, ".")
+
+    def test_defaults(self):
+        defaults_config = BrainDefaultsConfiguration()
+        data = {}
+        defaults_config.to_yaml(data, True)
+
+        BrainDefaultsDefaultsConfigurationTests.assert_defaults(self, data)
+
+    @staticmethod
+    def assert_defaults(test, data):
+        test.assertEqual(data['default_get'], "unknown")
+        test.assertEqual(data['default_property'], "unknown")
+        test.assertEqual(data['default_map'], "unknown")

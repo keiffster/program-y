@@ -1,0 +1,5 @@
+APPLICATION:hasPurpose:to ask for a job
+APPLICATION:hasSize:0
+APPLICATION:hasSyllables:4
+APPLICATION:isa:Task
+APPLICATION:lifeArea:Business

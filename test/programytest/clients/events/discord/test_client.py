@@ -3,6 +3,7 @@ import unittest
 from programy.clients.events.discord.client import DiscordBotClient
 from programy.clients.events.discord.client import DiscordClient
 from programy.clients.events.discord.config import DiscordConfiguration
+from programy.clients.render.text import TextRenderer
 from programytest.clients.arguments import MockArgumentParser
 
 
@@ -53,6 +54,9 @@ class DiscordBotClientTests(unittest.TestCase):
         self.assertEqual(client.id, "Discord")
         self.assertEqual('ProgramY AIML2.0 Client', client.get_description())
         self.assertIsInstance(client.get_client_configuration(), DiscordConfiguration)
+
+        self.assertFalse(client._render_callback())
+        self.assertIsInstance(client.renderer, TextRenderer)
 
     def test_on_ready(self):
         arguments = MockArgumentParser()

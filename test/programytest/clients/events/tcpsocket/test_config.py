@@ -40,9 +40,15 @@ class SocketConfigurationTests(unittest.TestCase):
         self.assertEqual(1024, data['max_buffer'])
         self.assertEqual(False, data['debug'])
 
-        self.assertEqual(data['bot'], 'bot')
         self.assertEqual(data['bot_selector'], "programy.clients.botfactory.DefaultBotSelector")
         self.assertEqual(data['renderer'], "programy.clients.render.text.TextRenderer")
+
+        self.assertTrue('bots' in data)
+        self.assertTrue('bot' in data['bots'])
+        self.assertEqual(data['bot_selector'], "programy.clients.botfactory.DefaultBotSelector")
+
+        self.assertTrue('brains' in data['bots']['bot'])
+        self.assertTrue('brain' in data['bots']['bot']['brains'])
 
     def test_to_yaml_without_defaults(self):
         yaml = YamlConfigurationFile()
@@ -54,7 +60,6 @@ class SocketConfigurationTests(unittest.TestCase):
           queue: 5
           max_buffer: 1024
           debug: true
-          bot: bot
           default_userid: console
           prompt: $
           bot_selector: programy.clients.botfactory.DefaultBotSelector
@@ -73,9 +78,15 @@ class SocketConfigurationTests(unittest.TestCase):
         self.assertEqual(1024, data['max_buffer'])
         self.assertEqual(True, data['debug'])
 
-        self.assertEqual(data['bot'], 'bot')
         self.assertEqual(data['bot_selector'], "programy.clients.botfactory.DefaultBotSelector")
         self.assertEqual(data['renderer'], "programy.clients.render.text.TextRenderer")
+
+        self.assertTrue('bots' in data)
+        self.assertTrue('bot' in data['bots'])
+        self.assertEqual(data['bot_selector'], "programy.clients.botfactory.DefaultBotSelector")
+
+        self.assertTrue('brains' in data['bots']['bot'])
+        self.assertTrue('brain' in data['bots']['bot']['brains'])
 
     def test_to_yaml_no_data(self):
         yaml = YamlConfigurationFile()
@@ -96,6 +107,12 @@ class SocketConfigurationTests(unittest.TestCase):
         self.assertEqual(1024, data['max_buffer'])
         self.assertEqual(False, data['debug'])
 
-        self.assertEqual(data['bot'], 'bot')
         self.assertEqual(data['bot_selector'], "programy.clients.botfactory.DefaultBotSelector")
         self.assertEqual(data['renderer'], "programy.clients.render.text.TextRenderer")
+
+        self.assertTrue('bots' in data)
+        self.assertTrue('bot' in data['bots'])
+        self.assertEqual(data['bot_selector'], "programy.clients.botfactory.DefaultBotSelector")
+
+        self.assertTrue('brains' in data['bots']['bot'])
+        self.assertTrue('brain' in data['bots']['bot']['brains'])

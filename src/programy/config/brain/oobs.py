@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -74,8 +74,9 @@ class BrainOOBSConfiguration(BaseSectionConfigurationData):
             data['sms'] = {'classname': 'programy.oob.defaults.sms.SMSOutOfBandProcessor'}
             data['url'] = {'classname': 'programy.oob.defaults.url.URLOutOfBandProcessor'}
             data['wifi'] = {'classname': 'programy.oob.defaults.wifi.WifiOutOfBandProcessor'}
+
         else:
             if self._default is not None:
-                self.config_to_yaml(data, self._default, defaults)
+                self.config_to_yaml(data, self._default, False)
             for _, config in self._oobs.items():
-                self.config_to_yaml(data, config, defaults)
+                self.config_to_yaml(data, config, False)

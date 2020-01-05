@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: balance.aiml -->
+    <!--  -->
+    <!-- This AIML file is part of the Y-Bot knowledge base. -->
+    <!--  -->
+    <!-- Y-Bot is Copyright &copy; 2017 by Keith Sterling. -->
+    <!--
+    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+    documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+    the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+    and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+    THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+    TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    -->
+
+    <!-- ############################################################################################# -->
+    <!-- SCHEDULE IN|EVERY X SECS|MINS|HOURS|DAYS|WEEKS TEXT|SRAI ........... -->
+
+    <category>
+        <pattern>SCHEDULE IN * * TEXT *</pattern>
+        <template>
+            <srai>
+                SCHEDULE
+                <extension path="programy.extensions.scheduler.scheduler.SchedulerExtension">
+                    SCHEDULE IN <star index="1" /> <star index="2" /> TEXT <star index="3" />
+                </extension>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>SCHEDULE EVERY * * TEXT *</pattern>
+        <template>
+            <srai>
+                SCHEDULE
+                <extension path="programy.extensions.scheduler.scheduler.SchedulerExtension">
+                    SCHEDULE EVERY <star index="1" /> <star index="2" /> TEXT <star index="3" />
+                </extension>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>SCHEDULE IN * * SRAI *</pattern>
+        <template>
+            <srai>
+                SCHEDULE
+                <extension path="programy.extensions.scheduler.scheduler.SchedulerExtension">
+                    SCHEDULE IN <star index="1" /> <star index="2" /> SRAI <star index="3" />
+                </extension>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>SCHEDULE EVERY * * SRAI *</pattern>
+        <template>
+            <srai>
+                SCHEDULE
+                <extension path="programy.extensions.scheduler.scheduler.SchedulerExtension">
+                    SCHEDULE EVERY <star index="1" /> <star index="2" /> SRAI <star index="3" />
+                </extension>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>SCHEDULE OK</pattern>
+        <template>
+            OK, thats scheduled.
+        </template>
+    </category>
+
+    <category>
+        <pattern>SCHEDULE ERR</pattern>
+        <template>
+            Sorry, I was not able to set that reminder at this time!
+        </template>
+    </category>
+
+    <!-- ############################################################################################# -->
+    <!-- SCHEDULER PAUSE ALL|NUM -->
+
+    <category>
+        <pattern>SCHEDULER PAUSE $ALL</pattern>
+        <template>
+            <srai>
+                SCHEDULE PAUSE ALL
+                <extension path="programy.extensions.scheduler.scheduler.SchedulerExtension">
+                    SCHEDULE PAUSE ALL
+                </extension>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>SCHEDULE PAUSE ALL OK</pattern>
+        <template>
+            OK, they are all paused.
+        </template>
+    </category>
+
+    <category>
+        <pattern>SCHEDULE PAUSE ALL ERR</pattern>
+        <template>
+            Sorry, I was unable to pause your scheduled events at this time!
+        </template>
+    </category>
+
+    <category>
+        <pattern>SCHEDULER PAUSE *</pattern>
+        <template>
+            <srai>
+                SCHEDULE PAUSE JOB
+                <extension path="programy.extensions.scheduler.scheduler.SchedulerExtension">
+                    SCHEDULE PAUSE <star />
+                </extension>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>SCHEDULE PAUSE JOB OK</pattern>
+        <template>
+            OK, that is paused.
+        </template>
+    </category>
+
+    <category>
+        <pattern>SCHEDULE PAUSE JOB ERR</pattern>
+        <template>
+            Sorry, I was unable to pause your scheduled event at this time!
+        </template>
+    </category>
+
+    <!-- ############################################################################################# -->
+    <!-- SCHEDULER RESUME ALL|NUM -->
+
+    <category>
+        <pattern>SCHEDULER RESUME $ALL</pattern>
+        <template>
+            <srai>
+                SCHEDULE RESUME
+                <extension path="programy.extensions.scheduler.scheduler.SchedulerExtension">
+                    SCHEDULE RESUME ALL
+                </extension>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>SCHEDULE RESUME OK</pattern>
+        <template>
+            OK, they are all resumed.
+        </template>
+    </category>
+
+    <category>
+        <pattern>SCHEDULE RESUME ERR</pattern>
+        <template>
+            Sorry, I was unable to resume your scheduled events at this time!
+        </template>
+    </category>
+
+    <category>
+        <pattern>SCHEDULER RESUME *</pattern>
+        <template>
+            <srai>
+                SCHEDULE RESUME JOB
+                <extension path="programy.extensions.scheduler.scheduler.SchedulerExtension">
+                    SCHEDULE RESUME <star />
+                </extension>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>SCHEDULE RESUME JOB OK</pattern>
+        <template>
+            OK, that is resumed.
+        </template>
+    </category>
+
+    <category>
+        <pattern>SCHEDULE RESUME JOB ERR</pattern>
+        <template>
+            Sorry, I was unable to resumed your scheduled event at this time!
+        </template>
+    </category>
+
+    <!-- ############################################################################################# -->
+    <!-- SCHEDULER STOP ALL|NUM -->
+
+    <category>
+        <pattern>SCHEDULER STOP $ALL</pattern>
+        <template>
+            <srai>
+                SCHEDULE STOP
+                <extension path="programy.extensions.scheduler.scheduler.SchedulerExtension">
+                    SCHEDULE STOP ALL
+                </extension>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>SCHEDULE STOP OK</pattern>
+        <template>
+            OK, they are all stopped.
+        </template>
+    </category>
+
+    <category>
+        <pattern>SCHEDULE STOP ERR</pattern>
+        <template>
+            Sorry, I was unable to stop your scheduled events at this time!
+        </template>
+    </category>
+
+    <category>
+        <pattern>SCHEDULER STOP *</pattern>
+        <template>
+            <srai>
+                SCHEDULE STOP JOB
+                <extension path="programy.extensions.scheduler.scheduler.SchedulerExtension">
+                    SCHEDULE STOP <star />
+                </extension>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>SCHEDULE STOP JOB OK</pattern>
+        <template>
+            OK, that is stopped.
+        </template>
+    </category>
+
+    <category>
+        <pattern>SCHEDULE STOP JOB ERR</pattern>
+        <template>
+            Sorry, I was unable to stop your scheduled event at this time!
+        </template>
+    </category>
+
+    <!-- ############################################################################################# -->
+    <!-- SCHEDULER LIST -->
+
+    <category>
+        <pattern>SCHEDULER LIST</pattern>
+        <template>
+            <srai>
+                SCHEDULE LIST
+                <extension path="programy.extensions.scheduler.scheduler.SchedulerExtension">
+                    SCHEDULE LIST
+                </extension>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>SCHEDULE LIST OK *</pattern>
+        <template>
+            <star />
+        </template>
+    </category>
+
+    <category>
+        <pattern>SCHEDULE LIST ERR</pattern>
+        <template>
+            You have no scheduler actions at this time!
+        </template>
+    </category>
+
+</aiml>
+
+

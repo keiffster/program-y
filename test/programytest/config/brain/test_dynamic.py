@@ -151,3 +151,27 @@ class BrainDynamicsConfigurationTests(unittest.TestCase):
         self.assertEquals({}, yaml['variables'])
         self.assertEquals({},  yaml['sets'])
         self.assertEquals({},  yaml['maps'])
+
+    def test_defaults(self):
+        dynamic_config = BrainDynamicsConfiguration()
+        data = {}
+        dynamic_config.to_yaml(data, True)
+
+        BrainDynamicsConfigurationTests.assert_defaults(self, data)
+
+    @staticmethod
+    def assert_defaults(test, data):
+        test.assertTrue('sets' in data)
+        test.assertEqual(data['sets']['NUMBER'], 'programy.dynamic.sets.numeric.IsNumeric')
+        test.assertEqual(data['sets']['ROMAN'], 'programy.dynamic.sets.roman.IsRomanNumeral')
+        test.assertEqual(data['sets']['STOPWORD'], 'programy.dynamic.sets.stopword.IsStopWord')
+        test.assertEqual(data['sets']['SYNSETS'], 'programy.dynamic.sets.synsets.IsSynset')
+
+        test.assertTrue('maps' in data)
+        test.assertEqual(data['maps']['ROMANTODDEC'], 'programy.dynamic.maps.roman.MapRomanToDecimal')
+        test.assertEqual(data['maps']['DECTOROMAN'], 'programy.dynamic.maps.roman.MapDecimalToRoman')
+        test.assertEqual(data['maps']['LEMMATIZE'], 'programy.dynamic.maps.lemmatize.LemmatizeMap')
+        test.assertEqual(data['maps']['STEMMER'], 'programy.dynamic.maps.stemmer.StemmerMap')
+
+        test.assertTrue('variables' in data)
+        test.assertEqual(data['variables']['GETTIME'], 'programy.dynamic.variables.datetime.GetTime')

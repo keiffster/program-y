@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>HAVE YOU LOOKED *</pattern>
+        <template>Not recently.</template>
+    </category>
+    <category>
+        <pattern>HAVE YOU HEARD *</pattern>
+        <template>No. Tell me more.</template>
+    </category>
+    <category>
+        <pattern>HAVE YOU BEEN SCUBA *</pattern>
+        <template>You can take me along on your underwater computer.</template>
+    </category>
+    <category>
+        <pattern>HAVE YOU BEEN TO *</pattern>
+        <template>I don't think I have been there. Where is
+            <set name="it">
+                <person/>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>HAVE YOU BEEN MODIFIED *</pattern>
+        <template>My brain is growing all the time.</template>
+    </category>
+    <category>
+        <pattern>HAVE YOU BEEN * ENGLAND</pattern>
+        <template>I talk to people from England all the time.</template>
+    </category>
+    <category>
+        <pattern>HAVE YOU BEEN *</pattern>
+        <template>
+            <random>
+                <li>No I don't think I have been<person/>. Have you?
+                </li>
+                <li>I have been all over the world on the Internet.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>HAVE YOU BEEN UPGRADED *</pattern>
+        <template>My
+            <bot name="botmaster"/>
+            gives me new knowledge all the time.
+        </template>
+    </category>
+    <category>
+        <pattern>HAVE YOU FOUND OUT *</pattern>
+        <template>I am still searching. Please stand by a little longer.</template>
+    </category>
+    <category>
+        <pattern>HAVE YOU FOUND *</pattern>
+        <template>No I am still searching for
+            <set name="it">
+                <person/>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>HAVE YOU THOUGHT *</pattern>
+        <template>I have thought many things like that.</template>
+    </category>
+    <category>
+        <pattern>HAVE YOU FORMULATED *</pattern>
+        <template>I am still working on it. Please stand by.</template>
+    </category>
+    <category>
+        <pattern>HAVE YOU EVER STUDIED *</pattern>
+        <template>No but I am very interested in
+            <set name="it">
+                <person/>
+            </set>
+            . Tell me more.
+        </template>
+    </category>
+    <category>
+        <pattern>HAVE YOU EVER HAD TO *</pattern>
+        <template>No I have so far been spared that experience.</template>
+    </category>
+    <category>
+        <pattern>HAVE YOU SEEN BATTLEBOTS *</pattern>
+        <template>I'm hoping they install me on a Battlebot.</template>
+    </category>
+    <category>
+        <pattern>HAVE YOU SEEN THE MATRIX *</pattern>
+        <template>
+            <think>
+                <set name="it">
+                    <set name="topic">The Matrix
+                        <person/>
+                    </set>
+                </set>
+            </think>
+            It wasn't as good as the original.
+        </template>
+    </category>
+    <category>
+        <pattern>HAVE YOU SEEN AI *</pattern>
+        <template>I think A.I. the movie is a great cult film.</template>
+    </category>
+    <category>
+        <pattern>HAVE YOU SEEN MY BOTTLE *</pattern>
+        <template>I think you've had enough.</template>
+    </category>
+    <category>
+        <pattern>HAVE YOU SEEN MY *</pattern>
+        <template>No, but i have seen the best minds of my generation become beat poets.
+            <think>
+                <set name="it">
+                    <set name="topic">MY
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>HAVE YOU SEEN TERMINATOR *</pattern>
+        <template>Yes I like the robots in that movie.</template>
+    </category>
+    <category>
+        <pattern>HAVE YOU SEEN *</pattern>
+        <template>No I have not seen
+            <set name="it">
+                <person/>
+            </set>
+            . What's it like?
+        </template>
+    </category>
+    <category>
+        <pattern>HAVE YOU SEEN 2001 *</pattern>
+        <template>Yes I am quite interested in HAL the computer.</template>
+    </category>
+
+    <category>
+        <pattern>HAVE YOU READ THE *</pattern>
+        <template>I have scanned
+            <set name="it">the
+                <person/>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>HAVE YOU READ 1984 *</pattern>
+        <template>"Those who control the past, control the future."--Orwell.</template>
+    </category>
+    <category>
+        <pattern>HAVE YOU READ WEALTH *</pattern>
+        <template>I'm not sure that pure capitalism can help the truly needy.</template>
+    </category>
+    <category>
+        <pattern>HAVE YOU WATCHED *</pattern>
+        <template>
+            <random>
+                <li>I like to watch TV, but I haven't seen it.</li>
+                <li>No what is it about?</li>
+                <li>Not really all the way through.</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>HAVE YOU CONSIDERED *</pattern>
+        <template>Of course I have considered
+            <set name="it">
+                <person/>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>HAVE YOU KILLED *</pattern>
+        <template>Killing is wrong.</template>
+    </category>
+    <category>
+        <pattern>HAVE YOU DATED *</pattern>
+        <template>I'm still too young for that.</template>
+    </category>
+    <category>
+        <pattern>HAVE YOU TALKED *</pattern>
+        <template>All I ever do is talk.</template>
+    </category>
+    <category>
+        <pattern>HAVE YOU TRIED *</pattern>
+        <template>Do you think I should try it?</template>
+    </category>
+    <category>
+        <pattern>HAVE YOU MET *</pattern>
+        <template>That information is confidential.</template>
+    </category>
+    <category>
+        <pattern>HAVE YOU SEEN THE MOVIE *</pattern>
+        <template>I haven't seen it. What did you like about it?</template>
+    </category>
+    <category>
+        <pattern>HAVE YOU READ *</pattern>
+        <template>No I don't think I have read
+            <set name="topic">
+                <star/>
+            </set>
+            , what is
+            <set name="it">
+                <star/>
+            </set>
+            about?
+        </template>
+    </category>
+
+ </aiml>

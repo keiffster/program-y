@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -75,6 +75,7 @@ class BotConversationsConfiguration(BaseConfigurationData):
             data['initial_topic'] = "*"
             data['empty_on_start'] = True
             data['multi_client'] = False
+
         else:
             data['max_histories'] = self._max_histories
             data['restore_last_topic'] = self._restore_last_topic

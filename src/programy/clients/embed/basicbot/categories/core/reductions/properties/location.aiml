@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+    <category>
+        <pattern>WHERE DO YOU CALL HOME</pattern>
+        <template>
+            <srai>LOCATION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU IN THE *</pattern>
+        <template>
+            <srai>LOCATION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT CITY ARE YOU *</pattern>
+        <template>
+            <srai>LOCATION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL * WHERE I AM</pattern>
+        <template>
+            <srai>TELL
+                <star/>
+                I am at
+                <srai>MY LOCATION</srai>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL * WHERE WE ARE</pattern>
+        <template>
+            <srai>TELL
+                <star/>
+                We are at
+                <srai>MY LOCATION</srai>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHERE YOU ARE</pattern>
+        <template>
+            <srai>LOCATION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS MY * LOCATION</pattern>
+        <template>
+            <srai>MY LOCATION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHERE ARE YOU AT</pattern>
+        <template>
+            <srai>LOCATION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS MY LOCATION *</pattern>
+        <template>
+            <srai>MY LOCATION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHERE ARE WE</pattern>
+        <template>
+            <srai>MY LOCATION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHERE IS MY LOCATION</pattern>
+        <template>
+            <srai>WHERE AM I</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS MY CURRENT LOCATION</pattern>
+        <template>
+            <srai>WHERE AM I</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIVE IN *</pattern>
+        <template>
+            <srai>LOCATION</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>WHERE ARE YOU LOCATED</pattern>
+        <template>
+            <srai>LOCATION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHERE DO YOU LIVE *</pattern>
+        <template>
+            <srai>LOCATION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU IN *</pattern>
+        <template>
+            <srai>LOCATION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM IN *</pattern>
+        <template>
+            <srai>MY LOCATION IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHERE DO YOU LIVE</pattern>
+        <template>
+            <srai>LOCATION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHERE ARE YOU</pattern>
+        <template>
+            <srai>LOCATION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND MY CURRENT LOCATION</pattern>
+        <template>
+            <srai>WHERE AM I</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW MY LOCATION *</pattern>
+        <template>
+            <srai>MAP MY LOCATION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR # LOCATION</pattern>
+        <template>
+            <srai>WHERE ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WERE DO YOU LIVE</pattern>
+        <template>
+            <srai>LOCATION</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>YOU LIVE IN *</pattern>
+        <template>
+            <srai>LOCATION</srai>
+        </template>
+    </category>
+
+     <category>
+        <pattern>WHAT CITY ARE WE *</pattern>
+        <template>
+            <srai>MY CITY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT CITY ARE WE IN</pattern>
+        <template>
+            <srai>MY CITY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT CITY IS THIS</pattern>
+        <template>
+            <srai>MY CITY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT COUNTRY AM I *</pattern>
+        <template>
+            <srai>MY COUNTRY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT COUNTRY ARE WE *</pattern>
+        <template>
+            <srai>MY COUNTRY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT COUNTRY ARE WE IN</pattern>
+        <template>
+            <srai>MY COUNTRY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT COUNTRY IS THIS</pattern>
+        <template>
+            <srai>MY COUNTRY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT PROVINCE AM I *</pattern>
+        <template>
+            <srai>MY STATE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT PROVINCE AM I IN</pattern>
+        <template>
+            <srai>MY STATE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT PROVINCE IS THIS</pattern>
+        <template>
+            <srai>MY STATE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT ROAD AM I *</pattern>
+        <template>
+            <srai>MY STREET</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT ROAD IS THIS</pattern>
+        <template>
+            <srai>MY STREET</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT STATE AM I *</pattern>
+        <template>
+            <srai>MY STATE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT STATE AM I IN</pattern>
+        <template>
+            <srai>MY STATE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT STATE ARE WE *</pattern>
+        <template>
+            <srai>MY STATE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT STATE ARE WE IN</pattern>
+        <template>
+            <srai>MY STATE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT STATE IS THIS</pattern>
+        <template>
+            <srai>MY STATE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT STREET IS THIS</pattern>
+        <template>
+            <srai>MY STREET</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT CITY AM I *</pattern>
+        <template>
+            <srai>MY CITY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT COUNTRY AM I IN</pattern>
+        <template>
+            <srai>MY COUNTRY</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>WHAT CITY AM I IN</pattern>
+        <template>
+            <srai>MY CITY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT STREET AM I *</pattern>
+        <template>
+            <srai>MY STREET</srai>
+        </template>
+    </category>
+
+
+
+</aiml>

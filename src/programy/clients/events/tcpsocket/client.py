@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -142,7 +142,8 @@ class SocketBotClient(EventBotClient):
 
     def process_question(self, client_context, question):
         self._questions += 1
-        return client_context.bot.ask_question(client_context, question, responselogger=self)
+        response = client_context.bot.ask_question(client_context, question, responselogger=self)
+        return self.renderer.render(client_context, response)
 
     def render_response(self, client_context, response):
         # Calls the renderer which handles RCS context, and then calls back to the client to show response

@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -55,12 +55,11 @@ class BrainOpenChatBotsConfiguration(BaseSectionConfigurationData):
 
             for name in openchatbot_keys:
                 if name == 'protocols':
-                    protocols = configuration_file.get_option(openchatbots, "protocols", missing_value=['http'],
+                    self._protocols = configuration_file.get_option(openchatbots, "protocols", missing_value=['http'],
                                                               subs=subs)
-                    self._protocols = [x.strip() for x in protocols.split(",")]
                 elif name == 'domains':
-                    domains = configuration_file.get_option(openchatbots, "domains", missing_value=[], subs=subs)
-                    self._domains = [x.strip() for x in domains.split(",")]
+                    self._domains = configuration_file.get_option(openchatbots, "domains", missing_value=[], subs=subs)
+
                 else:
                     openchatbot = BrainOpenChatBotConfiguration(name)
                     openchatbot.load_config_section(configuration_file, openchatbots, bot_root, subs=subs)
@@ -71,10 +70,11 @@ class BrainOpenChatBotsConfiguration(BaseSectionConfigurationData):
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:
-            data['openchatbots'] = self._openchatbots
-            data['protocols'] = self._protocols
-            data['domains'] = self._domains
-        else:
             data['openchatbots'] = {}
             data['protocols'] = ['http']
             data['domains'] = []
+
+        else:
+            data['openchatbots'] = self._openchatbots
+            data['protocols'] = self._protocols
+            data['domains'] = self._domains

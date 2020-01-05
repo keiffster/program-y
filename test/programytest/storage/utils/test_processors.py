@@ -73,8 +73,6 @@ class CSVFileReaderWriterTests(unittest.TestCase):
         self.assertEquals(success, 1)
         reader.close()
 
-        self.assertEquals(["A", "B", "C"], processor.contents)
-
         self.assertTrue(os.path.exists(filename))
         os.remove(filename)
 
@@ -97,8 +95,6 @@ class CSVFileReaderWriterTests(unittest.TestCase):
         self.assertEquals(count, 1)
         self.assertEquals(success, 0)
         reader.close()
-
-        self.assertEquals(["A", "B", "C"], processor.contents)
 
         self.assertTrue(os.path.exists(filename))
         os.remove(filename)

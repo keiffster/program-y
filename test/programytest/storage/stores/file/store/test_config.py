@@ -131,7 +131,12 @@ class FileStoreConfigurationTests(unittest.TestCase):
 
         data = {}
         sets_config.to_yaml(data, True)
-        self.assertEquals({'delete_on_start': False, 'dirs': './storage/sets', 'encoding': None, 'extension': '.txt', 'file': None, 'format': None, 'subdirs': False}, data)
+        self.assertFalse(data['delete_on_start'])
+        self.assertEqual(data['dirs'], './storage/sets')
+        self.assertIsNone(data['encoding'])
+        self.assertEqual(data['extension'], '.txt')
+        self.assertIsNone(data['format'])
+        self.assertFalse(data['subdirs'])
 
     def test_to_yaml_no_defaults(self):
         yaml = YamlConfigurationFile()
@@ -158,4 +163,9 @@ class FileStoreConfigurationTests(unittest.TestCase):
 
         data = {}
         sets_config.to_yaml(data, False)
-        self.assertEquals({'delete_on_start': True, 'dirs': ['./sets'], 'encoding': 'utf-8', 'extension': '.txt', 'file': None, 'format': 'text', 'subdirs': False}, data)
+        self.assertTrue(data['delete_on_start'])
+        self.assertEqual(data['dirs'], ['./sets'])
+        self.assertEqual(data['encoding'], 'utf-8')
+        self.assertEqual(data['extension'], '.txt')
+        self.assertEqual(data['format'], 'text')
+        self.assertFalse(data['subdirs'])

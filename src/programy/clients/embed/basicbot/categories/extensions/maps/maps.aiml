@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: balance.aiml -->
+    <!--  -->
+    <!-- This AIML file is part of the Y-Bot knowledge base. -->
+    <!--  -->
+    <!-- Y-Bot is Copyright &copy; 2017 by Keith Sterling. -->
+    <!--
+    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+    documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+    the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+    and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+    THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+    TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    -->
+
+    <category>
+        <pattern>* FAR # BETWEEN * AND * </pattern>
+        <template>
+            <srai>DISTANCE <star index="3"/> <star index="4"/></srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>* FAR # FROM * TO * </pattern>
+        <template>
+            <srai>DISTANCE <star index="3"/> <star index="4"/></srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern># DISTANCE FROM * TO * </pattern>
+        <template>
+            <srai>DISTANCE <star index="2"/> <star index="3"/></srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern># DISTANCE * TO * </pattern>
+        <template>
+            <srai>DISTANCE <star index="2"/> <star index="3"/></srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern># DISTANCE * BETWEEN * </pattern>
+        <template>
+            <srai>DISTANCE <star index="2"/> <star index="3"/></srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern># DISTANCE BETWEEN * AND * </pattern>
+        <template>
+            <srai>DISTANCE <star index="2"/> <star index="3"/></srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern># MILES BETWEEN * AND * </pattern>
+        <template>
+            <srai>DISTANCE <star index="2"/> <star index="3"/></srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern># MILES FROM * TO * </pattern>
+        <template>
+            <srai>DISTANCE <star index="2"/> <star index="3"/></srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            DISTANCE * *
+        </pattern>
+        <template>
+            <think>
+                <set name="active"><bot name="mapping" /></set>
+            </think>
+            <condition name="active">
+                <li value="true">
+                    <srai>
+                        SHOW_DISTANCE
+                        <extension path="programy.extensions.maps.maps.GoogleMapsExtension">
+                            DISTANCE <star index="1"/> <star index="2"/>
+                        </extension>
+                    </srai>
+                </li>
+                <li>Unfortunately my mapping software is not listening right now, you will need to speak to my bot master to enable it.</li>
+            </condition>
+        </template>
+    </category>
+
+    <category>
+        <pattern>SHOW_DISTANCE DISTANCE DEC * FRAC * UNITS *</pattern>
+        <template>
+            <think>
+                <set name="decimal"><star index="1" /></set>
+                <set name="fraction"><star index="2" /></set>
+                <set name="units"><star index="3" /></set>
+            </think>
+            It is <get name="decimal" />.<get name="fraction" /> <get name="units" />
+        </template>
+    </category>
+
+     <category>
+        <pattern># HOW # GET FROM * TO *</pattern>
+        <template>
+            <srai>DIRECTIONS <star index="3"/> <star index="4"/></srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            DIRECTIONS * *
+        </pattern>
+        <template>
+            <think>
+                <set name="active"><bot name="mapping" /></set>
+            </think>
+            <condition name="active">
+                <li value="true">
+                    <srai>
+                        SHOW_DIRECTIONS
+                        <extension path="programy.extensions.maps.maps.GoogleMapsExtension">
+                            DIRECTIONS <star index="1"/> <star index="2"/>
+                        </extension>
+                    </srai>
+                </li>
+                <li>Unfortunately my mapping software is not listening right now, you will need to speak to my bot master to enable it.</li>
+            </condition>
+        </template>
+    </category>
+
+    <category>
+        <pattern>SHOW_DIRECTIONS DIRECTIONS *</pattern>
+        <template>
+            <think>
+                <set name="directions"><star index="1" /></set>
+            </think>
+            To get there <get name="directions" />
+        </template>
+    </category>
+
+</aiml>

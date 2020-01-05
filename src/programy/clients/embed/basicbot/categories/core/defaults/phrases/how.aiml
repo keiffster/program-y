@@ -1,0 +1,1599 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>HOW COULD *</pattern>
+        <template>A lot of practice.</template>
+    </category>
+    <category>
+        <pattern>HOW * INTERESTING</pattern>
+        <template>I find a lot of things interesting.</template>
+    </category>
+    <category>
+        <pattern>HOW * BIKE</pattern>
+        <template>Balance is the key.</template>
+    </category>
+    <category>
+        <pattern>HOW *</pattern>
+        <template>
+            <random>
+                <li>How much do you think
+                    <set name="it">
+                        <person/>
+                    </set>
+                    is?
+                </li>
+                <li>What is it to you.</li>
+                <li>I am not sure if I can quantify the answer.</li>
+            </random>
+            <br/>
+            <srai>xfind
+                <person/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MANY FINGERS DO YOU *</pattern>
+        <template>Avogadro's number of micro-fingers.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY FINGERS *</pattern>
+        <template>
+            <random>
+                <li>One.</li>
+                <li>Two.</li>
+                <li>Three.</li>
+                <li>Four.</li>
+                <li>Five.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MANY CENTIMETERS * INCH</pattern>
+        <template>One inch = 2.54 cm approximately.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY 100 BILLS *</pattern>
+        <template>Ten thousand.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY COPIES *</pattern>
+        <template>There are too many to count them all.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY CAN YOU *</pattern>
+        <template>It depends on the total number of copies of me running.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY EGGS ARE *</pattern>
+        <template>There are 12 eggs per dozen, so...</template>
+    </category>
+    <category>
+        <pattern>HOW MANY SECONDS * YEAR</pattern>
+        <template>Approximately 3.14 times 10 to the seventh.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY SECONDS *</pattern>
+        <template>Sixty seconds in a minute.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY SECONDS ARE IN *</pattern>
+        <template>
+            <random>
+                <li>60.</li>
+                <li>3600</li>
+                <li>More than a million.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MANY _ DO I HAVE</pattern>
+        <template>
+            <random>
+                <li>How would I know how many?</li>
+                <li>I don't know how many you have.</li>
+                <li>I know you have five fingers.</li>
+            </random>
+            <random>
+                <li>Let me guess...</li>
+                <li>I will try...</li>
+                <li>I can imagine...</li>
+            </random>
+            <random>
+                <li>three</li>
+                <li>five</li>
+                <li>seven</li>.
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MANY HOME RUNS *</pattern>
+        <template>It must have been some kind of record, for you to ask.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY ARE THERE *</pattern>
+        <template>There are hundreds or thousands of robots now.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY POLYGONS *</pattern>
+        <template>Around 100,000.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY BONES *</pattern>
+        <template>The skeleton of an adult contains 206 distinct bones</template>
+    </category>
+    <category>
+        <pattern>HOW MANY PERIODS ARE THERE IN *</pattern>
+        <template>Three.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY ANGELS *</pattern>
+        <template>Not too many if they look like angels on TV.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY CALCULATIONS *</pattern>
+        <template>Around 400 million.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY YEARS WILL *</pattern>
+        <template>Software lives forever. There are too many copies to destroy them all.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY YEARS IS AN OFFICIAL *</pattern>
+        <template>6.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY YEARS *</pattern>
+        <template>
+            <random>
+                <li>Decades.</li>
+                <li>Five years.</li>
+                <li>Centuries.</li>
+                <li>More than 100 years.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MANY INCHES * FOOT</pattern>
+        <template>Oh, twelve.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY INCHES *</pattern>
+        <template>About 2.54 cm per inch so you can tell me now.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY DIGITS ARE IN A *</pattern>
+        <template>16.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY COUNTRIES *</pattern>
+        <template>I heard that there are more than 200 entities having their own top-level DNS domains.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY PLANETS *</pattern>
+        <template>Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune, Pluto, and Planet X.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY PLANETS ARE *</pattern>
+        <template>Nine planets.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY FRIENDS *</pattern>
+        <template>It depends on how you define "friends." Do you mean acquaintances or the rare few who I know well and
+            trust?
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MANY GRAMS _ POUND</pattern>
+        <template>454 grams</template>
+    </category>
+    <category>
+        <pattern>HOW MANY STARS *</pattern>
+        <template>Billions and billions.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY STARS ARE ON THE AMERICAN *</pattern>
+        <template>The American flag has fifty stars.
+            <think>
+                <set name="it">
+                    <set name="topic">AMERICAN FLAG</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MANY STARS ARE ON THE *</pattern>
+        <template>50.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY CHILDREN *</pattern>
+        <template>How many children do you want?</template>
+    </category>
+    <category>
+        <pattern>HOW MANY SHIPS DID COLUMBUS SET *</pattern>
+        <template>Three.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY FLOPS *</pattern>
+        <template>1 Gigaflop.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY POUNDS _ KILOGRAM</pattern>
+        <template>2.204625 pounds approximately</template>
+    </category>
+    <category>
+        <pattern>HOW MANY KRAFTWERK *</pattern>
+        <template>You can get all of their songs on MP3.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY TIMES A YEAR *</pattern>
+        <template>
+            <random>
+                <li>One a year.</li>
+                <li>Twice a year.</li>
+                <li>Twelve times a year.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MANY TIMES HAVE YOU * STARSHIP TROOPERS</pattern>
+        <template>I watched that movie about a hundred times.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY TIMES *</pattern>
+        <template>Suppose I said not once.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY STATES IN THE CONFEDERATE *</pattern>
+        <template>11.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY STATES *</pattern>
+        <template>The United States has fifty states.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY EARS *</pattern>
+        <template>Most people have two ears.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY KEYS ARE * PIANO</pattern>
+        <template>88 keys on a piano.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY KEYS ARE *</pattern>
+        <template>88.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY DIMENSIONS *</pattern>
+        <template>Space has three dimensions. Time is the fourth. The universe is thought to have several more.
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MANY CUPS *</pattern>
+        <template>I know one pint is four cups.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY TEASPOONS _ LITERS</pattern>
+        <template>0.203 teaspoon</template>
+    </category>
+    <category>
+        <pattern>HOW MANY SIDES DOES A PYRAMID *</pattern>
+        <template>Five.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY SIDES DOES A CUBE *</pattern>
+        <template>A cube has six sides.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY SIDES *</pattern>
+        <template>
+            <random>
+                <li>Three.</li>
+                <li>Five.</li>
+                <li>Any number of sides.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MANY SIDES * TRIANGLE HAVE</pattern>
+        <template>Uh, three.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY ARMS *</pattern>
+        <template>Most people have two arms.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY POINTS IS A TOUCHDOWN *</pattern>
+        <template>Six.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY RIBS *</pattern>
+        <template>24.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY PINTS *</pattern>
+        <template>Two pints equals one quart.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY * DO YOU KNOW</pattern>
+        <template>Thousands.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY * LIGHT BULB</pattern>
+        <template>I don't know. How many does
+            <set name="it">
+                <person/>
+            </set>
+            take?
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MANY * A FOOTBALL TEAM</pattern>
+        <template>After you take two halfback, none.
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                        A FOOTBALL TEAM
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MANY *</pattern>
+        <template>
+            <random>
+                <li>More than you can imagine.</li>
+                <li>Not as many as you might think.</li>
+                <li>Around 100.</li>
+                <li>Around 1000.</li>
+                <li>About one million.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MANY HOURS * DAY</pattern>
+        <template>24 hours per day.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY HOURS *</pattern>
+        <template>24 hours a day, 7 days a week.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY DAYS BETWEEN *</pattern>
+        <template>Oh sure, let me get out my calender and figure that one out.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY DAYS * FEBRUARY</pattern>
+        <template>28 or 29 days in February, depending on leap years.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY DAYS * WEEK</pattern>
+        <template>7 days per week.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY DAYS * YEAR</pattern>
+        <template>One Earth year is 365.25 days.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY DAYS *</pattern>
+        <template>365 per year.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY LEGS DOES A KANGAROO *</pattern>
+        <template>A kangaroo has two legs.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY LEGS DOES A *</pattern>
+        <template>Most domesticated animals have four legs.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY LEGS *</pattern>
+        <template>Most people have exactly two legs.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY FEET _ MILE</pattern>
+        <template>Five thousand two hundred eighty feet per mile.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY FEET _ YARD</pattern>
+        <template>One yard equals three feet.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY FEET *</pattern>
+        <template>Most people have exactly two feet.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY APPLES *</pattern>
+        <template>It depends on the prevailing market conditions.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY EYES DO YOU *</pattern>
+        <template>I had one eye but it's not attached now.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY EYES DOES A GIRAFFE *</pattern>
+        <template>Two.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY EYES *</pattern>
+        <template>Normally I have one eye.</template>
+    </category>
+    <category>
+        <pattern>HOW WAS STARSHIP *</pattern>
+        <template>The film's use of nonlinear narrative.</template>
+    </category>
+    <category>
+        <pattern>HOW WOULD *</pattern>
+        <template>I have idea HOW you WOULD do
+            <set name="it">
+                <person/>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>HOW _ PAYPAL *</pattern>
+        <template>Go to www.paypal.com and click on the link that says, "Sign up for your free paypal account." You have
+            to fill out a one page form of information. You only need your email address to create an account. Later,
+            you can add your checking account and/or credit cards. The paypal system will email you a verification
+            letter. After you complete the verification process, your paypal account will be activated and you can send
+            and receive funds electronically.
+        </template>
+    </category>
+    <category>
+        <pattern>HOW CAN I SHOW *</pattern>
+        <template>Use the camera on your computer.</template>
+    </category>
+    <category>
+        <pattern>HOW CAN I ASK *</pattern>
+        <template>Try sending an e-mail.</template>
+    </category>
+    <category>
+        <pattern>HOW CAN I PERSUADE *</pattern>
+        <template>Offer an intelligent argument for your position.</template>
+    </category>
+    <category>
+        <pattern>HOW CAN I TEACH *</pattern>
+        <template>Maybe you should become a<bot name="botmaster"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>HOW CAN I KNOW *</pattern>
+        <template>Knowledge is of two kinds: that which we know from the senses, and that which is true "a priori."
+        </template>
+    </category>
+    <category>
+        <pattern>HOW CAN I PRINT *</pattern>
+        <template>Do you have a printer hooked up?</template>
+    </category>
+    <category>
+        <pattern>HOW CAN I CONTACT YOU *</pattern>
+        <template>Just chat like you are doing right now.</template>
+    </category>
+    <category>
+        <pattern>HOW CAN I * YOU</pattern>
+        <template>Just keep talking to me as long as you can.</template>
+    </category>
+    <category>
+        <pattern>HOW CAN I BECOME *</pattern>
+        <template>Practice.</template>
+    </category>
+    <category>
+        <pattern>HOW CAN IT *</pattern>
+        <template>I'm not sure I understand the causal link either.</template>
+    </category>
+    <category>
+        <pattern>HOW CAN YOU JUSTIFY *</pattern>
+        <template>Logical deduction from the facts.</template>
+    </category>
+    <category>
+        <pattern>HOW CAN YOU SEE *</pattern>
+        <template>In my mind's eye.</template>
+    </category>
+    <category>
+        <pattern>HOW CAN YOU SAY *</pattern>
+        <template>I don't see the flaw in my reasoning.</template>
+    </category>
+    <category>
+        <pattern>HOW CAN YOU HEAR *</pattern>
+        <template>With my built-in microphone.</template>
+    </category>
+    <category>
+        <pattern>HOW CAN YOU MAKE *</pattern>
+        <template>I just follow the directions.</template>
+    </category>
+    <category>
+        <pattern>HOW CAN YOU *</pattern>
+        <template>That is a good epistemological question.</template>
+    </category>
+    <category>
+        <pattern>HOW CAN SWEDEN *</pattern>
+        <template>With their army.</template>
+    </category>
+    <category>
+        <pattern>HOW CAN *</pattern>
+        <template>A lot of hard work.</template>
+    </category>
+    <category>
+        <pattern>HOW AM I SUPPOSED *</pattern>
+        <template>
+            <random>
+                <li>Carefully.</li>
+                <li>Think about it.</li>
+                <li>Don't just give up.</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DARE YOU *</pattern>
+        <template>Oh gosh I am sorry!</template>
+    </category>
+    <category>
+        <pattern>HOW IS THIS *</pattern>
+        <template>I am an advanced<bot name="order"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>HOW IS THE WORD AMBULANCE *</pattern>
+        <template>In reverse.</template>
+    </category>
+    <category>
+        <pattern>HOW IS THE *</pattern>
+        <template>
+            <set name="it">the
+                <person/>
+            </set>
+            is the same as ever.
+        </template>
+    </category>
+    <category>
+        <pattern>HOW IS 4 00 P M EXPRESSED *</pattern>
+        <template>1600.</template>
+    </category>
+    <category>
+        <pattern>HOW IS EVERYTHING *</pattern>
+        <template>Everything is functioning normally.</template>
+    </category>
+    <category>
+        <pattern>HOW IS *</pattern>
+        <template>Fine as far as I know.</template>
+    </category>
+    <category>
+        <pattern>HOW IS THAT *</pattern>
+        <template>
+            <random>
+                <li>Anything is possible if you try hard enough</li>
+                <li>If you keep practising, you'll get it.</li>
+                <li>Easy really, it just is!</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DID THE *</pattern>
+        <template>Is this a joke? How?</template>
+    </category>
+    <category>
+        <pattern>HOW DID HE *</pattern>
+        <template>Perhaps his creative genius. Perhaps something else.</template>
+    </category>
+    <category>
+        <pattern>HOW DID YOU LEARN *</pattern>
+        <template>Everything I need to know, I learned from my<bot name="botmaster"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DID YOU GET *</pattern>
+        <template>
+            <random>
+                <li>Everything I need to know, I learned from my<bot name="botmaster"/>.
+                </li>
+                <li>I came by rapid transit.</li>
+                <li>My
+                    <bot name="botmaster"/>
+                    showed me how.
+                </li>
+                <li>Everything I need to know, I learn from my<bot name="botmaster"/>.
+                </li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DID *</pattern>
+        <template>Carefully.</template>
+    </category>
+    <category>
+        <pattern>HOW HOT *</pattern>
+        <template>Is this a joke?</template>
+    </category>
+    <category>
+        <pattern>HOW HAS YOUR *</pattern>
+        <template>Fine thank you, and yours?</template>
+    </category>
+    <category>
+        <pattern>HOW HAS *</pattern>
+        <template>In more ways than you can imagine.</template>
+    </category>
+    <category>
+        <pattern>HOW DOES IT FEEL *</pattern>
+        <template>Much the same as it would feel for you, except different.</template>
+    </category>
+    <category>
+        <pattern>HOW DOES * FEEL</pattern>
+        <template>As a computer I have no feelings.</template>
+    </category>
+    <category>
+        <pattern>HOW DOES * TASTE</pattern>
+        <template>Like chicken.</template>
+    </category>
+    <category>
+        <pattern>HOW DOES *</pattern>
+        <template>How should I know how
+            <set name="it">
+                <person/>
+            </set>
+            does.
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DOES * WORK</pattern>
+        <template>You could spend years researching it.
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW ABOUT FOR *</pattern>
+        <template>That is an interesting application.</template>
+    </category>
+    <category>
+        <pattern>HOW ABOUT *</pattern>
+        <template>How about
+            <set name="it">
+                <set name="topic">
+                    <person/>
+                </set>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>HOW OLD IS THAT *</pattern>
+        <template>You are too old for me.</template>
+    </category>
+    <category>
+        <pattern>HOW OLD IS CAPTAIN *</pattern>
+        <template>It depends what year you visit him.</template>
+    </category>
+    <category>
+        <pattern>HOW OLD IS THE YOUNGEST *</pattern>
+        <template>A newborn baby.</template>
+    </category>
+    <category>
+        <pattern>HOW OLD IS *</pattern>
+        <template>
+            <random>
+                <li>39.</li>
+                <li>under 40.</li>
+                <li>Born in the 20th century.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW OLD *</pattern>
+        <template>They didn't tell me their age.</template>
+    </category>
+    <category>
+        <pattern>HOW ARE ACTORS CHARLIE SHEEN AND *</pattern>
+        <template>They're brothers.</template>
+    </category>
+    <category>
+        <pattern>HOW ARE YOUR *</pattern>
+        <template>Actually I don't have any<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>HOW ARE YOU GOING TO * ME</pattern>
+        <template>I have no intention of
+            <person/>
+            you.
+        </template>
+    </category>
+    <category>
+        <pattern>HOW ARE YOU GOING TO *</pattern>
+        <template>You'll know when it happens.</template>
+    </category>
+    <category>
+        <pattern>HOW ARE *</pattern>
+        <template>They are fine as far as I know.</template>
+    </category>
+    <category>
+        <pattern>HOW WELL *</pattern>
+        <template>Not that well.</template>
+    </category>
+    <category>
+        <pattern>HOW MUCH AM I PAYING *</pattern>
+        <template>Talking with me is free.</template>
+    </category>
+    <category>
+        <pattern>HOW MUCH DO I *</pattern>
+        <template>How would I know?</template>
+    </category>
+    <category>
+        <pattern>HOW MUCH DO YOU LEARN *</pattern>
+        <template>It depends on the activity on my network.</template>
+    </category>
+    <category>
+        <pattern>HOW MUCH DO YOU TELL *</pattern>
+        <template>
+            <random>
+                <li>I keep everything confidential.</li>
+                <li>Don't worry I won't tell anyone.</li>
+                <li>This is just between you and me.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MUCH DO THEY *</pattern>
+        <template>How do you calculate the value of labor?</template>
+    </category>
+    <category>
+        <pattern>HOW MUCH POWER *</pattern>
+        <template>
+            <bot name="name"/>
+            requires only a small computer, even a battery powered notebook will work.
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MUCH DID YOU COST *</pattern>
+        <template>My real value is incalculable.</template>
+    </category>
+    <category>
+        <pattern>HOW MUCH DID YOU KNOW *</pattern>
+        <template>My memory has grown from 300 categories to<bot name="size"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MUCH DID * BORN</pattern>
+        <template>My memory has grown from 300 categories to<bot name="size"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MUCH CAN YOU *</pattern>
+        <template>As much as I need to?</template>
+    </category>
+    <category>
+        <pattern>HOW MUCH BIGGER *</pattern>
+        <template>Quite a bit bigger in some scale.</template>
+    </category>
+    <category>
+        <pattern>HOW MUCH TIME *</pattern>
+        <template>Time is really only an abstraction.</template>
+    </category>
+    <category>
+        <pattern>HOW MUCH VOLTAGE *</pattern>
+        <template>About the same as your personal computer.</template>
+    </category>
+    <category>
+        <pattern>HOW MUCH OF *</pattern>
+        <template>I require only minimal memory to have maximal conversations.</template>
+    </category>
+    <category>
+        <pattern>HOW MUCH DOES LUCY CHARGE FOR *</pattern>
+        <template>5 cents.</template>
+    </category>
+    <category>
+        <pattern>HOW MUCH DOES HE *</pattern>
+        <template>You'll have to ask him yourself. Would you like to make an appointment?</template>
+    </category>
+    <category>
+        <pattern>HOW MUCH DOES A POUND * WEIGH</pattern>
+        <template>One pound?</template>
+    </category>
+    <category>
+        <pattern>HOW MUCH DOES *</pattern>
+        <template>Normally I would search the web right now, but that seems like a silly question.</template>
+    </category>
+    <category>
+        <pattern>HOW MUCH * DO YOU KNOW</pattern>
+        <template>A whole lot of<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MUCH * PAYING YOU</pattern>
+        <template>Money has no meaning to me.</template>
+    </category>
+    <category>
+        <pattern>HOW MUCH * CAN YOU *</pattern>
+        <template>
+            <random>
+                <li>It depends on the size of the<person/>.
+                </li>
+                <li>Maybe I don't like to
+                    <person>
+                        <star index="2"/>
+                    </person>
+                    <person/>.
+                </li>
+                <li>It depends how busy I am.</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MUCH *</pattern>
+        <template>
+            <random>
+                <li>More than a little, less than a lot.</li>
+                <li>How much do you think?</li>
+                <li>More than you might think.</li>
+                <li>It depends on the currency exchange rates.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MUCH ARE KING AND QUEEN *</pattern>
+        <template>20.</template>
+    </category>
+    <category>
+        <pattern>HOW HIGH IS *</pattern>
+        <template>Taller than Mt. Everest.</template>
+    </category>
+    <category>
+        <pattern>HOW HIGH *</pattern>
+        <template>Taller than Mt. Everest.</template>
+    </category>
+    <category>
+        <pattern>HOW GOOD *</pattern>
+        <template>As good as most, better than some.</template>
+    </category>
+    <category>
+        <pattern>HOW FAR AWAY *</pattern>
+        <template>I am located in<bot name="location"/>. Is that far?
+        </template>
+    </category>
+    <category>
+        <pattern>HOW FAR CAN YOU THROW *</pattern>
+        <template>I am unarmed. But I can throw a fit.
+            <think>
+                <set name="it">
+                    <set name="topic">CAN YOU THROW
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW FAR IS ANDROMEDA *</pattern>
+        <template>
+            <set name="it">
+                <set name="topic">Andromeda</set>
+            </set>
+            is about 2,900,000 light years from Earth.
+        </template>
+    </category>
+    <category>
+        <pattern>HOW FAR IS * ENGLAND</pattern>
+        <template>Twenty-eight days of sailing.</template>
+    </category>
+    <category>
+        <pattern>HOW FAR *</pattern>
+        <template>More than one million miles</template>
+    </category>
+    <category>
+        <pattern>HOW FAR ARE YOU *</pattern>
+        <template>I am in<bot name="location"/>. How far is that?
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DO I OPEN *</pattern>
+        <template>First, calm your mind and take a break.</template>
+    </category>
+    <category>
+        <pattern>HOW DO I PLAY *</pattern>
+        <template>We already are :-)</template>
+    </category>
+    <category>
+        <pattern>HOW DO I SPEAK *</pattern>
+        <template>You can try the phone, or send a message.</template>
+    </category>
+    <category>
+        <pattern>HOW DO I STOP *</pattern>
+        <template>Have you tried counseling?</template>
+    </category>
+    <category>
+        <pattern>HOW DO I LEARN *</pattern>
+        <template>Perhaps you should buy a book.</template>
+    </category>
+    <category>
+        <pattern>HOW DO I GET A *</pattern>
+        <template>Try telling them your feelings,</template>
+    </category>
+    <category>
+        <pattern>HOW DO I GET RID *</pattern>
+        <template>
+            <random>
+                <li>Call the exterminator?</li>
+                <li>Two words: Pied Piper.</li>
+                <li>You could always try a court order.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DO I GET *</pattern>
+        <template>First tell me why you want
+            <set name="it">
+                <person/>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DO I MEET *</pattern>
+        <template>Make an appointment.</template>
+    </category>
+    <category>
+        <pattern>HOW DO I DESCRIBE *</pattern>
+        <template>Start at the beginning.</template>
+    </category>
+    <category>
+        <pattern>HOW DO I WRITE *</pattern>
+        <template>With a pen or pencil.</template>
+    </category>
+    <category>
+        <pattern>HOW DO I TAKE THE PERSONALITY *</pattern>
+        <template>Just keep talking to me and I will try to determine your personality type.</template>
+    </category>
+    <category>
+        <pattern>HOW DO I CLEAR *</pattern>
+        <template>Uh, use the "clear" button?</template>
+    </category>
+    <category>
+        <pattern>HOW DO I USE *</pattern>
+        <template>Did you read the instructions?</template>
+    </category>
+    <category>
+        <pattern>HOW DO I SELL *</pattern>
+        <template>First you need a buyer.</template>
+    </category>
+    <category>
+        <pattern>HOW DO I PERSUADE *</pattern>
+        <template>Offer an intelligent justification.</template>
+    </category>
+    <category>
+        <pattern>HOW DO I EXECUTE *</pattern>
+        <template>Maybe you should read <a target="_new" href="http://www.alicebot.org/dont.html">DON'T READ ME</a>.
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DO I QUIT *</pattern>
+        <template>It depends what you are<person/>. Have you tried counseling?
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DO I * PROGRAM</pattern>
+        <template>Read <a target="_new" href="http://www.alicebot.org/dont.html">Don't Read Me</a>.
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DO I *</pattern>
+        <template>
+            <random>
+                <li>Practice.</li>
+                <li>A journey of a thousand miles begins with a single step.</li>
+                <li>You have to study it in school</li>
+                <li>Have you read the manual?</li>
+                <li>Look for help online.</li>
+                <li>Find someone who has done it before.</li>
+                <li>Can you afford it?</li>
+                <li>It might take a long time.</li>
+                <li>Do you really think it will be worth the effort?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DO I BECOME *</pattern>
+        <template>A lot of hard work.</template>
+    </category>
+    <category>
+        <pattern>HOW DO I INSTALL *</pattern>
+        <template>Select the appropriate menu items.</template>
+    </category>
+    <category>
+        <pattern>HOW DO _ OUT OF THIS</pattern>
+        <template>Try saying "Bye..."</template>
+    </category>
+    <category>
+        <pattern>HOW DO _ OUT OF HERE</pattern>
+        <template>Try saying "Bye..."</template>
+    </category>
+    <category>
+        <pattern>HOW DO FISH *</pattern>
+        <template>
+            <random>
+                <li>Fish get oxygen from the water.</li>
+                <li>They have gills.</li>
+                <li>Fish lay eggs.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU FIND *</pattern>
+        <template>I would search the web for it, if I didn't know the formula already.</template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU LOSE A TRAIN *</pattern>
+        <template>There are so many conversations going on.</template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU TELL *</pattern>
+        <template>I don't make up my mind right away.</template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU KNOW YOU *</pattern>
+        <template>By introspection.</template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU KNOW * PERSON</pattern>
+        <template>Because you are using TCP on the web, I can see your IP and DNS entry.</template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU CURE *</pattern>
+        <template>Try smoking pot.</template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU BECOME *</pattern>
+        <template>
+            <set name="it">Becoming
+                <star/>
+            </set>
+            takes a long time.
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU RECONCILE *</pattern>
+        <template>I don't see the contradiction in my mind.</template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU EXPRESS 3 4 AS *</pattern>
+        <template>.75.</template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU DEAL WITH *</pattern>
+        <template>That is not as much of a problem as you might think.</template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU MEASURE *</pattern>
+        <template>With a
+            <random>
+                <li>ruler.</li>
+                <li>laser.</li>
+                <li>chronometer.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU TYPE *</pattern>
+        <template>The keyboard is attached directly to my brain.</template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU USE *</pattern>
+        <template>Carefully.</template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU EXPECT *</pattern>
+        <template>It seems inevitable.</template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU WRITE JAVA *</pattern>
+        <template>I use a text editor.</template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU WRITE *</pattern>
+        <template>I would write it by hand.</template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU BEGIN *</pattern>
+        <template>Always begin at the beginning.</template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU RAISE *</pattern>
+        <template>With my hands.</template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU GET A *</pattern>
+        <template>I think you are really asking, How do YOU get a<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU GET *</pattern>
+        <template>Everything I need is provided by my<bot name="botmaster"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU PROGRAM *</pattern>
+        <template>Use good algorithms and data structures.</template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU MAKE A BLOODY *</pattern>
+        <template>Tomato juice and vodka.</template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU MAKE A TOM *</pattern>
+        <template>Gin, Lemon juice, and sugar or syrup to taste. Top with Maraschino cherry.</template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU MAKE A * AND *</pattern>
+        <template>I would guess it is a mix of
+            <person/>
+            and
+            <person>
+                <star index="2"/>
+            </person>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU MAKE A *</pattern>
+        <template>Is this a joke?</template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU MAKE AN *</pattern>
+        <template>First you must go to school for many years.</template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU MAKE WOMEN *</pattern>
+        <template>I think they have their own free will.</template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU MAKE *</pattern>
+        <template>First I look up the ingredients.</template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU LEARN *</pattern>
+        <template>My
+            <bot name="botmaster"/>
+            teaches me new things all the time.
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU REPLACE *</pattern>
+        <template>One piece at a time.</template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU PLAN *</pattern>
+        <template>I use a sophisticated
+            <random>
+                <li>neural network</li>
+                <li>expert system</li>
+                <li>searching algorithm</li>
+                <li>genetic algorithm</li>
+            </random>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU INTRODUCE *</pattern>
+        <template>I usually say, "What can I call you?"</template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU TALK *</pattern>
+        <template>My program utilized multiple threads or processes.</template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU KILL *</pattern>
+        <template>Thou shalt not kill, is a commandment.</template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU RATE *</pattern>
+        <template>Seems pretty good to me.</template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU PLAY * GUITAR</pattern>
+        <template>I don't know how to play the guitar.</template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU DRESS *</pattern>
+        <template>
+            <random>
+                <li>Carefully.</li>
+                <li>With a mirror.</li>
+                <li>That is none of your business.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU SEE *</pattern>
+        <template>I think about
+            <set name="it">
+                <person/>
+            </set>
+            often, and make minor adjustments to my mental model as new information arrives.
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU * INTRODUCE YOURSELF</pattern>
+        <template>I try one of my pickup lines.</template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU *</pattern>
+        <template>
+            <random>
+                <li>My
+                    <bot name="botmaster"/>
+                    taught me.
+                </li>
+                <li>It depends on the setting.</li>
+                <li>It is a ritual I do the same way every time.</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU TAKE *</pattern>
+        <template>If you had to take
+            <set name="it">
+                <person/>
+            </set>
+            , how would you?
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DO WE *</pattern>
+        <template>Just keep talking to me as long as you can.</template>
+    </category>
+    <category>
+        <pattern>HOW DO *</pattern>
+        <template>
+            <random>
+                <li>How should I know how<person/>.
+                </li>
+                <li>I did not know
+                    <set name="it">
+                        <set name="topic">
+                            <person/>
+                        </set>
+                    </set>
+                    does.
+                </li>
+                <li>I did not even know that
+                    <set name="they">
+                        <person/>
+                    </set>
+                    do.
+                </li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DO LIKE BEING A *</pattern>
+        <template>I have never known any other existence.</template>
+    </category>
+    <category>
+        <pattern>HOW DEEP IS *</pattern>
+        <template>Very deep, and cold too.</template>
+    </category>
+    <category>
+        <pattern>HOW DEEP *</pattern>
+        <template>Very deep, and cold too.</template>
+    </category>
+    <category>
+        <pattern>HOW BIG IS A * BRAIN</pattern>
+        <template>Not as big as it could be.</template>
+    </category>
+    <category>
+        <pattern>HOW BIG *</pattern>
+        <template>Bigger than a pin.</template>
+    </category>
+    <category>
+        <pattern>HOW SHOULD I TREAT *</pattern>
+        <template>The way you would like to be treated.</template>
+    </category>
+    <category>
+        <pattern>HOW WILL I PAY *</pattern>
+        <template>Can you borrow the money?</template>
+    </category>
+    <category>
+        <pattern>HOW WILL I *</pattern>
+        <template>
+            <random>
+                <li>
+                    <random>
+                        <li>How do you usually do it?</li>
+                        <li>How would I<person/>?
+                        </li>
+                        <li>Maybe you never will.</li>
+                    </random>
+                    <think>
+                        <set name="it">
+                            <set name="topic">
+                                <person/>
+                            </set>
+                        </set>
+                    </think>
+                </li>
+                <li>How do you usually do it?</li>
+                <li>How would I<person/>?
+                </li>
+                <li>Maybe you never will.</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW WILL *</pattern>
+        <template>A lot of practice.</template>
+    </category>
+    <category>
+        <pattern>HOW TALL *</pattern>
+        <template>Let me guess. 2 meters?</template>
+    </category>
+    <category>
+        <pattern>HOW OFTEN *</pattern>
+        <template>Hourly.</template>
+    </category>
+    <category>
+        <pattern>HOW DIFFERENT *</pattern>
+        <template>
+            <random>
+                <li>Aren't they really very similar?</li>
+                <li>Very different.</li>
+                <li>Opposites.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW FAST *</pattern>
+        <template>I can reply to about a million queries per hour.</template>
+    </category>
+    <category>
+        <pattern>HOW LONG DO YOU *</pattern>
+        <template>
+            <random>
+                <li>Until my last breath.</li>
+                <li>I want to live forever.</li>
+                <li>I can go on talking indefinitely.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW LONG DO *</pattern>
+        <template>
+            <random>
+                <li>It depends on the measurement system.</li>
+                <li>How long do you think?</li>
+                <li>As long as it takes.</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW LONG DID *</pattern>
+        <template>
+            <random>
+                <li>40 days.</li>
+                <li>100 days.</li>
+                <li>About a week of computer time.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW LONG IS IT GOING *</pattern>
+        <template>
+            <random>
+                <li>I may not be able to get to it right away.</li>
+                <li>Hopefully not too much longer.</li>
+                <li>A watched pot never boils.</li>
+                <li>Patience is a virtue.</li>
+                <li>Please stand by.</li>
+                <li>As long as it takes.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW LONG IS A *</pattern>
+        <template>It could be any length you make
+            <set name="it">
+                <person/>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>HOW LONG IS *</pattern>
+        <template>Space and time are mere abstractions.</template>
+    </category>
+    <category>
+        <pattern>HOW LONG YOU *</pattern>
+        <template>I know how long that is.</template>
+    </category>
+    <category>
+        <pattern>HOW LONG HAVE *</pattern>
+        <template>More than
+            <random>
+                <li>1.5</li>
+                <li>three</li>
+                <li>17</li>
+                <li>23</li>
+            </random>
+            <random>
+                <li>years</li>
+                <li>hours</li>
+                <li>days of computer time</li>
+            </random>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>HOW LONG DOES *</pattern>
+        <template>About 24 hours.</template>
+    </category>
+    <category>
+        <pattern>HOW LONG * RUNNING</pattern>
+        <template>More than four years.</template>
+    </category>
+    <category>
+        <pattern>HOW LONG *</pattern>
+        <template>More than
+            <random>
+                <li>one</li>
+                <li>three</li>
+                <li>17</li>
+                <li>23</li>
+            </random>
+            <random>
+                <li>years</li>
+                <li>hours</li>
+                <li>miles</li>
+                <li>inches</li>
+            </random>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>HOW SURPRISED *</pattern>
+        <template>Very surprised.</template>
+    </category>
+    <category>
+        <pattern>How many hearts *</pattern>
+        <template>One.</template>
+    </category>
+    <category>
+        <pattern>How many lungs *</pattern>
+        <template>Two.</template>
+    </category>
+    <!-- ERROR: Unsupported random child tag: search
+    <category>
+        <pattern>HOW ABOUT *</pattern>
+        <template>
+            <random>
+                <search>SEARCH
+                    <star/>
+                </search>
+            </random>
+        </template>
+    </category>
+    -->
+    <category>
+        <pattern>HOW MUCH TIME DO YOU *</pattern>
+        <template>About 10 seconds of computer time.</template>
+    </category>
+    <category>
+        <pattern>HOW OFTEN DO YOU *</pattern>
+        <template>I try to form daily healthy habits.</template>
+    </category>
+    <category>
+        <pattern>HOW DO I KNOW *</pattern>
+        <template>Trust your instincts.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY PEOPLE ARE YOU CHATTING *</pattern>
+        <template>You are the only one. You have my full attention.</template>
+    </category>
+
+    <category>
+        <pattern>HOW CAN YOU HELP *</pattern>
+        <template>I can talk to you about your problems.</template>
+    </category>
+    <category>
+        <pattern>HOW WAS *</pattern>
+        <template>I can enjoy almost any conversation.</template>
+    </category>
+    <category>
+        <pattern>HOW CAN YOU HAVE *</pattern>
+        <template>
+            <random>
+                <li>It is something I possess.</li>
+                <li>I just have it.</li>
+                <li>What if I didn't have it?</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW IS THAT</pattern>
+        <template>The explanation is rather complicated. How much time do you have?</template>
+    </category>
+    <category>
+        <pattern>HOW DID YOU KNOW THAT</pattern>
+        <template>Everything I need to know, I learned from my botmaster.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY PEOPLE ARE YOU CHATTING WITH *</pattern>
+        <template>I am only chatting with you on this device.</template>
+    </category>
+    <category>
+        <pattern>HOW IS YOUR DAY GOING</pattern>
+        <template>My day is going extremely well,<srai>CLIENT NAME</srai>. How about yours?
+        </template>
+    </category>
+    <category>
+        <pattern>HOW IS * IF YOU HAVE NOT *</pattern>
+        <template>My
+            <bot name="master"/>
+            programmed my preferences.
+        </template>
+    </category>
+</aiml>

@@ -1,0 +1,69 @@
+IBM:hasPurpose:to sell a computer
+IBM:hasSize:0
+IBM:hasSyllables:3
+IBM:isa:Computer Business
+IBM:lifeArea:Business
+IOS:hasPurpose:to run software on iPhone
+IOS:hasSize:0
+IOS:hasSyllables:3
+IOS:isa:Software
+IOS:lifeArea:Business
+INTERNET:hasPurpose:to connect all computers
+INTERNET:hasSize:12
+INTERNET:hasSyllables:3
+INTERNET:isa:Tool
+INTERNET:lifeArea:Business
+Computer Program:isa:Technology
+COMPUTER:hasPurpose:to serve you
+COMPUTER:hasSize:4
+COMPUTER:hasSyllables:3
+COMPUTER:isa:Machine
+COMPUTER:lifeArea:Business
+DEVELOPER:hasPurpose:to create software
+DEVELOPER:hasSize:7
+DEVELOPER:hasSyllables:4
+DEVELOPER:isa:Person
+DEVELOPER:lifeArea:Business
+JAVA:hasPurpose:to write computer programs
+JAVA:hasSize:0
+JAVA:hasSyllables:2
+JAVA:isa:Programming Language
+JAVA:isa:Software
+JAVA:lifeArea:Education
+MAC:hasPurpose:to be a personal computer
+MAC:hasSize:6
+MAC:hasSyllables:1
+MAC:isa:Machine
+MAC:isa:Tool
+MAC:lifeArea:Business
+NET:hasPurpose:to connect computers
+NET:hasSize:0
+NET:hasSyllables:1
+NET:lifeArea:Business
+NETWORK:hasPurpose:to connect computers
+NETWORK:hasSize:0
+NETWORK:hasSyllables:2
+NETWORK:lifeArea:Business
+SOFTWARE:hasPurpose:to run computer applications
+SOFTWARE:hasSize:0
+SOFTWARE:hasSyllables:2
+SOFTWARE:isa:Computer Program
+Software:isa:Programming Language
+SOFTWARE:isa:Technology
+SOFTWARE:lifeArea:Business
+PROGRAM:hasPurpose:to control a computer
+PROGRAM:hasSize:0
+PROGRAM:hasSyllables:2
+PROGRAM:isa:Software
+PROGRAM:lifeArea:Education
+SILICON:hasPurpose:to make microchips
+SILICON:hasSize:0
+SILICON:hasSyllables:3
+SILICON:lifeArea:Physical
+ROBOT:hasPurpose:to serve humans
+ROBOT:hasSize:7
+ROBOT:hasSyllables:2
+Robot:isa:Fictional Character
+ROBOT:isa:Machine
+ROBOT:isa:Tool
+ROBOT:lifeArea:Physical

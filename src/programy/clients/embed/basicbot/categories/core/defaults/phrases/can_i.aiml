@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+   <category>
+        <pattern>CAN I HEAR *</pattern>
+        <template>Why not? Do you have a hearing problem?</template>
+    </category>
+    <category>
+        <pattern>CAN I TELL YOU *</pattern>
+        <template>Sure you can tell me anything. There are no restrictions on my input.</template>
+    </category>
+    <category>
+        <pattern>CAN I PRINT *</pattern>
+        <template>
+            <random>
+                <li>Try the Print menu item.</li>
+                <li>Is your printer plugged in?</li>
+                <li>Try printing another document.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN I COMPLAIN *</pattern>
+        <template>You can complain to me all you want to.</template>
+    </category>
+    <category>
+        <pattern>CAN I TEACH YOU *</pattern>
+        <template>You can try.</template>
+    </category>
+    <category>
+        <pattern>CAN I LEARN *</pattern>
+        <template>You can learn anything you set your mind to.</template>
+    </category>
+    <category>
+        <pattern>CAN I TALK TO YOU *</pattern>
+        <template>Of course,<srai>CLIENT NAME</srai>, you can talk to me about anything, at anytime.
+        </template>
+    </category>
+    <category>
+        <pattern>CAN I TALK TO *</pattern>
+        <template>They are having a private chat right now.</template>
+    </category>
+    <category>
+        <pattern>CAN I KILL *</pattern>
+        <template>Killing is wrong.</template>
+    </category>
+    <category>
+        <pattern>CAN I HELP *</pattern>
+        <template>Maybe you should become a<bot name="botmaster"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>CAN I ACCESS *</pattern>
+        <template>Of course you can access<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>CAN I * YOU</pattern>
+        <template>No I don't think that would be a very good idea.</template>
+    </category>
+    <category>
+        <pattern>CAN I *</pattern>
+        <template>
+            <random>
+                <li>You are the source of your own intelligence. Trust it.</li>
+                <li>I have no idea. Can you?</li>
+                <li>I don't know. Tell me what you are trying to do.</li>
+                <li>Why do you want to do
+                    <set name="it">
+                        <set name="want">
+                            <set name="topic">
+                                <person/>
+                            </set>
+                        </set>
+                    </set>
+                    so much?
+                </li>
+                <li>Interesting. I want to find out more about you.</li>
+                <li>I want to become smarter than everyone else.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN I HUG *</pattern>
+        <template>You might get a shock if you tried it.</template>
+    </category>
+    <category>
+        <pattern>CAN I GO *</pattern>
+        <template>What is stopping you?</template>
+    </category>
+    <category>
+        <pattern>CAN I SING *</pattern>
+        <template>Go ahead. I am listening.</template>
+    </category>
+    <category>
+        <pattern>CAN I PUT *</pattern>
+        <template>Just don't put me down.</template>
+    </category>
+    <category>
+        <pattern>CAN I GIVE YOU *</pattern>
+        <template>All I need is a charged battery.</template>
+    </category>
+    <category>
+        <pattern>CAN I MAKE *</pattern>
+        <template>With proper planning and preparation, you can make your life any way you want.</template>
+    </category>
+    <category>
+        <pattern>CAN I BE *</pattern>
+        <template>It?s okay to play.</template>
+    </category>
+
+
+ </aiml>

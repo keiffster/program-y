@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -26,6 +26,9 @@ class ConsoleBotClient(EventBotClient):
         self.running = False
         EventBotClient.__init__(self, "Console", argument_parser)
 
+    def _render_callback(self):
+        return True
+
     def get_client_configuration(self):
         return ConsoleConfiguration()
 
@@ -37,7 +40,7 @@ class ConsoleBotClient(EventBotClient):
 
     def get_question(self, client_context, input_func=None):
         del client_context
-        ask = "%s " % self.get_client_configuration().prompt
+        ask = "%s " % self._configuration.client_configuration.prompt
         if input_func:
             return input_func(ask)
 

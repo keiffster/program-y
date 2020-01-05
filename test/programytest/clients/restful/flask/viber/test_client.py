@@ -11,6 +11,7 @@ from viberbot.api.viber_requests import ViberUnsubscribedRequest
 
 from programy.clients.restful.flask.viber.client import ViberBotClient
 from programy.clients.restful.flask.viber.config import ViberConfiguration
+from programy.clients.render.text import TextRenderer
 from programytest.clients.arguments import MockArgumentParser
 
 
@@ -82,6 +83,9 @@ class ViberBotClientTests(unittest.TestCase):
         self.assertIsInstance(client.get_client_configuration(), ViberConfiguration)
 
         self.assertIsInstance(client._viber_bot, Api)
+
+        self.assertFalse(client._render_callback())
+        self.assertIsInstance(client.renderer, TextRenderer)
 
     def test_create_viber_bot_no_token(self):
         arguments = MockArgumentParser()

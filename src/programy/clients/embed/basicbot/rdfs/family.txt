@@ -1,0 +1,99 @@
+COURSE:lifeArea:Education
+COUSIN:hasPurpose:to be the son or daughter of an aunt
+COUSIN:hasSize:7
+COUSIN:hasSyllables:2
+COUSIN:isa:Person
+COUSIN:lifeArea:Family
+DAD:hasPurpose:to raise a child
+DAD:hasSize:7
+DAD:hasSyllables:1
+DAD:isa:Male Parent
+DAD:isa:Parent
+DAD:lifeArea:Family
+CHILD:hasPurpose:to continue the species
+CHILD:hasSize:6
+CHILD:hasSpeed:6
+CHILD:hasSyllables:1
+CHILD:isa:Person
+CHILD:isa:Young Person
+CHILD:lifeArea:Family
+FAMILY:hasPurpose:to give us close relatives
+FAMILY:hasSize:8
+FAMILY:hasSyllables:3
+FAMILY:lifeArea:Family
+FATHER:hasPurpose:to raise a child
+FATHER:hasSize:7
+FATHER:hasSyllables:1
+FATHER:isa:Male Parent
+FATHER:isa:Parent
+FATHER:lifeArea:Family
+GIRL:hasPurpose:to grow into a woman
+GIRL:hasSize:7
+GIRL:hasSyllables:1
+GIRL:isa:Person
+GIRL:lifeArea:Social
+Grandchild:isa:Person
+GRANDFATHER:hasPurpose:to offer wisdom
+GRANDFATHER:hasSize:7
+GRANDFATHER:hasSyllables:3
+GRANDFATHER:isa:Grandparent
+GRANDFATHER:isa:Person
+GRANDFATHER:lifeArea:Family
+GRANDMOTHER:hasPurpose:to provide wisdom and experience
+GRANDMOTHER:hasSize:7
+GRANDMOTHER:hasSyllables:3
+GRANDMOTHER:isa:Grandparent
+GRANDMOTHER:isa:Person
+GRANDMOTHER:lifeArea:Family
+Grandparent:isa:Person
+GRANDSON:hasPurpose:to keep us young when we are old
+GRANDSON:hasSize:7
+GRANDSON:hasSyllables:2
+GRANDSON:isa:Grandchild
+GRANDSON:isa:Person
+GRANDSON:lifeArea:Family
+KID:hasPurpose:to be a child
+KID:hasSize:7
+KID:hasSyllables:1
+KID:lifeArea:Family
+LADY:hasPurpose:to be a female person
+LADY:hasSize:7
+LADY:hasSyllables:2
+LADY:isa:Female Person
+LADY:isa:Person
+LADY:lifeArea:Social
+person:hasPlural:people
+person:maleName:man
+person:femaleName:woman
+person:youngName:baby or  infant
+person:collective:a crowd of people
+person:legs:2
+person:sound:yabber yabber
+UNCLE:hasPurpose:to have the role of mother or father's brother
+UNCLE:hasSize:7
+UNCLE:hasSyllables:2
+UNCLE:isa:Person
+UNCLE:lifeArea:Family
+SISTER:hasPurpose:to be a female sibling
+SISTER:hasSize:7
+SISTER:hasSyllables:2
+SISTER:isa:Female Person
+SISTER:isa:Sibling
+SISTER:lifeArea:Family
+BROTHER:hasPurpose:to be a male sibling
+BROTHER:hasSize:7
+BROTHER:hasSyllables:2
+BROTHER:isa:Sibling
+BROTHER:lifeArea:Family
+SON:hasPurpose:to be a male child
+SON:hasSize:7
+SON:hasSyllables:1
+SON:isa:Male Person
+SON:isa:Person
+SON:lifeArea:Family
+MARRIAGE:hasPurpose:to share vows of love
+MARRIAGE:hasSize:0
+MARRIAGE:hasSyllables:2
+MARRIAGE:isa:Contract
+MARRIAGE:isa:Partership
+MARRIAGE:lifeArea:Family

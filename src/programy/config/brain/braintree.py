@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -47,7 +47,8 @@ class BrainBraintreeConfiguration(BaseSectionConfigurationData):
     def to_yaml(self, data, defaults=True):
         if defaults is True:
             data['create'] = False
-            data['create'] = "system"
+            data['save_as_user'] = "system"
+
         else:
             data['create'] = self._create
-            data['create'] = self._save_as_user
+            data['save_as_user'] = self._save_as_user

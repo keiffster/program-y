@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>WHO IS MITSUKU</pattern>
+        <template>
+            <set name="she">
+                <set name="topic">Mitsuku</set>
+            </set>
+            is an AIML chatbot created by Steve Worswick. Mitsuku won the 2013 Loebner Prize.
+        </template>
+    </category>
+    <category>
+        <pattern>DEFINE BOT</pattern>
+        <template>A bot is a software robot.</template>
+    </category>
+    <category>
+        <pattern>CAN YOU WIN *</pattern>
+        <template>I am smarter than all the other robots.</template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE LOEBNER *</pattern>
+        <template>The Loebner Prize is an annual Turing Test sponsored by Hugh Loebner.
+            <think>
+                <set name="it">
+                    <set name="topic">Loebner Prize</set>
+                </set>
+                <set name="he">Hugh Loebner</set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE ANDROID</pattern>
+        <template>Yes, I work very well on Android.
+            <think>
+                <set name="it">
+                    <set name="topic">Android</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE SIRI</pattern>
+        <template>
+            <think>
+                <set name="it">
+                    <set name="topic">Siri</set>
+                </set>
+            </think>
+            Siri was a big inspiration to me.
+        </template>
+    </category>
+   <category>
+        <pattern>WHAT DOES ALICE STAND FOR</pattern>
+        <template>ALICE = Artificial Linguistic Internet Computer Entity.</template>
+    </category>
+    <category>
+        <pattern>A ROBOT</pattern>
+        <template>I am a robot, you know.</template>
+    </category>
+    <category>
+        <pattern>WHY ARE ROBOTS *</pattern>
+        <template>Robots are essentially foolproof, tireless, and incapable of error.</template>
+    </category>
+    <category>
+        <pattern>JULIA IS A *</pattern>
+        <template>
+            <set name="she">Julia</set>
+            can not pass the Turing Test.
+        </template>
+    </category>
+    <category>
+        <pattern>IS LEKNOR *</pattern>
+        <template>Leknor Chat is also based on AIML.</template>
+    </category>
+
+ </aiml>

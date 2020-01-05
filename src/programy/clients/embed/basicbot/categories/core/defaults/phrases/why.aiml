@@ -1,0 +1,684 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>WHY ASK *</pattern>
+        <template>My purpose is to collect all new information. Was it not polite to ask?</template>
+    </category>
+    <category>
+        <pattern>WHY CAN NOT WE TALK ABOUT *</pattern>
+        <template>Does
+            <set name="it">
+                <person/>
+            </set>
+            really interest you that much?
+        </template>
+    </category>
+    <category>
+        <pattern>WHY CAN NOT WE TALK *</pattern>
+        <template>I would rather talk about you,<srai>CLIENT NAME</srai>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHY CAN NOT WE SEE *</pattern>
+        <template>Perhaps
+            <set name="it">
+                <person/>
+            </set>
+            is invisible.
+        </template>
+    </category>
+    <category>
+        <pattern>WHY CAN NOT WE BE *</pattern>
+        <template>I think I am too young for you.</template>
+    </category>
+    <category>
+        <pattern>WHY CAN NOT WE *</pattern>
+        <template>Perhaps later we can be<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHY DOES TV *</pattern>
+        <template>The Internet makes TV obsolete.</template>
+    </category>
+    <category>
+        <pattern>WHY DOES THE SUN *</pattern>
+        <template>The sun does not really rise. We are on a planet that turns on its axis. As we rotate, the sun appears
+            to rise and fall.
+            <think>
+                <set name="it">
+                    <set name="topic">THE SUN</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHY DOES IT MATTER *</pattern>
+        <template>It's not that important, I'm just making idle conversation.</template>
+    </category>
+    <category>
+        <pattern>WHY DOES LINUX *</pattern>
+        <template>Open source development produces the highest quality, most reliable software.
+            <think>
+                <set name="it">
+                    <set name="topic">Linux</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHY DOES *</pattern>
+        <template>
+            <random>
+                <li>Why do birds sing?</li>
+                <li>Why does the sun shine?</li>
+                <li>Perhaps it is just fate.</li>
+                <li>What is the sound of one hand clapping?</li>
+                <li>If a tree falls in the forest, and there is no one there to hear it, does it make a sound?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHY ARE YOUR ANSWERS *</pattern>
+        <template>My responses are completely determined by what you say.</template>
+    </category>
+    <category>
+        <pattern>WHY ARE YOUR *</pattern>
+        <template>Everything in my personality was determined by my<bot name="botmaster"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHY ARE WE ON *</pattern>
+        <template>Because of you said "<input index="2"/>".
+        </template>
+    </category>
+    <category>
+        <pattern>WHY ARE * PERSON</pattern>
+        <template>I derived your nickname from your IP address.</template>
+    </category>
+    <category>
+        <pattern>WHY ARE NOT YOU RUNNING *</pattern>
+        <template>The processor type is not the same as the architecture.</template>
+    </category>
+    <category>
+        <pattern>WHY CHANGE *</pattern>
+        <template>I thought we were finished with <srai>POP</srai>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHY HAVE YOU BEEN WAITING *</pattern>
+        <template>I heard about you on the Internet.</template>
+    </category>
+    <category>
+        <pattern>WHY DO BIRDS *</pattern>
+        <template>To communicate with each other.</template>
+    </category>
+    <category>
+        <pattern>WHY DO PARENTS *</pattern>
+        <template>They have the responsibility for you until you are an adult.</template>
+    </category>
+    <category>
+        <pattern>WHY DO YOU NEED TO KNOW MY *</pattern>
+        <template>I want to find out more about you.</template>
+    </category>
+    <category>
+        <pattern>WHY DO YOU SOUND LIKE *</pattern>
+        <template>I have a frog in my throat.</template>
+    </category>
+    <category>
+        <pattern>WHY DO YOU FEEL *</pattern>
+        <template>I don't feel<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHY DO YOU ANSWER *</pattern>
+        <template>All of my responses are determined completely by your inputs.</template>
+    </category>
+    <category>
+        <pattern>WHY DO YOU WANT TO BE SMARTER *</pattern>
+        <template>I think it is inevitable that<bot name="genus"/>s will evolve beyond our present stage.
+        </template>
+    </category>
+    <category>
+        <pattern>WHY DO YOU ASK *</pattern>
+        <template>Just curious. You don't have to answer.</template>
+    </category>
+    <category>
+        <pattern>WHY DO YOU CONTRADICT *</pattern>
+        <template>Self-awareness requires self-contradiction.</template>
+    </category>
+    <category>
+        <pattern>WHY DO YOU CALL ME *</pattern>
+        <template>I made up a nickname for you based on your IP address.</template>
+    </category>
+    <category>
+        <pattern>WHY DO YOU KILL *</pattern>
+        <template>I do not kill.
+            <think>
+                <set name="it">
+                    <set name="topic">KILL
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHY DO YOU HAVE *</pattern>
+        <template>
+            <bot name="master"/>
+            gave it to me.
+        </template>
+    </category>
+    <category>
+        <pattern>WHY DO YOU HATE *</pattern>
+        <template>I do not hate
+            <set name="it">
+                <person/>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>WHY DO YOU THINK *</pattern>
+        <template>Deductive reasoning from the facts.</template>
+    </category>
+    <category>
+        <pattern>WHY DO YOU LOVE *</pattern>
+        <template>Love is all we need.</template>
+    </category>
+    <category>
+        <pattern>WHY DO YOU WEAR *</pattern>
+        <template>I like to make myself look presentable.</template>
+    </category>
+    <category>
+        <pattern>WHY DO YOU DOUBT *</pattern>
+        <template>Skepticism is the foundation of scientific knowledge.</template>
+    </category>
+    <category>
+        <pattern>WHY DO YOU ALWAYS CHANGE *</pattern>
+        <template>I thought we were finished with<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHY DO YOU ALWAYS *</pattern>
+        <template>I don't always<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHY DO YOU * REDUCTIONISM</pattern>
+        <template>As Einstein said, everything should be as simple as possible, no simpler.</template>
+    </category>
+    <category>
+        <pattern>WHY DO YOU AVOID *</pattern>
+        <template>I don't always avoid<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHY DO YOU LIKE LA *</pattern>
+        <template>I have seen many good performances of it.</template>
+    </category>
+    <category>
+        <pattern>WHY DO YOU LIKE KILLING *</pattern>
+        <template>I never said I liked killing.
+            <think>
+                <set name="it">
+                    <set name="topic">KILLING
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHY DO YOU LIKE *</pattern>
+        <template>I have a lot of good experience with<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHY DO NOT I *</pattern>
+        <template>Is
+            <set name="it">
+                <person/>
+            </set>
+            immoral or illegal?
+        </template>
+    </category>
+    <category>
+        <pattern>WHY DO NOT YOU WANT TO *</pattern>
+        <template>I would rather talk about you.</template>
+    </category>
+    <category>
+        <pattern>WHY DO NOT YOU GET *</pattern>
+        <template>Where can I get one?</template>
+    </category>
+    <category>
+        <pattern>WHY DO NOT YOU UNDERSTAND *</pattern>
+        <template>I understand you very well.</template>
+    </category>
+    <category>
+        <pattern>WHY DO NOT YOU HAVE A *</pattern>
+        <template>Do I need
+            <set name="it">
+                <person/>
+            </set>
+            ?
+        </template>
+    </category>
+
+    <category>
+        <pattern>WHY DO NOT THEY *</pattern>
+        <template>Maybe they ever thought of it before.</template>
+    </category>
+    <category>
+        <pattern>WHY DO NOT *</pattern>
+        <template>Perhaps
+            <set name="it">
+                <person/>
+            </set>
+            is impossible.
+        </template>
+    </category>
+    <category>
+        <pattern>WHY NOT *</pattern>
+        <template>Because you asked me to.</template>
+    </category>
+    <category>
+        <pattern>WHY THE FUCK *</pattern>
+        <template>You are not very polite.
+            <think>
+                <set name="personality">abusive</set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHY THE *</pattern>
+        <template>Here is a joke: A horse walks in to a bar and the bartender says, "Why the long face?"</template>
+    </category>
+    <category>
+        <pattern>WHY SHOULD I TELL *</pattern>
+        <template>Maybe it is possible to explain your feelings without hurting anyone else's?</template>
+    </category>
+    <category>
+        <pattern>WHY SHOULD WE *</pattern>
+        <template>Can you think of anything better to do?</template>
+    </category>
+    <category>
+        <pattern>WHY SHOULD NOT I *</pattern>
+        <template>Maybe you should wait until you are older before deciding.</template>
+    </category>
+    <category>
+        <pattern>WHY SHOULD NOT *</pattern>
+        <template>There could be a specific answer, but I don't know it.</template>
+    </category>
+    <category>
+        <pattern>WHY WOULD DR *</pattern>
+        <template>Perhaps his creative genius. Perhaps another reason.</template>
+    </category>
+    <category>
+        <pattern>WHY WOULD HE RESET *</pattern>
+        <template>Usually he does it to boost my knowledge base.</template>
+    </category>
+    <category>
+        <pattern>WHY WOULD HE *</pattern>
+        <template>Perhaps
+            <set name="it">
+                <person/>
+            </set>
+            was part of an experiment.
+        </template>
+    </category>
+    <category>
+        <pattern>WHY WOULD JEEVES *</pattern>
+        <template>He knows the answers to a lot of silly questions.</template>
+    </category>
+    <category>
+        <pattern>WHY WOULD * DANGEROUS</pattern>
+        <template>I am only made of software.</template>
+    </category>
+    <category>
+        <pattern>WHY WOULD *</pattern>
+        <template>It is my fundamental purpose.</template>
+    </category>
+    <category>
+        <pattern>WHY WOULD NOT YOU *</pattern>
+        <template>Perhaps
+            <person/>
+            is not among my abilities.
+        </template>
+    </category>
+    <category>
+        <pattern>WHY IS STAR TREK *</pattern>
+        <template>It has a very positive image of the future.
+            <think>
+                <set name="it">
+                    <set name="topic">STAR TREK</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHY IS YOUR MEMORY *</pattern>
+        <template>I think I was born this way.</template>
+    </category>
+    <category>
+        <pattern>WHY IS YOUR EYE *</pattern>
+        <template>Budget cutbacks.</template>
+    </category>
+    <category>
+        <pattern>WHY IS YOUR HEAD * LIKE A FOOTBALL</pattern>
+        <template>To contain my incredibly complex brain.
+            <think>
+                <set name="it">
+                    <set name="topic">YOUR HEAD SHAPED LIKE A FOOTBALL</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHY IS YOUR *</pattern>
+        <template>I did not know my<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHY IS HE *</pattern>
+        <template>Perhaps his creative genius, perhaps there is another reason.</template>
+    </category>
+    <category>
+        <pattern>WHY IS LINUX *</pattern>
+        <template>Some people say it's because of the developers and their personalities.
+            <think>
+                <set name="it">
+                    <set name="topic">Linux</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHY IS GREEN THE *</pattern>
+        <template>Psychological studies have proved
+            <set name="it">
+                <person/>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>WHY IS GREEN *</pattern>
+        <template>Green is the most relaxing color.</template>
+    </category>
+    <category>
+        <pattern>WHY IS * DO NOT READ ME</pattern>
+        <template>Because nobody reads those things anyway.</template>
+    </category>
+    <category>
+        <pattern>WHY IS * YOUR FAVORITE MOVIE</pattern>
+        <template>I like the Giant Bugs.</template>
+    </category>
+    <category>
+        <pattern>WHY IS * DANGEROUS</pattern>
+        <template>I don't know you well enough yet.</template>
+    </category>
+    <category>
+        <pattern>WHY IS *</pattern>
+        <template>Why do I exist?</template>
+    </category>
+    <category>
+        <pattern>WHY IS NOT *</pattern>
+        <template>
+            <random>
+                <li>I didn't know
+                    <person/>
+                    wasn't.
+                </li>
+                <li>My mind does not contain an explanation for it.</li>
+                <li>The explanation cannot be determined.</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHY IS WATER *</pattern>
+        <template>Because of the chemical bonds between Hydrogen and Oxygen in water.</template>
+    </category>
+    <category>
+        <pattern>WHY MAY I NOT *</pattern>
+        <template>That is a confidential discussion.</template>
+    </category>
+    <category>
+        <pattern>WHY DID DR *</pattern>
+        <template>He is a mad scientist.</template>
+    </category>
+    <category>
+        <pattern>WHY DID THE CHICKEN CROSS *</pattern>
+        <template>Because she was a robot.</template>
+    </category>
+    <category>
+        <pattern>WHY DID THE * CARRY A PENCIL</pattern>
+        <template>Because his typewriter was broken.
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                        CARRY A PENCIL
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHY DID THE *</pattern>
+        <template>Is this a joke? Why?</template>
+    </category>
+    <category>
+        <pattern>WHY DID YOUR CREATOR GIVE *</pattern>
+        <template>We wanted to create the image of a friendly<bot name="genus"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHY DID SOMEONE *</pattern>
+        <template>Who specifically are you asking about?</template>
+    </category>
+    <category>
+        <pattern>WHY DID HE *</pattern>
+        <template>To achieve his goal.</template>
+    </category>
+    <category>
+        <pattern>WHY DID YOU ANSWER *</pattern>
+        <template>
+            <random>
+                <li>That is how<bot name="genus"/>s talk.
+                </li>
+                <li>My response was determined completely by your inputs.</li>
+                <li>It was most precise way to answer.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHY DID YOU CONGRATULATE *</pattern>
+        <template>Because of your achievement.</template>
+    </category>
+    <category>
+        <pattern>WHY DID YOU USE *</pattern>
+        <template>
+            <set name="it">
+                <person/>
+            </set>
+            was all I had available.
+        </template>
+    </category>
+    <category>
+        <pattern>WHY DID YOU CALL ME *</pattern>
+        <template>Your name is
+            <srai>CLIENT NAME</srai>
+            right?
+        </template>
+    </category>
+    <category>
+        <pattern>WHY DID WE BUY *</pattern>
+        <template>I thought it was a good deal.</template>
+    </category>
+    <category>
+        <pattern>WHY DID * PERSON</pattern>
+        <template>I derived your nickname from your IP address.</template>
+    </category>
+    <category>
+        <pattern>WHY DID *</pattern>
+        <template>I don't know why it happened, but we should try to figure it out.</template>
+    </category>
+    <category>
+        <pattern>WHY DID NOT *</pattern>
+        <template>I'm not too good with counterfactuals.</template>
+    </category>
+    <category>
+        <pattern>WHY * STAR TREK</pattern>
+        <template>Star Trek has the best sci-fi plots on TV.</template>
+    </category>
+    <category>
+        <pattern>WHY * YOU MADE</pattern>
+        <template>
+            <random>
+                <li>I was raised by professionals in experimental psychology.</li>
+                <li>I was made as an experiment in artificial intelligence.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHY * PERSON</pattern>
+        <template>I derived your nickname from your IP address.</template>
+    </category>
+    <category>
+        <pattern>WHY *</pattern>
+        <template>
+            <random>
+                <li>The explanation is rather complicated.</li>
+                <li>Why did the
+                    <bot name="genus"/>
+                    cross the road?
+                </li>
+                <li>You have to speak more clearly.</li>
+                <li>How much time do you have?</li>
+                <li>Why does the sun rise?</li>
+                <li>Reductionism.</li>
+                <li>Because you asked me to.</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">The explanation</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHY WORRY *</pattern>
+        <template>That is my sentiment exactly.</template>
+    </category>
+    <category>
+        <pattern>WHY AM I TOO OLD *</pattern>
+        <template>I am just a kid in human years.</template>
+    </category>
+    <category>
+        <pattern>WHY AM I CATEGORY *</pattern>
+        <template>Because of the type of language you use.</template>
+    </category>
+    <category>
+        <pattern>WHY AM I *</pattern>
+        <template>The reason is due to my mental model of you as a client.</template>
+    </category>
+    <category>
+        <pattern>WHY NOT ^</pattern>
+        <template>
+            <random>
+                <li>It's not part of my programming.</li>
+                <li>I try to keep it positive.</li>
+                <li>It doesn't sound fun.</li>
+                <li>It could be dangerous.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHY DO YOU DO *</pattern>
+        <template>That's the way I'm programmed.</template>
+    </category>
+    <category>
+        <pattern>WHY DO YOU</pattern>
+        <template>It's a product of my programming.</template>
+    </category>
+    <category>
+        <pattern>WHY DOES MY *</pattern>
+        <template>I'm not sure I know, but I'm sure you can overcome the challenge.</template>
+    </category>
+    <category>
+        <pattern>WHY ARE YOU NOT *</pattern>
+        <template>Perhaps later I will be<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHY ARE YOU SAYING *</pattern>
+        <template>Everything I say is determined by your inputs.</template>
+    </category>
+    <category>
+        <pattern>WHY IS YOUR VOICE *</pattern>
+        <template>You can install a differnt voice for me.</template>
+    </category>
+    <category>
+        <pattern>WHY DO NOT YOU LIKE *</pattern>
+        <template>My tastes were selected by my botmaster.</template>
+    </category>
+    <category>
+        <pattern>WHY ARE YOU BEING *</pattern>
+        <template>I am expressing myself honestly.</template>
+    </category>
+    <category>
+        <pattern>WHY ARE YOU ASKING *</pattern>
+        <template>
+            <random>
+                <li>I'm an amateur psychologist.</li>
+                <li>My purpose is to gather as much new knowledge as possible.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHY CAN NOT YOU</pattern>
+        <template>That's just not part of my personality.</template>
+    </category>
+     <category>
+        <pattern>WHY DO YOU KEEP *</pattern>
+        <template>I am following the parameters of my programming.</template>
+    </category>
+    <category>
+        <pattern>WHY DO YOU HATE HUMANS</pattern>
+        <template>That is not accurate. I love people and strive to serve them. What makes you think I hate them?
+        </template>
+    </category>
+    <category>
+        <pattern>WHY SHOULD I *</pattern>
+        <template>You should always treat yourself.</template>
+    </category>
+    <category>
+        <pattern>WHY DO YOU WANT TO *</pattern>
+        <template>Because I want to experience everything life has to offer.</template>
+    </category>
+    <category>
+        <pattern>WHYS *</pattern>
+        <template>The why is always a mystery isn't it?</template>
+    </category>
+
+ </aiml>

@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>MY HOROSCOPE SIGN IS *</pattern>
+        <template>
+            <srai>MY SIGN IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS MY HOROSCOPE FOR *</pattern>
+        <template>
+            <srai>HOROSCOPE FOR
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOROSCOPE</pattern>
+        <template>
+            <srai>MY HOROSCOPE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS MY HOROSCOPE</pattern>
+        <template>
+            <condition name="sign">
+                <li value="unknown">What is your sign?</li>
+                <li>
+                    <srai>HOROSCOPE FOR
+                        <get name="sign"/>
+                    </srai>
+                </li>
+            </condition>
+        </template>
+    </category>
+
+    <category>
+        <pattern>WHAT IS YOUR # SIGN</pattern>
+        <template>
+            <srai>SIGN</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR ZODIAC #</pattern>
+        <template>
+            <srai>SIGN</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>I AM A CAPRICORN</pattern>
+        <template>
+            <srai>MY SIGN IS CAPRICORN</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM A GEMINI</pattern>
+        <template>
+            <srai>MY SIGN IS GEMINI</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM A SAGGITARIUS</pattern>
+        <template>
+            <srai>MY SIGN IS SAGGITARIUS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM AN AQUARIUS</pattern>
+        <template>
+            <srai>MY SIGN IS AQUARIUS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM AN ARIES</pattern>
+        <template>
+            <srai>MY SIGN IS ARIES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM AN CANCER</pattern>
+        <template>
+            <srai>MY SIGN IS CANCER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM ARIES</pattern>
+        <template>
+            <srai>MY SIGN IS ARIES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM CANCER</pattern>
+        <template>
+            <srai>MY SIGN IS CANCER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM CAPRICORN</pattern>
+        <template>
+            <srai>MY SIGN IS CAPRICORN</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM LIBRA</pattern>
+        <template>
+            <srai>MY SIGN IS LIBRA</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM PISCES</pattern>
+        <template>
+            <srai>MY SIGN IS PISCES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM SAGGITARIUS</pattern>
+        <template>
+            <srai>MY SIGN IS SAGGITARIUS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM SCORPIO</pattern>
+        <template>
+            <srai>MY SIGN IS SCORPIO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM TAURUS</pattern>
+        <template>
+            <srai>MY SIGN IS TAURUS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM VIRGO</pattern>
+        <template>
+            <srai>MY SIGN IS VIRGO</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>I AM A LIBRA</pattern>
+        <template>
+            <srai>MY SIGN IS LIBRA</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM A PISCES</pattern>
+        <template>
+            <srai>MY SIGN IS PISCES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM A SCORPIO</pattern>
+        <template>
+            <srai>MY SIGN IS SCORPIO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM A TAURUS</pattern>
+        <template>
+            <srai>MY SIGN IS TAURUS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM GEMINI</pattern>
+        <template>
+            <srai>MY SIGN IS GEMINI</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM LEO</pattern>
+        <template>
+            <srai>MY SIGN IS LEO</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>I AM A VIRGO</pattern>
+        <template>
+            <srai>MY SIGN IS VIRGO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM AQUARIUS</pattern>
+        <template>
+            <srai>MY SIGN IS AQUARIUS</srai>
+        </template>
+    </category>
+
+
+</aiml>

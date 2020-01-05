@@ -1,0 +1,938 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>LAUNCH THE * APPLICATION</pattern>
+        <template>
+            <srai>LAUNCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN MY * APP</pattern>
+        <template>
+            <srai>LAUNCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN GOOGLE PLAY</pattern>
+        <template>
+            <srai>LAUNCH GOOGLE PLAY STORE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>LAUNCH * APPLICATION</pattern>
+        <template>
+            <srai>LAUNCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>LAUNCH THE * APP</pattern>
+        <template>
+            <srai>LAUNCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN CLOCK</pattern>
+        <template>
+            <srai>LAUNCH CLOCK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN MY FACEBOOK *</pattern>
+        <template>
+            <srai>LAUNCH FACEBOOK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN THE APP *</pattern>
+        <template>
+            <srai>LAUNCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU OPEN FACEBOOK</pattern>
+        <template>
+            <srai>LAUNCH FACEBOOK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN APPLICATION *</pattern>
+        <template>
+            <srai>LAUNCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN FLASHLIGHT</pattern>
+        <template>
+            <srai>LAUNCH FLASHLIGHT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN PLAY STORE</pattern>
+        <template>
+            <srai>LAUNCH GOOGLE PLAY STORE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>OPEN ANGRY BIRDS</pattern>
+        <template>
+            <srai>LAUNCH ANGRY BIRDS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN CALCULATOR</pattern>
+        <template>
+            <srai>LAUNCH CALCULATOR</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN SKYPE</pattern>
+        <template>
+            <srai>LAUNCH SKYPE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN TASK MANAGER</pattern>
+        <template>
+            <srai>LAUNCH TASK MANAGER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN TWITTER</pattern>
+        <template>
+            <srai>LAUNCH TWITTER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN MY CALENDAR</pattern>
+        <template>
+            <srai>LAUNCH CALENDAR</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN MY MUSIC</pattern>
+        <template>
+            <srai>LAUNCH MY MUSIC</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN PHONE BOOK</pattern>
+        <template>
+            <srai>LAUNCH CONTACTS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN GALLERY</pattern>
+        <template>
+            <srai>LAUNCH GALLERY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN MAPS</pattern>
+        <template>
+            <srai>LAUNCH MAPS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN PANDORA</pattern>
+        <template>
+            <srai>LAUNCH PANDORA</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN GOOGLE MAPS</pattern>
+        <template>
+            <srai>LAUNCH MAPS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN MUSIC PLAYER</pattern>
+        <template>
+            <srai>LAUNCH MUSIC PLAYER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS ON MY *</pattern>
+        <template>
+            <srai>LAUNCH CALENDAR</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU TUBE</pattern>
+        <template>
+            <srai>LAUNCH YOUTUBE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN EMAIL</pattern>
+        <template>
+            <srai>LAUNCH GMAIL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN INTERNET</pattern>
+        <template>
+            <srai>LAUNCH BROWSER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN MESSAGES</pattern>
+        <template>
+            <srai>LAUNCH MESSAGING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN MUSIC</pattern>
+        <template>
+            <srai>LAUNCH MUSIC</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN UP *</pattern>
+        <template>
+            <srai>LAUNCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN BROWSER</pattern>
+        <template>
+            <srai>LAUNCH BROWSER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN GMAIL</pattern>
+        <template>
+            <srai>LAUNCH GMAIL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN CAMERA</pattern>
+        <template>
+            <srai>LAUNCH CAMERA</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN YOUTUBE</pattern>
+        <template>
+            <srai>LAUNCH YOUTUBE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN CALENDAR</pattern>
+        <template>
+            <srai>LAUNCH CALENDAR</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN CONTACTS</pattern>
+        <template>
+            <srai>LAUNCH CONTACTS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN FACEBOOK</pattern>
+        <template>
+            <srai>LAUNCH FACEBOOK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUTUBE</pattern>
+        <template>
+            <srai>LAUNCH YOUTUBE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN MY *</pattern>
+        <template>
+            <srai>OPEN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GOTO YOUTUBE</pattern>
+        <template>
+            <srai>OPEN YOUTUBE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN AN EMAIL</pattern>
+        <template>
+            <srai>EMAIL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN * FOR ME</pattern>
+        <template>
+            <srai>OPEN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU OPEN UP *</pattern>
+        <template>
+            <srai>OPEN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>PULL UP MY *</pattern>
+        <template>
+            <srai>OPEN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN MY MUSIC PLAYER</pattern>
+        <template>
+            <srai>OPEN MUSIC PLAYER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>READ EMAIL</pattern>
+        <template>
+            <srai>OPEN GMAIL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>VIEW *</pattern>
+        <template>
+            <srai>OPEN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WWW FACEBOOK COM</pattern>
+        <template>
+            <srai>OPEN FACEBOOK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN FACEBOOK *</pattern>
+        <template>
+            <srai>OPEN FACEBOOK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME MY CALENDAR</pattern>
+        <template>
+            <srai>OPEN CALENDAR</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WIKIPEDIA</pattern>
+        <template>
+            <srai>OPEN WIKIPEDIA</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GO TO FACEBOOK</pattern>
+        <template>
+            <srai>OPEN FACEBOOK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>LOG * FACEBOOK</pattern>
+        <template>
+            <srai>OPEN FACEBOOK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TAKE ME TO FACEBOOK</pattern>
+        <template>
+            <srai>OPEN FACEBOOK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YELP</pattern>
+        <template>
+            <srai>OPEN YELP</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ACTIVATE *</pattern>
+        <template>
+            <srai>OPEN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU OPEN THE *</pattern>
+        <template>
+            <srai>OPEN THE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GMAIL</pattern>
+        <template>
+            <srai>OPEN GMAIL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GOTO FACEBOOK</pattern>
+        <template>
+            <srai>OPEN FACEBOOK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN TEXT *</pattern>
+        <template>
+            <srai>OPEN MESSAGING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>PLEASE OPEN *</pattern>
+        <template>
+            <srai>OPEN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU OPEN MY *</pattern>
+        <template>
+            <srai>OPEN MY
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>EBAY</pattern>
+        <template>
+            <srai>OPEN EBAY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CHECK MY *</pattern>
+        <template>
+            <srai>OPEN MY
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MAIL</pattern>
+        <template>
+            <srai>OPEN GMAIL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU OPEN *</pattern>
+        <template>
+            <srai>OPEN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TAKE A PICTURE</pattern>
+        <template>
+            <srai>OPEN CAMERA</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>PHONE</pattern>
+        <template>
+            <srai>OPEN PHONE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TAKE ME TO *</pattern>
+        <template>
+            <srai>OPEN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YAHOO</pattern>
+        <template>
+            <srai>OPEN YAHOO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GOTO *</pattern>
+        <template>
+            <srai>OPEN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>START *</pattern>
+        <template>
+            <srai>OPEN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SCHEDULE</pattern>
+        <template>
+            <srai>OPEN CALENDAR</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME A PICTURE OF ME *</pattern>
+        <template>Let's look in your photos.
+            <srai>OPEN GALLERY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOOT A VIDEO</pattern>
+        <template>
+            <srai>OPEN CAMERA</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TAKE A VIDEO</pattern>
+        <template>
+            <srai>OPEN CAMERA</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO I HAVE ON MY CALENDAR *</pattern>
+        <template>
+            <srai>OPEN CALENDAR</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ACCESS EMAIL</pattern>
+        <template>
+            <srai>OPEN EMAIL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ASK SKYPE</pattern>
+        <template>
+            <srai>OPEN SKYPE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU GO TO EMAIL</pattern>
+        <template>
+            <srai>OPEN EMAIL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CHECK OUT EMAIL</pattern>
+        <template>
+            <srai>OPEN EMAIL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CHECK YOU EMAIL</pattern>
+        <template>
+            <srai>CHECK YOUR EMAIL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CONNECT TO SKYPE</pattern>
+        <template>
+            <srai>LAUNCH SKYPE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO I HAVE A NEW EMAIL</pattern>
+        <template>
+            <srai>OPEN EMAIL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO I HAVE ANY EMAIL</pattern>
+        <template>
+            <srai>OPEN EMAIL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO I HAVE ANY EMAILS</pattern>
+        <template>
+            <srai>OPEN EMAIL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SET UP EMAIL</pattern>
+        <template>
+            <srai>OPEN EMAIL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS MY DAY LOOK LIKE</pattern>
+        <template>
+            <srai>OPEN CALENDAR</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHERE CAN I READ MY EMAIL</pattern>
+        <template>
+            <srai>OPEN EMAIL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO I HAVE ANY NEW EMAIL</pattern>
+        <template>
+            <srai>OPEN EMAIL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>READ MY EMAIL</pattern>
+        <template>
+            <srai>OPEN EMAIL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO I HAVE ON MY CALENDAR TODAY</pattern>
+        <template>
+            <srai>OPEN CALENDAR</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO I HAVE ANY MESSAGES</pattern>
+        <template>
+            <srai>OPEN MESSAGING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GOTO MY PICTURES</pattern>
+        <template>
+            <srai>OPEN GALLERY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN APP *</pattern>
+        <template>
+            <srai>LAUNCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN MY PHOTOS</pattern>
+        <template>
+            <srai>OPEN GALLERY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT MEETING *</pattern>
+        <template>
+            <srai>OPEN CALENDAR</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GMAIL *</pattern>
+        <template>
+            <srai>OPEN GMAIL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN CAMCORDER</pattern>
+        <template>
+            <srai>OPEN CAMERA</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CHECK MY SCHEDULE</pattern>
+        <template>
+            <srai>OPEN CALENDAR</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GO TO CONTACTS</pattern>
+        <template>
+            <srai>OPEN CONTACTS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GO TO GOOGLE</pattern>
+        <template>
+            <srai>OPEN GOOGLE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CHECK MY CALENDAR</pattern>
+        <template>
+            <srai>OPEN CALENDAR</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CHECK MY EMAIL</pattern>
+        <template>
+            <srai>OPEN EMAIL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GOOGLE SEARCH</pattern>
+        <template>
+            <srai>OPEN GOOGLE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CHECK EMAIL</pattern>
+        <template>
+            <srai>OPEN EMAIL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO I HAVE ANY APPOINTMENTS *</pattern>
+        <template>
+            <srai>OPEN CALENDAR</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN * OPEN *</pattern>
+        <template>
+            <srai>OPEN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HULU</pattern>
+        <template>
+            <srai>OPEN HULU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN * APP</pattern>
+        <template>
+            <srai>LAUNCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GOOGLE MAPS</pattern>
+        <template>
+            <srai>OPEN MAPS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>VIEW MY CONTACTS</pattern>
+        <template>
+            <srai>OPEN CONTACTS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CALENDAR</pattern>
+        <template>
+            <srai>OPEN CALENDAR</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>E DASH MAIL</pattern>
+        <template>
+            <srai>OPEN EMAIL</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>CAMERA</pattern>
+        <template>
+            <srai>OPEN CAMERA</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GO ON *</pattern>
+        <template>
+            <srai>OPEN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TURN ON *</pattern>
+        <template>
+            <srai>OPEN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FACEBOOK *</pattern>
+        <template>
+            <srai>OPEN FACEBOOK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CONTACT</pattern>
+        <template>
+            <srai>OPEN CONTACTS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GO TO *</pattern>
+        <template>
+            <srai>OPEN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>BEGIN *</pattern>
+        <template>
+            <srai>OPEN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN THE *</pattern>
+        <template>
+            <srai>OPEN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WWW *</pattern>
+        <template>
+            <srai>OPEN WWW
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SKYRIM</pattern>
+        <template>
+            <srai>OPEN SKYRIM</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>BEGIN MONSTER PARK</pattern>
+        <template>
+            <srai>OPEN MONSTER PARK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>20 QUESTIONS</pattern>
+        <template>
+            <srai>OPEN 20 QUESTIONS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GOTO MY *</pattern>
+        <template>
+            <srai>OPEN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>PLAY MY MUSIC</pattern>
+        <template>
+            <srai>OPEN MUSIC PLAYER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MONSTERPARK</pattern>
+        <template>
+            <srai>OPEN MONSTER PARK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MONSTER PARK</pattern>
+        <template>
+            <srai>OPEN MONSTER PARK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT AM I DOING *</pattern>
+        <template>
+            <srai>OPEN CALENDAR</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MYSPACE</pattern>
+        <template>
+            <srai>OPEN MYSPACE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>LAUNCH BROWSER *</pattern>
+        <template>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>GOTO SKYPE</pattern>
+        <template>
+            <srai>LAUNCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU LAUNCH *</pattern>
+        <template>
+            <srai>LAUNCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>LAUNCH * APP</pattern>
+        <template>
+            <srai>LAUNCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SKYPE</pattern>
+        <template>
+            <srai>LAUNCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>ANGRY BIRDS</pattern>
+        <template>
+            <srai>LANUCH ANGRY BIRDS</srai>
+        </template>
+    </category>
+
+</aiml>

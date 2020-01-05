@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+    <category>
+        <pattern>CAN YOU CALL MY MOM * SKYPE</pattern>
+        <template>
+            <srai>FEATURE REQUEST SKYPE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU * SKYPE *</pattern>
+        <template>
+            <srai>FEATURE REQUEST SKYPE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CANCEL GOLF TODAY</pattern>
+        <template>
+            <srai>FEATURE REQUEST CANCEL CALENDAR EVENT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MOVE MY * O CLOCK *</pattern>
+        <template>
+            <srai>FEATURE REQUEST CHANGE CALENDAR EVENTS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DELETE ALL ALARMS</pattern>
+        <template>
+            <srai>FEATURE REQUEST DELETE ALARMS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU ON SKYPE</pattern>
+        <template>
+            <srai>FEATURE REQUEST SKYPE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU * SKYPE</pattern>
+        <template>
+            <srai>FEATURE REQUEST SKYPE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU SKYPE *</pattern>
+        <template>
+            <srai>FEATURE REQUEST SKYPE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE SKYPE *</pattern>
+        <template>
+            <srai>FEATURE REQUEST SKYPE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE SKYPE</pattern>
+        <template>
+            <srai>FEATURE REQUEST SKYPE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO I HAVE ON MY SCHEDULE *</pattern>
+        <template>
+            <srai>FEATURE REQUEST READ CALENDAR EVENTS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR SKYPE *</pattern>
+        <template>
+            <srai>FEATURE REQUEST SKYPE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CHANGE MY * TO *</pattern>
+        <template>
+            <srai>FEATURE REQUEST CHANGE CALENDAR EVENT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SKYPE *</pattern>
+        <template>
+            <srai>FEATURE REQUEST SKYPE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FORGET EVERYTHING ABOUT ME</pattern>
+        <template>
+            <srai>FEATURE REQUEST FORGET EVERYTHING ABOUT ME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I WANT TO PLAY A GAME</pattern>
+        <template>
+            <srai>FEATURE REQUEST PLAY A GAME</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>TURN ON BLUETOOTH</pattern>
+        <template>
+            <srai>FEATURE REQUEST TURN ON BLUETOOTH</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>CAN YOU PLAY GAMES</pattern>
+        <template>
+            <srai>FEATURE REQUEST PLAY GAMES</srai>
+        </template>
+    </category>
+
+
+
+</aiml>

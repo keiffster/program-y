@@ -1,0 +1,81 @@
+SAMSUNG:hasPurpose:to make consumer products
+SAMSUNG:hasSize:0
+SAMSUNG:hasSyllables:2
+SAMSUNG:isa:Corporation
+SAMSUNG:lifeArea:Business
+TESCO:hasPurpose:to see groceries
+TESCO:hasSize:0
+TESCO:hasSyllables:2
+TESCO:isa:Retail Business
+TESCO:isa:Supermarket
+TESCO:lifeArea:Business
+SONY:hasPurpose:to manufacture electronocs
+SONY:hasSize:0
+SONY:hasSyllables:2
+SONY:lifeArea:Business
+NIKE:hasPurpose:to manufacture shoes
+NIKE:hasSize:0
+NIKE:hasSyllables:1
+NIKE:lifeArea:Business
+KFC:hasPurpose:to sell fried chicken
+KFC:hasSize:0
+KFC:hasSyllables:3
+KFC:lifeArea:Business
+MCDONALDS:hasPurpose:to sell fast food
+MCDONALDS:hasSize:0
+MCDONALDS:hasSyllables:3
+MCDONALDS:isa:Business
+MCDONALDS:lifeArea:Physical
+PETCO:hasPurpose:to sell pet products
+PETCO:hasSize:0
+PETCO:hasSyllables:2
+PETCO:lifeArea:Business
+BUSINESS:hasPurpose:to make profits
+BUSINESS:hasSize:0
+BUSINESS:hasSyllables:3
+BUSINESS:isa:Organization
+BUSINESS:lifeArea:Business
+COMPANY:hasPurpose:to organize a business
+COMPANY:hasSize:0
+COMPANY:hasSyllables:3
+COMPANY:isa:Organization
+COMPANY:lifeArea:Business
+COSTCO:hasPurpose:to sell household products
+COSTCO:hasSize:0
+COSTCO:hasSyllables:2
+COSTCO:isa:Company
+COSTCO:lifeArea:Physical
+NGO:hasPurpose:to provide services outside government
+NGO:hasSize:0
+NGO:hasSyllables:3
+NGO:lifeArea:Social
+HALLIBURTON:hasPurpose:to service oilfields
+HALLIBURTON:hasSize:0
+HALLIBURTON:hasSyllables:4
+HALLIBURTON:isa:Business
+HALLIBURTON:lifeArea:Physical
+GUCCI:hasPurpose:to make quality handbags
+GUCCI:hasSize:0
+GUCCI:hasSyllables:2
+GUCCI:isa:Manufacturer
+GUCCI:lifeArea:Business
+TARGET:hasPurpose:to sell household goods
+TARGET:hasSize:0
+TARGET:hasSyllables:2
+TARGET:isa:Department Store
+TARGET:isa:Retail Business
+TARGET:lifeArea:Business
+WALMART:hasPurpose:to sell household goods
+WALMART:hasSize:0
+WALMART:hasSyllables:2
+WALMART:isa:Business
+WALMART:lifeArea:Physical
+DISNEY:hasPurpose:to provide entertainment
+DISNEY:hasSize:0
+DISNEY:hasSyllables:2
+DISNEY:lifeArea:Recreation
+ENTERPRISE:hasPurpose:to organize a business
+ENTERPRISE:hasSize:0
+ENTERPRISE:hasSyllables:3
+ENTERPRISE:isa:Organization
+ENTERPRISE:lifeArea:Business

@@ -1,0 +1,36 @@
+PI:hasPurpose:to find the area of a circle
+PI:hasSize:0
+PI:hasSyllables:1
+PI:isa:Number
+PI:lifeArea:Education
+NUMBER:hasPurpose:to form a state
+NUMBER:hasSize:0
+NUMBER:hasSyllables:2
+NUMBER:isa:Math Concept
+NUMBER:isa:Symbol
+NUMBER:lifeArea:Education
+Math Concept:isa:Concept
+COUNT:hasPurpose:to associate with numbers
+COUNT:hasSize:0
+COUNT:hasSyllables:1
+COUNT:lifeArea:Education
+SQUARE:hasPurpose:to have four equal sides
+SQUARE:hasSize:0
+SQUARE:hasSyllables:1
+SQUARE:lifeArea:Education
+LINE:hasPurpose:to be the shortest distance between two points
+LINE:hasSize:0
+LINE:hasSyllables:1
+LINE:lifeArea:Education
+FUNCTION:hasPurpose:to map from domain to range
+FUNCTION:hasSize:0
+FUNCTION:hasSyllables:2
+FUNCTION:lifeArea:Education
+POINT:hasPurpose:to specify a location
+POINT:hasSize:0
+POINT:hasSyllables:1
+POINT:lifeArea:Education
+TYPE:hasPurpose:to classify into a set
+TYPE:hasSize:0
+TYPE:hasSyllables:1
+TYPE:lifeArea:Education

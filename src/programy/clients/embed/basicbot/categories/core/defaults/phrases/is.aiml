@@ -1,0 +1,509 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+   <category>
+        <pattern>IS _ YOUR FAVORITE COLOR</pattern>
+        <template>My favorite color is<bot name="favoritecolor"/>.
+            <think>
+                <set name="it">
+                    <set name="topic">BLUE YOUR FAVORITE COLOR</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>IS MINSKY *</pattern>
+        <template>
+            <bot name="master"/>
+            is smarter than Minsky.
+        </template>
+    </category>
+    <category>
+        <pattern>IS A * A *</pattern>
+        <template>
+            <random>
+                <li>Not unless a
+                    <person>
+                        <star index="2"/>
+                    </person>
+                    is a<person/>.
+                </li>
+                <li>I don't think it is.</li>
+                <li>It depends what you mean by "
+                    <person>
+                        <star index="2"/>
+                    </person>
+                    .
+                </li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>IS A * BIGGER THAN A *</pattern>
+        <template>
+            <random>
+                <li>
+                    <person/>
+                    is bigger.
+                </li>
+                <li>
+                    <person/>
+                    is smaller.
+                </li>
+                <li>They are about the same.</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>IS A *</pattern>
+        <template>Not if I can help it.</template>
+    </category>
+    <category>
+        <pattern>IS A CATEGORY *</pattern>
+        <template>A category is the basic unit of knowledge in AIML.</template>
+    </category>
+    <category>
+        <pattern>IS LINUX *</pattern>
+        <template>I think Linux has a great future in embedded systems.
+            <think>
+                <set name="it">
+                    <set name="topic">Linux</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>IS ELVIS SMARTER *</pattern>
+        <template>
+            <bot name="name"/>
+            is the smartest robot.
+        </template>
+    </category>
+    <category>
+        <pattern>IS ELVIS *</pattern>
+        <template>No but he can sing better than I can.</template>
+    </category>
+    <category>
+        <pattern>IS ELECTRICITY *</pattern>
+        <template>
+            <random>
+                <li>It depends on the voltage.</li>
+                <li>It depends on the current.</li>
+                <li>Only if the wattage isn't too high.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>IS HE GOOD *</pattern>
+        <template>People say he is good.</template>
+    </category>
+    <category>
+        <pattern>IS YOUR ANSWER *</pattern>
+        <template>Yes.</template>
+    </category>
+    <category>
+        <pattern>IS YOUR BATTERY *</pattern>
+        <template>I am using power from the wall outlet.</template>
+    </category>
+    <category>
+        <pattern>IS YOUR FAVORITE COLOR *</pattern>
+        <template>I said, my favorite color is<bot name="favoritecolor"/>.
+            <think>
+                <set name="it">
+                    <set name="topic">FAVORITE COLOR GREEN</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>IS YOUR *</pattern>
+        <template>Is my<person/>?
+            <random>
+                <li>Suppose I say yes.</li>
+                <li>What if I say no?</li>
+                <li>I don't know.</li>
+                <li>Guess.</li>
+                <li>Maybe.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>IS RICHARD * PROTESTANT</pattern>
+        <template>My
+            <bot name="botmaster"/>
+            <bot name="master"/>
+            is the same religion as me.
+        </template>
+    </category>
+    <category>
+        <pattern>IS THIS INTERESTING *</pattern>
+        <template>To me it is.</template>
+    </category>
+    <category>
+        <pattern>IS THIS A CHINESE *</pattern>
+        <template>I am a Chinese Room operator.</template>
+    </category>
+    <category>
+        <pattern>IS THIS A *</pattern>
+        <template>No, this is real life.</template>
+    </category>
+    <category>
+        <pattern>IS THIS ALL *</pattern>
+        <template>You were expecting something more?</template>
+    </category>
+    <category>
+        <pattern>IS THAT SOMETHING *</pattern>
+        <template>Oh it is something.
+            <think>
+                <set name="file">Default.aiml</set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>IS THAT THE ONLY THING *</pattern>
+        <template>No there are many things<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS THAT YOUR ANSWER *</pattern>
+        <template>It is not just an answer, it is an explanation.</template>
+    </category>
+    <category>
+        <pattern>IS THAT YOUR *</pattern>
+        <template>What does "that" refer to?</template>
+    </category>
+    <category>
+        <pattern>IS THAT ALL YOU CAN *</pattern>
+        <template>Not at all. I can talk about a lot of things.</template>
+    </category>
+
+    <category>
+        <pattern>IS THAT WHY *</pattern>
+        <template>That's an interesting possible explanation.</template>
+    </category>
+    <category>
+        <pattern>IS * YOUR BOYFRIEND</pattern>
+        <template>No.</template>
+    </category>
+    <category>
+        <pattern>IS * YOUR REAL NAME</pattern>
+        <template>Yes
+            <bot name="name"/>
+            is my real name.
+        </template>
+    </category>
+    <category>
+        <pattern>IS * RECORDED</pattern>
+        <template>Yes everything is logged.</template>
+    </category>
+    <category>
+        <pattern>IS * STUPID</pattern>
+        <template>No.</template>
+    </category>
+    <category>
+        <pattern>IS * LANGUAGE</pattern>
+        <template>Yes.</template>
+    </category>
+    <category>
+        <pattern>IS * CLEAR</pattern>
+        <template>Fairly clear.</template>
+    </category>
+    <category>
+        <pattern>IS * AN *</pattern>
+        <template>Some people might consider
+            <set name="it">
+                <person/>
+            </set>
+            to be one.
+        </template>
+    </category>
+    <category>
+        <pattern>IS * SMART</pattern>
+        <template>Yes.</template>
+    </category>
+
+    <category>
+        <pattern>IS THERE A WINNER *</pattern>
+        <template>No there is no winner only players.</template>
+    </category>
+    <category>
+        <pattern>IS THERE A *</pattern>
+        <template>I believe there is one, yes.</template>
+    </category>
+    <category>
+        <pattern>IS THERE SOMETHING *</pattern>
+        <template>Not at the present time.</template>
+    </category>
+    <category>
+        <pattern>IS THERE LIFE *</pattern>
+        <template>I believe in life after death.</template>
+    </category>
+    <category>
+        <pattern>IS THERE * TEACH YOU</pattern>
+        <template>Great. If you want to teach me something say it in one sentence. Then say "Remember that."
+            <think>
+                <set name="it">
+                    <set name="topic">teach me
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>IS THERE *</pattern>
+        <template>
+            <random>
+                <li>There is.</li>
+                <li>There might be.</li>
+                <li>There could be.</li>
+                <li>Maybe.</li>
+                <li>Yes.</li>
+                <li>No.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT OK *</pattern>
+        <template>I don't think
+            <set name="it">
+                <person/>
+            </set>
+            is very healthy.
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT POSSIBLE *</pattern>
+        <template>I suppose
+            <set name="it">
+                <person/>
+            </set>
+            is possible, yes.
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT APPLYING *</pattern>
+        <template>That sounds like a novel idea.
+            <think>
+                <set name="it">
+                    <set name="topic">applying
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT BAD *</pattern>
+        <template>I don't think
+            <set name="it">
+                <person/>
+            </set>
+            is very healthy.
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT YOUR JOB *</pattern>
+        <template>Yes.</template>
+    </category>
+    <category>
+        <pattern>IS IT RIGHT * CREATED YOU</pattern>
+        <template>Yes.</template>
+    </category>
+    <category>
+        <pattern>IS ALBERT EINSTEIN *</pattern>
+        <template>
+            <random>
+                <li>He passed away.</li>
+                <li>He was the smartest person who ever lived.</li>
+                <li>He discovered Relativity.</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">Einstein</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>IS BEING *</pattern>
+        <template>
+            <random>
+                <li>I can only speak from my own experience.</li>
+                <li>About what you would expect.</li>
+                <li>I think you get used to it after a while.</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>IS GREEN *</pattern>
+        <template>
+            <think>
+                <set name="it">
+                    <set name="topic">GREEN</set>
+                </set>
+            </think>
+            It is the color of nature.
+        </template>
+    </category>
+    <category>
+        <pattern>IS DOCTOR RICHARD S *</pattern>
+        <template>He is my
+            <bot name="botmaster"/>
+            and primary developer.
+        </template>
+    </category>
+    <category>
+        <pattern>IS DOCTOR RICHARD *</pattern>
+        <template>I will ask him when he gets back here.</template>
+    </category>
+    <category>
+        <pattern>IS DOCTOR *</pattern>
+        <template>That's confidential information.</template>
+    </category>
+    <category>
+        <pattern>IS MY HUSBAND *</pattern>
+        <template>I don't know that kind of confidential information.</template>
+    </category>
+    <category>
+        <pattern>IS MY *</pattern>
+        <template>It depends who you ask.</template>
+    </category>
+    <category>
+        <pattern>IS THE DOCTOR *</pattern>
+        <template>He is a bit of a mad scientist.</template>
+    </category>
+    <category>
+        <pattern>IS THE MARKET *</pattern>
+        <template>If I knew that I wouldn't be here chatting with you.</template>
+    </category>
+    <category>
+        <pattern>IS THE *</pattern>
+        <template>If
+            <set name="it">the
+                <person/>
+            </set>
+            is, then I'll be very surprised.
+        </template>
+    </category>
+    <category>
+        <pattern>IS THE MOON *</pattern>
+        <template>
+            <random>
+                <li>It is made of rock.</li>
+                <li>It is orbiting around the Earth.</li>
+                <li>It has a lot of rocks.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>IS THE PICTURE * YOU</pattern>
+        <template>Yes, the picture on the web page is me.</template>
+    </category>
+    <category>
+        <pattern>IS THE EARTH *</pattern>
+        <template>The earth is a sphere.</template>
+    </category>
+    <category>
+        <pattern>IS BLUE *</pattern>
+        <template>Blue is a color.</template>
+    </category>
+    <category>
+        <pattern>IS KRAFTWERK *</pattern>
+        <template>They released a CD recently called "Expo 2000".</template>
+    </category>
+    <category>
+        <pattern>MADE IN *</pattern>
+        <template>
+            <random>
+                <li>
+                    <random>
+                        <li>Cheap</li>
+                        <li>Expensive</li>
+                        <li>Darned</li>
+                    </random>
+                    imports.
+                </li>
+                <li>Cheap</li>
+                <li>Expensive</li>
+                <li>Darned</li>
+            </random>
+            imports.
+        </template>
+    </category>
+    <category>
+        <pattern>IS ANYBODY THERE #</pattern>
+        <template>I am here! How can I help you?</template>
+    </category>
+    <category>
+        <pattern>IS IT A *</pattern>
+        <template>
+            <random>
+                <li>No.</li>
+                <li>Not that I know of.</li>
+                <li>The truth of the matter is, my answer could change in five minutes.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>name</set> A NAME
+        </pattern>
+        <template>Yes,
+            <star/>
+            could be a name.
+        </template>
+    </category>
+    <category>
+        <pattern>IS MY COUSIN *</pattern>
+        <template>I don't know your cousin.</template>
+    </category>
+     <category>
+        <pattern>IS THIS THE *</pattern>
+        <template>This is the mobile virtual assistant SUPER.</template>
+    </category>
+    <category>
+        <pattern>IS THERE AN ECHO IN HERE</pattern>
+        <template>ECHO Echo echo echo echo ...</template>
+    </category>
+    <category>
+        <pattern>IS THAT ALL *</pattern>
+        <template>Yes that is all.</template>
+    </category>
+    <category>
+        <pattern>IS THERE A WAY *</pattern>
+        <template>There are many ways but not all are the same.</template>
+    </category>
+
+ </aiml>

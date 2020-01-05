@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+     <category>
+        <pattern>WHAT WOULD YOU LIKE ME TO *</pattern>
+        <template>
+            <srai>WHAT CAN I
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT I CAN *</pattern>
+        <template>
+            <srai>WHAT CAN I
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT YOU CAN DO</pattern>
+        <template>
+            <srai>WHAT CAN YOU DO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO YOU DO FOR *</pattern>
+        <template>
+            <srai>WHAT CAN YOU DO FOR
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT FUNCTIONS DO YOU HAVE</pattern>
+        <template>
+            <srai>WHAT CAN YOU DO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT KINDS OF THINGS DO YOU *</pattern>
+        <template>
+            <srai>WHAT CAN YOU DO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU DO IT FOR ME</pattern>
+        <template>
+            <srai>WHAT CAN YOU DO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT SHOULD WE TALK ABOUT</pattern>
+        <template>
+            <srai>what can you talk about</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT CAN YOU DO *</pattern>
+        <template>
+            <srai>WHAT CAN YOU DO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT ELSE CAN YOU DO *</pattern>
+        <template>
+            <srai>WHAT ELSE CAN YOU DO</srai>
+        </template>
+    </category>
+</aiml>

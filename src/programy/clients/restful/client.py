@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -40,6 +40,9 @@ class RestBotClient(BotClient, ABC):
 
     def get_client_configuration(self):
         return RestConfiguration(self.id)
+
+    def _render_callback(self):
+        return False
 
     def initialise(self):
         self._api_keys.load_api_keys()
@@ -85,7 +88,7 @@ class RestBotClient(BotClient, ABC):
         if client_context.brain.properties.has_property("copyright"):
             metadata['copyright'] = client_context.brain.properties.property("copyright")
         else:
-            metadata['copyright'] = "Copyright 2016-2019 keithsterling.com"
+            metadata['copyright'] = "Copyright 2016-2020 keithsterling.com"
 
         if client_context.brain.properties.has_property("botmaster"):
             metadata['authors'] = [client_context.brain.properties.property("botmaster")]
@@ -119,10 +122,10 @@ class RestBotClient(BotClient, ABC):
                     return 'Unauthorized access', 401
 
         if version == 1.0:
-            return self._v1_0_handler.process_request(request)
+            return self._v1_0_handler.process_request(self, request)
 
         elif version == 2.0:
-            return self._v2_0_handler.process_request(request)
+            return self._v2_0_handler.process_request(self, request)
 
         else:
             return 'Invalid API version', 400

@@ -1,0 +1,10 @@
+AWAKE:hasPurpose:to be conscious
+AWAKE:hasSize:0
+AWAKE:hasSyllables:2
+AWAKE:isa:Spiritual State
+AWAKE:lifeArea:Spiritual
+AWE:hasPurpose:to be impressed
+AWE:hasSize:0
+AWE:hasSyllables:2
+AWE:isa:Spiritual State
+AWE:lifeArea:Spiritual

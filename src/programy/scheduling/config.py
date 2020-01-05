@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -60,9 +60,14 @@ class SchedulerJobStoreConfiguration(BaseConfigurationData):
         else:
             data['name'] = self._name
 
-        self.config_to_yaml(data, SchedulerMongoJobStoreConfiguration(), defaults)
-        self.config_to_yaml(data, SchedulerRedisJobStoreConfiguration(), defaults)
-        self.config_to_yaml(data, SchedulerSqlAlchemyJobStoreConfiguration(), defaults)
+        if data['name'] == 'mongo':
+            self.config_to_yaml(data, SchedulerMongoJobStoreConfiguration(), defaults)
+
+        if data['name'] == 'redis':
+            self.config_to_yaml(data, SchedulerRedisJobStoreConfiguration(), defaults)
+
+        if data['name'] == 'sqlalchemy':
+            self.config_to_yaml(data, SchedulerSqlAlchemyJobStoreConfiguration(), defaults)
 
 
 class SchedulerMongoJobStoreConfiguration(BaseConfigurationData):
@@ -85,6 +90,7 @@ class SchedulerMongoJobStoreConfiguration(BaseConfigurationData):
     def to_yaml(self, data, defaults=True):
         if defaults is True:
             data['collection'] = "programy"
+
         else:
             data['collection'] = self.collection
 
@@ -116,6 +122,7 @@ class SchedulerRedisJobStoreConfiguration(BaseConfigurationData):
         if defaults is True:
             data['jobs_key'] = "programy.jobs"
             data['run_times_key'] = "programy.run_times"
+
         else:
             data['jobs_key'] = self.jobs_key
             data['run_times_key'] = self.run_times_key
@@ -141,6 +148,7 @@ class SchedulerSqlAlchemyJobStoreConfiguration(BaseConfigurationData):
     def to_yaml(self, data, defaults=True):
         if defaults is True:
             data['url'] = 'sqlite:///programy.sqlite'
+
         else:
             data['url'] = self.url
 
@@ -164,6 +172,7 @@ class SchedulerThreadPoolConfiguration(BaseConfigurationData):
     def to_yaml(self, data, defaults=True):
         if defaults is True:
             data['max_workers'] = 20
+
         else:
             data['max_workers'] = self.max_workers
 
@@ -187,6 +196,7 @@ class SchedulerProcessPoolConfiguration(BaseConfigurationData):
     def to_yaml(self, data, defaults=True):
         if defaults is True:
             data['max_workers'] = 5
+
         else:
             data['max_workers'] = self.max_workers
 
@@ -217,6 +227,7 @@ class SchedulerJobDefaultsConfiguration(BaseConfigurationData):
         if defaults is True:
             data['coalesce'] = False
             data['max_instances'] = 3
+
         else:
             data['coalesce'] = self.coalesce
             data['max_instances'] = self.max_instances
@@ -405,6 +416,7 @@ class SchedulerConfiguration(BaseConfigurationData):
             data['debug_level'] = 0
             data['add_listeners'] = False
             data['remove_all_jobs'] = False
+
         else:
             data['name'] = self.name
             data['debug_level'] = self.debug_level

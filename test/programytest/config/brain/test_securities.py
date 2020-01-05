@@ -3,6 +3,7 @@ import unittest
 from programy.clients.events.console.config import ConsoleConfiguration
 from programy.config.brain.securities import BrainSecuritiesConfiguration
 from programy.config.file.yaml_file import YamlConfigurationFile
+from programytest.config.brain.test_security import BrainSecurityConfigurationTests
 
 
 class BrainSecuritiesConfigurationTests(unittest.TestCase):
@@ -28,3 +29,14 @@ class BrainSecuritiesConfigurationTests(unittest.TestCase):
 
         self.assertIsNotNone(securities_config.authorisation)
         self.assertIsNotNone(securities_config.authentication)
+
+    def test_defaults(self):
+        securities_config = BrainSecuritiesConfiguration()
+        data = {}
+        securities_config.to_yaml(data, True)
+
+    @staticmethod
+    def assert_defaults(test, data):
+        BrainSecurityConfigurationTests.assert_authenticate_defaults(test, data['authentication'])
+        BrainSecurityConfigurationTests.assert_authorise_defaults(test, data['authorisation'])
+        BrainSecurityConfigurationTests.assert_accountlinker_defaults(test, data['account_linker'])

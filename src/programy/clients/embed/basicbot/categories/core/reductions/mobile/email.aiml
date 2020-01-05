@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>$EMAIL * SAYING *</pattern>
+        <template>
+            <srai>EMAIL
+                <star/>
+                MESSAGEBODY
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>$EMAIL * TO SAY *</pattern>
+        <template>
+            <srai>EMAIL
+                <star/>
+                MESSAGEBODY
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>$EMAIL MY *</pattern>
+        <template>
+            <srai>EMAIL
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TAKE A MEMO</pattern>
+        <template>
+            <srai>EMAIL ME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU ABLE TO READ EMAIL</pattern>
+        <template>
+            <srai>CAN YOU READ EMAIL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>$CAN I SEND AN EMAIL TO *</pattern>
+        <template>
+            <srai>EMAIL
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU * EMAILS</pattern>
+        <template>
+            <srai>SEND EMAIL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU COMPOSE AN EMAIL *</pattern>
+        <template>
+            <srai>SEND EMAIL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU READ MY EMAIL *</pattern>
+        <template>
+            <srai>READ EMAIL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>$EMAIL * I *</pattern>
+        <template>
+            <srai>EMAIL
+                <star/>
+                SAYING
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>$EMAIL * THE *</pattern>
+        <template>
+            <srai>EMAIL
+                <star/>
+                MESSAGEBODY The
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>EMAIL FROM MY PHONE</pattern>
+        <template>
+            <srai>SEND EMAIL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GIVE ME HER EMAIL</pattern>
+        <template>
+            <condition name="she">
+                <li value="who">Who is she?</li>
+                <li>
+                    <srai>GIVE ME
+                        <get name="she"/>
+                        EMAIL
+                    </srai>
+                </li>
+            </condition>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW CAN I SEND EMAIL</pattern>
+        <template>
+            <srai>SEND EMAIL</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>$SEND * AN EMAIL</pattern>
+        <template>
+            <srai>EMAIL
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>$SEND * EMAIL I *</pattern>
+        <template>
+            <srai>EMAIL
+                <star/>
+                MESSAGEBODY I
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SEND AN E DASH MAIL</pattern>
+        <template>
+            <srai>SEND EMAIL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SEND EMAILS</pattern>
+        <template>
+            <srai>SEND EMAIL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>$SEND TO EMAIL * COM *</pattern>
+        <template>
+            <srai>EMAIL
+                <star/>
+                MESSAGEBODY
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SO WHAT SEND *</pattern>
+        <template>
+            <srai>SEND
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WRITE EMAIL</pattern>
+        <template>
+            <srai>SEND EMAIL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU READ MY EMAIL</pattern>
+        <template>
+            <srai>READ EMAIL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>COMPOSE EMAIL</pattern>
+        <template>
+            <srai>SEND EMAIL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>$EMAIL * TO *</pattern>
+        <template>
+            <srai>EMAIL
+                <star index="2"/>
+                SAYING
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>EMAIL YOU *</pattern>
+        <template>
+            <srai>SEND EMAIL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>READ MY EMAIL *</pattern>
+        <template>
+            <srai>READ MY EMAIL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>$SEND AN EMAIL TO *</pattern>
+        <template>
+            <srai>EMAIL
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SEND EMAIL *</pattern>
+        <template>
+            <srai>SEND EMAIL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NOTE TO SELF *</pattern>
+        <template>
+            <srai>EMAIL ME SAYING
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SEND AN EMAIL</pattern>
+        <template>
+            <srai>SEND EMAIL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SEND EMAIL TO *</pattern>
+        <template>
+            <srai>EMAIL
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NOTE *</pattern>
+        <template>
+            <srai>EMAIL ME SAYING
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+</aiml>

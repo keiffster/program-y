@@ -1,0 +1,76 @@
+BASEBALL:hasPurpose:to score home runs
+BASEBALL:hasSize:0
+BASEBALL:hasSyllables:2
+BASEBALL:isa:Sport
+BASEBALL:lifeArea:Recreation
+Basketball Team:isa:Sports Team
+BASKETBALL:hasPurpose:to score baskets
+BASKETBALL:hasSize:0
+BASKETBALL:hasSyllables:3
+BASKETBALL:isa:Sport
+BASKETBALL:lifeArea:Recreation
+FOOTBALL:hasPurpose:to score touchdowns
+FOOTBALL:hasSize:0
+FOOTBALL:hasSyllables:2
+FOOTBALL:isa:Sport
+FOOTBALL:lifeArea:Recreation
+GOLF:hasPurpose:to hit balls in holes
+GOLF:hasSize:0
+GOLF:hasSyllables:1
+GOLF:isa:Game
+GOLF:isa:Sport
+GOLF:lifeArea:Recreation
+SOCCER:hasPurpose:to score goals
+SOCCER:hasSize:0
+SOCCER:hasSyllables:2
+SOCCER:lifeArea:Recreation
+SPORT:hasPurpose:to play physical games
+SPORT:hasSize:0
+SPORT:hasSyllables:1
+Sport:isa:Game
+SPORT:lifeArea:Recreation
+NFL:hasPurpose:to be a football league
+NFL:hasSize:0
+NFL:hasSyllables:3
+NFL:isa:Organization
+NFL:lifeArea:Recreation
+NBA:hasPurpose:to be a basketball league
+NBA:hasSize:0
+NBA:hasSyllables:3
+NBA:isa:Organization
+NBA:lifeArea:Recreation
+LAKERS:hasPurpose:to be a basketball team
+LAKERS:hasSize:0
+LAKERS:hasSyllables:1
+LAKERS:isa:Basketball Team
+LAKERS:isa:Sports Team
+LAKERS:lifeArea:Recreation
+RACE:hasPurpose:to compete for speed
+RACE:hasSize:0
+RACE:hasSyllables:1
+RACE:lifeArea:Recreation
+PLAYER:hasPurpose:to participate in a game or sport
+PLAYER:hasSize:7
+PLAYER:hasSyllables:2
+PLAYER:isa:Person
+PLAYER:isa:Team Member
+PLAYER:lifeArea:Recreation
+PLAY:hasPurpose:to have fun
+PLAY:hasSize:0
+PLAY:hasSyllables:1
+PLAY:isa:Activity
+PLAY:lifeArea:Recreation
+GAME:hasPurpose:to compete
+GAME:hasSize:0
+GAME:hasSyllables:1
+GAME:isa:Activity
+GAME:lifeArea:Recreation
+OLYMPICS:hasPurpose:to award top athletes
+OLYMPICS:hasSize:0
+OLYMPICS:hasSyllables:3
+OLYMPICS:isa:Event
+OLYMPICS:lifeArea:Recreation
+RUNNING:hasPurpose:to provide exercise
+RUNNING:hasSize:0
+RUNNING:hasSyllables:2
+RUNNING:lifeArea:Physical

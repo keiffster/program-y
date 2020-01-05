@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+    <category>
+        <pattern>WHAT NUMBER COMES AFTER
+            <set>number</set>
+        </pattern>
+        <template>
+            <srai>SUCCESSOR
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT NUMBER COMES AFTER
+            <set>numbername</set>
+        </pattern>
+        <template>
+            <srai>SUCCESSOR
+                <map>
+                    <name>name2number</name>
+                    <star/>
+                </map>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT NUMBER COMES BEFORE
+            <set>number</set>
+        </pattern>
+        <template>
+            <srai>PREDECESSOR
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT NUMBER COMES BEFORE
+            <set>numbername</set>
+        </pattern>
+        <template>
+            <srai>PREDECESSOR
+                <map>
+                    <name>name2number</name>
+                    <star/>
+                </map>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>IS <set>number</set> # ODD ^
+        </pattern>
+        <template>
+            <srai>ODDEVEN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>number</set> # EVEN ^
+        </pattern>
+        <template>
+            <srai>ODDEVEN
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+
+    <category>
+        <pattern>HOW MUCH SHOULD I TIP * <set>number</set> DOLLARS
+        </pattern>
+        <template>
+            <srai>WHAT IS 15 PERCENT OF
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+   <category>
+        <pattern>WHAT IS <set>number</set> PERCENT OF
+            <set>number</set>
+        </pattern>
+        <template>
+            <srai>WHAT IS 0.
+                <star/>
+                *
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HOW _ <set>number</set>
+            <set>number</set>
+        </pattern>
+        <template>
+            <srai>HOW
+                <star/>
+                <star index="2"/>
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HOW _ <set>number</set>
+            <set>number</set> *
+        </pattern>
+        <template>
+            <srai>HOW
+                <star/>
+                <star index="2"/>
+                <star index="3"/>
+                <star index="4"/>
+            </srai>
+        </template>
+    </category>
+
+   <category>
+        <pattern>
+            <set>number</set>
+            DIVIDED BY
+            <set>number</set>
+        </pattern>
+        <template>
+            <srai>
+                <star/>
+                SLASH
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>
+            <set>number</set>
+            TIMES
+            <set>number</set>
+        </pattern>
+        <template>
+            <srai>
+                <star/>
+                ASTERISK
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS <set>number</set> IN ROMAN #
+        </pattern>
+        <template>
+            <srai>ROMAN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CONVERT <set>number</set>
+            <set>preposition</set> ROMAN #
+        </pattern>
+        <template>
+            <srai>ROMAN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WRITE <set>number</set>
+            <set>preposition</set> ROMAN #
+        </pattern>
+        <template>
+            <srai>ROMAN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE ROMAN #
+            <set>number</set>
+        </pattern>
+        <template>
+            <srai>ROMAN
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS <set>numbername</set> IN ROMAN #
+        </pattern>
+        <template>
+            <srai>ROMAN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CONVERT <set>numbername</set>
+            <set>preposition</set> ROMAN #
+        </pattern>
+        <template>
+            <srai>ROMAN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WRITE <set>numbername</set>
+            <set>preposition</set> ROMAN #
+        </pattern>
+        <template>
+            <srai>ROMAN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE ROMAN #
+            <set>numbername</set>
+        </pattern>
+        <template>
+            <srai>ROMAN
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM <set>number</set> *
+        </pattern>
+        <template>
+            <srai>MY AGE IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM ONLY
+            <set>number</set>
+        </pattern>
+        <template>
+            <srai>I AM
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>COUNT UP TO *</pattern>
+        <template>
+            <srai>COUNT TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+        <category>
+        <pattern>PICK A NUMBER # <set>numbername</set> #
+            <set>numbername</set>
+        </pattern>
+        <template>
+            <srai>PICK A NUMBER
+                <star/>
+                <map name="name2number">
+                    <star index="2"/>
+                </map>
+                <star index="3"/>
+                <map name="name2number">
+                    <star index="4"/>
+                </map>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NAME A NUMBER *</pattern>
+        <template>
+            <srai>PICK A NUMBER
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CHOOSE A NUMBER *</pattern>
+        <template>
+            <srai>PICK A NUMBER
+                <star/>
+            </srai>
+        </template>
+    </category>
+     <category>
+        <pattern>THINK OF A NUMBER *</pattern>
+        <template>
+            <srai>PICK A NUMBER
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS HALF OF *</pattern>
+        <template>
+            <srai><star/>/2.0
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>WHAT A QUARTER OF *</pattern>
+        <template>
+            <srai><star/>/4.0
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>WHAT A THIRD OF *</pattern>
+        <template>
+            <srai><star/>/3.0
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>
+            <set>numbername</set>
+            _
+        </pattern>
+        <template>
+            <srai>
+                <map>
+                    <name>name2number</name>
+                    <star/>
+                </map>
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>_ <set>numbername</set> *
+        </pattern>
+        <template>
+            <srai>
+                <star/>
+                <map>
+                    <name>name2number</name>
+                    <star index="2"/>
+                </map>
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>_
+            <set>numbername</set>
+        </pattern>
+        <template>
+            <srai>
+                <star/>
+                <map>
+                    <name>name2number</name>
+                    <star index="2"/>
+                </map>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>
+            <set>numbername</set>
+        </pattern>
+        <template>
+            <srai>
+                <map name="name2number">
+                    <star/>
+                </map>
+            </srai>
+        </template>
+    </category>
+
+</aiml>

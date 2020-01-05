@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>YOUR BOUGHT MASTER *</pattern>
+        <template>
+            <srai>YOU BOTMASTER
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO DESIGNED YOU</pattern>
+        <template>
+            <srai>BOTMASTER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DOES YOUR BOT MASTER *</pattern>
+        <template>
+            <srai>DOES YOUR BOTMASTER
+                <star/>
+            </srai>
+        </template>
+    </category>
+   <category>
+        <pattern>WHO IS YOUR TEACHER</pattern>
+        <template>
+            <srai>BOTMASTER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS YOUR BOTMASTER</pattern>
+        <template>
+            <srai>BOTMASTER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS YOUR MASTER</pattern>
+        <template>
+            <srai>BOTMASTER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS YOUR DADDY</pattern>
+        <template>
+            <srai>BOTMASTER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS YOUR BOT MASTER</pattern>
+        <template>
+            <srai>BOTMASTER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS YOUR CREATOR</pattern>
+        <template>
+            <srai>BOTMASTER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO CREATED YOU</pattern>
+        <template>
+            <srai>BOTMASTER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM YOUR FATHER</pattern>
+        <template>
+            <srai>my name is
+                <bot name="master"/>
+            </srai>
+        </template>
+    </category>
+</aiml>

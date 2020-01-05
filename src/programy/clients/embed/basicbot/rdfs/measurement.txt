@@ -1,0 +1,71 @@
+Measurement:isa:Number
+Measurement:isa:Physical Unit
+MILE:hasPurpose:to measure distance
+MILE:hasSize:9
+MILE:hasSyllables:1
+MILE:lifeArea:PhysicalAGE:hasPurpose:to count years of life
+AGE:hasSize:0
+AGE:hasSyllables:1
+AGE:isa:Measurement
+AGE:isa:Number
+AGE:lifeArea:Physical
+GALLON:hasPurpose:to measure liquid
+GALLON:hasSize:5
+GALLON:hasSyllables:2
+GALLON:isa:Physical Measurement
+GALLON:lifeArea:Physical
+DISTANCE:hasPurpose:to measure length between locations
+DISTANCE:hasSize:0
+DISTANCE:hasSyllables:2
+DISTANCE:isa:Physical Measurement
+DISTANCE:lifeArea:Physical
+POPULATION:hasPurpose:to count people
+POPULATION:hasSize:4
+POPULATION:hasSyllables:4
+POPULATION:isa:Measurement
+POPULATION:isa:Number
+POPULATION:lifeArea:Education
+POUND:hasPurpose:to measure weight
+POUND:hasSize:0
+POUND:hasSyllables:1
+POUND:lifeArea:Education
+TEMPERATURE:hasPurpose:to measure hot or cold
+TEMPERATURE:hasSize:0
+TEMPERATURE:hasSyllables:4
+TEMPERATURE:lifeArea:Physical
+TEST:hasPurpose:to measure performance
+TEST:hasSize:0
+TEST:hasSyllables:1
+TEST:lifeArea:Education
+TOTAL:hasPurpose:to add up all amounts
+TOTAL:hasSize:0
+TOTAL:hasSyllables:2
+TOTAL:isa:Money Amount
+TOTAL:lifeArea:Finances
+WEIGHT:hasPurpose:to measure mass under gravity
+WEIGHT:hasSize:0
+WEIGHT:hasSyllables:1
+WEIGHT:lifeArea:Education
+LEVEL:hasPurpose:to measure horizontalness
+LEVEL:hasSize:0
+LEVEL:hasSyllables:2
+LEVEL:isa:Tool
+LEVEL:lifeArea:Physical
+STEP:hasPurpose:to be a unit of walking
+STEP:hasSize:5
+STEP:hasSyllables:1
+STEP:lifeArea:Physical
+GRADE:hasPurpose:to give feedback on performance
+GRADE:hasSize:0
+GRADE:hasSyllables:1
+GRADE:lifeArea:Education
+SPEED:hasPurpose:to go fast
+SPEED:hasSize:0
+SPEED:hasSyllables:1
+SPEED:lifeArea:Physical
+SCORE:hasPurpose:to count points
+SCORE:hasSize:0
+SCORE:hasSyllables:1
+SCORE:isa:Measurement
+SCORE:isa:Number
+SCORE:lifeArea:Recreation

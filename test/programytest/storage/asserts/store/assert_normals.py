@@ -73,11 +73,11 @@ class NormalsStoreAsserts(unittest.TestCase):
         self.assertEqual(collection.normalise(".UK"), [re.compile('(^\\.UK|\\.UK|\\.UK$)', re.IGNORECASE), ' DOT UK '])
         self.assertEqual(collection.normalise_string("keiffster.uk"), "keiffster dot uk")
 
-    def assert_upload_csv_file(self, store, filename):
+    def assert_upload_csv_file(self, store):
 
         store.empty()
 
-        store.upload_from_file(filename, fileformat=Store.CSV_FORMAT)
+        store.upload_from_file(os.path.dirname(__file__) + os.sep + "data" + os.sep + "lookups" + os.sep + "csv" + os.sep + "normal.csv", fileformat=Store.CSV_FORMAT)
 
         collection = NormalCollection()
         store.load(collection)

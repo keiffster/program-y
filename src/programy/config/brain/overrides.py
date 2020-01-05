@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -57,6 +57,7 @@ class BrainOverridesConfiguration(BaseSectionConfigurationData):
             data['allow_system_aiml'] = False
             data['allow_learn_aiml'] = False
             data['allow_learnf_aiml'] = False
+
         else:
             data['allow_system_aiml'] = self._allow_system_aiml
             data['allow_learn_aiml'] = self._allow_learn_aiml

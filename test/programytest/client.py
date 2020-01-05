@@ -104,7 +104,7 @@ class TestClient(BotClient):
 
     def add_pattern_nodes_store(self, file=None):
         if file is None:
-            file = os.path.dirname(__file__) + os.sep + "testdata" + os.sep + "nodes" + os.sep + "test_pattern_nodes.txt"
+            file = os.path.dirname(__file__) + os.sep + "testdata" + os.sep + "nodes" + os.sep + "test_pattern_nodes.conf"
         self._file_store_config._pattern_nodes_storage = FileStoreConfiguration(file=file, fileformat="text",
                                                        encoding="utf-8", delete_on_start=False)
         self.storage_factory._storage_engines[StorageFactory.PATTERN_NODES] = self._storage_engine
@@ -112,7 +112,7 @@ class TestClient(BotClient):
 
     def add_template_nodes_store(self, file=None):
         if file is None:
-            file = os.path.dirname(__file__) + os.sep + "testdata" + os.sep + "nodes" + os.sep + "test_template_nodes.txt"
+            file = os.path.dirname(__file__) + os.sep + "testdata" + os.sep + "nodes" + os.sep + "test_template_nodes.conf"
         self._file_store_config._template_nodes_storage = FileStoreConfiguration(file=file, fileformat="text",
                                                        encoding="utf-8", delete_on_start=False)
         self.storage_factory._storage_engines[StorageFactory.TEMPLATE_NODES] = self._storage_engine

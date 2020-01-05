@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -34,6 +34,9 @@ class SanicRestBotClient(RestBotClient):
 
     def __init__(self, botid, argument_parser=None):
         RestBotClient.__init__(self, botid, argument_parser)
+
+    def _render_callback(self):
+        return False
 
     def get_client_configuration(self):
         return SanicRestConfiguration(self.id)

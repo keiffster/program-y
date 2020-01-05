@@ -1,0 +1,131 @@
+MOUNTAIN:hasPurpose:to climb
+MOUNTAIN:hasSize:10
+MOUNTAIN:hasSyllables:2
+Mountain:isa:Geographic Location
+MOUNTAIN:lifeArea:Physical
+Natural Feature:isa:Geographic Location
+RIVER:hasPurpose:to move water
+RIVER:hasSize:10
+RIVER:hasSyllables:2
+RIVER:isa:Geographic Feature
+River:isa:Geographic Location
+RIVER:lifeArea:Education
+ISLAND:hasPurpose:to be surrounded by water
+ISLAND:hasSize:10
+ISLAND:hasSyllables:2
+ISLAND:isa:Geographic Location
+ISLAND:isa:Land area
+ISLAND:lifeArea:Education
+HILL:hasPurpose:to climb
+HILL:hasSize:9
+HILL:hasSyllables:1
+HILL:isa:Geographic Feature
+HILL:lifeArea:Education
+GROUND:hasPurpose:to give us something to stand on
+GROUND:hasSize:0
+GROUND:hasSyllables:1
+GROUND:lifeArea:Physical
+GEOGRAPHIC LOCATION:hasPurpose:to be identified on a map
+GEOGRAPHIC LOCATION:hasSize:0
+GEOGRAPHIC LOCATION:isa:Location
+GEOGRAPHIC LOCATION:lifeArea:Education
+BORDER:hasPurpose:to divide two geographic areas
+BORDER:hasSize:0
+BORDER:hasSyllables:2
+BORDER:isa:Geographic Location
+BORDER:lifeArea:Education
+Borough:isa:Geographic Location
+BEACH:hasPurpose:to swim and get suntans
+BEACH:hasSize:10
+BEACH:hasSyllables:1
+BEACH:isa:Geographic Location
+BEACH:isa:Natural Feature
+BEACH:lifeArea:Education
+BAY:hasPurpose:to partially enclose a body of water
+BAY:hasSize:10
+BAY:hasSyllables:1
+BAY:isa:Geographic Location
+BAY:isa:Natural Feature
+BAY:lifeArea:Education
+EARTH:hasPurpose:to give us a place to live
+EARTH:hasSize:12
+EARTH:hasSyllables:1
+EARTH:isa:Astronomical Body
+EARTH:isa:Planet
+EARTH:lifeArea:Physical
+LAKE:hasPurpose:to swim and boat in
+LAKE:hasSize:10
+LAKE:hasSyllables:1
+LAKE:isa:Geographic Location
+LAKE:lifeArea:Education
+Land area:isa:Geographic Location
+LAND:hasPurpose:to live on
+LAND:hasSize:0
+LAND:hasSyllables:1
+LAND:isa:Geographic Location
+LAND:lifeArea:Education
+LAWN:hasPurpose:to grow grass
+LAWN:hasSize:0
+LAWN:hasSyllables:1
+LAWN:lifeArea:Physical
+SAND:hasPurpose:to make beaches
+SAND:hasSize:2
+SAND:hasSyllables:1
+SAND:isa:Rock
+SAND:lifeArea:Physical
+SHORE:hasPurpose:to separate land and water
+SHORE:hasSize:9
+SHORE:hasSyllables:1
+SHORE:isa:Geographic Location
+SHORE:isa:Natural Feature
+SHORE:lifeArea:Education
+SITE:hasPurpose:to be a location
+SITE:hasSize:0
+SITE:hasSyllables:1
+SITE:lifeArea:Physical
+SKY:hasPurpose:to provide us with air
+SKY:hasSize:11
+SKY:hasSyllables:1
+SKY:isa:Astronomical Body
+SKY:isa:Atmosphere
+SKY:lifeArea:Physical
+Political Unit:isa:Geographic Location
+ROCK:hasPurpose:to form a hard solid material
+ROCK:hasSize:0
+ROCK:hasSyllables:1
+ROCK:lifeArea:Physical
+PASS:hasPurpose:to travel between mountains
+PASS:hasSize:0
+PASS:hasSyllables:1
+PASS:lifeArea:Physical
+MONUMENT:hasPurpose:to remember the past
+MONUMENT:hasSize:9
+MONUMENT:hasSyllables:3
+MONUMENT:lifeArea:Physical
+CAPITAL:hasPurpose:to be the center of government
+CAPITAL:hasSize:10
+CAPITAL:hasSyllables:3
+CAPITAL:isa:City
+CAPITAL:isa:Geographic Location
+CAPITAL:lifeArea:Education
+PARK:hasPurpose:to provide a recreational space
+PARK:hasSize:9
+PARK:hasSyllables:1
+PARK:lifeArea:Physical
+PLACE:hasPurpose:to be a location
+PLACE:hasSize:0
+PLACE:hasSyllables:1
+ADDRESS:hasPurpose:to locate a residence or business
+ADDRESS:hasSize:0
+ADDRESS:hasSyllables:2
+ADDRESS:isa:Location
+ADDRESS:lifeArea:Physical
+STREET:hasPurpose:to build a neighborhood
+STREET:hasSize:9
+STREET:hasSyllables:1
+STREET:lifeArea:Physical
+WORLD:hasPurpose:to contain everything
+WORLD:hasSize:12
+WORLD:hasSyllables:1
+WORLD:isa:Planet
+WORLD:lifeArea:Education

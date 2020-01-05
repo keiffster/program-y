@@ -22,7 +22,7 @@ class MapAIMLTests(unittest.TestCase):
         self._client_context = client.create_client_context("testid")
 
         self._client_context.brain.properties.load_from_text("""
-             default-get:unknown
+             default_get:unknown
          """)
         self._client_context.bot.brain.dynamics.add_dynamic_map('romantodec', "programy.dynamic.maps.roman.MapRomanToDecimal", None)
         self._client_context.bot.brain.dynamics.add_dynamic_map('dectoroman', "programy.dynamic.maps.roman.MapDecimalToRoman", None)

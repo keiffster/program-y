@@ -75,6 +75,12 @@ class KikConfigurationTests(unittest.TestCase):
         self.assertEqual(data['unknown_command'], "Unknown command")
         self.assertEqual(data['unknown_command_srai'], 'KIKUNKNONWCOMMAND')
 
-        self.assertEqual(data['bot'], 'bot')
         self.assertEqual(data['bot_selector'], "programy.clients.botfactory.DefaultBotSelector")
         self.assertEqual(data['renderer'], "programy.clients.render.text.TextRenderer")
+
+        self.assertTrue('bots' in data)
+        self.assertTrue('bot' in data['bots'])
+        self.assertEqual(data['bot_selector'], "programy.clients.botfactory.DefaultBotSelector")
+
+        self.assertTrue('brains' in data['bots']['bot'])
+        self.assertTrue('brain' in data['bots']['bot']['brains'])

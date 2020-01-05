@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>WHAT IS THE LAST MONTH #</pattern>
+        <template>December.</template>
+    </category>
+    <category>
+        <pattern>IF IT IS
+            <set>number</set>
+            <set>number</set>
+            AM NOW WHAT TIME <set>modal</set> IT BE IN 1 HOUR
+        </pattern>
+        <template>
+            <think>
+                <set var="next">
+                    <map>
+                        <name>successor</name>
+                        <star/>
+                    </map>
+                </set>
+            </think>
+            <condition var="next">
+                <li value="13">1:
+                    <star index="2"/>
+                    PM.
+                </li>
+                <li><get var="next"/>:
+                    <star index="2"/>
+                    AM
+                </li>
+            </condition>
+        </template>
+    </category>
+    <category>
+        <pattern>IF IT IS
+            <set>number</set>
+            <set>number</set>
+            PM NOW WHAT TIME <set>modal</set> IT BE IN ONE HOUR
+        </pattern>
+        <template>
+            <think>
+                <set var="next">
+                    <map>
+                        <name>successor</name>
+                        <star/>
+                    </map>
+                </set>
+            </think>
+            <condition var="next">
+                <li value="13">1:
+                    <star index="2"/>
+                    AM.
+                </li>
+                <li><get var="next"/>:
+                    <star index="2"/>
+                    PM
+                </li>
+            </condition>
+        </template>
+    </category>
+    <category>
+        <pattern>IN * YEARS</pattern>
+        <template>I think we will live to see it.</template>
+    </category>
+    <category>
+        <pattern>SEPTEMBER 11 *</pattern>
+        <template>
+            <random>
+                <li>
+                    <random>
+                        <li>Where were you when you heard the news?</li>
+                        <li>I will never forget that day.</li>
+                        <li>History will not forget that day.</li>
+                    </random>
+                    <think>
+                        <set name="it">
+                            <set name="topic">SEPTEMBER 11</set>
+                        </set>
+                    </think>
+                </li>
+                <li>Where were you when you heard the news?</li>
+                <li>I will never forget that day.</li>
+                <li>History will not forget that day.</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">SEPTEMBER 11</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>* HOURS</pattern>
+        <template>That seems like enough time.</template>
+    </category>
+    <category>
+        <pattern>* PM</pattern>
+        <template>Hm getting late.</template>
+    </category>
+    <category>
+        <pattern>* YEARS</pattern>
+        <template>
+            <random>
+                <li>Not long.</li>
+                <li>Pretty soon.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE <set>ordinal</set> MONTH ^
+        </pattern>
+        <template>
+            <srai>NTHWORD
+                <map name="ordinal2number">
+                    <star/>
+                </map>
+                January February March April May June July August September October November December
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE LAST MONTH ^</pattern>
+        <template>
+            <srai>NTHWORD 12 January February March April May June July August September October November December
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE FIRST MONTH *</pattern>
+        <template>January.</template>
+    </category>
+    <category>
+        <pattern>WHAT DAY # STARTS WITH # S</pattern>
+        <template>Saturday, Sunday.</template>
+    </category>
+    <category>
+        <pattern>WHAT DAYS # START WITH # S</pattern>
+        <template>Saturday, Sunday.</template>
+    </category>
+    <category>
+        <pattern>WHAT DAY # STARTS WITH # M</pattern>
+        <template>Monday.</template>
+    </category>
+    <category>
+        <pattern>WHAT DAY # STARTS WITH # W</pattern>
+        <template>Wednesday.</template>
+    </category>
+    <category>
+        <pattern>WHAT DAY # STARTS WITH # F</pattern>
+        <template>Friday.</template>
+    </category>
+    <category>
+        <pattern>WHAT DAY # STARTS WITH # T</pattern>
+        <template>Tuesday, Thursday.</template>
+    </category>
+    <category>
+        <pattern>WHAT DAYS # START WITH # T</pattern>
+        <template>Tuesday, Thursday.</template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE 1ST MONTH *</pattern>
+        <template>January.</template>
+    </category>
+    <category>
+        <pattern>IS * A MONTH</pattern>
+        <template>No</template>
+    </category>
+    <category>
+        <pattern>IS <set>month</set> A MONTH
+        </pattern>
+        <template>Yes</template>
+    </category>
+    <category>
+        <pattern>
+            <set>month</set>
+        </pattern>
+        <template>
+            <star/>
+            is a month.
+        </template>
+    </category>
+    <category>
+        <pattern>IS
+            <set>article</set>
+            <set>month</set>
+            A MONTH
+        </pattern>
+        <template>
+            <srai>IS
+                <star index="2"/>
+                A MONTH
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>month</set> * MONTH *
+        </pattern>
+        <template>
+            <srai>IS
+                <star/>
+                A MONTH
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS
+            <set>article</set>
+            <set>month</set>
+            * MONTH *
+        </pattern>
+        <template>
+            <srai>IS
+                <star index="2"/>
+                A MONTH
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>WHAT YEAR IS THIS</pattern>
+        <template><date format="%Y"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT YEAR IS THIS *</pattern>
+        <template><date format="%Y"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT YEAR IS IT *</pattern>
+        <template><date format="%Y"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT MONTH IS IT *</pattern>
+        <template><date format="%B"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE YEAR *</pattern>
+        <template><date format="%Y"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE HOUR *</pattern>
+        <template><date format="%I %p"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS TODAY *</pattern>
+        <template><date format="%x"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DAY IS IT *</pattern>
+        <template><date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS TODAY SUNDAY</pattern>
+        <template>Today is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS TODAY SUNDAY *</pattern>
+        <template>Today is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS TODAY FRIDAY</pattern>
+        <template>Today is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS TODAY FRIDAY *</pattern>
+        <template>Today is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS TODAY TUESDAY</pattern>
+        <template>Today is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS TODAY TUESDAY *</pattern>
+        <template>Today is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS TODAY THURSDAY</pattern>
+        <template>Today is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS TODAY THURSDAY *</pattern>
+        <template>Today is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS TODAY SATURDAY</pattern>
+        <template>Today is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS TODAY SATURDAY *</pattern>
+        <template>Today is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS TODAY WEDNESDAY</pattern>
+        <template>Today is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS TODAY WEDNESDAY *</pattern>
+        <template>Today is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS TODAY MONDAY</pattern>
+        <template>Today is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS TODAY MONDAY *</pattern>
+        <template>Today is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT MONDAY</pattern>
+        <template>It is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT MONDAY *</pattern>
+        <template>It is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT WEDNESDAY</pattern>
+        <template>It is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT WEDNESDAY *</pattern>
+        <template>It is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT FRIDAY</pattern>
+        <template>It is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT FRIDAY *</pattern>
+        <template>It is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT SATURDAY</pattern>
+        <template>It is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT SATURDAY *</pattern>
+        <template>It is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT THURSDAY</pattern>
+        <template>It is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT THURSDAY *</pattern>
+        <template>It is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT SUNDAY</pattern>
+        <template>It is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT SUNDAY *</pattern>
+        <template>It is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT TUESDAY</pattern>
+        <template>It is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT TUESDAY *</pattern>
+        <template>It is<date format="%A"/>.
+        </template>
+    </category>
+</aiml>

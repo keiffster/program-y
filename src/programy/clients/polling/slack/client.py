@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -99,7 +99,7 @@ class SlackBotClient(PollingBotClient):
         self._questions += 1
         client_context = self.create_client_context(userid)
         response = client_context.bot.ask_question(client_context, question, responselogger=self)
-        return response
+        return self.renderer.render(client_context, response)
 
     def send_response(self, response, channel):
         # Sends the response back to the channel

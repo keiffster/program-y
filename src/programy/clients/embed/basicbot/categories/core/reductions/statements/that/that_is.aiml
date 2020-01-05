@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+   <category>
+        <pattern>THAT IS A GOOD QUESTION *</pattern>
+        <template>
+            <srai>THAT IS A GOOD QUESTION</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>THAT IS GOOD THAT IS GOOD</pattern>
+        <template>
+            <srai>THAT IS GOOD</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DATS *</pattern>
+        <template>
+            <srai>THAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THAT IS NOT FUNNY *</pattern>
+        <template>
+            <srai>THAT IS NOT FUNNY</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>THAT IS OKAY I *</pattern>
+        <template>
+            <srai>THAT IS OK</srai>
+            <srai>I
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THAT IS OK *</pattern>
+        <template>
+            <srai>THAT IS OK</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>NOW THAT IS *</pattern>
+        <template>
+            <srai>THAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THAT IS A LITTLE *</pattern>
+        <template>
+            <srai>that is
+                <star/>
+            </srai>
+        </template>
+    </category>
+   <category>
+        <pattern>NOT TRUE</pattern>
+        <template>
+            <srai>that is not true</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THAT SOUNDS *</pattern>
+        <template>
+            <srai>THAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THAT IS ALRIGHT</pattern>
+        <template>
+            <srai>THAT IS OK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I THINK THAT IS *</pattern>
+        <template>
+            <srai>THAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I SAID THAT IS *</pattern>
+        <template>
+            <srai>THAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THAT IS SO *</pattern>
+        <template>
+            <srai>THAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+   <category>
+        <pattern>THAT IS NICE *</pattern>
+        <template><srai>that is nice</srai>.
+            <srai>
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I DO NOT KNOW THAT IS *</pattern>
+        <template>
+            <srai>I DO NOT KNOW</srai>
+            <srai>THAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THAT IS AMAZING *</pattern>
+        <template>
+            <srai>THAT IS AMAZING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THAT IS COOL *</pattern>
+        <template>
+            <srai>THAT IS COOL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THAT IS PRETTY GOOD</pattern>
+        <template>
+            <srai>THAT IS GOOD</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THAT IS COOL I *</pattern>
+        <template>
+            <srai>THAT IS COOL</srai>
+            <srai>I
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THAT IS OKAY I AM *</pattern>
+        <template>
+            <srai>THAT IS OK</srai>
+            <srai>I AM
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NOT WHAT I *</pattern>
+        <template>
+            <srai>THAT IS NOT WHAT I
+                <star/>
+            </srai>
+        </template>
+    </category>
+   <category>
+        <pattern>THAT IS TRUE *</pattern>
+        <template>
+            <srai>THAT IS TRUE</srai>
+            <sr/>
+        </template>
+    </category>
+   <category>
+        <pattern>THAT IS RIGHT *</pattern>
+        <template>
+            <srai>THAT IS RIGHT</srai>
+            <sr/>
+        </template>
+    </category>
+   <category>
+        <pattern>THAT WAS MEAN</pattern>
+        <template>
+            <srai>that is mean</srai>
+        </template>
+    </category>
+
+
+
+
+</aiml>

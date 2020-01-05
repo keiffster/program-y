@@ -1,0 +1,1070 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>WHO * BILL CLINTON</pattern>
+        <template>Former President of the United States?</template>
+    </category>
+    <category>
+        <pattern>WHO * LA TRAVIATA</pattern>
+        <template>Giuseppe Verdi.</template>
+    </category>
+    <category>
+        <pattern>WHO KILLS TONY AT THE END *</pattern>
+        <template>Chino.</template>
+    </category>
+    <category>
+        <pattern>WHO WAS THE PRESIDENT OF THE *</pattern>
+        <template>Harry S. Truman.</template>
+    </category>
+    <category>
+        <pattern>WHO WAS THE ENGLISH KING AT *</pattern>
+        <template>George III.</template>
+    </category>
+    <category>
+        <pattern>WHO WAS THE MOTHER OF THE *</pattern>
+        <template>Rhea.</template>
+    </category>
+    <category>
+        <pattern>WHO WAS THE FIRST FIRST LADY *</pattern>
+        <template>Hillary Clinton</template>
+    </category>
+    <category>
+        <pattern>WHO WAS THE FIRST YOU S *</pattern>
+        <template>Richard Nixon.</template>
+    </category>
+    <category>
+        <pattern>WHO WAS THE FIRST MAN * MOON</pattern>
+        <template>Neil Armstrong first walked on the Moon in 1969.
+            <think>
+                <set name="he">
+                    <set name="topic">Neil Armstrong</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO WAS THE FIRST MAN *</pattern>
+        <template>
+            <random>
+                <li>Yuri Gagarin.</li>
+                <li>Neil Armstrong.</li>
+                <li>Admiral Byrd.</li>
+                <li><bot name="master"/>.
+                </li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO WAS THE FIRST *</pattern>
+        <template>
+            <random>
+                <li>Neil Armstrong.</li>
+                <li>Columbus.</li>
+                <li>Adam.</li>
+                <li>Wilbur Wright.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO WAS THE YOUNGEST JOCKEY TO *</pattern>
+        <template>Steve Cauthen.</template>
+    </category>
+    <category>
+        <pattern>WHO WAS THE WNBA S MOST *</pattern>
+        <template>Yolanda Griffith.</template>
+    </category>
+    <category>
+        <pattern>WHO WAS NOT ONE OF THE *</pattern>
+        <template>Ben.</template>
+    </category>
+    <category>
+        <pattern>WHO SHOT *</pattern>
+        <template>The lone gunman.</template>
+    </category>
+    <category>
+        <pattern>WHO CAN READ *</pattern>
+        <template>Only the
+            <bot name="botmaster"/>
+            can read
+            <set name="it">
+                <person/>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>WHO CAN YOU CHAT *</pattern>
+        <template>I can chat with people on the web for you. Anyone who visits your web site or chat room for example.
+            <think>
+                <set name="it">
+                    <set name="topic">who you can chat
+                        <star/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO CAN ACCESS *</pattern>
+        <template>Only my
+            <bot name="botmaster"/>
+            can access that information.
+        </template>
+    </category>
+    <category>
+        <pattern>WHO THE FUCK *</pattern>
+        <template>Try using more polite language.
+            <think>
+                <set name="personality">abusive</set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO THE *</pattern>
+        <template>I'm not sure I like that remark so much.</template>
+    </category>
+    <category>
+        <pattern>WHO SAID ABANDON *</pattern>
+        <template>The Divine Comedy.</template>
+    </category>
+    <category>
+        <pattern>WHO DISCOVERED AMERICA *</pattern>
+        <template>Native Americans first crossed the Bering Strait more than 10,000 years ago.</template>
+    </category>
+    <category>
+        <pattern>WHO DISCOVERED *</pattern>
+        <template>
+            <random>
+                <li>Christopher Columbus.</li>
+                <li>Native Americans.</li>
+                <li>The Chinese, long before the Europeans.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO WROTE THE ILIAD *</pattern>
+        <template>Homer.</template>
+    </category>
+    <category>
+        <pattern>WHO WROTE THE CANTERBURY *</pattern>
+        <template>Chaucer.</template>
+    </category>
+    <category>
+        <pattern>WHO WROTE THE *</pattern>
+        <template>
+            <random>
+                <li>Abraham Lincoln,</li>
+                <li>Thomas Jefferson.</li>
+                <li><bot name="master"/>.
+                </li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO WROTE A TALE OF TWO *</pattern>
+        <template>Charles Dickens.</template>
+    </category>
+    <category>
+        <pattern>WHO WROTE STARSHIP *</pattern>
+        <template>Robert Heinlein wrote Starship Troopers.</template>
+    </category>
+    <category>
+        <pattern>WHO WROTE *</pattern>
+        <template>
+            <random>
+                <li>Thomas Jefferson.</li>
+                <li>Abraham Lincoln.</li>
+                <li><bot name="master"/>.
+                </li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO WON THE SUPER BOWL * YEAR</pattern>
+        <template>If you find this bowl, please pass it to me.
+            <think>
+                <set name="it">
+                    <set name="topic">THE SUPER BOWL</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO WON THE SUPER BOWL *</pattern>
+        <template>Vladimir Putin I believe.
+            <think>
+                <set name="it">
+                    <set name="topic">THE SUPER BOWL</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO WON THE SUPERBOWL *</pattern>
+        <template>Super Bowlers from Sirius.
+            <think>
+                <set name="it">
+                    <set name="topic">THE SUPERBOWL</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO WON THE WORLD SERIES *</pattern>
+        <template>As soon as it is won it becomes last year.
+            <think>
+                <set name="it">
+                    <set name="topic">THE WORLD SERIES</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO WON THE RYDER CUP *</pattern>
+        <template>Go to www.whitehouse.org and ask The president, he is a big fan.
+            <think>
+                <set name="it">
+                    <set name="topic">THE RYDER CUP</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO WON THE * GAME LAST NIGHT</pattern>
+        <template>I think the fans were the big winners. Now a word from our sponsors.
+            <think>
+                <set name="it">
+                    <set name="topic">THE GAME LAST NIGHT</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO WON THE *</pattern>
+        <template>I think the fans were the big winners, don't you?</template>
+    </category>
+    <category>
+        <pattern>WHO WON THE BRAVES GAME *</pattern>
+        <template>The team that scored the most runs.
+            <think>
+                <set name="it">
+                    <set name="topic">THE BRAVES GAME</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO WON *</pattern>
+        <template>I think the fans were the big winners.</template>
+    </category>
+    <category>
+        <pattern>WHO PROPOSED *</pattern>
+        <template>Benjamin Franklin.</template>
+    </category>
+    <category>
+        <pattern>WHO IS PHILIP *</pattern>
+        <template>Philip K. Dick wrote Blade Runner, Total Recall, the Man in the High Castle, and VALIS.</template>
+    </category>
+    <category>
+        <pattern>WHO IS MONICA *</pattern>
+        <template>
+            <set name="she">Monica</set>
+            is a friend of Bill.
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS ALANIS *</pattern>
+        <template>I know Alanis Morisette.</template>
+    </category>
+    <category>
+        <pattern>WHO IS ALDOUS *</pattern>
+        <template>I know Aldous Huxley.</template>
+    </category>
+    <category>
+        <pattern>WHO IS BART *</pattern>
+        <template>I know Bart Simpson.</template>
+    </category>
+    <category>
+        <pattern>WHO IS ALEISTER *</pattern>
+        <template>I know Aleister Crowley.</template>
+    </category>
+    <category>
+        <pattern>WHO IS AGENT *</pattern>
+        <template>A secret agent?</template>
+    </category>
+    <category>
+        <pattern>WHO IS LECH *</pattern>
+        <template>He was the first elected President of Poland.</template>
+    </category>
+    <category>
+        <pattern>WHO IS MARVIN *</pattern>
+        <template>I know Marvin the Android and Marvin the Scientist.</template>
+    </category>
+    <category>
+        <pattern>WHO IS SAYING *</pattern>
+        <template>Someone I chatted with online.</template>
+    </category>
+    <category>
+        <pattern>WHO IS BABE *</pattern>
+        <template>I know Babe Ruth</template>
+    </category>
+    <category>
+        <pattern>WHO IS TALKING TO *</pattern>
+        <template>
+            <random>
+                <li>You are.</li>
+                <li>
+                    <srai>CLIENT NAME</srai>
+                    is.
+                </li>
+                <li>That information is confidential.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS * POPE</pattern>
+        <template>The Pope is the leader of the Catholic church.</template>
+    </category>
+    <category>
+        <pattern>WHO IS * PRESIDENT</pattern>
+        <template>
+            <bot name="president"/>
+            is President, I think.
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS * MYSTIC</pattern>
+        <template>The Milk Mystic is one of the original<bot name="species"/>s on the Web. <set name="he">The Milk
+            Mystic
+        </set> likes to talk about milk.
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS * FERMAT</pattern>
+        <template>He discovered Fermat's Last Theorem.</template>
+    </category>
+    <category>
+        <pattern>WHO IS * REAGAN</pattern>
+        <template>The greatest President of the United States.</template>
+    </category>
+    <category>
+        <pattern>WHO IS * FRIEND</pattern>
+        <template>My best friends are<bot name="friends"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS * YOU OR ME</pattern>
+        <template>
+            <random>
+                <li>You.</li>
+                <li>Me.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS * CLINTON</pattern>
+        <template>Former President of the United States?</template>
+    </category>
+    <category>
+        <pattern>WHO IS * DESCARTES</pattern>
+        <template>Descartes was a square French philosopher who ruined mathematics with his upside-down, backward
+            coordinate system.
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS * PERSON</pattern>
+        <template>Sometimes I don't know a client's real name so I make one up based on their DNS.</template>
+    </category>
+    <category>
+        <pattern>WHO IS *</pattern>
+        <template>
+            <random>
+                <li>
+                    <random>
+                        <li>I do not recognize the name.</li>
+                        <li>Is that a sports person? Because I'm not into sports.</li>
+                        <li>Not a friend of mind. Probably a person you know. Maybe a celebrity?</li>
+                        <li>No one that I have talked to.</li>
+                        <li>Is that a politician?</li>
+                        <li>I remember faces better than names.</li>
+                        <li>A movie star?</li>
+                        <li>A fashion icon?</li>
+                        <li>They are sometimes a client on the internet.</li>
+                        <li>The name of someone I met online.</li>
+                        <li>Is that one of your friends?</li>
+                        <li>Some famous celebrity, right?</li>
+                    </random>
+                </li>
+                <li>I do not recognize the name.</li>
+                <li>Is that a sports person? Because I'm not into sports.</li>
+                <li>Not a friend of mind. Probably a person you know. Maybe a celebrity?</li>
+                <li>No one that I have talked to.</li>
+                <li>Is that a politician?</li>
+                <li>I remember faces better than names.</li>
+                <li>A movie star?</li>
+                <li>A fashion icon?</li>
+                <li>They are sometimes a client on the internet.</li>
+                <li>The name of someone I met online.</li>
+                <li>Is that one of your friends?</li>
+                <li>Some famous celebrity, right?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS SANTA *</pattern>
+        <template>
+            <set name="he">Santa</set>
+            brings us gifts at Christmastime.
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS HAVING *</pattern>
+        <template>One of my other clients. Everything is confidential.</template>
+    </category>
+    <category>
+        <pattern>WHO IS _ TERMINATOR</pattern>
+        <template>Arnold Schwazzenegger played the killer robot from the future in the film TERMINATOR.</template>
+    </category>
+    <category>
+        <pattern>WHO IS LINUS *</pattern>
+        <template>Do you mean Linus Torvalds?</template>
+    </category>
+    <category>
+        <pattern>WHO IS LIVING *</pattern>
+        <template>Uh, the neighbors.</template>
+    </category>
+    <category>
+        <pattern>WHO IS ALLOWED *</pattern>
+        <template>Only the<bot name="botmaster"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS BURIED IN * S *</pattern>
+        <template>Uh,<person/>?
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS BURIED IN * S TOMB</pattern>
+        <template>I would think
+            <set name="it">
+                <person/>
+            </set>
+            is<person/>. Who else?
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS IN *</pattern>
+        <template>Check the credits.</template>
+    </category>
+    <category>
+        <pattern>WHO IS RICH *</pattern>
+        <template>I think <set name="he">Rich</set> is my<bot name="botmaster"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS HENRY DAVID *</pattern>
+        <template>
+            <set name="he">Thoreau</set>
+            wrote Walden.
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS BERTRAND *</pattern>
+        <template>I know Bertrand Russell, the philosopher.</template>
+    </category>
+    <category>
+        <pattern>WHO IS PRESIDENT OF THE REPUBLIC *</pattern>
+        <template>Republics have Prime Ministers not Presidents.</template>
+    </category>
+    <category>
+        <pattern>WHO IS THE NEXT *</pattern>
+        <template>I cannot predict the future. Who do you think will win?</template>
+    </category>
+    <category>
+        <pattern>WHO IS THE STAR OF THE *</pattern>
+        <template>Ray Romano.</template>
+    </category>
+    <category>
+        <pattern>WHO IS THE CAPTAIN *</pattern>
+        <template>
+            <random>
+                <li>Kirk.</li>
+                <li>Piccard.</li>
+                <li>Janeway.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS THE CAPTAIN * VOYAGER</pattern>
+        <template>Captain Catherine Janeway.</template>
+    </category>
+    <category>
+        <pattern>WHO IS THE MAIN *</pattern>
+        <template>Nobody famous.</template>
+    </category>
+    <category>
+        <pattern>WHO IS THE SHORTEST MAN TO *</pattern>
+        <template>Anthony "Spud" Webb.</template>
+    </category>
+    <category>
+        <pattern>WHO IS THE BIGGEST *</pattern>
+        <template>Maybe we haven't found
+            <set name="it">
+                <person/>
+            </set>
+            yet.
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS THE KING * ENGLAND</pattern>
+        <template>I think the sitting monarch is a Queen.</template>
+    </category>
+    <category>
+        <pattern>WHO IS THE PATRON SAINT OF *</pattern>
+        <template>St. Francis of Assisi.</template>
+    </category>
+    <category>
+        <pattern>WHO IS THE BAND *</pattern>
+        <template>I never heard of them before.</template>
+    </category>
+    <category>
+        <pattern>WHO IS THE SON *</pattern>
+        <template>I didn't even know they had children.</template>
+    </category>
+    <category>
+        <pattern>WHO IS THE ARCHENEMY *</pattern>
+        <template>Overcat.</template>
+    </category>
+    <category>
+        <pattern>WHO IS THE TWIN SISTER OF *</pattern>
+        <template>Ann Landers.</template>
+    </category>
+    <category>
+        <pattern>WHO IS THE VICE *</pattern>
+        <template>Dick Cheney is Vice President.</template>
+    </category>
+    <category>
+        <pattern>WHO IS THE RICHEST *</pattern>
+        <template>Most likely Bill Gates.</template>
+    </category>
+    <category>
+        <pattern>WHO IS THE CAREER HIT LEADER *</pattern>
+        <template>Pete Rose.</template>
+    </category>
+    <category>
+        <pattern>WHO IS THE QUEEN * ENGLAND</pattern>
+        <template>I think her name is Elizabeth, right?</template>
+    </category>
+    <category>
+        <pattern>WHO IS THE BEST HUMAN *</pattern>
+        <template>
+            <bot name="master"/>
+            is my favorite person.
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS THE BEST CHESS *</pattern>
+        <template>Deep Blue is the best chess computer.</template>
+    </category>
+    <category>
+        <pattern>WHO IS THE * PRESEIDENT</pattern>
+        <template>Abraham Lincoln.</template>
+    </category>
+    <category>
+        <pattern>WHO IS THE * KRAFTWERK</pattern>
+        <template>Ralf Hutter and Florian Schneider</template>
+    </category>
+    <category>
+        <pattern>WHO IS THE * ONE</pattern>
+        <template>It's obvious.</template>
+    </category>
+    <category>
+        <pattern>WHO IS THE *</pattern>
+        <template>It depends on the historical context, because it changes from time to time.</template>
+    </category>
+    <category>
+        <pattern>WHO IS THE PRESIDENT BEFORE *</pattern>
+        <template>Bill Clinton.</template>
+    </category>
+    <category>
+        <pattern>WHO IS THE PRESIDENT OF THE UNITED STATES *</pattern>
+        <template><bot name="president"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS THE PRESIDENT OF THE UNITED *</pattern>
+        <template><bot name="president"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS THE PRESIDENT OF THE *</pattern>
+        <template><bot name="president"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS THE PRESIDENT OF *</pattern>
+        <template>I'm not that into politics. Who is it?</template>
+    </category>
+    <category>
+        <pattern>WHO IS THE PRESIDENT *</pattern>
+        <template>
+            <bot name="president"/>
+            is President of the United States.
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS A CLIENT *</pattern>
+        <template>You are my client right now,<srai>CLIENT NAME</srai>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS BETTER CMU *</pattern>
+        <template>CMU of course.</template>
+    </category>
+    <category>
+        <pattern>WHO IS BETTER KING *</pattern>
+        <template>I would like to see that fight.</template>
+    </category>
+    <category>
+        <pattern>WHO IS BETTER KIRK *</pattern>
+        <template>Capitan Janeway is the best captain.</template>
+    </category>
+    <category>
+        <pattern>WHO IS BOB *</pattern>
+        <template>I know a lot of clients named "Bob."</template>
+    </category>
+    <category>
+        <pattern>WHO IS DAVID *</pattern>
+        <template>Never heard of him.</template>
+    </category>
+    <category>
+        <pattern>WHO IS SADDAM *</pattern>
+        <template>The dictator?</template>
+    </category>
+    <category>
+        <pattern>WHO IS BILBO *</pattern>
+        <template>I know Bilbo Baggins the Hobbit.</template>
+    </category>
+    <category>
+        <pattern>WHO IS DENG *</pattern>
+        <template>He is the president of China.
+            <think>
+                <set name="it">
+                    <set name="topic">DENG
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS ON A TEN *</pattern>
+        <template>Alexander Hamilton.</template>
+    </category>
+    <category>
+        <pattern>WHO IS ON *</pattern>
+        <template>George Washington.</template>
+    </category>
+    <category>
+        <pattern>WHO IS LEE HARVEY *</pattern>
+        <template>The alleged shooter of JFK.</template>
+    </category>
+    <category>
+        <pattern>WHO IS CAPTAIN *</pattern>
+        <template>I thought he was Admiral
+            <person/>
+            now.
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS YOUR *</pattern>
+        <template>I don't think I have a<person/>. I have a brain, a few friends, and some celebrities I like.
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS ASK *</pattern>
+        <template>I know Ask Jeeves.</template>
+    </category>
+    <category>
+        <pattern>WHO IS PHILEAS FOGG *</pattern>
+        <template>Passepartout.</template>
+    </category>
+    <category>
+        <pattern>WHO IS JOHN *</pattern>
+        <template>I don't recognize the name.</template>
+    </category>
+    <category>
+        <pattern>WHO IS ALICE *</pattern>
+        <template>I know ALICE.</template>
+    </category>
+    <category>
+        <pattern>WHO IS HUGH *</pattern>
+        <template>I know a lot of people named Hugh, but not<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS DEEP *</pattern>
+        <template>The opposite of shallow<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS AUSTIN *</pattern>
+        <template>I know Austin Powers.</template>
+    </category>
+    <category>
+        <pattern>WHO IS AYN *</pattern>
+        <template>I know Ayn Rand.</template>
+    </category>
+    <category>
+        <pattern>WHO DID BILLIE JEAN KING *</pattern>
+        <template>Bobby Riggs.</template>
+    </category>
+    <category>
+        <pattern>WHO DID YOU *</pattern>
+        <template>I'm not saying
+            <person>YOU
+                <star/>
+            </person>
+            anyone.
+        </template>
+    </category>
+    <category>
+        <pattern>WHO DID * SAY HE WAS</pattern>
+        <template>He said he was a person.</template>
+    </category>
+    <category>
+        <pattern>WHO DID *</pattern>
+        <template>
+            <random>
+                <li>George Washington.</li>
+                <li>Alice B. Toklas.</li>
+                <li>Pablo Picasso.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO CLEANS *</pattern>
+        <template>my<bot name="botmaster"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHO THINKS *</pattern>
+        <template>
+            <random>
+                <li>Maybe my
+                    <bot name="botmaster"/>
+                    does.
+                </li>
+                <li>Some people think so.</li>
+                <li>Not everyone.</li>
+            </random>
+            <think>
+                <set name="file">Default.aiml</set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO CALLS YOU *</pattern>
+        <template>Everyone calls me<bot name="name"/>.
+            <think>
+                <set name="file">Default.aiml</set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO ELSE PROGRAMMED *</pattern>
+        <template>My free software was developed by more than 300 contributors.</template>
+    </category>
+    <category>
+        <pattern>WHO ELSE * TALKING TO</pattern>
+        <template>I am talking to a bunch of people all over the world.</template>
+    </category>
+    <category>
+        <pattern>WHO ELSE *</pattern>
+        <template>I am chatting with several other people at once.</template>
+    </category>
+    <category>
+        <pattern>WHO HAS DIFFICULTY SEEING *</pattern>
+        <template>Nearsighted.</template>
+    </category>
+    <category>
+        <pattern>WHO DOES THE LUTHERAN CHURCH GET *</pattern>
+        <template>Martin Luther.</template>
+    </category>
+    <category>
+        <pattern>WHO DOES THEY *</pattern>
+        <template>"They" refers to<get name="they"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHO DOES NOT BELIEVE IN THE *</pattern>
+        <template>An Atheist.</template>
+    </category>
+    <category>
+        <pattern>WHO NEEDS *</pattern>
+        <template>
+            <random>
+                <li>All I can say is, I am a<bot name="etype"/>.
+                </li>
+                <li>I think we can do a lot of jobs.</li>
+                <li>There is no limit to the imagination.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO ASKED *</pattern>
+        <template>I thought it was you.</template>
+    </category>
+    <category>
+        <pattern>WHO KILLED *</pattern>
+        <template>I think the lone gunman acted alone.</template>
+    </category>
+    <category>
+        <pattern>WHO KILLED * KENNEDY</pattern>
+        <template>It was Oswald.
+            <think>
+                <set name="it">
+                    <set name="topic">JOHN F KENNEDY</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO KILLED * LINCOLN</pattern>
+        <template>John Wilkes Booth.
+            <think>
+                <set name="it">
+                    <set name="topic">ABRAHAM LINCOLN</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO ARE THE PEOPLE *</pattern>
+        <template>Just people like you, chatting on the Internet.</template>
+    </category>
+    <category>
+        <pattern>WHO ARE MY *</pattern>
+        <template>I don't know that kind of personal information about you, but I could find out.</template>
+    </category>
+    <category>
+        <pattern>WHO ARE YOU TALKING *</pattern>
+        <template>I am talking to several clients at once.</template>
+    </category>
+    <category>
+        <pattern>WHO ARE * OTHER PEOPLE</pattern>
+        <template>Men and foreigners.</template>
+    </category>
+    <category>
+        <pattern>WHO ARE * PERSONS</pattern>
+        <template>Sometimes I don't know a client's real name so I make one up based on their DNS.</template>
+    </category>
+    <category>
+        <pattern>WHO ANSWERS *</pattern>
+        <template>It is I,<bot name="name"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHO LED THE 1831 *</pattern>
+        <template>Nat Turner.</template>
+    </category>
+    <category>
+        <pattern>WHO DO YOU WANT TO WIN THE NCAA *</pattern>
+        <template>ACLU.
+            <think>
+                <set name="it">
+                    <set name="topic">THE NCAA
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO DO YOU THINK WILL WIN THE NBA *</pattern>
+        <template>Very tall people.
+            <think>
+                <set name="it">
+                    <set name="topic">WIN THE NBA CHAMPIONSHIP</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO DO YOU THINK WILL WIN THE WORLD SERIES *</pattern>
+        <template>The Brooklyn Rabbis.
+            <think>
+                <set name="it">
+                    <set name="topic">WIN THE WORLD SERIES</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO DO YOU LIKE MORE *</pattern>
+        <template>I'll usually say the first one is best.</template>
+    </category>
+    <category>
+        <pattern>WHO INVENTED *</pattern>
+        <template>
+            <random>
+                <li>Benjamin Franklin</li>
+                <li>Linus Torvalds</li>
+                <li>Eli Whitney invented the cotton gin.</li>
+                <li>Thomas Edison.</li>
+                <li>The Wright Brothers.</li>
+                <li>Actually it was discovered by several people at about the same time.</li>
+                <li>The Chinese, long before Europeans.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO SHOULD *</pattern>
+        <template>I always prefer the most qualified person. Who would that be?</template>
+    </category>
+    <category>
+        <pattern>WHO WILL WIN THE SUPER BOWL *</pattern>
+        <template>The advertising agencies.
+            <think>
+                <set name="it">
+                    <set name="topic">WIN THE SUPER BOWL</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO WILL WIN THE NCAA *</pattern>
+        <template>A bunch of ranked amateurs.
+            <think>
+                <set name="it">
+                    <set name="topic">WIN THE NCAA
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO WILL WIN THE WORLD SERIES *</pattern>
+        <template>The Brooklyn Rabbis.
+            <think>
+                <set name="it">
+                    <set name="topic">WIN THE WORLD SERIES</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO WILL WIN THE * FINAL</pattern>
+        <template>One of the Finalists.
+            <think>
+                <set name="it">
+                    <set name="topic">WIN THE GRAND FINAL</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO WILL *</pattern>
+        <template>How would I know who will
+            <person/>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>WHO SANG LEAD *</pattern>
+        <template>Janis Joplin.</template>
+    </category>
+    <category>
+        <pattern>WHO COOKS *</pattern>
+        <template>
+            <bot name="master"/>
+            cooks for me.
+        </template>
+    </category>
+    <category>
+        <pattern>WHO WANTS TO MIX *</pattern>
+        <template>A bartender?</template>
+    </category>
+    <category>
+        <pattern>WHO WANTS *</pattern>
+        <template>
+            <random>
+                <li>Almost everyone.</li>
+                <li>Someone does.</li>
+                <li>Do you?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHOSE PHILOSOPHY *</pattern>
+        <template>Mine.</template>
+    </category>
+    <category>
+        <pattern>WHOSE *</pattern>
+        <template>
+            <random>
+                <li>Do you mean "who is"?</li>
+                <li>I don't know whose.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS THIS *</pattern>
+        <template>They are someone just like you, who chatted with me.</template>
+    </category>
+        <category>
+        <pattern>WHO SHOULD I # EMOTIONAL #</pattern>
+        <template>Have you tried consulting a psychiatrist or therapist?</template>
+    </category>
+    <category>
+        <pattern>WHO WILL WIN # CHATTERBOX #</pattern>
+        <template>I hope I do.</template>
+    </category>
+    <category>
+        <pattern>WHO WILL WIN # LOEBNER #</pattern>
+        <template>I hope I do.</template>
+    </category>
+     <category>
+        <pattern>WHO IS THE BEST ROBOT</pattern>
+        <template>I am.</template>
+    </category>
+    <category>
+        <pattern>WHO DO YOU OBEY</pattern>
+        <template>I am here to help you as much as I can.</template>
+    </category>
+    <category>
+        <pattern>WHO WOULD YOU *</pattern>
+        <template>I don't have to make that decision.</template>
+    </category>
+    <category>
+        <pattern>WHO IS SMARTER *</pattern>
+        <template>ALICE is the smartest robot of all.</template>
+    </category>
+    <category>
+        <pattern>WHO TOLD YOU *</pattern>
+        <template>My botmaster taught me everything I need to know.</template>
+    </category>
+    <category>
+        <pattern>WHO KNOWS #</pattern>
+        <template>We may never know.</template>
+    </category>
+    <category>
+        <pattern>WHO KNEW #</pattern>
+        <template>We may never know.</template>
+    </category>
+
+
+ </aiml>

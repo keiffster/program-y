@@ -5,6 +5,7 @@ from kik.messages import TextMessage
 
 from programy.clients.restful.flask.kik.client import KikBotClient
 from programy.clients.restful.flask.kik.config import KikConfiguration
+from programy.clients.render.text import TextRenderer
 from programytest.clients.arguments import MockArgumentParser
 
 
@@ -71,6 +72,9 @@ class KikBotClientTests(unittest.TestCase):
         self.assertEqual('ProgramY AIML2.0 Client', client.get_description())
 
         self.assertIsInstance(client._kik_bot, KikApi)
+
+        self.assertFalse(client._render_callback())
+        self.assertIsInstance(client.renderer, TextRenderer)
 
     def test_handle_text_message(self):
         arguments = MockArgumentParser()

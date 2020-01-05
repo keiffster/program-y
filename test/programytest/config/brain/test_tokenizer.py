@@ -66,3 +66,14 @@ class BrainTokenizerConfigurationTests(unittest.TestCase):
         tokenizer_config = BrainTokenizerConfiguration()
         tokenizer_config.load_config_section(yaml, brain_config, ".")
 
+    def test_defaults(self):
+        tokenizer_config = BrainTokenizerConfiguration()
+        data = {}
+        tokenizer_config.to_yaml(data, True)
+
+        BrainTokenizerConfigurationTests.assert_defaults(self, data)
+
+    @staticmethod
+    def assert_defaults(test, data):
+        test.assertEqual(data['classname'], "programy.dialog.tokenizer.tokenizer.Tokenizer")
+        test.assertEqual(data['split_chars'], ' ')

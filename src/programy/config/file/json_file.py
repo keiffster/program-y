@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -96,9 +96,7 @@ class JSONConfigurationFile(BaseConfigurationFile):
 
         return missing_value
 
-    def get_multi_option(self, section, option_name, missing_value=None, subs: Substitutions = None):
-        if missing_value is None:
-            missing_value = []
+    def get_multi_option(self, section, option_name, missing_value=[], subs: Substitutions = None):
 
         value = self.get_option(section, option_name, missing_value)
         if isinstance(value, list):
@@ -113,9 +111,7 @@ class JSONConfigurationFile(BaseConfigurationFile):
 
         return multis
 
-    def get_multi_file_option(self, section, option_name, bot_root, missing_value=None, subs: Substitutions = None):
-        if missing_value is None:
-            missing_value = []
+    def get_multi_file_option(self, section, option_name, bot_root, missing_value=[], subs: Substitutions = None):
 
         value = self.get_option(section, option_name, missing_value)
         if isinstance(value, list):

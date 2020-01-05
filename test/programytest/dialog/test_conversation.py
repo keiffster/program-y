@@ -99,12 +99,13 @@ class ConversationTests(unittest.TestCase):
         conversation = Conversation(client_context)
 
         self.assertEquals("*", conversation.parse_last_sentences_from_response(""))
+        self.assertEquals("*", conversation.parse_last_sentences_from_response("."))
         self.assertEquals("HELLO", conversation.parse_last_sentences_from_response("HELLO"))
         self.assertEquals("HELLO THERE", conversation.parse_last_sentences_from_response("HELLO THERE"))
         self.assertEquals("THERE", conversation.parse_last_sentences_from_response("HELLO. THERE"))
         self.assertEquals("THERE", conversation.parse_last_sentences_from_response("HELLO. THERE!"))
 
-    def test_parse_last_sentences_from_response_that_empty(self):
+    def test_that_pattern(self):
         client = TestClient()
         client_context = ClientContext(client, "testid")
         client_context.bot = Bot(BotConfiguration(), client)
@@ -114,8 +115,10 @@ class ConversationTests(unittest.TestCase):
         conversation = Conversation(client_context)
 
         self.assertEquals("*", conversation.parse_last_sentences_from_response(""))
-        self.assertEquals("*", conversation.parse_last_sentences_from_response("."))
         self.assertEquals("HELLO", conversation.parse_last_sentences_from_response("HELLO"))
+        self.assertEquals("HELLO", conversation.parse_last_sentences_from_response(".HELLO"))
+        self.assertEquals("HELLO", conversation.parse_last_sentences_from_response("HELLO."))
+        self.assertEquals("HELLO", conversation.parse_last_sentences_from_response(".HELLO."))
         self.assertEquals("HELLO THERE", conversation.parse_last_sentences_from_response("HELLO THERE"))
         self.assertEquals("THERE", conversation.parse_last_sentences_from_response("HELLO. THERE"))
         self.assertEquals("THERE", conversation.parse_last_sentences_from_response("HELLO. THERE!"))

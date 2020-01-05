@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>DO YOU HAVE # PETS</pattern>
+        <template>
+            <srai>PETS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY PET * IS *</pattern>
+        <template>
+            <srai>MY
+                <star/>
+                IS
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>* IS MY PET <set>animal</set> #
+        </pattern>
+        <template>
+            <srai>MY
+                <star index="2"/>
+                IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>WHAT IS MY CAT S NAME</pattern>
+        <template>
+            <srai>MY CAT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I HAVE A CAT NAMED *</pattern>
+        <template>
+            <srai>MY CAT IS NAMED
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>WHAT IS MY DOG S NAME</pattern>
+        <template>
+            <srai>MY DOG</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY DOG IS
+            <set>name</set>
+        </pattern>
+        <template>
+            <srai>MY DOG S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE A DOG</pattern>
+        <template>
+            <srai>DOG</srai>
+        </template>
+    </category>
+
+
+</aiml>

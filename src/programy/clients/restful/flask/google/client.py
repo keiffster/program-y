@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -41,7 +41,8 @@ class GoogleBotClient(FlaskRestBotClient):
         reply = ""
         try:
             self._questions += 1
-            reply = client_context.bot.ask_question(client_context, question, responselogger=self)
+            response = client_context.bot.ask_question(client_context, question, responselogger=self)
+            reply = self.renderer.render(client_context, response)
 
         except Exception as e:
             YLogger.exception(client_context, "Error getting reply from bot", e)

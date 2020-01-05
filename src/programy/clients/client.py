@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -240,14 +240,14 @@ class BotClient(ResponseLogger):
             outputLog(self, "No storage defined!")
 
     def _render_callback(self):
-        return True
+        return False
 
     def load_renderer(self):
         callback = self._render_callback()
         try:
-            if self.get_client_configuration().renderer is not None:
+            if self._configuration.client_configuration.renderer is not None:
                 YLogger.debug(None, "Loading Renderer")
-                clazz = ClassLoader.instantiate_class(self.get_client_configuration().renderer)
+                clazz = ClassLoader.instantiate_class(self._configuration.client_configuration.renderer)
                 if callback is True:
                     self._renderer = clazz(self)
                 else:
@@ -257,7 +257,7 @@ class BotClient(ResponseLogger):
         except Exception as e:
             YLogger.exception(None, "Failed to load config specified renderer", e)
 
-        self._renderer = self.get_default_renderer()
+        self._renderer = self.get_default_renderer(callback)
 
     def get_default_renderer(self, callback=True):
         if callback is True:

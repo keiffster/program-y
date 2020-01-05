@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>FIND ME A STORE THAT SELLS *</pattern>
+        <template>
+            <srai>MAP
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GAS STATION</pattern>
+        <template>
+            <srai>MAP Gas Station</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GOLF *</pattern>
+        <template>
+            <srai>MAP GOLF
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHERE IS THE NEAREST PUB</pattern>
+        <template>
+            <srai>MAP PUB</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>* SHOPS IN *</pattern>
+        <template>
+            <srai>MAP
+                <star/>
+                IN
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>PIZZA HUT</pattern>
+        <template>
+            <srai>MAP Pizza Hut</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HAWAII</pattern>
+        <template>
+            <srai>MAP HAWAII</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND A PLACE TO *</pattern>
+        <template>
+            <srai>MAP
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>PIZZA *</pattern>
+        <template>
+            <srai>MAP PIZZA
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHERE CAN I GET A *</pattern>
+        <template>
+            <srai>MAP
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHERE IS LONDON</pattern>
+        <template>
+            <srai>MAP London</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHERE IS A GOOD *</pattern>
+        <template>
+            <srai>MAP
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHERE IS JAPAN</pattern>
+        <template>
+            <srai>MAP JAPAN</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND * ON MAPS</pattern>
+        <template>
+            <srai>MAP
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MANCHESTER *</pattern>
+        <template>
+            <srai>MAP MANCHESTER
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>COSTCO</pattern>
+        <template>
+            <srai>MAP COSTCO</srai>
+        </template>
+    </category>
+
+
+
+</aiml>

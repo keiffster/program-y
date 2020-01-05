@@ -74,3 +74,15 @@ class BotSentenceJoinerConfigurationTests(unittest.TestCase):
         joiner_config = BotSentenceJoinerConfiguration()
         joiner_config.load_config_section(yaml, bot_config, ".")
 
+    def test_defaults(self):
+        joiner_config = BotSentenceJoinerConfiguration()
+        data = {}
+        joiner_config.to_yaml(data, True)
+
+        BotSentenceJoinerConfigurationTests.assert_defaults(self, data)
+
+    @staticmethod
+    def assert_defaults(test, data):
+        test.assertEqual(data['classname'], BotSentenceJoinerConfiguration.DEFAULT_CLASSNAME)
+        test.assertEqual(data['join_chars'], BotSentenceJoinerConfiguration.DEFAULT_JOIN_CHARS)
+        test.assertEqual(data['terminator'], BotSentenceJoinerConfiguration.DEFAULT_TERMINATOR)

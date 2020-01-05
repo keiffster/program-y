@@ -89,3 +89,14 @@ class TriggersConfigurationTests(unittest.TestCase):
         data = {}
         triggers_config.to_yaml(data, defaults=True)
         self.assertEquals({'manager': 'programy.triggers.local.LocalTriggerManager'}, data)
+
+    def test_defaults(self):
+        triggers_config = TriggerConfiguration()
+        data = {}
+        triggers_config.to_yaml(data, True)
+
+        TriggersConfigurationTests.assert_defaults(self, data)
+
+    @staticmethod
+    def assert_defaults(test, data):
+        test.assertEqual(data['manager'], TriggerConfiguration.LOCAL_MANAGER)

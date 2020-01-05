@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -53,9 +53,10 @@ class BotTranslatorConfiguration(BaseConfigurationData):
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:
-            data['classname'] = "programy.translation.textblob.TextBlobTranslator"
+            data['classname'] = "programy.nlp.translate.textblob_translator.TextBlobTranslator"
             data['from'] = None
             data['to'] = None
+
         else:
             data['classname'] = self._classname
             data['from'] = self._from_lang

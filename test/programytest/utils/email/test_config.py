@@ -142,3 +142,18 @@ class EmailConfigurationTests(unittest.TestCase):
         data = {}
         email_config.to_yaml(data, defaults=False)
         self.assertEquals({'from_addr': 'emailuser', 'host': '127.0.0.1', 'password': 'emailpassword', 'port': 80, 'username': 'emailuser'}, data)
+
+    def test_defaults(self):
+        email_config = EmailConfiguration()
+        data = {}
+        email_config.to_yaml(data, True)
+
+        EmailConfigurationTests.assert_defaults(self, data)
+
+    @staticmethod
+    def assert_defaults(test, data):
+        test.assertIsNone(data['host'])
+        test.assertIsNone(data['port'])
+        test.assertIsNone(data['username'])
+        test.assertIsNone(data['password'])
+        test.assertIsNone(data['from_addr'])

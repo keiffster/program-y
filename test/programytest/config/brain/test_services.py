@@ -77,3 +77,27 @@ class BrainServicesConfigurationTests(unittest.TestCase):
         self.assertFalse(services_config.exists("Pandora"))
         self.assertFalse(services_config.exists("Wikipedia"))
         self.assertFalse(services_config.exists("Other"))
+
+    def test_defaults(self):
+        services_config = BrainServicesConfiguration()
+        data = {}
+        services_config.to_yaml(data, True)
+
+        BrainServicesConfigurationTests.assert_defaults(self, data)
+
+    @staticmethod
+    def assert_defaults(test, data):
+        test.assertEquals(data['REST']['classname'], 'programy.services.rest.GenericRESTService')
+        test.assertEquals(data['REST']['method'], 'GET')
+        test.assertEquals(data['REST']['host'], '0.0.0.0')
+
+        test.assertEquals(data['Pannous']['classname'], 'programy.services.pannous.PannousService')
+        test.assertEquals(data['Pannous']['url'], 'http://weannie.pannous.com/api')
+
+        test.assertEquals(data['Pandora']['classname'], 'programy.services.pandora.PandoraService')
+        test.assertEquals(data['Pandora']['url'], 'http://www.pandorabots.com/pandora/talk-xml')
+
+        test.assertEquals(data['Wikipedia']['classname'], 'programy.services.wikipediaservice.WikipediaService')
+
+        test.assertEquals(data['DuckDuckGo']['classname'], 'programy.services.duckduckgo.DuckDuckGoService')
+        test.assertEquals(data['DuckDuckGo']['url'], 'http://api.duckduckgo.com')

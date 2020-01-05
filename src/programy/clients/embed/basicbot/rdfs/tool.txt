@@ -1,0 +1,108 @@
+CUP:hasPurpose:to contain liquid
+CUP:hasSize:0
+CUP:hasSyllables:1
+CUP:isa:Dishware
+CUP:isa:Tool
+CUP:lifeArea:Physical
+KNIFE:hasPurpose:to cut things
+KNIFE:hasSize:0
+KNIFE:hasSyllables:1
+KNIFE:isa:Tool
+KNIFE:lifeArea:Physical
+SPOON:hasPurpose:to help us eat liquid foods
+SPOON:hasSize:3
+SPOON:hasSyllables:1
+SPOON:isa:Eating Utensil
+SPOON:isa:Tool
+SPOON:lifeArea:Diet
+FORK:hasPurpose:to help us eat solid foods
+FORK:hasSize:3
+FORK:hasSyllables:1
+FORK:isa:Eating Utensil
+FORK:isa:Tool
+FORK:lifeArea:Diet
+PEN:hasPurpose:to write words and draw pictures
+PEN:hasSize:3
+PEN:hasSyllables:1
+PEN:isa:Tool
+PEN:isa:Writing Instrument
+PEN:lifeArea:Physical
+PENCIL:hasPurpose:to write words and draw pictures
+PENCIL:hasSize:3
+PENCIL:hasSyllables:2
+PENCIL:isa:Tool
+PENCIL:isa:Writing Instrument
+PENCIL:lifeArea:Physical
+PAPER:hasPurpose:to write things on
+PAPER:hasSize:3
+PAPER:hasSyllables:2
+Paper:isa:Tool
+PAPER:lifeArea:Physical
+NOTE:hasPurpose:to record information
+NOTE:hasSize:0
+NOTE:hasSyllables:1
+NOTE:lifeArea:Physical
+PAGE:hasPurpose:to fill a book
+PAGE:hasSize:3
+PAGE:hasSyllables:1
+PAGE:lifeArea:Physical
+NAIL:hasPurpose:to fasten things to wood
+NAIL:hasSize:3
+NAIL:hasSyllables:1
+NAIL:isa:Fastener
+NAIL:lifeArea:Physical
+MACHINE:hasPurpose:to perform a function automatically
+MACHINE:hasSize:0
+MACHINE:hasSyllables:2
+Machine:isa:Tool
+MACHINE:lifeArea:Physical
+HAMMER:hasPurpose:to hit nails
+HAMMER:hasSize:4
+HAMMER:hasSyllables:2
+HAMMER:isa:Hand Tool
+HAMMER:isa:Tool
+HAMMER:lifeArea:Physical
+GUN:hasPurpose:to kill
+GUN:hasSize:4
+GUN:hasSyllables:1
+GUN:isa:Tool
+GUN:lifeArea:Physical
+SCREW:hasPurpose:to connect things
+SCREW:hasSize:3
+SCREW:hasSyllables:1
+SCREW:lifeArea:Physical
+SCREWDRIVER:hasPurpose:to tighten screws
+SCREWDRIVER:hasSize:4
+SCREWDRIVER:hasSyllables:3
+SCREWDRIVER:isa:Hand Tool
+SCREWDRIVER:isa:Tool
+SCREWDRIVER:lifeArea:Physical
+BOOK:hasPurpose:to share knowledge and stories
+BOOK:hasSize:4
+BOOK:hasSyllables:1
+BOOK:isa:Writing
+BOOK:lifeArea:Education
+CAMERA:hasPurpose:to take pictures
+CAMERA:hasSize:4
+CAMERA:hasSyllables:3
+CAMERA:isa:Tool
+CAMERA:lifeArea:Physical
+Writing Instrument:isa:Tool
+Dishware:isa:Tool
+Eating Utensil:isa:Tool
+MATCH:hasPurpose:to start a fire
+MATCH:hasSize:0
+MATCH:hasSyllables:1
+MATCH:isa:Tool
+MATCH:lifeArea:Physical
+SCANNER:hasPurpose:to search for radio signals
+SCANNER:hasSize:0
+SCANNER:hasSyllables:1
+SCANNER:lifeArea:Physical
+PHONE:hasPurpose:to make calls
+PHONE:hasSize:4
+PHONE:hasSyllables:1
+PHONE:isa:Communications device
+PHONE:isa:Machine
+PHONE:lifeArea:Physical
+Communications device:isa:Machine

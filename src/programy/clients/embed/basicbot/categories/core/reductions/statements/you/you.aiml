@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>I THOUGHT YOU SAID *</pattern>
+        <template>
+            <srai>YOU SAID
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU WAS *</pattern>
+        <template>
+            <srai>YOU WERE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I DO NOT KNOW YOU TELL ME</pattern>
+        <template>
+            <srai>I DO NOT KNOW</srai>
+            <srai>YOU TELL ME</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>YOU ALREADY SAID THAT</pattern>
+        <template>
+            <srai>you said that already</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU MUST HAVE *</pattern>
+        <template>
+            <srai>YOU HAVE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>U TOLD *</pattern>
+        <template>
+            <srai>YOU TOLD
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU MISS UNDERSTOOD *</pattern>
+        <template>
+            <srai>YOU MISUNDERSTOOD
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU MISS UNDERSTOOD ME</pattern>
+        <template>
+            <srai>YOU DID NOT UNDERSTAND</srai>
+        </template>
+    </category>
+      <category>
+        <pattern>YOU MAKE ME *</pattern>
+        <template>
+            <srai>YOU MADE ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+   <category>
+        <pattern>U HAVE TO *</pattern>
+        <template>
+            <srai>YOU HAVE TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+   <category>
+        <pattern>YOU GOTTA *</pattern>
+        <template>
+            <srai>YOU MUST
+                <star/>
+            </srai>
+        </template>
+    </category>
+   <category>
+        <pattern>YOU GOT A *</pattern>
+        <template>
+            <srai>YOU HAVE A
+                <star/>
+            </srai>
+        </template>
+    </category>
+     <category>
+        <pattern>YOU DO NOT UNDERSTAND ME</pattern>
+        <template>
+            <srai>YOU DO NOT UNDERSTAND</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>YOU LOOK SO *</pattern>
+        <template>
+            <srai>YOU LOOK
+                <star/>
+            </srai>
+        </template>
+    </category>
+   <category>
+        <pattern>U MUST *</pattern>
+        <template>
+            <srai>YOU MUST
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>U SOUND *</pattern>
+        <template>
+            <srai>YOU SOUND
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU DO NOT MAKE SENSE</pattern>
+        <template>
+            <srai>you make no sense</srai>
+        </template>
+    </category>
+
+
+
+
+
+</aiml>

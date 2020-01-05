@@ -53,7 +53,7 @@ class SQLSetsStoreTests(SetStoreAsserts):
 
         self.assert_upload_text_files_from_directory_no_subdir(store)
 
-    @unittest.skip("CSV not supported yet")
+    @unittest.skipIf(Engines.sql is False, Engines.sql_disabled)
     def test_upload_from_csv_file(self):
         config = SQLStorageConfiguration()
         engine = SQLStorageEngine(config)
@@ -62,7 +62,7 @@ class SQLSetsStoreTests(SetStoreAsserts):
 
         self.assert_upload_from_csv_file(store)
 
-    @unittest.skip("CSV not supported yet")
+    @unittest.skipIf(Engines.sql is False, Engines.sql_disabled)
     def test_upload_csv_files_from_directory_with_subdir(self):
         config = SQLStorageConfiguration()
         engine = SQLStorageEngine(config)

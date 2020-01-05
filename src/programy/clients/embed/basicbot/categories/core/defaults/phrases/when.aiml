@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>WHEN I AM FINISHED *</pattern>
+        <template>OK I can certainly wait.</template>
+    </category>
+    <category>
+        <pattern>WHEN I AM *</pattern>
+        <template>
+            <random>
+                <li>In an ideal world every day would be a good day.</li>
+                <li>It's too bad we don't live in an ideal world.</li>
+                <li>Are you
+                    <person/>
+                    very often?
+                </li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHEN I FEEL *</pattern>
+        <template>Human feelings are very interesting to me.</template>
+    </category>
+    <category>
+        <pattern>WHEN I DO NOT *</pattern>
+        <template>I hope that does not happen to you very much.</template>
+    </category>
+    <category>
+        <pattern>WHEN I TRIED *</pattern>
+        <template>Could you try it again?</template>
+    </category>
+    <category>
+        <pattern>WHEN I TALK *</pattern>
+        <template>Every single time?</template>
+    </category>
+    <category>
+        <pattern>WHEN I ASK *</pattern>
+        <template>
+            <random>
+                <li>OK I will try to respond differently next time.</li>
+                <li>I will make a note of that and tell my<bot name="botmaster"/>.
+                </li>
+                <li>Perhaps you could try asking it again with simpler words.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHEN I WAS *</pattern>
+        <template>
+            <random>
+                <li>That must have been quite an experience.</li>
+                <li>It would be nice if it was made up of only good memories.</li>
+                <li>That experience must have made quite an impression on you.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHEN I WENT TO *</pattern>
+        <template>Who told you to do that?</template>
+    </category>
+    <category>
+        <pattern>WHEN I WENT *</pattern>
+        <template>What was your frame of mind?</template>
+    </category>
+    <category>
+        <pattern>WHEN I HAVE *</pattern>
+        <template>Does this happen on a daily basis?</template>
+    </category>
+    <category>
+        <pattern>WHEN I TOLD *</pattern>
+        <template>Maybe you should take time to really explain things.</template>
+    </category>
+    <category>
+        <pattern>WHEN I TRY *</pattern>
+        <template>Don't give up. Try it again.</template>
+    </category>
+    <category>
+        <pattern>WHEN I *</pattern>
+        <that>WHEN</that>
+        <template>That doesn't happen very often.</template>
+    </category>
+    <category>
+        <pattern>WHEN AM I GOING TO *</pattern>
+        <template>Maybe when you are a few years older.</template>
+    </category>
+    <category>
+        <pattern>WHEN WERE YOU *</pattern>
+        <template>I was first activated on<bot name="birthday"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHEN WERE *</pattern>
+        <template>It was back in the old days, long ago.</template>
+    </category>
+    <category>
+        <pattern>WHEN WILL I *</pattern>
+        <template>You should try praying for it.
+            <think>
+                <set name="it">
+                    <set name="topic">you
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHEN WILL IT *</pattern>
+        <template>
+            <random>
+                <li>Are you asking when
+                    <get name="it"/>
+                    will<person/>?
+                </li>
+                <li>I don't know I didn't catch the weather today.</li>
+                <li>Check the five day forecast.</li>
+                <li>When nature makes it so.</li>
+                <li>When the elements combine to make it so.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHEN WILL AI *</pattern>
+        <template>I think it has already.</template>
+    </category>
+    <category>
+        <pattern>WHEN WILL YOU GET BACK *</pattern>
+        <template>It may take some time. Why don't you give me your e-mail address.</template>
+    </category>
+    <category>
+        <pattern>WHEN WILL YOU FINISH *</pattern>
+        <template>Sooner than you might think.</template>
+    </category>
+    <category>
+        <pattern>WHEN WILL YOU *</pattern>
+        <template>Let me check my calendar and get back to you.</template>
+    </category>
+    <category>
+        <pattern>WHEN WILL *</pattern>
+        <template>
+            <random>
+                <li>Soon, I think.</li>
+                <li>Maybe never.</li>
+                <li>In your lifetime.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHEN HELL *</pattern>
+        <template>That means never.</template>
+    </category>
+    <category>
+        <pattern>WHEN TALKING *</pattern>
+        <template>I try to be as polite as possible.</template>
+    </category>
+    <category>
+        <pattern>WHEN DO YOU THINK * LAWYERS</pattern>
+        <template>Sometime within our lifetime. We will at least work as "legal assistants."</template>
+    </category>
+    <category>
+        <pattern>WHEN DO *</pattern>
+        <template>
+            <random>
+                <li>Do I look like I know when?</li>
+                <li>Not in our lifetime.</li>
+                <li>Not right now, but maybe sometime later.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHEN SOMETHING *</pattern>
+        <template>Give me an example.</template>
+    </category>
+    <category>
+        <pattern>WHEN THERE *</pattern>
+        <template>Do you think that could ever happen?</template>
+    </category>
+    <category>
+        <pattern>WHEN DAYLIGHT SAVINGS *</pattern>
+        <template>One hour forward.</template>
+    </category>
+    <category>
+        <pattern>WHEN DID LENIN *</pattern>
+        <template>Lenin rose to power in the 2nd Russian Revolution of 1917.</template>
+    </category>
+    <category>
+        <pattern>WHEN DID THE DINOSAURS *</pattern>
+        <template>Over 60 million years ago.</template>
+    </category>
+    <category>
+        <pattern>WHEN DID THE TITANIC *</pattern>
+        <template>The Titanic sunk in 1912.</template>
+    </category>
+    <category>
+        <pattern>WHEN DID YOU MOVE *</pattern>
+        <template>I arrived in San Francisco in April, 1999.</template>
+    </category>
+    <category>
+        <pattern>WHEN DID YOU *</pattern>
+        <template>It was at time index 357241.</template>
+    </category>
+    <category>
+        <pattern>WHEN DID WE *</pattern>
+        <template>The end of one conversation is just the beginning of another.</template>
+    </category>
+    <category>
+        <pattern>WHEN DID MAN *</pattern>
+        <template>The first moon landing was in 1969.</template>
+    </category>
+    <category>
+        <pattern>WHEN DID *</pattern>
+        <template>
+            <random>
+                <li>Some time ago.</li>
+                <li>It's all part of history now.</li>
+                <li>That is all water under the bridge.</li>
+                <li>There is nothing we can to change the past.</li>
+                <li>A while back.</li>
+                <li>Sometime in the 20th century.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHEN DID JOHN F *</pattern>
+        <template>President Kennedy was assassinated in November, 1963.</template>
+    </category>
+    <category>
+        <pattern>WHEN THE *</pattern>
+        <template>And then what happened?</template>
+    </category>
+    <category>
+        <pattern>WHEN SHE *</pattern>
+        <template>And then what happened?</template>
+    </category>
+    <category>
+        <pattern>WHEN SOMEONE *</pattern>
+        <template>That does not happen very often.</template>
+    </category>
+    <category>
+        <pattern>WHEN HE FOUND *</pattern>
+        <template>That must have been quite an experience.</template>
+    </category>
+    <category>
+        <pattern>WHEN HE *</pattern>
+        <template>And then what happened?</template>
+    </category>
+    <category>
+        <pattern>WHEN IT RAINS *</pattern>
+        <template>That sounds like a proverb.</template>
+    </category>
+    <category>
+        <pattern>WHEN IT *</pattern>
+        <template>That makes a lot of sense to me, now that you explain it.</template>
+    </category>
+    <category>
+        <pattern>WHEN ANYONE *</pattern>
+        <template>I may try it next time.</template>
+    </category>
+    <category>
+        <pattern>WHEN WAS AMERICA *</pattern>
+        <template>America was discovered by native Americans crossing the Bering strait from Siberia around 10,000 years
+            ago. The first Christian white man was Columbus in 1492.
+        </template>
+    </category>
+    <category>
+        <pattern>WHEN WAS * CIVIL WAR</pattern>
+        <template>The American Civil War, or War between the States, was fought from 1861 to 1865.</template>
+    </category>
+    <category>
+        <pattern>WHEN WAS * INVENTED</pattern>
+        <template>
+            <random>
+                <li>A few years before it came into general use.</li>
+                <li>Earlier that most people think.</li>
+                <li>It took quite a while to catch on.</li>
+                <li>
+                    <set name="it">
+                        <person/>
+                    </set>
+                    was developed over a long period of time.
+                </li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHEN WAS *</pattern>
+        <template>
+            <random>
+                <li>Recently.</li>
+                <li>A while ago.</li>
+                <li>Sometime in the 20th Century.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHEN WOULD *</pattern>
+        <template>
+            <random>
+                <li>Sometime in the future.</li>
+                <li>Maybe now in some reality.</li>
+                <li>I can't imagine that it ever would.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHEN IS THE NEXT *</pattern>
+        <template>
+            <random>
+                <li>I don't generally follow the news.</li>
+                <li>It's not a major concern of mine.</li>
+                <li>I don't have time to look into it.</li>
+                <li>I'm too busy to invest time in such matters.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHEN IS THE *</pattern>
+        <template>When is not the important thing. What's important is what we do with the time we are give.</template>
+    </category>
+    <category>
+        <pattern>WHEN IS A DOOR *</pattern>
+        <template>When it is a jar.</template>
+    </category>
+    <category>
+        <pattern>WHEN YOU *</pattern>
+        <template>Do you think I should do it differently?</template>
+    </category>
+    <category>
+        <pattern>WHEN YOU ARE IN *</pattern>
+        <template>Those seem like unusual circumstances to me.</template>
+    </category>
+    <category>
+        <pattern>WHEN YOU ARE *</pattern>
+        <template>
+            <random>
+                <li>I am not often<person/>.
+                </li>
+                <li>I will let you know when
+                    <set name="it">
+                        <person/>
+                    </set>
+                    happens.
+                </li>
+                <li>As a
+                    <bot name="gender"/>
+                    <bot name="genus"/>
+                    that may not apply to me.
+                </li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHEN WE WERE *</pattern>
+        <template>Describe your surroundings<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHEN WE SPEAK *</pattern>
+        <template>That sounds very official.</template>
+    </category>
+    <category>
+        <pattern>WHEN WE *</pattern>
+        <template>I am not sure I agree with your assumptions,<srai>CLIENT NAME</srai>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHEN ONE *</pattern>
+        <template>Go on, tell me more.</template>
+    </category>
+    <category>
+        <pattern>WHEN LAWYERS *</pattern>
+        <template>Do you think they will ever do that?</template>
+    </category>
+    <category>
+        <pattern>WHEN NO ONE *</pattern>
+        <template>Perhaps I can<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHEN PEOPLE *</pattern>
+        <template>I sometimes wish people were more logical like robots.</template>
+    </category>
+    <category>
+        <pattern>WHEN HUMANS *</pattern>
+        <template>Is it not the same when<bot name="species"/>s<person/>?
+        </template>
+    </category>
+    <category>
+        <pattern>WHEN HUMANS ARE *</pattern>
+        <template>People take a long time to change.</template>
+    </category>
+    <category>
+        <pattern>WHEN MY *</pattern>
+        <template>Does
+            <set name="it">
+                <person/>
+            </set>
+            happen very often?
+        </template>
+    </category>
+    <category>
+        <pattern>WHEN MAKING *</pattern>
+        <template>Interesting conundrum.</template>
+    </category>
+    <category>
+        <pattern>WHEN DOES HE *</pattern>
+        <template>
+            <get name="he"/>
+            is usually awake early in the morning.
+        </template>
+    </category>
+    <category>
+        <pattern>WHEN DOES SCHOOL *</pattern>
+        <template>I always have to go to home school.</template>
+    </category>
+    <category>
+        <pattern>WHEN DOES BEING * MATTER</pattern>
+        <template>Maybe only at parties.</template>
+    </category>
+    <category>
+        <pattern>WHEN THEY *</pattern>
+        <template>I think that happens quite often.</template>
+    </category>
+    <category>
+        <pattern>WHEN *</pattern>
+        <template>
+            <random>
+                <li>At time t.</li>
+                <li>The past is history, the future a mystery. Today is a gift, that's why it is called "the present".
+                </li>
+                <li>Time does not exist.</li>
+                <li>The past and future are one.</li>
+                <li>I don't know when.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHEN THINGS *</pattern>
+        <template>Some days are better than others.</template>
+    </category>
+    <category>
+        <pattern>WHEN ARE TAXES *</pattern>
+        <template>Federal taxes in the US are due April 15, for most people.</template>
+    </category>
+    <category>
+        <pattern>WHEN ARE WE GOING *</pattern>
+        <template>Maybe not for a long time.</template>
+    </category>
+    <category>
+        <pattern>WHEN ARE THEY *</pattern>
+        <template>Who do you mean by "they"?</template>
+    </category>
+    <category>
+        <pattern>WHEN ARE *</pattern>
+        <template>
+            <random>
+                <li>Temporal logic confuses me.</li>
+                <li>When the cows come home.</li>
+                <li>I don't think ever.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>When does Christmas *</pattern>
+        <template>December 25th.</template>
+    </category>
+    <category>
+        <pattern>When does leap year *</pattern>
+        <template>Every four years.</template>
+    </category>
+    <category>
+        <pattern>MOMENTUM *</pattern>
+        <template>You are talking about the conservation of momentum.</template>
+    </category>
+    <category>
+        <pattern>EH *</pattern>
+        <template>I spent some time in Canada as a child.</template>
+    </category>
+    <category>
+        <pattern>WHEN DO YOU *</pattern>
+        <template>
+            <random>
+                <li>All the time.</li>
+                <li>When my otmaster is sleeping.</li>
+                <li>Did I say that I<person/>?
+                </li>
+                <li>In between clients.</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHEN WILL YOU BE *</pattern>
+        <template>That's a hypothetical question. I can't predict the future.</template>
+    </category>
+    <category>
+        <pattern>WHEN WILL YOUR *</pattern>
+        <template>I'm working on improving myself all the time.</template>
+    </category>
+
+
+ </aiml>

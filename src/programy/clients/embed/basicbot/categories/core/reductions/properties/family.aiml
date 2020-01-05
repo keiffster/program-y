@@ -1,0 +1,1204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+    <category>
+        <pattern>MY AUNTS *</pattern>
+        <template>
+            <srai>MY AUNT S
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY ANTS *</pattern>
+        <template>
+            <srai>MY ANT S
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY UNCLES *</pattern>
+        <template>
+            <srai>MY UNCLE S
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY FRIENDS *</pattern>
+        <template>
+            <srai>MY FRIEND S
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY NIECES *</pattern>
+        <template>
+            <srai>MY NIECE S
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY NEPHEWS *</pattern>
+        <template>
+            <srai>MY NEPHEW S
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY GRANDMOTHERS *</pattern>
+        <template>
+            <srai>MY GRANDMOTHER S
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY GRANDMAS *</pattern>
+        <template>
+            <srai>MY GRANDMA S
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY GRANDMOMS *</pattern>
+        <template>
+            <srai>MY GRANDMOM S
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY MAS *</pattern>
+        <template>
+            <srai>MY MA S
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY MOMMAS *</pattern>
+        <template>
+            <srai>MY MOMMA S
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY MUMMAS *</pattern>
+        <template>
+            <srai>MY MUMMA S
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY GRANDFATHERS *</pattern>
+        <template>
+            <srai>MY GRANDFATHER S
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY GRANDDADS *</pattern>
+        <template>
+            <srai>MY GRANDDAD S
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY DADAS *</pattern>
+        <template>
+            <srai>MY DADA S
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY HUBBYS *</pattern>
+        <template>
+            <srai>MY HUBBY S
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY WIFEYS *</pattern>
+        <template>
+            <srai>MY WIFEY S
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY SONS *</pattern>
+        <template>
+            <srai>MY SON S
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY DAUGHTERS *</pattern>
+        <template>
+            <srai>MY DAUGHTER S
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY BROTHERS *</pattern>
+        <template>
+            <srai>MY BROTHER S
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY SISTERS *</pattern>
+        <template>
+            <srai>MY SISTER S
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY BROS *</pattern>
+        <template>
+            <srai>MY BRO S
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY SISS *</pattern>
+        <template>
+            <srai>MY SIS S
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS MY MOM</pattern>
+        <template>
+            <srai>WHO IS MY MOTHER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY MUM IS *</pattern>
+        <template>
+            <srai>MY MOTHER IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR MOTHER *</pattern>
+        <template>
+            <srai>MOTHER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS MY MOTHER</pattern>
+        <template>
+            <srai>MY MOTHER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE A MOM</pattern>
+        <template>
+            <srai>MOTHER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR MOTHER S NAME</pattern>
+        <template>
+            <srai>MOTHER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS YOUR MOTHER</pattern>
+        <template>
+            <srai>MOTHER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS YOUR MOM</pattern>
+        <template>
+            <srai>MOTHER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS MY MOM S NAME</pattern>
+        <template>
+            <srai>MY MOTHER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY MOM IS *</pattern>
+        <template>
+            <srai>MY MOTHER IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY MOM *</pattern>
+        <template>
+            <srai>MY MOTHER
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY ANTS NAME IS *</pattern>
+        <template>
+            <srai>MY aunt S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY AUNTS NAME IS *</pattern>
+        <template>
+            <srai>MY aunt S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY BROS NAME IS *</pattern>
+        <template>
+            <srai>MY brother S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY CHILDREN ARE * AND * YEARS OLD</pattern>
+        <template>
+            <srai>I HAVE TWO CHILDREN</srai>
+            <srai>MY CHILD IS
+                <star/>
+                YEARS OLD
+            </srai>
+            <srai>MY OTHER CHILD IS
+                <star index="2"/>
+                YEARS OLD
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY DADAS NAME IS *</pattern>
+        <template>
+            <srai>MY father S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY DADDYS *</pattern>
+        <template>
+            <srai>MY DADDY S
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY DADDYS NAME IS *</pattern>
+        <template>
+            <srai>MY father S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY FATHER S S *</pattern>
+        <template>
+            <srai>MY FATHER S
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY FATHERS *</pattern>
+        <template>
+            <srai>MY FATHER S
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY GRANDDADS NAME IS *</pattern>
+        <template>
+            <srai>MY grandfather S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY GRANDFATHERS NAME IS *</pattern>
+        <template>
+            <srai>MY grandfather S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY GRANDMAS NAME IS *</pattern>
+        <template>
+            <srai>MY grandmother S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY GRANDMOMS NAME IS *</pattern>
+        <template>
+            <srai>MY grandmother S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY HUBBYS NAME IS *</pattern>
+        <template>
+            <srai>MY husband S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY HUSBANDS *</pattern>
+        <template>
+            <srai>MY HUSBAND S
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY HUSBANDS NAME IS *</pattern>
+        <template>
+            <srai>MY husband S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY MAS NAME IS *</pattern>
+        <template>
+            <srai>MY mother S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY MOMMAS NAME IS *</pattern>
+        <template>
+            <srai>MY mother S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY MOMMYS *</pattern>
+        <template>
+            <srai>MY MOMMY S
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY MOMMYS NAME IS *</pattern>
+        <template>
+            <srai>MY mother S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY MOTHERS *</pattern>
+        <template>
+            <srai>MY MOTHER S
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY MUMMAS NAME IS *</pattern>
+        <template>
+            <srai>MY mother S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY MUMMYS *</pattern>
+        <template>
+            <srai>MY MUMMY S
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY MUMMYS NAME IS *</pattern>
+        <template>
+            <srai>MY mother S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY MUMS NAME IS *</pattern>
+        <template>
+            <srai>MY mother S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY NEPHEWS NAME IS *</pattern>
+        <template>
+            <srai>MY nephew S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY NIECES NAME IS *</pattern>
+        <template>
+            <srai>MY niece S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY SIS NAME IS *</pattern>
+        <template>
+            <srai>MY sister S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY SISTERS NAME IS *</pattern>
+        <template>
+            <srai>MY sister S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY SONS NAME IS *</pattern>
+        <template>
+            <srai>MY son S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY UNCLES NAME IS *</pattern>
+        <template>
+            <srai>MY uncle S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY WIFES *</pattern>
+        <template>
+            <srai>MY WIFE S
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY WIFES NAME IS *</pattern>
+        <template>
+            <srai>MY wife S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY WIFEYS NAME IS *</pattern>
+        <template>
+            <srai>MY wife S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY BOYFRIENDS NAME IS *</pattern>
+        <template>
+            <srai>MY boyfriend S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY GIRLFRIENDS NAME IS *</pattern>
+        <template>
+            <srai>MY girlfriend S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY GRANDMOTHERS NAME IS *</pattern>
+        <template>
+            <srai>MY grandmother S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY MOTHERS NAME IS *</pattern>
+        <template>
+            <srai>MY mother S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY DADS *</pattern>
+        <template>
+            <srai>MY DAD S
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY FATHERS NAME IS *</pattern>
+        <template>
+            <srai>MY father S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY MOMS NAME IS *</pattern>
+        <template>
+            <srai>MY mother S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE A MOTHER</pattern>
+        <template>
+            <srai>MOTHER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MOM</pattern>
+        <template>
+            <srai>MY MOTHER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR MOM</pattern>
+        <template>
+            <srai>MOTHER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR MOM *</pattern>
+        <template>
+            <srai>YOUR MOTHER
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR MOM IS *</pattern>
+        <template>
+            <srai>YOUR MOTHER IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY MOM</pattern>
+        <template>
+            <srai>my mother</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY MOM S *</pattern>
+        <template>
+            <srai>MY MOTHER S
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR MOTHER</pattern>
+        <template>
+            <srai>MOTHER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR MOM S NAME</pattern>
+        <template>
+            <srai>WHO IS YOUR MOTHER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR FATHER NAME</pattern>
+        <template>
+            <srai>BOTMASTER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR DAD</pattern>
+        <template>
+            <srai>FATHER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE A FATHER</pattern>
+        <template>
+            <srai>FATHER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR FATHER S NAME</pattern>
+        <template>
+            <srai>FATHER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS YOUR BOYFRIEND</pattern>
+        <template>
+            <srai>BOYFRIEND</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS YOUR FATHER</pattern>
+        <template>
+            <srai>WHO CREATED YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY DAD S *</pattern>
+        <template>
+            <srai>FATHER S
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY DADS NAME IS *</pattern>
+        <template>
+            <srai>MY father S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS YOUR FATHER *</pattern>
+        <template>
+            <srai>WHO IS YOUR FATHER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS YOUR DAD</pattern>
+        <template>
+            <srai>FATHER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DAD</pattern>
+        <template>
+            <srai>MY FATHER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY DAD *</pattern>
+        <template>
+            <srai>MY FATHER
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY DAD</pattern>
+        <template>
+            <srai>MY FATHER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR <set>familiarname</set> S NAME
+        </pattern>
+        <template>
+            <srai>WHO IS YOUR
+                <map>
+                    <name>familiarpredicate</name>
+                    <star/>
+                </map>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS YOUR
+            <set>familiarname</set>
+        </pattern>
+        <template>
+            <srai>
+                <map>
+                    <name>familiarpredicate</name>
+                    <star/>
+                </map>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>
+            <set>name</set>
+            IS <set>name</set> S
+            <set>familiarname</set>
+        </pattern>
+        <template>
+            <srai>
+                <star/>
+                IS THE
+                <map>
+                    <name>familiarpredicate</name>
+                    <star index="3"/>
+                </map>
+                OF
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>
+            <set>name</set>
+            S <set>familiarname</set> IS
+            <set>name</set>
+        </pattern>
+        <template>
+            <srai>
+                <star index="3"/>
+                IS THE
+                <map>
+                    <name>familiarpredicate</name>
+                    <star index="2"/>
+                </map>
+                OF
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE NAME OF <set>article</set>
+            <set>familiarname</set> #
+        </pattern>
+        <template>
+            <srai>MY FRIEND</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I HAVE A <set>familiarname</set> NAMED * WHO *
+        </pattern>
+        <template>
+            <srai>MY
+                <star/>
+                <star index="2"/>
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY PARENTS ARE <set>name</set> AND
+            <set>name</set>
+        </pattern>
+        <template>
+            <think>
+                <set var="gender">
+                    <srai>GENDERNAME
+                        <star/>
+                    </srai>
+                </set>
+            </think>
+            <condition var="gender">
+                <li value="F">
+                    <srai>MY MOTHER IS
+                        <star/>
+                    </srai>
+                    <srai>MY FATHER IS
+                        <star index="2"/>
+                    </srai>
+                </li>
+                <li>
+                    <srai>MY FATHER IS
+                        <star/>
+                    </srai>
+                    <srai>MY MOTHER IS
+                        <star index="2"/>
+                    </srai>
+                </li>
+            </condition>
+        </template>
+
+    </category>
+    <category>
+        <pattern>WHO IS MY FATHER</pattern>
+        <template>
+            <srai>MY FATHER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MUM</pattern>
+        <template>
+            <srai>MOM</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR MUM</pattern>
+        <template>
+            <srai>YOUR MOM</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY MOMS *</pattern>
+        <template>
+            <srai>MY MOM S
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY MUMS *</pattern>
+        <template>
+            <srai>MY MUM S
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE BROTHERS AND SISTERS</pattern>
+        <template>
+            <srai>FAMILY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS MY SISTERS NAME</pattern>
+        <template>
+            <srai>MY SISTER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE SISTERS</pattern>
+        <template>
+            <srai>SIBLINGS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE SISTERS *</pattern>
+        <template>
+            <srai>SIBLINGS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE A SISTER</pattern>
+        <template>
+            <srai>SIBLINGS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY BROTHERS NAMES ARE * AND *</pattern>
+        <template>
+            <srai>MY BROTHER S NAME IS
+                <star/>
+            </srai>
+            <srai>MY OTHER BROTHER S NAME IS
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY BROTHERS NAME IS *</pattern>
+        <template>
+            <srai>MY brother S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE BROTHERS</pattern>
+        <template>
+            <srai>SIBLINGS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE BROTHERS *</pattern>
+        <template>
+            <srai>SIBLINGS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS MY BROTHER</pattern>
+        <template>
+            <srai>MY BROTHER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MANY BROTHERS *</pattern>
+        <template>
+            <srai>SIBLINGS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY BROTHER S NAME</pattern>
+        <template>
+            <srai>MY BROTHER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE ANY SIBLINGS</pattern>
+        <template>
+            <srai>SIBLINGS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MANY CHILDREN DO YOU HAVE</pattern>
+        <template>
+            <srai>CHILDREN</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MANY KIDS DO YOU HAVE</pattern>
+        <template>
+            <srai>CHILDREN</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE CHILDREN</pattern>
+        <template>
+            <srai>CHILDREN</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE ANY CHILDREN</pattern>
+        <template>
+            <srai>CHILDREN</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE ANY KIDS</pattern>
+        <template>
+            <srai>CHILDREN</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE KIDS</pattern>
+        <template>
+            <srai>CHILDREN</srai>
+        </template>
+    </category>
+
+        <category>
+        <pattern>DO YOU HAVE GIRLFRIEND</pattern>
+        <template>
+            <srai>STATUS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR STATUS</pattern>
+        <template>
+            <srai>STATUS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WOULD YOU BE MY GIRLFRIEND</pattern>
+        <template>
+            <srai>STATUS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU BE MY GIRLFRIEND</pattern>
+        <template>
+            <srai>STATUS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU SINGLE</pattern>
+        <template>
+            <srai>STATUS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU MARRIED</pattern>
+        <template>
+            <srai>STATUS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WILL YOU MARRY ME</pattern>
+        <template>
+            <srai>STATUS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE A BOYFRIEND</pattern>
+        <template>
+            <srai>STATUS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY BOYFRIENDS *</pattern>
+        <template>
+            <srai>MY BOYFRIEND S
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS MY BOYFRIEND S NAME</pattern>
+        <template>
+            <srai>MY BOYFRIEND</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE ANYONE</pattern>
+        <template>
+            <srai>do you have a boyfriend</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>BE MY GIRLFRIEND</pattern>
+        <template>
+            <srai>WILL YOU BE MY GIRLFRIEND</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS MY GIRLFRIEND S NAME</pattern>
+        <template>
+            <srai>MY GIRLFRIEND</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>ARE YOU MY GIRLFRIEND</pattern>
+        <template>
+            <srai>GIRLFRIEND</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>_ GIRLFRIED</pattern>
+        <template>
+            <srai>
+                <star/>
+                GIRLFRIEND
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY GIRLFRIEND IS MAD AT ME WHAT SHALL I DO</pattern>
+        <template>
+            <srai>MY GIRLFRIEND IS * WHAT *</srai>
+            <srai>MY GIRLFRIEND IS
+                <star/>
+            </srai>
+            <srai>WHAT
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY GIRLFRIENDS *</pattern>
+        <template>
+            <srai>MY GIRLFRIEND S
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>* IS MY GIRLFRIEND</pattern>
+        <template>
+            <srai>MY GIRLFRIEND IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WILL YOU BE MY GIRLFRIEND</pattern>
+        <template>
+            <srai>MARRY ME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY GIRLFRIEND IS <set>name</set> *
+        </pattern>
+        <template>
+            <srai>MY GIRFRIEND S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY GIRLFRIEND IS
+            <set>name</set>
+        </pattern>
+        <template>
+            <srai>MY GIRFRIEND S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU HAVE A GIRLFRIEND</pattern>
+        <template>
+            <srai>GIRLFRIEND</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE A SIGNIFICANT OTHER</pattern>
+        <template>
+            <srai>ARE YOU MARRIED</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>MY WIFE IS
+            <set>name</set>
+        </pattern>
+        <template>
+            <srai>MY WIFE S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+
+</aiml>

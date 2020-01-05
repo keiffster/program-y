@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -55,13 +55,13 @@ class TemplateGetNode(TemplateNode):
 
     @staticmethod
     def get_default_value(client_context):
-        value = client_context.bot.brain.properties.property("default-get")
+        value = client_context.bot.brain.properties.property("default_get")
         if value is None:
-            YLogger.error(None, "No property defined for default-get, checking defaults")
+            YLogger.error(None, "No property defined for default_get, checking defaults")
 
             value = client_context.bot.brain.configuration.defaults.default_get
             if value is None:
-                YLogger.error(None, "No value defined for default default-get, returning 'unknown'")
+                YLogger.error(None, "No value defined for default default_get, returning 'unknown'")
                 value = "unknown"
 
         return value

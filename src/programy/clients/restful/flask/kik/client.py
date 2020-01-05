@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -53,13 +53,16 @@ class KikBotClient(FlaskRestBotClient):
         question = message.body
         userid = message.from_user
 
+        client_context = self.create_client_context(userid)
+
         answer = self.ask_question(userid, question)
+        rendered = self.renderer.render(client_context, answer)
 
         self._kik_bot.send_messages([
             TextMessage(
                 to=message.from_user,
                 chat_id=message.chat_id,
-                body=answer
+                body=rendered
             )
         ])
 
@@ -70,7 +73,10 @@ class KikBotClient(FlaskRestBotClient):
             unknown_response = self.ask_question(userid, self.configuration.client_configuration.unknown_command_srai)
             if unknown_response is None or unknown_response == "":
                 unknown_response = self.configuration.client_configuration.unknown_command
-        return unknown_response
+
+        client_context = self.create_client_context(userid)
+
+        return self.renderer.render(client_context, unknown_response)
 
     def handle_unknown_message(self, message):
         userid = message.from_user

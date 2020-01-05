@@ -83,3 +83,23 @@ class PingResponderConfigurationTests(unittest.TestCase):
         self.assertIsNone(responder_config.shutdown)
         self.assertIsNone(responder_config.register)
         self.assertIsNone(responder_config.unregister)
+
+    def test_defaults(self):
+        responder_config = PingResponderConfig()
+        data = {}
+        responder_config.to_yaml(data, True)
+
+        PingResponderConfigurationTests.assert_defaults(self, data)
+
+    @staticmethod
+    def assert_defaults(test, data):
+        test.assertEqual(data['name'], "Client Ping Responder")
+        test.assertIsNone(data['host'])
+        test.assertIsNone(data['port'])
+        test.assertIsNone(data['ssl_cert_file'])
+        test.assertIsNone(data['ssl_key_file'])
+        test.assertIsNone(data['url'])
+        test.assertIsNone(data['shutdown'])
+        test.assertIsNone(data['register'])
+        test.assertIsNone(data['unregister'])
+        test.assertFalse(data['debug'])

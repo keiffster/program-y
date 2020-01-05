@@ -1,0 +1,43 @@
+Month:isa:Time Quantity
+APRIL:hasPurpose:to measure time
+APRIL:hasSize:0
+APRIL:hasSyllables:2
+APRIL:isa:Month
+APRIL:isa:Time Quantity
+APRIL:lifeArea:Physical
+AUGUST:hasPurpose:to measure time
+AUGUST:hasSize:0
+AUGUST:hasSyllables:2
+AUGUST:isa:Month
+AUGUST:isa:Time Quantity
+AUGUST:lifeArea:Physical
+FEBRUARY:hasPurpose:to measure time
+FEBRUARY:hasSize:0
+FEBRUARY:hasSyllables:4
+FEBRUARY:isa:Month
+FEBRUARY:isa:Time Quantity
+FEBRUARY:lifeArea:Physical
+JANUARY:hasPurpose:to measure time
+JANUARY:hasSize:0
+JANUARY:hasSyllables:4
+JANUARY:isa:Month
+JANUARY:isa:Time Quantity
+JANUARY:lifeArea:Physical
+JULY:hasPurpose:to measure time
+JULY:hasSize:0
+JULY:hasSyllables:2
+JULY:isa:Month
+JULY:isa:Time Quantity
+JULY:lifeArea:Physical
+JUNE:hasPurpose:to measure time
+JUNE:hasSize:0
+JUNE:hasSyllables:1
+JUNE:isa:Month
+JUNE:isa:Time Quantity
+JUNE:lifeArea:Physical
+MARCH:hasPurpose:to measure time
+MARCH:hasSize:0
+MARCH:hasSyllables:1
+MARCH:isa:Month
+MARCH:isa:Time Quantity
+MARCH:lifeArea:Physical

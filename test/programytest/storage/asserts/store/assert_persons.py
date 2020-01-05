@@ -68,11 +68,11 @@ class PersonsStoreAsserts(unittest.TestCase):
         self.assertEqual(collection.person(" WITH YOU "), [re.compile('(^WITH YOU | WITH YOU | WITH YOU$)', re.IGNORECASE), ' WITH ME2 '])
         self.assertEqual(collection.personalise_string("This is with you "), "This is with me2")
 
-    def assert_upload_csv_file(self, store, filename):
+    def assert_upload_csv_file(self, store):
 
         store.empty()
 
-        store.upload_from_file(filename, fileformat=Store.CSV_FORMAT)
+        store.upload_from_file(os.path.dirname(__file__) + os.sep + "data" + os.sep + "lookups" + os.sep + "csv" + os.sep + "person.csv", fileformat=Store.CSV_FORMAT)
 
         collection = PersonCollection()
         store.load(collection)

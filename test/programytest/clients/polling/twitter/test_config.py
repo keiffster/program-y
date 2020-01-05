@@ -66,9 +66,15 @@ class TwitterConfigurationTests(unittest.TestCase):
         self.assertEqual(data['auto_follow'], False)
         self.assertEqual(data['welcome_message'], "Thanks for following me.")
 
-        self.assertEqual(data['bot'], 'bot')
         self.assertEqual(data['bot_selector'], "programy.clients.botfactory.DefaultBotSelector")
         self.assertEqual(data['renderer'], "programy.clients.render.text.TextRenderer")
+
+        self.assertTrue('bots' in data)
+        self.assertTrue('bot' in data['bots'])
+        self.assertEqual(data['bot_selector'], "programy.clients.botfactory.DefaultBotSelector")
+
+        self.assertTrue('brains' in data['bots']['bot'])
+        self.assertTrue('brain' in data['bots']['bot']['brains'])
 
     def test_to_yaml_no_data(self):
         yaml = YamlConfigurationFile()

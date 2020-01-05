@@ -3,16 +3,22 @@ import unittest
 from programy.clients.restful.apihandlers import APIHandler_V2_0
 
 
-class MockBot(object):
+class MockBot:
 
     def __init__(self):
         self.default_response = "default response"
 
 
-class MockClientContext(object):
+class MockClientContext:
 
     def __init__(self, bot):
         self.bot = bot
+
+
+class MockRenderer:
+
+    def render(self, client_context, answer):
+        return answer
 
 
 class MockBotClient(object):
@@ -22,6 +28,11 @@ class MockBotClient(object):
         self._variables = variables
         self._response = response
         self._metadata = metadata
+        self._renderer = MockRenderer()
+
+    @property
+    def renderer(self):
+        return self._renderer
 
     def verify_api_key_usage(self, request, method='GET'):
         return self._verify_api_key_usage[0],  self._verify_api_key_usage[1]
@@ -73,7 +84,7 @@ class APIHandler_V2_0Tests(unittest.TestCase):
         handler = APIHandler_V2_0UnderTest(mock_bot_client)
         self.assertIsNotNone(handler)
 
-        response = handler.process_request("Hello")
+        response = handler.process_request(mock_bot_client, "Hello")
         self.assertIsNotNone(response)
         self.assertEqual(response, ({'response': {"query": "Hello",
                                                    "userId": "userid1",

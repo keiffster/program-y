@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>LET US PLAY 20 *</pattern>
+        <template>I don't like 20 questions.</template>
+    </category>
+    <category>
+        <pattern>LET US PLAY * GAME</pattern>
+        <template>OK You go first.</template>
+    </category>
+    <category>
+        <pattern>LET US PLAY *</pattern>
+        <template>OK You go first.</template>
+    </category>
+
+ </aiml>

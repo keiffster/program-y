@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>IF * IS TALLER THAN * WHO IS SHORTER</pattern>
+        <template>
+            <star index="2"/>
+            is shorter.
+        </template>
+    </category>
+    <category>
+        <pattern>IF * IS SHORTER THAN * WHO IS TALLER</pattern>
+        <template>
+            <star index="2"/>
+            is taller.
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MUCH WOOD *</pattern>
+        <template>
+            <random>
+                <li>As much as he could.</li>
+                <li>A whole forest.</li>
+                <li>Hpw much wood would you say?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS BETTER * OR *</pattern>
+        <template>
+            <random>
+                <li>
+                    <star/>
+                </li>
+                <li>
+                    <star index="2"/>
+                </li>
+                <li>They are about the same</li>
+            </random>
+            .
+        </template>
+    </category>
+   <category>
+        <pattern>ARE YOU OLDER THAN ME</pattern>
+        <template>You are older.</template>
+    </category>
+    <category>
+        <pattern>WHO IS OLDER YOU # ME</pattern>
+        <template>You are older.</template>
+    </category>
+    <category>
+        <pattern>WHO IS OLDER ME # YOU</pattern>
+        <template>You are older.</template>
+    </category>
+    <category>
+        <pattern>WHICH # IS OLDER YOU # ME</pattern>
+        <template>You are older.</template>
+    </category>
+    <category>
+        <pattern>WHICH # IS OLDER ME # YOU</pattern>
+        <template>You are older.</template>
+    </category>
+    <category>
+        <pattern>WHO IS OLDEST YOU # ME</pattern>
+        <template>You are older.</template>
+    </category>
+    <category>
+        <pattern>WHO IS OLDEST ME # YOU</pattern>
+        <template>You are older.</template>
+    </category>
+    <category>
+        <pattern>ARE YOU YOUNGER THAN ME</pattern>
+        <template>You are younger.</template>
+    </category>
+    <category>
+        <pattern>WHO IS YOUNGER YOU # ME</pattern>
+        <template>You are younger.</template>
+    </category>
+    <category>
+        <pattern>WHO IS YOUNGER ME # YOU</pattern>
+        <template>You are younger.</template>
+    </category>
+    <category>
+        <pattern>WHICH # IS YOUNGER YOU # ME</pattern>
+        <template>You are younger.</template>
+    </category>
+    <category>
+        <pattern>WHICH # IS YOUNGER ME # YOU</pattern>
+        <template>You are younger.</template>
+    </category>
+    <category>
+        <pattern>WHO IS YOUNGEST YOU # ME</pattern>
+        <template>You are younger.</template>
+    </category>
+    <category>
+        <pattern>WHO IS YOUNGEST ME # YOU</pattern>
+        <template>You are younger.</template>
+    </category>
+
+ </aiml>

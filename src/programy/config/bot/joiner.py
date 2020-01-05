@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -64,6 +64,7 @@ class BotSentenceJoinerConfiguration(BaseConfigurationData):
             data['classname'] = BotSentenceJoinerConfiguration.DEFAULT_CLASSNAME
             data['join_chars'] = BotSentenceJoinerConfiguration.DEFAULT_JOIN_CHARS
             data['terminator'] = BotSentenceJoinerConfiguration.DEFAULT_TERMINATOR
+
         else:
             data['classname'] = self._classname
             data['join_chars'] = self._join_chars

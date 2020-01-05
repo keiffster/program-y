@@ -53,7 +53,7 @@ class MongoSetsStoreTests(SetStoreAsserts):
 
         self.assert_upload_text_files_from_directory_no_subdir(store)
 
-    @unittest.skip("CSV not supported yet")
+    @unittest.skipIf(Engines.mongo is False, Engines.mongo_disabled)
     def test_upload_from_csv_file(self):
         config = MongoStorageConfiguration()
         engine = MongoStorageEngine(config)
@@ -62,7 +62,7 @@ class MongoSetsStoreTests(SetStoreAsserts):
 
         self.assert_upload_from_csv_file(store)
 
-    @unittest.skip("CSV not supported yet")
+    @unittest.skipIf(Engines.mongo is False, Engines.mongo_disabled)
     def test_upload_csv_files_from_directory_with_subdir(self):
         config = MongoStorageConfiguration()
         engine = MongoStorageEngine(config)

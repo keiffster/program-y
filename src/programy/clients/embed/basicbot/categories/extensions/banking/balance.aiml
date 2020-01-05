@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: balance.aiml -->
+    <!--  -->
+    <!-- This AIML file is part of the Y-Bot knowledge base. -->
+    <!--  -->
+    <!-- Y-Bot is Copyright &copy; 2017 by Keith Sterling. -->
+    <!--
+    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+    documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+    the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+    and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+    THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+    TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    -->
+
+    <!-- Basic entry point into request a bank balance -->
+    <!-- Create as many of these to provide a wide a richer grammar for asking for a balance -->
+    <!-- Currently defaults to NOW as the date, but you could extend this to put in a specific -->
+    <!-- date, month, year or period -->
+    <category>
+        <pattern>
+            # MY BANK BALANCE
+        </pattern>
+        <template>
+            <srai>BANK BALANCE NOW</srai>
+        </template>
+    </category>
+
+    <!-- Primary entry point ot request a balance, called from the variety of grammars above -->
+    <!-- <star /> is the only parameter which should be considered a user defined time value -->
+    <!-- Calls the extension to retrieve the balance, which should return 3 values -->
+    <!-- Pounds Pence CREDIT|DEBIT -->
+    <!-- Then calls SHOW_BALANCE to format the results into somethiing that is meaningful -->
+    <category>
+        <pattern>
+            BANK BALANCE *
+        </pattern>
+        <template>
+            <srai>
+                SHOW_BALANCE
+                <extension path="programy.extensions.banking.balance.BankingBalanceExtension">
+                    <star />
+                </extension>
+            </srai>
+        </template>
+    </category>
+
+    <!-- Format the result of calling the utils, provide a polite result back to the customer -->
+    <category>
+        <pattern>
+            SHOW_BALANCE * * *
+        </pattern>
+        <template>
+            Your bank balance is currently <implode>£<star index="1" />.<star index="2" />.</implode>
+        </template>
+    </category>
+    
+</aiml>

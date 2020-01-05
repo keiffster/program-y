@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -94,7 +94,8 @@ class CSVFileReader(CSVFileProcessor):
         self._file = open(self._filename, self._mode, encoding=self._encoding)
         self._csv_reader = csv.reader(self._file, delimiter=delimiter, quotechar=quotechar, quoting=quoting)
 
-    def process_lines(self, name, processor):
+    def process_lines(self, name, processor, verbose=False):
+        del verbose
         count = 0
         success = 0
         for line in self._csv_reader:

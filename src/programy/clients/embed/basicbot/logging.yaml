@@ -1,0 +1,35 @@
+version: 1
+disable_existing_loggers: true
+
+formatters:
+  conversation:
+    format: '%(asctime)s - %(message)s'
+  simple:
+    format: '%(asctime)s  %(name)-10s %(levelname)-7s - %(message)s'
+
+handlers:
+    file:
+        class: logging.handlers.RotatingFileHandler
+        formatter: simple
+        filename: /tmp/y-bot.log
+        maxBytes: 20972152
+        backupCount: 10
+        encoding: utf-8
+
+    conversation:
+        class : logging.handlers.RotatingFileHandler
+        formatter: conversation
+        filename: /tmp/y-bot-conversation.log
+
+loggers:
+  conversation:
+    level: DEBUG
+    handlers:
+      - conversation
+    propogate: no
+
+root:
+    level: DEBUG
+    handlers:
+        - file
+

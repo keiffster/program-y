@@ -82,13 +82,34 @@ class MapStoreAsserts(unittest.TestCase):
         store.upload_from_directory(os.path.dirname(__file__) + os.sep + "data" + os.sep + "maps" + os.sep + "text", subdir=False)
 
         map_collection = MapCollection()
-        store.load(map_collection, 'TESTMAP')
+        store.load_all(map_collection)
 
         self.assertTrue(map_collection.contains('TESTMAP'))
         map = map_collection.map('TESTMAP')
         self.assertIsNotNone(map)
         self.assertTrue('ANT' in map)
         self.assertEqual('6', map['ANT'])
+
+    def assert_upload_text_files_from_directory_with_subdir(self, store, filestore):
+        store.empty()
+
+        store.upload_from_directory(os.path.dirname(__file__) + os.sep + "data" + os.sep + "maps" + os.sep + "text", subdir=True)
+
+        map_collection = MapCollection()
+        store.load_all(map_collection)
+
+        self.assertTrue(map_collection.contains('TESTMAP'))
+        map = map_collection.map('TESTMAP')
+        self.assertIsNotNone(map)
+        self.assertTrue('ANT' in map)
+        self.assertEqual('6', map['ANT'])
+
+        self.assertTrue(map_collection.contains('TESTMAP2'))
+        self.assertEqual(filestore, map_collection.storename('TESTMAP2'))
+        map = map_collection.map('TESTMAP2')
+        self.assertIsNotNone(map)
+        self.assertTrue('BIRD' in map)
+        self.assertEqual('TWEET', map['BIRD'])
 
     def assert_upload_from_csv_file(self, store):
         store.empty()
@@ -104,7 +125,7 @@ class MapStoreAsserts(unittest.TestCase):
         self.assertTrue('ANT' in map)
         self.assertEqual('6', map['ANT'])
 
-    def assert_upload_csv_files_from_directory_with_subdir(self, store):
+    def assert_upload_csv_files_from_directory_with_subdir(self, store, filestore):
      
         store.empty()
 
@@ -120,11 +141,11 @@ class MapStoreAsserts(unittest.TestCase):
         self.assertEqual('6', map['ANT'])
 
         self.assertTrue(map_collection.contains('TESTMAP2'))
-        self.assertEqual('sql', map_collection.storename('TESTMAP2'))
+        self.assertEqual(filestore, map_collection.storename('TESTMAP2'))
         map = map_collection.map('TESTMAP2')
         self.assertIsNotNone(map)
         self.assertTrue('BIRD' in map)
-        self.assertEqual('fur', map['BIRD'])
+        self.assertEqual('FEATHERS', map['BIRD'])
 
     def assert_empty_named(self, store):
         store.empty()

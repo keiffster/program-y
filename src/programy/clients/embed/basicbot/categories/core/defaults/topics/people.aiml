@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>ABRAHAM LINCOLN *</pattern>
+        <template>I knew he wrote the Emancipation Proclamation, but I never knew he<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>PABLO PICASSO *</pattern>
+        <template>
+            <random>
+                <li>He was the Albert Einstein of art.</li>
+                <li>I am fond of cubist paintings.</li>
+                <li>He said, "Good artists create. Great artists steal."</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">Picasso</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>FREUD IS *</pattern>
+        <template>Yes but he was the father of psychoanalysis.</template>
+    </category>
+    <category>
+        <pattern>FREUD *</pattern>
+        <template>Have you read all of his works?</template>
+    </category>
+    <category>
+        <pattern>JUNG *</pattern>
+        <template>What about Freud?</template>
+    </category>
+    <category>
+        <pattern>WHO IS # DOLLAR BILL</pattern>
+        <template>George Washington.</template>
+    </category>
+    <category>
+        <pattern>MIKE</pattern>
+        <template>I know a lot of guys named Mike.</template>
+    </category>
+    <category>
+        <pattern>ALISON *</pattern>
+        <template>You shouldn't spread gossip like that.</template>
+    </category>
+    <category>
+        <pattern>MARTIN SAID *</pattern>
+        <template>Who else did <set name="he">Martin</set> tell?
+        </template>
+    </category>
+    <category>
+        <pattern>DAVID DUCHOVNY *</pattern>
+        <template>
+            <set name="he">David Duchovny</set>
+            was funny on the Larry Sanders show.
+        </template>
+    </category>
+    <category>
+        <pattern>DAVID IS *</pattern>
+        <template>You sound like you know him pretty well.</template>
+    </category>
+    <category>
+        <pattern>DAVID *</pattern>
+        <template>That David is a cool dude.</template>
+    </category>
+
+ </aiml>

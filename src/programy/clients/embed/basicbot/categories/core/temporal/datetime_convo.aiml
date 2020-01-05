@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: datetime_core.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Created for Y-Bot by Keith Sterling March 2017 -->
+    <!-- This file contains conversation elements that call down into datetime_core.aiml to produce a result -->
+
+    <category>
+        <pattern>
+            # THE SEASON ^
+        </pattern>
+        <template>
+            It is <srai>SEASON</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            # WHAT # SEASON ^
+        </pattern>
+        <template>
+            It is <srai>SEASON</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            # WHICH # SEASON ^
+        </pattern>
+        <template>
+            It is <srai>SEASON</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            # WHAT # MONTH ^
+        </pattern>
+        <template>
+            <srai>MONTH</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            # WHICH # MONTH ^
+        </pattern>
+        <template>
+            <srai>MONTH</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            # WHAT # DAY ^
+        </pattern>
+        <template>
+            <srai>DAY</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            # WHICH # DAY ^
+        </pattern>
+        <template>
+            <srai>DAY</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            TODAY
+        </pattern>
+        <template>
+            <srai>DAY</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            # WHAT * TODAY ^
+        </pattern>
+        <template>
+            <srai>DAY</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            # WHICH # TODAY ^
+        </pattern>
+        <template>
+            <srai>DAY</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            # WHAT # DAY # TOMORROW
+        </pattern>
+        <template>
+            It will be <srai>TOMORROW</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            # WHAT IS TOMORROW
+        </pattern>
+        <template>
+            It will be <srai>TOMORROW</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            # WHICH # DAY # TOMORROW
+        </pattern>
+        <template>
+            It will be <srai>TOMORROW</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            # WHAT # YEAR ^
+        </pattern>
+        <template>
+            <srai>YEAR</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            # WHICH # YEAR ^
+        </pattern>
+        <template>
+            <srai>YEAR</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            # WHAT # TODAYS DATE ^
+        </pattern>
+        <template>
+            <srai>DATE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            # WHAT # DATE ^
+        </pattern>
+        <template>
+            <srai>DATE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            # WHAT # DATE ^ TOMORROW ^
+        </pattern>
+        <template>
+            <srai>DATE TOMORROW</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            # WHAT # TIME ^
+        </pattern>
+        <template>
+            <srai>TIME</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            TIME NOW
+        </pattern>
+        <template>
+            <srai>TIME</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            DATE NOW
+        </pattern>
+        <template>
+            <srai>DATE</srai>
+        </template>
+    </category>
+
+</aiml>

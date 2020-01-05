@@ -73,11 +73,11 @@ class DenormalStoreAsserts(unittest.TestCase):
         self.assertEqual(collection.denormalise(" DOT UK "), [re.compile('(^DOT UK | DOT UK | DOT UK$)', re.IGNORECASE), '.UK'])
         self.assertEqual(collection.denormalise_string("keiffster DOT UK"), "keiffster.uk")
 
-    def assert_upload_csv_file(self, store, filename):
+    def assert_upload_csv_file(self, store):
 
         store.empty()
 
-        store.upload_from_file(filename, fileformat=Store.CSV_FORMAT)
+        store.upload_from_file(os.path.dirname(__file__) + os.sep + "data" + os.sep + "lookups" + os.sep + "csv" + os.sep + "denormal.csv",  fileformat=Store.CSV_FORMAT)
 
         collection = DenormalCollection()
         store.load(collection)

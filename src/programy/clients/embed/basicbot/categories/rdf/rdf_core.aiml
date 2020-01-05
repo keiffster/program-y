@@ -1,0 +1,1262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: triple.aiml -->
+    <!-- Author: Dr. Richard S. Wallace -->
+    <!-- Last modified: July 19, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the ALICE2 0.0.5 chat bot knowledge base. -->
+    <!--  -->
+    <!-- The ALICE2 brain is Copyright &copy; 2014 by ALICE AI Foundation. -->
+    <!--  -->
+    <!-- The ALICE2 brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information see http://www.alicebot.org -->
+	<!--
+	     Modified by Keith Sterling oct 2017
+	-->
+    <!--  -->
+
+    <category>
+        <pattern>GENSYM</pattern>
+        <template>
+            <condition name="symcount">
+                <li value="unknown">symbol
+                    <set name="symcount">0</set>
+                </li>
+                <li>symbol
+                    <set name="symcount">
+                        <map name="successor">
+                            <get name="symcount"/>
+                        </map>
+                    </set>
+                </li>
+            </condition>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            <set>entity</set>
+        </pattern>
+        <template>
+            <srai>WHAT IS A
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>SIZE TABLE</pattern>
+        <template>
+            <think>
+                <set var="size">0</set>
+            </think>
+            <condition var="size">
+
+                <li value="16"/>
+
+                <li><get var="size"/>:
+                    <think>
+                        <set var="items">
+                            <select>
+                                <vars>?x</vars>
+                                <q>
+                                    <subj>?x</subj>
+                                    <pred>hasSize</pred>
+                                    <obj>
+                                        <get var="size"/>
+                                    </obj>
+                                </q>
+                            </select>
+                        </set>
+                        <set var="size">
+                            <map>
+                                <name>successor</name>
+                                <get var="size"/>
+                            </map>
+                        </set>
+                    </think>
+
+                    <condition var="items">
+                        <li value="NIL"/>
+                        <li>
+                            <think>
+                                <set var="head">
+                                    <first>
+                                        <get var="items"/>
+                                    </first>
+                                </set>
+                                <set var="items">
+                                    <rest>
+                                        <get var="items"/>
+                                    </rest>
+                                </set>
+                            </think>
+                            "
+                            <get var="?x">
+                                <tuple>
+                                    <get var="head"/>
+                                </tuple>
+                            </get>
+                            "
+                            <srai>COMMAFY
+                                <get var="items"/>
+                            </srai>
+                            <loop/>
+                        </li>
+                    </condition>
+                    <loop/>
+                </li>
+
+            </condition>
+        </template>
+    </category>
+
+    <category>
+        <pattern>COMMAFY NIL</pattern>
+        <template>
+        </template>
+    </category>
+
+    <category>
+        <pattern>COMMAFY *</pattern>
+        <template>,</template>
+    </category>
+
+    <category>
+        <pattern>ALL ISA</pattern>
+        <template>
+            <set var="tuples">
+                <select>
+                    <vars>?x ?y ?z ?w</vars>
+                    <q>
+                        <subj>?x</subj>
+                        <pred>isa</pred>
+                        <obj>?y</obj>
+                    </q>
+                    <q>
+                        <subj>?y</subj>
+                        <pred>isa</pred>
+                        <obj>?z</obj>
+                    </q>
+                    <q>
+                        <subj>?z</subj>
+                        <pred>isa</pred>
+                        <obj>?w</obj>
+                    </q>
+                </select>
+            </set>
+            <condition var="tuples">
+                <li value="NIL"/>
+                <li>
+                    <think>
+                        <set var="head">
+                            <first>
+                                <get var="tuples"/>
+                            </first>
+                        </set>
+                        <set var="tuples">
+                            <rest>
+                                <get var="tuples"/>
+                            </rest>
+                        </set>
+                    </think>
+                    <get var="?x">
+                        <tuple>
+                            <get var="head"/>
+                        </tuple>
+                    </get>
+                    --&gt;
+                    <get var="?y">
+                        <tuple>
+                            <get var="head"/>
+                        </tuple>
+                    </get>
+                    --&gt;
+                    <get var="?z">
+                        <tuple>
+                            <get var="head"/>
+                        </tuple>
+                    </get>
+                    --&gt;
+                    <get var="?w">
+                        <tuple>
+                            <get var="head"/>
+                        </tuple>
+                    </get>
+                    ,
+                    <loop/>
+                </li>
+            </condition>
+        </template>
+    </category>
+
+     <category>
+        <pattern>APPEND NIL *</pattern>
+        <template>
+            <srai>APPEND
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>APPEND * NIL</pattern>
+        <template>
+            <srai>APPEND
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>APPEND NIL NIL</pattern>
+        <template>NIL</template>
+    </category>
+
+    <category>
+        <pattern>APPEND *</pattern>
+        <template>
+            <star/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>GETPURPOSE *</pattern>
+        <template>
+            <think>
+                <set var="purpose">
+                    <first>
+                        <select>
+                            <vars>?x</vars>
+                            <q>
+                                <subj>
+                                    <star/>
+                                </subj>
+                                <pred>hasPurpose</pred>
+                                <obj>?x</obj>
+                            </q>
+                        </select>
+                    </first>
+                </set>
+            </think>
+            First tuple =<get var="purpose"/>.
+            Get ?x from tuple =
+            <get var="?x">
+                <tuple>
+                    <get var="purpose"/>
+                </tuple>
+            </get>
+            .
+            <condition var="purpose">
+                <li value="NIL">I don't know what
+                    <star/>
+                    is for.
+                </li>
+                <li>
+                    <get var="?x">
+                        <tuple>
+                            <get var="purpose"/>
+                        </tuple>
+                    </get>
+                </li>
+            </condition>
+        </template>
+    </category>
+
+     <category>
+        <pattern>BOTHLIFEAREA *</pattern>
+        <template>They are both found in the
+            <star/>
+            area of life.
+        </template>
+    </category>
+
+    <category>
+        <pattern>BOTHLIFEAREA EDUCATION</pattern>
+        <template>They are both something you could learn about in school.</template>
+    </category>
+
+    <category>
+        <pattern>BOTHLIFEAREA RECREATION</pattern>
+        <template>They are both something you might do for recreation.</template>
+    </category>
+
+    <category>
+        <pattern>BOTHLIFEAREA PHYSICAL</pattern>
+        <template>They are both part of the physical world.</template>
+    </category>
+
+    <category>
+        <pattern>BOTHLIFEAREA SPIRITUAL</pattern>
+        <template>They are both spiritual matters.</template>
+    </category>
+
+    <category>
+        <pattern>BOTHLIFEAREA ENTERTAINMENT</pattern>
+        <template>They are both connected with entertainment.</template>
+    </category>
+
+    <category>
+        <pattern>BOTHLIFEAREA FAMILY</pattern>
+        <template>They are both part of family life.</template>
+    </category>
+
+    <category>
+        <pattern>BOTHLIFEAREA SOCIAL</pattern>
+        <template>They are both part of social life.</template>
+    </category>
+
+    <category>
+        <pattern>ONELIFEAREA * *</pattern>
+        <template>
+            <star index="2"/>
+            is part of the
+            <star/>
+            area of life
+        </template>
+    </category>
+
+    <category>
+        <pattern>ONELIFEAREA EDUCATION *</pattern>
+        <template>
+            <star/>
+            is something you could learn about in school
+        </template>
+    </category>
+
+    <category>
+        <pattern>ONELIFEAREA RECREATION *</pattern>
+        <template>
+            <star/>
+            is something you might do for recreation
+        </template>
+    </category>
+
+    <category>
+        <pattern>ONELIFEAREA PHYSICAL *</pattern>
+        <template>
+            <star/>
+            is part of the physical world
+        </template>
+    </category>
+
+    <category>
+        <pattern>ONELIFEAREA SPIRITUAL *</pattern>
+        <template>
+            <star/>
+            is a spiritual matter
+        </template>
+    </category>
+
+    <category>
+        <pattern>ONELIFEAREA ENTERTAINMENT *</pattern>
+        <template>
+            <star/>
+            is connected with entertainment
+        </template>
+    </category>
+
+    <category>
+        <pattern>ONELIFEAREA FAMILY *</pattern>
+        <template>
+            <star/>
+            is part of family life
+        </template>
+    </category>
+
+    <category>
+        <pattern>ONELIFEAREA SOCIAL *</pattern>
+        <template>
+            <star/>
+            is part of social life
+        </template>
+    </category>
+
+    <category>
+        <pattern>UNIQUEWORDS *</pattern>
+        <template>
+            <star/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>UNIQUEWORDS * *</pattern>
+        <template>
+            <think>
+                <set var="contains">
+                    <srai>CONTAINSLETTERLIST
+                        <star/>
+                        LIST
+                        <star index="2"/>
+                        END
+                    </srai>
+                </set>
+            </think>
+            <condition var="contains">
+                <li value="true">
+                    <srai>UNIQUEWORDS
+                        <star index="2"/>
+                    </srai>
+                </li>
+                <li>
+                    <star/>
+                    <srai>UNIQUEWORDS
+                        <star index="2"/>
+                    </srai>
+                </li>
+            </condition>
+        </template>
+    </category>
+
+    <category>
+        <pattern>SAMEPURPOSE * SAMEAS *</pattern>
+        <template>
+            <think>
+                <set var="p1">
+                    <srai>WHAT IS
+                        <star/>
+                        FOR
+                    </srai>
+                </set>
+                <set var="p2">
+                    <srai>WHAT IS
+                        <star index="2"/>
+                        FOR
+                    </srai>
+                </set>
+            </think>
+            <srai>IS
+                <get var="p1"/>
+                EQUALTO
+                <get var="p2"/>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>SAMELIFEAREA * SAMEAS *</pattern>
+        <template>
+            <think>
+                <set var="a1">
+                    <srai>WHAT AREA OF LIFE IS
+                        <star/>
+                    </srai>
+                </set>
+                <set var="a2">
+                    <srai>WHAT AREA OF LIFE IS
+                        <star index="2"/>
+                    </srai>
+                </set>
+            </think>
+            <srai>IS
+                <get var="a1"/>
+                EQUALTO
+                <get var="a2"/>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>CONTAINSLETTER * *</pattern>
+        <template>
+            <srai>CONTAINSLETTERLIST
+                <star/>
+                LIST
+                <explode>
+                    <star index="2"/>
+                </explode>
+                END
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>CONTAINSLETTERLIST * LIST * END</pattern>
+        <template>
+            <srai>IS
+                <star/>
+                EQUALTO
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>CONTAINSLETTERLIST * LIST * * END</pattern>
+        <template>
+            <think>
+                <set var="firstletter">
+                    <srai>IS
+                        <star/>
+                        EQUALTO
+                        <star index="2"/>
+                    </srai>
+                </set>
+            </think>
+            <condition var="firstletter">
+                <li value="true">true</li>
+                <li>
+                    <srai>CONTAINSLETTERLIST
+                        <star/>
+                        LIST
+                        <star index="3"/>
+                        END
+                    </srai>
+                </li>
+            </condition>
+        </template>
+    </category>
+
+    <category>
+        <pattern>LETTERSINCOMMON * XWORD *</pattern>
+        <template>
+            <think>
+                <set var="any">false</set>
+                <set var="letterlist">
+                    <explode>
+                        <star/>
+                    </explode>
+                    END
+                </set>
+            </think>
+            <condition var="letterlist">
+                <li value="END">
+                    <condition value="false" var="any">None</condition>
+                </li>
+                <li>
+                    <think>
+                        <set var="first">
+                            <srai>FIRSTWORD
+                                <get var="letterlist"/>
+                            </srai>
+                        </set>
+                        <set var="letterlist">
+                            <srai>REMAININGWORDS
+                                <get var="letterlist"/>
+                            </srai>
+                        </set>
+                        <set var="contains">
+                            <srai>CONTAINSLETTER
+                                <get var="first"/>
+                                <star index="2"/>
+                            </srai>
+                        </set>
+                    </think>
+                    <condition value="true" var="contains">
+                        <think>
+                            <set var="any">true</set>
+                        </think>
+                        <get var="first"/>
+                    </condition>
+                    <loop/>
+                </li>
+            </condition>
+        </template>
+    </category>
+
+    <category>
+        <pattern>COMMASEPWORDS *</pattern>
+        <template>
+            <star/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>COMMASEPWORDS * *</pattern>
+        <template>
+            <star/>
+            and
+            <star index="2"/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>COMMASEPWORDS * * *</pattern>
+        <template><star/>,
+            <srai>COMMASEPWORDS
+                <star index="2"/>
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>COMMASEPLIST *</pattern>
+        <template>
+            <star/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>COMMASEPLIST CONS * NIL</pattern>
+        <template>
+            <star/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>COMMASEPLIST CONS * CONS * NIL</pattern>
+        <template>
+            <star/>
+            and
+            <star index="2"/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>COMMASEPLIST CONS *</pattern>
+        <template><star/>,
+            <srai>COMMASEPLIST CONS
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>COMMONCLASSES * XOBJECT *</pattern>
+        <template>
+            <think>
+                <set var="c1">
+                    <srai>LISTOBJECTS SUBJ
+                        <star/>
+                        PRED isa
+                    </srai>
+                </set>
+                <set var="c2">
+                    <srai>LISTOBJECTS SUBJ
+                        <star index="2"/>
+                        PRED isa
+                    </srai>
+                </set>
+            </think>
+            <condition var="c1">
+                <li value="NIL">NIL</li>
+                <li>
+                    <think>
+                        <set var="head">
+                            <srai>LISTCAR
+                                <get var="c1"/>
+                            </srai>
+                        </set>
+                        <set var="c1">
+                            <srai>LISTCDR
+                                <get var="c1"/>
+                            </srai>
+                        </set>
+                        <set var="member">
+                            <srai>LISTMEMBER
+                                <get var="head"/>
+                                OF LIST
+                                <get var="c2"/>
+                            </srai>
+                        </set>
+                    </think>
+                    <condition value="true" var="member">CONS
+                        <get var="head"/>
+                    </condition>
+                    <loop/>
+                </li>
+            </condition>
+        </template>
+    </category>
+
+    <category>
+        <pattern>SINGULAR *</pattern>
+        <template>
+            <map>
+                <name>singular</name>
+                <star/>
+            </map>
+        </template>
+    </category>
+
+    <category>
+        <pattern>PLURAL *</pattern>
+        <template>
+            <map>
+                <name>plural</name>
+                <star/>
+            </map>
+        </template>
+    </category>
+
+    <category>
+        <pattern>GETOBJECT SUBJ * PRED *</pattern>
+        <template>
+            <get var="?x">
+                <tuple>
+                    <first>
+                        <select>
+                            <vars>?x</vars>
+                            <q>
+                                <subj>
+                                    <star/>
+                                </subj>
+                                <pred>
+                                    <star index="2"/>
+                                </pred>
+                                <obj>?x</obj>
+                            </q>
+                        </select>
+                    </first>
+                </tuple>
+            </get>
+        </template>
+    </category>
+
+    <category>
+        <pattern>LISTOBJECTS SUBJ * PRED *</pattern>
+        <template>
+            <think>
+                <set var="tuples">
+                    <select>
+                        <vars>?x</vars>
+                        <q>
+                            <subj>
+                                <star/>
+                            </subj>
+                            <pred>
+                                <star index="2"/>
+                            </pred>
+                            <obj>?x</obj>
+                        </q>
+                    </select>
+                </set>
+            </think>
+            <condition var="tuples">
+                <li value="NIL">NIL</li>
+                <li>
+                    <think>
+                        <set var="head">
+                            <first>
+                                <get var="tuples"/>
+                            </first>
+                        </set>
+                        <set var="tuples">
+                            <rest>
+                                <get var="tuples"/>
+                            </rest>
+                        </set>
+                    </think>
+                    CONS
+                    <get var="?x">
+                        <tuple>
+                            <get var="head"/>
+                        </tuple>
+                    </get>
+                    <loop/>
+                </li>
+            </condition>
+        </template>
+    </category>
+
+    <category>
+        <pattern>SIZEOF *</pattern>
+        <template>
+            <get var="?x">
+                <tuple>
+                    <first>
+                        <select>
+                            <q>
+                                <subj>
+                                    <star/>
+                                </subj>
+                                <pred>hasSize</pred>
+                                <obj>?x</obj>
+                            </q>
+                        </select>
+                    </first>
+                </tuple>
+            </get>
+        </template>
+    </category>
+
+    <category>
+        <pattern>SPEEDOF *</pattern>
+        <template>
+            <get var="?x">
+                <tuple>
+                    <first>
+                        <select>
+                            <q>
+                                <subj>
+                                    <star/>
+                                </subj>
+                                <pred>hasSpeed</pred>
+                                <obj>?x</obj>
+                            </q>
+                        </select>
+                    </first>
+                </tuple>
+            </get>
+        </template>
+    </category>
+
+    <category>
+        <pattern>LARGEROF * AND *</pattern>
+        <template>
+            <think>
+                <set var="thing1">
+                    <star/>
+                </set>
+                <set var="thing2">
+                    <star index="2"/>
+                </set>
+                <set var="result">
+                    <srai>IS
+                        <get var="thing1"/>
+                        LARGER THAN
+                        <get var="thing2"/>
+                    </srai>
+                </set>
+            </think>
+            <condition var="result">
+                <li value="YES">
+                    <get var="thing1"/>
+                </li>
+                <li value="NO">
+                    <get var="thing2"/>
+                </li>
+                <li>unknown</li>
+            </condition>
+        </template>
+    </category>
+
+    <category>
+        <pattern>LARGEROF <set>entity</set> AND
+            <set>entity</set>
+        </pattern>
+        <template>
+            <think>
+                <set var="s1">
+                    <srai>SIZEOF
+                        <star/>
+                    </srai>
+                </set>
+                <set var="s2">
+                    <srai>SIZEOF
+                        <star index="2"/>
+                    </srai>
+                </set>
+            </think>
+            <condition var="s1">
+                <li value="unknown">unknown</li>
+                <li>
+                    <condition var="s2">
+                        <li value="unknown">unknown</li>
+                        <li>
+                            <value>
+                                <get var="s1"/>
+                            </value>
+                            same
+                        </li>
+                        <li>
+                            <think>
+                                <set var="larger">
+                                    <srai>LARGEROF
+                                        <get var="s1"/>
+                                        <get var="s2"/>
+                                    </srai>
+                                </set>
+                            </think>
+                            <condition var="larger">
+                                <li>
+                                    <value>
+                                        <get var="s1"/>
+                                    </value>
+                                    <star/>
+                                </li>
+                                <li>
+                                    <star index="2"/>
+                                </li>
+                            </condition>
+                        </li>
+                    </condition>
+                </li>
+            </condition>
+        </template>
+    </category>
+
+    <category>
+        <pattern>FASTEROF <set>entity</set> AND
+            <set>entity</set>
+        </pattern>
+        <template>
+            <think>
+                <set var="s1">
+                    <srai>SPEEDOF
+                        <star/>
+                    </srai>
+                </set>
+                <set var="s2">
+                    <srai>SPEEDOF
+                        <star index="2"/>
+                    </srai>
+                </set>
+            </think>
+            <condition var="s1">
+                <li value="unknown">unknown</li>
+                <li>
+                    <condition var="s2">
+                        <li value="unknown">unknown</li>
+                        <li>
+                            <value>
+                                <get var="s1"/>
+                            </value>
+                            same
+                        </li>
+                        <li>
+                            <think>
+                                <set var="larger">
+                                    <srai>LARGEROF
+                                        <get var="s1"/>
+                                        <get var="s2"/>
+                                    </srai>
+                                </set>
+                            </think>
+                            <condition var="larger">
+                                <li>
+                                    <value>
+                                        <get var="s1"/>
+                                    </value>
+                                    <star/>
+                                </li>
+                                <li>
+                                    <star index="2"/>
+                                </li>
+                            </condition>
+                        </li>
+                    </condition>
+                </li>
+            </condition>
+        </template>
+    </category>
+
+    <category>
+        <pattern>FASTEROF *</pattern>
+        <template>unknown</template>
+    </category>
+
+    <category>
+        <pattern>LARGEROF *</pattern>
+        <template>unknown</template>
+    </category>
+
+    <category>
+        <pattern>SMALLEROF <set>entity</set> AND
+            <set>entity</set>
+        </pattern>
+        <template>
+            <think>
+                <set var="s1">
+                    <srai>SIZEOF
+                        <star/>
+                    </srai>
+                </set>
+                <set var="s2">
+                    <srai>SIZEOF
+                        <star index="2"/>
+                    </srai>
+                </set>
+            </think>
+            <condition var="s1">
+                <li value="unknown">unknown</li>
+                <li>
+                    <condition var="s2">
+                        <li value="unknown">unknown</li>
+                        <li>
+                            <value>
+                                <get var="s1"/>
+                            </value>
+                            same
+                        </li>
+                        <li>
+                            <think>
+                                <set var="smaller">
+                                    <srai>SMALLEROF
+                                        <get var="s1"/>
+                                        <get var="s2"/>
+                                    </srai>
+                                </set>
+                            </think>
+                            <condition var="smaller">
+                                <li>
+                                    <value>
+                                        <get var="s1"/>
+                                    </value>
+                                    <star/>
+                                </li>
+                                <li>
+                                    <star index="2"/>
+                                </li>
+                            </condition>
+                        </li>
+                    </condition>
+                </li>
+            </condition>
+        </template>
+    </category>
+
+    <category>
+        <pattern>SYLLABLES *</pattern>
+        <template>
+            <think>
+                <set var="result">
+                    <q>
+                        <subj>
+                            <star/>
+                        </subj>
+                        <pred>hasSyllables</pred>
+                    </q>
+                </set>
+            </think>
+            <condition var="result">
+                <li value="NIL">unknown</li>
+                <li>
+                    <object>
+                        <srai>LISTCAR
+                            <get var="result"/>
+                        </srai>
+                    </object>
+                </li>
+            </condition>
+        </template>
+    </category>
+
+    <category>
+        <pattern>IS * MEMBEROF *</pattern>
+        <template>
+            <think>
+                <set var="types">
+                    <srai>WHAT ISA
+                        <star/>
+                    </srai>
+                </set>
+                <condition var="types">
+                    <li value="NIL">
+                        <set var="result">
+                            <sraix service="pannous">IS
+                                <star/>
+                                A
+                                <star index="2"/>
+                            </sraix>
+                        </set>
+                    </li>
+                    <li>
+                        <set var="result">No.</set>
+                    </li>
+                </condition>
+            </think>
+            <condition var="types">
+                <li value="NIL"/>
+                <li>
+                    <think>
+                        <set var="head">
+                            <srai>LISTCAR
+                                <get var="types"/>
+                            </srai>
+                        </set>
+                        <set var="types">
+                            <srai>LISTCDR
+                                <get var="types"/>
+                            </srai>
+                        </set>
+                        <condition>
+                            <var>head</var>
+                            <value>
+                                <star index="2"/>
+                            </value>
+                            <set var="result">Yes.</set>
+                        </condition>
+                    </think>
+                    <loop/>
+                </li>
+            </condition>
+            <get var="result"/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>ADDTRIPLE * * *</pattern>
+        <template>
+            <addtriple>
+                <subj>
+                    <star/>
+                </subj>
+                <pred>
+                    <star index="2"/>
+                </pred>
+                <obj>
+                    <star index="3"/>
+                </obj>
+            </addtriple>
+        </template>
+    </category>
+
+    <category>
+        <pattern>LIST TRIPLES</pattern>
+        <template>
+            <select>
+                <vars>?subj ?pred ?obj</vars>
+                <q>
+                    <subj>?subj</subj>
+                    <pred>?pred</pred>
+                    <obj>?obj</obj>
+                </q>
+            </select>
+        </template>
+    </category>
+
+    <category>
+        <pattern>FIRST *</pattern>
+        <template>
+            <first>
+                <star/>
+            </first>
+        </template>
+    </category>
+
+    <category>
+        <pattern>REST *</pattern>
+        <template>
+            <rest>
+                <star/>
+            </rest>
+        </template>
+    </category>
+
+    <category>
+        <pattern>PRINT TRIPLES</pattern>
+        <template>
+            <think>
+                <set var="list">
+                    <srai>LIST TRIPLES</srai>
+                </set>
+            </think>
+            <condition var="list">
+                <li value="NIL"/>
+                <li>
+                    <think>
+                        <set var="head">
+                            <first>
+                                <get var="list"/>
+                            </first>
+                        </set>
+                        <set var="list">
+                            <rest>
+                                <get var="list"/>
+                            </rest>
+                        </set>
+                    </think>
+                    ["
+                    <get var="?subj">
+                        <tuple>
+                            <get var="head"/>
+                        </tuple>
+                    </get>
+                    ","
+                    <get var="?pred">
+                        <tuple>
+                            <get var="head"/>
+                        </tuple>
+                    </get>
+                    ","
+                    <get var="?obj">
+                        <tuple>
+                            <get var="head"/>
+                        </tuple>
+                    </get>
+                    "]
+                    <loop/>
+                </li>
+            </condition>
+        </template>
+    </category>
+
+    <category>
+        <pattern>NAME <set>number</set> *</pattern>
+        <template>
+            <think>
+                <set var="number">
+                    <star/>
+                </set>
+                <set var="singular">
+                    <map>
+                        <name>singular</name>
+                        <star index="2"/>
+                    </map>
+                </set>
+                <set var="tuples">
+                    <select>
+                        <vars>?x</vars>
+                        <q>
+                            <subj>?x</subj>
+                            <pred>isa</pred>
+                            <obj>
+                                <get var="singular"/>
+                            </obj>
+                        </q>
+                    </select>
+                </set>
+                <set var="count">
+                    <srai>COUNTWORDS
+                        <get var="tuples"/>
+                    </srai>
+                </set>
+            </think>
+            <condition var="tuples">
+                <li value="NIL">
+                    <srai>NAME
+                        <star/>
+                        <star index="2"/>
+                    </srai>
+                </li>
+                <li>I know
+                    <get var="count"/>
+                    <star index="2"/>.
+                    <condition>
+                        <li value="NIL" var="tuples"/>
+                        <li value="0" var="number"/>
+                        <li>
+                            <think>
+                                <set var="head">
+                                    <first>
+                                        <get var="tuples"/>
+                                    </first>
+                                </set>
+                                <set var="tuples">
+                                    <rest>
+                                        <get var="tuples"/>
+                                    </rest>
+                                </set>
+                                <set var="number">
+                                    <map>
+                                        <name>predecessor</name>
+                                        <get var="number"/>
+                                    </map>
+                                </set>
+                            </think>
+                            <get var="?x">
+                                <tuple>
+                                    <get var="head"/>
+                                </tuple>
+                            </get>
+                            <condition>
+                                <li value="NIL" var="tuples">.</li>
+                                <li value="0" var="number">.</li>
+                                <li>,</li>
+                            </condition>
+                            <loop/>
+                        </li>
+                    </condition>
+                </li>
+            </condition>
+        </template>
+    </category>
+
+</aiml>

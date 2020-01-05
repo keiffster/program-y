@@ -51,8 +51,11 @@ class BrainTests(unittest.TestCase):
         yaml = YamlConfigurationFile()
         self.load_os_specific_configuration(yaml, "test_brain.yaml", "test_brain.windows.yaml")
 
+        brains_section = yaml.get_section("brains")
+        brain_section = yaml.get_section("brain", brains_section)
+
         brain_config = BrainConfiguration()
-        brain_config.load_configuration(yaml, ".")
+        brain_config.load_configuration(yaml, brain_section, ".")
 
         client = TestClient()
         client_context = client.create_client_context("testid")
@@ -79,8 +82,11 @@ class BrainTests(unittest.TestCase):
         yaml = YamlConfigurationFile()
         self.load_os_specific_configuration(yaml, "test_secure_brain.yaml", "test_secure_brain.windows.yaml")
 
+        brains_section = yaml.get_section("brains")
+        brain_section = yaml.get_section("brain", brains_section)
+
         brain_config = BrainConfiguration()
-        brain_config.load_configuration(yaml, os.path.dirname(__file__))
+        brain_config.load_configuration(yaml, brain_section, ".")
 
         client = TestClient()
         client_context = client.create_client_context("testid")
@@ -107,8 +113,11 @@ class BrainTests(unittest.TestCase):
         yaml = YamlConfigurationFile()
         self.load_os_specific_configuration(yaml, "test_brain.yaml", "test_brain.windows.yaml")
 
+        brains_section = yaml.get_section("brains")
+        brain_section = yaml.get_section("brain", brains_section)
+
         brain_config = BrainConfiguration()
-        brain_config.load_configuration(yaml, ".")
+        brain_config.load_configuration(yaml, brain_section, ".")
 
         client = TestClient()
         client_context = client.create_client_context("testid")
@@ -123,8 +132,11 @@ class BrainTests(unittest.TestCase):
         yaml = YamlConfigurationFile()
         self.load_os_specific_configuration(yaml, "test_brain.yaml", "test_brain.windows.yaml")
 
+        brains_section = yaml.get_section("brains")
+        brain_section = yaml.get_section("brain", brains_section)
+
         brain_config = BrainConfiguration()
-        brain_config.load_configuration(yaml, ".")
+        brain_config.load_configuration(yaml, brain_section, ".")
 
         client = TestClient()
         client_context = client.create_client_context("testid")
@@ -139,8 +151,12 @@ class BrainTests(unittest.TestCase):
         yaml = YamlConfigurationFile()
         self.load_os_specific_configuration(yaml, "test_secure_brain.yaml", "test_secure_brain.windows.yaml")
 
+        brains_section = yaml.get_section("brains")
+        brain_section = yaml.get_section("brain", brains_section)
+
         brain_config = BrainConfiguration()
-        brain_config.load_configuration(yaml, os.path.dirname(__file__))
+        brain_config.load_configuration(yaml, brain_section, ".")
+
         brain_config.binaries._save_binary = True
         brain_config.binaries._load_binary = False
 
@@ -160,8 +176,11 @@ class BrainTests(unittest.TestCase):
         yaml = YamlConfigurationFile()
         self.load_os_specific_configuration(yaml, "test_brain.yaml", "test_brain.windows.yaml")
 
+        brains_section = yaml.get_section("brains")
+        brain_section = yaml.get_section("brain", brains_section)
+
         brain_config = BrainConfiguration()
-        brain_config.load_configuration(yaml, ".")
+        brain_config.load_configuration(yaml, brain_section, ".")
 
         client = TestClient()
         client_context = client.create_client_context("testid")
@@ -179,8 +198,11 @@ class BrainTests(unittest.TestCase):
         yaml = YamlConfigurationFile()
         self.load_os_specific_configuration(yaml, "test_brain.yaml", "test_brain.windows.yaml")
 
+        brains_section = yaml.get_section("brains")
+        brain_section = yaml.get_section("brain", brains_section)
+
         brain_config = BrainConfiguration()
-        brain_config.load_configuration(yaml, ".")
+        brain_config.load_configuration(yaml, brain_section, ".")
 
         client = TestClient()
         client_context = client.create_client_context("testid")

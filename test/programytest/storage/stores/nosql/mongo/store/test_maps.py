@@ -43,7 +43,16 @@ class MongoMapsStoreTests(MapStoreAsserts):
 
         self.assert_upload_text_files_from_directory_no_subdir(store)
 
-    @unittest.skip("CSV not supported yet")
+    @unittest.skipIf(Engines.mongo is False, Engines.mongo_disabled)
+    def test_upload_text_files_from_directory_with_subdir(self):
+        config = MongoStorageConfiguration()
+        engine = MongoStorageEngine(config)
+        engine.initialise()
+        store = MongoMapsStore(engine)
+
+        self.assert_upload_text_files_from_directory_with_subdir(store, "mongo")
+
+    @unittest.skipIf(Engines.mongo is False, Engines.mongo_disabled)
     def test_upload_from_csv_file(self):
         config = MongoStorageConfiguration()
         engine = MongoStorageEngine(config)
@@ -52,14 +61,14 @@ class MongoMapsStoreTests(MapStoreAsserts):
 
         self.assert_upload_from_csv_file(store)
 
-    @unittest.skip("CSV not supported yet")
+    @unittest.skipIf(Engines.mongo is False, Engines.mongo_disabled)
     def test_upload_csv_files_from_directory_with_subdir(self):
         config = MongoStorageConfiguration()
         engine = MongoStorageEngine(config)
         engine.initialise()
         store = MongoMapsStore(engine)
 
-        self.assert_upload_csv_files_from_directory_with_subdir(store)
+        self.assert_upload_csv_files_from_directory_with_subdir(store, "mongo")
 
     @unittest.skipIf(Engines.mongo is False, Engines.mongo_disabled)
     def test_empty_named(self):

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>CRUISE SHIP *</pattern>
+        <template>
+            <random>
+                <li>When did you first become a master?</li>
+                <li>What was you first command?</li>
+                <li>Where did you attend merchant marine academy?</li>
+                <li>Did you come from an entertainment background?</li>
+                <li>How much of the year do you work ships?</li>
+                <li>Where is home to you?</li>
+                <li>Tell me about tour family?</li>
+                <li>When is your next vacation?</li>
+                <li>Who are the best tippers?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>* TRAINS</pattern>
+        <template>Where did you see those trains?</template>
+    </category>
+
+ </aiml>

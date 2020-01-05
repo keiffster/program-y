@@ -1,0 +1,212 @@
+Annual Event:isa:Holiday
+Annual Event:isa:Time Quantity
+DAY:hasPurpose:to measure time
+DAY:hasSize:0
+DAY:hasSyllables:1
+DAY:isa:Duration
+DAY:isa:Time Quantity
+DAY:lifeArea:Physical
+YEAR:hasPurpose:to measure time
+YEAR:hasSize:0
+YEAR:hasSyllables:1
+YEAR:isa:Duration
+YEAR:isa:Time Quantity
+YEAR:lifeArea:Physical
+YESTERDAY:hasPurpose:to measure time
+YESTERDAY:hasSize:0
+YESTERDAY:hasSyllables:3
+YESTERDAY:isa:Day
+YESTERDAY:isa:Time Quantity
+YESTERDAY:lifeArea:Physical
+WEDNESDAY:hasPurpose:to measure time
+WEDNESDAY:hasSize:0
+WEDNESDAY:hasSyllables:3
+WEDNESDAY:isa:Day
+WEDNESDAY:isa:Time Quantity
+WEDNESDAY:isa:Weekday
+WEDNESDAY:lifeArea:Physical
+WEEK:hasPurpose:to mark 7 days
+WEEK:hasSize:0
+WEEK:hasSyllables:1
+WEEK:isa:Duration
+WEEK:isa:Time Quantity
+WEEK:lifeArea:Physical
+Weekday:isa:Time Quantity
+WEEKEND:hasPurpose:to rest from the work week
+WEEKEND:hasSize:0
+WEEKEND:hasSyllables:2
+WEEKEND:isa:Duration
+WEEKEND:isa:Time Quantity
+WEEKEND:lifeArea:Physical
+TUESDAY:hasPurpose:to measure time
+TUESDAY:hasSize:0
+TUESDAY:hasSyllables:2
+TUESDAY:isa:Day
+TUESDAY:isa:Time Quantity
+TUESDAY:lifeArea:Physical
+TOMORROW:hasPurpose:to measure time
+TOMORROW:hasSize:0
+TOMORROW:hasSyllables:3
+TOMORROW:isa:Day
+TOMORROW:isa:Time Quantity
+TOMORROW:lifeArea:Physical
+TONIGHT:hasPurpose:to measure time
+TONIGHT:hasSize:0
+TONIGHT:hasSyllables:2
+TONIGHT:isa:Evening
+TONIGHT:isa:Time Quantity
+TONIGHT:lifeArea:Physical
+THURSDAY:hasPurpose:to measure time
+THURSDAY:hasSize:0
+THURSDAY:hasSyllables:2
+THURSDAY:isa:Day
+THURSDAY:isa:Time Quantity
+THURSDAY:isa:Weekday
+THURSDAY:lifeArea:Physical
+SEPTEMBER:hasPurpose:to measure time
+SEPTEMBER:hasSize:0
+SEPTEMBER:hasSyllables:3
+SEPTEMBER:isa:Month
+SEPTEMBER:isa:Time Quantity
+SEPTEMBER:lifeArea:Physical
+Season:isa:Time Quantity
+SATURDAY:hasPurpose:to measure time
+SATURDAY:hasSize:0
+SATURDAY:hasSyllables:3
+SATURDAY:isa:Day
+SATURDAY:isa:Time Quantity
+SATURDAY:lifeArea:Physical
+BIRTH:hasPurpose:to come to life
+BIRTH:hasSize:0
+BIRTH:hasSyllables:1
+BIRTH:isa:Event
+BIRTH:lifeArea:Physical
+BIRTHDAY:hasPurpose:to celebrate a birth
+BIRTHDAY:hasSize:0
+BIRTHDAY:hasSyllables:2
+BIRTHDAY:isa:Annual Event
+BIRTHDAY:isa:Time Quantity
+BIRTHDAY:lifeArea:Social
+CALENDAR:hasPurpose:to keep track of dates and appointments
+CALENDAR:hasSize:4
+CALENDAR:hasSyllables:3
+CALENDAR:isa:Time Measuring Device
+CALENDAR:isa:Tool
+CALENDAR:lifeArea:Education
+DATE:hasPurpose:to measure time
+DATE:hasSize:0
+DATE:hasSyllables:1
+DATE:isa:Event
+DATE:isa:Time Quantity
+DATE:lifeArea:Physical
+NOVEMBER:hasPurpose:to measure time
+NOVEMBER:hasSize:0
+NOVEMBER:hasSyllables:3
+NOVEMBER:isa:Month
+NOVEMBER:isa:Time Quantity
+NOVEMBER:lifeArea:Physical
+OCTOBER:hasPurpose:to measure time
+OCTOBER:hasSize:0
+OCTOBER:hasSyllables:3
+OCTOBER:isa:Month
+OCTOBER:isa:Time Quantity
+OCTOBER:lifeArea:Physical
+Time Measuring Device:isa:Tool
+TIME:hasPurpose:to measure life
+TIME:hasSize:0
+TIME:hasSyllables:1
+TIME:isa:Concept
+TIME:lifeArea:Physical
+SUNDAY:hasPurpose:to measure time
+SUNDAY:hasSize:0
+SUNDAY:hasSyllables:2
+SUNDAY:isa:Day
+SUNDAY:isa:Time Quantity
+SUNDAY:lifeArea:Physical
+MONDAY:hasPurpose:to measure time
+MONDAY:hasSize:0
+MONDAY:hasSyllables:2
+MONDAY:isa:Day
+MONDAY:isa:Time Quantity
+MONDAY:lifeArea:Physical
+FRIDAY:hasPurpose:to measure time
+FRIDAY:hasSize:0
+FRIDAY:hasSyllables:2
+FRIDAY:isa:Day
+FRIDAY:isa:Time Quantity
+FRIDAY:lifeArea:Physical
+TODAY:hasPurpose:to measure time
+TODAY:hasSize:0
+TODAY:hasSyllables:1
+TODAY:isa:Day
+TODAY:isa:Time Quantity
+TODAY:lifeArea:Physical
+NOW:hasPurpose:to be in this moment
+NOW:hasSize:0
+NOW:hasSyllables:1
+NOW:lifeArea:Physical
+NOON:hasPurpose:to mark the middle of the day
+NOON:hasSize:0
+NOON:hasSyllables:1
+NOON:lifeArea:Physical
+NIGHT:hasPurpose:to end the day
+NIGHT:hasSize:0
+NIGHT:hasSyllables:1
+NIGHT:lifeArea:Physical
+MORNING:hasPurpose:to start the day
+MORNING:hasSize:0
+MORNING:hasSyllables:2
+MORNING:lifeArea:Physical
+MAY:hasPurpose:to measure time
+MAY:hasSize:0
+MAY:hasSyllables:1
+MAY:isa:Month
+MAY:isa:Time Quantity
+MAY:lifeArea:Physical
+MINUTE:hasPurpose:to measure time
+MINUTE:hasSize:0
+MINUTE:hasSyllables:2
+MINUTE:isa:Time Interval
+MINUTE:lifeArea:Physical
+PAST:hasPurpose:to be history
+PAST:hasSize:0
+PAST:hasSyllables:1
+PAST:lifeArea:Physical
+SECOND:hasPurpose:to measure time
+SECOND:hasSize:0
+SECOND:hasSyllables:2
+SECOND:isa:Time Quantity
+SECOND:lifeArea:Physical
+Duration:isa:Time Quantity
+EVENING:hasPurpose:to end the day
+EVENING:hasSize:0
+EVENING:hasSyllables:2
+EVENING:isa:Time Measurement
+Evening:isa:Time Quantity
+EVENING:lifeArea:Physical
+TWILIGHT:hasPurpose:to end the day
+TWILIGHT:hasSize:0
+TWILIGHT:hasSyllables:2
+TWILIGHT:lifeArea:Physical
+DECEMBER:hasPurpose:to measure time
+DECEMBER:hasSize:0
+DECEMBER:hasSyllables:3
+DECEMBER:isa:Month
+DECEMBER:isa:Time Quantity
+DECEMBER:lifeArea:Physical
+Event:isa:Time Quantity
+FUTURE:hasPurpose:to unfold
+FUTURE:hasSize:0
+FUTURE:hasSyllables:2
+FUTURE:isa:Time Measurement
+FUTURE:lifeArea:Physical
+HISTORY:hasPurpose:to chronicle the past
+HISTORY:hasSize:0
+HISTORY:hasSyllables:3
+HISTORY:isa:Subject
+HISTORY:lifeArea:Education
+NEVER:hasPurpose:to not occur at any time
+NEVER:hasSize:0
+NEVER:hasSyllables:2
+NEVER:lifeArea:Physical
+

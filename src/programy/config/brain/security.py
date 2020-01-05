@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -66,6 +66,7 @@ class BrainSecurityAuthenticationConfiguration(BrainSecurityConfiguration):
             data['classname'] = "programy.security.authenticate.passthrough.BasicPassThroughAuthenticationService"
             data['denied_srai'] = "AUTHENTICATION_FAILED"
             data['denied_text'] = "Access Denied!"
+
         else:
             data['classname'] = self._classname
             data['denied_srai'] = self._denied_srai
@@ -91,6 +92,7 @@ class BrainSecurityAuthorisationConfiguration(BrainSecurityConfiguration):
             data['classname'] = "programy.security.authorise.usergroupsauthorisor.BasicUserGroupAuthorisationService"
             data['denied_srai'] = "AUTHORISATION_FAILED"
             data['denied_text'] = "Access Denied!"
+
         else:
             data['classname'] = self._classname
             data['denied_srai'] = self._denied_srai
@@ -116,6 +118,7 @@ class BrainSecurityAccountLinkerConfiguration(BrainSecurityConfiguration):
             data['classname'] = "programy.security.linking.accountlinker.BasicAccountLinkerService"
             data['denied_srai'] = "ACCOUNT_LINKING_FAILED"
             data['denied_text'] = "Unable to link accounts!"
+
         else:
             data['classname'] = self._classname
             data['denied_srai'] = self._denied_srai

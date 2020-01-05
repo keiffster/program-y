@@ -162,7 +162,7 @@ For more information see [url]
 	<category>
 		<pattern>BOT PROPERTY DEFAULT GET</pattern>
 		<template>
-		    <bot name='default-get' />
+		    <bot name='default_get' />
 		</template>
 	</category>
 
@@ -176,7 +176,7 @@ For more information see [url]
 	<category>
 		<pattern>BOT PROPERTY DEFAULT MAP</pattern>
 		<template>
-		    <bot name='default-map' />
+		    <bot name='default_map' />
 		</template>
 	</category>
 

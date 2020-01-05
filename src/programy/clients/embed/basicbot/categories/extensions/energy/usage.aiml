@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: balance.aiml -->
+    <!--  -->
+    <!-- This AIML file is part of the Y-Bot knowledge base. -->
+    <!--  -->
+    <!-- Y-Bot is Copyright &copy; 2017 by Keith Sterling. -->
+    <!--
+    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+    documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+    the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+    and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+    THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+    TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    -->
+
+    <!-- Basic entry point into request a nergy usage -->
+    <!-- Create as many of these to provide a wide a richer grammar for asking for consumption data -->
+    <!-- Currently defaults to NOW as the date, but you could extend this to put in a specific -->
+    <!-- date, month, year or period -->
+    <category>
+        <pattern>
+            # MY ENERGY USAGE
+        </pattern>
+        <template>
+            <srai>ENERGY USAGE NOW</srai>
+        </template>
+    </category>
+
+    <!-- Primary entry point ot request energy consumption data, called from the variety of grammars above -->
+    <!-- <star /> is the only parameter which should be considered a user defined time value -->
+    <!-- Calls the extension to retrieve the usage data, which shouldd return 3 values -->
+    <!-- Gas Elec Units -->
+    <!-- Then calls SHOW_USAGE to format the results into somethiing that is meaningful -->
+    <category>
+        <pattern>
+            ENERGY USAGE *
+        </pattern>
+        <template>
+            <srai>
+                SHOW_USAGE
+                <extension path="programy.extensions.energy.usage.EnergyUsageExtension">
+                    <star />
+                </extension>
+            </srai>
+        </template>
+    </category>
+
+    <!-- Format the result of calling the extensions, provide a polite result back to the customer -->
+    <category>
+        <pattern>
+            SHOW_USAGE * * *
+        </pattern>
+        <template>
+            So far this month you have used <star index="1" /> <star index="3" /> of Gas and <star index="2" /> <star index="3" /> of Electricity.
+        </template>
+    </category>
+
+</aiml>

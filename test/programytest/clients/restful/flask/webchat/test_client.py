@@ -3,6 +3,7 @@ import unittest.mock
 
 from programy.clients.restful.flask.webchat.client import WebChatBotClient
 from programy.clients.restful.flask.webchat.config import WebChatConfiguration
+from programy.clients.render.html import HtmlRenderer
 from programytest.clients.arguments import MockArgumentParser
 
 
@@ -37,6 +38,9 @@ class WebChatBotClientTests(unittest.TestCase):
 
         self.assertIsInstance(client.get_client_configuration(), WebChatConfiguration)
         self.assertEqual('ProgramY AIML2.0 Client', client.get_description())
+
+        self.assertFalse(client._render_callback())
+        self.assertIsInstance(client.renderer, HtmlRenderer)
 
     def test_api_keys(self):
         arguments = MockArgumentParser()

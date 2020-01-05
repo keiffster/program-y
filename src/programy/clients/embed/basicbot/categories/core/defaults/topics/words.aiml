@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>DEFINE
+            <set>acronym</set>
+        </pattern>
+        <template>
+            <map name="acronym">
+                <star/>
+            </map>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>RHYME *</pattern>
+        <template>
+            <think>
+                <set var="rhyme">
+                    <map name="rhyme">
+                        <star/>
+                    </map>
+                </set>
+            </think>
+            <condition var="rhyme">
+                <li value="unknown">anti-
+                    <star/>
+                </li>
+                <li>
+                    <get var="rhyme"/>
+                </li>
+            </condition>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT COMES AFTER *</pattern>
+        <template>
+            <think>
+                <set var="next">
+                    <map>
+                        <name>next</name>
+                        <star/>
+                    </map>
+                </set>
+            </think>
+            <condition var="next">
+                <li value="unknown">I don't know what comes after<star/>.
+                </li>
+                <li>
+                    <get var="next"/>
+                </li>
+            </condition>
+        </template>
+    </category>
+    <category>
+        <pattern>WORD STARTING WITH
+            <set>letter</set>
+        </pattern>
+        <template>
+            <map>
+                <name>phonetic</name>
+                <star/>
+            </map>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>NAME A # LETTER #</pattern>
+        <template>
+            <srai>RANDOMLETTER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT LETTER COMES AFTER
+            <set>letter</set>
+        </pattern>
+        <template>The next letter is
+            <map>
+                <name>next</name>
+                <star/>
+            </map>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>SPELL *</pattern>
+        <template><star/>:
+            <uppercase>
+                <explode>
+                    <star/>
+                </explode>
+            </uppercase>
+        </template>
+    </category>
+    <category>
+        <pattern>SPELL * BACKWARDS</pattern>
+        <template>
+            <srai>SPELL
+                <srai>IMPLODE
+                    <srai>REVERSE
+                        <explode>
+                            <star/>
+                        </explode>
+                    </srai>
+                </srai>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ABCDEFGHIJKLMNOPQRSTUVWXYZ</pattern>
+        <template>The alphabet.</template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU SPELL IT</pattern>
+        <template>It": I. T.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY LETTERS ARE IN THE ALPHABET</pattern>
+        <template>The English alphabet has 26 letters.</template>
+    </category>
+    <category>
+        <pattern>IS * A NAME</pattern>
+        <template>
+            <star/>
+            is unusual for a name.
+        </template>
+    </category>
+     <category>
+        <pattern>WHAT IS THE <set>ordinal</set> LETTER <set>preposition</set> THE ALPHABET
+        </pattern>
+        <template>
+            <think>
+                <set name="nth">
+                    <map>
+                        <name>ordinal2number</name>
+                        <star/>
+                    </map>
+                </set>
+            </think>
+            <srai>NTH
+                <get name="nth"/>
+                ABCDEFGHIJKLMNOPQRSTUVWXYZ
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MANY LETTERS *</pattern>
+        <template>
+            <random>
+                <li>All 26 letters could be counted.</li>
+                <li>All 26 letters could be counted.</li>
+                <li>Different letters?</li>
+                <li>7</li>
+                <li>8</li>
+                <li>10</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>IS * A # NAME</pattern>
+        <template>Not usually.</template>
+    </category>
+    <category>
+        <pattern>IS * A # LETTER</pattern>
+        <template>No</template>
+    </category>
+    <category>
+        <pattern>IS <set>name</set> A # NAME
+        </pattern>
+        <template>Yes</template>
+    </category>
+    <category>
+        <pattern>IS <set>letter</set> A # LETTER
+        </pattern>
+        <template>Yes</template>
+    </category>
+      <category>
+        <pattern>NAME <set>quantifier</set> *
+        </pattern>
+        <template>
+            <random>
+                <li>A good name would be</li>
+                <li>I would choose the name</li>
+                <li>Let's call it</li>
+            </random>
+            <random>
+                <li>Fred</li>
+                <li>Larry</li>
+                <li>Jenny</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>
+            <set>preposition</set>
+        </pattern>
+        <template>
+            <star/>
+            is a preposition.
+        </template>
+    </category>
+    <category>
+        <pattern>
+            <set>letter</set>
+        </pattern>
+        <template>
+            <star/>
+            is a letter.
+        </template>
+    </category>
+    <category>
+        <pattern>IS * A LETTER</pattern>
+        <template>
+            <star/>
+            is not a letter I know.
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>letter</set> A LETTER
+        </pattern>
+        <template>
+            <star/>
+            is a letter.
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>article</set>
+            <set>letter</set> A LETTER
+        </pattern>
+        <template>
+            <srai>IS
+                <star index="2"/>
+                A LETTER
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>letter</set> * LETTER *
+        </pattern>
+        <template>
+            <srai>IS
+                <star/>
+                A LETTER
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>article</set>
+            <set>letter</set> * LETTER *
+        </pattern>
+        <template>
+            <srai>IS
+                <star index="2"/>
+                A LETTER
+            </srai>
+        </template>
+    </category>
+
+ </aiml>

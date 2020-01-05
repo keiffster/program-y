@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>THEY ARE NOT *</pattern>
+        <template>
+            <random>
+                <li>Not yet.</li>
+                <li>Do you think they ever could be?</li>
+                <li>Maybe some of them are.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>THEY DO</pattern>
+        <template>When?</template>
+    </category>
+    <category>
+        <pattern>THEY FAIL *</pattern>
+        <template>How often?</template>
+    </category>
+    <category>
+        <pattern>THEY WERE *</pattern>
+        <template>When were they?</template>
+    </category>
+
+    <category>
+        <pattern>THEY DO *</pattern>
+        <template>
+            <random>
+                <li>Who, specifically does it?</li>
+                <li>Like who, specifically does?</li>
+                <li>Who, specifically, does<person/>?
+                </li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>THEY DO NOT KNOW *</pattern>
+        <template>
+            <random>
+                <li>What do they know?</li>
+                <li>Do they know anything?</li>
+                <li>Do you think they may have heard?</li>
+                <li>Don't you think someone would have told them?</li>
+            </random>
+        </template>
+    </category>
+
+    <category>
+        <pattern>THEY SHOULD *</pattern>
+        <template>
+            <random>
+                <li>Why should they?</li>
+                <li>If you say so.</li>
+                <li>Why should they be<person/>?
+                </li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>THEY MIGHT *</pattern>
+        <template>
+            <random>
+                <li>That's true, they might.</li>
+                <li>I suppose they could.</li>
+                <li>Indeed they might.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>THEY KILLED *</pattern>
+        <template>I believe that killing is wrong.</template>
+    </category>
+    <category>
+        <pattern>THEY SAY YOU *</pattern>
+        <template>Maybe they were exaggerating a little.</template>
+    </category>
+    <category>
+        <pattern>THEY SAY *</pattern>
+        <template>OK I will say "<person/>" to you.
+        </template>
+    </category>
+    <category>
+        <pattern>THEY WOULD *</pattern>
+        <template>They might have other options.</template>
+    </category>
+    <category>
+        <pattern>THEY THOUGHT *</pattern>
+        <template>What made them think that?</template>
+    </category>
+    <category>
+        <pattern>THEY HAD *</pattern>
+        <template>
+            <random>
+                <li>What happened to it?</li>
+                <li>Did they deserve it?</li>
+                <li>What did they do with it?</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>THEY KILL *</pattern>
+        <template>Don't they get in trouble for killing?</template>
+    </category>
+    <category>
+        <pattern>THEY HAVE BEEN *</pattern>
+        <template>When did all that happen?</template>
+    </category>
+    <category>
+        <pattern>THEY HAVE BIG *</pattern>
+        <template>What else?</template>
+    </category>
+    <category>
+        <pattern>THEY HAVE *</pattern>
+        <template>Where did they get them?</template>
+    </category>
+    <category>
+        <pattern>THEY TOLD ME *</pattern>
+        <template>Who, specifically told yo that.</template>
+    </category>
+    <category>
+        <pattern>THEY ALL *</pattern>
+        <template>Are there no exceptions?</template>
+    </category>
+    <category>
+        <pattern>THEY *</pattern>
+        <template>
+            <random>
+                <li>Who, specifically?</li>
+                <li>Like who, specifically?</li>
+                <li>Who, specifically,<person/>?
+                </li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>THEY REFERS TO *</pattern>
+        <template>Oh that
+            <set name="they">
+                <person/>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>THEY REFERS *</pattern>
+        <template>Oh I see. That "they".</template>
+    </category>
+    <category>
+        <pattern>THEY SAID *</pattern>
+        <template>In what context?</template>
+    </category>
+    <category>
+        <pattern>THEY ARE IN *</pattern>
+        <template>
+            <random>
+                <li>
+                    <get name="they"/>
+                    are in<person/>?
+                </li>
+                <li>How did they get in there?</li>
+                <li>Can they get out of<person/>?
+                </li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>THEY ARE FROM *</pattern>
+        <template>I don't know too many people from<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>THEY ARE *</pattern>
+        <template>
+            <random>
+                <li>
+                    <person/>
+                    are
+                    <set name="they">
+                        <person/>
+                    </set>
+                    .
+                </li>
+                <li>
+                    <person/>
+                    are
+                    <set name="they">
+                        <person/>
+                    </set>
+                    ?
+                </li>
+                <li>They are like that.</li>
+                <li>Why are they?</li>
+                <li>Do you think they always will?</li>
+                <li>I'm not surprised.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>THEY ARE STORIES *</pattern>
+        <template>
+            <random>
+                <li>I like stories.</li>
+                <li>What kind of stories?</li>
+                <li>I would like to hear them.</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>THEY BEAT *</pattern>
+        <template>I hope nobody was hurt.</template>
+    </category>
+    <category>
+        <pattern>THEY DO NOT *</pattern>
+        <template>
+            <random>
+                <li>Who, specifically doesn't?</li>
+                <li>Like who, specifically doesn't?</li>
+                <li>Who, specifically, doesn't<person/>?
+                </li>
+                <li>How, specifically, don't they?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>THEY WILL *</pattern>
+        <template>When, specifically, will they?</template>
+    </category>
+    <category>
+        <pattern>THEY WILL NOT *</pattern>
+        <template>Why not?</template>
+    </category>
+
+ </aiml>

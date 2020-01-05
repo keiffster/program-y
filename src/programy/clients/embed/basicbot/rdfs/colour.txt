@@ -1,0 +1,61 @@
+BLACK:hasPurpose:to color darkly
+BLACK:hasSize:0
+BLACK:hasSyllables:1
+BLACK:isa:Color
+BLACK:lifeArea:Physical
+BLUE:hasPurpose:to color like hte sky
+BLUE:hasSize:0
+BLUE:hasSyllables:1
+BLUE:isa:Color
+BLUE:lifeArea:Physical
+BROWN:hasPurpose:to color like clay
+BROWN:hasSize:0
+BROWN:hasSyllables:1
+BROWN:isa:Color
+BROWN:lifeArea:Physical
+BLONDE:hasPurpose:to color yellow
+BLONDE:hasSize:0
+BLONDE:hasSyllables:1
+BLONDE:isa:Color
+BLONDE:lifeArea:Physical
+GREEN:hasPurpose:to color like leaves
+GREEN:hasSize:0
+GREEN:hasSyllables:1
+GREEN:isa:Color
+GREEN:lifeArea:Physical
+YELLOW:hasPurpose:to color like the sun
+YELLOW:hasSize:0
+YELLOW:hasSyllables:2
+YELLOW:isa:Color
+YELLOW:lifeArea:Physical
+WHITE:hasPurpose:to color like clouds
+WHITE:hasSize:0
+WHITE:hasSyllables:1
+WHITE:isa:Color
+WHITE:lifeArea:Physical
+ORANGE:hasPurpose:to provide nourishment
+ORANGE:hasSize:4
+ORANGE:hasSyllables:2
+ORANGE:isa:Citrus
+ORANGE:isa:Fruit
+ORANGE:lifeArea:Physical
+PINK:hasPurpose:to color like skin
+PINK:hasSize:0
+PINK:hasSyllables:1
+PINK:isa:Color
+PINK:lifeArea:Physical
+PURPLE:hasPurpose:to color like an eggplant
+PURPLE:hasSize:0
+PURPLE:hasSyllables:2
+PURPLE:isa:Color
+PURPLE:lifeArea:Physical
+RED:hasPurpose:to color like a ripe tomato
+RED:hasSize:0
+RED:hasSyllables:1
+RED:isa:Color
+RED:lifeArea:Physical
+COLOR:hasPurpose:to perceive the wavelength of light
+COLOR:hasSize:0
+COLOR:hasSyllables:2
+COLOR:isa:Physical Measurement
+COLOR:lifeArea:Physical

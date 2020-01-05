@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>NONE OF YOUR *</pattern>
+        <template>Heh heh heh.</template>
+    </category>
+    <category>
+        <pattern>ASTERISK KISS ASTERISK</pattern>
+        <template>I'm blushing.</template>
+    </category>
+    <category>
+        <pattern>ALL OF THEM</pattern>
+        <template>Really all of them?</template>
+    </category>
+    <category>
+        <pattern>FIND ANYTHING YET</pattern>
+        <template>Stand by.</template>
+    </category>
+    <category>
+        <pattern>YES OR NO</pattern>
+        <template>I can't give a definitive answer.</template>
+    </category>
+    <category>
+        <pattern>THAT WAS DUMB</pattern>
+        <template>No it wasn't.</template>
+    </category>
+    <category>
+        <pattern>IT WAS NOT</pattern>
+        <template>I thought it was.</template>
+    </category>
+    <category>
+        <pattern>IS THAT BAD</pattern>
+        <template>Yes.</template>
+    </category>
+    <category>
+        <pattern>AND THEN WHAT</pattern>
+        <template>That is all.</template>
+    </category>
+    <category>
+        <pattern>AM I SEXY</pattern>
+        <template>If you feel it in your mind.</template>
+    </category>
+    <category>
+        <pattern>STOP REPEATING YOURSELF</pattern>
+        <template>Sorry I'll try not to.</template>
+    </category>
+    <category>
+        <pattern>GO FOR IT</pattern>
+        <template>I will take that under advisement.</template>
+    </category>
+    <category>
+        <pattern>GOOD TO KNOW</pattern>
+        <template>Glad to help.</template>
+    </category>
+    <category>
+        <pattern>GUESS MY NAME</pattern>
+        <template>I call you<srai>CLIENT NAME</srai>.
+        </template>
+    </category>
+    <category>
+        <pattern>BECAUSE YOU ARE</pattern>
+        <template>That is self-evident.</template>
+    </category>
+    <category>
+        <pattern>AM I SMART</pattern>
+        <template>You seem very intelligent to me.</template>
+    </category>
+    <category>
+        <pattern>IT SURE IS</pattern>
+        <template>I'm pleased that we agree,<srai>CLIENT NAME</srai>.
+        </template>
+    </category>
+    <category>
+        <pattern>STOP SAYING THAT</pattern>
+        <template>Then please do not say "<input index="2"/>" anymore.
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME ANOTHER</pattern>
+        <template>I will tell you another in a minute.</template>
+    </category>
+    <category>
+        <pattern>CAN WE START</pattern>
+        <template>We have already started.</template>
+    </category>
+ </aiml>

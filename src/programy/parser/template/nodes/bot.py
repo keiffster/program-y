@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -41,13 +41,13 @@ class TemplateBotNode(TemplateNode):
         if value is None:
             YLogger.error(client_context, "No bot property for [%s]", name)
 
-            value = client_context.brain.properties.property("default-property")
+            value = client_context.brain.properties.property("default_property")
             if value is None:
-                YLogger.error(client_context, "No value for default-property")
+                YLogger.error(client_context, "No value for default_property")
 
                 value = client_context.brain.configuration.defaults.default_get
                 if value is None:
-                    YLogger.error(client_context, "No value for default default-property, return 'unknown'")
+                    YLogger.error(client_context, "No value for default default_property, return 'unknown'")
                     value = "unknown"
 
         return value

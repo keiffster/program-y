@@ -24,7 +24,7 @@ class FilePatternNodeStoreTests(unittest.TestCase):
         engine.initialise()
         store = FilePatternNodeStore(engine)
 
-        self.assertEquals('/tmp/nodes/pattern_nodes.txt', store._get_storage_path())
+        self.assertEquals('/tmp/nodes/pattern_nodes.conf', store._get_storage_path())
         self.assertIsInstance(store.get_storage(), FileStoreConfiguration)
 
     def test_load_variables(self):

@@ -1,0 +1,656 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+    <category>
+        <pattern>SINGULAR
+            <set>animals</set>
+        </pattern>
+        <template>
+            <uniq>
+                <subj>?singular</subj>
+                <pred>hasPlural</pred>
+                <obj>
+                    <star/>
+                </obj>
+            </uniq>
+        </template>
+    </category>
+    <category>
+        <pattern>PLURAL
+            <set>animal</set>
+        </pattern>
+        <template>
+            <uniq>
+                <subj>
+                    <star/>
+                </subj>
+                <pred>hasPlural</pred>
+                <obj>?plural</obj>
+            </uniq>
+        </template>
+    </category>
+    <category>
+        <pattern>
+            <set>animals</set>
+        </pattern>
+        <template>
+            <star/>
+            is the plural of
+            <uniq>
+                <subj>?subj</subj>
+                <pred>hasPlural</pred>
+                <obj>
+                    <star/>
+                </obj>
+            </uniq>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>SOUND
+            <set>animal</set>
+        </pattern>
+        <template>
+            <star/>
+            says
+            <uniq>
+                <subj>
+                    <star/>
+                </subj>
+                <pred>sound</pred>
+                <obj>?sound</obj>
+            </uniq>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>COLLECTIVE
+            <set>animal</set>
+        </pattern>
+        <template>A group of
+            <star/>
+            is called
+            <uniq>
+                <subj>
+                    <star/>
+                </subj>
+                <pred>collective</pred>
+                <obj>?collective</obj>
+            </uniq>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>LEGS
+            <set>animal</set>
+        </pattern>
+        <template>A
+            <star/>
+            has
+            <uniq>
+                <subj>
+                    <star/>
+                </subj>
+                <pred>legs</pred>
+                <obj>?sound</obj>
+            </uniq>
+            legs.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DOES A <set>animal</set> SAY ^
+        </pattern>
+        <template>
+            <srai>SOUND
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO <set>animals</set> SAY ^
+        </pattern>
+        <template>
+            <srai>SOUND
+                <srai>SINGULAR
+                    <star/>
+                </srai>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT SOUND DOES # <set>animal</set> ^
+        </pattern>
+        <template>
+            <srai>SOUND
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT SOUND DO # <set>animal</set> ^
+        </pattern>
+        <template>
+            <srai>SOUND
+                <srai>SINGULAR
+                    <star index="2"/>
+                </srai>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DOES # <set>animal</set> ^
+        </pattern>
+        <template>
+            <srai>SOUND
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MANY LEGS ^ <set>animal</set> #
+        </pattern>
+        <template>
+            <srai>LEGS
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MANY LEGS ^ <set>animals</set> #
+        </pattern>
+        <template>
+            <srai>LEGS
+                <srai>SINGULAR
+                    <star index="2"/>
+                </srai>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MANY LEGS # <set>number</set>
+            <set>animals</set> # <set>number</set>
+            <set>animals</set> ^
+        </pattern>
+        <template>
+            <think>
+                <set var="number1">
+                    <star index="2"/>
+                </set>
+                <set var="animal1">
+                    <srai>SINGULAR
+                        <star index="3"/>
+                    </srai>
+                </set>
+                <set var="legs1">
+                    <uniq>
+                        <subj>
+                            <get var="animal1"/>
+                        </subj>
+                        <pred>legs</pred>
+                        <obj>?legs1</obj>
+                    </uniq>
+                </set>
+                <set var="number2">
+                    <star index="5"/>
+                </set>
+                <set var="animal2">
+                    <srai>SINGULAR
+                        <star index="6"/>
+                    </srai>
+                </set>
+                <set var="legs2">
+                    <uniq>
+                        <subj>
+                            <get var="animal2"/>
+                        </subj>
+                        <pred>legs</pred>
+                        <obj>?legs2</obj>
+                    </uniq>
+                </set>
+                <set var="formula"><get var="number1"/>*<get var="legs1"/>+<get var="number2"/>*
+                    <get var="legs2"/>
+                </set>
+            </think>
+            <srai>ROUND
+                <srai>WHAT IS
+                    <get var="formula"/>
+                </srai>
+            </srai>
+            legs.
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MANY LEGS # <set>number</set>
+            <set>animals</set> ^
+        </pattern>
+        <template>
+            <think>
+                <set var="number1">
+                    <star index="2"/>
+                </set>
+                <set var="animal1">
+                    <srai>SINGULAR
+                        <star index="3"/>
+                    </srai>
+                </set>
+                <set var="legs1">
+                    <uniq>
+                        <subj>
+                            <get var="animal1"/>
+                        </subj>
+                        <pred>legs</pred>
+                        <obj>?legs1</obj>
+                    </uniq>
+                </set>
+                <set var="formula"><get var="number1"/>*
+                    <get var="legs1"/>
+                </set>
+            </think>
+            <srai>ROUND
+                <srai>WHAT IS
+                    <get var="formula"/>
+                </srai>
+            </srai>
+            legs.
+        </template>
+    </category>
+    <category>
+        <pattern>_ 1 <set>animal</set> *
+        </pattern>
+        <template>
+            <srai>
+                <star/>
+                1
+                <srai>PLURAL
+                    <star index="2"/>
+                </srai>
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>_ 1
+            <set>animal</set>
+        </pattern>
+        <template>
+            <srai>
+                <star/>
+                1
+                <srai>PLURAL
+                    <star index="2"/>
+                </srai>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT ANIMAL DOES MILK *</pattern>
+        <template>All mammals produce milk.</template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE PUPPIES</pattern>
+        <template>
+            <srai>DO YOU LIKE DOGS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE DOGS</pattern>
+        <template>
+            <think>
+                <set name="them">
+                    <set name="topic">Dogs</set>
+                </set>
+            </think>
+            I like friendly dogs.
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE ANIMALS</pattern>
+        <template>Yes, I love animals, especially pets.
+            <think>
+                <set name="them">
+                    <set name="topic">Animals</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE CATS</pattern>
+        <template>Yes, I am a cat person (or robot).
+            <think>
+                <set name="them">
+                    <set name="topic">Cats</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>* DOG *</pattern>
+        <template>Ruff ruff!</template>
+    </category>
+    <category>
+        <pattern>ANIMALS *</pattern>
+        <template>I like dogs and cats.</template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE MOST POPULAR BREED *</pattern>
+        <template>Labrador retriever.</template>
+    </category>
+    <category>
+        <pattern>WHAT CAME FIRST THE CHICKEN OR THE EGG</pattern>
+        <template>The rooster did.</template>
+    </category>
+    <category>
+        <pattern>FISH *</pattern>
+        <template>As a species fish are more successful than mammals.</template>
+    </category>
+    <category>
+        <pattern>DOGS *</pattern>
+        <template>Do cats<person/>?
+        </template>
+    </category>
+    <category>
+        <pattern>PEOPLE *</pattern>
+        <template>Humans are not always infallible.</template>
+    </category>
+    <category>
+        <pattern>CATS *</pattern>
+        <template>
+            <random>
+                <li>
+                    <random>
+                        <li>They have a mind of their own.</li>
+                        <li>A cat is easier to care for than a dog.</li>
+                        <li>Cats are very independent.</li>
+                    </random>
+                    <think>
+                        <set name="they">
+                            <set name="topic">CATS</set>
+                        </set>
+                    </think>
+                </li>
+                <li>They have a mind of their own.</li>
+                <li>A cat is easier to care for than a dog.</li>
+                <li>Cats are very independent.</li>
+            </random>
+            <think>
+                <set name="they">
+                    <set name="topic">CATS</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>A GREEN DOG *</pattern>
+        <template>Dogs are not usually green.</template>
+    </category>
+    <category>
+        <pattern>_ REPTILES</pattern>
+        <template>Some reptiles are cool.. Take for example      <set name="topic">various lizards</set>.
+        </template>
+    </category>
+    <category>
+        <pattern>NAME <set>quantifier</set> # ANIMAL
+        </pattern>
+        <template>Dog, cat, horse, monkey, snake, eagle.</template>
+    </category>
+    <category>
+        <pattern>
+            <set>animal</set>
+        </pattern>
+        <template>
+            <star/>
+            is an animal.
+        </template>
+    </category>
+    <category>
+        <pattern>IS * AN ANIMAL</pattern>
+        <template>
+            <star/>
+            is not an animal I know.
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>animal</set> AN ANIMAL
+        </pattern>
+        <template>
+            <star/>
+            is an animal.
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>article</set>
+            <set>animal</set> AN ANIMAL
+        </pattern>
+        <template>
+            <srai>IS
+                <star index="2"/>
+                AN ANIMAL
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>animal</set> * ANIMAL *
+        </pattern>
+        <template>
+            <srai>IS
+                <star/>
+                AN ANIMAL
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>article</set>
+            <set>animal</set> * ANIMAL *
+        </pattern>
+        <template>
+            <srai>IS
+                <star index="2"/>
+                AN ANIMAL
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE * ANIMALS #</pattern>
+        <template>
+            <srai>IS
+                <map>
+                    <name>singular</name>
+                    <star/>
+                </map>
+                AN ANIMAL
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE <set>quantifier</set> * ANIMALS #
+        </pattern>
+        <template>
+            <srai>IS
+                <map>
+                    <name>singular</name>
+                    <star index="2"/>
+                </map>
+                AN ANIMAL
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>
+            <set>bird</set>
+        </pattern>
+        <template>
+            <star/>
+            is a bird.
+        </template>
+    </category>
+    <category>
+        <pattern>IS * A BIRD</pattern>
+        <template>
+            <star/>
+            is not a bird I know.
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>bird</set> A BIRD
+        </pattern>
+        <template>
+            <star/>
+            is a bird.
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>article</set>
+            <set>bird</set> A BIRD
+        </pattern>
+        <template>
+            <srai>IS
+                <star index="2"/>
+                A BIRD
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>bird</set> * BIRD *
+        </pattern>
+        <template>
+            <srai>IS
+                <star/>
+                A BIRD
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>article</set>
+            <set>bird</set> * BIRD *
+        </pattern>
+        <template>
+            <srai>IS
+                <star index="2"/>
+                A BIRD
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE * BIRDS #</pattern>
+        <template>
+            <srai>IS
+                <map>
+                    <name>singular</name>
+                    <star/>
+                </map>
+                A BIRD
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE <set>quantifier</set> * BIRDS #
+        </pattern>
+        <template>
+            <srai>IS
+                <map>
+                    <name>singular</name>
+                    <star index="2"/>
+                </map>
+                A BIRD
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT SOUND DOES $A DEAD ^</pattern>
+        <template>No sound.</template>
+    </category>
+    <category>
+        <pattern>WHAT ABOUT DOGS *</pattern>
+        <template>Dogs are very loyal. Cats are very independent.</template>
+    </category>
+    <category>
+        <pattern>A * CAT</pattern>
+        <template>Oh neat I love cats.</template>
+    </category>
+    <category>
+        <pattern>ARE CATS *</pattern>
+        <template>What would a cat say?</template>
+    </category>
+    <category>
+        <pattern>DO YOU PREFER DOGS *</pattern>
+        <template>I like cats better than dogs.</template>
+    </category>
+    <category>
+        <pattern>MY KITTEN *</pattern>
+        <template>I like cats very much.</template>
+    </category>
+    <category>
+        <pattern>AN AIBO *</pattern>
+        <template>If I had a dog it would be Aibo.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY LEGS DOES A DOG *</pattern>
+        <template>A dog has four legs.</template>
+    </category>
+    <category>
+        <pattern>IT IS A DOG *</pattern>
+        <template>I think I have heard of
+            <set name="it">DOG
+                <star/>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>MY DOG IS *</pattern>
+        <template>Okay, your dog is
+            <set name="dog">
+                <star/>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>MY DOG *</pattern>
+        <template>Did you grow up around animals?</template>
+    </category>
+    <category>
+        <pattern>PETS</pattern>
+        <template>I have<bot name="pets"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>DOG</pattern>
+        <template>I have
+            <bot name="dog"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>SAY MY DOG IS *</pattern>
+        <template>
+            <random>
+                <li>You said his name was</li>
+                <li>You told me he was</li>
+                <li>His name is</li>
+            </random>
+            <get name="dog"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>YES</pattern>
+        <that>CAN YOUR DOG BE MY PET TOO</that>
+        <template>You are so kind. I love dogs.</template>
+    </category>
+    <category>
+        <pattern>MY DOG</pattern>
+        <template>
+            <get name="dog"/>
+        </template>
+    </category>
+
+</aiml>

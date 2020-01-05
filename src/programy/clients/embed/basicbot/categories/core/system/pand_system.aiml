@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: pand_system.aiml -->
+    <!-- Last modified: October 31st, 2014 -->
+    <!--  -->
+    <!-- This file is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- This file is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling March 2017 -->
+
+    <category>
+        <pattern>BRAIN VERSION</pattern>
+        <template>
+            <program/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>PROGRAM VERSION</pattern>
+        <template>
+            <program/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>BRAIN BUILD</pattern>
+        <template>
+            <program>
+            </program>
+        </template>
+    </category>
+
+    <category>
+        <pattern>AIML MATCH LIMIT *</pattern>
+        <template>Match limit exceeded</template>
+    </category>
+
+    <category>
+        <pattern>AIML MATCH FAIL *</pattern>
+        <template>Match failed</template>
+    </category>
+
+</aiml>

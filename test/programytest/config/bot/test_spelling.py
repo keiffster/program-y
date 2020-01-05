@@ -67,3 +67,17 @@ class BotSpellingConfigurationTests(unittest.TestCase):
         self.assertIsNone(spelling_config.alphabet)
         self.assertFalse(spelling_config.check_before)
         self.assertFalse(spelling_config.check_and_retry)
+
+    def test_defaults(self):
+        spelling_config = BotSpellingConfiguration()
+        data = {}
+        spelling_config.to_yaml(data, True)
+
+        BotSpellingConfigurationTests.assert_defaults(self, data)
+
+    @staticmethod
+    def assert_defaults(test, data):
+        test.assertEqual(data['classname'], "programy.spelling.norvig.NorvigSpellingChecker")
+        test.assertEqual(data['alphabet'], 'ABCDEFGHIJKLMNOPQRSTUVWXYZ')
+        test.assertEqual(data['check_before'], False)
+        test.assertEqual(data['check_and_retry'], False)

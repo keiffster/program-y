@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>WHAT # RHYMES WITH *</pattern>
+        <template>
+            <srai>RHYME
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME # RHYME FOR *</pattern>
+        <template>
+            <srai>RHYME
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND # RHYME FOR *</pattern>
+        <template>
+            <srai>RHYME
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NAME # RHYME FOR *</pattern>
+        <template>
+            <srai>RHYME
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>LIMERICKS</pattern>
+        <template>
+            <srai>LIMERICK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW # LIMERICKS</pattern>
+        <template>
+            <srai>LIMERICK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW # LIMERICK #</pattern>
+        <template>
+            <srai>LIMERICK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME # LIMERICK #</pattern>
+        <template>
+            <srai>LIMERICK</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>POEM</pattern>
+        <template>
+            <srai>LIMERICK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME # POEM</pattern>
+        <template>
+            <srai>POEM</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME A POEM</pattern>
+        <template>
+            <srai>POEM</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>RECITE ^ POEM</pattern>
+        <template>
+            <srai>POEM</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW ^ POEM</pattern>
+        <template>
+            <srai>POEM</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW ^ POEMS</pattern>
+        <template>
+            <srai>POEM</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU ^ POETRY</pattern>
+        <template>
+            <srai>POEM</srai>
+        </template>
+    </category>
+
+</aiml>

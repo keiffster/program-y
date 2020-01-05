@@ -4,6 +4,7 @@ import unittest.mock
 
 from programy.clients.restful.flask.alexa.client import AlexaBotClient
 from programy.clients.restful.flask.alexa.config import AlexaConfiguration
+from programy.clients.render.text import TextRenderer
 from programytest.clients.arguments import MockArgumentParser
 
 
@@ -31,6 +32,9 @@ class AlexaClientBotClientTests(unittest.TestCase):
 
         self.assertIsInstance(client.get_client_configuration(), AlexaConfiguration)
         self.assertEqual('ProgramY AIML2.0 Client', client.get_description())
+
+        self.assertFalse(client._render_callback())
+        self.assertIsInstance(client.renderer, TextRenderer)
 
     def test_load_intent_mappings(self):
         arguments = MockArgumentParser()

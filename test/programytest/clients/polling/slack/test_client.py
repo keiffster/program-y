@@ -4,6 +4,7 @@ from slackclient import SlackClient
 
 from programy.clients.polling.slack.client import SlackBotClient
 from programy.clients.polling.slack.config import SlackConfiguration
+from programy.clients.render.text import TextRenderer
 from programytest.clients.arguments import MockArgumentParser
 
 
@@ -68,6 +69,9 @@ class SlackBotClientTests(unittest.TestCase):
         self.assertEqual('ProgramY AIML2.0 Client', client.get_description())
         self.assertIsInstance(client.get_client_configuration(), SlackConfiguration)
         self.assertIsInstance(client._slack_client, SlackClient)
+
+        self.assertFalse(client._render_callback())
+        self.assertIsInstance(client.renderer, TextRenderer)
 
     def test_parse_direct_mention(self):
         arguments = MockArgumentParser()

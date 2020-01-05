@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -54,18 +54,25 @@ class LineBotClient(FlaskRestBotClient):
         question = event.message.text
         userid = event.source.user_id
 
-        answer = self.ask_question(userid, question)
+        client_context = self.create_client_context(userid)
 
-        self._line_bot_api.reply_message(event.reply_token, TextSendMessage(text=answer))
+        answer = self.ask_question(userid, question)
+        rendered = self.renderer.render(client_context, answer)
+
+        self._line_bot_api.reply_message(event.reply_token, TextSendMessage(text=rendered))
 
     def get_unknown_response(self, userid):
         if self.configuration.client_configuration.unknown_command_srai is None:
             unknown_response = self.configuration.client_configuration.unknown_command
+
         else:
             unknown_response = self.ask_question(userid, self.configuration.client_configuration.unknown_command_srai)
             if unknown_response is None or unknown_response == "":
                 unknown_response = self.configuration.client_configuration.unknown_command
-        return unknown_response
+
+        client_context = self.create_client_context(userid)
+
+        return self.renderer.render(client_context, unknown_response)
 
     def handle_unknown_event(self, event):
         userid = ""

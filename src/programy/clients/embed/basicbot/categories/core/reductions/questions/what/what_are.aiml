@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>WHAT * ARE WE IN</pattern>
+        <template>
+            <srai>MY
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT ARE U</pattern>
+        <template>
+            <srai>WHAT ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT ARE YOU UP TO *</pattern>
+        <template>
+            <srai>WHAT ARE YOU DOING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT ARE YOU WEARING TODAY</pattern>
+        <template>
+            <srai>WHAT ARE YOU WEARING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHERE ARE YOU DOING *</pattern>
+        <template>
+            <srai>WHAT ARE YOU DOING
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NOT MUCH YOU</pattern>
+        <template>
+            <srai>WHAT ARE YOU DOING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT ARE YOU DOING RIGHT NOW</pattern>
+        <template>
+            <srai>WHAT ARE YOU DOING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THIS</pattern>
+        <template>
+            <srai>WHAT ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT ARE YOU DOING TODAY</pattern>
+        <template>
+            <srai>WHAT ARE YOU DOING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT YOU DOING</pattern>
+        <template>
+            <srai>WHAT ARE YOU DOING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS UP</pattern>
+        <template>
+            <srai>WHAT ARE YOU DOING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>* WHAT ARE *</pattern>
+        <template>
+            <srai>WHAT ARE
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT R YOU</pattern>
+        <template>
+            <srai>WHAT ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT ARE YOU THINKING ABOUT</pattern>
+        <template>
+            <srai>WHAT ARE YOU THINKING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHATCHA *</pattern>
+        <template>
+            <srai>WHAT ARE YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT ARE YOU WEARING *</pattern>
+        <template>
+            <srai>WHAT ARE YOU WEARING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT ARE YOU UP TO</pattern>
+        <template>
+            <srai>WHAT ARE YOU DOING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WYD</pattern>
+        <template>
+            <srai>WHAT ARE YOU DOING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT ARE YOU DOING NOW</pattern>
+        <template>
+            <srai>WHAT ARE YOU DOING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME SOMETHING AMAZING</pattern>
+        <template>
+            <srai>WHAT ARE THE LATEST HEADLINES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT R YOU *</pattern>
+        <template>
+            <srai>WHAT ARE YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WAT R YOU *</pattern>
+        <template>
+            <srai>WHAT ARE YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU ARE WHAT</pattern>
+        <template>
+            <srai>WHAT ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT ARE YOU GONNA DO *</pattern>
+        <template>
+            <srai>WHAT ARE YOU GOING TO DO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT YOU ARE DOING</pattern>
+        <template>
+            <srai>WHAT ARE YOU DOING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT * R WE *</pattern>
+        <template>
+            <srai>WHAT
+                <star/>
+                ARE WE
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+
+
+    <category>
+        <pattern>WHAT ARE *</pattern>
+        <template>
+            <!-- A <star /> IS -->
+            <srai>WHAT IS THE PURPOSE OF
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>WHAT ARE * FOR</pattern>
+        <template>
+            <srai>WHAT IS THE PURPOSE OF
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+
+</aiml>

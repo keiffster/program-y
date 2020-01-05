@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -57,13 +57,14 @@ class BrainOpenChatBotConfiguration(BaseSectionConfigurationData):
             YLogger.warning(self, "'openchatbot' section missing from brain config, using to defaults")
 
     def to_yaml(self, data, defaults=True):
-        if defaults is False:
-            data['url'] = self._url
-            data['method'] = self._method
-            data['authorization'] = self._authorization
-            data['api_key'] = self._api_key
-        else:
+        if defaults is True:
             data['url'] = None
             data['method'] = None
             data['authorization'] = None
             data['api_key'] = None
+
+        else:
+            data['url'] = self._url
+            data['method'] = self._method
+            data['authorization'] = self._authorization
+            data['api_key'] = self._api_key

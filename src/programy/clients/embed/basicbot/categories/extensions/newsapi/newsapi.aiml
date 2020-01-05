@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: balance.aiml -->
+    <!--  -->
+    <!-- This AIML file is part of the Y-Bot knowledge base. -->
+    <!--  -->
+    <!-- Y-Bot is Copyright &copy; 2017 by Keith Sterling. -->
+    <!--
+    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+    documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+    the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+    and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+    THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+    TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    -->
+
+    <category>
+        <pattern>
+           NEWS * MAX * SORT * REVERSE *
+        </pattern>
+        <template>
+            <think>
+                <set name="active"><bot name="newsapi" /></set>
+            </think>
+            <condition name="active">
+                <li value="true">
+                    <extension path="programy.extensions.newsapi.newsapi.NewsAPIExtension">
+                        SOURCE <star index="1"/> MAX <star index="2"/> SORT <star index="3"/> REVERSE <star index="4"/>
+                    </extension>
+                </li>
+                <li>Unfortunately my News Feed is not listening right now, you will need to speak to my bot master to enable it.</li>
+            </condition>
+        </template>
+    </category>
+
+    <category>
+        <pattern>ABC NEWS</pattern>
+        <template>
+            <srai>NEWS abc-news-au MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>AL JAZEERA NEWS</pattern>
+        <template>
+            <srai>NEWS al-jazeera-english MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARS TECHNICA NEWS</pattern>
+        <template>
+            <srai>NEWS ars-technica MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ASSOCIATED PRESS NEWS</pattern>
+        <template>
+            <srai>NEWS associated-press MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>BBC NEWS</pattern>
+        <template>
+            <srai>NEWS bbc-news MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>BBC SPORT NEWS</pattern>
+        <template>
+            <srai>NEWS bbc-sport MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>BLOOMBERG NEWS</pattern>
+        <template>
+            <srai>NEWS bloomberg MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>BUSINESS INSIDER NEWS</pattern>
+        <template>
+            <srai>NEWS business-insider MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>BUSINESS INSIDER UK NEWS</pattern>
+        <template>
+            <srai>NEWS business-insider-uk MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>BUZZFEED NEWS</pattern>
+        <template>
+            <srai>NEWS buzzfeed MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CNBC NEWS</pattern>
+        <template>
+            <srai>NEWS cnbc MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CNN NEWS</pattern>
+        <template>
+            <srai>NEWS cnn MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DAILY MAIL NEWS</pattern>
+        <template>
+            <srai>NEWS daily-mail MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ENGADGET NEWS</pattern>
+        <template>
+            <srai>NEWS engadget MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ENTERTAINMENT WEEKLY NEWS</pattern>
+        <template>
+            <srai>NEWS entertainment-weekly MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ESPN NEWS</pattern>
+        <template>
+            <srai>NEWS espn MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ESPN CRIC INFO NEWS</pattern>
+        <template>
+            <srai>NEWS espn-cric-info MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FINANCIAL TIMES NEWS</pattern>
+        <template>
+            <srai>NEWS financial-times MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FOOTBALL ITALIA NEWS</pattern>
+        <template>
+            <srai>NEWS football-italia MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FORTUNE NEWS</pattern>
+        <template>
+            <srai>NEWS fortune MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FOUR FOUR TWO NEWS</pattern>
+        <template>
+            <srai>NEWS four-four-two MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FOX SPORTS NEWS</pattern>
+        <template>
+            <srai>NEWS fox-sports MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GOOGLE NEWS</pattern>
+        <template>
+            <srai>NEWS google-news MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HACKER NEWS</pattern>
+        <template>
+            <srai>NEWS hacker-news MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IGN NEWS</pattern>
+        <template>
+            <srai>NEWS ign MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>INDEPENDENT NEWS</pattern>
+        <template>
+            <srai>NEWS independent MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MASHABLE NEWS</pattern>
+        <template>
+            <srai>NEWS mashable MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>METRO NEWS</pattern>
+        <template>
+            <srai>NEWS metro MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MIRROR NEWS</pattern>
+        <template>
+            <srai>NEWS mirror MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MTV NEWS</pattern>
+        <template>
+            <srai>NEWS mtv-news MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MTV UK NEWS</pattern>
+        <template>
+            <srai>NEWS mtv-news-uk MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NATIONAL GEOGRAPHIC NEWS</pattern>
+        <template>
+            <srai>NEWS national-geographic MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NEW SCIENTIST NEWS</pattern>
+        <template>
+            <srai>NEWS new-scientist MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NEWSWEEK NEWS</pattern>
+        <template>
+            <srai>NEWS newsweek MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NEW YORK MAGAZINE NEWS</pattern>
+        <template>
+            <srai>NEWS new-york-magazine MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NFL NEWS</pattern>
+        <template>
+            <srai>NEWS nfl-news MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>POLYGON NEWS</pattern>
+        <template>
+            <srai>NEWS polygon MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>RECODE NEWS</pattern>
+        <template>
+            <srai>NEWS recode MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>REDDIT NEWS</pattern>
+        <template>
+            <srai>NEWS reddit-r-all MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>REUTERS NEWS</pattern>
+        <template>
+            <srai>NEWS reuters MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TALKSPORT NEWS</pattern>
+        <template>
+            <srai>NEWS talksport MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TECHCRUNCH NEWS</pattern>
+        <template>
+            <srai>NEWS techcrunch MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TECHRADAR NEWS</pattern>
+        <template>
+            <srai>NEWS techradar MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THE ECONOMIST NEWS</pattern>
+        <template>
+            <srai>NEWS the-economist MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THE GUARDIAN AU NEWS</pattern>
+        <template>
+            <srai>NEWS the-guardian-au MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THE GUARDIAN UK NEWS</pattern>
+        <template>
+            <srai>NEWS the-guardian-uk MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THE HUFFINGTON POST NEWS</pattern>
+        <template>
+            <srai>NEWS the-huffington-post MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THE NEW YORK TIMES NEWS</pattern>
+        <template>
+            <srai>NEWS the-new-york-times MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THE NEXT WEB NEWS</pattern>
+        <template>
+            <srai>NEWS the-next-web MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THE SPORT BIBLE NEWS</pattern>
+        <template>
+            <srai>NEWS the-sport-bible MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THE TELEGRAPH NEWS</pattern>
+        <template>
+            <srai>NEWS the-telegraph MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THE VERGE NEWS</pattern>
+        <template>
+            <srai>NEWS the-verge MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THE WALL STREET JOURNAL NEWS</pattern>
+        <template>
+            <srai>NEWS the-wall-street-journal MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THE WASHINGTON POST NEWS</pattern>
+        <template>
+            <srai>NEWS the-washington-post MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TIME NEWS</pattern>
+        <template>
+            <srai>NEWS time MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>USA TODAY NEWS</pattern>
+        <template>
+            <srai>NEWS usa-today MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>BUSINESS NEWS</pattern>
+        <template>
+            <srai>NEWS business MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ENTERTAINMENT NEWS</pattern>
+        <template>
+            <srai>NEWS entertainment MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GAMING NEWS</pattern>
+        <template>
+            <srai>NEWS gaming MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MUSIC NEWS</pattern>
+        <template>
+            <srai>NEWS music MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SCIENCE AND NATURE NEWS</pattern>
+        <template>
+            <srai>NEWS science_and_nature MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SPORT NEWS</pattern>
+        <template>
+            <srai>NEWS sport MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TECHNOLOGY NEWS</pattern>
+        <template>
+            <srai>NEWS technology MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>UK NEWS</pattern>
+        <template>
+            <srai>NEWS uk_news MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>UK NEWSPAPERS NEWS</pattern>
+        <template>
+            <srai>NEWS uk_newspapers MAX 10 SORT False REVERSE False</srai>
+        </template>
+    </category>
+
+</aiml>

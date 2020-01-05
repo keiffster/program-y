@@ -72,3 +72,14 @@ class BrainOOBConfigurationTests(unittest.TestCase):
         data = {}
         oob_config.to_yaml(data, defaults=False)
         self.assertEquals({'classname': 'programy.oob.defaults.default.DefaultOutOfBandProcessor'}, data)
+
+    def test_defaults(self):
+        oob_config = BrainOOBConfiguration("default")
+        data = {}
+        oob_config.to_yaml(data, True)
+
+        BrainOOBConfigurationTests.assert_defaults(self, data)
+
+    @staticmethod
+    def assert_defaults(test, data):
+        test.assertEqual(data['classname'], 'programy.oob.defaults.default.DefaultOutOfBandProcessor')

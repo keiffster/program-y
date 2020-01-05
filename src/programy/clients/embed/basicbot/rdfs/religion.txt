@@ -1,0 +1,169 @@
+ATHEIST:hasPurpose:to believe there is no God
+ATHEIST:hasSize:7
+ATHEIST:hasSyllables:3
+ATHEIST:isa:Person
+ATHEIST:lifeArea:Spiritual
+BIBLE:hasPurpose:to provide inspiration and guidance
+BIBLE:hasSize:4
+BIBLE:hasSyllables:2
+BIBLE:isa:Book
+BIBLE:lifeArea:Spiritual
+CATHOLIC:hasPurpose:to worship God
+CATHOLIC:hasSize:0
+CATHOLIC:hasSyllables:3
+CATHOLIC:isa:Religion
+CATHOLIC:lifeArea:Spiritual
+CHRIST:hasPurpose:to sacrafice Himself for our sins
+CHRIST:hasSize:7
+CHRIST:hasSyllables:1
+CHRIST:isa:Deity
+CHRIST:isa:God
+CHRIST:lifeArea:Spiritual
+CHRISTIANITY:hasPurpose:to worship God
+CHRISTIANITY:hasSize:0
+CHRISTIANITY:hasSyllables:5
+CHRISTIANITY:isa:Religion
+CHRISTIANITY:lifeArea:Spiritual
+CHRISTMAS:hasPurpose:to celebrate the birth of Christ
+CHRISTMAS:hasSize:0
+CHRISTMAS:hasSyllables:2
+CHRISTMAS:isa:Annual Event
+CHRISTMAS:isa:Holiday
+CHRISTMAS:lifeArea:Social
+CHURCH:hasPurpose:to gather worshippers
+CHURCH:hasSize:9
+CHURCH:hasSyllables:1
+CHURCH:isa:Building
+CHURCH:isa:Worship Facility
+CHURCH:lifeArea:Spiritual
+CORINTHIANS:hasPurpose:to provide inspiration
+CORINTHIANS:hasSize:0
+CORINTHIANS:hasSyllables:4
+CORINTHIANS:isa:Bible Book
+CORINTHIANS:lifeArea:Spiritual
+CREATOR:hasPurpose:to create the universe
+CREATOR:hasSize:15
+CREATOR:hasSyllables:3
+CREATOR:isa:Deity
+CREATOR:isa:God
+CREATOR:lifeArea:Spiritual
+DEVIL:hasPurpose:to tempt us with evil
+DEVIL:hasSize:14
+DEVIL:hasSyllables:2
+DEVIL:isa:Entity
+DEVIL:lifeArea:Spiritual
+FAITH:hasPurpose:to believe in God
+FAITH:hasSize:0
+FAITH:hasSyllables:1
+FAITH:isa:Concept
+FAITH:lifeArea:Spiritual
+GOD:hasPurpose:to create the universe
+GOD:hasSize:15
+GOD:hasSyllables:1
+God:isa:Deity
+GOD:isa:Deity
+GOD:lifeArea:Spiritual
+HALO:hasPurpose:to signify an angel
+HALO:hasSize:0
+HALO:hasSyllables:2
+HALO:isa:Concept
+HALO:lifeArea:Spiritual
+HEAVEN:hasPurpose:to provide eternal life to believers
+HEAVEN:hasSize:14
+HEAVEN:hasSyllables:2
+HEAVEN:isa:Location
+HEAVEN:lifeArea:Spiritual
+HOLY:hasPurpose:to be spiritual
+HOLY:hasSize:0
+HOLY:hasSyllables:2
+HOLY:isa:Concept
+HOLY:lifeArea:Spiritual
+ISLAM:hasPurpose:to worship God
+ISLAM:hasSize:0
+ISLAM:hasSyllables:2
+ISLAM:isa:Religion
+ISLAM:lifeArea:Spiritual
+JESUS:hasPurpose:to sacrafice himself for our sins
+JESUS:hasSize:7
+JESUS:hasSyllables:2
+JESUS:isa:Deity
+JESUS:isa:God
+JESUS:lifeArea:Spiritual
+JUDAISM:hasPurpose:to worship God
+JUDAISM:hasSize:0
+JUDAISM:hasSyllables:3
+JUDAISM:isa:Religion
+JUDAISM:lifeArea:Spiritual
+Worship Facility:isa:Building
+SATAN:hasPurpose:to tempt us with evil
+SATAN:hasSize:14
+SATAN:hasSyllables:2
+SATAN:isa:Deity
+SATAN:isa:Evil Entity
+SATAN:lifeArea:Spiritual
+SAINT:hasPurpose:to perform a miracle
+SAINT:hasSize:7
+SAINT:hasSyllables:1
+SAINT:isa:Person
+SAINT:lifeArea:Spiritual
+EDEN:hasPurpose:to provide a home for Adam and Eve
+EDEN:hasSize:10
+EDEN:hasSyllables:2
+EDEN:isa:Location
+EDEN:lifeArea:Spiritual
+HELL:hasPurpose:to provide eternal torment to sinners
+HELL:hasSize:14
+HELL:hasSyllables:1
+HELL:isa:Location
+HELL:lifeArea:Spiritual
+RELIGION:hasPurpose:to worship God or other deities or find enlightenment
+RELIGION:hasSize:0
+RELIGION:hasSyllables:3
+RELIGION:isa:Organization
+RELIGION:lifeArea:Spiritual
+SOUL:hasPurpose:to give our minds a life
+SOUL:hasSize:0
+SOUL:hasSyllables:1
+SOUL:isa:Concept
+SOUL:lifeArea:Spiritual
+PRAYER:hasPurpose:to ask God for help
+PRAYER:hasSize:0
+PRAYER:hasSyllables:2
+PRAYER:isa:Activity
+PRAYER:lifeArea:Spiritual
+MUSLIM:hasPurpose:to worship God
+MUSLIM:hasSize:0
+MUSLIM:hasSyllables:2
+MUSLIM:isa:Religion
+MUSLIM:lifeArea:Spiritual
+MINISTER:hasPurpose:to preach in church
+MINISTER:hasSize:7
+MINISTER:hasSyllables:3
+MINISTER:isa:Person
+MINISTER:lifeArea:Spiritual
+LUCIFER:hasPurpose:to tempt us with evil
+LUCIFER:hasSize:14
+LUCIFER:hasSyllables:3
+LUCIFER:isa:Deity
+LUCIFER:lifeArea:Spiritual
+CROSS:hasPurpose:to crucify Jesus
+CROSS:hasSize:7
+CROSS:hasSyllables:1
+CROSS:isa:Symbol
+CROSS:lifeArea:Spiritual
+VICE:hasPurpose:to sin
+VICE:hasSize:0
+VICE:hasSyllables:1
+VICE:isa:Activity
+VICE:lifeArea:Spiritual
+Evil Entity:isa:Deity
+EVIL:hasPurpose:to tempt us with bad living
+EVIL:hasSize:0
+EVIL:hasSyllables:2
+EVIL:isa:Concept
+EVIL:lifeArea:Spiritual
+GRACE:hasPurpose:to be one with God
+GRACE:hasSize:0
+GRACE:hasSyllables:1
+GRACE:isa:Spiritual State
+GRACE:lifeArea:Spiritual

@@ -81,3 +81,16 @@ class BotTranslatorConfigurationTests(unittest.TestCase):
         self.assertIsNone(translator_config.classname)
         self.assertIsNone(translator_config.from_lang)
         self.assertIsNone(translator_config.to_lang)
+
+    def test_defaults(self):
+        translator_config = BotTranslatorConfiguration(name="translator")
+        data = {}
+        translator_config.to_yaml(data, True)
+
+        BotTranslatorConfigurationTests.assert_defaults(self, data)
+
+    @staticmethod
+    def assert_defaults(test, data):
+        test.assertEqual(data['classname'], "programy.nlp.translate.textblob_translator.TextBlobTranslator")
+        test.assertEqual(data['from'], None)
+        test.assertEqual(data['to'], None)

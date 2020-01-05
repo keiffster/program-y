@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -78,18 +78,18 @@ class PingResponderConfig(BaseConfigurationData):
     def load_config_section(self, configuration_file, section, bot_root=None, subs: Substitutions = None):
         del bot_root
         del subs
-        triggers = configuration_file.get_section(self._section_name, section)
-        if triggers is not None:
-            self._name = configuration_file.get_option(triggers, "name")
-            self._host = configuration_file.get_option(triggers, "host")
-            self._port = configuration_file.get_option(triggers, "port")
-            self._ssl_cert_file = configuration_file.get_option(triggers, "ssl_cert_file")
-            self._ssl_key_file = configuration_file.get_option(triggers, "ssl_key_file")
-            self._url = configuration_file.get_option(triggers, "url")
-            self._shutdown = configuration_file.get_option(triggers, "shutdown")
-            self._register = configuration_file.get_option(triggers, "register")
-            self._unregister = configuration_file.get_option(triggers, "unregister")
-            self._debug = configuration_file.get_option(triggers, "debug")
+        responder = configuration_file.get_section(self._section_name, section)
+        if responder is not None:
+            self._name = configuration_file.get_option(responder, "name")
+            self._host = configuration_file.get_option(responder, "host")
+            self._port = configuration_file.get_option(responder, "port")
+            self._ssl_cert_file = configuration_file.get_option(responder, "ssl_cert_file")
+            self._ssl_key_file = configuration_file.get_option(responder, "ssl_key_file")
+            self._url = configuration_file.get_option(responder, "url")
+            self._shutdown = configuration_file.get_option(responder, "shutdown")
+            self._register = configuration_file.get_option(responder, "register")
+            self._unregister = configuration_file.get_option(responder, "unregister")
+            self._debug = configuration_file.get_option(responder, "debug")
 
         else:
             YLogger.warning(self, "'responder' section missing from client config, using defaults")

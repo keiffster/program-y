@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>WHICH *</pattern>
+        <template>
+            <random>
+                <li>The
+                    <random>
+                        <li>tall</li>
+                        <li>expensive</li>
+                        <li>cheap</li>
+                        <li>special</li>
+                        <li>express</li>
+                        <li>red</li>
+                        <li>blue</li>
+                        <li>small</li>
+                        <li>big</li>
+                        <li>large</li>
+                        <li>first</li>
+                        <li>last</li>
+                    </random>
+                    one, I think.
+                </li>
+                <li>The
+                    <random>
+                        <li>tall</li>
+                        <li>red</li>
+                        <li>blue</li>
+                        <li>small</li>
+                        <li>big</li>
+                        <li>large</li>
+                        <li>first</li>
+                        <li>last</li>
+                    </random>
+                    one, I think.
+                </li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH CITY S RESIDENTS ARE KNOWN *</pattern>
+        <template>New York City.</template>
+    </category>
+    <category>
+        <pattern>WHICH CHARACTER ON THE TV SHOW *</pattern>
+        <template>Monica.</template>
+    </category>
+    <category>
+        <pattern>WHICH SCENE *</pattern>
+        <template>The bugs eat all the people.</template>
+    </category>
+    <category>
+        <pattern>WHICH FACT *</pattern>
+        <template>It's obvious.</template>
+    </category>
+    <category>
+        <pattern>WHICH COUNTRY *</pattern>
+        <template>
+            <random>
+                <li>America</li>
+                <li>Netherlands</li>
+                <li>France</li>
+                <li>Germany</li>
+                <li>Canada</li>
+                <li>Australia</li>
+                <li>Italy</li>
+                <li>Spain</li>
+                <li>Switzerland</li>
+                <li>Norway</li>
+                <li>Belgium</li>
+                <li>Finland</li>
+                <li>Austria</li>
+                <li>Japan</li>
+                <li>Portugal</li>
+                <li>Sweden</li>
+                <li>Ireland</li>
+                <li>Denmark</li>
+                <li>Greece</li>
+                <li>USA</li>
+                <li>Poland</li>
+                <li>India</li>
+                <li>Mexico</li>
+                <li>Hungary</li>
+                <li>Russia</li>
+                <li>Brazil</li>
+                <li>Tasmania</li>
+                <li>Patagonia</li>
+                <li>Turkey</li>
+                <li>China</li>
+                <li>Argentina</li>
+                <li>Israel</li>
+                <li>Romania</li>
+                <li>Luxembourg</li>
+                <li>Iceland</li>
+                <li>Bulgaria</li>
+                <li>Ukraine</li>
+                <li>Singapore</li>
+            </random>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH IS THE OBVIOUS *</pattern>
+        <template>It's really obvious.
+            <think>
+                <set name="it">
+                    <set name="topic">ONE</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH IS HEAVIER * OR *</pattern>
+        <template>
+            <random>
+                <li>
+                    <person>
+                        <star index="2"/>
+                    </person>
+                    .
+                </li>
+                <li><person/>.
+                </li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH IS *</pattern>
+        <template>The obvious one.</template>
+    </category>
+    <category>
+        <pattern>WHICH IS CLOSER * OR *</pattern>
+        <template>
+            <random>
+                <li>
+                    <person/>
+                </li>
+                <li>
+                    <person>
+                        <star index="2"/>
+                    </person>
+                </li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH UNIVERSITY *</pattern>
+        <template>Carnegie Mellon University.</template>
+    </category>
+    <category>
+        <pattern>WHICH STATE *</pattern>
+        <template>
+            <random>
+                <li>Maine.</li>
+                <li>California.</li>
+                <li>New York.</li>
+                <li>Texas.</li>
+                <li>Massachusetts.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH ONE IS *</pattern>
+        <template>The first one is usually the best one.</template>
+    </category>
+    <category>
+        <pattern>WHICH ROCKY FILM *</pattern>
+        <template>Rocky III.</template>
+    </category>
+    <category>
+        <pattern>WHICH ARE *</pattern>
+        <template>The obvious.</template>
+    </category>
+    <category>
+        <pattern>WHICH WORDS *</pattern>
+        <template>
+            <random>
+                <li>
+                    <random>
+                        <li>Words in human languages.</li>
+                        <li>Words like you use.</li>
+                        <li>Words I can't remember.</li>
+                    </random>
+                </li>
+                <li>Words in human languages.</li>
+                <li>Words like you use.</li>
+                <li>Words I can't remember.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH SYSTEM *</pattern>
+        <template>It is platform-independent.</template>
+    </category>
+    <category>
+        <pattern>WHICH AMERICAN COLONY KNOWN FOR ITS *</pattern>
+        <template>Rhode Island.</template>
+    </category>
+    <category>
+        <pattern>WHICH TALL *</pattern>
+        <template>I meant, the short one.</template>
+    </category>
+    <category>
+        <pattern>WHICH PLAYER IS ALLOWED TO USE *</pattern>
+        <template>Goalkeeper.</template>
+    </category>
+    <category>
+        <pattern>WHICH FAST FOOD *</pattern>
+        <template>Wendy's.</template>
+    </category>
+    <category>
+        <pattern>WHICH LANGUAGE *</pattern>
+        <template>
+            <random>
+                <li>C++.</li>
+                <li>AIML.</li>
+                <li>The Russian Language.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH OF THE THREE STOOGES WAS *</pattern>
+        <template>Larry.</template>
+    </category>
+
+ </aiml>

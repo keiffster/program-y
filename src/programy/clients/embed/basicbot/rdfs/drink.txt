@@ -1,0 +1,88 @@
+ALCOHOL:hasPurpose:to make us intoxicated
+ALCOHOL:hasSize:0
+ALCOHOL:hasSyllables:3
+Alcohol:isa:Beverage
+ALCOHOL:isa:Beverage
+ALCOHOL:lifeArea:Diet
+BEER:hasPurpose:to make us intoxicated
+BEER:hasSize:4
+BEER:hasSyllables:1
+BEER:isa:Alcohol
+BEER:isa:Beverage
+BEER:lifeArea:Diet
+BRANDY:hasPurpose:to make us intoxicated
+BRANDY:hasSize:4
+BRANDY:hasSyllables:2
+BRANDY:isa:Alcohol
+BRANDY:isa:Beverage
+BRANDY:lifeArea:Diet
+Caffeine Drink:isa:Beverage
+COFFEE:hasPurpose:to keep us awake
+COFFEE:hasSize:3
+COFFEE:hasSyllables:2
+COFFEE:isa:Beverage
+COFFEE:isa:Caffeine Drink
+COFFEE:lifeArea:Diet
+COLA:hasPurpose:to provide nourishment
+COLA:hasSize:4
+COLA:hasSyllables:1
+COLA:isa:Beverage
+COLA:isa:Soda
+COLA:lifeArea:Diet
+GIN:hasPurpose:to make us intoxicated
+GIN:hasSize:3
+GIN:hasSyllables:1
+GIN:isa:Alcohol
+GIN:isa:Beverage
+GIN:lifeArea:Diet
+Liquid Fuel:isa:Liquid
+LIQUID:hasPurpose:to be a state of matter
+LIQUID:hasSize:0
+LIQUID:hasSyllables:2
+LIQUID:isa:Matter State
+LIQUID:lifeArea:Physical
+LIQUOR:hasPurpose:to make us intoxicated
+LIQUOR:hasSize:5
+LIQUOR:hasSyllables:1
+LIQUOR:isa:Alcohol
+LIQUOR:isa:Beverage
+LIQUOR:lifeArea:Diet
+WINE:hasPurpose:to make us intoxicated
+WINE:hasSize:3
+WINE:hasSyllables:1
+WINE:isa:Alcohol
+WINE:isa:Beverage
+WINE:lifeArea:Diet
+WHISKEY:hasPurpose:to make us intoxicated
+WHISKEY:hasSize:3
+WHISKEY:hasSyllables:2
+WHISKEY:isa:Alcohol
+WHISKEY:isa:Beverage
+WHISKEY:lifeArea:Diet
+WATER:hasPurpose:to quench thirst
+WATER:hasSize:0
+WATER:hasSyllables:2
+WATER:lifeArea:Physical
+MILK:hasPurpose:to provide nourishment
+MILK:hasSize:3
+MILK:hasSyllables:1
+MILK:isa:Beverage
+MILK:lifeArea:Diet
+Soda:isa:Beverage
+DRUNK:hasPurpose:to be intoxicated
+DRUNK:hasSize:7
+DRUNK:hasSyllables:1
+DRUNK:isa:Intoxicated Person
+DRUNK:isa:Person
+DRUNK:lifeArea:Social
+TEA:hasPurpose:to perk us up
+TEA:hasSize:3
+TEA:hasSyllables:1
+TEA:isa:Beverage
+TEA:isa:Caffeine Drink
+TEA:lifeArea:Diet
+STILL:hasPurpose:to make liquor
+STILL:hasSize:8
+STILL:hasSyllables:1
+STILL:isa:Tool
+STILL:lifeArea:Diet

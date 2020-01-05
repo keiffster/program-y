@@ -1,0 +1,16 @@
+anything:^.*$
+anytext:^.+$
+anyinteger:^\d+$
+anydecimal:^\d+\.\d+$
+anynumber:^[\d+\.\d+$]|[\d+]$
+legion:^LEGION$
+email:^[-a-z0-9_.]+@(?:[-a-z0-9]+\.)+[a-z]{2,6}$
+postcode:^[a-z]{1,2}\d{1,2}[a-z]?\s*\d[a-z]{2}$
+zipcode:^\d{5}(?:[-\s]\d{4})?$
+ukdate:^[0123]?\d[-/\s\.](?:[01]\d|[a-z]{3,})[-/\s\.](?:\d{2})?\d{2}$
+time:^\d{1,2}:\d{1,2}(?:\s*[aApP]\.?[mM]\.?)?$
+visacard:^4\d{3}[\s-]?\d{4}[\s-]?\d{4}[\s-]?\d{4}$
+mastercard:^5[1-5]\d{2}[\s-]?\d{4}[\s-]?\d{4}[\s-]?\d{4}$
+phone:^0[-\d\s]{10,}$
+ninumber:^[a-z]{2}\s?\d{2}\s?\d{2}\s?\d{2}\s?[a-z]$
+isbn:^\d{9}[\d|X]$

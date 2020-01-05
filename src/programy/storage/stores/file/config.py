@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2020 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -72,7 +72,7 @@ class FileStorageConfiguration(BaseConfigurationData):
                                                       encoding="utf-8", delete_on_start=False)
         self._person2_storage = FileStoreConfiguration(file=tmpdir + os.sep + "lookups/person2.txt", fileformat="text",
                                                        encoding="utf-8", delete_on_start=False)
-        self._regex_storage = FileStoreConfiguration(file=tmpdir + os.sep + "lookups/regex.txt", fileformat="text",
+        self._regex_storage = FileStoreConfiguration(file=tmpdir + os.sep + "regex/regex-templates.txt", fileformat="text",
                                                      encoding="utf-8", delete_on_start=False)
 
         self._properties_storage = FileStoreConfiguration(file=tmpdir + os.sep + "properties/properties.txt", fileformat="text",
@@ -90,9 +90,9 @@ class FileStorageConfiguration(BaseConfigurationData):
         self._license_storage = FileStoreConfiguration(file=tmpdir + os.sep + "licenses/license.keys",
                                                        fileformat="text", encoding="utf-8", delete_on_start=False)
 
-        self._pattern_nodes_storage = FileStoreConfiguration(file=tmpdir + os.sep + "nodes/pattern_nodes.txt",
+        self._pattern_nodes_storage = FileStoreConfiguration(file=tmpdir + os.sep + "nodes/pattern_nodes.conf",
                                                              fileformat="text", encoding="utf-8", delete_on_start=False)
-        self._template_nodes_storage = FileStoreConfiguration(file=tmpdir + os.sep + "nodes/template_nodes.txt",
+        self._template_nodes_storage = FileStoreConfiguration(file=tmpdir + os.sep + "nodes/template_nodes.conf",
                                                               fileformat="text", encoding="utf-8",
                                                               delete_on_start=False)
 
@@ -453,19 +453,19 @@ class FileStorageConfiguration(BaseConfigurationData):
         config.to_yaml(amap[FileStore.PERSON2_STORAGE], defaults=False)
 
         amap[FileStore.REGEX_STORAGE] = {}
-        config = FileStoreConfiguration(file=tmpdir + os.sep + "lookups/regex.txt",
+        config = FileStoreConfiguration(file=tmpdir + os.sep + "regex/regex-templates.txt",
                                         fileformat="text",
                                         encoding="utf-8", delete_on_start=False)
         config.to_yaml(amap[FileStore.REGEX_STORAGE], defaults=False)
 
         amap[FileStore.PROPERTIES_STORAGE] = {}
-        config = FileStoreConfiguration(file=tmpdir + os.sep + "properties.txt",
+        config = FileStoreConfiguration(file=tmpdir + os.sep + "properties/properties.txt",
                                         fileformat="text",
                                         encoding="utf-8", delete_on_start=False)
         config.to_yaml(amap[FileStore.PROPERTIES_STORAGE], defaults=False)
 
         amap[FileStore.DEFAULTS_STORAGE] = {}
-        config = FileStoreConfiguration(file=tmpdir + os.sep + "defaults.txt",
+        config = FileStoreConfiguration(file=tmpdir + os.sep + "properties/defaults.txt",
                                         fileformat="text",
                                         encoding="utf-8", delete_on_start=False)
         config.to_yaml(amap[FileStore.DEFAULTS_STORAGE], defaults=False)
@@ -490,13 +490,13 @@ class FileStorageConfiguration(BaseConfigurationData):
         config.to_yaml(amap[FileStore.LICENSE_STORAGE], defaults=False)
 
         amap[FileStore.PATTERN_NODES_STORAGE] = {}
-        config = FileStoreConfiguration(file=tmpdir + os.sep + "nodes/pattern_nodes.txt",
+        config = FileStoreConfiguration(file=tmpdir + os.sep + "nodes/pattern_nodes.conf",
                                                                        fileformat="text",
                                                                        encoding="utf-8", delete_on_start=False)
         config.to_yaml(amap[FileStore.PATTERN_NODES_STORAGE], defaults=False)
 
         amap[FileStore.TEMPLATE_NODES_STORAGE] = {}
-        config = FileStoreConfiguration(file=tmpdir + os.sep + "nodes/template_nodes.txt",
+        config = FileStoreConfiguration(file=tmpdir + os.sep + "nodes/template_nodes.conf",
                                                                         fileformat="text",
                                                                         encoding="utf-8", delete_on_start=False)
         config.to_yaml(amap[FileStore.TEMPLATE_NODES_STORAGE], defaults=False)
@@ -529,7 +529,7 @@ class FileStorageConfiguration(BaseConfigurationData):
         config.to_yaml(amap[FileStore.POSTQUESTIONPROCESSORS_STORAGE], defaults=False)
 
         amap[FileStore.USERGROUPS_STORAGE] = {}
-        config = FileStoreConfiguration(file=tmpdir + os.sep + "security/usergroups.txt",
+        config = FileStoreConfiguration(file=tmpdir + os.sep + "security/usergroups.yaml",
                                         fileformat="text",
                                         encoding="utf-8", delete_on_start=False)
         config.to_yaml(amap[FileStore.USERGROUPS_STORAGE], defaults=False)

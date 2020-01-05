@@ -4,6 +4,7 @@ from pymessenger.bot import Bot
 
 from programy.clients.restful.flask.facebook.client import FacebookBotClient
 from programy.clients.restful.flask.facebook.config import FacebookConfiguration
+from programy.clients.restful.flask.facebook.renderer import FacebookRenderer
 from programytest.clients.arguments import MockArgumentParser
 
 
@@ -61,6 +62,9 @@ class FacebookClientBotClientTests(unittest.TestCase):
         self.assertEqual('ProgramY AIML2.0 Client', client.get_description())
 
         self.assertIsInstance(client._facebook_bot, Bot)
+
+        self.assertTrue(client._render_callback())
+        self.assertIsInstance(client.renderer, FacebookRenderer)
 
     def test_hub_challenge(self):
         arguments = MockArgumentParser()

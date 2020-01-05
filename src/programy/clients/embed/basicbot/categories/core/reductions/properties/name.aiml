@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>WHAT IS YOUR NAME PLEASE</pattern>
+        <template>
+            <srai>NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU SAY YOUR NAME</pattern>
+        <template>
+            <srai>NAME</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>WHAT IS YOUR REAL NAME</pattern>
+        <template>
+            <srai>NAME</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>WHAT SHOULD I CALL YOU</pattern>
+        <template>
+            <srai>NAME</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>WHAT IS YOUR NAME</pattern>
+        <template>
+            <srai>NAME</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>TELL ME YOUR REAL NAME</pattern>
+        <template>
+            <srai>NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS NAME</pattern>
+        <template>
+            <srai>NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR NAME AGAIN</pattern>
+        <template>
+            <srai>NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR NAME IS</pattern>
+        <template>
+            <srai>NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT ARE YOU CALLED #</pattern>
+        <template>
+            <srai>NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT NAME DO YOU #</pattern>
+        <template>
+            <srai>NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO # CALL YOU</pattern>
+        <template>
+            <srai>NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT CAN I CALL YOU #</pattern>
+        <template>
+            <srai>NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IDENTIFY YOURSELF #</pattern>
+        <template>
+            <srai>NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR NAME AGAIN *</pattern>
+        <template>
+            <srai>NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WATS YOUR NAME</pattern>
+        <template>
+            <srai>NAME</srai>
+        </template>
+    </category>
+
+
+    <category>
+        <pattern>MY FULL NAME IS * *</pattern>
+        <template>
+            <srai>MY NAME IS
+                <star/>
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS MY FULL NAME</pattern>
+        <template>
+            <srai>MY FULL NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR FULL NAME</pattern>
+        <template>
+            <srai>FULL NAME</srai>
+        </template>
+    </category>
+
+        <category>
+        <pattern>WHAT IS MY FIRST NAME</pattern>
+        <template>
+            <srai>MY FIRST NAME</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>MY SURNAME IS *</pattern>
+        <template>
+            <srai>MY LAST NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR LAST NAME</pattern>
+        <template>
+            <srai>LAST NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS MY LAST NAME</pattern>
+        <template>
+            <srai>MY LAST NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY SURNAME</pattern>
+        <template>
+            <srai>MY LAST NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR MIDDLE NAME</pattern>
+        <template>
+            <srai>MIDDLE NAME</srai>
+        </template>
+    </category>
+
+        <category>
+        <pattern>I AM GOING TO CALL YOU *</pattern>
+        <template>
+            <srai>CHANGE YOUR NAME TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MAY I CALL YOU *</pattern>
+        <template>
+            <srai>CHANGE YOUR NAME TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+   <category>
+        <pattern>IS YOUR NAME *</pattern>
+        <template>
+            <srai>WHAT IS YOUR NAME</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>WHAT IS YOUR NAME *</pattern>
+        <template>
+            <srai>WHAT IS YOUR NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN I CALL YOU *</pattern>
+        <template>
+            <srai>CHANGE YOUR NAME TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DOES YOUR NAME MEAN</pattern>
+        <template>
+            <srai>WHAT DOES
+                <bot name="name"/>
+                STAND FOR
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CHANGE YOUR NAME *</pattern>
+        <template>
+            <srai>CHANGE YOUR NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN I CHANGE YOUR NAME TO *</pattern>
+        <template>
+            <srai>CHANGE YOUR NAME TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN I CHANGE YOUR NAME *</pattern>
+        <template>
+            <srai>CHANGE YOUR NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN I NAME YOU *</pattern>
+        <template>
+            <srai>CHANGE YOUR NAME TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>
+            <set>name</set>
+            IS MY *
+        </pattern>
+        <template>
+            <srai>MY
+                <star index="2"/>
+                IS NAMED
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>
+            <set>name</set>
+            IS MY NAME ^
+        </pattern>
+        <template>
+            <srai>MY NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>* IS MY NAME ^</pattern>
+        <template>
+            <srai>MY NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+        <category>
+        <pattern>HOW SHOULD I # YOU</pattern>
+        <template>
+            <srai>NAME</srai>
+        </template>
+    </category>
+
+
+</aiml>

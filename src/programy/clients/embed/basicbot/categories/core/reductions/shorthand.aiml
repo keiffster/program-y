@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+    <category>
+        <pattern>COZ *</pattern>
+        <template>
+            <srai>BECAUSE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>BC *</pattern>
+        <template>
+            <srai>BECAUSE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FO SHO</pattern>
+        <template>
+            <srai>FOR SURE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>JUS *</pattern>
+        <template>
+            <srai>JUST
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>KEWL</pattern>
+        <template>
+            <srai>COOL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>O M G *</pattern>
+        <template>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>GIMME A *</pattern>
+        <template>
+            <srai>GIVE ME A
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OMG</pattern>
+        <template>
+            <srai>OH MY GOD</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>KOOL</pattern>
+        <template>
+            <srai>COOL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>10 4</pattern>
+        <template>
+            <srai>TEN FOUR</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DEN *</pattern>
+        <template>
+            <srai>THEN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAUSE</pattern>
+        <template>
+            <srai>BECAUSE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CUZ *</pattern>
+        <template>
+            <srai>BECAUSE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CUZ</pattern>
+        <template>
+            <srai>BECAUSE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NP</pattern>
+        <template>
+            <srai>NO PROBLEM</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>JK</pattern>
+        <template>
+            <srai>KIDDING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>KO</pattern>
+        <template>
+            <srai>OK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CUZ I *</pattern>
+        <template>
+            <srai>BECAUSE I
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NVM</pattern>
+        <template>
+            <srai>NEVERMIND</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SRRY</pattern>
+        <template>
+            <srai>SORRY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SUP</pattern>
+        <template>
+            <srai>WHAT IS UP</srai>
+        </template>
+    </category>
+</aiml>

@@ -91,3 +91,17 @@ class BrainOpenChatBotConfigurationTests(unittest.TestCase):
                            'authorization': 'Basic',
                            'method': 'GET',
                            'url': 'https://99.88.77.66/api/rest/v2.0/ask'}, data)
+
+    def test_defaults(self):
+        openchatbot_config = BrainOpenChatBotConfiguration("chatbot1")
+        data ={}
+        openchatbot_config.to_yaml(data, True)
+
+        BrainOpenChatBotConfigurationTests.assert_defaults(self, data)
+
+    @staticmethod
+    def assert_defaults(test, data):
+        test.assertIsNone(data['url'])
+        test.assertIsNone(data['method'])
+        test.assertIsNone(data['authorization'])
+        test.assertIsNone(data['api_key'])

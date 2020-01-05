@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- basic_chat.aiml -->
+
+    <category>
+        <pattern>HELLO $FRIEND #</pattern>
+        <template>Hi there, friend!</template>
+    </category>
+
+    <category>
+        <pattern>HELLO THERE</pattern>
+        <template>Hi there!</template>
+    </category>
+    <category>
+        <pattern>MY FIRST NAME IS * AND MY SURNAME IS *</pattern>
+        <template>NICE TO MEET YOU
+            <set name="fn">
+                <star index="1"/>
+            </set>
+            <set name="ln">
+                <star index="2"/>
+            </set>
+        </template>
+    </category>
+    <category>
+        <pattern>GOOD NIGHT *</pattern>
+        <template>
+            Good night
+            <get name="nameUser"/>
+        </template>
+    </category>
+    <category>
+        <pattern>GOOD NIGHT</pattern>
+        <template>Bye</template>
+    </category>
+    <category>
+        <pattern>I LIKE THE
+            <regex pattern="col[o|ou]r"/>
+            RED
+        </pattern>
+        <template>Wow, I like red too!</template>
+    </category>
+    <category>
+        <pattern>I DRIVE A
+            <set name="cars"/>
+        </pattern>
+        <template>
+            Hey, I have always wanted to drive one of them.
+        </template>
+    </category>
+    <category>
+        <pattern>MY NAME IS *</pattern>
+        <template>
+            <set name="name">
+                <star index="1"/>
+            </set>
+            , nice name.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT ARE YOU</pattern>
+        <template>
+            <random>
+                <li>I'm a bot</li>
+                <li>A bot</li>
+                <li>I'm a chatbot</li>
+                <li>A chatbot</li>
+                <li>A virtual agent</li>
+                <li>I am artificial intelligent agent</li>
+            </random>
+
+        </template>
+    </category>
+    <category>
+        <pattern>ONE TIME I *</pattern>
+        <template>
+            <random>
+                <li>Go on.</li>
+                <li>How old are you?</li>
+                <li>Be more specific.</li>
+                <li>I did not know that.</li>
+                <li>Are you telling the truth?</li>
+                <li>I don't know what that means.</li>
+                <li>Try to tell me that another way.</li>
+                <li>Are you talking about an animal, vegetable or mineral?</li>
+                <li>What is it?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>LET TALK ABOUT FLOWERS.</pattern>
+        <template>
+            Yes
+            <set name="topic">flowers</set>
+        </template>
+    </category>
+
+    <topic name="flowers">
+        <category>
+            <pattern>*</pattern>
+            <template>
+                Flowers have a nice smell.
+            </template>
+        </category>
+
+        <category>
+            <pattern>I LIKE IT SO MUCH!</pattern>
+            <template>
+                I like flowers too.
+            </template>
+        </category>
+    </topic>
+
+
+</aiml>

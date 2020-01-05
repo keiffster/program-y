@@ -1,10 +1,11 @@
-
 """
 import unittest
 
 from programytest.clients.arguments import MockArgumentParser
 from programy.clients.restful.asyncio.microsoft.client import MicrosoftBotClient
 from programy.clients.restful.asyncio.microsoft.config import MicrosoftConfiguration
+
+from programy.clients.render.text import TextRenderer
 
 
 class MockMicrosoftBotClient(MicrosoftBotClient):
@@ -25,4 +26,6 @@ class MicrosoftBotClientTests(unittest.TestCase):
         self.assertEqual('ProgramY AIML2.0 Client', client.get_description())
         self.assertIsInstance(client.get_client_configuration(), MicrosoftConfiguration)
 
+        self.assertFalse(client._render_callback())
+        self.assertIsInstance(client.renderer, TextRenderer)
 """

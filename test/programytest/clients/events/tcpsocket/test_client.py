@@ -4,6 +4,7 @@ import unittest
 from programy.clients.events.tcpsocket.client import SocketBotClient
 from programy.clients.events.tcpsocket.client import SocketConnection
 from programy.clients.events.tcpsocket.config import SocketConfiguration
+from programy.clients.render.json import JSONRenderer
 from programytest.clients.arguments import MockArgumentParser
 
 
@@ -66,6 +67,9 @@ class SocketBotClientTests(unittest.TestCase):
         self.assertIsNotNone(client)
         self.assertEqual('ProgramY AIML2.0 Client', client.get_description())
         self.assertIsInstance(client.get_client_configuration(), SocketConfiguration)
+
+        self.assertFalse(client._render_callback())
+        self.assertIsInstance(client.renderer, JSONRenderer)
 
     def test_extract_payload(self):
         arguments = MockArgumentParser()

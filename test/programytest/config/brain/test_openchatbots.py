@@ -13,8 +13,12 @@ class BrainOpenChatBotsConfigurationTests(unittest.TestCase):
         yaml.load_from_text("""
         brain:
             openchatbots:
-                protocols: http, https
-                domains: org, co.uk
+                protocols: 
+                  - http
+                  - https
+                domains: 
+                  - org
+                  - co.uk
                 chatbot1:
                     url: https://11.11.11.11/api/rest/v2.0/ask
                     method: GET
@@ -86,3 +90,16 @@ class BrainOpenChatBotsConfigurationTests(unittest.TestCase):
         self.assertFalse(openchatbots_config.exists("Pandora"))
         self.assertFalse(openchatbots_config.exists("Wikipedia"))
         self.assertFalse(openchatbots_config.exists("Other"))
+
+    def test_defaults(self):
+        openchatbots_config = BrainOpenChatBotsConfiguration()
+        data = {}
+        openchatbots_config.to_yaml(data, True)
+
+        BrainOpenChatBotsConfigurationTests.assert_defaults(self, data)
+
+    @staticmethod
+    def assert_defaults(test, data):
+        test.assertEqual(data['openchatbots'], {})
+        test.assertEqual(data['protocols'], ['http'])
+        test.assertEqual(data['domains'], [])

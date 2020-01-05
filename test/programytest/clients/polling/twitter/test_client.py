@@ -9,6 +9,7 @@ from programy.storage.config import FileStorageConfiguration
 from programy.storage.factory import StorageFactory
 from programy.storage.stores.file.config import FileStoreConfiguration
 from programy.storage.stores.file.engine import FileStorageEngine
+from programy.clients.render.text import TextRenderer
 from programytest.clients.arguments import MockArgumentParser
 
 
@@ -104,6 +105,9 @@ class TwitterBotClientTests(unittest.TestCase):
         self.assertEqual("consumer_secret", client._consumer_secret)
         self.assertEqual("access_token", client._access_token)
         self.assertEqual("access_secret", client._access_token_secret)
+
+        self.assertFalse(client._render_callback())
+        self.assertIsInstance(client.renderer, TextRenderer)
 
     #############################################################################################
     # Direct Messages

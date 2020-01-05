@@ -113,3 +113,26 @@ class BrainOOBsConfigurationTests(unittest.TestCase):
         self.assertEquals({'default': {'classname': 'programy.oob.defaults.default.DefaultOutOfBandProcessor'},
                            'dial': {'classname': 'programy.oob.defaults.dial.DialOutOfBandProcessor'},
                            'email': {'classname': 'programy.oob.defaults.email.EmailOutOfBandProcessor'}}, data)
+
+    def test_defaults(self):
+        oobs_config = BrainOOBSConfiguration()
+        data = {}
+        oobs_config.to_yaml(data, True)
+
+        BrainOOBsConfigurationTests.assert_defaults(self, data)
+
+    @staticmethod
+    def assert_defaults(test, data):
+        test.assertEqual(data['default'], {'classname': 'programy.oob.defaults.default.DefaultOutOfBandProcessor'})
+        test.assertEqual(data['alarm'], {'classname': 'programy.oob.defaults.alarm.AlarmOutOfBandProcessor'})
+        test.assertEqual(data['camera'], {'classname': 'programy.oob.defaults.camera.CameraOutOfBandProcessor'})
+        test.assertEqual(data['clear'], {'classname': 'programy.oob.defaults.clear.ClearOutOfBandProcessor'})
+        test.assertEqual(data['dial'], {'classname': 'programy.oob.defaults.dial.DialOutOfBandProcessor'})
+        test.assertEqual(data['dialog'], {'classname': 'programy.oob.defaults.dialog.DialogOutOfBandProcessor'})
+        test.assertEqual(data['email'], {'classname': 'programy.oob.defaults.email.EmailOutOfBandProcessor'})
+        test.assertEqual(data['geomap'], {'classname': 'programy.oob.defaults.map.MapOutOfBandProcessor'})
+        test.assertEqual(data['schedule'], {'classname': 'programy.oob.defaults.schedule.ScheduleOutOfBandProcessor'})
+        test.assertEqual(data['search'], {'classname': 'programy.oob.defaults.search.SearchOutOfBandProcessor'})
+        test.assertEqual(data['sms'], {'classname': 'programy.oob.defaults.sms.SMSOutOfBandProcessor'})
+        test.assertEqual(data['url'], {'classname': 'programy.oob.defaults.url.URLOutOfBandProcessor'})
+        test.assertEqual(data['wifi'], {'classname': 'programy.oob.defaults.wifi.WifiOutOfBandProcessor'})

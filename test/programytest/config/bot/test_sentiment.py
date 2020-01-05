@@ -77,3 +77,14 @@ class BotSentimentAnalyserConfigurationTests(unittest.TestCase):
         self.assertIsNone(sentiment_config.classname)
         self.assertIsNone(sentiment_config.scores)
 
+    def test_defaults(self):
+        sentiment_config = BotSentimentAnalyserConfiguration()
+        data = {}
+        sentiment_config.to_yaml(data, True)
+
+        BotSentimentAnalyserConfigurationTests.assert_defaults(self, data)
+
+    @staticmethod
+    def assert_defaults(test, data):
+        test.assertEqual(data['classname'], "programy.nlp.sentiment.textblob_sentiment.TextBlobSentimentAnalyser")
+        test.assertEqual(data['scores'], "programy.nlp.sentiment.scores.SentimentScores")

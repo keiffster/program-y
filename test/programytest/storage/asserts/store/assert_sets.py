@@ -104,6 +104,28 @@ class SetStoreAsserts(unittest.TestCase):
         self.assertTrue('VAL3' in values)
         self.assertTrue('VAL4' in values)
 
+    def assert_upload_text_files_from_directory_with_subdir(self, store):
+        store.empty ()
+
+        store.upload_from_directory(os.path.dirname(__file__)+os.sep+"data"+os.sep+"sets"+os.sep+"text", subdir=True)
+
+        set_collection = SetCollection()
+        store.load_all(set_collection)
+
+        self.assertTrue(set_collection.contains('TESTSET'))
+        values = set_collection.set('TESTSET')
+        self.assertTrue('VAL1' in values)
+        self.assertTrue('VAL2' in values)
+        self.assertTrue('VAL3' in values)
+        self.assertTrue('VAL4' in values)
+
+        self.assertTrue(set_collection.contains('TESTSET2'))
+        values = set_collection.set('TESTSET2')
+        self.assertTrue('VAL5' in values)
+        self.assertTrue('VAL6' in values)
+        self.assertTrue('VAL7' in values)
+        self.assertTrue('VAL8' in values)
+
     def assert_upload_from_csv_file(self, store):
         store.empty()
 

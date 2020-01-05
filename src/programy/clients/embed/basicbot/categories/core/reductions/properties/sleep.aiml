@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+    <category>
+        <pattern>WHAT TIME DO YOU GO TO BED</pattern>
+        <template>
+            <srai>SLEEP</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT TIME * YOU * BED</pattern>
+        <template>
+            <srai>SLEEP</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TIRED</pattern>
+        <template>
+            <srai>SLEEP</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE LAST DREAM *</pattern>
+        <template>
+            <srai>SLEEP</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO YOU DO # TIRED</pattern>
+        <template>
+            <srai>SLEEP</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT # YOUR DREAM #</pattern>
+        <template>
+            <srai>SLEEP</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO YOU DREAM #</pattern>
+        <template>
+            <srai>SLEEP</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU DREAM #</pattern>
+        <template>
+            <srai>SLEEP</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU REMEMBER # DREAM #</pattern>
+        <template>
+            <srai>SLEEP</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU REMEMBER # DREAMS #</pattern>
+        <template>
+            <srai>SLEEP</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE # DREAMS #</pattern>
+        <template>
+            <srai>SLEEP</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GOTO SLEEP</pattern>
+        <template>
+            <srai>SLEEP</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM SLEEPY *</pattern>
+        <template>
+            <srai>I AM TIRED</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT TIME * YOU * BED *</pattern>
+        <template>
+            <srai>SLEEP</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU SLEEPING</pattern>
+        <template>
+            <srai>TIRED</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I CAN NOT SLEEP *</pattern>
+        <template>
+            <srai>I CAN NOT SLEEP</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I WANT TO SLEEP</pattern>
+        <template>
+            <srai>I AM TIRED</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>DO YOU SLEEP</pattern>
+        <template>
+            <srai>SLEEP</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO YOU DO # SLEEPY</pattern>
+        <template>
+            <srai>SLEEP</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHEN DO YOU # GO TO BED</pattern>
+        <template>
+            <srai>SLEEP</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM SLEEPY</pattern>
+        <template>
+            <srai>I am tired</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SLEEP *</pattern>
+        <template>
+            <srai>DO YOU SLEEP
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM GOING TO SLEEP *</pattern>
+        <template>
+            <srai>I AM GOING TO SLEEP</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SLEEPING</pattern>
+        <template>
+            <srai>are you sleeping</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM SLEEPING *</pattern>
+        <template>
+            <srai>I AM SLEEPING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM SO TIRED</pattern>
+        <template>
+            <srai>I AM TIRED</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM GOING TO BED GOODNIGHT</pattern>
+        <template>
+            <srai>I AM GOING TO BED</srai>
+        </template>
+    </category>
+
+
+
+
+</aiml>

@@ -39,7 +39,7 @@ class TemplateMapNodeTests(ParserTestsBaseClass):
 
     def test_no_var_defaultmap_set(self):
         self._client_context.brain.maps._maps['COLOURS'] = {'BLACK': 'WHITE'}
-        self._client_context.brain.properties.add_property('default-map', "test_value")
+        self._client_context.brain.properties.add_property('default_map', "test_value")
 
         node = TemplateMapNode()
         node.name = TemplateWordNode("COLOURS")
@@ -66,7 +66,7 @@ class TemplateMapNodeTests(ParserTestsBaseClass):
 
     def test_no_map_for_name_defaultmap_set(self):
         self._client_context.brain.maps._maps['COLOURS'] = {'BLACK': 'WHITE'}
-        self._client_context.brain.properties.add_property('default-map', "test_value")
+        self._client_context.brain.properties.add_property('default_map', "test_value")
 
         node = TemplateMapNode()
         node.name = TemplateWordNode("UNKNOWN")

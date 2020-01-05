@@ -71,3 +71,14 @@ class BotSentenceSplitterConfigurationTests(unittest.TestCase):
         splitter_config = BotSentenceSplitterConfiguration()
         splitter_config.load_config_section(yaml, bot_config, ".")
 
+    def test_defaults(self):
+        splitter_config = BotSentenceSplitterConfiguration()
+        data = {}
+        splitter_config.to_yaml(data, True)
+
+        BotSentenceSplitterConfigurationTests.assert_defaults(self, data)
+
+    @staticmethod
+    def assert_defaults(test, data):
+        test.assertEqual(data['classname'], BotSentenceSplitterConfiguration.DEFAULT_CLASSNAME)
+        test.assertEqual(data['split_chars'], BotSentenceSplitterConfiguration.DEFAULT_SPLITCHARS)

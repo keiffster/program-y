@@ -51,3 +51,15 @@ class BrainBraintreeConfigurationTests(unittest.TestCase):
         braintree_config.load_config_section(yaml, brain_config, ".")
 
         self.assertFalse(braintree_config.create)
+
+    def test_defaults(self):
+        braintree_config = BrainBraintreeConfiguration()
+        data = {}
+        braintree_config.to_yaml(data, True)
+
+        BrainBraintreeConfigurationTests.assert_defaults(self, data)
+
+    @staticmethod
+    def assert_defaults(test, data):
+        test.assertFalse(data['create'])
+        test.assertEqual(data['save_as_user'], "system")

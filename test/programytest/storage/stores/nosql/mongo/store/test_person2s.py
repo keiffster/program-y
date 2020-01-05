@@ -44,7 +44,7 @@ class MongoPerson2StoreTests(Person2sStoreAsserts):
 
         self.assert_upload_from_text_file(store)
 
-    @unittest.skip("CSV not supported yet")
+    @unittest.skipIf(Engines.mongo is False, Engines.mongo_disabled)
     def test_upload_csv_file(self):
         config = MongoStorageConfiguration()
         engine = MongoStorageEngine(config)
