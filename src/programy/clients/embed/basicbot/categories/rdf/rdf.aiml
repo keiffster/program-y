@@ -862,7 +862,7 @@
                     </select>
                 </set>
             </think>
-            <condition value="NIL" var="tuples">I don't who dreams about<star/>.
+            <condition value="NIL" var="tuples">I don't know who dreams about <star/>.
             </condition>
             <condition var="tuples">
                 <li value="NIL"/>

@@ -16,20 +16,8 @@ handlers:
         backupCount: 10
         encoding: utf-8
 
-    conversation:
-        class : logging.handlers.RotatingFileHandler
-        formatter: conversation
-        filename: /tmp/y-bot-conversation.log
-
-loggers:
-  conversation:
-    level: DEBUG
-    handlers:
-      - conversation
-    propogate: no
-
 root:
-    level: DEBUG
+    level: ERROR
     handlers:
         - file
 

@@ -43,4 +43,7 @@ class RedisStore(Store):
         pipeline.execute()
 
     def get(self, h_key):
-        return self._storage_engine.redis.get(h_key)
+        result = self._storage_engine.redis.get(h_key)
+        if result is not None:
+            return result.decode("utf-8")
+        return result

@@ -86,7 +86,6 @@ class TemplateGetNode(TemplateNode):
 
         if value is None:
             YLogger.error(client_context, "No property for [%s]", name)
-
             value = TemplateGetNode.get_default_value(client_context)
 
         return value
@@ -149,7 +148,13 @@ class TemplateGetNode(TemplateNode):
                 resolved += " "
 
         YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
-        return resolved.strip()
+        value = resolved.strip()
+
+        if value is None or value == "":
+            YLogger.error(client_context, "No value for tuple, returning default_get")
+            value = TemplateGetNode.get_default_value(client_context)
+
+        return value
 
     def resolve_to_string(self, client_context):
         if self._tuples is None:

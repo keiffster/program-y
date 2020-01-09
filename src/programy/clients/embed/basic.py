@@ -16,12 +16,14 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 import os
 from programy.clients.embed.datafile import EmbeddedDataFileBot
+from programy.clients.args import CommandLineClientArguments
 
 
 class EmbeddedBasicBot(EmbeddedDataFileBot):
 
-    def __init__(self, ):
-        
+    def __init__(self, logging_filename=None):
+        self._logging_filename = logging_filename
+
         filepath = os.path.dirname(__file__) + os.sep 
         
         files = {'aiml': [filepath + 'basicbot/categories'],
@@ -46,6 +48,11 @@ class EmbeddedBasicBot(EmbeddedDataFileBot):
                  }
         EmbeddedDataFileBot.__init__(self, files)
 
+    def parse_arguments(self, argument_parser):
+        client_args = CommandLineClientArguments(self, parser=None)
+        if self._logging_filename is not None:
+            client_args._logging = self._logging_filename
+        return client_args
 
 if __name__ == '__main__':
 

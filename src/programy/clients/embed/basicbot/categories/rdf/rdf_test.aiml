@@ -283,7 +283,7 @@
                         <tuple>
                             <get var="head"/>
                         </tuple>
-                    </get>
+                    </get>X
                     <loop/>
                 </li>
             </condition>

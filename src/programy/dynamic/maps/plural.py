@@ -23,7 +23,9 @@ from programy.dynamic.maps.map import DynamicMap
 class PluralMap(DynamicMap):
 
     NAME = "PLURAL"
-    STATICS = {"MOUSE": "MICE"
+    STATICS = {"MOUSE": "MICE",
+               "MAN": "MEN",
+               "WOMAN": "WOMEN"
               }
 
     def __init__(self, config):

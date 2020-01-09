@@ -14,7 +14,7 @@ class RedisStoreTests(unittest.TestCase):
         store = RedisConversationStore(engine)
 
         store.save('TESTKEY', "Hello world")
-        self.assertEquals(b'Hello world', store.get('TESTKEY'))
+        self.assertEquals('Hello world', store.get('TESTKEY'))
         store.delete('TESTKEY')
         self.assertEquals(None, store.get('TESTKEY'))
 

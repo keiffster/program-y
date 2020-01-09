@@ -14,7 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from autocorrect import spell
+from autocorrect import Speller
 from programy.spelling.base import SpellingChecker
 
 
@@ -22,8 +22,7 @@ class AutoCorrectSpellingChecker(SpellingChecker):
 
     def __init__(self, spelling_config=None):
         SpellingChecker.__init__(self, spelling_config)
+        self._speller = Speller()
 
     def correct(self, phrase):
-        words = phrase.split()
-        correct = [spell(word).upper() for word in words]
-        return ' '.join(correct)
+        return self._speller.autocorrect_sentence(phrase).upper()

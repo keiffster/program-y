@@ -214,7 +214,7 @@ class TemplateGetNodeTests(ParserTestsBaseClass):
         self.assertEqual('<template><get var="?x ?y"><select /></get></template>', xml_str)
 
         result = root.resolve_to_string(self._client_context)
-        self.assertEquals(result, "")
+        self.assertEquals("unknown", result)
 
     def test_tuples_string(self):
         root = TemplateNode()
@@ -254,7 +254,7 @@ class TemplateGetNodeTests(ParserTestsBaseClass):
         node = TemplateGetNode()
         node.name = TemplateWordNode("x")
         node.tuples = TemplateWordNode("")
-        self.assertEqual("", node.resolve_tuple(self._client_context))
+        self.assertEqual("unknown", node.resolve_tuple(self._client_context))
 
     def test_resolve_tuple_as_results_no_vars(self):
         node = TemplateGetNode()
@@ -277,10 +277,10 @@ class TemplateGetNodeTests(ParserTestsBaseClass):
         node = TemplateGetNode()
         node.name = TemplateWordNode("y")
         node.tuples = TemplateWordNode('[["x", "1"]]')
-        self.assertEqual("", node.resolve_tuple(self._client_context))
+        self.assertEqual("unknown", node.resolve_tuple(self._client_context))
 
     def test_resolve_tuple_as_results_with_vars_mismatch(self):
         node = TemplateGetNode()
         node.name = TemplateWordNode("a")
         node.tuples = TemplateWordNode('[[["x","1"], ["y","2"], ["z", "3"]]]')
-        self.assertEqual("", node.resolve_tuple(self._client_context))
+        self.assertEqual("unknown", node.resolve_tuple(self._client_context))

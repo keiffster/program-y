@@ -22,7 +22,6 @@ from programy.config.file.yaml_file import YamlConfigurationFile
 from programy.config.programy import ProgramyConfiguration
 from programy.clients.args import CommandLineClientArguments
 from programy.utils.substitutions.substitues import Substitutions
-from programy.utils.console.console import outputLog
 from programy.clients.events.console.config import ConsoleConfiguration
 
 
@@ -43,7 +42,6 @@ class EmbeddedConfigFileBot(ConsoleBotClient):
         return client_args
 
     def load_configuration(self, arguments, subs: Substitutions = None):
-
         client_config = self.get_client_configuration()
         self._configuration = ProgramyConfiguration(client_config)
 
