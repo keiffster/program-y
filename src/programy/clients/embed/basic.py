@@ -22,10 +22,12 @@ from programy.clients.args import CommandLineClientArguments
 class EmbeddedBasicBot(EmbeddedDataFileBot):
 
     def __init__(self, logging_filename=None):
-        self._logging_filename = logging_filename
+        filepath = os.path.dirname(__file__) + os.sep
+        if logging_filename is not None:
+            self._logging_filename = logging_filename
+        else:
+            self._logging_filename = filepath + 'basicbot/logging.yaml'
 
-        filepath = os.path.dirname(__file__) + os.sep 
-        
         files = {'aiml': [filepath + 'basicbot/categories'],
                  'learnf': [filepath + 'basicbot/learnf'],
                  'patterns': filepath + 'basicbot/nodes/pattern_nodes.conf',

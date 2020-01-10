@@ -19,6 +19,7 @@ For information about installing either via Git or Pip on OSX, Ubuntu and Window
 ## Contact
 There are a number of ways you can get help
 
+* [Programy Backlog](https://trello.com/b/ksToL3tX/chatilly) Current backlog and work schedule
 * [Github](https://github.com/keiffster/program-y/issues) Raise an issue directly
 * [Slack](https://program-y.slack.com) Talk live with the Dev Team
 * [Gitter](https://gitter.im/Program-y) Talk with the Dev Team

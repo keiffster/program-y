@@ -29,7 +29,13 @@ class EmbeddedDataFileBot(ConsoleBotClient):
     def __init__(self, files={}, defaults=False, logging_filename=None):
         self._files = files
         self._defaults = defaults
-        self._logging_filename = logging_filename
+
+        filepath = os.path.dirname(__file__) + os.sep
+        if logging_filename is not None:
+            self._logging_filename = logging_filename
+        else:
+            self._logging_filename = filepath + 'basicbot/logging.yaml'
+
         ConsoleBotClient.__init__(self, "Console")
 
     def _render_callback(self):

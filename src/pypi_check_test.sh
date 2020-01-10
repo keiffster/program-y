@@ -16,7 +16,7 @@ cd programy
 
 source ./bin/activate
 
-pip3 install --no-cache-dir programy
+pip3 install --no-cache-dir --index-url https://test.pypi.org/simple --extra-index-url https://pypi.org/simple programy
 
 python3 -m programy.admin.tool
 

@@ -14,6 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+import os
 import sys
 import json
 import yaml
@@ -29,7 +30,13 @@ class EmbeddedConfigFileBot(ConsoleBotClient):
 
     def __init__(self, config_filename, logging_filename=None):
         self._config_filename = config_filename
-        self._logging_filename = logging_filename
+
+        filepath = os.path.dirname(__file__) + os.sep
+        if logging_filename is not None:
+            self._logging_filename = logging_filename
+        else:
+            self._logging_filename = filepath + 'basicbot/logging.yaml'
+
         ConsoleBotClient.__init__(self, "Console")
 
     def _render_callback(self):
