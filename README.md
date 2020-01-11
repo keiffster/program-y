@@ -39,7 +39,7 @@ my_bot = EmbeddedBasicBot()
 
 print("Response = %s" % my_bot.ask_question("Hello"))
 ```
-For more information on this feature, see [Embedded Bots](./Tutorial-Embedded-Bots)
+For more information on this feature, see [Embedded Bots](https://github.com/keiffster/program-y/wiki/Tutorial-Embedded-Bots)
 
 ### Unified Naming
 A number of configuration items have had their names changed so that all variables use underscore '_' as a 
