@@ -39,6 +39,8 @@ from programy.storage.stores.nosql.mongo.store.nodes import MongoPatternNodeStor
 from programy.storage.stores.nosql.mongo.store.processors import MongoPreProcessorStore
 from programy.storage.stores.nosql.mongo.store.processors import MongoPostProcessorStore
 from programy.storage.stores.nosql.mongo.store.processors import MongoPostQuestionProcessorStore
+from programy.storage.stores.nosql.mongo.store.triggers import MongoTriggerStore
+from programy.storage.stores.nosql.mongo.store.oobs import MongoOOBStore
 from programy.utils.console.console import outputLog
 
 
@@ -116,6 +118,10 @@ class Uploader:
             return MongoLicenseKeysStore(engine)
         if storetype == 'usergroups':
             return MongoUserGroupsStore(engine)
+        if storetype == 'triggers':
+            return MongoTriggerStore(engine)
+        if storetype == 'oobs':
+            return MongoOOBStore(engine)
 
         raise Exception("Unknone entity storetype [%s]" % storetype)
 

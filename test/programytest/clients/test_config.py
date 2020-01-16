@@ -134,34 +134,6 @@ class ClientConfigurationDataTests(unittest.TestCase):
                                 usergroups:
                                   storage: file
                     
-                        oob:
-                            default:
-                                classname: programy.oob.defaults.default.DefaultOutOfBandProcessor
-                            alarm:
-                                classname: programy.oob.defaults.alarm.AlarmOutOfBandProcessor
-                            camera:
-                                classname: programy.oob.defaults.camera.CameraOutOfBandProcessor
-                            clear:
-                                classname: programy.oob.defaults.clear.ClearOutOfBandProcessor
-                            dial:
-                                classname: programy.oob.defaults.dial.DialOutOfBandProcessor
-                            dialog:
-                                classname: programy.oob.defaults.dialog.DialogOutOfBandProcessor
-                            email:
-                                classname: programy.oob.defaults.email.EmailOutOfBandProcessor
-                            geomap:
-                                classname: programy.oob.defaults.map.MapOutOfBandProcessor
-                            schedule:
-                                classname: programy.oob.defaults.schedule.ScheduleOutOfBandProcessor
-                            search:
-                                classname: programy.oob.defaults.search.SearchOutOfBandProcessor
-                            sms:
-                                classname: programy.oob.defaults.sms.SMSOutOfBandProcessor
-                            url:
-                                classname: programy.oob.defaults.url.URLOutOfBandProcessor
-                            wifi:
-                                classname: programy.oob.defaults.wifi.WifiOutOfBandProcessor
-                    
                         dynamic:
                             variables:
                                 gettime: programy.dynamic.variables.datetime.GetTime
@@ -309,34 +281,6 @@ class ClientConfigurationDataTests(unittest.TestCase):
                                 usergroups:
                                   storage: file
                     
-                        oob:
-                            default:
-                                classname: programy.oob.defaults.default.DefaultOutOfBandProcessor
-                            alarm:
-                                classname: programy.oob.defaults.alarm.AlarmOutOfBandProcessor
-                            camera:
-                                classname: programy.oob.defaults.camera.CameraOutOfBandProcessor
-                            clear:
-                                classname: programy.oob.defaults.clear.ClearOutOfBandProcessor
-                            dial:
-                                classname: programy.oob.defaults.dial.DialOutOfBandProcessor
-                            dialog:
-                                classname: programy.oob.defaults.dialog.DialogOutOfBandProcessor
-                            email:
-                                classname: programy.oob.defaults.email.EmailOutOfBandProcessor
-                            geomap:
-                                classname: programy.oob.defaults.map.MapOutOfBandProcessor
-                            schedule:
-                                classname: programy.oob.defaults.schedule.ScheduleOutOfBandProcessor
-                            search:
-                                classname: programy.oob.defaults.search.SearchOutOfBandProcessor
-                            sms:
-                                classname: programy.oob.defaults.sms.SMSOutOfBandProcessor
-                            url:
-                                classname: programy.oob.defaults.url.URLOutOfBandProcessor
-                            wifi:
-                                classname: programy.oob.defaults.wifi.WifiOutOfBandProcessor
-                    
                         dynamic:
                             variables:
                                 gettime: programy.dynamic.variables.datetime.GetTime
@@ -346,7 +290,7 @@ class ClientConfigurationDataTests(unittest.TestCase):
                             maps:
                                 romantodec: programy.dynamic.maps.roman.MapRomanToDecimal
                                 dectoroman: programy.dynamic.maps.roman.MapDecimalToRoman
-                            
+
             bot2:
                 prompt: ">>>"
                 initial_question: Hi, how can I help you today?
@@ -451,34 +395,6 @@ class ClientConfigurationDataTests(unittest.TestCase):
                                 usergroups:
                                   storage: file
                     
-                        oob:
-                            default:
-                                classname: programy.oob.defaults.default.DefaultOutOfBandProcessor
-                            alarm:
-                                classname: programy.oob.defaults.alarm.AlarmOutOfBandProcessor
-                            camera:
-                                classname: programy.oob.defaults.camera.CameraOutOfBandProcessor
-                            clear:
-                                classname: programy.oob.defaults.clear.ClearOutOfBandProcessor
-                            dial:
-                                classname: programy.oob.defaults.dial.DialOutOfBandProcessor
-                            dialog:
-                                classname: programy.oob.defaults.dialog.DialogOutOfBandProcessor
-                            email:
-                                classname: programy.oob.defaults.email.EmailOutOfBandProcessor
-                            geomap:
-                                classname: programy.oob.defaults.map.MapOutOfBandProcessor
-                            schedule:
-                                classname: programy.oob.defaults.schedule.ScheduleOutOfBandProcessor
-                            search:
-                                classname: programy.oob.defaults.search.SearchOutOfBandProcessor
-                            sms:
-                                classname: programy.oob.defaults.sms.SMSOutOfBandProcessor
-                            url:
-                                classname: programy.oob.defaults.url.URLOutOfBandProcessor
-                            wifi:
-                                classname: programy.oob.defaults.wifi.WifiOutOfBandProcessor
-                    
                         dynamic:
                             variables:
                                 gettime: programy.dynamic.variables.datetime.GetTime
@@ -488,6 +404,7 @@ class ClientConfigurationDataTests(unittest.TestCase):
                             maps:
                                 romantodec: programy.dynamic.maps.roman.MapRomanToDecimal
                                 dectoroman: programy.dynamic.maps.roman.MapDecimalToRoman
+                            
         """, ConsoleConfiguration(), ".")
 
         client_config = ClientConfigurationData("console")

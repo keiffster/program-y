@@ -284,3 +284,23 @@ class SQLUploaderTests(unittest.TestCase):
                                          create=True)
         self.assertEquals(1, count)
         self.assertEquals(1, success)
+
+    def test_upload_triggers(self):
+        count, success = Uploader.upload(storetype='triggers',
+                                         url='mysql+pymysql://root@localhost:3306/programy',
+                                         filename=self.basepath + "triggers" + os.sep + "triggers.txt",
+                                         dirname=None,
+                                         subdir=True, extension=".txt",
+                                         create=True)
+        self.assertEquals(4, count)
+        self.assertEquals(4, success)
+
+    def test_upload_oobs(self):
+        count, success = Uploader.upload(storetype='oobs',
+                                         url='mysql+pymysql://root@localhost:3306/programy',
+                                         filename=self.basepath + "oobs" + os.sep + "callmom.conf",
+                                         dirname=None,
+                                         subdir=True, extension=".conf",
+                                         create=True)
+        self.assertEquals(13, count)
+        self.assertEquals(13, success)

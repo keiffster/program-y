@@ -28,10 +28,11 @@ from programy.storage.stores.file.store.properties import FileRegexStore
 from programy.storage.stores.file.store.rdfs import FileRDFStore
 from programy.storage.stores.file.store.sets import FileSetsStore
 from programy.storage.stores.file.store.spelling import FileSpellingStore
-from programy.storage.stores.file.store.triggers import FileTriggersStore
 from programy.storage.stores.file.store.twitter import FileTwitterStore
 from programy.storage.stores.file.store.usergroups import FileUserGroupStore
 from programytest.storage.test_utils import StorageEngineTestUtils
+from programy.storage.stores.file.store.triggers import FileTriggersStore
+from programy.storage.stores.file.store.oobs import FileOOBStore
 
 
 class FileStorageEngineTests(StorageEngineTestUtils):
@@ -74,6 +75,7 @@ class FileStorageEngineTests(StorageEngineTestUtils):
         self.assertIsInstance(engine.postquestionprocessors_store(), FilePostQuestionProcessorsStore)
         self.assertIsInstance(engine.usergroups_store(), FileUserGroupStore)
         self.assertIsInstance(engine.triggers_store(), FileTriggersStore)
+        self.assertIsInstance(engine.oobs_store(), FileOOBStore)
 
     def test_properties(self):
         config = FileStorageConfiguration()

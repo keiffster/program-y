@@ -2,7 +2,7 @@ import unittest
 import unittest.mock
 import xml.etree.ElementTree as ET
 
-from programy.oob.defaults.schedule import ScheduleOutOfBandProcessor
+from programy.oob.callmom.schedule import ScheduleOutOfBandProcessor
 from programytest.client import TestClient
 
 

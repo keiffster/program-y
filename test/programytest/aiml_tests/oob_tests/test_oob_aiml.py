@@ -1,8 +1,8 @@
 import os
 import unittest
 
-from programy.config.brain.oob import BrainOOBConfiguration
 from programytest.client import TestClient
+from programytest.aiml_tests.oob_tests.test_oob import MockDialOutOfBandProcessor
 
 
 class OOBTestClient(TestClient):
@@ -14,12 +14,7 @@ class OOBTestClient(TestClient):
         super(OOBTestClient, self).load_storage()
         self.add_default_stores()
         self.add_categories_store([os.path.dirname(__file__)])
-
-    def load_configuration(self, arguments):
-        super(OOBTestClient, self).load_configuration(arguments)
-        default = BrainOOBConfiguration("default")
-        default._classname = "programy.oob.defaults.default.DefaultOutOfBandProcessor"
-        self.configuration.client_configuration.configurations[0].configurations[0].oob._default = default
+        self.add_oobs_store(os.path.dirname(__file__) + os.sep + "test-oobs.conf")
 
 
 class OOBAIMLTests(unittest.TestCase):
@@ -43,3 +38,13 @@ class OOBAIMLTests(unittest.TestCase):
     def test_oob_complex(self):
         response = self._client_context.bot.ask_question(self._client_context,  "FILE BUG REPORT")
         self.assertEqual(response, "To help the developers blah blah blah.")
+
+    def test_embedded_aiml(self):
+        response = self._client_context.bot.ask_question(self._client_context,  "DIAL 077777777")
+        self.assertEqual(response, "Ok dialing 077777777.")
+        self.assertEqual(MockDialOutOfBandProcessor.dialed, "077777777")
+
+    def test_complex_embedded_aiml(self):
+        response = self._client_context.bot.ask_question(self._client_context,  "DIAL AGAIN 077777777")
+        self.assertEqual(response, "Ok dialing 077777777.")
+        self.assertEqual(MockDialOutOfBandProcessor.dialed, "OK I dialled 077777777 but I will dial 077777777 AGAIN")

@@ -2,7 +2,7 @@ import unittest
 import unittest.mock
 import xml.etree.ElementTree as ET
 
-from programy.oob.defaults.sms import SMSOutOfBandProcessor
+from programy.oob.callmom.sms import SMSOutOfBandProcessor
 from programytest.client import TestClient
 
 

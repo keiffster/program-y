@@ -14,31 +14,31 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.utils.parsing.linenumxml import LineNumberingParser
-import xml.etree.ElementTree as ET  # pylint: disable=wrong-import-order
-from programy.utils.logging.ylogger import YLogger
-from programy.oob.defaults.oob import OutOfBandProcessor
+from programy.storage.stores.utils import DAOUtils
 
 
-class WifiOutOfBandProcessor(OutOfBandProcessor):
-    """
-    <oob>
-        <wifi>on|off</wifi>
-    </oob>
-    """
+class Trigger:
 
-    def __init__(self):
-        OutOfBandProcessor.__init__(self)
-        self._command = None
+    def __init__(self, name, trigger_class):
+        self.id = None
+        self.name = name
+        self.trigger_class = trigger_class
 
-    def parse_oob_xml(self, oob: ET.Element):
-        if oob is not None and oob.text is not None:
-            self._command = oob.text
-            return True
-        else:
-            YLogger.error(self, "Unvalid camera oob command - missing command")
-            return False
+    def to_document(self):
+        document = {"name": self.name,
+                    "trigger_class": self.trigger_class}
+        if self.id is not None:
+            document['_id'] = self.id
+        return document
 
-    def execute_oob_command(self, client_context):
-        YLogger.info(client_context, "WifiOutOfBandProcessor: Setting camera to=%s", self._command)
-        return "WIFI"
+    def __repr__(self):
+        return "<Trigger(id='%s', name='%s', trigger_class='%s')>" % (
+            DAOUtils.valid_id(self.id), self.name, self.trigger_class)
+
+    @staticmethod
+    def from_document(data):
+        trigger = Trigger(None, None)
+        trigger.id = DAOUtils.get_value_from_data(data, '_id')
+        trigger.name = DAOUtils.get_value_from_data(data, 'name')
+        trigger.trigger_class = DAOUtils.get_value_from_data(data, 'trigger_class')
+        return trigger

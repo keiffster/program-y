@@ -236,6 +236,10 @@ class EmbeddedDataFileBot(ConsoleBotClient):
                                                                                                                 subdirs=True,
                                                                                                                 delete_on_start=False)
 
+        if 'oobs' in self._files:
+            client_config.storage.entity_store[StorageFactory.OOBS] = 'file'
+            client_config.storage.storage_configurations['file']._oobs_storage = FileStoreConfiguration(file=self._files['oobs'], fileformat="text")
+
         self._configuration = ProgramyConfiguration(client_config)
 
     def ask_question(self, question):

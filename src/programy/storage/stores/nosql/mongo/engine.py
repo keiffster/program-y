@@ -44,6 +44,8 @@ from programy.storage.stores.nosql.mongo.store.usergroups import MongoUserGroups
 from programy.storage.stores.nosql.mongo.store.users import MongoUserStore
 from programy.storage.stores.nosql.mongo.store.linkedaccounts import MongoLinkedAccountStore
 from programy.storage.stores.nosql.mongo.store.links import MongoLinkStore
+from programy.storage.stores.nosql.mongo.store.triggers import MongoTriggerStore
+from programy.storage.stores.nosql.mongo.store.oobs import MongoOOBStore
 
 
 class MongoStorageEngine(StorageEngine):
@@ -150,3 +152,9 @@ class MongoStorageEngine(StorageEngine):
 
     def link_store(self):
         return MongoLinkStore(self)
+
+    def triggers_store(self):
+        return MongoTriggerStore(self)
+
+    def oobs_store(self):
+        return MongoOOBStore(self)

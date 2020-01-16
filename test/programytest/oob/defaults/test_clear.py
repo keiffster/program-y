@@ -2,7 +2,7 @@ import unittest
 import unittest.mock
 import xml.etree.ElementTree as ET
 
-from programy.oob.defaults.clear import ClearOutOfBandProcessor
+from programy.oob.callmom.clear import ClearOutOfBandProcessor
 from programytest.client import TestClient
 
 

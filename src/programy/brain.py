@@ -79,7 +79,7 @@ class Brain:
 
         self._security = SecurityManager(configuration.security)
 
-        self._oobhandler = OOBHandler(configuration.oob)
+        self._oobhandler = OOBHandler()
 
         self._openchatbots = OpenChatBotCollection()
 
@@ -234,7 +234,7 @@ class Brain:
         self.load_security_services()
 
         YLogger.info(self, "Loading oob processors")
-        self._oobhandler.load_oob_processors()
+        self._oobhandler.load_oob_processors(self.bot.client.storage_factory)
 
         YLogger.info(self, "Loading regex templates")
         self.load_regex_templates()

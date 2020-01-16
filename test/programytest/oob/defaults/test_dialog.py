@@ -2,7 +2,7 @@ import unittest
 import unittest.mock
 import xml.etree.ElementTree as ET
 
-from programy.oob.defaults.dialog import DialogOutOfBandProcessor
+from programy.oob.callmom.dialog import DialogOutOfBandProcessor
 from programytest.client import TestClient
 
 

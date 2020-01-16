@@ -2,7 +2,7 @@ import unittest
 import unittest.mock
 import xml.etree.ElementTree as ET
 
-from programy.oob.defaults.camera import CameraOutOfBandProcessor
+from programy.oob.callmom.camera import CameraOutOfBandProcessor
 from programytest.client import TestClient
 
 

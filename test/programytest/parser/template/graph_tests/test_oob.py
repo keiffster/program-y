@@ -4,6 +4,8 @@ from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.get import TemplateGetNode
 from programy.parser.template.nodes.oob import TemplateOOBNode
 from programy.parser.template.nodes.word import TemplateWordNode
+from programy.parser.template.nodes.star import TemplateStarNode
+from programy.parser.template.nodes.xml import TemplateXMLNode
 from programytest.parser.template.graph_tests.graph_test_client import TemplateGraphTestClient
 
 
@@ -78,3 +80,21 @@ class TemplateGraphOOBTests(TemplateGraphTestClient):
 			""")
         root = self._graph.parse_template_expression(template)
         self.assertIsNotNone(root)
+
+        self.assertIsInstance(root, TemplateNode)
+        self.assertIsNotNone(root.children)
+        self.assertEqual(len(root.children), 1)
+
+        node = root.children[0]
+        self.assertIsNotNone(node)
+        self.assertIsInstance(node, TemplateOOBNode)
+
+        self.assertEqual(len(node.children), 1)
+        self.assertIsInstance(node.children[0], TemplateXMLNode)
+
+        self.assertEqual(len(node.children[0].children), 1)
+        self.assertIsInstance(node.children[0].children[0], TemplateStarNode)
+
+        client_context = self.create_client_context("test1")
+        resolved = root.resolve_to_string(self._client_context)
+        self.assertEqual("<oob><dial>one</dial></oob>", resolved)

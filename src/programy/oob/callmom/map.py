@@ -17,38 +17,27 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.utils.parsing.linenumxml import LineNumberingParser
 import xml.etree.ElementTree as ET  # pylint: disable=wrong-import-order
 from programy.utils.logging.ylogger import YLogger
-from programy.oob.defaults.oob import OutOfBandProcessor
+from programy.oob.callmom.oob import OutOfBandProcessor
 
 
-class DialogOutOfBandProcessor(OutOfBandProcessor):
+class MapOutOfBandProcessor(OutOfBandProcessor):
     """
-    <oob>
-        <dialog><title>Which contact?</title><list><get name="contactlist"/></list></dialog>
-    </oob>
+    <geooob>
+        <map>Kinghorn</map>
+    </geooob>
     """
-
     def __init__(self):
         OutOfBandProcessor.__init__(self)
-        self._title = None
-        self._list = None
+        self._location = None
 
     def parse_oob_xml(self, oob: ET.Element):
-        if oob is not None:
-            for child in oob:
-                if child.tag == 'title':
-                    self._title = child.text
-                elif child.tag == 'list':
-                    self._list = child.text
-                else:
-                    YLogger.error(self, "Unknown child element [%s] in dialog oob", child.tag)
-
-            if self._title is not None and \
-                self._list is not None:
-                return True
-
-        YLogger.error(self, "Invalid dialog oob command")
-        return False
+        if oob is not None and oob.text is not None:
+            self._location = oob.text
+            return True
+        else:
+            YLogger.error(self, "Unvalid geomap oob command - missing location text!")
+            return False
 
     def execute_oob_command(self, client_context):
-        YLogger.info(client_context, "DialogOutOfBandProcessor: Dialog=%s", self._title)
-        return "DIALOG"
+        YLogger.info(client_context, "MapOutOfBandProcessor: Showing a map for location=%s", self._location)
+        return "MAP"

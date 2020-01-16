@@ -20,7 +20,6 @@ from programy.triggers.config import TriggerConfiguration
 from programy.context import ClientContext
 from programy.triggers.manager import TriggerManager
 from programy.storage.factory import StorageFactory
-from programy.utils.classes.loader import ClassLoader
 
 
 class LocalTriggerManager(TriggerManager):
@@ -50,15 +49,14 @@ class LocalTriggerManager(TriggerManager):
         for event, trigger in triggers.items():
             self.add_trigger(event, trigger)
 
-    def add_trigger(self, event: str, classname: str):
+    def add_trigger(self, event: str, trigger):
         try:
-            trigger = ClassLoader.instantiate_class(classname)()
             if event not in self._triggers:
                 self._triggers[event] = []
             self._triggers[event].append(trigger)
 
         except Exception as e:
-            YLogger.exception(self, "Failed to add trigger [%s] -> [%s]", e, event, classname)
+            YLogger.exception(self, "Failed to add trigger [%s]", e, event)
 
     def _load_trigger_from_store(self, storage_factory):
         trigger_engine = storage_factory.entity_storage_engine(StorageFactory.TRIGGERS)

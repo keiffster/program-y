@@ -2,7 +2,7 @@ import unittest
 import unittest.mock
 import xml.etree.ElementTree as ET
 
-from programy.oob.defaults.wifi import WifiOutOfBandProcessor
+from programy.oob.callmom.wifi import WifiOutOfBandProcessor
 from programytest.client import TestClient
 
 

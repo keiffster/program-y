@@ -21,7 +21,7 @@ from programy.storage.stores.sql.base import Base
 from programy.storage.stores.utils import DAOUtils
 
 
-class Node():
+class Node:
     id = Column(Integer, primary_key=True)
     name = Column(String(48))
     node_class = Column(String(512))

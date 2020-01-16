@@ -2,7 +2,7 @@ import unittest
 import unittest.mock
 import xml.etree.ElementTree as ET
 
-from programy.oob.defaults.email import EmailOutOfBandProcessor
+from programy.oob.callmom.email import EmailOutOfBandProcessor
 from programytest.client import TestClient
 
 

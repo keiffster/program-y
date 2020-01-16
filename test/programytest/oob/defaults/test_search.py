@@ -2,7 +2,7 @@ import unittest
 import unittest.mock
 import xml.etree.ElementTree as ET
 
-from programy.oob.defaults.search import SearchOutOfBandProcessor
+from programy.oob.callmom.search import SearchOutOfBandProcessor
 from programytest.client import TestClient
 
 

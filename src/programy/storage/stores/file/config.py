@@ -109,11 +109,19 @@ class FileStorageConfiguration(BaseConfigurationData):
         self._postquestionprocessors_storage = FileStoreConfiguration(
             file=tmpdir + os.sep + "processing/postquestionprocessors.conf", fileformat="text", encoding="utf-8",
             delete_on_start=False)
+
         self._usergroups_storage = FileStoreConfiguration(file=tmpdir + os.sep + "security/usergroups.yaml",
                                                           fileformat="yaml", encoding="utf-8", delete_on_start=False)
 
-        self._triggers_storage = FileStoreConfiguration(file=tmpdir + os.sep + "triggers.txt", fileformat="text",
+        self._triggers_storage = FileStoreConfiguration(file=tmpdir + os.sep + "triggers/triggers.txt", fileformat="text",
                                                         encoding="utf-8", delete_on_start=False)
+
+        self._oobs_storage = FileStoreConfiguration(file=tmpdir + os.sep + "oob/callmom.conf", fileformat="text",
+                                                        encoding="utf-8", delete_on_start=False)
+
+        self._services_storage = FileStoreConfiguration(dirs=[tmpdir + os.sep + "services"], extension="txt",
+                                                          subdirs=False, fileformat="text", encoding="utf-8",
+                                                          delete_on_start=False)
 
     @property
     def categories_storage(self):
@@ -227,6 +235,14 @@ class FileStorageConfiguration(BaseConfigurationData):
     def triggers_storage(self):
         return self._triggers_storage
 
+    @property
+    def oobs_storage(self):
+        return self._oobs_storage
+
+    @property
+    def services_storage(self):
+        return self._services_storage
+
     def load_storage_config(self, storage_config, name, configuration_file, storage, bot_root,
                             subs: Substitutions = None):
         config_section = configuration_file.get_option(storage, 'config', subs=subs)
@@ -305,6 +321,12 @@ class FileStorageConfiguration(BaseConfigurationData):
             self.load_storage_config(self._triggers_storage, FileStore.TRIGGERS_STORAGE, configuration_file, storage,
                                      bot_root, subs=subs)
 
+            self.load_storage_config(self._oobs_storage, FileStore.OOBS_STORAGE, configuration_file, storage,
+                                     bot_root, subs=subs)
+
+            self.load_storage_config(self._services_storage, FileStore.SERVICES_STORAGE, configuration_file, storage,
+                                     bot_root, subs=subs)
+
     def create_filestorage_config(self):
         config = {}
         self._create_storage_map(config)
@@ -363,6 +385,10 @@ class FileStorageConfiguration(BaseConfigurationData):
         amap[FileStore.USERGROUPS_STORAGE] = self._usergroups_storage
 
         amap[FileStore.TRIGGERS_STORAGE] = self._triggers_storage
+
+        amap[FileStore.OOBS_STORAGE] = self._oobs_storage
+
+        amap[FileStore.SERVICES_STORAGE] = self._services_storage
 
     def _create_storage_defaults(self, amap):
 
@@ -539,3 +565,16 @@ class FileStorageConfiguration(BaseConfigurationData):
                                         fileformat="text",
                                         encoding="utf-8", delete_on_start=False)
         config.to_yaml(amap[FileStore.TRIGGERS_STORAGE], defaults=False)
+
+        amap[FileStore.OOBS_STORAGE] = {}
+        config = FileStoreConfiguration(file=tmpdir + os.sep + "oobs/callmom.conf",
+                                        fileformat="text",
+                                        encoding="utf-8", delete_on_start=False)
+        config.to_yaml(amap[FileStore.OOBS_STORAGE], defaults=False)
+
+        amap[FileStore.SERVICES_STORAGE] = {}
+        config = FileStoreConfiguration(dirs=[tmpdir + os.sep + "services"],
+                                        extension="txt", subdirs=True,
+                                        fileformat="text", encoding="utf-8",
+                                        delete_on_start=False)
+        config.to_yaml(amap[FileStore.SERVICES_STORAGE], defaults=False)

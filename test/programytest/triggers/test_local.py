@@ -129,17 +129,6 @@ class LocalTriggerManagerTests(unittest.TestCase):
 
         self.assertTrue("SYSTEM_STARTUP" in mgr.triggers)
 
-    def test_add_trigger_bad_class(self):
-        config = TriggerConfiguration()
-        config._manager = TriggerConfiguration.LOCAL_MANAGER
-
-        mgr = TriggerManager.load_trigger_manager(config)
-        self.assertIsNotNone(mgr)
-
-        mgr.add_trigger("SYSTEM_STARTUP", "programytest.triggers.trigger1.TriggerXYZ")
-
-        self.assertFalse("SYSTEM_STARTUP" in mgr.triggers)
-
     def test_add_triggers(self):
         config = TriggerConfiguration()
         config._manager = TriggerConfiguration.LOCAL_MANAGER

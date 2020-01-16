@@ -25,7 +25,7 @@ class FileTriggersStoreTests(unittest.TestCase):
         engine.initialise()
         store = FileTriggersStore(engine)
 
-        self.assertEquals('/tmp/triggers.txt', store._get_storage_path())
+        self.assertEquals('/tmp/triggers/triggers.txt', store._get_storage_path())
         self.assertIsInstance(store.get_storage(), FileStoreConfiguration)
 
     def test_process_line(self):

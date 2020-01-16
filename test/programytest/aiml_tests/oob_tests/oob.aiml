@@ -47,4 +47,28 @@ For more information see [url]
 		</template>
 	</category>
 
+	<category>
+		<pattern>DIAL *</pattern>
+		<template>
+			Ok dialing <star />
+			<oob><dial><star /></dial></oob>
+		</template>
+	</category>
+
+	<category>
+		<pattern>DIAL *</pattern>
+		<template>
+			Ok dialing <star />
+			<oob><dial><star /></dial></oob>
+		</template>
+	</category>
+
+	<category>
+		<pattern>DIAL AGAIN *</pattern>
+		<template>
+			Ok dialing <star />
+			<oob><dial>OK I dialled <star /> but I will dial <star /> <uppercase>again</uppercase></dial></oob>
+		</template>
+	</category>
+
 </aiml>

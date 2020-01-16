@@ -2,7 +2,7 @@ import unittest
 import unittest.mock
 import xml.etree.ElementTree as ET
 
-from programy.oob.defaults.url import URLOutOfBandProcessor
+from programy.oob.callmom.url import URLOutOfBandProcessor
 from programytest.client import TestClient
 
 

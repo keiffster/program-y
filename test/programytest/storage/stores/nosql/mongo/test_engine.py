@@ -31,6 +31,8 @@ from programy.storage.stores.nosql.mongo.store.spelling import MongoSpellingStor
 from programy.storage.stores.nosql.mongo.store.twitter import MongoTwitterStore
 from programy.storage.stores.nosql.mongo.store.usergroups import MongoUserGroupsStore
 from programy.storage.stores.nosql.mongo.store.users import MongoUserStore
+from programy.storage.stores.nosql.mongo.store.triggers import MongoTriggerStore
+from programy.storage.stores.nosql.mongo.store.oobs import MongoOOBStore
 from programytest.storage.test_utils import StorageEngineTestUtils
 
 
@@ -75,7 +77,8 @@ class MongoStorageEngineTests(StorageEngineTestUtils):
         self.assertIsInstance(engine.user_store(), MongoUserStore)
         self.assertIsInstance(engine.linked_account_store(), MongoLinkedAccountStore)
         self.assertIsInstance(engine.link_store(), MongoLinkStore)
-        #self.assertIsInstance(engine.triggers_store(), MongoTriggersStore)
+        self.assertIsInstance(engine.triggers_store(), MongoTriggerStore)
+        self.assertIsInstance(engine.oobs_store(), MongoOOBStore)
 
     @unittest.skipIf(Engines.mongo is False, Engines.mongo_disabled)
     def test_initialise_drop_all_first_false(self):

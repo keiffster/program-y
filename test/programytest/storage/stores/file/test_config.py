@@ -367,7 +367,7 @@ class FileStorageConfigurationTests(unittest.TestCase):
         self.assertEqual(delete_on_start, config.delete_on_start)
 
     def _assert_storage_map(self, amap, config):
-        self.assertEquals(28, len(amap.keys()))
+        self.assertEquals(30, len(amap.keys()))
 
         self.assertEquals(amap[FileStore.CATEGORIES_STORAGE], config._categories_storage)
         self.assertEquals(amap[FileStore.ERRORS_STORAGE], config._errors_storage)
@@ -397,6 +397,7 @@ class FileStorageConfigurationTests(unittest.TestCase):
         self.assertEquals(amap[FileStore.POSTQUESTIONPROCESSORS_STORAGE], config._postquestionprocessors_storage)
         self.assertEquals(amap[FileStore.USERGROUPS_STORAGE], config._usergroups_storage)
         self.assertEquals(amap[FileStore.TRIGGERS_STORAGE], config._triggers_storage)
+        self.assertEquals(amap[FileStore.OOBS_STORAGE], config._oobs_storage)
 
     def test_create_storage_map(self):
         amap = {}
@@ -418,7 +419,7 @@ class FileStorageConfigurationTests(unittest.TestCase):
         data = {}
         config.to_yaml(data, defaults=True)
 
-        self.assertEquals(28, len(data.keys()))
+        self.assertEquals(30, len(data.keys()))
 
     def test_to_yaml_no_defaults(self):
 
@@ -427,7 +428,7 @@ class FileStorageConfigurationTests(unittest.TestCase):
         data = {}
         config.to_yaml(data, defaults=False)
 
-        self.assertEquals(28, len(data.keys()))
+        self.assertEquals(30, len(data.keys()))
         self._assert_storage_map(data, config)
 
     def test_defaults(self):
@@ -502,6 +503,12 @@ class FileStorageConfigurationTests(unittest.TestCase):
                                 encoding="utf-8", delete_on_start=False)
 
         FileStorageConfigurationTests.assert_yaml_config(test, data['usergroups_storage'], file=tmpdir + os.sep + "security/usergroups.yaml",
+                                fileformat="text", encoding="utf-8", delete_on_start=False)
+
+        FileStorageConfigurationTests.assert_yaml_config(test, data['triggers_storage'], file=tmpdir + os.sep + "triggers/triggers.txt",
+                                fileformat="text", encoding="utf-8", delete_on_start=False)
+
+        FileStorageConfigurationTests.assert_yaml_config(test, data['oobs_storage'], file=tmpdir + os.sep + "oobs/callmom.conf",
                                 fileformat="text", encoding="utf-8", delete_on_start=False)
 
     @staticmethod

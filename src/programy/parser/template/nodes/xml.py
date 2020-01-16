@@ -73,7 +73,7 @@ class TemplateXMLNode(TemplateAttribNode):
                 xml += ' %s="%s"' % (attrib_name, escaped)
 
             xml += ">"
-            child_xml = self.children_to_xml(client_context)
+            child_xml = self.resolve_children_to_string(client_context)
             xml += child_xml
             xml += "</%s>" % self._name
             return xml

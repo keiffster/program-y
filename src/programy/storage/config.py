@@ -143,23 +143,35 @@ class StorageConfiguration(BaseConfigurationData):
 
         if sqlite is True:
             store_configs['sqlite'] = {}
+            store_configs['sqlite']['type'] = 'sql'
+            store_configs['sqlite']['config'] = {}
+
             store = SQLStorageConfiguration()
-            store.to_yaml(store_configs['sqlite'], defaults=True)
+            store.to_yaml(store_configs['sqlite']['config'], defaults=True)
 
         if mongo is True:
             store_configs['mongo'] = {}
+            store_configs['mongo']['type'] = 'mongo'
+            store_configs['mongo']['config'] = {}
+
             store = MongoStorageConfiguration()
-            store.to_yaml(store_configs['mongo'], defaults=True)
+            store.to_yaml(store_configs['mongo']['config'], defaults=True)
 
         if redis is True:
             store_configs['redis'] = {}
+            store_configs['redis']['type'] = 'redis'
+            store_configs['redis']['config'] = {}
+
             store = RedisStorageConfiguration()
-            store.to_yaml(store_configs['redis'], defaults=True)
+            store.to_yaml(store_configs['redis']['config'], defaults=True)
 
         if logger is True:
             store_configs['logger'] = {}
+            store_configs['logger']['type'] = 'logger'
+            store_configs['logger']['config'] = {}
+
             store = LoggerStorageConfiguration()
-            store.to_yaml(store_configs['logger'], defaults=True)
+            store.to_yaml(store_configs['logger']['config'], defaults=True)
 
     @staticmethod
     def add_default_entities(entity_store, file=True, sqlite=False):
@@ -211,6 +223,10 @@ class StorageConfiguration(BaseConfigurationData):
             entity_store[StorageFactory.USERGROUPS] = 'file'
 
             entity_store[StorageFactory.TRIGGERS] = 'file'
+
+            entity_store[StorageFactory.OOBS] = 'file'
+
+            entity_store[StorageFactory.SERVICES] = 'file'
 
     def to_yaml(self, data, defaults=True):
 

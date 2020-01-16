@@ -18,47 +18,39 @@ import re
 from programy.utils.parsing.linenumxml import LineNumberingParser
 import xml.etree.ElementTree as ET  # pylint: disable=wrong-import-order
 from programy.utils.logging.ylogger import YLogger
-from programy.utils.classes.loader import ClassLoader
-from programy.config.brain.oobs import BrainOOBSConfiguration
+from programy.storage.factory import StorageFactory
+from programy.oob.default import DefaultOutOfBandProcessor
 
 
 class OOBHandler:
 
-    def __init__(self, oob_configuration):
-
-        assert oob_configuration is not None
-        assert isinstance(oob_configuration, BrainOOBSConfiguration)
-
-        self._configuration = oob_configuration
-        self._default_oob = None
-        self._oob = {}
+    def __init__(self):
+        self._oobs = {}
 
     @property
     def default_oob(self):
-        return self._default_oob
+        return self._oobs.get('default', None)
 
     @property
     def oobs(self):
-        return self._oob
+        return self._oobs
 
-    def load_oob_processors(self):
-        if self._configuration.default() is not None:
-            try:
-                YLogger.info(self, "Loading default oob")
-                classobject = ClassLoader.instantiate_class(self._configuration.default().classname)
-                self._default_oob = classobject()
+    def add_oob(self, name, oob_class):
+        self._oobs[name] = oob_class
 
-            except Exception as excep:
-                YLogger.exception(self, "Failed to load OOB Processor", excep)
+    def empty(self):
+        self._oobs.clear()
 
-        for oob_name in self._configuration.oobs():
-            try:
-                YLogger.info(self, "Loading oob: %s", oob_name)
-                classobject = ClassLoader.instantiate_class(self._configuration.oob(oob_name).classname)
-                self._oob[oob_name] = classobject()
+    def load_oob_processors(self, storage_factory):
+        if storage_factory.entity_storage_engine_available(StorageFactory.OOBS) is True:
+            storage_engine = storage_factory.entity_storage_engine(StorageFactory.OOBS)
+            oobs_store = storage_engine.oobs_store()
+            oobs_store.load(self)
+        else:
+            YLogger.error(None, "No storage engine available for pattern_nodes!")
 
-            except Exception as excep:
-                YLogger.exception(self, "Failed to load OOB", excep)
+        if self._oobs.get('default', None) is None:
+            self._oobs['default'] = DefaultOutOfBandProcessor()
 
     def oob_in_response(self, response):
         if response is not None:
@@ -93,11 +85,14 @@ class OOBHandler:
 
         if oob_content.tag == 'oob':
             for child in oob_content.findall('./'):
-                if child.tag in self._oob:
-                    oob_class = self._oob[child.tag]
+                if child.tag in self._oobs:
+                    oob_class = self._oobs[child.tag]
                     return oob_class.process_out_of_bounds(client_context, child)
 
-                if self._default_oob is not None:
-                    return self._default_oob.process_out_of_bounds(client_context, child)
+                def_oob = self.default_oob
+                if def_oob is not None:
+                    def_oob.process_out_of_bounds(client_context, child)
+                else:
+                    YLogger.error (client_context, "No default oob defined")
 
         return ""

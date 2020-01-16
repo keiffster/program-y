@@ -125,3 +125,6 @@ class StorageEngine:
 
     def triggers_store(self):
         raise StorageEngineException("Engine does not support trigger storage")
+
+    def oobs_store(self):
+        raise StorageEngineException("Engine does not support oobs storage")

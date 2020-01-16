@@ -5,9 +5,9 @@ from programy.brain import Brain
 from programy.clients.events.console.config import ConsoleConfiguration
 from programy.config.brain.brain import BrainConfiguration
 from programy.config.file.yaml_file import YamlConfigurationFile
-from programy.oob.defaults.default import DefaultOutOfBandProcessor
-from programy.oob.defaults.dial import DialOutOfBandProcessor
-from programy.oob.defaults.email import EmailOutOfBandProcessor
+from programy.oob.default import DefaultOutOfBandProcessor
+from programy.oob.callmom.dial import DialOutOfBandProcessor
+from programy.oob.callmom.email import EmailOutOfBandProcessor
 from programytest.client import TestClient
 
 
@@ -124,8 +124,6 @@ class BrainTests(unittest.TestCase):
         brain = Brain(client_context.bot, brain_config)
 
         self.assertIsInstance(brain._oobhandler.default_oob, DefaultOutOfBandProcessor)
-        self.assertIsInstance(brain._oobhandler.oobs['dial'], DialOutOfBandProcessor)
-        self.assertIsInstance(brain._oobhandler.oobs['email'], EmailOutOfBandProcessor)
 
     def test_reload_unknowns(self):
 

@@ -17,39 +17,28 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.utils.parsing.linenumxml import LineNumberingParser
 import xml.etree.ElementTree as ET  # pylint: disable=wrong-import-order
 from programy.utils.logging.ylogger import YLogger
-from programy.oob.defaults.oob import OutOfBandProcessor
+from programy.oob.callmom.oob import OutOfBandProcessor
 
 
-class SMSOutOfBandProcessor(OutOfBandProcessor):
+class DialOutOfBandProcessor(OutOfBandProcessor):
     """
     <oob>
-        <sms>
-            <recipient><get name="contacturi"/></recipient>
-            <message><get name="messagebody"/></message>
-        </sms>
+        <dial>07777777777</dial>
     </oob>
     """
+
     def __init__(self):
         OutOfBandProcessor.__init__(self)
-        self._recipient = None
-        self._message = None
+        self._number = None
 
     def parse_oob_xml(self, oob: ET.Element):
-        if oob is not None:
-            for child in oob:
-                if child.tag == 'recipient':
-                    self._recipient = child.text
-                elif child.tag == 'message':
-                    self._message = child.text
-                else:
-                    YLogger.error(self, "Unknown child element [%s] in sms oob", child.tag)
-
-            if self._recipient is not None and self._message is not None:
-                return True
-
-        YLogger.error(self, "Invalid sms oob command")
-        return False
+        if oob is not None and oob.text is not None:
+            self._number = oob.text
+            return True
+        else:
+            YLogger.error(self, "Invalid dial oob command - missing dial text!")
+            return False
 
     def execute_oob_command(self, client_context):
-        YLogger.info(client_context, "SMSOutOfBandProcessor: Messaging=%s", self._recipient)
-        return "SMS"
+        YLogger.info(client_context, "DialOutOfBandProcessor: Dialing=%s", self._number)
+        return "DIAL"

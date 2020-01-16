@@ -61,6 +61,10 @@ class StorageConfigurationTests(unittest.TestCase):
                 
                     triggers: file
                     
+                    oobs: file
+                    
+                    services: file
+                    
                 stores:
                     sqlite:
                         type:   sql
@@ -210,6 +214,10 @@ class StorageConfigurationTests(unittest.TestCase):
 
             self.assertEqual(storage_config.entity_store[StorageFactory.TRIGGERS], 'file')
 
+            self.assertEqual(storage_config.entity_store[StorageFactory.OOBS], 'file')
+
+            self.assertEqual(storage_config.entity_store[StorageFactory.SERVICES], 'file')
+
     def assert_storage_configurations(self, storage_config, file=True, sqlite=False, mongo=False, redis=False, logger=False):
 
         if sqlite is True:
@@ -247,7 +255,6 @@ class StorageConfigurationTests(unittest.TestCase):
         self.assertFalse('redis' in config['stores'])
         self.assertFalse('logger' in config['stores'])
 
-
     def test_create_storage_config_all(self):
         storage_config = StorageConfiguration()
 
@@ -269,94 +276,8 @@ class StorageConfigurationTests(unittest.TestCase):
         data = {}
         storage_config.to_yaml(data, defaults=False)
 
-        self.assertEquals({'entities': {'categories': 'file', 'errors': 'file', 'duplicates': 'file', 'learnf': 'file',
-                                        'conversations': 'file', 'maps': 'file', 'sets': 'file', 'rdf': 'file',
-                                        'denormal': 'file', 'normal': 'file', 'gender': 'file', 'person': 'file',
-                                        'person2': 'file', 'regex_templates': 'file', 'properties': 'file',
-                                        'defaults': 'file', 'variables': 'file', 'twitter': 'file',
-                                        'spelling_corpus': 'file', 'license_keys': 'file', 'pattern_nodes': 'file',
-                                        'template_nodes': 'file', 'binaries': 'file', 'braintree': 'file',
-                                        'preprocessors': 'file', 'postprocessors': 'file',
-                                        'postquestionprocessors': 'file', 'usergroups': 'file', 'triggers': 'file'},
-                           'stores': {'file': {'type': 'file', 'config': {
-                               'categories_storage': {'dirs': ['/tmp/categories'], 'extension': 'aiml', 'subdirs': True,
-                                                      'format': 'xml', 'encoding': 'utf-8', 'delete_on_start': False},
-                               'errors_storage': {'file': '/tmp/debug/errors.txt', 'extension': None, 'subdirs': False,
-                                                  'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False},
-                               'duplicates_storage': {'file': '/tmp/debug/duplicates.txt', 'extension': None,
-                                                      'subdirs': False, 'format': 'text', 'encoding': 'utf-8',
-                                                      'delete_on_start': False},
-                               'learnf_storage': {'dirs': ['/tmp/categories/learnf'], 'extension': 'aiml',
-                                                  'subdirs': False, 'format': 'xml', 'encoding': 'utf-8',
-                                                  'delete_on_start': False},
-                               'conversation_storage': {'dirs': ['/tmp/conversations'], 'extension': 'txt',
-                                                        'subdirs': False, 'format': 'text', 'encoding': 'utf-8',
-                                                        'delete_on_start': False},
-                               'sets_storage': {'dirs': ['/tmp/sets'], 'extension': 'txt', 'subdirs': False,
-                                                'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False},
-                               'maps_storage': {'dirs': ['/tmp/maps'], 'extension': 'txt', 'subdirs': False,
-                                                'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False},
-                               'rdf_storage': {'dirs': ['/tmp/rdfs'], 'extension': 'txt', 'subdirs': True,
-                                               'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False},
-                               'denormal_storage': {'file': '/tmp/lookups/denormal.txt', 'extension': None,
-                                                    'subdirs': False, 'format': 'text', 'encoding': 'utf-8',
-                                                    'delete_on_start': False},
-                               'normal_storage': {'file': '/tmp/lookups/normal.txt', 'extension': None,
-                                                  'subdirs': False, 'format': 'text', 'encoding': 'utf-8',
-                                                  'delete_on_start': False},
-                               'gender_storage': {'file': '/tmp/lookups/gender.txt', 'extension': None,
-                                                  'subdirs': False, 'format': 'text', 'encoding': 'utf-8',
-                                                  'delete_on_start': False},
-                               'person_storage': {'file': '/tmp/lookups/person.txt', 'extension': None,
-                                                  'subdirs': False, 'format': 'text', 'encoding': 'utf-8',
-                                                  'delete_on_start': False},
-                               'person2_storage': {'file': '/tmp/lookups/person2.txt', 'extension': None,
-                                                   'subdirs': False, 'format': 'text', 'encoding': 'utf-8',
-                                                   'delete_on_start': False},
-                               'regex_storage': {'file': '/tmp/regex/regex-templates.txt', 'extension': None,
-                                                 'subdirs': False, 'format': 'text', 'encoding': 'utf-8',
-                                                 'delete_on_start': False},
-                               'properties_storage': {'file': '/tmp/properties/properties.txt', 'extension': None,
-                                                      'subdirs': False, 'format': 'text', 'encoding': 'utf-8',
-                                                      'delete_on_start': False},
-                               'defaults_storage': {'file': '/tmp/properties/defaults.txt', 'extension': None,
-                                                    'subdirs': False, 'format': 'text', 'encoding': 'utf-8',
-                                                    'delete_on_start': False},
-                               'twitter_storage': {'dirs': ['/tmp/twitter'], 'extension': 'txt', 'subdirs': False,
-                                                   'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False},
-                               'spelling_storage': {'file': '/tmp/spelling/corpus.txt', 'extension': None,
-                                                    'subdirs': False, 'format': 'text', 'encoding': 'utf-8',
-                                                    'delete_on_start': False},
-                               'license_storage': {'file': '/tmp/licenses/license.keys', 'extension': None,
-                                                   'subdirs': False, 'format': 'text', 'encoding': 'utf-8',
-                                                   'delete_on_start': False},
-                               'pattern_nodes_storage': {'file': '/tmp/nodes/pattern_nodes.conf', 'extension': None,
-                                                         'subdirs': False, 'format': 'text', 'encoding': 'utf-8',
-                                                         'delete_on_start': False},
-                               'template_nodes_storage': {'file': '/tmp/nodes/template_nodes.conf', 'extension': None,
-                                                          'subdirs': False, 'format': 'text', 'encoding': 'utf-8',
-                                                          'delete_on_start': False},
-                               'binaries_storage': {'file': '/tmp/braintree/braintree.bin', 'extension': None,
-                                                    'subdirs': False, 'format': 'binary', 'encoding': 'utf-8',
-                                                    'delete_on_start': False},
-                               'braintree_storage': {'file': '/tmp/braintree/braintree.xml', 'extension': None,
-                                                     'subdirs': False, 'format': 'xml', 'encoding': 'utf-8',
-                                                     'delete_on_start': False},
-                               'preprocessors_storage': {'file': '/tmp/processing/preprocessors.conf',
-                                                         'extension': None, 'subdirs': False, 'format': 'text',
-                                                         'encoding': 'utf-8', 'delete_on_start': False},
-                               'postprocessors_storage': {'file': '/tmp/processing/postprocessors.conf',
-                                                          'extension': None, 'subdirs': False, 'format': 'text',
-                                                          'encoding': 'utf-8', 'delete_on_start': False},
-                               'postquestionprocessors_storage': {'file': '/tmp/processing/postquestionprocessors.conf',
-                                                                  'extension': None, 'subdirs': False, 'format': 'text',
-                                                                  'encoding': 'utf-8', 'delete_on_start': False},
-                               'usergroups_storage': {'file': '/tmp/security/usergroups.yaml', 'extension': None,
-                                                      'subdirs': False, 'format': 'text', 'encoding': 'utf-8',
-                                                      'delete_on_start': False},
-                               'triggers_storage': {'file': '/tmp/triggers/triggers.txt', 'extension': None,
-                                                    'subdirs': False, 'format': 'text', 'encoding': 'utf-8',
-                                                    'delete_on_start': False}}}}}, data)
+        self.assertDefaultEntities(data['entities'])
+        self.assertDefaultFileStoreConfig(data['stores'])
 
     def test_to_yaml_no_defaults_empty(self):
         storage_config = StorageConfiguration()
@@ -372,95 +293,8 @@ class StorageConfigurationTests(unittest.TestCase):
         data = {}
         storage_config.to_yaml(data, defaults=True)
 
-        self.assertEquals({'entities': {'categories': 'file', 'errors': 'file', 'duplicates': 'file', 'learnf': 'file',
-                                        'conversations': 'file', 'maps': 'file', 'sets': 'file', 'rdf': 'file',
-                                        'denormal': 'file', 'normal': 'file', 'gender': 'file', 'person': 'file',
-                                        'person2': 'file', 'regex_templates': 'file', 'properties': 'file',
-                                        'defaults': 'file', 'variables': 'file', 'twitter': 'file',
-                                        'spelling_corpus': 'file', 'license_keys': 'file', 'pattern_nodes': 'file',
-                                        'template_nodes': 'file', 'binaries': 'file', 'braintree': 'file',
-                                        'preprocessors': 'file', 'postprocessors': 'file',
-                                        'postquestionprocessors': 'file', 'usergroups': 'file', 'triggers': 'file'},
-                           'stores': {'file': {'type': 'file', 'config': {
-                               'categories_storage': {'dirs': ['/tmp/categories'], 'extension': 'aiml', 'subdirs': True,
-                                                      'format': 'xml', 'encoding': 'utf-8', 'delete_on_start': False},
-                               'errors_storage': {'file': '/tmp/debug/errors.txt', 'extension': None, 'subdirs': False,
-                                                  'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False},
-                               'duplicates_storage': {'file': '/tmp/debug/duplicates.txt', 'extension': None,
-                                                      'subdirs': False, 'format': 'text', 'encoding': 'utf-8',
-                                                      'delete_on_start': False},
-                               'learnf_storage': {'dirs': ['/tmp/categories/learnf'], 'extension': 'aiml',
-                                                  'subdirs': False, 'format': 'xml', 'encoding': 'utf-8',
-                                                  'delete_on_start': False},
-                               'conversation_storage': {'dirs': ['/tmp/conversations'], 'extension': 'txt',
-                                                        'subdirs': False, 'format': 'text', 'encoding': 'utf-8',
-                                                        'delete_on_start': False},
-                               'sets_storage': {'dirs': ['/tmp/sets'], 'extension': 'txt', 'subdirs': False,
-                                                'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False},
-                               'maps_storage': {'dirs': ['/tmp/maps'], 'extension': 'txt', 'subdirs': False,
-                                                'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False},
-                               'rdf_storage': {'dirs': ['/tmp/rdfs'], 'extension': 'txt', 'subdirs': True,
-                                               'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False},
-                               'denormal_storage': {'file': '/tmp/lookups/denormal.txt', 'extension': None,
-                                                    'subdirs': False, 'format': 'text', 'encoding': 'utf-8',
-                                                    'delete_on_start': False},
-                               'normal_storage': {'file': '/tmp/lookups/normal.txt', 'extension': None,
-                                                  'subdirs': False, 'format': 'text', 'encoding': 'utf-8',
-                                                  'delete_on_start': False},
-                               'gender_storage': {'file': '/tmp/lookups/gender.txt', 'extension': None,
-                                                  'subdirs': False, 'format': 'text', 'encoding': 'utf-8',
-                                                  'delete_on_start': False},
-                               'person_storage': {'file': '/tmp/lookups/person.txt', 'extension': None,
-                                                  'subdirs': False, 'format': 'text', 'encoding': 'utf-8',
-                                                  'delete_on_start': False},
-                               'person2_storage': {'file': '/tmp/lookups/person2.txt', 'extension': None,
-                                                   'subdirs': False, 'format': 'text', 'encoding': 'utf-8',
-                                                   'delete_on_start': False},
-                               'regex_storage': {'file': '/tmp/regex/regex-templates.txt', 'extension': None,
-                                                 'subdirs': False, 'format': 'text', 'encoding': 'utf-8',
-                                                 'delete_on_start': False},
-                               'properties_storage': {'file': '/tmp/properties/properties.txt', 'extension': None,
-                                                      'subdirs': False, 'format': 'text', 'encoding': 'utf-8',
-                                                      'delete_on_start': False},
-                               'defaults_storage': {'file': '/tmp/properties/defaults.txt', 'extension': None,
-                                                    'subdirs': False, 'format': 'text', 'encoding': 'utf-8',
-                                                    'delete_on_start': False},
-                               'twitter_storage': {'dirs': ['/tmp/twitter'], 'extension': 'txt', 'subdirs': False,
-                                                   'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False},
-                               'spelling_storage': {'file': '/tmp/spelling/corpus.txt', 'extension': None,
-                                                    'subdirs': False, 'format': 'text', 'encoding': 'utf-8',
-                                                    'delete_on_start': False},
-                               'license_storage': {'file': '/tmp/licenses/license.keys', 'extension': None,
-                                                   'subdirs': False, 'format': 'text', 'encoding': 'utf-8',
-                                                   'delete_on_start': False},
-                               'pattern_nodes_storage': {'file': '/tmp/nodes/pattern_nodes.conf', 'extension': None,
-                                                         'subdirs': False, 'format': 'text', 'encoding': 'utf-8',
-                                                         'delete_on_start': False},
-                               'template_nodes_storage': {'file': '/tmp/nodes/template_nodes.conf', 'extension': None,
-                                                          'subdirs': False, 'format': 'text', 'encoding': 'utf-8',
-                                                          'delete_on_start': False},
-                               'binaries_storage': {'file': '/tmp/braintree/braintree.bin', 'extension': None,
-                                                    'subdirs': False, 'format': 'binary', 'encoding': 'utf-8',
-                                                    'delete_on_start': False},
-                               'braintree_storage': {'file': '/tmp/braintree/braintree.xml', 'extension': None,
-                                                     'subdirs': False, 'format': 'xml', 'encoding': 'utf-8',
-                                                     'delete_on_start': False},
-                               'preprocessors_storage': {'file': '/tmp/processing/preprocessors.conf',
-                                                         'extension': None, 'subdirs': False, 'format': 'text',
-                                                         'encoding': 'utf-8', 'delete_on_start': False},
-                               'postprocessors_storage': {'file': '/tmp/processing/postprocessors.conf',
-                                                          'extension': None, 'subdirs': False, 'format': 'text',
-                                                          'encoding': 'utf-8', 'delete_on_start': False},
-                               'postquestionprocessors_storage': {'file': '/tmp/processing/postquestionprocessors.conf',
-                                                                  'extension': None, 'subdirs': False, 'format': 'text',
-                                                                  'encoding': 'utf-8', 'delete_on_start': False},
-                               'usergroups_storage': {'file': '/tmp/security/usergroups.yaml', 'extension': None,
-                                                      'subdirs': False, 'format': 'text', 'encoding': 'utf-8',
-                                                      'delete_on_start': False},
-                               'triggers_storage': {'file': '/tmp/triggers/triggers.txt', 'extension': None,
-                                                    'subdirs': False, 'format': 'text', 'encoding': 'utf-8',
-                                                    'delete_on_start': False}}}}}
-                          , data)
+        self.assertDefaultEntities(data['entities'])
+        self.assertDefaultFileStoreConfig(data['stores'])
 
     def test_add_default_stores_all_off(self):
         store_configs = {}
@@ -470,72 +304,220 @@ class StorageConfigurationTests(unittest.TestCase):
     def test_add_default_stores_all_on(self):
         store_configs = {}
         StorageConfiguration.add_default_stores_as_yaml(store_configs, file=True, sqlite=True, mongo=True, redis=True, logger=True)
-        self.assertEquals({'file': {'type': 'file', 'config': {
-            'categories_storage': {'dirs': ['/tmp/categories'], 'extension': 'aiml', 'subdirs': True, 'format': 'xml',
-                                   'encoding': 'utf-8', 'delete_on_start': False},
-            'errors_storage': {'file': '/tmp/debug/errors.txt', 'extension': None, 'subdirs': False, 'format': 'text',
-                               'encoding': 'utf-8', 'delete_on_start': False},
-            'duplicates_storage': {'file': '/tmp/debug/duplicates.txt', 'extension': None, 'subdirs': False,
-                                   'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False},
-            'learnf_storage': {'dirs': ['/tmp/categories/learnf'], 'extension': 'aiml', 'subdirs': False,
-                               'format': 'xml', 'encoding': 'utf-8', 'delete_on_start': False},
-            'conversation_storage': {'dirs': ['/tmp/conversations'], 'extension': 'txt', 'subdirs': False,
-                                     'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False},
-            'sets_storage': {'dirs': ['/tmp/sets'], 'extension': 'txt', 'subdirs': False, 'format': 'text',
-                             'encoding': 'utf-8', 'delete_on_start': False},
-            'maps_storage': {'dirs': ['/tmp/maps'], 'extension': 'txt', 'subdirs': False, 'format': 'text',
-                             'encoding': 'utf-8', 'delete_on_start': False},
-            'rdf_storage': {'dirs': ['/tmp/rdfs'], 'extension': 'txt', 'subdirs': True, 'format': 'text',
-                            'encoding': 'utf-8', 'delete_on_start': False},
-            'denormal_storage': {'file': '/tmp/lookups/denormal.txt', 'extension': None, 'subdirs': False,
-                                 'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False},
-            'normal_storage': {'file': '/tmp/lookups/normal.txt', 'extension': None, 'subdirs': False, 'format': 'text',
-                               'encoding': 'utf-8', 'delete_on_start': False},
-            'gender_storage': {'file': '/tmp/lookups/gender.txt', 'extension': None, 'subdirs': False, 'format': 'text',
-                               'encoding': 'utf-8', 'delete_on_start': False},
-            'person_storage': {'file': '/tmp/lookups/person.txt', 'extension': None, 'subdirs': False, 'format': 'text',
-                               'encoding': 'utf-8', 'delete_on_start': False},
-            'person2_storage': {'file': '/tmp/lookups/person2.txt', 'extension': None, 'subdirs': False,
-                                'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False},
-            'regex_storage': {'file': '/tmp/regex/regex-templates.txt', 'extension': None, 'subdirs': False,
-                              'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False},
-            'properties_storage': {'file': '/tmp/properties/properties.txt', 'extension': None, 'subdirs': False,
-                                   'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False},
-            'defaults_storage': {'file': '/tmp/properties/defaults.txt', 'extension': None, 'subdirs': False,
-                                 'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False},
-            'twitter_storage': {'dirs': ['/tmp/twitter'], 'extension': 'txt', 'subdirs': False, 'format': 'text',
-                                'encoding': 'utf-8', 'delete_on_start': False},
-            'spelling_storage': {'file': '/tmp/spelling/corpus.txt', 'extension': None, 'subdirs': False,
-                                 'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False},
-            'license_storage': {'file': '/tmp/licenses/license.keys', 'extension': None, 'subdirs': False,
-                                'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False},
-            'pattern_nodes_storage': {'file': '/tmp/nodes/pattern_nodes.conf', 'extension': None, 'subdirs': False,
-                                      'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False},
-            'template_nodes_storage': {'file': '/tmp/nodes/template_nodes.conf', 'extension': None, 'subdirs': False,
-                                       'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False},
-            'binaries_storage': {'file': '/tmp/braintree/braintree.bin', 'extension': None, 'subdirs': False,
-                                 'format': 'binary', 'encoding': 'utf-8', 'delete_on_start': False},
-            'braintree_storage': {'file': '/tmp/braintree/braintree.xml', 'extension': None, 'subdirs': False,
-                                  'format': 'xml', 'encoding': 'utf-8', 'delete_on_start': False},
-            'preprocessors_storage': {'file': '/tmp/processing/preprocessors.conf', 'extension': None, 'subdirs': False,
-                                      'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False},
-            'postprocessors_storage': {'file': '/tmp/processing/postprocessors.conf', 'extension': None,
-                                       'subdirs': False, 'format': 'text', 'encoding': 'utf-8',
-                                       'delete_on_start': False},
-            'postquestionprocessors_storage': {'file': '/tmp/processing/postquestionprocessors.conf', 'extension': None,
-                                               'subdirs': False, 'format': 'text', 'encoding': 'utf-8',
-                                               'delete_on_start': False},
-            'usergroups_storage': {'file': '/tmp/security/usergroups.yaml', 'extension': None, 'subdirs': False,
-                                   'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False},
-            'triggers_storage': {'file': '/tmp/triggers/triggers.txt', 'extension': None, 'subdirs': False,
-                                 'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False}}},
-                           'sqlite': {'url': 'sqlite:///:memory:', 'echo': False, 'encoding': 'utf-8',
-                                      'create_db': True, 'drop_all_first': True},
-                           'mongo': {'url': 'mongodb://localhost:27017/', 'database': 'programy',
-                                     'drop_all_first': True},
-                           'redis': {'host': 'localhost', 'port': 6379, 'password': None, 'db': 0, 'prefix': 'programy',
-                                     'drop_all_first': True}, 'logger': {'conversation_logger': 'conversation'}}
-                          , store_configs)
+
+        self.assertDefaultStoreConfigs(store_configs)
+
+    def assertDefaultEntities(self, entities):
+        self.assertEqual("file", entities['categories'])
+        self.assertEqual("file", entities['errors'])
+        self.assertEqual("file", entities['duplicates'])
+        self.assertEqual("file", entities['learnf'])
+        self.assertEqual("file", entities['conversations'])
+        self.assertEqual("file", entities['maps'])
+        self.assertEqual("file", entities['sets'])
+        self.assertEqual("file", entities['rdf'])
+        self.assertEqual("file", entities['denormal'])
+        self.assertEqual("file", entities['normal'])
+        self.assertEqual("file", entities['gender'])
+        self.assertEqual("file", entities['person'])
+        self.assertEqual("file", entities['person2'])
+        self.assertEqual("file", entities['regex_templates'])
+        self.assertEqual("file", entities['properties'])
+        self.assertEqual("file", entities['defaults'])
+        self.assertEqual("file", entities['variables'])
+        self.assertEqual("file", entities['twitter'])
+        self.assertEqual("file", entities['spelling_corpus'])
+        self.assertEqual("file", entities['license_keys'])
+        self.assertEqual("file", entities['pattern_nodes'])
+        self.assertEqual("file", entities['template_nodes'])
+        self.assertEqual("file", entities['binaries'])
+        self.assertEqual("file", entities['braintree'])
+        self.assertEqual("file", entities['preprocessors'])
+        self.assertEqual("file", entities['postprocessors'])
+        self.assertEqual("file", entities['postquestionprocessors'])
+        self.assertEqual("file", entities['usergroups'])
+        self.assertEqual("file", entities['triggers'])
+        self.assertEqual("file", entities['oobs'])
+        self.assertEqual("file", entities['services'])
+
+    def assertDefaultStoreConfigs(self, store_configs):
+        self.assertDefaultFileStoreConfig(store_configs)
+        self.assertDefaultSQLStoreConfig(store_configs)
+        self.assertDefaultMongoStoreConfig(store_configs)
+        self.assertDefaultRedisStoreConfig(store_configs)
+        self.assertDefaultLoggerStoreConfig(store_configs)
+
+    def assertDefaultFileStoreConfig(self, store_configs):
+        self.assertTrue('file' in store_configs)
+        self.assertTrue('type' in store_configs['file'])
+        self.assertEquals('file', store_configs['file']['type'])
+        self.assertTrue('config' in store_configs['file'])
+        config = store_configs['file']['config']
+
+        self.assertIsNotNone(config)
+        self.assertTrue('categories_storage'in config)
+        self.assertTrue('errors_storage'in config)
+        self.assertTrue('duplicates_storage'in config)
+        self.assertTrue('learnf_storage'in config)
+        self.assertTrue('conversation_storage'in config)
+        self.assertTrue('sets_storage'in config)
+        self.assertTrue('maps_storage'in config)
+        self.assertTrue('rdf_storage'in config)
+        self.assertTrue('denormal_storage'in config)
+        self.assertTrue('normal_storage'in config)
+        self.assertTrue('gender_storage'in config)
+        self.assertTrue('person_storage'in config)
+        self.assertTrue('person2_storage'in config)
+        self.assertTrue('regex_storage'in config)
+        self.assertTrue('properties_storage'in config)
+        self.assertTrue('defaults_storage'in config)
+        self.assertTrue('twitter_storage'in config)
+        self.assertTrue('spelling_storage'in config)
+        self.assertTrue('license_storage'in config)
+        self.assertTrue('pattern_nodes_storage'in config)
+        self.assertTrue('template_nodes_storage'in config)
+        self.assertTrue('binaries_storage'in config)
+        self.assertTrue('braintree_storage'in config)
+        self.assertTrue('preprocessors_storage'in config)
+        self.assertTrue('postprocessors_storage'in config)
+        self.assertTrue('postquestionprocessors_storage'in config)
+        self.assertTrue('usergroups_storage'in config)
+        self.assertTrue('triggers_storage'in config)
+        self.assertTrue('oobs_storage'in config)
+        self.assertTrue('services_storage'in config)
+
+        self.assertEquals(config['categories_storage'],
+                          {'dirs': ['/tmp/categories'], 'extension': 'aiml', 'subdirs': True, 'format': 'xml',
+                           'encoding': 'utf-8', 'delete_on_start': False})
+        self.assertEquals(config['errors_storage'],
+                          {'file': '/tmp/debug/errors.txt', 'extension': None, 'subdirs': False, 'format': 'text',
+                           'encoding': 'utf-8', 'delete_on_start': False})
+        self.assertEquals(config['duplicates_storage'],
+                          {'file': '/tmp/debug/duplicates.txt', 'extension': None, 'subdirs': False,
+                           'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False})
+        self.assertEquals(config['learnf_storage'],
+                          {'dirs': ['/tmp/categories/learnf'], 'extension': 'aiml', 'subdirs': False,
+                           'format': 'xml', 'encoding': 'utf-8', 'delete_on_start': False})
+        self.assertEquals(config['conversation_storage'],
+                          {'dirs': ['/tmp/conversations'], 'extension': 'txt', 'subdirs': False,
+                           'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False})
+        self.assertEquals(config['sets_storage'],
+                          {'dirs': ['/tmp/sets'], 'extension': 'txt', 'subdirs': False, 'format': 'text',
+                           'encoding': 'utf-8', 'delete_on_start': False})
+        self.assertEquals(config['maps_storage'],
+                          {'dirs': ['/tmp/maps'], 'extension': 'txt', 'subdirs': False, 'format': 'text',
+                           'encoding': 'utf-8', 'delete_on_start': False})
+        self.assertEquals(config['rdf_storage'],
+                          {'dirs': ['/tmp/rdfs'], 'extension': 'txt', 'subdirs': True, 'format': 'text',
+                           'encoding': 'utf-8', 'delete_on_start': False})
+        self.assertEquals(config['denormal_storage'],
+                          {'file': '/tmp/lookups/denormal.txt', 'extension': None, 'subdirs': False,
+                           'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False})
+        self.assertEquals(config['normal_storage'],
+                          {'file': '/tmp/lookups/normal.txt', 'extension': None, 'subdirs': False, 'format': 'text',
+                           'encoding': 'utf-8', 'delete_on_start': False})
+        self.assertEquals(config['gender_storage'],
+                          {'file': '/tmp/lookups/gender.txt', 'extension': None, 'subdirs': False, 'format': 'text',
+                           'encoding': 'utf-8', 'delete_on_start': False})
+        self.assertEquals(config['person_storage'],
+                          {'file': '/tmp/lookups/person.txt', 'extension': None, 'subdirs': False, 'format': 'text',
+                           'encoding': 'utf-8', 'delete_on_start': False})
+        self.assertEquals(config['person2_storage'],
+                          {'file': '/tmp/lookups/person2.txt', 'extension': None, 'subdirs': False,
+                           'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False})
+        self.assertEquals(config['regex_storage'],
+                          {'file': '/tmp/regex/regex-templates.txt', 'extension': None, 'subdirs': False,
+                           'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False})
+        self.assertEquals(config['properties_storage'],
+                          {'file': '/tmp/properties/properties.txt', 'extension': None, 'subdirs': False,
+                           'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False})
+        self.assertEquals(config['defaults_storage'],
+                          {'file': '/tmp/properties/defaults.txt', 'extension': None, 'subdirs': False,
+                           'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False})
+        self.assertEquals(config['twitter_storage'],
+                          {'dirs': ['/tmp/twitter'], 'extension': 'txt', 'subdirs': False, 'format': 'text',
+                           'encoding': 'utf-8', 'delete_on_start': False})
+        self.assertEquals(config['spelling_storage'],
+                          {'file': '/tmp/spelling/corpus.txt', 'extension': None, 'subdirs': False,
+                           'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False})
+        self.assertEquals(config['license_storage'],
+                          {'file': '/tmp/licenses/license.keys', 'extension': None, 'subdirs': False,
+                           'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False})
+        self.assertEquals(config['pattern_nodes_storage'],
+                          {'file': '/tmp/nodes/pattern_nodes.conf', 'extension': None, 'subdirs': False,
+                           'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False})
+        self.assertEquals(config['template_nodes_storage'],
+                          {'file': '/tmp/nodes/template_nodes.conf', 'extension': None, 'subdirs': False,
+                           'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False})
+        self.assertEquals(config['binaries_storage'],
+                          {'file': '/tmp/braintree/braintree.bin', 'extension': None, 'subdirs': False,
+                           'format': 'binary', 'encoding': 'utf-8', 'delete_on_start': False})
+        self.assertEquals(config['braintree_storage'],
+                          {'file': '/tmp/braintree/braintree.xml', 'extension': None, 'subdirs': False,
+                           'format': 'xml', 'encoding': 'utf-8', 'delete_on_start': False})
+        self.assertEquals(config['preprocessors_storage'],
+                          {'file': '/tmp/processing/preprocessors.conf', 'extension': None, 'subdirs': False,
+                           'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False})
+        self.assertEquals(config['postprocessors_storage'],
+                          {'file': '/tmp/processing/postprocessors.conf', 'extension': None,
+                           'subdirs': False, 'format': 'text', 'encoding': 'utf-8',
+                           'delete_on_start': False})
+        self.assertEquals(config['postquestionprocessors_storage'],
+                          {'file': '/tmp/processing/postquestionprocessors.conf', 'extension': None,
+                           'subdirs': False, 'format': 'text', 'encoding': 'utf-8',
+                           'delete_on_start': False})
+        self.assertEquals(config['usergroups_storage'],
+                          {'file': '/tmp/security/usergroups.yaml', 'extension': None, 'subdirs': False,
+                           'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False})
+        self.assertEquals(config['triggers_storage'],
+                          {'file': '/tmp/triggers/triggers.txt', 'extension': None, 'subdirs': False,
+                           'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False})
+        self.assertEquals(config['oobs_storage'],
+                          {'file': '/tmp/oobs/callmom.conf', 'extension': None, 'subdirs': False,
+                           'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False})
+        self.assertEquals(config['services_storage'],
+                          {'dirs': ['/tmp/services'], 'extension': 'txt', 'subdirs': True, 'format': 'text',
+                           'encoding': 'utf-8', 'delete_on_start': False})
+
+    def assertDefaultSQLStoreConfig(self, store_configs):
+        self.assertTrue('sqlite' in store_configs)
+        self.assertTrue('type' in store_configs['sqlite'])
+        self.assertEquals('sql', store_configs['sqlite']['type'])
+        self.assertTrue('config' in store_configs['sqlite'])
+        config = store_configs['sqlite']['config']
+
+        self.assertEquals(config, {'url': 'sqlite:///:memory:', 'echo': False, 'encoding': 'utf-8',
+                                                    'create_db': True, 'drop_all_first': True})
+
+    def assertDefaultMongoStoreConfig(self, store_configs):
+        self.assertTrue('mongo' in store_configs)
+        self.assertTrue('type' in store_configs['mongo'])
+        self.assertEquals('mongo', store_configs['mongo']['type'])
+        self.assertTrue('config' in store_configs['mongo'])
+        config = store_configs['mongo']['config']
+
+        self.assertEquals(config, {'url': 'mongodb://localhost:27017/', 'database': 'programy',
+                                                   'drop_all_first': True})
+
+    def assertDefaultRedisStoreConfig(self, store_configs):
+        self.assertTrue('redis' in store_configs)
+        self.assertTrue('type' in store_configs['redis'])
+        self.assertEquals('redis', store_configs['redis']['type'])
+        self.assertTrue('config' in store_configs['redis'])
+        config = store_configs['redis']['config']
+
+        self.assertEquals(config,
+                          {'host': 'localhost', 'port': 6379, 'password': None, 'db': 0, 'prefix': 'programy',
+                           'drop_all_first': True})
+
+    def assertDefaultLoggerStoreConfig(self, store_configs):
+        self.assertTrue('logger' in store_configs)
+        self.assertTrue('type' in store_configs['logger'])
+        self.assertEquals('logger', store_configs['logger']['type'])
+        self.assertTrue('config' in store_configs['logger'])
+        config = store_configs['logger']['config']
+
+        self.assertEquals(config, {'conversation_logger': 'conversation'})
 
     def test_defaults(self):
         storage_config = StorageConfiguration()
@@ -589,6 +571,10 @@ class StorageConfigurationTests(unittest.TestCase):
         test.assertEqual(data['entities'][StorageFactory.USERGROUPS], 'file')
 
         test.assertEqual(data['entities'][StorageFactory.TRIGGERS], 'file')
+
+        test.assertEqual(data['entities'][StorageFactory.OOBS], 'file')
+
+        test.assertEqual(data['entities'][StorageFactory.SERVICES], 'file')
 
         test.assertTrue('stores' in data)
         test.assertTrue('file' in data['stores'])

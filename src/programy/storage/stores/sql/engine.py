@@ -44,6 +44,8 @@ from programy.storage.stores.sql.store.processors import SQLPreProcessorsStore
 from programy.storage.stores.sql.store.processors import SQLPostProcessorsStore
 from programy.storage.stores.sql.store.processors import SQLPostQuestionProcessorsStore
 from programy.storage.stores.sql.store.usergroups import SQLUserGroupStore
+from programy.storage.stores.sql.store.triggers import SQLTriggersStore
+from programy.storage.stores.sql.store.oobs import SQLOOBsStore
 from programy.storage.engine import StorageEngine
 from programy.storage.stores.sql.base import Base
 
@@ -166,3 +168,9 @@ class SQLStorageEngine(StorageEngine):
 
     def usergroups_store(self):
         return SQLUserGroupStore(self)
+
+    def triggers_store(self):
+        return SQLTriggersStore(self)
+
+    def oobs_store(self):
+        return SQLOOBsStore(self)

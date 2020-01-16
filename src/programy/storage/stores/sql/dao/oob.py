@@ -14,29 +14,21 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.utils.logging.ylogger import YLogger
-from programy.oob.defaults.oob import OutOfBandProcessor
+from sqlalchemy import Column
+from sqlalchemy import Integer
+from sqlalchemy import String
+from programy.storage.stores.sql.base import Base
+from programy.storage.stores.utils import DAOUtils
 
 
-class CameraOutOfBandProcessor(OutOfBandProcessor):
-    """
-    <oob>
-        <camera>on|off</camera>
-    </oob>
-    """
+class OOB(Base):
+    __tablename__ = 'oobs'
 
-    def __init__(self):
-        OutOfBandProcessor.__init__(self)
-        self._command = None
+    id = Column(Integer, primary_key=True)
+    name = Column(String(48))
+    oob_class = Column(String(512))
 
-    def parse_oob_xml(self, oob):
-        if oob is not None and oob.text is not None:
-            self._command = oob.text
-            return True
-        else:
-            YLogger.error(self, "Invalid camera oob command - missing command")
-            return False
+    def __repr__(self):
+        return "<OOB(id='%s', name='%s', oob_class='%s')>" % (
+            DAOUtils.valid_id(self.id), self.name, self.oob_class)
 
-    def execute_oob_command(self, client_context):
-        YLogger.info(client_context, "CameraOutOfBandProcessor: Setting camera to=%s", self._command)
-        return "CAMERA"

@@ -167,6 +167,12 @@ class TestClient(BotClient):
         self.storage_factory._storage_engines[StorageFactory.BRAINTREE] = self._storage_engine
         self.storage_factory._store_to_engine_map[StorageFactory.BRAINTREE] = self._storage_engine
 
+    def add_oobs_store(self, oobsfile):
+        self._file_store_config._oobs_storage = FileStoreConfiguration(file=oobsfile, fileformat="text",
+                                                       encoding="utf-8", delete_on_start=False)
+        self.storage_factory._storage_engines[StorageFactory.OOBS] = self._storage_engine
+        self.storage_factory._store_to_engine_map[StorageFactory.OOBS] = self._storage_engine
+
     def add_default_stores(self):
         self.add_license_keys_store()
         self.add_spelling_store()

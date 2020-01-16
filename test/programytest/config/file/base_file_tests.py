@@ -80,9 +80,6 @@ class ConfigurationBaseFileTests(unittest.TestCase):
         self.assertIsNotNone(brain_configuration.security.authorisation)
         self.assertIsNotNone(brain_configuration.security.authentication)
 
-        self.assertIsNotNone(brain_configuration.oob)
-        self.assertTrue(brain_configuration.oob.exists("default"))
-
         self.assertIsNotNone(brain_configuration.dynamics)
         self.assertIsNotNone(brain_configuration.dynamics.dynamic_sets)
 

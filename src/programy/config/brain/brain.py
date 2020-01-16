@@ -22,7 +22,6 @@ from programy.config.brain.braintree import BrainBraintreeConfiguration
 from programy.config.brain.services import BrainServicesConfiguration
 from programy.config.brain.openchatbots import BrainOpenChatBotsConfiguration
 from programy.config.brain.securities import BrainSecuritiesConfiguration
-from programy.config.brain.oobs import BrainOOBSConfiguration
 from programy.config.brain.dynamic import BrainDynamicsConfiguration
 from programy.config.brain.tokenizer import BrainTokenizerConfiguration
 from programy.config.brain.debugfiles import BrainDebugFilesConfiguration
@@ -39,7 +38,6 @@ class BrainConfiguration(BaseContainerConfigurationData):
         self._services = BrainServicesConfiguration()
         self._openchatbots = BrainOpenChatBotsConfiguration()
         self._security = BrainSecuritiesConfiguration()
-        self._oob = BrainOOBSConfiguration()
         self._dynamics = BrainDynamicsConfiguration()
         self._tokenizer = BrainTokenizerConfiguration()
         self._debugfiles = BrainDebugFilesConfiguration()
@@ -74,10 +72,6 @@ class BrainConfiguration(BaseContainerConfigurationData):
         return self._security
 
     @property
-    def oob(self):
-        return self._oob
-
-    @property
     def dynamics(self):
         return self._dynamics
 
@@ -97,7 +91,6 @@ class BrainConfiguration(BaseContainerConfigurationData):
         self._services.check_for_license_keys(license_keys)
         self._openchatbots.check_for_license_keys(license_keys)
         self._security.check_for_license_keys(license_keys)
-        self._oob.check_for_license_keys(license_keys)
         self._dynamics.check_for_license_keys(license_keys)
         self._tokenizer.check_for_license_keys(license_keys)
         self._debugfiles.check_for_license_keys(license_keys)
@@ -112,7 +105,6 @@ class BrainConfiguration(BaseContainerConfigurationData):
             self._services.load_config_section(configuration_file, brain_config, bot_root, subs=subs)
             self._openchatbots.load_config_section(configuration_file, brain_config, bot_root, subs=subs)
             self._security.load_config_section(configuration_file, brain_config, bot_root, subs=subs)
-            self._oob.load_config_section(configuration_file, brain_config, bot_root, subs=subs)
             self._dynamics.load_config_section(configuration_file, brain_config, bot_root, subs=subs)
             self._tokenizer.load_config_section(configuration_file, brain_config, bot_root, subs=subs)
             self._debugfiles.load_config_section(configuration_file, brain_config, bot_root, subs=subs)
@@ -125,7 +117,6 @@ class BrainConfiguration(BaseContainerConfigurationData):
             self.config_to_yaml(data, BrainServicesConfiguration(), defaults)
             self.config_to_yaml(data, BrainOpenChatBotsConfiguration(), defaults)
             self.config_to_yaml(data, BrainSecuritiesConfiguration(), defaults)
-            self.config_to_yaml(data, BrainOOBSConfiguration(), defaults)
             self.config_to_yaml(data, BrainDynamicsConfiguration(), defaults)
             self.config_to_yaml(data, BrainTokenizerConfiguration(), defaults)
             self.config_to_yaml(data, BrainDebugFilesConfiguration(), defaults)

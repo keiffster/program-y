@@ -14,31 +14,13 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.utils.parsing.linenumxml import LineNumberingParser
-import xml.etree.ElementTree as ET  # pylint: disable=wrong-import-order
-from programy.utils.logging.ylogger import YLogger
-from programy.oob.defaults.oob import OutOfBandProcessor
+from programy.storage.entities.store import Store
 
 
-class DialOutOfBandProcessor(OutOfBandProcessor):
-    """
-    <oob>
-        <dial>07777777777</dial>
-    </oob>
-    """
+class OOBsStore(Store):
 
     def __init__(self):
-        OutOfBandProcessor.__init__(self)
-        self._number = None
+        Store.__init__(self)
 
-    def parse_oob_xml(self, oob: ET.Element):
-        if oob is not None and oob.text is not None:
-            self._number = oob.text
-            return True
-        else:
-            YLogger.error(self, "Unvalid dial oob command - missing dial text!")
-            return False
-
-    def execute_oob_command(self, client_context):
-        YLogger.info(client_context, "DialOutOfBandProcessor: Dialing=%s", self._number)
-        return "DIAL"
+    def load(self, collector, name=None):
+        raise NotImplementedError()  # pragma: no cover

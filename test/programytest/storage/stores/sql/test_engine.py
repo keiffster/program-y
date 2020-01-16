@@ -30,6 +30,8 @@ from programy.storage.stores.sql.store.spelling import SQLSpellingStore
 from programy.storage.stores.sql.store.twitter import SQLTwitterStore
 from programy.storage.stores.sql.store.usergroups import SQLUserGroupStore
 from programy.storage.stores.sql.store.users import SQLUserStore
+from programy.storage.stores.sql.store.triggers import SQLTriggersStore
+from programy.storage.stores.sql.store.oobs import SQLOOBsStore
 from programytest.storage.test_utils import StorageEngineTestUtils
 
 
@@ -119,7 +121,8 @@ class SQLStorageEngineTests(StorageEngineTestUtils):
         self.assertIsInstance(engine.user_store(), SQLUserStore)
         self.assertIsInstance(engine.linked_account_store(), SQLLinkedAccountStore)
         self.assertIsInstance(engine.link_store(), SQLLinkStore)
-        #self.assertIsInstance(engine.triggers_store(), SQLTriggersStore)
+        self.assertIsInstance(engine.triggers_store(), SQLTriggersStore)
+        self.assertIsInstance(engine.oobs_store(), SQLOOBsStore)
 
     def test_users(self):
         config = SQLStorageConfiguration()

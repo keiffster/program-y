@@ -16,7 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 import xml.etree.ElementTree as ET  # pylint: disable=wrong-import-order
 from programy.utils.logging.ylogger import YLogger
-from programy.oob.defaults.oob import OutOfBandProcessor
+from programy.oob.callmom.oob import OutOfBandProcessor
 
 
 class SearchOutOfBandProcessor(OutOfBandProcessor):

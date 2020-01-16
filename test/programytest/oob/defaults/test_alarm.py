@@ -2,7 +2,7 @@ import unittest
 import unittest.mock
 import xml.etree.ElementTree as ET
 
-from programy.oob.defaults.alarm import AlarmOutOfBandProcessor
+from programy.oob.callmom.alarm import AlarmOutOfBandProcessor
 from programytest.client import TestClient
 
 

@@ -14,32 +14,30 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from programy.utils.parsing.linenumxml import LineNumberingParser
+import xml.etree.ElementTree as ET  # pylint: disable=wrong-import-order
 from programy.utils.logging.ylogger import YLogger
-
-from programy.config.section import BaseSectionConfigurationData
-from programy.utils.substitutions.substitues import Substitutions
+from programy.oob.callmom.oob import OutOfBandProcessor
 
 
-class BrainOOBConfiguration(BaseSectionConfigurationData):
+class URLOutOfBandProcessor(OutOfBandProcessor):
+    """
+    <oob>
+        <url>http://<star/>.com</url>
+    </oob>
+    """
+    def __init__(self):
+        OutOfBandProcessor.__init__(self)
+        self._url = None
 
-    def __init__(self, oob_name):
-        BaseSectionConfigurationData.__init__(self, oob_name)
-        self._classname = None
-
-    @property
-    def classname(self):
-        return self._classname
-
-    def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
-        oob = configuration_file.get_section(self.section_name, configuration)
-        if oob is not None:
-            self._classname = configuration_file.get_option(oob, "classname", missing_value=None, subs=subs)
+    def parse_oob_xml(self, oob: ET.Element):
+        if oob is not None and oob.text is not None:
+            self._url = oob.text
+            return True
         else:
-            YLogger.warning(self, "'oob' section missing from brain config, using to defaults")
+            YLogger.error(self, "Unvalid url oob command - missing url!")
+            return False
 
-    def to_yaml(self, data, defaults=True):
-        if defaults is True:
-            data['classname'] = 'programy.oob.defaults.default.DefaultOutOfBandProcessor'
-
-        else:
-            data['classname'] = self._classname
+    def execute_oob_command(self, client_context):
+        YLogger.info(client_context, "URLOutOfBandProcessor: Loading=%s", self._url)
+        return "URL"

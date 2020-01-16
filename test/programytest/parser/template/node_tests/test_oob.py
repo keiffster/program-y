@@ -13,6 +13,7 @@ class MockTemplateOOBNode(TemplateOOBNode):
     def resolve_to_string(self, context):
         raise Exception("This is an error")
 
+
 class TemplateOOBNodeTests(ParserTestsBaseClass):
 
     def test_node(self):

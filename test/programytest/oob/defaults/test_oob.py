@@ -1,7 +1,7 @@
 import unittest
 import xml.etree.ElementTree as ET
 
-from programy.oob.defaults.oob import OutOfBandProcessor
+from programy.oob.callmom.oob import OutOfBandProcessor
 from programytest.client import TestClient
 
 

@@ -67,6 +67,10 @@ class FileStore(Store):
 
     TRIGGERS_STORAGE = 'triggers_storage'
 
+    OOBS_STORAGE = 'oobs_storage'
+
+    SERVICES_STORAGE = 'services_storage'
+
     def __init__(self, storage_engine):
         self._storage_engine = storage_engine
 

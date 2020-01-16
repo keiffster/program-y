@@ -8,7 +8,6 @@ from programytest.config.brain.test_binaries import BrainBinariesConfigurationTe
 from programytest.config.brain.test_debugfiles import BrainDebugFilesConfigurationTests
 from programytest.config.brain.test_defaults import BrainDefaultsDefaultsConfigurationTests
 from programytest.config.brain.test_dynamic import BrainDynamicsConfigurationTests
-from programytest.config.brain.test_oobs import BrainOOBsConfigurationTests
 from programytest.config.brain.test_openchatbots import BrainOpenChatBotsConfigurationTests
 from programytest.config.brain.test_overrides import BrainOverridesConfigurationTests
 from programytest.config.brain.test_securities import BrainSecuritiesConfigurationTests
@@ -74,34 +73,6 @@ brain:
             usergroups:
               storage: file
 
-    oob:
-      default:
-        classname: programy.oob.defaults.default.DefaultOutOfBandProcessor
-      alarm:
-        classname: programy.oob.defaults.alarm.AlarmOutOfBandProcessor
-      camera:
-        classname: programy.oob.defaults.camera.CameraOutOfBandProcessor
-      clear:
-        classname: programy.oob.defaults.clear.ClearOutOfBandProcessor
-      dial:
-        classname: programy.oob.defaults.dial.DialOutOfBandProcessor
-      dialog:
-        classname: programy.oob.defaults.dialog.DialogOutOfBandProcessor
-      email:
-        classname: programy.oob.defaults.email.EmailOutOfBandProcessor
-      geomap:
-        classname: programy.oob.defaults.map.MapOutOfBandProcessor
-      schedule:
-        classname: programy.oob.defaults.schedule.ScheduleOutOfBandProcessor
-      search:
-        classname: programy.oob.defaults.search.SearchOutOfBandProcessor
-      sms:
-        classname: programy.oob.defaults.sms.SMSOutOfBandProcessor
-      url:
-        classname: programy.oob.defaults.url.URLOutOfBandProcessor
-      wifi:
-        classname: programy.oob.defaults.wifi.WifiOutOfBandProcessor
-
     dynamic:
         variables:
             gettime: programy.dynamic.variables.datetime.GetTime
@@ -161,9 +132,6 @@ brain:
         test.assertIsNotNone(brain_configuration.security.authorisation)
         test.assertIsNotNone(brain_configuration.security.authentication)
 
-        test.assertIsNotNone(brain_configuration.oob)
-        test.assertTrue(brain_configuration.oob.exists("default"))
-
         test.assertIsNotNone(brain_configuration.dynamics)
         test.assertIsNotNone(brain_configuration.dynamics.dynamic_sets)
 
@@ -209,8 +177,6 @@ brain:
         self.assertIsNone(brain_configuration.security.authorisation)
         self.assertIsNone(brain_configuration.security.authentication)
 
-        self.assertIsNotNone(brain_configuration.oob)
-
         self.assertIsNotNone(brain_configuration.dynamics)
         self.assertIsNotNone(brain_configuration.dynamics.dynamic_sets)
 
@@ -252,8 +218,6 @@ brain:
         BrainDefaultsDefaultsConfigurationTests.assert_defaults(test, data['defaults'])
         test.assertTrue('dynamic' in data)
         BrainDynamicsConfigurationTests.assert_defaults(test, data['dynamic'])
-        test.assertTrue('oob' in data)
-        BrainOOBsConfigurationTests.assert_defaults(test, data['oob'])
         test.assertTrue('openchatbots' in data)
         BrainOpenChatBotsConfigurationTests.assert_defaults(test, data['openchatbots'])
         test.assertTrue('overrides' in data)

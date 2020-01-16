@@ -63,6 +63,10 @@ class StorageFactory:
 
     TRIGGERS = "triggers"
 
+    OOBS = "oobs"
+
+    SERVICES = "services"
+
     def __init__(self):
         self._storage_engines = {}
         self._store_to_engine_map = {}
