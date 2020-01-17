@@ -70,6 +70,7 @@ console:
       postquestionprocessors: file
       usergroups: file
       triggers: file
+      oobs: file
     stores:
       file:
         type: file
@@ -272,6 +273,13 @@ console:
             delete_on_start: false
           triggers_storage:
             file: ./triggers/triggers.txt
+            extension: null
+            subdirs: false
+            format: text
+            encoding: utf-8
+            delete_on_start: false
+          oobs_storage:
+            file: ./oob/callmom.conf
             extension: null
             subdirs: false
             format: text
