@@ -4,7 +4,13 @@ Program Y is a fully compliant AIML 2.1 chatbot framework written in Python 3. I
 building your own chat bots using Artificial Intelligence Markup Language, or AIML for short. 
 For more information about Program-y, its features and its history then check out the Background page.
 
+## New in 4.1
+v4.1 sees an incremental release which moves the OOB and Trigger configuration into the storage engine. This is designed
+to reduce the size of config files. For more information on how to configure OOB and Trigger configuration see either
+the wiki documentation for each or the examples in Y-Bot
+
 ## New in 4.0
+
 ### Baseline Release
 Version 4.0 is a baseline release to prepare the ground work for a number of major changes in 2020. 
 It includes the addition of over 2000 unit tests which brings coverage up to 99% of the core system and 96% overall
