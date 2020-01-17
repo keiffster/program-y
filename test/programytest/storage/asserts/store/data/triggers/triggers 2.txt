@@ -1,0 +1,4 @@
+SYSTEM_STARTUP=programy.triggers.null.NullTrigger
+SYSTEM_STARTUP=programy.triggers.null.NullTrigger
+SYSTEM_SHUTDOWN=programy.triggers.null.NullTrigger
+CONVERSATION_START=programy.triggers.null.NullTrigger
