@@ -68,3 +68,20 @@ class FileRDFStoreTests(RDFStoreAsserts):
 
         self.assertFalse(map_collection.contains('ACTIVITY'))
         self.assertFalse(map_collection.contains('ANIMAL'))
+
+    def test_reload(self):
+        config = FileStorageConfiguration()
+        config._rdf_storage = FileStoreConfiguration(dirs=[os.path.dirname(__file__) + os.sep + "data" + os.sep + "rdfs" + os.sep + "text"], extension="rdf", subdirs=False, fileformat="text", encoding="utf-8", delete_on_start=False)
+        engine = FileStorageEngine(config)
+        engine.initialise()
+        store = FileRDFStore(engine)
+
+        map_collection = RDFCollection()
+        store.load_all(map_collection)
+
+        self.assertTrue(map_collection.contains('ACTIVITY'))
+
+        store.reload(map_collection, 'ACTIVITY')
+
+        self.assertTrue(map_collection.contains('ACTIVITY'))
+

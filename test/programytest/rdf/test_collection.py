@@ -197,3 +197,45 @@ class RDFCollectionTests(unittest.TestCase):
         self.assertEquals(2, len(entities))
         self.assertEquals({'HASSIZE': ['0']}, entities[0].predicates)
         self.assertEquals({'HASVALUE': ['1']}, entities[1].predicates)
+
+    def test_empty_all(self):
+        collection = RDFCollection()
+        self.assertIsNotNone(collection)
+
+        collection.add_entity("ACCOUNT", "hasSize", "0", rdf_name="BANKING", rdf_store="TEST", entityid="1")
+        collection.add_entity("BALANCE", "hasValue", "1", rdf_name="BANKING", rdf_store="TEST", entityid="2")
+
+        collection.add_entity("WALKING", "hasSize", "0", rdf_name="ACTIVITY", rdf_store="TEST", entityid="3")
+        collection.add_entity("RUNNING", "hasValue", "1", rdf_name="ACTIVITY", rdf_store="TEST", entityid="4")
+
+        self.assertEquals("BANKING", collection.entities_to_stores['ACCOUNT'])
+        self.assertEquals("ACTIVITY", collection.entities_to_stores['RUNNING'])
+
+        self.assertTrue(collection.contains('BANKING'))
+        self.assertTrue(collection.contains('ACTIVITY'))
+
+        collection.empty()
+
+        self.assertFalse(collection.contains('BANKING'))
+        self.assertFalse(collection.contains('ACTIVITY'))
+
+    def test_empty_by_name(self):
+        collection = RDFCollection()
+        self.assertIsNotNone(collection)
+
+        collection.add_entity("ACCOUNT", "hasSize", "0", rdf_name="BANKING", rdf_store="TEST", entityid="1")
+        collection.add_entity("BALANCE", "hasValue", "1", rdf_name="BANKING", rdf_store="TEST", entityid="2")
+
+        collection.add_entity("WALKING", "hasSize", "0", rdf_name="ACTIVITY", rdf_store="TEST", entityid="3")
+        collection.add_entity("RUNNING", "hasValue", "1", rdf_name="ACTIVITY", rdf_store="TEST", entityid="4")
+
+        self.assertEquals("BANKING", collection.entities_to_stores['ACCOUNT'])
+        self.assertEquals("ACTIVITY", collection.entities_to_stores['RUNNING'])
+
+        self.assertTrue(collection.contains('BANKING'))
+        self.assertTrue(collection.contains('ACTIVITY'))
+
+        collection.empty("BANKING")
+
+        self.assertFalse(collection.contains('BANKING'))
+        self.assertTrue(collection.contains('ACTIVITY'))

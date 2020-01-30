@@ -55,5 +55,5 @@ class FileRDFStore(FileStore, RDFReadOnlyStore):
 
     def reload(self, collection, rdf_name):
         filename = collection.storename(rdf_name)
-        collection.empty()
+        collection.empty(rdf_name)
         return self._load_file_contents(collection, filename)
