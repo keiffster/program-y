@@ -23,22 +23,60 @@ class SlackConfiguration(ClientConfigurationData):
     def __init__(self):
         ClientConfigurationData.__init__(self, "slack")
         self._polling_interval = 1
+        self._username = "Chatilly"
+        self._reply_to_direct = True
+        self._reply_to_mention = True
+        self._reply_to_all = False
 
     @property
     def polling_interval(self):
         return self._polling_interval
+
+    @property
+    def username(self):
+        return self._username
+
+    @property
+    def reply_to_direct(self):
+        return self._reply_to_direct
+
+    @property
+    def reply_to_mention(self):
+        return self._reply_to_mention
+
+    @property
+    def reply_to_all(self):
+        return self._reply_to_all
 
     def load_configuration_section(self, configuration_file, section, bot_root, subs: Substitutions = None):
         assert section is not None
 
         self._polling_interval = configuration_file.get_int_option(section, "polling_interval", missing_value=1,
                                                                    subs=subs)
+        self._username = configuration_file.get_option(section, "username", missing_value="Chatilly",
+                                                                   subs=subs)
+
+        self._reply_to_direct = configuration_file.get_bool_option(section, "reply_to_direct", missing_value=True,
+                                                                   subs=subs)
+        self._reply_to_mention = configuration_file.get_bool_option(section, "reply_to_mention", missing_value=True,
+                                                                   subs=subs)
+        self._reply_to_all = configuration_file.get_bool_option(section, "reply_to_all", missing_value=False,
+                                                                   subs=subs)
+
         super(SlackConfiguration, self).load_configuration_section(configuration_file, section, bot_root, subs=subs)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:
             data['polling_interval'] = 1
+            data['username'] = "Chatilly"
+            data['reply_to_direct'] = True
+            data['reply_to_mention'] = True
+            data['reply_to_all'] = True
         else:
             data['polling_interval'] = self._polling_interval
+            data['username'] = self._username
+            data['reply_to_direct'] = self._reply_to_direct
+            data['reply_to_mention'] = self._reply_to_mention
+            data['reply_to_all'] = self._reply_to_all
 
         super(SlackConfiguration, self).to_yaml(data, defaults)

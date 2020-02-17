@@ -28,7 +28,8 @@ SLACK_CLIENT = None
 class SlackBotClient(PollingBotClient):
 
     # constants
-    MENTION_REGEX = "^<@(|[WU].+?)>(.*)"
+    DIRECT_REGEX = r"^<@(.+)>\s(.*)"
+    MENTION_REGEX = r"^(.*)\s<@(|[WU].+?)>\s(.*)"
 
     def __init__(self, argument_parser=None):
         self._bot_token = None
@@ -63,17 +64,6 @@ class SlackBotClient(PollingBotClient):
     def get_bot_id(self):
         return self._slack_client.api_call("auth.test")["user_id"]
 
-    def parse_message(self, event):
-        text = event["text"]
-    
-        YLogger.debug(self, "Slack received [%s] ", text)
-    
-        userid, message = self.parse_direct_mention(text)
-    
-        if message and userid == self._starterbot_id:
-            channel = event['channel']
-            self.handle_message(message, channel, userid)
-
     def parse_messages(self, slack_events):
         """
             Parses a list of events coming from the Slack RTM API to find bot messages.
@@ -83,8 +73,53 @@ class SlackBotClient(PollingBotClient):
         for event in slack_events:
             if event["type"] == "message" and "subtype" not in event:
                 self.parse_message(event)
- 
-    def parse_direct_mention(self, message_text):
+
+    def parse_message(self, event):
+        YLogger.debug(self, "Slack Bot Received: %s", event)
+
+        text = event["text"]
+        direct = False
+        mention = False
+
+        userid, message = self.parse_direct_message(text)
+        if userid is None and message is None:
+            userid, message = self.parse_mention(text)
+            if userid is None and message is None:
+                userid = event['user']
+                message = text
+            else:
+                mention = True
+        else:
+            direct = True
+
+        response = {
+            "botid": self._starterbot_id,
+            "userid": userid,
+            "message": message
+        }
+
+        if message:
+            channel = event['channel']
+
+            if self.configuration.client_configuration.reply_to_all is True:
+                response['reply_all'] = True
+                self.handle_message(message, channel, userid)
+
+            elif self.configuration.client_configuration.reply_to_direct is True and direct is True:
+                response['direct'] = True
+                self.handle_message(message, channel, userid)
+
+            elif self.configuration.client_configuration.reply_to_mention is True and mention is True:
+                response['mention'] = True
+                self.handle_message(message, channel, userid)
+
+            else:
+                response['no_response'] = True
+
+        YLogger.debug("Slack Bot Response: %s", response)
+
+
+    def parse_mention(self, message_text):
         """
             Finds a direct mention (a mention that is at the beginning) in message text
             and returns the user ID which was mentioned. If there is no direct mention, returns None
@@ -92,8 +127,21 @@ class SlackBotClient(PollingBotClient):
         matches = re.search(self.MENTION_REGEX, message_text)
         # the first group contains the username, the second group contains the remaining message
         if matches:
-            return (matches.group(1), matches.group(2).strip())
-        return (None, None)
+            return matches.group(2), matches.group(3).strip()
+
+        return None, None
+
+    def parse_direct_message(self, message_text):
+        """
+            Finds a direct mention (a mention that is at the beginning) in message text
+            and returns the user ID which was mentioned. If there is no direct mention, returns None
+        """
+        matches = re.search(self.DIRECT_REGEX, message_text)
+        # the first group contains the username, the second group contains the remaining message
+        if matches:
+            return matches.group(1), matches.group(2).strip()
+
+        return None, None
 
     def ask_question(self, userid, question):
         self._questions += 1
@@ -105,6 +153,7 @@ class SlackBotClient(PollingBotClient):
         # Sends the response back to the channel
         self._slack_client.api_call(
             "chat.postMessage",
+            username=self.configuration.client_configuration.username,
             channel=channel,
             text=response or response
         )
@@ -113,7 +162,6 @@ class SlackBotClient(PollingBotClient):
 
         # Finds and executes the given message, filling in response
         response = self.ask_question(userid, message)
-
         YLogger.debug(self, "Slack sending [%s] to [%s]", message, userid)
 
         self.send_response(response, channel)

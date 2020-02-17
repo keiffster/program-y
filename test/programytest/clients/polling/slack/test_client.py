@@ -73,13 +73,25 @@ class SlackBotClientTests(unittest.TestCase):
         self.assertFalse(client._render_callback())
         self.assertIsInstance(client.renderer, TextRenderer)
 
-    def test_parse_direct_mention(self):
+    def test_parse_direct_message(self):
         arguments = MockArgumentParser()
         client = MockSlackBotClient(arguments)
 
         text = "<@U024BE7LH> Hello"
 
-        userid, message = client.parse_direct_mention(text)
+        userid, message = client.parse_direct_message(text)
+        self.assertIsNotNone(userid)
+        self.assertEqual("U024BE7LH", userid)
+        self.assertIsNotNone(message)
+        self.assertEqual("Hello", message)
+
+    def test_parse_mention(self):
+        arguments = MockArgumentParser()
+        client = MockSlackBotClient(arguments)
+
+        text = "I told <@U024BE7LH> Hello"
+
+        userid, message = client.parse_mention(text)
         self.assertIsNotNone(userid)
         self.assertEqual("U024BE7LH", userid)
         self.assertIsNotNone(message)
