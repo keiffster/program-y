@@ -110,6 +110,7 @@ class SQLLookupsStore(SQLStore, LookupsStore):
             count, success = self._read_lookups_from_file(filename, verbose)
             self.commit(commit)
             return count, success
+
         except Exception as e:
             YLogger.exception(None, "Failed to upload lookups from file [%s]", e, filename)
 
@@ -139,10 +140,8 @@ class SQLDenormalStore(SQLLookupsStore):
         try:
             return self._storage_engine.session.query(Denormal).filter(Denormal.key == key).one()
 
-        except Exception as excep:
-            YLogger.exception_nostack(self, "Failed to check for existence", excep)
-
-        return None
+        except Exception:
+            return None
 
 
 class SQLNormalStore(SQLLookupsStore):
@@ -169,10 +168,8 @@ class SQLNormalStore(SQLLookupsStore):
         try:
             return self._storage_engine.session.query(Normal).filter(Denormal.key == key).one()
 
-        except Exception as excep:
-            YLogger.exception_nostack(self, "Failed to check for existence", excep)
-
-        return None
+        except Exception:
+            return None
 
 
 class SQLGenderStore(SQLLookupsStore):
@@ -192,7 +189,6 @@ class SQLGenderStore(SQLLookupsStore):
     def remove_lookup(self):
         self._storage_engine.session.query(Gender).delete()
 
-
     def _get_entity(self, key, value):
         return Gender(key=key, value=value)
 
@@ -200,10 +196,8 @@ class SQLGenderStore(SQLLookupsStore):
         try:
             return self._storage_engine.session.query(Gender).filter(Gender.key == key).one()
 
-        except Exception as excep:
-            YLogger.exception_nostack(self, "Failed to check for existence", excep)
-
-        return None
+        except Exception:
+            return None
 
 
 class SQLPersonStore(SQLLookupsStore):
@@ -230,10 +224,8 @@ class SQLPersonStore(SQLLookupsStore):
         try:
             return self._storage_engine.session.query(Person).filter(Person.key == key).one()
 
-        except Exception as excep:
-            YLogger.exception_nostack(self, "Failed to check for existence", excep)
-
-        return None
+        except Exception:
+            return None
 
 
 class SQLPerson2Store(SQLLookupsStore):
@@ -260,7 +252,5 @@ class SQLPerson2Store(SQLLookupsStore):
         try:
             return self._storage_engine.session.query(Person2).filter(Denormal.key == key).one()
 
-        except Exception as excep:
-            YLogger.exception_nostack(self, "Failed to check for existence", excep)
-
-        return None
+        except Exception:
+            return None

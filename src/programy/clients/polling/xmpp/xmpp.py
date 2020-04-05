@@ -49,6 +49,7 @@ class XmppClient(sleekxmpp.ClientXMPP):
             YLogger.debug(self, "XMPPClient registering xep_0199 plugin")
             self.register_plugin('xep_0199')
 
+
     def start(self, event):
         YLogger.debug(self, "XMPPClient starting....[%s]", str(event))
         self.send_presence()
@@ -68,6 +69,7 @@ class XmppClient(sleekxmpp.ClientXMPP):
             msg.reply(response).send()
 
     def message(self, msg):
+        print("Msg = ", msg)
         if self.is_valid_message(msg) is True:
 
             question = self.get_question(msg)

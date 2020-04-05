@@ -15,13 +15,26 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 import time
+import datetime
 import tweepy
 from tweepy.error import RateLimitError
 from programy.utils.logging.ylogger import YLogger
 from programy.clients.polling.client import PollingBotClient
 from programy.clients.polling.twitter.config import TwitterConfiguration
-from programy.storage.factory import StorageFactory
 from programy.utils.console.console import outputLog
+
+
+class TwitterListener(tweepy.StreamListener):
+
+    def __init__(self, twitter_bot_client):
+        self._twitter_bot_client = twitter_bot_client
+        self.api = twitter_app._api
+
+    def on_status(self, status):
+        self._twitter_bot_client.handle_mention(status)
+
+    def on_error(self, status):
+        YLogger.error(self, status)
 
 
 class TwitterBotClient(PollingBotClient):
@@ -32,12 +45,15 @@ class TwitterBotClient(PollingBotClient):
         self._username_len = 0
         self._welcome_message = None
         self._api = None
+        self._me = None
         self._consumer_key = None
         self._consumer_secret = None
         self._access_token = None
         self._access_token_secret = None
 
-        PollingBotClient.__init__(self, "Twitter", argument_parser)
+        self._direct_id = -1
+
+        PollingBotClient.__init__(self, "twitter", argument_parser)
 
     def get_client_configuration(self):
         return TwitterConfiguration()
@@ -53,200 +69,14 @@ class TwitterBotClient(PollingBotClient):
     def _create_api(self, consumer_key, consumer_secret, access_token, access_token_secret):
         auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
         auth.set_access_token(access_token, access_token_secret)
-        return tweepy.API(auth)
+        api = tweepy.API(auth, wait_on_rate_limit=False, wait_on_rate_limit_notify=False)
+        try:
+            api.verify_credentials()
+            return api
 
-    #############################################################################################
-    # Direct Messages
-
-    def _get_direct_messages(self, last_message_id):
-        if last_message_id == -1:
-            YLogger.debug(self, "Getting latest direct messages")
-            messages = self._api.direct_messages()
-        else:
-            YLogger.debug(self, "Getting latest direct messages since : %s", last_message_id)
-            messages = self._api.direct_messages(since_id=last_message_id)
-        messages.sort(key=lambda msg: msg.id)
-        return messages
-
-    def _process_direct_message_question(self, userid, text):
-
-        YLogger.debug(self, "Direct Messages: %s -> %s", userid, text)
-
-        self._questions += 1
-
-        client_context = self.create_client_context(userid)
-        response = client_context.bot.ask_question(client_context, text, responselogger=self)
-        rendered = self.renderer.render(client_context, response)
-
-        self._api.send_direct_message(userid, text=rendered)
-
-    def _process_direct_messages(self, last_message_id):
-        YLogger.debug(self, "Processing direct messages since [%s]", last_message_id)
-
-        messages = self._get_direct_messages(last_message_id)
-
-        for message in messages:
-            YLogger.debug(self, "message: %s", message.text)
-            try:
-                self._process_direct_message_question(message.sender_id, message.text)
-            except Exception as err:
-                YLogger.exception(self, "Failed processing direct messages", err)
-
-        if messages:
-            last_message_id = messages[-1].id
-
-        return last_message_id
-
-    #############################################################################################
-    # Followers
-
-    def _unfollow_non_followers(self, friends, followers_ids):
-        for friend_id in friends:
-            if friend_id not in followers_ids:
-                YLogger.debug(self, "Removing previous friendship with [%d]", friend_id)
-                self._api.destroy_friendship(friend_id)
-
-    def _follow_new_followers(self, followers, friends):
-        for follower in followers:
-            YLogger.debug(self, "Checking follower [%s]", follower.screen_name)
-            if follower.id not in friends:
-                YLogger.debug(self, "Following %s", follower.screen_name)
-                follower.follow()
-                self._api.send_direct_message(follower.id, text=self._welcome_message)
-
-    def _process_followers(self):
-        YLogger.debug(self, "Processing followers")
-        followers = self._api.followers()
-        followers_ids = [x.id for x in followers]
-        friends = self._api.friends_ids()
-
-        # Unfollow anyone I follow that does not follow me
-        self._unfollow_non_followers(friends, followers_ids)
-
-        # Next follow those new fellows following me
-        self._follow_new_followers(followers, friends)
-
-    #############################################################################################
-    # Status (Tweets)
-
-    def _get_statuses(self, last_status_id):
-        if last_status_id == -1:
-            YLogger.debug(self, "Getting latest statuses")
-            statuses = self._api.home_timeline()
-        else:
-            YLogger.debug(self, "Getting latest statuses since : %s", last_status_id)
-
-            statuses = self._api.home_timeline(since_id=last_status_id)
-
-        statuses.sort(key=lambda msg: msg.id)
-        return statuses
-
-    def _get_question_from_text(self, text):
-        if '@' not in text:
+        except Exception as error:
+            YLogger.exception(self, "Error creating api", error)
             return None
-
-        text = text.strip()
-        pos = text.find(self._username)
-        if pos == -1:
-            return None
-
-        pos = pos - 1  # Take into account @ sign
-        question = text[(pos + self._username_len) + 1:]
-        return question.strip()
-
-    def ask_question(self, userid, question):
-
-        self._questions += 1
-
-        client_context = self.create_client_context(userid)
-        return client_context.bot.ask_question(client_context, question, responselogger=self)
-
-    def _process_status_question(self, userid, text):
-        YLogger.debug(self, "Status Update: %s -> %s", userid, text)
-
-        question = self._get_question_from_text(text)
-        if question is not None:
-            YLogger.debug(self, "%s -> %s", userid, question)
-
-            response = self.ask_question(userid, question)
-
-            user = self._api.get_user(userid)
-            status = "@%s %s" % (user.screen_name, response)
-
-            YLogger.debug(self, "Sending status response [@%s] [%s]", user.screen_name, response)
-
-            self._api.update_status(status)
-
-    def _process_statuses(self, last_status_id):
-        YLogger.debug(self, "Processing status updates since [%s]", last_status_id)
-
-        statuses = self._get_statuses(last_status_id)
-
-        for status in statuses:
-
-            YLogger.debug(self, "%s Received Status From[%s] - To[%s] -> [%s]", status.id, status.author.screen_name,
-                          self._username, status.text)
-
-            if status.author.screen_name != self._username:
-                YLogger.debug(self, "status: %s", status.text)
-                try:
-                    self._process_status_question(status.user.id, status.text)
-                except Exception as err:
-                    YLogger.exception(self, "Failed processing statuses", err)
-
-            last_status_id = status.id
-
-        return last_status_id
-
-    #############################################################################################
-    # Message ID Storage
-
-    def _get_last_message_ids(self):
-
-        if self.storage_factory.entity_storage_engine_available(StorageFactory.TWITTER) is True:
-            engine = self.storage_factory.entity_storage_engine(StorageFactory.TWITTER)
-            store = engine.twitter_store()
-            last_direct_message_id, last_status_id = store.load_last_message_ids()
-
-        else:
-            last_direct_message_id = last_status_id = -1
-
-        YLogger.debug(self, "Got Last Messaged ID: %s", last_direct_message_id)
-        YLogger.debug(self, "Got Last Status ID: %s", last_status_id)
-
-        return last_direct_message_id, last_status_id
-
-    def _store_last_message_ids(self, last_direct_message_id, last_status_id):
-
-        if self.storage_factory.entity_storage_engine_available(StorageFactory.TWITTER) is True:
-            engine = self.storage_factory.entity_storage_engine(StorageFactory.TWITTER)
-            store = engine.twitter_store()
-            store.store_last_message_ids(last_direct_message_id, last_status_id)
-
-    #############################################################################################
-    # Execution
-
-    def _poll(self, last_direct_message_id, last_status_id):
-        if self._configuration.client_configuration.use_direct_message is True:
-            if self._configuration.client_configuration.auto_follow is True:
-                self._process_followers()
-
-            YLogger.debug(self, "Processing direct messaages")
-
-            last_direct_message_id = self._process_direct_messages(last_direct_message_id)
-
-            YLogger.debug(self, "Last message id = %d", last_direct_message_id)
-
-        if self._configuration.client_configuration.use_status is True:
-            YLogger.debug(self, "Processing status messaages")
-
-            last_status_id = self._process_statuses(last_status_id)
-
-            YLogger.debug(self, "Last status id = %d", last_status_id)
-
-        self._store_last_message_ids(last_direct_message_id, last_status_id)
-
-        time.sleep(self._configuration.client_configuration.polling_interval)
 
     def connect(self):
         if self._consumer_key is not None and \
@@ -258,6 +88,7 @@ class TwitterBotClient(PollingBotClient):
                                          self._consumer_secret,
                                          self._access_token,
                                          self._access_token_secret)
+            self._me = self._api.me()
             return True
 
         return False
@@ -265,30 +96,101 @@ class TwitterBotClient(PollingBotClient):
     def display_connected_message(self):
         outputLog(self, "Twitter Bot connected and running...")
 
+    def ask_question(self, userid, question):
+        self._questions += 1
+        client_context = self.create_client_context(userid)
+        return client_context.bot.ask_question(client_context, question, responselogger=self)
+
+    def _follow_followers(self):
+        YLogger.debug(self, "Retrieving and following followers")
+        for follower in tweepy.Cursor(self._api.followers).items():
+            if not follower.following:
+                YLogger.debug(self, f"Following {follower.name}")
+                follower.follow()
+
+    def handle_mention(self, tweet):
+        if tweet.in_reply_to_status_id is not None or tweet.user.id == self._me.id:
+            # This tweet is a reply or I'm its author so, ignore it
+            return
+
+        if not tweet.favorited:
+            # Mark it as Liked, since we have not done it yet
+            try:
+                tweet.favorite()
+
+            except Exception as e:
+                YLogger.error("Error on fav", exc_info=True)
+
+        # Reply to the user
+        try:
+            author = tweet.author.screen_name
+
+            question = " ".join(tweet.text.split(" ")[1:])
+            YLogger.debug(self, "Mention: %s", question)
+
+            response = self.ask_question(author, question)
+
+            reply = "@{0} {1}".format(author, response)
+            YLogger.debug(self, "Mention reply: %s", reply)
+
+            self._api.update_status(reply, in_reply_to_status_id=tweet.id)
+
+        except Exception as error:
+            YLogger.exception(self, "Error handling mention", error)
+
+    def _check_directs(self):
+        try:
+            YLogger.info(self, "Retrieving directs")
+            new_since_id = self._direct_id
+            if self._direct_id == -1:
+                tweets = tweepy.Cursor(self._api.list_direct_messages).items()
+            else:
+                tweepy.Cursor(self._api.list_direct_messages, count=10, cursor=new_since_id).items()
+
+            for tweet in tweets:
+                new_since_id = max(tweet.id, new_since_id)
+
+            self._direct_id = new_since_id
+
+        except Exception as error:
+            YLogger.exception(self, "Failure handling direct", error)
+
+    def pre_poll(self):
+        if self.configuration.client_configuration.respond_to_mentions is True:
+            YLogger.debug(self, "Responding to mentions: %s", self.configuration.client_configuration.mentions)
+            stream = tweepy.Stream(self._api.auth, TwitterListener(self))
+            stream.filter(track=self.configuration.client_configuration.mentions, languages=["en"], is_async=True)
+
     def poll_and_answer(self):
 
         running = True
-        try:
-            (last_direct_message_id, last_status_id) = self._get_last_message_ids()
+        sleepy_time = self._configuration.client_configuration.polling_interval
 
-            self._poll(last_direct_message_id, last_status_id)
+        try:
+            if self._configuration.client_configuration.follow_followers is True:
+                YLogger.debug(self, "Following followers")
+                self._follow_followers()
+
+            if self._configuration.client_configuration.respond_to_directs:
+                YLogger.debug(self, "Checking direct messages")
+                self._check_directs()
+
+            YLogger.debug(self, "Sleeping for %d at %s" %(sleepy_time, datetime.datetime.now().strftime("%H:%M:%S")))
 
         except KeyboardInterrupt:
             running = False
 
         except RateLimitError:
 
-            if self._configuration.client_configuration.rate_limit_sleep != -1:
-                rate_limit_sleep = self._configuration.client_configuration.rate_limit_sleep
-            else:
-                rate_limit_sleep = self.FIFTEEN_MINUTES
+            outputLog(self, "Rate limit exceeded, check logs!")
+            YLogger.error(self, "Rate limit exceeded, sleeping for %d seconds", self._rate_limit_sleep)
 
-            YLogger.error(self, "Rate limit exceeded, sleeping for %d seconds", rate_limit_sleep)
-
-            self.sleep(rate_limit_sleep)
+            sleepy_time = self._rate_limit_sleep
 
         except Exception as excep:
             YLogger.exception(self, "Poll and answer error", excep)
+
+        time.sleep(sleepy_time)
 
         return running
 

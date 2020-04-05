@@ -71,6 +71,8 @@ class MongoLookupStoreTests(unittest.TestCase):
     @unittest.skipIf(Engines.mongo is False, Engines.mongo_disabled)
     def test_load_no_collection(self):
         config = MongoStorageConfiguration()
+        config.drop_all_first = True
+
         engine = MongoStorageEngine(config)
         engine.initialise()
         store = TestMongoLookupStore(engine)

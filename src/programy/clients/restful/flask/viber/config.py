@@ -45,14 +45,14 @@ class ViberConfiguration(RestConfiguration):
         self._avatar = configuration_file.get_option(section, "avatar", missing_value="http://viber.com/avatar.jpg",
                                                  subs=subs)
         self._webhook = configuration_file.get_option(section, "webhook",
-                                                  missing_value="https://localhost:443/incoming", subs=subs)
+                                                  missing_value="https://localhost:5000/api/viber/v1.0/ask", subs=subs)
         super(ViberConfiguration, self).load_configuration_section(configuration_file, section, bot_root, subs=subs)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:
-            data['name'] = "ProgramY"
-            data['avatar'] = 'http://666666666.ngrok.io/programy.png'
-            data['webhook'] = 'http://666666666.ngrok.io/rest/v1.0/ask'
+            data['name'] = "Program-Y"
+            data['avatar'] = 'http://127.0.0.1/programy.png'
+            data['webhook'] = 'https://127.0.0.1/api/viber/v1.0/ask'
         else:
             data['name'] = self._name
             data['avatar'] = self._avatar

@@ -52,6 +52,7 @@ class Uploader:
         config.url = url
         config.create_db = create
         config.drop_all_first = drop_all
+
         engine = SQLStorageEngine(config)
         engine.initialise()
         store = Uploader._get_store(storetype, engine)

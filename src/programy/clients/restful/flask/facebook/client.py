@@ -49,7 +49,7 @@ class FacebookBotClient(FlaskRestBotClient):
     def get_client_configuration(self):
         return FacebookConfiguration()
 
-    def get_default_renderer(self):
+    def get_default_renderer(self, callback=True):
         return FacebookRenderer(self)
 
     def create_facebook_bot(self):
@@ -133,9 +133,8 @@ class FacebookBotClient(FlaskRestBotClient):
             elif message.get('postback'):
                 self.handle_postback(message)
 
-    def ask_question(self, userid, question, metadata=None):
+    def ask_question(self, client_context, question, metadata=None):
         response = ""
-        client_context = self.create_client_context(userid)
         try:
             self._questions += 1
             response = client_context.bot.ask_question(client_context, question, responselogger=self)

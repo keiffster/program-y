@@ -32,7 +32,7 @@ class GoogleBotClient(FlaskRestBotClient):
         outputLog(self, "Google Client loaded")
 
     def _to_json(self, data):
-        return self._to_json(data)
+        return json.dumps(data)
 
     def get_client_configuration(self):
         return GoogleConfiguration()

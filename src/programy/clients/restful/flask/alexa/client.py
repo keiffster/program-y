@@ -117,7 +117,6 @@ class AlexaBotClient(FlaskRestBotClient):
         return reply
 
     def _handle_launch_request(self, client_context):
-        outputLog(self, "Handling launch...")
         if self.configuration.client_configuration.launch_srai is not None:
             reply = self._ask_question(client_context, self.configuration.client_configuration.launch_srai)
 
@@ -137,8 +136,6 @@ class AlexaBotClient(FlaskRestBotClient):
             raise Exception("Invalid intent, name missing!")
 
         intent_name = intent['name']
-
-        outputLog(self, "Handling [%s] intent..." % intent_name)
 
         if intent_name == 'AMAZON.CancelIntent':
             return self._handle_cancel_request(client_context, self._should_leave(intent_name))

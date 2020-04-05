@@ -43,7 +43,7 @@ class FileLicenseStore(FileStore, LicenseStore):
 
     def _process_license_key_line(self, license_collection, line):
         line = line.strip()
-        if line.startswith('#') is False:
+        if line and line.startswith('#') is False:
             splits = line.split("=")
             if len(splits) > 1:
                 key_name = splits[0].strip()

@@ -85,4 +85,4 @@ class DiscordBotClientTests(unittest.TestCase):
         self.assertIsNotNone(client)
 
         response = client.on_message(MockMessage(user, "hello"))
-        self.assertIsNone(response)
+        self.assertEqual('Hello there.', response)

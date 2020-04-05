@@ -33,9 +33,12 @@ class PollingBotClient(BotClient):
     def disconnect(self):
         return True
 
+    def pre_poll(self):
+        pass
+
     def poll_and_answer(self):
-        raise NotImplementedError("You must override this and implement the l"
-                                  "ogic poll for messages and send answers back")  # pragma: no cover
+        raise NotImplementedError("You must override this and implement the logic poll for messages and "
+                                  "send answers back")  # pragma: no cover
 
     def sleep(self, period):
         time.sleep(period)
@@ -50,6 +53,8 @@ class PollingBotClient(BotClient):
 
             if self.connect():
                 self.display_connected_message()
+
+                self.pre_poll()
 
                 self._running = True
                 while self._running:

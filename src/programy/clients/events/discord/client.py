@@ -49,10 +49,7 @@ class DiscordBotClient(EventBotClient):
         return self._discord_client.user
 
     def on_message(self, message):
-        outputLog(self, "Author:[%s], User:[%d]" % (message.author, self.get_discord_user()))
-
-        if message.author.id != self.get_discord_user():
-
+        if message.author != self.get_discord_user():
             try:
                 client_context = self.create_client_context(message.author.id)
 
@@ -73,11 +70,9 @@ if __name__ == '__main__':
     client = DiscordClient()
     discord = DiscordBotClient(client)
 
-
     @client.event
     async def on_ready():
         discord.on_ready()
-
 
     @client.event
     async def on_message(message):

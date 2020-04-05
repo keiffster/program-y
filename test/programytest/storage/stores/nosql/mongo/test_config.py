@@ -12,7 +12,7 @@ class MongoStorgeConfigurationTests(unittest.TestCase):
         self.assertIsNotNone(config)
         self.assertTrue(config.url.startswith('mongodb://localhost:'))
         self.assertEqual(config.database, "programy")
-        self.assertEqual(config.drop_all_first, True)
+        self.assertEqual(config.drop_all_first, False)
 
     def test_getters_setters(self):
         config = MongoStorageConfiguration()
@@ -28,7 +28,7 @@ class MongoStorgeConfigurationTests(unittest.TestCase):
 
     def test_create_mongostorage_config_defaults(self):
         config = MongoStorageConfiguration()
-        self.assertEquals({'database': 'programy', 'drop_all_first': True, 'url': 'mongodb://localhost:27017/'},
+        self.assertEquals({'database': 'programy', 'drop_all_first': False, 'url': 'mongodb://localhost:27017/'},
                           config.create_mongostorage_config())
 
     def test_create_mongostorage_config_no_defaults(self):
@@ -77,7 +77,7 @@ class MongoStorgeConfigurationTests(unittest.TestCase):
 
         self.assertTrue(config.url.startswith('mongodb://localhost:'))
         self.assertEqual(config.database, "programy")
-        self.assertEqual(config.drop_all_first, True)
+        self.assertEqual(config.drop_all_first, False)
 
     def test_initialise_no_config(self):
 
@@ -94,7 +94,7 @@ class MongoStorgeConfigurationTests(unittest.TestCase):
 
         self.assertTrue(config.url.startswith('mongodb://localhost:'))
         self.assertEqual(config.database, "programy")
-        self.assertEqual(config.drop_all_first, True)
+        self.assertEqual(config.drop_all_first, False)
 
     def test_to_yaml_defaults(self):
         config = MongoStorageConfiguration()

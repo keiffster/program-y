@@ -92,8 +92,10 @@ class LineBotClient(FlaskRestBotClient):
             if isinstance(event, MessageEvent):
                 if isinstance(event.message, TextMessage):
                     self.handle_text_message(event)
+
                 else:
                     self.handle_unknown_message(event)
+
             else:
                 self.handle_unknown_event(event)
 
@@ -115,7 +117,7 @@ class LineBotClient(FlaskRestBotClient):
             YLogger.exception(self, "Line error", excep)
             abort(500)
 
-        return Response(status=200)
+        return 'OK' #Response(status=200)
 
 
 if __name__ == "__main__":
