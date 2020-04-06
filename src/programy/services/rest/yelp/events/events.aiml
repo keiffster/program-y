@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>YELP EVENTS SEARCH HELP</pattern>
+        <template>
+            YELP EVENTS SEARCH * LOCATION * [LOCALE *]
+        </template>
+    </category>
+
+     <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>YELP EVENTS SEARCH LOCATION *</pattern>
+        <template>
+            <srai>
+                <sraix service="yelp.events.search">
+                    EVENTS SEARCH LOCATION <star index="1" />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>YELP EVENTS SEARCH RESULT *</pattern>
+        <template>
+            <star />
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>YELP EVENTS SEARCH SERVICE ERROR</pattern>
+        <template>Yelp failed to return a response</template>
+    </category>
+
+ </aiml>

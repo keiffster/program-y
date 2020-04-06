@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>WIKIPEDIA HELP</pattern>
+        <template>
+            WIKIPEDIA SEARCH * <br />
+            WIKIPEDIA SUMMARY *<br />
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>WIKIPEDIA SEARCH *</pattern>
+        <template>
+            <srai>
+                <sraix service="wikipedia">
+                    SEARCH <star />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            WIKIPEDIA RESULT SEARCH *
+        </pattern>
+        <template>
+            <star />
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>WIKIPEDIA SUMMARY *</pattern>
+        <template>
+            <srai>
+                <sraix service="wikipedia">
+                    SUMMARY <star />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            WIKIPEDIA RESULT SUMMARY *
+        </pattern>
+        <template>
+            <star />
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>WIKIPEDIA SERVICE ERROR</pattern>
+        <template>
+            Wikipedia failed to return a response
+        </template>
+    </category>
+
+ </aiml>

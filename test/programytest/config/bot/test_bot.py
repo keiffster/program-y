@@ -106,31 +106,6 @@ class BotConfigurationTests(unittest.TestCase):
               braintree:
                 create: true
                 save_as_user: system
-              services:
-                REST:
-                  classname: programy.services.rest.GenericRESTService
-                  method: GET
-                  host: 0.0.0.0
-                  port: 8080
-                Pannous:
-                  classname: programy.services.pannous.PannousService
-                  url: http://weannie.pannous.com/api
-                Pandora:
-                  classname: programy.services.pandora.PandoraService
-                  url: http://www.pandorabots.com/pandora/talk-xml
-                Wikipedia:
-                  classname: programy.services.wikipediaservice.WikipediaService
-                DuckDuckGo:
-                  classname: programy.services.duckduckgo.DuckDuckGoService
-                  url: http://api.duckduckgo.com
-                OPENCHAT:
-                  classname: programy.services.openchat.openchat.service.OpenChatRESTService
-                  url: http://localhost:8090
-              openchatbots:
-                openchatbots: {}
-                protocols:
-                - http
-                domains: []
               security:
                 authentication:
                   classname: programy.security.authenticate.passthrough.BasicPassThroughAuthenticationService

@@ -107,23 +107,6 @@ class ClientConfigurationDataTests(unittest.TestCase):
                         braintree:
                           create: true
                     
-                        services:
-                            OPENCHAT:
-                                classname: programy.services.openchat.openchat.service.OpenChatRESTService
-                            REST:
-                                classname: programy.services.rest.GenericRESTService
-                                method: GET
-                                host: 0.0.0.0
-                                port: 8080
-                            Pannous:
-                                classname: programy.services.pannous.PannousService
-                                url: http://weannie.pannous.com/api
-                    
-                        openchatbots:
-                          chatbot1:
-                            url: http://localhost:5959/api/rest/v2.0/ask
-                            method: GET
-                    
                         security:
                             authentication:
                                 classname: programy.security.authenticate.passthrough.BasicPassThroughAuthenticationService
@@ -254,23 +237,6 @@ class ClientConfigurationDataTests(unittest.TestCase):
                         braintree:
                           create: true
                     
-                        services:
-                            OPENCHAT:
-                                classname: programy.services.openchat.openchat.service.OpenChatRESTService
-                            REST:
-                                classname: programy.services.rest.GenericRESTService
-                                method: GET
-                                host: 0.0.0.0
-                                port: 8080
-                            Pannous:
-                                classname: programy.services.pannous.PannousService
-                                url: http://weannie.pannous.com/api
-                    
-                        openchatbots:
-                          chatbot1:
-                            url: http://localhost:5959/api/rest/v2.0/ask
-                            method: GET
-                    
                         security:
                             authentication:
                                 classname: programy.security.authenticate.passthrough.BasicPassThroughAuthenticationService
@@ -367,23 +333,6 @@ class ClientConfigurationDataTests(unittest.TestCase):
                         # Braintree
                         braintree:
                           create: true
-                    
-                        services:
-                            OPENCHAT:
-                                classname: programy.services.openchat.openchat.service.OpenChatRESTService
-                            REST:
-                                classname: programy.services.rest.GenericRESTService
-                                method: GET
-                                host: 0.0.0.0
-                                port: 8080
-                            Pannous:
-                                classname: programy.services.pannous.PannousService
-                                url: http://weannie.pannous.com/api
-                    
-                        openchatbots:
-                          chatbot1:
-                            url: http://localhost:5959/api/rest/v2.0/ask
-                            method: GET
                     
                         security:
                             authentication:

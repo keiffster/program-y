@@ -68,6 +68,11 @@ class Bot:
         self._conversation_mgr = ConversationManager(config.conversations)
         self._conversation_mgr.initialise(self._client.storage_factory)
 
+    def post_initialise(self):
+        brains = self.brain_factory.brains()
+        for brain in brains:
+            brain.post_initialise()
+
     @staticmethod
     def ylogger_type() -> str:
         return "bot"
@@ -336,6 +341,9 @@ class Bot:
     def ask_question(self, client_context, text, srai=False, responselogger=None):
 
         assert client_context is not None
+
+        # KS Added this to fix empty string UDC
+        text = text.strip()
 
         if srai is False:
             client_context.bot = self

@@ -23,12 +23,13 @@ class TestClient(BotClient):
 
         BotClient.__init__(self, "testclient")
 
-    def add_license_keys_store(self):
-        self._file_store_config._license_storage = FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "testdata" + os.sep + "test_licenses.keys", fileformat="text",
+    def add_license_keys_store(self, filepath=None):
+        if filepath is None:
+            filepath = os.path.dirname(__file__) + os.sep + "testdata" + os.sep + "test_licenses.keys"
+        self._file_store_config._license_storage = FileStoreConfiguration(file=filepath, fileformat="text",
                                                        encoding="utf-8", delete_on_start=False)
         self.storage_factory._storage_engines[StorageFactory.LICENSE_KEYS] = self._storage_engine
         self.storage_factory._store_to_engine_map[StorageFactory.LICENSE_KEYS] = self._storage_engine
-        self.load_license_keys()
 
     def add_spelling_store(self):
         self._file_store_config._spelling_storage = FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "testdata" + os.sep + "test_corpus.txt", fileformat="text",
@@ -172,6 +173,11 @@ class TestClient(BotClient):
                                                        encoding="utf-8", delete_on_start=False)
         self.storage_factory._storage_engines[StorageFactory.OOBS] = self._storage_engine
         self.storage_factory._store_to_engine_map[StorageFactory.OOBS] = self._storage_engine
+
+    def add_services_store(self, dirs):
+        self._file_store_config._services_storage = FileStoreConfiguration(dirs=dirs, fileformat="yaml", extension="conf", encoding="utf-8", delete_on_start=False)
+        self.storage_factory._storage_engines[StorageFactory.SERVICES] = self._storage_engine
+        self.storage_factory._store_to_engine_map[StorageFactory.SERVICES] =  self._storage_engine
 
     def add_default_stores(self):
         self.add_license_keys_store()

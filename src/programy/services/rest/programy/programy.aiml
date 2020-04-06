@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>PROGRAMY HELP</pattern>
+        <template>
+            PROGRAMYV1 ASK * USERID *<br />
+            PROGRAMYV2 ASK * USERID *
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>PROGRAMYV1 ASK * USERID *</pattern>
+        <template>
+            <sraix service="programyv1">
+                ASK QUESTION <star /> USERID <star index="2" />
+             </sraix>
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>PROGRAMYV2 ASK * USERID *</pattern>
+        <template>
+            <sraix service="programyv2">
+                ASK QUESTION <star /> USERID <star index="2" />
+             </sraix>
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>PROGRAMY SERVICE ERROR</pattern>
+        <template>
+            Programy failed to return a valid response
+        </template>
+    </category>
+
+ </aiml>

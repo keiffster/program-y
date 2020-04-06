@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>COCKTAILDB HELP</pattern>
+        <template>
+            COCKTAILDB SEARCH NAME * <br />
+            COCKTAILDB SEARCH INGREDIENT *
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>COCKTAILDB SEARCH NAME * </pattern>
+        <template>
+            <srai>
+                <sraix service="cocktaildb">
+                    SEARCH NAME <star />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>COCKTAILDB RESULT NAME * INGREDIENTS * INSTRUCTIONS * </pattern>
+        <template>
+            To make a <star index="1" />. You will need <star index="2" />. Then <star index="3" />
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>COCKTAILDB SEARCH INGREDIENT * </pattern>
+        <template>
+            <srai>
+                <sraix service="cocktaildb">
+                    SEARCH INGREDIENT <star />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>COCKTAILDB RESULT NAME * DESCRIPTION * </pattern>
+        <template>
+            <star index="2" />
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>COCKTAILDB SERVICE ERROR</pattern>
+        <template>CocktailDB failed to return a response</template>
+    </category>
+
+ </aiml>

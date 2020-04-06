@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>PANDORA HELP</pattern>
+        <template>
+            PANDORA ASK *
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>PANDORA ASK *</pattern>
+        <template>
+            <srai>
+                <sraix service="pandora">
+                    ASK <star />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>PANDORA RESULT *</pattern>
+        <template>
+            <star />
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>PANDORA SERVICE ERROR</pattern>
+        <template>
+            Pandorabots failed to return a valid response
+        </template>
+    </category>
+
+</aiml>

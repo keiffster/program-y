@@ -47,7 +47,7 @@ class OOBHandler:
             oobs_store = storage_engine.oobs_store()
             oobs_store.load(self)
         else:
-            YLogger.error(None, "No storage engine available for pattern_nodes!")
+            YLogger.error(None, "No storage engine available for oobs!")
 
         if self._oobs.get('default', None) is None:
             self._oobs['default'] = DefaultOutOfBandProcessor()

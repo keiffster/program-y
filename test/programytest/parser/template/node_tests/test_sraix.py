@@ -1,11 +1,10 @@
 import xml.etree.ElementTree as ET
 
-from programy.config.brain.brain import BrainConfiguration
-from programy.config.brain.service import BrainServiceConfiguration
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.sraix import TemplateSRAIXNode
 from programy.parser.template.nodes.word import TemplateWordNode
-from programy.services.service import Service, ServiceFactory
+from programy.services.base import Service
+from programy.services.config import ServiceConfiguration
 from programytest.parser.base import ParserTestsBaseClass
 
 
@@ -17,12 +16,14 @@ class MockService(Service):
     def ask_question(self, context: str, question: str):
         return "asked"
 
+
 class MockTemplateSRAIXNode(TemplateSRAIXNode):
     def __init__(self):
         TemplateSRAIXNode.__init__(self)
 
     def resolve_to_string(self, context):
         raise Exception("This is an error")
+
 
 class TemplateSRAIXNodeTests(ParserTestsBaseClass):
 
@@ -104,13 +105,7 @@ class TemplateSRAIXNodeTests(ParserTestsBaseClass):
 
     def test_call_service(self):
 
-        service_config = BrainServiceConfiguration("mock")
-        service_config._classname = 'programytest.services.test_service.MockService'
-
-        brain_config = BrainConfiguration()
-        brain_config.services._services['mock'] = service_config
-
-        ServiceFactory.preload_services(brain_config.services)
+        self._client_context.brain.service_handler.add_service("mock", MockService(ServiceConfiguration(service_type='library')))
 
         root = TemplateNode()
 

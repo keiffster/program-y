@@ -67,11 +67,11 @@ class BotClient(ResponseLogger):
 
         self.load_storage()
 
-        self._bot_factory = BotFactory(self, self.configuration.client_configuration)
-
         self.load_license_keys()
         self.get_license_keys()
         self._configuration.client_configuration.check_for_license_keys(self._license_keys)
+
+        self._bot_factory = BotFactory(self, self.configuration.client_configuration)
 
         self.load_scheduler()
 
@@ -83,6 +83,13 @@ class BotClient(ResponseLogger):
         self.load_trigger_manager()
 
         self.load_ping_responder()
+
+        self.post_initialise()
+
+    def post_initialise(self):
+        bots = self.bot_factory.bots()
+        for bot in bots:
+            bot.post_initialise()
 
     @staticmethod
     def ylogger_type():

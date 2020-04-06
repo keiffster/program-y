@@ -128,3 +128,6 @@ class StorageEngine:
 
     def oobs_store(self):
         raise StorageEngineException("Engine does not support oobs storage")
+
+    def services_store(self):
+        raise StorageEngineException("Engine does not support services storage")

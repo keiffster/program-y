@@ -79,15 +79,16 @@ a:hover {
 #formwrapper {
     margin:0 auto;
     padding-bottom:5px;
-    background:#EBF4FB;
-    border:1px solid #ACD8F0;
+    background:#FFFFFF;
+    /*border:1px solid #ACD8F0;*/
 }
 
 #questionswrapper {
     margin:0 auto;
     padding-bottom:5px;
-    background:#EBF4FB;
-    border:1px solid #ACD8F0;
+    height: 100%;
+    background:#FFFFFF;
+    /*border:1px solid #ACD8F0;*/
 }
 
 #chatbox {
@@ -103,16 +104,18 @@ a:hover {
     }
 
 #usermsg {
-    width:90%;
-    border:1px solid #ACD8F0;
+    width:100%;
+    height: 30px;
+    border:1px solid #000000;
+    /*border:1px solid #ACD8F0;*/
     }
 
-#submit { width: 60px; align: right}
+#submit { width: 80px; align: right}
 
 
 /* MEDIA QUERIES */
 @media screen and (min-width: 47.5em ) {
   .leftColumn { margin-right: 19.5em; }
 
-	.rightColumn { position: absolute; top: 0; right: 0; width: 18.75em; }
+	.rightColumn { position: absolute; top: 0; right: 0; width: 18.75em; height: 100%;}
 }

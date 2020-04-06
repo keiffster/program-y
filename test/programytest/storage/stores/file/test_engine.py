@@ -33,6 +33,7 @@ from programy.storage.stores.file.store.usergroups import FileUserGroupStore
 from programytest.storage.test_utils import StorageEngineTestUtils
 from programy.storage.stores.file.store.triggers import FileTriggersStore
 from programy.storage.stores.file.store.oobs import FileOOBStore
+from programy.storage.stores.file.store.services import FileServiceStore
 
 
 class FileStorageEngineTests(StorageEngineTestUtils):
@@ -76,6 +77,7 @@ class FileStorageEngineTests(StorageEngineTestUtils):
         self.assertIsInstance(engine.usergroups_store(), FileUserGroupStore)
         self.assertIsInstance(engine.triggers_store(), FileTriggersStore)
         self.assertIsInstance(engine.oobs_store(), FileOOBStore)
+        self.assertIsInstance(engine.services_store(), FileServiceStore)
 
     def test_properties(self):
         config = FileStorageConfiguration()

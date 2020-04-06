@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>GNEWS HELP</pattern>
+        <template>
+            GNEWS SEARCH *<br />
+            GNEWS TOPICS<br />
+            GNEWS TOPIC *<br />
+            GNEWS TOPNEWS * *
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>GNEWS SEARCH *</pattern>
+        <template>
+            <srai>
+                <sraix service="gnews">
+                    SEARCH <star />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>GNEWS RESULT SEARCH *</pattern>
+        <template>
+            <star />
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>GNEWS TOPICS</pattern>
+        <template>
+            <srai>
+                <sraix service="gnews">
+                    TOPICS
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>GNEWS RESULT TOPICS *</pattern>
+        <template>
+            <star />
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>GNEWS TOPIC *</pattern>
+        <template>
+            <srai>
+                <sraix service="gnews">
+                    TOPIC <star />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>GNEWS RESULT TOPIC *</pattern>
+        <template>
+            <star />
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>GNEWS TOPNEWS *</pattern>
+        <template>
+            <srai>
+                <sraix service="gnews">
+                    TOPNEWS <star />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>GNEWS RESULT TOPNEWS *</pattern>
+        <template>
+            <star />
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>GNEWS SERVICE ERROR</pattern>
+        <template>GNews failed to return a response</template>
+    </category>
+
+ </aiml>

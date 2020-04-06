@@ -23,6 +23,7 @@ from programy.utils.substitutions.substitues import Substitutions
 
 
 class BrainSecuritiesConfiguration(BaseSectionConfigurationData):
+
     def __init__(self):
         BaseSectionConfigurationData.__init__(self, "security")
         self._authorisation = None

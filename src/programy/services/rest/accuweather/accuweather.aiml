@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>ACCUWEATHER HELP</pattern>
+        <template>
+            ACCUWEATHER TEXTSEARCH LOCATION * <br />
+            ACCUWEATHER CONDITIONS LOCATION * <br />
+            ACCUWEATHER WEATHER LOCATION *
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>ACCUWEATHER TEXTSEARCH LOCATION * </pattern>
+        <template>
+            <sraix service="accuweather">
+                TEXTSEARCH LOCATION <star />
+            </sraix>
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>ACCUWEATHER CONDITIONS LOCATION * </pattern>
+        <template>
+            <srai>
+                <sraix service="accuweather">
+                    CONDITIONS LOCATION <star />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>ACCUWEATHER WEATHER LOCATION * </pattern>
+        <template>
+            <srai>
+                <sraix service="accuweather">
+                    TEXTSEARCH LOCATION <star />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>ACCUWEATHER RESULT KEY *</pattern>
+        <template>
+            <srai>
+                <sraix service="accuweather">
+                    CONDITIONS LOCATION <star />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>ACCUWEATHER RESULT EPOC * WEATHERTEXT * HASPRECIPITATION * PRECIPITATIONTYPE * ISDAYTIME * TEMP * UNIT *</pattern>
+        <template>
+            <sentence>It is  currently <star index="6" /></sentence><uppercase><star index="7" /></uppercase>and <star index="2" />
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>ACCUWEATHER SERVICE ERROR</pattern>
+        <template>Accuweather failed to return a response</template>
+    </category>
+
+ </aiml>

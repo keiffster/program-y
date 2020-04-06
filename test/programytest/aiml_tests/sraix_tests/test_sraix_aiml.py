@@ -2,9 +2,8 @@ import os
 import unittest
 import unittest.mock
 
-from programy.config.brain.service import BrainServiceConfiguration
-from programy.services.service import Service
-from programy.services.service import ServiceFactory
+from programy.services.config import ServiceConfiguration
+from programy.services.base import Service
 from programytest.client import TestClient
 
 
@@ -21,7 +20,7 @@ class SraixTestClient(TestClient):
 
 class MockGenericRESTService(Service):
 
-    def __init__(self, config: BrainServiceConfiguration):
+    def __init__(self, config: ServiceConfiguration):
         Service.__init__(self, config)
 
     def ask_question(self, client_context, question: str):
@@ -34,8 +33,8 @@ class SraixAIMLTests(unittest.TestCase):
         client = SraixTestClient()
         self._client_context = client.create_client_context("testid")
 
-        config = unittest.mock.Mock()
-        ServiceFactory.services['REST'] = MockGenericRESTService(config)
+        config = ServiceConfiguration(service_type="library")
+        self._client_context.brain.service_handler.add_service('REST',  MockGenericRESTService(config))
 
     def test_basic_sraix_test(self):
         response = self._client_context.bot.ask_question(self._client_context, "GENERIC REST TEST")

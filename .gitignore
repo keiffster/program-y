@@ -103,10 +103,10 @@ pytype.log
 
 # Ignore license key files
 license.keys
-/bots/y-bot/output/
-bots/y-bot/output/
-/bots/alice2/output/
-/bots/professor/output/
+license.txt
+licenses.keys
+licenses.txt
+test/programytest/services/testdata/license.keys
 temp/
 conversations/
 /src/utils/pattern_lister/y-bot.csv

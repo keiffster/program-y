@@ -44,6 +44,7 @@ from programy.storage.stores.file.store.processors import FilePostQuestionProces
 from programy.storage.stores.file.store.usergroups import FileUserGroupStore
 from programy.storage.stores.file.store.triggers import FileTriggersStore
 from programy.storage.stores.file.store.oobs import FileOOBStore
+from programy.storage.stores.file.store.services import FileServiceStore
 
 
 class FileStorageEngine(StorageEngine):
@@ -141,3 +142,6 @@ class FileStorageEngine(StorageEngine):
 
     def oobs_store(self):
         return FileOOBStore(self)
+
+    def services_store(self):
+        return FileServiceStore(self)

@@ -119,8 +119,8 @@ class FileStorageConfiguration(BaseConfigurationData):
         self._oobs_storage = FileStoreConfiguration(file=tmpdir + os.sep + "oob/callmom.conf", fileformat="text",
                                                         encoding="utf-8", delete_on_start=False)
 
-        self._services_storage = FileStoreConfiguration(dirs=[tmpdir + os.sep + "services"], extension="txt",
-                                                          subdirs=False, fileformat="text", encoding="utf-8",
+        self._services_storage = FileStoreConfiguration(dirs=[tmpdir + os.sep + "services"], extension="yaml",
+                                                          subdirs=False, fileformat="yaml", encoding="utf-8",
                                                           delete_on_start=False)
 
     @property
@@ -238,6 +238,10 @@ class FileStorageConfiguration(BaseConfigurationData):
     @property
     def oobs_storage(self):
         return self._oobs_storage
+
+    @property
+    def services_storage(self):
+        return self._services_storage
 
     @property
     def services_storage(self):
@@ -574,7 +578,7 @@ class FileStorageConfiguration(BaseConfigurationData):
 
         amap[FileStore.SERVICES_STORAGE] = {}
         config = FileStoreConfiguration(dirs=[tmpdir + os.sep + "services"],
-                                        extension="txt", subdirs=True,
-                                        fileformat="text", encoding="utf-8",
+                                        extension="yaml", subdirs=True,
+                                        fileformat="yaml", encoding="utf-8",
                                         delete_on_start=False)
         config.to_yaml(amap[FileStore.SERVICES_STORAGE], defaults=False)

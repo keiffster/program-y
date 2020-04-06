@@ -16,7 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 from programy.utils.logging.ylogger import YLogger
 from programy.parser.template.nodes.base import TemplateNode
-from programy.services.service import ServiceFactory
+from programy.services.handler import ServiceHandler
 from programy.parser.exceptions import ParserException
 from programy.utils.text.text import TextUtils
 
@@ -40,7 +40,7 @@ class TemplateSRAIXNode(TemplateNode):
         YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
 
         if self._service is not None:
-            bot_service = ServiceFactory.get_service(self._service)
+            bot_service = client_context.brain.service_handler.get_service(self._service)
             response = bot_service.ask_question(client_context, resolved)
             YLogger.debug(client_context, "SRAIX service [%s] return [%s]", self._service, response)
             return response
@@ -81,7 +81,7 @@ class TemplateSRAIXNode(TemplateNode):
             YLogger.warning(self, "'apikey' attrib not supported in sraix, moved to config, see documentation")
 
         if 'service' in expression.attrib:
-            self.service = expression.attrib['service']
+            self._service = expression.attrib['service']
 
         head_text = self.get_text_from_element(expression)
         self.parse_text(graph, head_text)
@@ -98,12 +98,12 @@ class TemplateSRAIXNode(TemplateNode):
             elif tag_name == 'apikey':
                 YLogger.warning(self, "'apikey' element not supported in sraix, moved to config, see documentation")
             elif tag_name == 'service':
-                self.service = self.get_text_from_element(child)
+                self._service = self.get_text_from_element(child)
             else:
                 graph.parse_tag_expression(child, self)
 
             tail_text = self.get_tail_from_element(child)
             self.parse_text(graph, tail_text)
 
-        if self.service is None:
+        if self._service is None:
             raise ParserException("SRAIX node, service attribute missing !")

@@ -143,8 +143,12 @@ class AIMLParser:
             YLogger.info(self, "Processed %s with %d categories in %f.2 secs", filename, num_categories,
                          diff.total_seconds())
 
+            return True
+
         except Exception as excep:
             YLogger.exception(self, "Failed to load contents of AIML file from [%s]", excep, filename)
+
+        return False
 
     def parse_from_text(self, text):
         """
@@ -153,11 +157,19 @@ class AIMLParser:
          :return list of categories parsed from file:
          """
 
+        start = datetime.datetime.now()
         aiml = ET.fromstring(text)
 
         _, namespace = AIMLParser.check_aiml_tag(aiml)
 
-        self.parse_aiml(aiml, namespace)
+        num_categories = self.parse_aiml(aiml, namespace)
+
+        stop = datetime.datetime.now()
+        diff = stop - start
+        YLogger.info(self, "Processed text with %d categories in %f.2 secs", num_categories,
+                     diff.total_seconds())
+
+        return bool(num_categories > 0)
 
     def create_debug_storage(self):
         if self.brain.configuration.debugfiles.save_errors is True:

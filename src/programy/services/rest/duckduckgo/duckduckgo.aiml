@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>DUCKDUCKGO HELP</pattern>
+        <template>
+            DUCKDUCKGO INSTANT *
+            DUCKDUCKGO SCRAPE *
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>DUCKDUCKGO INSTANT *</pattern>
+        <template>
+            <srai>
+                <sraix service="duckduckgo">
+                    INSTANT <star />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>DUCKDUCKGO SCRAPE *</pattern>
+        <template>
+            <srai>
+                <sraix service="duckduckgo">
+                    SCRAPE <star />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>DUCKDUCKGO RESULT *</pattern>
+        <template>
+            <star />
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>DUCKDUCKGO SERVICE ERROR</pattern>
+        <template>DuckDuckGo failed to return a response</template>
+    </category>
+
+ </aiml>

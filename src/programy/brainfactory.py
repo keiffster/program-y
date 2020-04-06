@@ -74,6 +74,9 @@ class BrainFactory:
         else:
             return None
 
+    def brains(self):
+        return self._brains.values()
+
     def loads_brains(self, bot):
         for config in bot.configuration.configurations:
             brain = Brain(bot, config)

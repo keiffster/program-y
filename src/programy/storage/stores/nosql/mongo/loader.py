@@ -41,6 +41,7 @@ from programy.storage.stores.nosql.mongo.store.processors import MongoPostProces
 from programy.storage.stores.nosql.mongo.store.processors import MongoPostQuestionProcessorStore
 from programy.storage.stores.nosql.mongo.store.triggers import MongoTriggerStore
 from programy.storage.stores.nosql.mongo.store.oobs import MongoOOBStore
+from programy.storage.stores.nosql.mongo.store.services import MongoServiceStore
 from programy.utils.console.console import outputLog
 
 
@@ -122,6 +123,8 @@ class Uploader:
             return MongoTriggerStore(engine)
         if storetype == 'oobs':
             return MongoOOBStore(engine)
+        if storetype == 'services':
+            return MongoServiceStore(engine)
 
         raise Exception("Unknone entity storetype [%s]" % storetype)
 

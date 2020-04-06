@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>OMDB HELP</pattern>
+        <template>
+            OMDB TITLE SEARCH *
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>OMDB TITLE SEARCH *</pattern>
+        <template>
+            <srai>
+                <sraix service="omdb">
+                    TITLE SEARCH <star />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>OMDB RESULT TITLE FILM * RELEASED * DIRECTOR * WRITER * ACTORS * PLOT *</pattern>
+        <template>
+            <star index="1" /> was released in <star index="2" /> and directed by <star index="3" /> and starring <star index="5" />.
+            <br />
+            <star index="6" />
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>OMDB SERVICE ERROR</pattern>
+        <template>OMDB failed to return a response</template>
+    </category>
+
+ </aiml>

@@ -43,16 +43,17 @@ class FileLicenseStore(FileStore, LicenseStore):
 
     def _process_license_key_line(self, license_collection, line):
         line = line.strip()
-        if line.startswith('#') is False:
-            splits = line.split("=")
-            if len(splits) > 1:
-                key_name = splits[0].strip()
-                # If key has = signs in it, then combine all elements past the first
-                key = "".join(splits[1:]).strip()
-                license_collection.add_key(key_name, key)
-                return True
+        if line:
+            if line.startswith('#') is False:
+                splits = line.split("=")
+                if len(splits) > 1:
+                    key_name = splits[0].strip()
+                    # If key has = signs in it, then combine all elements past the first
+                    key = "".join(splits[1:]).strip()
+                    license_collection.add_key(key_name, key)
+                    return True
 
-            else:
-                YLogger.warning(self, "Invalid license key [%s]", line)
+                else:
+                    YLogger.warning(self, "Invalid license key [%s]", line)
 
         return False

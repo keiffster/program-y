@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>GOOGLE GOECODE HELP</pattern>
+        <template>
+            GOOGLE LATLNG POSTCODE *<br />
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>GOOGLE LATLNG POSTCODE *</pattern>
+        <template>
+            <srai>
+                <sraix service="google.geocode">
+                    LATLNG POSTCODE <star index="1"/>
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>GOOGLE GEOCODE RESULT *</pattern>
+        <template>
+            <star />
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>GOOGLE GEOCODE SERVICE ERROR</pattern>
+        <template>Google GeoCode failed to return a response</template>
+    </category>
+
+ </aiml>

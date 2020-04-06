@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>WORLDTRADINGDATA HELP</pattern>
+        <template>
+            WORLDTRADINGDATA SYMBOLS *
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>WORLDTRADINGDATA SYMBOLS * </pattern>
+        <template>
+            <srai>
+                <sraix service="worldtradingdata">
+                    SYMBOLS <star />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>WORLDTRADINGDATA SYMBOLS RESULT NAME * SYMBOL * PRICE * CURRENCY *</pattern>
+        <template>
+            <star index="1" /> [<star index="2" />] is currently priced at <star index="3" /> <star index="4" />
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>WORLDTRADINGDATA SERVICE ERROR</pattern>
+        <template>
+            WorldTradingData failed to return a valid response.
+        </template>
+    </category>
+
+ </aiml>
+

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>MICROSOFT SEARCH HELP</pattern>
+        <template>
+            MICROSOFT SEARCH *
+        </template>
+    </category>
+
+     <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>MICROSOFT SEARCH *</pattern>
+        <template>
+            <srai>
+                <sraix service="microsoft.search">
+                    SEARCH <star />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>MICROSOFT SEARCH RESULT *</pattern>
+        <template>
+            <star />
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>MICROSOFT SEARCH SERVICE ERROR</pattern>
+        <template>Microsoft failed to return a response</template>
+    </category>
+
+ </aiml>

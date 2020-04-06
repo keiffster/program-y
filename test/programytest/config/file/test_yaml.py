@@ -111,31 +111,6 @@ brain:
 
         self.assertEqual(2, len(configuration.client_configuration.configurations[0].configurations))
 
-    def test_load_additionals(self):
-        yaml = YamlConfigurationFile()
-        self.assertIsNotNone(yaml)
-        configuration = yaml.load_from_text("""
-        console:
-            bots:                
-                bot:
-                    brains:    
-                        brain:
-                            services:
-                                authentication:
-                                    classname: programy.services.authenticate.passthrough.PassThroughAuthenticationService
-                                    denied_srai: ACCESS_DENIED
-
-            """, ConsoleConfiguration(), ".")
-
-        self.assertIsNotNone(configuration)
-
-        self.assertTrue(configuration.client_configuration.configurations[0].configurations[0].services.exists("authentication"))
-        auth_service = configuration.client_configuration.configurations[0].configurations[0].services.service("authentication")
-        self.assertIsNotNone(auth_service)
-
-        self.assertTrue(auth_service.exists("denied_srai"))
-        self.assertEqual("ACCESS_DENIED", auth_service.value("denied_srai"))
-
     def test_load_with_subs(self):
 
         subs = Substitutions()

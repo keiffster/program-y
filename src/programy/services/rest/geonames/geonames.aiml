@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>GEONAMES HELP</pattern>
+        <template>
+            GEONAMES LATLNG POSTCODE *
+            GEONAMES LATLNG PLACENAME *
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>GEONAMES LATLNG POSTCODE *</pattern>
+        <template>
+            <srai>
+                <sraix service="geonames">
+                    LATLNG POSTCODE <star />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>GEONAMES LATLNG PLACENAME *</pattern>
+        <template>
+            <srai>
+                <sraix service="geonames">
+                    LATLNG PLACENAME <star />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>GEONAMES RESULT *</pattern>
+        <template>
+            <star />
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>GEONAMES SERVICE ERROR</pattern>
+        <template>Geonames failed to return a response</template>
+    </category>
+
+ </aiml>

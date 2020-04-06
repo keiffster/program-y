@@ -73,6 +73,9 @@ class BotFactory():
     def botids(self):
         return list(self._bots.keys())
 
+    def bots(self):
+        return self._bots.values()
+
     def bot(self, botid):
         if botid in self._bots:
             return self._bots[botid]

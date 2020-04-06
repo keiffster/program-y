@@ -35,6 +35,9 @@ class LicenseKeys:
 
     def get_key(self, name):
         if name in self._keys:
-            return self._keys[name]
+            value = self._keys[name]
+            if value.startswith('"') or value.endswith('"'):
+                return value.replace('"', '')
+            return value
         else:
             raise ValueError("No license key named [%s]" % name)

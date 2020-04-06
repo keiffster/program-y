@@ -27,9 +27,16 @@ For more information see [url]
 	</category>
 
 	<category>
+		<pattern>YEMPTY</pattern>
+		<template>
+		    UDC YEMPTY Response
+		</template>
+	</category>
+
+	<category>
 		<pattern>* THIS</pattern>
 		<template>
-		    This Response
+		    UDC This Response
 		</template>
 	</category>
 

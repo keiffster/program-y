@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>>GOOGLE DIRECTIONS HELP</pattern>
+        <template>
+            GOOGLE DIRECTIONS ORIGIN * DESTINATION *
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>GOOGLE DIRECTIONS ORIGIN * DESTINATION *</pattern>
+        <template>
+            <srai>
+                <sraix service="google.directions">
+                    DIRECTIONS ORIGIN <star index="1"/> DESTINATION <star index="2"/>
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>GOOGLE DIRECTIONS RESULT *</pattern>
+        <template>
+            <star />
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>GOOGLE DIRECTIONS SERVICE ERROR</pattern>
+        <template>Google Directions failed to return a response</template>
+    </category>
+
+ </aiml>
