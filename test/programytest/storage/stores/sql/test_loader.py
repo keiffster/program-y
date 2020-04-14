@@ -34,7 +34,7 @@ class SQLUploaderTests(unittest.TestCase):
     def patch_get_args(arguments):
         args = MockArguments()
         args.entity = "categories"
-        args.url = "mysql+pymysql://root@localhost:3306/programy"
+        args.url = "mysql+pymysql://root:Password123@localhost:3306/programy"
         args.file = None
         args.dir = os.path.dirname(__file__) + os.sep + ".." + os.sep + ".." + os.sep + ".." + "/asserts/store/data/" + "categories"
         args.subdir = True
@@ -51,7 +51,7 @@ class SQLUploaderTests(unittest.TestCase):
     @staticmethod
     def patch_get_args2(arguments):
         args = MockArguments()
-        args.url = "mysql+pymysql://root@localhost:3306/programy"
+        args.url = "mysql+pymysql://root:Password123@localhost:3306/programy"
         args.drop = True
         return args
 
@@ -70,7 +70,7 @@ class SQLUploaderTests(unittest.TestCase):
     def test_upload_unknown(self):
         with self.assertRaises(Exception):
             Uploader.upload(storetype='other',
-                             url='mysql+pymysql://root@localhost:3306/programy',
+                             url='mysql+pymysql://root:Password123@localhost:3306/programy',
                              filename=None,
                              dirname=self.basepath + "categories",
                              subdir=True, extension=".aiml",
@@ -79,7 +79,7 @@ class SQLUploaderTests(unittest.TestCase):
     def test_upload_no_dir_or_file(self):
         with self.assertRaises(Exception):
             Uploader.upload(storetype='categories',
-                             url='mysql+pymysql://root@localhost:3306/programy',
+                             url='mysql+pymysql://root:Password123@localhost:3306/programy',
                              filename=None,
                              dirname=None,
                              subdir=True, extension=".aiml",
@@ -87,7 +87,7 @@ class SQLUploaderTests(unittest.TestCase):
 
     def test_upload_categories(self):
         count, success = Uploader.upload(storetype='categories',
-                                         url='mysql+pymysql://root@localhost:3306/programy',
+                                         url='mysql+pymysql://root:Password123@localhost:3306/programy',
                                          filename=None,
                                          dirname=self.basepath + "categories",
                                          subdir=True, extension=".aiml",
@@ -97,7 +97,7 @@ class SQLUploaderTests(unittest.TestCase):
 
     def test_upload_maps(self):
         count, success = Uploader.upload(storetype='maps',
-                                         url='mysql+pymysql://root@localhost:3306/programy',
+                                         url='mysql+pymysql://root:Password123@localhost:3306/programy',
                                          filename=None,
                                          dirname=self.basepath + "maps" + os.sep + "text",
                                          subdir=True, extension=".txt",
@@ -107,7 +107,7 @@ class SQLUploaderTests(unittest.TestCase):
 
     def test_upload_sets(self):
         count, success = Uploader.upload(storetype='sets',
-                                         url='mysql+pymysql://root@localhost:3306/programy',
+                                         url='mysql+pymysql://root:Password123@localhost:3306/programy',
                                          filename=None,
                                          dirname=self.basepath + "sets" + os.sep + "text",
                                          subdir=True, extension=".txt",
@@ -117,7 +117,7 @@ class SQLUploaderTests(unittest.TestCase):
 
     def test_upload_rdfs(self):
         count, success = Uploader.upload(storetype='rdfs',
-                                         url='mysql+pymysql://root@localhost:3306/programy',
+                                         url='mysql+pymysql://root:Password123@localhost:3306/programy',
                                          filename=None,
                                          dirname=self.basepath + "rdfs" + os.sep + "text",
                                          subdir=True, extension=".rdf",
@@ -127,7 +127,7 @@ class SQLUploaderTests(unittest.TestCase):
 
     def test_upload_denormals(self):
         count, success = Uploader.upload(storetype='denormals',
-                                         url='mysql+pymysql://root@localhost:3306/programy',
+                                         url='mysql+pymysql://root:Password123@localhost:3306/programy',
                                          filename=self.basepath + "lookups" + os.sep + "text" + os.sep + "denormal.txt",
                                          dirname=None,
                                          subdir=True, extension=".txt",
@@ -138,7 +138,7 @@ class SQLUploaderTests(unittest.TestCase):
 
     def test_upload_normals(self):
         count, success = Uploader.upload(storetype='normals',
-                                         url='mysql+pymysql://root@localhost:3306/programy',
+                                         url='mysql+pymysql://root:Password123@localhost:3306/programy',
                                          filename=self.basepath + "lookups" + os.sep + "text" + os.sep + "normal.txt",
                                          dirname=None,
                                          subdir=True, extension=".txt",
@@ -148,7 +148,7 @@ class SQLUploaderTests(unittest.TestCase):
 
     def test_upload_genders(self):
         count, success = Uploader.upload(storetype='genders',
-                                         url='mysql+pymysql://root@localhost:3306/programy',
+                                         url='mysql+pymysql://root:Password123@localhost:3306/programy',
                                          filename=self.basepath + "lookups" + os.sep + "text" + os.sep + "gender.txt",
                                          dirname=None,
                                          subdir=True, extension=".txt",
@@ -158,7 +158,7 @@ class SQLUploaderTests(unittest.TestCase):
 
     def test_upload_persons(self):
         count, success = Uploader.upload(storetype='persons',
-                                         url='mysql+pymysql://root@localhost:3306/programy',
+                                         url='mysql+pymysql://root:Password123@localhost:3306/programy',
                                          filename=self.basepath + "lookups" + os.sep + "text" + os.sep + "person.txt",
                                          dirname=None,
                                          subdir=True, extension=".txt",
@@ -168,7 +168,7 @@ class SQLUploaderTests(unittest.TestCase):
 
     def test_upload_person2s(self):
         count, success = Uploader.upload(storetype='person2s',
-                                         url='mysql+pymysql://root@localhost:3306/programy',
+                                         url='mysql+pymysql://root:Password123@localhost:3306/programy',
                                          filename=self.basepath + "lookups" + os.sep + "text" + os.sep + "person2.txt",
                                          dirname=None,
                                          subdir=True, extension=".txt",
@@ -178,7 +178,7 @@ class SQLUploaderTests(unittest.TestCase):
 
     def test_upload_properties(self):
         count, success = Uploader.upload(storetype='properties',
-                                         url='mysql+pymysql://root@localhost:3306/programy',
+                                         url='mysql+pymysql://root:Password123@localhost:3306/programy',
                                          filename=self.basepath + "lookups" + os.sep + "text" + os.sep + "properties.txt",
                                          dirname=None,
                                          subdir=True, extension=".txt",
@@ -188,7 +188,7 @@ class SQLUploaderTests(unittest.TestCase):
 
     def test_upload_defaults(self):
         count, success = Uploader.upload(storetype='defaults',
-                                         url='mysql+pymysql://root@localhost:3306/programy',
+                                         url='mysql+pymysql://root:Password123@localhost:3306/programy',
                                          filename=self.basepath + "lookups" + os.sep + "text" + os.sep + "defaults.txt",
                                          dirname=None,
                                          subdir=True, extension=".txt",
@@ -198,7 +198,7 @@ class SQLUploaderTests(unittest.TestCase):
 
     def test_upload_regexes(self):
         count, success = Uploader.upload(storetype='regexes',
-                                         url='mysql+pymysql://root@localhost:3306/programy',
+                                         url='mysql+pymysql://root:Password123@localhost:3306/programy',
                                          filename=self.basepath + "lookups" + os.sep + "text" + os.sep + "regex-templates.txt",
                                          dirname=None,
                                          subdir=True, extension=".txt",
@@ -208,7 +208,7 @@ class SQLUploaderTests(unittest.TestCase):
 
     def test_upload_patternnodes(self):
         count, success = Uploader.upload(storetype='patternnodes',
-                                         url='mysql+pymysql://root@localhost:3306/programy',
+                                         url='mysql+pymysql://root:Password123@localhost:3306/programy',
                                          filename=self.basepath + "lookups" + os.sep + "text" + os.sep + "pattern_nodes.conf",
                                          dirname=None,
                                          subdir=True, extension=".conf",
@@ -218,7 +218,7 @@ class SQLUploaderTests(unittest.TestCase):
 
     def test_upload_templatenodes(self):
         count, success = Uploader.upload(storetype='templatenodes',
-                                         url='mysql+pymysql://root@localhost:3306/programy',
+                                         url='mysql+pymysql://root:Password123@localhost:3306/programy',
                                          filename=self.basepath + "lookups" + os.sep + "text" + os.sep + "template_nodes.conf",
                                          dirname=None,
                                          subdir=True, extension=".conf",
@@ -228,7 +228,7 @@ class SQLUploaderTests(unittest.TestCase):
 
     def test_upload_preprocessors(self):
         count, success = Uploader.upload(storetype='preprocessors',
-                                         url='mysql+pymysql://root@localhost:3306/programy',
+                                         url='mysql+pymysql://root:Password123@localhost:3306/programy',
                                          filename=self.basepath + "lookups" + os.sep + "text" + os.sep + "preprocessors.conf",
                                          dirname=None,
                                          subdir=True, extension=".conf",
@@ -238,7 +238,7 @@ class SQLUploaderTests(unittest.TestCase):
 
     def test_upload_postprocessors(self):
         count, success = Uploader.upload(storetype='postprocessors',
-                                         url='mysql+pymysql://root@localhost:3306/programy',
+                                         url='mysql+pymysql://root:Password123@localhost:3306/programy',
                                          filename=self.basepath + "lookups" + os.sep + "text" + os.sep + "postprocessors.conf",
                                          dirname=None,
                                          subdir=True, extension=".conf")
@@ -247,7 +247,7 @@ class SQLUploaderTests(unittest.TestCase):
 
     def test_upload_postquestionprocessors(self):
         count, success = Uploader.upload(storetype='postquestionprocessors',
-                                         url='mysql+pymysql://root@localhost:3306/programy',
+                                         url='mysql+pymysql://root:Password123@localhost:3306/programy',
                                          filename=self.basepath + "lookups" + os.sep + "text" + os.sep + "postquestionprocessors.conf",
                                          dirname=None,
                                          subdir=True, extension=".conf",
@@ -257,7 +257,7 @@ class SQLUploaderTests(unittest.TestCase):
 
     def test_upload_spelling(self):
         count, success = Uploader.upload(storetype='spelling',
-                                         url='mysql+pymysql://root@localhost:3306/programy',
+                                         url='mysql+pymysql://root:Password123@localhost:3306/programy',
                                          filename=self.basepath + "spelling" + os.sep + "corpus.txt",
                                          dirname=None,
                                          subdir=True, extension=".txt",
@@ -267,7 +267,7 @@ class SQLUploaderTests(unittest.TestCase):
 
     def test_upload_licenses(self):
         count, success = Uploader.upload(storetype='licenses',
-                                         url='mysql+pymysql://root@localhost:3306/programy',
+                                         url='mysql+pymysql://root:Password123@localhost:3306/programy',
                                          filename=self.basepath + "licenses" + os.sep + "test_license.keys",
                                          dirname=None,
                                          subdir=True, extension=".txt",
@@ -277,7 +277,7 @@ class SQLUploaderTests(unittest.TestCase):
 
     def test_upload_usergroups(self):
         count, success = Uploader.upload(storetype='usergroups',
-                                         url='mysql+pymysql://root@localhost:3306/programy',
+                                         url='mysql+pymysql://root:Password123@localhost:3306/programy',
                                          filename=self.basepath + "security" + os.sep + "roles.yaml",
                                          dirname=None,
                                          subdir=True, extension=".txt",
@@ -287,7 +287,7 @@ class SQLUploaderTests(unittest.TestCase):
 
     def test_upload_triggers(self):
         count, success = Uploader.upload(storetype='triggers',
-                                         url='mysql+pymysql://root@localhost:3306/programy',
+                                         url='mysql+pymysql://root:Password123@localhost:3306/programy',
                                          filename=self.basepath + "triggers" + os.sep + "triggers.txt",
                                          dirname=None,
                                          subdir=True, extension=".txt",
@@ -297,7 +297,7 @@ class SQLUploaderTests(unittest.TestCase):
 
     def test_upload_oobs(self):
         count, success = Uploader.upload(storetype='oobs',
-                                         url='mysql+pymysql://root@localhost:3306/programy',
+                                         url='mysql+pymysql://root:Password123@localhost:3306/programy',
                                          filename=self.basepath + "oobs" + os.sep + "callmom.conf",
                                          dirname=None,
                                          subdir=True, extension=".conf",

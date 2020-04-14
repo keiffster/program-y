@@ -12,6 +12,7 @@ class MongoAccountLinkerServiceTests(AccountLinkerAsserts):
 
     def setUp(self):
         config = MongoStorageConfiguration()
+        config.drop_all_first = True
         self.storage_engine = MongoStorageEngine(config)
         self.storage_engine.initialise()
 

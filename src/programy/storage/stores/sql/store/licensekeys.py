@@ -78,7 +78,7 @@ class SQLLicenseKeysStore(SQLStore, LicenseStore):
     def _process_license_key_line(self, line, verbose=False):
         line = line.strip()
         result = False
-        if line.startswith('#') is False:
+        if line and line.startswith('#') is False:
             splits = line.split("=")
             if len(splits) > 1:
                 key_name = splits[0].strip()

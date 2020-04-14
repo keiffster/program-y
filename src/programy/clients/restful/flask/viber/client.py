@@ -28,6 +28,10 @@ from programy.clients.restful.flask.client import FlaskRestBotClient
 from programy.clients.restful.flask.viber.config import ViberConfiguration
 from programy.utils.console.console import outputLog
 
+import time
+import logging
+import sched
+import threading
 
 VIBER_CLIENT = None
 
@@ -43,6 +47,9 @@ class ViberBotClient(FlaskRestBotClient):
 
         YLogger.debug(self, "Viber Client is running....")
 
+        self.create_bot()
+
+    def create_bot(self):
         if self._viber_token is not None:
             self._viber_bot = self.create_viber_bot(self._viber_token)
 
@@ -89,7 +96,6 @@ class ViberBotClient(FlaskRestBotClient):
         if bot is not None:
             YLogger.error(self, "'Failed to create Viber api")
 
-        bot.set_webhook(webhook)
         return bot
 
     def handle_message_request(self, viber_request):
@@ -122,7 +128,7 @@ class ViberBotClient(FlaskRestBotClient):
         pass    # pragma: no cover
 
     def handle_unknown_request(self, viber_request):
-        YLogger.error(self, "client failed receiving message. failure: {0}".format(viber_request))
+        YLogger.error(self, "Client failed receiving message. failure: {0}".format(viber_request))
 
     def receive_message(self, request):
 
@@ -160,20 +166,36 @@ class ViberBotClient(FlaskRestBotClient):
         return Response(status=200)
 
 
+def set_webhook(viber):
+    print("Setting webhook", VIBER_CLIENT.configuration.client_configuration.webhook)
+    viber._viber_bot.set_webhook(VIBER_CLIENT.configuration.client_configuration.webhook)
+
+
+def scheduler_set_webhook(seconds, priority, viber):
+    scheduler = sched.scheduler(time.time, time.sleep)
+    scheduler.enter(seconds, priority, set_webhook, (viber,))
+    t = threading.Thread(target=scheduler.run)
+    t.start()
+
+
 if __name__ == "__main__":
 
     outputLog(None, "Initiating Viber Client...")
 
-    VIBER_CLIENT = ViberBotClient()
-
     APP = Flask(__name__)
+
+    VIBER_CLIENT = ViberBotClient()
 
     @APP.route(VIBER_CLIENT.configuration.client_configuration.api, methods=['POST'])
     def receive_message():
         try:
-            return VIBER_CLIENT.receive_message(request)
+            print("viber calling")
+            if VIBER_CLIENT is not None:
+                return VIBER_CLIENT.receive_message(request)
 
         except Exception as e:
             YLogger.exception(None, "Viber error", e)
+
+    scheduler_set_webhook(5, 1, VIBER_CLIENT)
 
     VIBER_CLIENT.run(APP)

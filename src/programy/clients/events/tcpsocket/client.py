@@ -126,7 +126,7 @@ class SocketBotClient(EventBotClient):
         if 'question' in receive_payload:
             question = receive_payload['question']
         if question is None or question == "":
-            raise Exception("Clientid missing from payload")
+            raise Exception("question missing from payload")
         return question
 
     def extract_userid(self, receive_payload):
@@ -134,7 +134,7 @@ class SocketBotClient(EventBotClient):
         if 'userid' in receive_payload:
             userid = receive_payload['userid']
         if userid is None or userid == "":
-            raise Exception("Clientid missing from payload")
+            raise Exception("userid missing from payload")
         return userid
 
     def create_socket_connection(self, host, port, queue, max_buffer):

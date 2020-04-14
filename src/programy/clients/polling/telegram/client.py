@@ -73,7 +73,8 @@ class TelegramBotClient(PollingBotClient):
         client_context = self.create_client_context(update.message.chat_id)
         initial_question = client_context.bot.get_initial_question(client_context)
         processed_question = client_context.bot.post_process_response(client_context,
-                                                                      initial_question)
+                                                                      initial_question,
+                                                                      srai=False)
         return processed_question
 
     def ask_question(self, userid, question):

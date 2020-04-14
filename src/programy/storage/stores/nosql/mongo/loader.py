@@ -52,6 +52,7 @@ class Uploader:
         config = MongoStorageConfiguration()
         config.url = url
         config.database = database
+        config.drop_all_first = False
         engine = MongoStorageEngine(config)
         engine.initialise()
         store = Uploader._get_store(storetype, engine)
@@ -64,6 +65,7 @@ class Uploader:
             count, success = store.upload_from_file(filename, fileformat=Store.TEXT_FORMAT, commit=True, verbose=verbose)
             outputLog(None, "Lines processed: %d" % count)
             outputLog(None, "Entities successful: %d" % success)
+
         elif dirname is not None:
             count, success = store.upload_from_directory(directory=dirname,
                                                          subdir=subdir,
@@ -72,6 +74,7 @@ class Uploader:
                                                          verbose=verbose)
             outputLog(None, "Lines processed: %d" % count)
             outputLog(None, "Entities successful: %d" % success)
+
         else:
             raise Exception("You must specify either --file or --dir")
 
@@ -140,7 +143,6 @@ class Uploader:
         loader_args.add_argument('-x', '--extension', help="Extension of file to load (dir only)")
         loader_args.add_argument('-s', '--subdir', action='store_true', help="Recurse into all subdirectories")
         loader_args.add_argument('-v', '--verbose', action='store_true', help="Verbose output of loading process")
-        loader_args.add_argument('-z', '--verboseX', action='store_true', help="Verbose output of loading process")
 
         return loader_args
 

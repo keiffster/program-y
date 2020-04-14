@@ -27,7 +27,7 @@ class MongoStorageConfiguration(BaseConfigurationData):
 
         self._url = 'mongodb://localhost:27017/'
         self._database = "programy"
-        self._drop_all_first = True
+        self._drop_all_first = False
 
     @property
     def url(self):

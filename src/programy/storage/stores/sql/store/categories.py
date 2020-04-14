@@ -46,19 +46,29 @@ class SQLCategoryStore(CategoryReadWriteStore, SQLStore):
     def load_all(self, collector):
         categories = self._storage_engine.session.query(Category)
         for category in categories:
+            if category.template is None:
+                template = ""
+            else:
+                template = category.template
+
             self._load_category(category.groupid,
                                 category.pattern.strip(),
                                 category.topic.strip(),
                                 category.that.strip(),
-                                category.template.strip(),
+                                template.strip(),
                                 collector)
 
     def load_categories(self, groupid, parser):
         categories = self._storage_engine.session.query(Category).filter(Category.groupid == groupid)
         for category in categories:
+            if category.template is None:
+                template = ""
+            else:
+                template = category.template
+
             self._load_category(category.groupid,
                                 category.pattern.strip(),
                                 category.topic.strip(),
                                 category.that.strip(),
-                                category.template.strip(),
+                                template.strip(),
                                 parser)

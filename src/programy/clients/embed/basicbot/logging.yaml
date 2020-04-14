@@ -8,16 +8,16 @@ formatters:
     format: '%(asctime)s  %(name)-10s %(levelname)-7s - %(message)s'
 
 handlers:
-    file:
-        class: logging.handlers.RotatingFileHandler
-        formatter: simple
-        filename: /tmp/y-bot.log
-        maxBytes: 20972152
-        backupCount: 10
-        encoding: utf-8
+  file:
+    class: logging.handlers.RotatingFileHandler
+    formatter: simple
+    filename: /tmp/y-bot.log
+    maxBytes: 20972152
+    backupCount: 10
+    encoding: utf-8
 
 root:
-    level: ERROR
-    handlers:
-        - file
+  level: ERROR
+  handlers:
+    - file
 

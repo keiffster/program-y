@@ -23,11 +23,15 @@ class TwitterConfiguration(ClientConfigurationData):
     def __init__(self):
         ClientConfigurationData.__init__(self, "twitter")
         self._description = 'ProgramY AIML2.0 Twitter Client'
-        self._polling_interval = 0
-        self._rate_limit_sleep = -1
-        self._use_status = False
-        self._use_direct_message = False
-        self._auto_follow = False
+        self._polling_interval = 60
+        self._rate_limit_sleep = 900
+
+        self._follow_followers = True
+        self._respond_to_mentions = True
+        self._respond_to_directs = False
+
+        self._mentions = ['#askprogramy']
+
         self._welcome_message = "Thanks for following me."
 
     @property
@@ -39,16 +43,20 @@ class TwitterConfiguration(ClientConfigurationData):
         return self._rate_limit_sleep
 
     @property
-    def use_status(self):
-        return self._use_status
+    def follow_followers(self):
+        return self._follow_followers
 
     @property
-    def use_direct_message(self):
-        return self._use_direct_message
+    def respond_to_mentions(self):
+        return self._respond_to_mentions
 
     @property
-    def auto_follow(self):
-        return self._auto_follow
+    def respond_to_directs(self):
+        return self._respond_to_directs
+
+    @property
+    def mentions(self):
+        return self._mentions
 
     @property
     def welcome_message(self):
@@ -57,34 +65,51 @@ class TwitterConfiguration(ClientConfigurationData):
     def load_configuration_section(self, configuration_file, section, bot_root, subs: Substitutions = None):
         assert section is not None
 
-        self._polling_interval = configuration_file.get_int_option(section, "polling_interval", subs=subs)
-        self._rate_limit_sleep = configuration_file.get_int_option(section, "rate_limit_sleep", missing_value=-1,
+        self._polling_interval = configuration_file.get_int_option(section, "polling_interval", missing_value=60,
                                                                    subs=subs)
-        self._use_status = configuration_file.get_bool_option(section, "use_status", subs=subs)
-        self._use_direct_message = configuration_file.get_bool_option(section, "use_direct_message", subs=subs)
-        if self._use_direct_message is True:
-            self._auto_follow = configuration_file.get_bool_option(section, "auto_follow", subs=subs)
+        self._rate_limit_sleep = configuration_file.get_int_option(section, "rate_limit_sleep", missing_value=900,
+                                                                   subs=subs)
+
+        self._follow_followers = configuration_file.get_bool_option(section, "follow_followers", missing_value=False,
+                                                                   subs=subs)
+        self._respond_to_mentions = configuration_file.get_bool_option(section, "respond_to_mentions", missing_value=False,
+                                                                   subs=subs)
+        self._respond_to_directs = configuration_file.get_bool_option(section, "respond_to_directs", missing_value=True,
+                                                                   subs=subs)
+
+        self._mentions = configuration_file.get_multi_option(section, "mentions", missing_value="", subs=subs)
 
         self._welcome_message = configuration_file.get_option(section, "welcome_message", subs=subs)
+
         super(TwitterConfiguration, self).load_configuration_section(configuration_file, section, bot_root,
                                                                      subs=subs)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:
-            data['polling_interval'] = 0
-            data['rate_limit_sleep'] = -1
-            data['use_status'] = False
-            data['use_direct_message'] = False
-            data['auto_follow'] = False
+            data['polling_interval'] = 60
+            data['rate_limit_sleep'] = 900
+
+            data['follow_followers'] = True
+            data['respond_to_mentions'] = True
+            data['respond_to_directs'] = False
+
+            data['mentions'] = ["#askprogramy"]
+
+            data['welcome_message'] = "Thanks for following me."
+
             data['storage'] = 'file'
             data['storage_location'] = './storage/twitter.data'
-            data['welcome_message'] = "Thanks for following me."
+
         else:
             data['polling_interval'] = self._polling_interval
             data['rate_limit_sleep'] = self._rate_limit_sleep
-            data['use_status'] = self._use_status
-            data['use_direct_message'] = self._use_direct_message
-            data['auto_follow'] = self._auto_follow
+
+            data['follow_followers'] = self._follow_followers
+            data['respond_to_mentions'] = self._respond_to_mentions
+            data['respond_to_directs'] = self._respond_to_directs
+
+            data['mentions'] = self._mentions[:]
+
             data['welcome_message'] = self._welcome_message
 
         super(TwitterConfiguration, self).to_yaml(data, defaults)

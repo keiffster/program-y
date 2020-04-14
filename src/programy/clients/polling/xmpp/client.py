@@ -67,7 +67,9 @@ class XmppBotClient(PollingBotClient):
 
         running = True
         try:
+            print("starting to process")
             self._xmpp_client.process(block=True)
+            print("Finished processing")
             outputLog(self, "XMPP client exiting cleanly....")
             running = False
 

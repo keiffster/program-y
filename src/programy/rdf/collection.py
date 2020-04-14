@@ -57,12 +57,28 @@ class RDFCollection(BaseCollection):
     def entities_to_stores(self):
         return self._entities_to_stores
 
-    def empty(self):
+    def empty(self, rdf_name=None):
+        if rdf_name is None:
+            self._remove_all()
+        else:
+           self._remove_entities_by_rdf_name(rdf_name)
+
+    def _remove_all(self):
         YLogger.debug(self, "Emptying RDF Collection")
         self._entities.clear()
         self._stores.clear()
         self._entities_to_ids.clear()
         self._entities_to_stores.clear()
+
+    def _remove_entities_by_rdf_name(self, rdf_name):
+        YLogger.debug(self, "Removing entities for [%s]", rdf_name)
+        if rdf_name in self._entities_to_stores.values():
+            for subject, name in self._entities_to_stores.items():
+                if name == rdf_name:
+                    self.delete_entity(subject)
+
+        if rdf_name in self._stores:
+            del self._stores[rdf_name]
 
     def contains(self, rdfname):
         return bool(rdfname.upper() in self._stores)

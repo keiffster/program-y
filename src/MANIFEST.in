@@ -1,1 +1,1 @@
-global-include *.py *.aiml *.conf *.txt *.rst *.md *.js *.css *.html
+global-include *.py *.aiml *.conf *.txt *.rst *.md *.js *.css *.html *.yaml
