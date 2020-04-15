@@ -19,10 +19,9 @@ class ServiceTests(unittest.TestCase):
                           'default_srai': None,
                           'success_prefix': None,
                           'name': 'test',
-                          'rest_api': None,
-                          'rest_apikey': None,
                           'rest_retries': None,
                           'rest_timeout': None,
+                          'url': None,
                           'service_class': 'test.serviceclass',
                           'type': None}, service.to_document())
 
@@ -43,10 +42,9 @@ class ServiceTests(unittest.TestCase):
                           'default_srai': None,
                           'success_prefix': None,
                           'name': 'test',
-                          'rest_api': None,
-                          'rest_apikey': None,
                           'rest_retries': None,
                           'rest_timeout': None,
+                          'url': None,
                           'service_class': 'test.serviceclass',
                           'type': None}, service.to_document())
 
@@ -67,9 +65,9 @@ class ServiceTests(unittest.TestCase):
 
     def test_from_document_no_id(self):
         service1 = Service.from_document({'name': 'test', 'service_class': 'test.serviceclass'})
-        self.assertEquals("<Service(id='n/a', type='None', name='test', category='None', service_class='None'default_response='None', default_srai='None', default_aiml='None', load_default_aiml='True', success_prefix='None')>", str(service1))
+        self.assertEquals("<Service(id='n/a', type='None', name='test', category='None', service_class='None'default_response='None', default_srai='None', default_aiml='None', load_default_aiml='True', success_prefix='None', url='None')>", str(service1))
 
     def test_from_document_with_id(self):
         service2 = Service.from_document({'_id': '666', 'name': 'test', 'service_class': 'test.serviceclass'})
-        self.assertEquals("<Service(id='666', type='None', name='test', category='None', service_class='None'default_response='None', default_srai='None', default_aiml='None', load_default_aiml='True', success_prefix='None')>", str(service2))
+        self.assertEquals("<Service(id='666', type='None', name='test', category='None', service_class='None'default_response='None', default_srai='None', default_aiml='None', load_default_aiml='True', success_prefix='None', url='None')>", str(service2))
 

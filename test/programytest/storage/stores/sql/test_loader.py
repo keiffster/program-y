@@ -307,7 +307,7 @@ class SQLUploaderTests(unittest.TestCase):
 
     def test_upload_services(self):
         count, success = Uploader.upload(storetype='services',
-                                         url='mysql+pymysql://root@localhost:3306/programy',
+                                         url='mysql+pymysql://root:Password123@localhost:3306/programy',
                                          filename=None,
                                          dirname=self.basepath + "services",
                                          subdir=True, extension=".yaml",

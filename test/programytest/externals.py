@@ -12,12 +12,12 @@ admin_tool = True
 admin_tool_disabled = "Admin tool download from github disabled"
 
 integration_tests_disabled = "Integration tests disabled"
-integration_tests = False
+integration_tests = True
 
-allow_license_keys_disabled = "License keys disbaled"
+allow_license_keys_disabled = "License keys disabled"
 allow_license_keys = True
 
-all_externals = False
+all_externals = True
 
 
 def google_translate_active():

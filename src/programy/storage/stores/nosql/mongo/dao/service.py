@@ -21,7 +21,7 @@ class Service:
 
     def __init__(self, type=None, name=None, category=None, service_class=None,
                  default_response=None, default_srai=None, default_aiml=None, load_default_aiml=True,
-                 success_prefix=None,
+                 success_prefix=None, url=None,
                  rest_timeout=None, rest_retries=None):
         self.id = None
         self.type = type
@@ -72,7 +72,7 @@ class Service:
             return "<Service(id='%s', type='%s', name='%s', category='%s', service_class='%s'" \
                    "default_response='%s', default_srai='%s', default_aiml='%s', load_default_aiml='%s', " \
                    "success_prefix='%s', " \
-                   "url='%s', " \
+                   "url='%s'" \
                    ")>" % (
                 DAOUtils.valid_id(self.id), self.type, self.name, self.category, self.service_class,
                     self.default_response, self.default_srai, self.default_aiml, self.load_default_aiml,

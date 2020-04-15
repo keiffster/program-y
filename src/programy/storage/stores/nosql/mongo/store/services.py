@@ -61,8 +61,7 @@ class MongoServiceStore(MongoStore, ServicesStore):
 
         return Service(type=type, name=name, category=category, service_class=service_class,
                  default_response=default_response, default_srai=default_srai, default_aiml=default_aiml,
-                 rest_timeout=rest_timeout, rest_retries=rest_retries,
-                 rest_api=rest_api, rest_apikey=rest_apikey)
+                 rest_timeout=rest_timeout, rest_retries=rest_retries)
 
     def load(self, collector, name=None):
         YLogger.info(self, "Loading %s services from Mongo", self.collection_name())
