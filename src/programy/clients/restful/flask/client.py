@@ -18,6 +18,7 @@ from flask import Flask, jsonify, request, make_response, abort, Response
 
 from programy.clients.restful.client import RestBotClient
 from programy.utils.console.console import outputLog
+import json
 
 
 class FlaskRestBotClient(RestBotClient):
@@ -35,20 +36,22 @@ class FlaskRestBotClient(RestBotClient):
     def make_response_v1(self, data, status_code):
         return make_response(jsonify(data, status_code))
 
-    def make_response_v2(self, data, status_code):
+    def make_response_v2(self, data, status_code, callback=None):
+        if callback:
+            return make_response(f"{callback}("+json.dumps(data)+")", status_code)
         return make_response(jsonify(data), status_code)
 
     def make_response_other(self, data, status_code):
         return make_response(data, status_code)
 
-    def create_response(self, response_data, status_code, version=1.0):
+    def create_response(self, response_data, status_code, version=1.0, callback=None):
         if self.configuration.client_configuration.debug is True:
             self.dump_request(response_data)
 
         if version == 1.0:
             return self.make_response_v1(response_data, status_code)
         elif version == 2.0:
-            return self.make_response_v2(response_data, status_code)
+            return self.make_response_v2(response_data, status_code, callback)
 
         return self.make_response_other('Invalid API version', 400)
 
@@ -97,7 +100,7 @@ if __name__ == '__main__':
     @APP.route('/api/rest/v2.0/ask', methods=['GET', 'POST'])
     def ask_v2_0():
         response_data, status = REST_CLIENT.process_request(request, version=2.0)
-        return REST_CLIENT.create_response(response_data, status, version=2.0)
+        return REST_CLIENT.create_response(response_data, status, version=2.0, callback=request.args.get('callback'))
 
 
     outputLog(None, "Loading, please wait...")
