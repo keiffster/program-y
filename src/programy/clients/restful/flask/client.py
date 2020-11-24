@@ -18,7 +18,6 @@ from flask import Flask, jsonify, request, make_response, abort, Response
 
 from programy.clients.restful.client import RestBotClient
 from programy.utils.console.console import outputLog
-import json
 
 
 class FlaskRestBotClient(RestBotClient):
