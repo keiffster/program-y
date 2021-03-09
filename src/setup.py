@@ -59,7 +59,7 @@ setup(
       'python-dateutil==2.8.1',
       'wget==3.2',
       'beautifulsoup4==4.8',
-      'lxml==4.4.2',
+      'lxml==4.6.2',
       'PyYAML==5.3b1',
       'requests==2.22.0',
       'Flask==1.1.1',
