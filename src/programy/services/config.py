@@ -37,8 +37,13 @@ class ServiceConfiguration:
 
         if service_type == 'rest':
             config = ServiceRESTConfiguration()
+
+        elif service_type == 'wsdl':
+            config = ServiceWSDLConfiguration()
+
         elif service_type == 'library':
             config = ServiceLibraryConfiguration()
+
         else:
             config = ServiceConfiguration(service_type=service_type)
 
@@ -117,8 +122,11 @@ class ServiceConfiguration:
             if service_type == 'rest':
                 config = ServiceRESTConfiguration()
 
+            elif service_type == 'wsdl':
+                config = ServiceWSDLConfiguration()
+
             elif service_type == 'library':
-                config = ServiceLibraryConfiguration()
+                config = ServiceWSDLConfiguration()
 
             else:
                 raise ValueError("Unknown service type [%s]"%service_type)
@@ -266,3 +274,30 @@ class ServiceRESTConfiguration(ServiceConfiguration):
             self._timeout = rest_data.get('timeout', None)
             if self._timeout is None:
                 self._timeout = ServiceRESTConfiguration.DEFAULT_TIMEOUT
+
+
+class ServiceWSDLConfiguration(ServiceConfiguration):
+
+    def __init__(self):
+        ServiceConfiguration.__init__(self, service_type='wsdl')
+        self._wsdl_file = None
+        self._station_codes_file = None
+
+    @property
+    def wsdl_file(self):
+        return self._wsdl_file
+
+    @property
+    def station_codes_file(self):
+        return self._station_codes_file
+
+    def from_yaml(self, service_data, filename):
+
+        super(ServiceWSDLConfiguration, self).from_yaml(service_data, filename)
+
+        self._station_codes_file = service_data.get("station_codes_file", None)
+
+        wsdl_data = service_data.get("wsdl", None)
+        if wsdl_data is not None:
+            self._wsdl_file = wsdl_data.get('wsdl_file', None)
+

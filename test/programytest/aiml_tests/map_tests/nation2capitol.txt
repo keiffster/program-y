@@ -1,0 +1,5 @@
+Uganda:Kampala
+Ukraine:Kiev
+United Arab Emirates:Abu Dhabi
+United Kingdom:London
+United States:Washington, D.C.

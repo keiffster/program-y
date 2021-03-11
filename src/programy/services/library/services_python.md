@@ -1,3 +1,0 @@
-
-* Met Office
-* Wikipedia

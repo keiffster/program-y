@@ -4,7 +4,6 @@ from unittest.mock import Mock
 import os
 from programy.services.rest.omdb.service import OMDBService
 from programy.services.config import ServiceConfiguration
-from programy.services.config import ServiceRESTConfiguration
 from programytest.services.testclient import ServiceTestClient
 from programytest.services.testcase import ServiceTestCase
 from programytest.externals import integration_tests_active, integration_tests_disabled
@@ -52,7 +51,7 @@ class OMDBServiceTests(ServiceTestCase):
         self._do_title_search()
 
     @patch("programy.services.rest.base.RESTService._requests_get", patch_requests_title_search_success)
-    def test_handler_load(self):
+    def test_handler_title_search(self):
         client = OMDBServiceTestClient()
         conf_file = OMDBService.get_default_conf_file()
 

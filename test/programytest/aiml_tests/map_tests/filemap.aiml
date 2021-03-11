@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <category>
+        <pattern>I AM FROM THE *</pattern>
+        <template>
+			Cool, have you been to the capital city <map name="nation2capitol"><star /></map>
+        </template>
+    </category>
+</aiml>
+

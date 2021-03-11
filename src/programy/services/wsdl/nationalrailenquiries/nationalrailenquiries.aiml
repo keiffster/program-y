@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+
+    <!-- ######################################################################################################## -->
+
+    <category>
+        <pattern>
+            NRE STATION CODE *
+        </pattern>
+        <template>
+            <sraix service="nationalrailenquiries">
+                STATION CODE <star index="1" />
+            </sraix>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            NRE STATION NAME *
+        </pattern>
+        <template>
+            <sraix service="nationalrailenquiries">
+                STATION NAME <star index="1" />
+            </sraix>
+        </template>
+    </category>
+
+    <!-- ######################################################################################################## -->
+
+    <category>
+        <pattern>NRE OPERATOR COMMENT *</pattern>
+        <template>
+            <think><set name="operator"><star /></set></think>
+            <condition>
+                <li value="SCOTRAIL">
+                    <random>
+                        <li>You will probably have to stand all the way!</li>
+                        <li>Lets hope they don't skip a station!</li>
+                        <li>Good luck!</li>
+                        <li>Hope you make it!</li>
+                        <li>That is if it is not cancelled</li>
+                        <li>Hope it is not delayed</li>
+                        <li></li>
+                    </random>
+                </li>
+            </condition>
+        </template>
+    </category>
+
+    <!-- ######################################################################################################## -->
+
+    <category>
+        <pattern>
+            NRE NEXT TRAIN FROM * PLATFORM *
+        </pattern>
+        <template>
+            <srai>
+                NRE SHOW NEXT TRAIN FROM <star index="1" /> PLATFORM <star index="2" />
+                <sraix service="nationalrailenquiries">
+                    NEXT TRAIN FROM <star index="1" /> PLATFORM <star index="2" />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+
+    <!-- ######################################################################################################## -->
+
+    <category>
+        <pattern>
+            NRE NEXT TRAIN FROM * TO * PLATFORM *
+        </pattern>
+        <template>
+            <srai>
+                NRE SHOW NEXT TRAIN FROM <star index="1" /> PLATFORM <star index="2" />
+                <sraix service="nationalrailenquiries">
+                    NEXT TRAIN FROM <star index="1" /> PLATFORM <star index="3" /> TO <star index="2" />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <!-- ######################################################################################################## -->
+
+    <category>
+        <pattern>NRE SHOW NEXT TRAIN FROM * PLATFORM * NRE RESULT OPERATOR * STD * ETA * ORIGIN * DESTINATION *</pattern>
+        <template>
+            The next train from <star index="1" /> to <star index="7" /> is due at <star index="4" />
+        </template>
+    </category>
+</aiml>

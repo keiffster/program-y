@@ -54,20 +54,35 @@ class PostProcessingTests(unittest.TestCase):
 
     @unittest.skipIf(Externals.google_translate is False or Externals.all_externals is False, Externals.google_translate_disabled)
     def test_post_cleanup(self):
-
         result = self.post_process("Hello World")
         self.assertIsNotNone(result)
         self.assertEqual("Bonjour le monde", result)
 
+    @unittest.skipIf(Externals.google_translate is False or Externals.all_externals is False,
+                     Externals.google_translate_disabled)
+    def test_post_cleanup_punctuation(self):
         result = self.post_process("Hello World . This is It! ")
         self.assertIsNotNone(result)
         self.assertEqual("Bonjour le monde. Ça y est!", result)
 
+    @unittest.skipIf(Externals.google_translate is False or Externals.all_externals is False,
+                     Externals.google_translate_disabled)
+    def test_post_cleanup_denorm(self):
         result = self.post_process("My email address is ybot atsign programy dot com")
         self.assertIsNotNone(result)
         self.assertEqual("Mon adresse e-mail est ybot@programy.com", result)
 
-        result = self.post_process("He said ' Hello World '.")
+    @unittest.skipIf(Externals.google_translate is False or Externals.all_externals is False,
+                     Externals.google_translate_disabled)
+    def test_post_cleanup_hello_world(self):
+        result = self.post_process("He said hello world")
         self.assertIsNotNone(result)
-        self.assertEqual('Il a dit "Bonjour tout le monde".', result)
+        self.assertEqual('Il a dit bonjour le monde', result)
+
+    @unittest.skipIf(Externals.google_translate is False or Externals.all_externals is False,
+                     Externals.google_translate_disabled)
+    def test_post_cleanup_hello_world_quotes(self):
+        result = self.post_process("He said ' hello world '")
+        self.assertIsNotNone(result)
+        self.assertEqual("Il a dit 'bonjour le monde'", result)
 
