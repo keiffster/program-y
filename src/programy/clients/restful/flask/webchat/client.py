@@ -43,6 +43,7 @@ class WebChatBotClient(FlaskRestBotClient):
         return WebChatConfiguration()
 
     def get_default_renderer(self, callback=True):
+        del callback
         return HtmlRenderer()
 
     def unauthorised_access_response(self, error_code=401):

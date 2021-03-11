@@ -50,6 +50,7 @@ class FacebookBotClient(FlaskRestBotClient):
         return FacebookConfiguration()
 
     def get_default_renderer(self, callback=True):
+        del callback
         return FacebookRenderer(self)
 
     def create_facebook_bot(self):

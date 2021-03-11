@@ -3,19 +3,7 @@
 Program Y is a fully compliant AIML 2.1 chatbot framework written in Python 3. It includes an entire platform for 
 building your own chat bots using Artificial Intelligence Markup Language, or AIML for short. 
 For more information about Program-y, its features and its history then check out the Background page.
-
-## New in v4.3
-v4.3 introduces a number of fixes to clients bring them all up to date with changes in their supporting libraries 
-of fixing defects found since earlier releases
-
-Please note that the Tweepy library used in the Twitter client has a defect in direct message streaming, and this has 
-been disabled until v3.9 of Tweepy is released.
-
-## New in 4.1
-v4.1 sees an incremental release which moves the OOB and Trigger configuration into the storage engine. This is designed
-to reduce the size of config files. For more information on how to configure OOB and Trigger configuration see either
-the wiki documentation for each or the examples in Y-Bot
-
+q
 ## New in 4.0
 
 ### Baseline Release
@@ -37,7 +25,7 @@ console:
           brain2:
       bot2:
         brains:
-        brain3
+          brain3
 ```
 Fixing config files should be as simple as introducing the bots and brains elements and shifting bot and brain elements 
 a couple of tabs right

@@ -256,7 +256,7 @@ class BotClient(ResponseLogger):
         except Exception as e:
             YLogger.exception(None, "Failed to load config specified renderer", e)
 
-        self._renderer = self.get_default_renderer(callback)
+        self._renderer = self.get_default_renderer(callback=callback)
 
     def get_default_renderer(self, callback=True):
         if callback is True:
