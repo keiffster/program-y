@@ -38,8 +38,9 @@ from programy.storage.stores.sql.store.nodes import SQLPatternNodesStore
 from programy.storage.stores.sql.store.processors import SQLPreProcessorsStore
 from programy.storage.stores.sql.store.processors import SQLPostProcessorsStore
 from programy.storage.stores.sql.store.processors import SQLPostQuestionProcessorsStore
-from programy.storage.stores.sql.store.oobs import SQLOOBsStore
 from programy.storage.stores.sql.store.triggers import SQLTriggersStore
+from programy.storage.stores.sql.store.oobs import SQLOOBsStore
+from programy.storage.stores.sql.store.services import SQLServicesStore
 from programy.utils.console.console import outputLog
 
 
@@ -124,6 +125,8 @@ class Uploader:
             return SQLTriggersStore(engine)
         if storetype == 'oobs':
             return SQLOOBsStore(engine)
+        if storetype == 'services':
+            return SQLServicesStore(engine)
 
         raise Exception("Unknown entity storetype [%s]" % storetype)
 

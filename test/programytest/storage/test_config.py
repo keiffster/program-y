@@ -476,7 +476,7 @@ class StorageConfigurationTests(unittest.TestCase):
                           {'file': '/tmp/oobs/callmom.conf', 'extension': None, 'subdirs': False,
                            'format': 'text', 'encoding': 'utf-8', 'delete_on_start': False})
         self.assertEquals(config['services_storage'],
-                          {'dirs': ['/tmp/services'], 'extension': 'txt', 'subdirs': True, 'format': 'text',
+                          {'dirs': ['/tmp/services'], 'extension': 'yaml', 'subdirs': True, 'format': 'yaml',
                            'encoding': 'utf-8', 'delete_on_start': False})
 
     def assertDefaultSQLStoreConfig(self, store_configs):

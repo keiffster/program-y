@@ -34,3 +34,14 @@ class RemoveHTMLTests(unittest.TestCase):
             self.assertEqual("Hello\r\nWorld", result)
         else:
             raise Exception("Unknown os [%s]"%os.name)
+
+        result = processor.process(context, """ACCUWEATHER TEXTSEARCH LOCATION * <br />
+            ACCUWEATHER CONDITIONS LOCATION * <br />
+            ACCUWEATHER WEATHER LOCATION *""")
+        self.assertIsNotNone(result)
+        if os.name == 'posix':
+            self.assertEqual("ACCUWEATHER TEXTSEARCH LOCATION *\nACCUWEATHER CONDITIONS LOCATION *\nACCUWEATHER WEATHER LOCATION *", result)
+        elif os.name == 'nt':
+            self.assertEqual("Hello\r\nWorld", result)
+        else:
+            raise Exception("Unknown os [%s]"%os.name)

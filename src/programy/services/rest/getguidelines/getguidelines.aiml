@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>GETGUIDELINES HELP</pattern>
+        <template>
+            GETGUIDELINES HELP *<br />
+            GETGUIDELINES ALL *
+            GETGUIDELINES VACINATION *
+            GETGUIDELINES CONDITIONS
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>GETGUIDELINES ALL * </pattern>
+        <template>
+            <srai>
+                <sraix service="getguidelines">
+                    ALL <star />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>GETGUIDELINES RESULT ALL *</pattern>
+        <template>
+            <star />
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>GETGUIDELINES VACINATION * </pattern>
+        <template>
+            <srai>
+                <sraix service="getguidelines">
+                    VAC <star />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>GETGUIDELINES RESULT VACINATION *</pattern>
+        <template>
+            <star />
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>GETGUIDELINES CONDITIONS</pattern>
+        <template>
+            <srai>
+                <sraix service="getguidelines">
+                    CONDITIONS
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>GETGUIDELINES RESULT CONDITIONS *</pattern>
+        <template>
+            <star />
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>GETGUIDELINES SERVICE ERROR</pattern>
+        <template>GetGuideLines failed to return a response</template>
+    </category>
+
+ </aiml>

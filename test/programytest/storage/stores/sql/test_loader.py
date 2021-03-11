@@ -304,3 +304,13 @@ class SQLUploaderTests(unittest.TestCase):
                                          create=True)
         self.assertEquals(13, count)
         self.assertEquals(13, success)
+
+    def test_upload_services(self):
+        count, success = Uploader.upload(storetype='services',
+                                         url='mysql+pymysql://root:Password123@localhost:3306/programy',
+                                         filename=None,
+                                         dirname=self.basepath + "services",
+                                         subdir=True, extension=".yaml",
+                                         create=True)
+        self.assertEquals(1, count)
+        self.assertEquals(1, success)

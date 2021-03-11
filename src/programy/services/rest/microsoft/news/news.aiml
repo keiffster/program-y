@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>MICROSOFT NEWS HELP</pattern>
+        <template>
+            MICROSOFT NEWS *
+        </template>
+    </category>
+
+     <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>MICROSOFT NEWS *</pattern>
+        <template>
+            <srai>
+                <sraix service="microsoft.news">
+                    NEWS <star />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>MICROSOFT NEWS RESULT *</pattern>
+        <template>
+            <star />
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>MICROSOFT NEWS SERVICE ERROR</pattern>
+        <template>Microsoft failed to return a response</template>
+    </category>
+
+ </aiml>

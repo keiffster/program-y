@@ -46,6 +46,7 @@ from programy.storage.stores.nosql.mongo.store.linkedaccounts import MongoLinked
 from programy.storage.stores.nosql.mongo.store.links import MongoLinkStore
 from programy.storage.stores.nosql.mongo.store.triggers import MongoTriggerStore
 from programy.storage.stores.nosql.mongo.store.oobs import MongoOOBStore
+from programy.storage.stores.nosql.mongo.store.services import MongoServiceStore
 
 
 class MongoStorageEngine(StorageEngine):
@@ -158,3 +159,6 @@ class MongoStorageEngine(StorageEngine):
 
     def oobs_store(self):
         return MongoOOBStore(self)
+
+    def services_store(self):
+        return MongoServiceStore(self)

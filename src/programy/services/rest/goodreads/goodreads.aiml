@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>GOODREADS HELP</pattern>
+        <template>
+            GOODREADS SEARCH AUTHOR * <br />
+            GOODREADS BOOK LIST *
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>GOODREADS SEARCH AUTHOR * </pattern>
+        <template>
+            <srai>
+                <sraix service="goodreads">
+                    SEARCH AUTHOR <star />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>GOODREADS SEARCH AUTHOR RESULT *</pattern>
+        <template>
+            <star />
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>GOODREADS BOOK LIST *</pattern>
+        <template>
+            <srai>
+                <sraix service="goodreads">
+                    LIST BOOKS <star />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>GOODREADS RESULT BOOK LIST *</pattern>
+        <template>
+            <star />
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>GOODREADS SERVICE ERROR</pattern>
+        <template>Goodreads failed to return a response</template>
+    </category>
+
+ </aiml>

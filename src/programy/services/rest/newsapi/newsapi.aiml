@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>NEWSAPI HELP</pattern>
+        <template>
+            NEWSAPI EVERYTHING *
+            NEWSAPI COLLECTIONS
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>NEWSAPI EVERYTHING *</pattern>
+        <template>
+            <srai>
+                <sraix service="newsapi">
+                    EVERYTHING <star />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>NEWSAPI RESULT EVERYTHING *</pattern>
+        <template>
+            <star />
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>NEWSAPI SERVICE ERROR</pattern>
+        <template>NewsAPI failed to return a response</template>
+    </category>
+
+ </aiml>

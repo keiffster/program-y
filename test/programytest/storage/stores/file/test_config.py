@@ -51,6 +51,12 @@ class FileStorageConfigurationTests(unittest.TestCase):
 
         self.assertIsNotNone(config.usergroups_storage)
 
+        self.assertIsNotNone(config.oobs_storage)
+
+        self.assertIsNotNone(config.triggers_storage)
+
+        self.assertIsNotNone(config.services_storage)
+
     def test_initialise_with_config(self):
 
         yaml = YamlConfigurationFile()
@@ -207,7 +213,27 @@ class FileStorageConfigurationTests(unittest.TestCase):
                       format: yaml
                       encoding: utf-8                 
                       delete_on_start: false            
+
+                    oobs_storage:
+                      file: ./storage/oobs/callmom.conf
+                      format: text
+                      encoding: utf-8                 
+                      delete_on_start: false            
+
+                    triggers_storage:
+                      file: ./storage/triggers/triggers.txt
+                      format: text
+                      encoding: utf-8                 
+                      delete_on_start: false            
                       
+                    services_storage:
+                      dirs: ./storage/services
+                      subdirs: true
+                      extension: yaml
+                      format: yaml
+                      encoding: utf-8     
+                      delete_on_start: false            
+
                 """, ConsoleConfiguration(), ".")
 
         file_config = yaml.get_section("file")
@@ -251,6 +277,12 @@ class FileStorageConfigurationTests(unittest.TestCase):
         self.assert_object_config(config.postquestionprocessors_storage, file="./storage/processing/postquestionprocessors.conf", fileformat="text", encoding="utf-8", delete_on_start=False)
 
         self.assert_object_config(config.usergroups_storage, file="./storage/security/usergroups.yaml", fileformat="yaml", encoding="utf-8", delete_on_start=False)
+
+        self.assert_object_config(config.triggers_storage, file="./storage/triggers/triggers.txt", fileformat="text", encoding="utf-8", delete_on_start=False)
+
+        self.assert_object_config(config.oobs_storage, file="./storage/oobs/callmom.conf", fileformat="text", encoding="utf-8", delete_on_start=False)
+
+        self.assert_object_config(config.services_storage, dirs=["./storage/services"], extension="yaml", subdirs=True, fileformat="yaml", encoding="utf-8", delete_on_start=False)
 
     def test_initialise_without_config(self):
         yaml = YamlConfigurationFile()
@@ -303,6 +335,12 @@ class FileStorageConfigurationTests(unittest.TestCase):
 
         self.assert_object_config(config.usergroups_storage, file=tmpdir + os.sep + "security/usergroups.yaml", fileformat="yaml", encoding="utf-8", delete_on_start=False)
 
+        self.assert_object_config(config.triggers_storage, file=tmpdir + os.sep + "triggers/triggers.txt", fileformat="text", encoding="utf-8", delete_on_start=False)
+
+        self.assert_object_config(config.oobs_storage, file=tmpdir + os.sep + "oob/callmom.conf", fileformat="text", encoding="utf-8", delete_on_start=False)
+
+        self.assert_object_config(config.services_storage, dirs=[tmpdir + os.sep + "services"], extension="yaml", subdirs=False, fileformat="yaml", encoding="utf-8", delete_on_start=False)
+
     def test_initialise_without_config_no_data(self):
         yaml = YamlConfigurationFile()
         self.assertIsNotNone(yaml)
@@ -354,6 +392,12 @@ class FileStorageConfigurationTests(unittest.TestCase):
 
         self.assert_object_config(config.usergroups_storage, file=tmpdir + os.sep + "security/usergroups.yaml", fileformat="yaml", encoding="utf-8", delete_on_start=False)
 
+        self.assert_object_config(config.triggers_storage, file=tmpdir + os.sep + "triggers/triggers.txt", fileformat="text", encoding="utf-8", delete_on_start=False)
+
+        self.assert_object_config(config.oobs_storage, file=tmpdir + os.sep + "oob/callmom.conf", fileformat="text", encoding="utf-8", delete_on_start=False)
+
+        self.assert_object_config(config.services_storage, dirs=[tmpdir + os.sep + "services"], extension="yaml", subdirs=False, fileformat="yaml", encoding="utf-8", delete_on_start=False)
+
     def assert_object_config(self, config, dirs=None, file=None, extension=None, subdirs=False, fileformat=None, encoding=None, delete_on_start=False):
         self.assertIsNotNone(config)
         if config.has_multiple_dirs() is True:
@@ -398,6 +442,7 @@ class FileStorageConfigurationTests(unittest.TestCase):
         self.assertEquals(amap[FileStore.USERGROUPS_STORAGE], config._usergroups_storage)
         self.assertEquals(amap[FileStore.TRIGGERS_STORAGE], config._triggers_storage)
         self.assertEquals(amap[FileStore.OOBS_STORAGE], config._oobs_storage)
+        self.assertEquals(amap[FileStore.SERVICES_STORAGE], config._services_storage)
 
     def test_create_storage_map(self):
         amap = {}
@@ -510,6 +555,9 @@ class FileStorageConfigurationTests(unittest.TestCase):
 
         FileStorageConfigurationTests.assert_yaml_config(test, data['oobs_storage'], file=tmpdir + os.sep + "oobs/callmom.conf",
                                 fileformat="text", encoding="utf-8", delete_on_start=False)
+
+        FileStorageConfigurationTests.assert_yaml_config(test, data['services_storage'], dirs=[tmpdir + os.sep + "services"], extension="yaml",
+                                subdirs=True, fileformat="yaml", encoding="utf-8", delete_on_start=False)
 
     @staticmethod
     def assert_yaml_config(test, config, dirs=None, file=None, extension=None, subdirs=False, fileformat=None, encoding=None, delete_on_start=False):

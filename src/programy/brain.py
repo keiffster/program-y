@@ -32,8 +32,7 @@ from programy.mappings.sets import SetCollection
 from programy.dynamic.dynamics import DynamicsCollection
 from programy.rdf.collection import RDFCollection
 from programy.parser.aiml_parser import AIMLParser
-from programy.services.service import ServiceFactory
-from programy.services.openchatbot.collection import OpenChatBotCollection
+from programy.services.handler import ServiceHandler
 from programy.dialog.tokenizer.tokenizer import Tokenizer
 from programy.parser.pattern.factory import PatternNodeFactory
 from programy.parser.template.factory import TemplateNodeFactory
@@ -55,8 +54,12 @@ class Brain:
         self._bot = bot
         self._configuration = configuration
 
+        self._pattern_factory = None
+        self._template_factory = None
+
         self._binaries = BinariesManager(configuration.binaries)
         self._braintree = BraintreeManager(configuration.braintree)
+
         self._tokenizer = Tokenizer.load_tokenizer(configuration.tokenizer)
 
         self._denormal_collection = DenormalCollection()
@@ -64,32 +67,32 @@ class Brain:
         self._gender_collection = GenderCollection()
         self._person_collection = PersonCollection()
         self._person2_collection = Person2Collection()
+
         self._rdf_collection = RDFCollection()
         self._sets_collection = SetCollection()
         self._maps_collection = MapCollection()
 
         self._properties_collection = PropertiesCollection()
         self._default_variables_collection = DefaultVariablesCollection()
+        self._regex_templates = RegexTemplatesCollection()
+        self._dynamics_collection = DynamicsCollection()
 
         self._preprocessors = PreProcessorCollection()
         self._postprocessors = PostProcessorCollection()
         self._postquestionprocessors = PostQuestionProcessorCollection()
-        self._pattern_factory = None
-        self._template_factory = None
 
-        self._security = SecurityManager(configuration.security)
+        self._services = ServiceHandler()
 
         self._oobhandler = OOBHandler()
 
-        self._openchatbots = OpenChatBotCollection()
-
-        self._regex_templates = RegexTemplatesCollection()
-
-        self._dynamics_collection = DynamicsCollection()
+        self._security = SecurityManager(configuration.security)
 
         self._aiml_parser = self.load_aiml_parser()
 
         self.load(self.configuration)
+
+    def post_initialise(self):
+        self.service_handler.post_initialise(self)
 
     @staticmethod
     def ylogger_type():
@@ -195,6 +198,10 @@ class Brain:
     def security(self):
         return self._security
 
+    @property
+    def service_handler(self):
+        return self._services
+
     def load_aiml_parser(self):
         self._load_pattern_nodes()
         self._load_template_nodes()
@@ -225,10 +232,7 @@ class Brain:
         self.load_collections()
 
         YLogger.info(self, "Loading services")
-        self.load_services(configuration)
-
-        YLogger.info(self, "Loading openchat bots")
-        self.load_openchatbots(configuration)
+        self.load_services()
 
         YLogger.info(self, "Loading security services")
         self.load_security_services()
@@ -350,11 +354,8 @@ class Brain:
         self._load_postprocessors()
         self._load_postquestionprocessors()
 
-    def load_services(self, configuration):
-        ServiceFactory.preload_services(configuration.services)
-
-    def load_openchatbots(self, configuration):
-        self._openchatbots.load_from_configuration(configuration.openchatbots)
+    def load_services(self, ):
+        self._services.load_services(self.bot.client)
 
     def load_security_services(self):
         self._security.load_security_services(self.bot.client)

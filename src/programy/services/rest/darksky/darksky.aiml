@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>DARKSKY HELP</pattern>
+        <template>
+            DARKSKY
+            DARKSKY FORECAST LAT SIGN * DEC * FRAC * LNG SIGN * DEC * FRAC *<br />
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>DARKSKY FORECAST POSTCODE *</pattern>
+        <template>
+            <srai>
+                DARKSKY FORECAST POSTCODE
+                <sraix service="geonames">
+                    LATLNG POSTCODE <star />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>DARKSKY FORECAST POSTCODE GEONAMES RESULT LAT SIGN * DEC * FRAC * LNG SIGN * DEC * FRAC *</pattern>
+        <template>
+            <srai>
+                <sraix service="darksky">
+                    FORECAST LAT SIGN <star index="1" /> DEC <star index="2" /> FRAC <star index="3" /> LNG SIGN <star index="4" /> DEC <star index="5" /> FRAC <star index="6" />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>DARKSKY FORECAST LAT SIGN * DEC * FRAC * LNG SIGN * DEC * FRAC *</pattern>
+        <template>
+            <srai>
+                <sraix service="darksky">
+                    FORECAST LAT SIGN <star index="1" /> DEC <star index="2" /> FRAC <star index="3" /> LNG SIGN <star index="4" /> DEC <star index="5" /> FRAC <star index="6" />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>DARKSKY RESULT FORECAST * </pattern>
+        <template>
+            <sentence>It is currently <star /></sentence>
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+    <category>
+        <pattern>DARKSKY TIMEMACHINE POSTCODE * TIME *</pattern>
+        <template>
+            <srai>
+                DARKSKY TIMEMACHINE POSTCODE
+                <sraix service="geonames">
+                    LATLNG POSTCODE <star index="1" />
+                </sraix>
+                TIME <star index="2" />
+            </srai>
+        </template>
+    </category>
+
+        <category>
+        <pattern>DARKSKY TIMEMACHINE POSTCODE GEONAMES RESULT LAT SIGN * DEC * FRAC * LNG SIGN * DEC * FRAC * TIME *</pattern>
+        <template>
+            <srai>
+                <sraix service="darksky">
+                    TIMEMACHINE LAT SIGN <star index="1" /> DEC <star index="2" /> FRAC <star index="3" /> LNG SIGN <star index="4" /> DEC <star index="5" /> FRAC <star index="6" /> TIME <star index="7" />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>DARKSKY TIMEMACHINE LAT SIGN * DEC * FRAC * LNG SIGN * DEC * FRAC * TIME *</pattern>
+        <template>
+            <srai>
+                <sraix service="darksky">
+                    TIMEMACHINE LAT SIGN <star index="1" /> DEC <star index="2" /> FRAC <star index="3" /> LNG SIGN <star index="4" /> DEC <star index="5" /> FRAC <star index="6" /> TIME <star index="7" />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>DARKSKY RESULT TIMEMACHINE TEMP * DEWPOINT * HUMIDITY * WINDSPEED * CLOUDCOVER * UVINDEX *</pattern>
+        <template>
+            <sentence>It was <star index="1"/>'C and a wind speed of <star index="4" /> mph</sentence>
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>DARKSKY SERVICE ERROR</pattern>
+        <template>DarkySky failed to return a response</template>
+    </category>
+
+ </aiml>

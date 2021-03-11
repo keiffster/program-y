@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>GOOGLE DISTANCE HELP</pattern>
+        <template>
+            GOOGLE DISTANCE ORIGIN * DESTINATION
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>GOOGLE DISTANCE ORIGIN * DESTINATION *</pattern>
+        <template>
+            <srai>
+                <sraix service="google.distance">
+                    DISTANCE ORIGIN <star index="1"/> DESTINATION <star index="2"/>
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>GOOGLE DISTANCE RESULT *</pattern>
+        <template>
+            About <star />
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>GOOGLE DISTANCE SERVICE ERROR</pattern>
+        <template>Google Distance failed to return a response</template>
+    </category>
+
+ </aiml>

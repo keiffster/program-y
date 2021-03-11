@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>YELP BUSINESS SEARCH HELP</pattern>
+        <template>
+            YELP BUSINESS SEARCH * LOCATION * [LOCALE *]
+        </template>
+    </category>
+
+     <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>YELP BUSINESS SEARCH * LOCATION *</pattern>
+        <template>
+            <srai>
+                <sraix service="yelp.business.search">
+                    BUSINESS SEARCH <star index="1" /> LOCATION <star index="2" />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>YELP BUSINESS SEARCH RESULT *</pattern>
+        <template>
+            <star />
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>YELP BUSINESS SEARCH SERVICE ERROR</pattern>
+        <template>Yelp failed to return a response</template>
+    </category>
+
+ </aiml>

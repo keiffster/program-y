@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+
+     <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>METOFFICE HELP</pattern>
+        <template>
+            METOFFICE HELP
+            METOFFICE WEATHER POSTCODE *
+            METOFFICE OBSERVATION LAT SIGN * DEC * FRAC * LNG SIGN * DEC * FRAC *<br />
+            METOFFICE FORECAST LAT SIGN * DEC * FRAC * LNG SIGN * DEC * FRAC * HOURS *<br />
+            METOFFICE FORECAST LAT SIGN * DEC * FRAC * LNG SIGN * DEC * FRAC * DAYS *
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>SIGN PLUS</pattern>
+        <template> </template>
+    </category>
+
+    <category>
+        <pattern>SIGN MINUS</pattern>
+        <template>-</template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>METOFFICE WEATHER POSTCODE *</pattern>
+        <template>
+            <srai>
+                METOFFICE WEATHER POSTCODE
+                <sraix service="geonames">
+                    LATLNG POSTCODE <star />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>METOFFICE WEATHER POSTCODE GEONAMES RESULT LAT SIGN * DEC * FRAC * LNG SIGN * DEC * FRAC *</pattern>
+        <template>
+            <srai>
+                <sraix service="metoffice">
+                    OBSERVATION LAT SIGN <star index="1" /> DEC <star index="2" /> FRAC <star index="3" /> LNG SIGN <star index="4" /> DEC <star index="5" /> FRAC <star index="6" />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>METOFFICE OBSERVATION LAT SIGN * DEC * FRAC * LNG SIGN * DEC * FRAC *</pattern>
+        <template>
+            <srai>
+                <sraix service="metoffice">
+                    OBSERVATION LAT SIGN <star index="1" /> DEC <star index="2" /> FRAC <star index="3" /> LNG SIGN <star index="4" /> DEC <star index="5" /> FRAC <star index="6" />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>METOFFICE RESULT OBSERVATION TYPE * TEMP * * * HUMIDITY * * VISIBILITY V * VF * PRESSURE P * PT * PTF * WIND D * DF * S *</pattern>
+        <template>
+            It is currently <star index="1" />, with a temperature of  <srai>SIGN <star index="2" /></srai> <star index="3" />.<star index="4" />'C
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>METOFFICE FORECAST LAT SIGN * DEC * FRAC * LNG SIGN * DEC * FRAC * HOURS *</pattern>
+        <template>
+            <srai>
+                <sraix service="metoffice">
+                    FORECAST LAT SIGN <star index="1" /> DEC <star index="2" /> FRAC <star index="3" /> LNG SIGN <star index="4" /> DEC <star index="5" /> FRAC <star index="6" /> HOURS <star index="7" />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>METOFFICE RESULT FORECAST HOURS TYPE * TEMP * FEELS * WINDSPEED * UVINDEX * UVGUIDE * RAINPROB * HUMIDITY * WINDDIR * WINDDIRFULL *</pattern>
+        <template>
+            It will be a <star index="1" />, with a temperature of <star index="2" />'C
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>METOFFICE FORECAST LAT SIGN * DEC * FRAC * LNG SIGN * DEC * FRAC * DAYS *</pattern>
+        <template>
+            <srai>
+                <sraix service="metoffice">
+                    FORECAST LAT SIGN <star index="1" /> DEC <star index="2" /> FRAC <star index="3" /> LNG SIGN <star index="4" /> DEC <star index="5" /> FRAC <star index="6" /> DAYS <star index="7" />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>METOFFICE RESULT FORECAST DAYS TYPE * WINDDIR * WINDSPEED * WINDGUST * TEMP * FEELS * HUMID * RAINPROB * UVINDEX * UVGUIDE * VIS * WEATHER *</pattern>
+        <template>
+            It will be <star index="12" />, with a temperature of <star index="5" />'C
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>METOFFICE SERVICE ERROR</pattern>
+        <template>
+            Metoffice service failed to return a response
+        </template>
+    </category>
+
+ </aiml>

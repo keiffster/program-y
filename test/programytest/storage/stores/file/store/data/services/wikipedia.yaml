@@ -1,0 +1,3 @@
+service:
+  name: wikipedia
+  service_class: programy.services.library.wikipedia.service.WikipediaService

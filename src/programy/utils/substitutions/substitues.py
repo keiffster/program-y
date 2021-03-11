@@ -52,7 +52,7 @@ class Substitutions:
                             self.add_substitute(namevalue[0], ":".join(namevalue[1:]))
 
             except Exception as excep:
-                YLogger.exception_nostack(None, "Failed to load substitutions file", excep)
+                YLogger.warning(None, "No substitutions file, but one specified [%s]", excep)
 
     def replace(self, string: str) -> str:
         splits = Substitutions.PATTERN.split(string)

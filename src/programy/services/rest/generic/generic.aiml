@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>GENERIC HELP</pattern>
+        <template>
+            GENERIC SEARCH *
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>GENERIC SEARCH *</pattern>
+        <template>
+            <srai>
+                <sraix service="generic">
+                    SEARCH <star />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>GENERIC RESULT *</pattern>
+        <template>
+            <star />
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>GENERIC SERVICE ERROR</pattern>
+        <template>Generic service failed to return a response</template>
+    </category>
+
+ </aiml>

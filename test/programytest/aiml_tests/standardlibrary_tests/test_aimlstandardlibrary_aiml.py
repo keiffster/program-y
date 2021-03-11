@@ -370,10 +370,11 @@ class StandardLibraryAIMLTests(unittest.TestCase):
         self.assertIsNotNone(response)
         self.assertEqual('11.', response)
 
-    #def test_xmin_11_22(self):
-    #    response = self._client_context.bot.ask_question(self._client_context, "XMIN 11 22")
-    #    self.assertIsNotNone(response)
-    #    self.assertEqual('11.', response)
+    @unittest.skip("This does not work in the standard library")
+    def test_xmin_11_22(self):
+        response = self._client_context.bot.ask_question(self._client_context, "XMIN 11 22")
+        self.assertIsNotNone(response)
+        self.assertEqual('11.', response)
 
     def test_xmin_22_11(self):
         response = self._client_context.bot.ask_question(self._client_context, "XMIN 22 11")

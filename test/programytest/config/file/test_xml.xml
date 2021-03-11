@@ -387,33 +387,6 @@
 				<create>true</create>
 				<save_as_user>system</save_as_user>
 			  </braintree>
-			  <services>
-				<REST>
-				  <classname>programy.services.rest.GenericRESTService</classname>
-				  <method>GET</method>
-				  <host>0.0.0.0</host>
-				  <port>8080</port>
-				</REST>
-				<Pannous>
-				  <classname>programy.services.pannous.PannousService</classname>
-				  <url>http://weannie.pannous.com/api</url>
-				</Pannous>
-				<Pandora>
-				  <classname>programy.services.pandora.PandoraService</classname>
-				  <url>http://www.pandorabots.com/pandora/talk-xml</url>
-				</Pandora>
-				<Wikipedia>
-				  <classname>programy.services.wikipediaservice.WikipediaService</classname>
-				</Wikipedia>
-				<DuckDuckGo>
-				  <classname>programy.services.duckduckgo.DuckDuckGoService</classname>
-				  <url>http://api.duckduckgo.com</url>
-				</DuckDuckGo>
-			  </services>
-			  <openchatbots>
-				<openchatbots/>
-				<protocols>http</protocols>
-			  </openchatbots>
 			  <security>
 				<authentication>
 				  <classname>programy.security.authenticate.passthrough.BasicPassThroughAuthenticationService</classname>

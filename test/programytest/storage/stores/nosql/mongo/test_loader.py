@@ -292,3 +292,13 @@ class MongoUploaderTests(unittest.TestCase):
                                          subdir=True, extension=".conf")
         self.assertEquals(13, count)
         self.assertEquals(13, success)
+
+    def test_upload_services(self):
+        count, success = Uploader.upload(storetype='services',
+                                         url='mongodb://localhost:27017/',
+                                         database='programy',
+                                         filename=None,
+                                         dirname=self.basepath + "services",
+                                         subdir=True, extension=".yaml")
+        self.assertEquals(1, count)
+        self.assertEquals(1, success)

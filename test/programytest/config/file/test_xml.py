@@ -110,40 +110,6 @@ class XMLConfigurationFileTests(ConfigurationBaseFileTests):
 
         self.assertEqual(1, len(configuration.client_configuration.configurations[0].configurations))
 
-    def test_load_additionals(self):
-        xml = XMLConfigurationFile()
-        self.assertIsNotNone(xml)
-        configuration = xml.load_from_text("""<?xml version="1.0" encoding="UTF-8" ?>
-<root>
-<console>
-  <bots>
-    <bot>
-      <brains>
-        <brain>
-          <services>
-            <authentication>
-              <classname>programy.services.authenticate.passthrough.PassThroughAuthenticationService</classname>
-              <denied_srai>ACCESS_DENIED</denied_srai>
-            </authentication>
-          </services>
-        </brain>
-      </brains>
-    </bot>
-  </bots>
-</console>
-</root>""", ConsoleConfiguration(), ".")
-
-        self.assertIsNotNone(configuration)
-
-        self.assertTrue(
-            configuration.client_configuration.configurations[0].configurations[0].services.exists("authentication"))
-        auth_service = configuration.client_configuration.configurations[0].configurations[0].services.service(
-            "authentication")
-        self.assertIsNotNone(auth_service)
-
-        self.assertTrue(auth_service.exists("denied_srai"))
-        self.assertEqual("ACCESS_DENIED", auth_service.value("denied_srai"))
-
     def test_load_with_subs(self):
         subs = Substitutions()
         subs.add_substitute("$ALLOW_SYSTEM", True)

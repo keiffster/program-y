@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>WOLFRAMALPHA HELP</pattern>
+        <template>
+            WOLFRAMALPHA SHORT *<br />
+            WOLFRAMALPHA SIMPLE *
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>WOLFRAMALPHA SHORT *</pattern>
+        <template>
+            <srai>
+                <sraix service="wolframalpha">
+                    SHORT <star />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>WOLFRAMALPHA RESULT SHORT *</pattern>
+        <template>
+            <star />
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>WOLFRAMALPHA SIMPLE *</pattern>
+        <template>
+            <srai>
+                <sraix service="wolframalpha">
+                    SIMPLE <star />
+                </sraix>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>WOLFRAMALPHA RESULT SIMPLE *</pattern>
+        <template>
+            <star />
+        </template>
+    </category>
+
+    <!-- *********************************************************************************************************** -->
+
+    <category>
+        <pattern>WOLFRAMALPHA SERVICE ERROR</pattern>
+        <template>
+            Wolfram Alpha failed to return a valid response
+        </template>
+    </category>
+
+ </aiml>
