@@ -1,6 +1,6 @@
 import unittest.mock
 
-from slackclient import SlackClient
+from slack import WebClient
 
 from programy.clients.polling.slack.client import SlackBotClient
 from programy.clients.polling.slack.config import SlackConfiguration
@@ -68,7 +68,7 @@ class SlackBotClientTests(unittest.TestCase):
         self.assertEqual("SLACK_BOT_TOKEN", client._bot_token)
         self.assertEqual('ProgramY AIML2.0 Client', client.get_description())
         self.assertIsInstance(client.get_client_configuration(), SlackConfiguration)
-        self.assertIsInstance(client._slack_client, SlackClient)
+        self.assertIsInstance(client._slack_client, WebClient)
 
         self.assertFalse(client._render_callback())
         self.assertIsInstance(client.renderer, TextRenderer)

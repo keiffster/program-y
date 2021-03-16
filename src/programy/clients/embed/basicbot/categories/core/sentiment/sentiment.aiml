@@ -4,11 +4,11 @@
     <category>
         <pattern>HOW HAPPY ARE YOU</pattern>
         <template>
-            <extension path="programy.sentiment.extension.SentimentExtension">
+            <extension path="programy.nlp.sentiment.extension.SentimentExtension">
                 SENTIMENT POSITIVITY <get name="positivity" />
             </extension>
             and
-            <extension path="programy.sentiment.extension.SentimentExtension">
+            <extension path="programy.nlp.sentiment.extension.SentimentExtension">
                 SENTIMENT SUBJECTIVITY <get name="positivity" />
             </extension>
         </template>

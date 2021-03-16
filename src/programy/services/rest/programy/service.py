@@ -93,7 +93,7 @@ class ProgramyService(RESTService):
         return os.path.dirname(__file__) + os.sep + "programyv1.conf"
 
     def _build_ask_url(self, question, userid):
-        url = self.configuration.api.format(question, userid)
+        url = self.configuration.url.format(question, userid)
         return url
 
     def ask(self, question, userid):

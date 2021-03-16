@@ -17,7 +17,7 @@ class MetOfficeTestClient(ServiceTestClient):
 
     def load_storage(self):
         super(MetOfficeTestClient, self).load_storage()
-        self.add_license_keys_store(filepath=os.path.dirname(__file__) + os.sep + "../../testdata" + os.sep + "license.keys")
+        self.add_license_keys_store(filepath=self.get_license_key_file())
 
 
 class MetOffice24HourForecastServiceTests(ServiceTestCase):

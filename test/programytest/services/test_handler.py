@@ -33,7 +33,9 @@ class ServiceHandlerTestClient(TestClient):
 
     def load_storage(self):
         super(ServiceHandlerTestClient, self).load_storage()
+
         self.add_license_keys_store(filepath=os.path.dirname(__file__) + os.sep + "testdata" + os.sep + "license.keys")
+
         self.add_services_store(dirs=[MetOfficeService.get_default_conf_file(),
                                       WikipediaService.get_default_conf_file(),
                                       AccuWeatherService.get_default_conf_file(),

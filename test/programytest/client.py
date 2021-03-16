@@ -26,6 +26,7 @@ class TestClient(BotClient):
     def add_license_keys_store(self, filepath=None):
         if filepath is None:
             filepath = os.path.dirname(__file__) + os.sep + "testdata" + os.sep + "test_licenses.keys"
+
         self._file_store_config._license_storage = FileStoreConfiguration(file=filepath, fileformat="text",
                                                        encoding="utf-8", delete_on_start=False)
         self.storage_factory._storage_engines[StorageFactory.LICENSE_KEYS] = self._storage_engine

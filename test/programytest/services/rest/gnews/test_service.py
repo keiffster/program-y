@@ -20,7 +20,7 @@ class GNewsServiceTestClient(ServiceTestClient):
 
     def load_storage(self):
         super(GNewsServiceTestClient, self).load_storage()
-        self.add_license_keys_store(filepath=os.path.dirname(__file__) + os.sep + "../../testdata" + os.sep + "license.keys")
+        self.add_license_keys_store(self.get_license_key_file())
 
 
 class GNewsServiceTests(ServiceTestCase):
@@ -49,6 +49,8 @@ class GNewsServiceTests(ServiceTestCase):
 
     def do_search(self):
         service = GNewsService(ServiceConfiguration.from_data("rest", "gnews", "news"))
+        client = GNewsServiceTestClient()
+        service.initialise(client)
         self.assertIsNotNone(service)
 
         response = service.search("CHATBOTS")
@@ -64,6 +66,8 @@ class GNewsServiceTests(ServiceTestCase):
 
     def do_top_news(self):
         service = GNewsService(ServiceConfiguration.from_data("rest", "gnews", "news"))
+        client = GNewsServiceTestClient()
+        service.initialise(client)
         self.assertIsNotNone(service)
 
         response = service.top_news()
@@ -79,6 +83,8 @@ class GNewsServiceTests(ServiceTestCase):
 
     def do_topics(self):
         service = GNewsService(ServiceConfiguration.from_data("rest", "gnews", "news"))
+        client = GNewsServiceTestClient()
+        service.initialise(client)
         self.assertIsNotNone(service)
 
         response = service.topics("technology")

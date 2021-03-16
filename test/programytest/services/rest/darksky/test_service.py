@@ -21,7 +21,7 @@ class DarkSkyServiceTestClient(ServiceTestClient):
 
     def load_storage(self):
         super(DarkSkyServiceTestClient, self).load_storage()
-        self.add_license_keys_store(filepath=os.path.dirname(__file__) + os.sep + "../../testdata" + os.sep + "license.keys")
+        self.add_license_keys_store(self.get_license_key_file())
 
 
 class DarkSkyServiceTests(ServiceTestCase):

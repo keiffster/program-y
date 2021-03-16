@@ -17,7 +17,7 @@ class MicrosoftSearchServiceTestClient(ServiceTestClient):
 
     def load_storage(self):
         super(MicrosoftSearchServiceTestClient, self).load_storage()
-        self.add_license_keys_store(filepath=os.path.dirname(__file__) + os.sep + "../../../testdata" + os.sep + "license.keys")
+        self.add_license_keys_store(self.get_license_key_file())
 
 
 class MicrosoftSearchServiceTests(ServiceTestCase):
@@ -44,7 +44,8 @@ class MicrosoftSearchServiceTests(ServiceTestCase):
         response = service.search("chatbots")
         self.assertResponse(response, 'search', "microsoft.search", "search")
 
-    @unittest.skipIf(integration_tests_active() is False, integration_tests_disabled)
+    @unittest.skip("Needs active cognitiveservices.azure.com account, chatilly closed down")
+    #@unittest.skipIf(integration_tests_active() is False, integration_tests_disabled)
     def test_search_integration(self):
         self._do_search()
 

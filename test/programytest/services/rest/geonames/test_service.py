@@ -1,7 +1,6 @@
 import unittest
 from unittest.mock import patch
 from unittest.mock import Mock
-import os
 from programy.services.rest.geonames.service import GeoNamesService
 from programy.services.config import ServiceConfiguration
 from programytest.services.testclient import ServiceTestClient
@@ -18,7 +17,6 @@ class GeoNamesServiceTestClient(ServiceTestClient):
 
     def load_storage(self):
         super(GeoNamesServiceTestClient, self).load_storage()
-        self.add_license_keys_store(filepath=os.path.dirname(__file__) + os.sep + "../../testdata" + os.sep + "license.keys")
 
 
 class GeoNamesServiceTests(ServiceTestCase):

@@ -34,7 +34,7 @@ class GenericServiceTests(ServiceTestCase):
     @patch("programy.services.rest.base.RESTService._requests_get", patch_requests_generic_success)
     def test_search(self):
         service = GenericService(ServiceConfiguration.from_data("rest", "generic", "generic",
-                                                                api="https://localhost/api?query={0}"))
+                                                                url="https://localhost/api?query={0}"))
         self.assertIsNotNone(service)
 
         client = GenericServiceTestClient()
@@ -43,11 +43,3 @@ class GenericServiceTests(ServiceTestCase):
         response = service.generic("Ping")
         self.assertResponse(response, 'generic', 'generic', 'generic')
 
-    @patch("programy.services.rest.base.RESTService._requests_get", patch_requests_generic_success)
-    def test_handler_load(self):
-        client = GenericServiceTestClient()
-        conf_file = GenericService.get_default_conf_file()
-
-        response = self._do_handler_load(client, conf_file, "generic", "GENERIC SEARCH CHATBOTS")
-        self.assertIsNotNone(response)
-        self.assertEqual("Generic success.", response)

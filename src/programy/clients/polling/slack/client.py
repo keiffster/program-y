@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 import re
-from slackclient import SlackClient
+from slack import WebClient
 from programy.utils.logging.ylogger import YLogger
 from programy.clients.polling.client import PollingBotClient
 from programy.clients.polling.slack.config import SlackConfiguration
@@ -50,7 +50,7 @@ class SlackBotClient(PollingBotClient):
         self._bot_token = self.license_keys.get_key("SLACK_TOKEN")
 
     def create_client(self):
-        return SlackClient(self._bot_token)
+        return WebClient(self._bot_token)
 
     def connect(self):
         if self._slack_client.rtm_connect(with_team_state=False) is True:

@@ -5,7 +5,6 @@ from programytest.client import TestClient
 from programytest.services.library.metoffice.payloads.forecast_3hourly import forecast_3hourly_payload
 from programytest.services.library.metoffice.payloads.observation import observation_payload
 from programytest.services.library.metoffice.payloads.forecast_daily import forecast_daily_payload
-from programy.utils.license.keys import LicenseKeys
 
 
 class MockMetOffice(MetOffice):

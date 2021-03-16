@@ -17,7 +17,7 @@ class NationalRailEnquiriesServiceTestClient(ServiceTestClient):
 
     def load_storage(self):
         super(NationalRailEnquiriesServiceTestClient, self).load_storage()
-        self.add_license_keys_store(filepath=os.path.dirname(__file__) + os.sep + "../../testdata" + os.sep + "license.keys")
+        self.add_license_keys_store(self.get_license_key_file())
 
 
 class NationalRailEnquiriesWSDLServiceTests(ServiceTestCase):
@@ -52,12 +52,18 @@ class NationalRailEnquiriesWSDLServiceTests(ServiceTestCase):
         client = NationalRailEnquiriesServiceTestClient()
         wsdl_client.initialise(client)
 
-        self.assertEquals("KINGHORN", wsdl_client.get_station_name_from_code('KGH'))
-        self.assertEquals("KGH", wsdl_client.get_station_code_from_name('KINGHORN'))
+        result = wsdl_client.get_station_name_from_code('KGH')
+        self.assertEquals("KINGHORN",  result['response']['payload']['station_name'])
+
+        result =  wsdl_client.get_station_code_from_name('KINGHORN')
+        self.assertEquals("KGH", result['response']['payload']['station_code'])
 
         self.assertEquals([], wsdl_client._match_station("XXXXXXX"))
-        self.assertEquals(['KINGHORN'], wsdl_client.match_station("Kinghorn"))
-        self.assertEquals(['KIRKBY (MERSEYSIDE)', 'KIRKBY STEPHEN', 'KIRKBY-IN-ASHFIELD'], wsdl_client.match_station("Kirkby"))
+
+
+        self.assertEquals(['KINGHORN'], wsdl_client._match_station("Kinghorn"))
+
+        self.assertEquals(['KIRKBY (MERSEYSIDE)', 'KIRKBY STEPHEN', 'KIRKBY-IN-ASHFIELD'], wsdl_client._match_station("Kirkby"))
 
     def test_get_arrival_boards_with_details(self):
 

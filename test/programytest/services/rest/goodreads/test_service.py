@@ -19,11 +19,12 @@ class GoodReadsServiceTestClient(ServiceTestClient):
 
     def load_storage(self):
         super(GoodReadsServiceTestClient, self).load_storage()
-        self.add_license_keys_store(filepath=os.path.dirname(__file__) + os.sep + "../../testdata" + os.sep + "license.keys")
+        self.add_license_keys_store(self.get_license_key_file())
 
 
 class GoodReadsServiceTests(ServiceTestCase):
 
+    @unittest.skip("Goodreads currently disabled at source - https://help.goodreads.com/s/article/Why-did-my-API-key-stop-working")
     def test_init(self):
         service = GoodReadsService(ServiceConfiguration.from_data("rest", "goodreads", "books"))
         self.assertIsNotNone(service)
@@ -50,7 +51,8 @@ class GoodReadsServiceTests(ServiceTestCase):
         response = service.search_for_author("William Gibson")
         self.assertResponse(response, 'search_for_author', "goodreads", "books",)
 
-    @unittest.skipIf(integration_tests_active() is False, integration_tests_disabled)
+    @unittest.skip("Goodreads currently disabled at source - https://help.goodreads.com/s/article/Why-did-my-API-key-stop-working")
+    #@unittest.skipIf(integration_tests_active() is False, integration_tests_disabled)
     def test_search_author_integration(self):
         self._do_search_author()
 
@@ -68,7 +70,8 @@ class GoodReadsServiceTests(ServiceTestCase):
         response = service.list_books("9226")
         self.assertResponse(response, 'list_books', "goodreads", "books",)
 
-    @unittest.skipIf(integration_tests_active() is False, integration_tests_disabled)
+    @unittest.skip("Goodreads currently disabled at source - https://help.goodreads.com/s/article/Why-did-my-API-key-stop-working")
+    #@unittest.skipIf(integration_tests_active() is False, integration_tests_disabled)
     def test_book_list_integration(self):
         self._do_book_list()
 
@@ -85,7 +88,8 @@ class GoodReadsServiceTests(ServiceTestCase):
         self.assertIsNotNone(response)
         self.assertEquals("9226.", response)
 
-    @patch("programy.services.rest.base.RESTService._requests_get", patch_requests_book_list_success_response)
+    @unittest.skip("Goodreads currently disabled at source - https://help.goodreads.com/s/article/Why-did-my-API-key-stop-working")
+    #@patch("programy.services.rest.base.RESTService._requests_get", patch_requests_book_list_success_response)
     def test_handler_load_author_search(self):
         client = GoodReadsServiceTestClient()
         conf_file = GoodReadsService.get_default_conf_file()

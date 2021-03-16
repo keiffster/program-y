@@ -18,7 +18,7 @@ class WorldTradingDataServiceTestClient(ServiceTestClient):
 
     def load_storage(self):
         super(WorldTradingDataServiceTestClient, self).load_storage()
-        self.add_license_keys_store(filepath=os.path.dirname(__file__) + os.sep + "../../testdata" + os.sep + "license.keys")
+        self.add_license_keys_store(self.get_license_key_file())
 
 
 class WorldTradingDataStocksServiceTests(ServiceTestCase):

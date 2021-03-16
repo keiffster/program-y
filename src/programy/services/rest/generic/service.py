@@ -69,7 +69,7 @@ class GenericService(RESTService):
         return os.path.dirname(__file__) + os.sep + "generic.conf"
 
     def _build_generic_url(self, question):
-        url = self.configuration.api.format(question)
+        url = self.configuration.url.format(question)
         return url
 
     def generic(self, question):
