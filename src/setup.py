@@ -60,7 +60,7 @@ setup(
       'wget==3.2',
       'beautifulsoup4==4.8',
       'lxml==4.6.2',
-      'PyYAML==5.3b1',
+      'PyYAML==5.4',
       'requests==2.22.0',
       'Flask==1.1.1',
       'Flask-SocketIO==4.2.1',
