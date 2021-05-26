@@ -39,10 +39,16 @@ class MongoLearnfStore(MongoStore, LearnfStore):
                       category.that,
                       category.template)
 
-        pattern = category.pattern
-        topic = category.topic
-        that = category.that
-        template = category.template
+        #pattern = category.pattern
+        #topic = category.topic
+        #that = category.that
+        #template = category.template
+        # Changes
+        pattern = category.pattern.text
+        topic = category.topic.text
+        that = category.that.text
+        template = category.template.resolve(client_context)
+        # End Changes
 
         groupid = "LEARNF"
         userid = client_context.userid

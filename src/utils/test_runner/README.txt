@@ -1,4 +1,4 @@
-Test Runner
+qTest Runner
 ===========
 After creating AIML unit tests with the test_creator.py utility, use test_runner to execute the tests and flag up
 any errors or invalid responses

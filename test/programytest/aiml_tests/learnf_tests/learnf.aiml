@@ -48,4 +48,35 @@
         </template>
     </category>
 
+    # LazyRacon00n
+    <category>
+        <pattern>* IS SYNONYM OF *</pattern>
+        <template>
+            <think>
+                <set name="firstword">
+                    <star/>
+                </set>
+                <set name="secondword">
+                    <star index="2"/>
+                </set>
+            </think>
+            Learning <get name="firstword"/> = <get name="secondword"/>
+            <learnf>
+                <category>
+                    <pattern>
+                        <eval><get name="firstword"/></eval>
+                    </pattern>
+                    <template>
+                        <srai><eval><get name="secondword"/></eval></srai>
+                    </template>
+                </category>
+            </learnf>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HI</pattern>
+        <template>Hey LazyRac00n</template>
+    </category>
+
 </aiml>

@@ -14,6 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from programy.utils.logging.ylogger import YLogger
 from programy.storage.stores.sql.store.sqlstore import SQLStore
 from programy.storage.entities.learnf import LearnfStore
 from programy.storage.stores.sql.dao.category import Category
@@ -29,10 +30,24 @@ class SQLLearnfStore(SQLStore, LearnfStore):
         raise Exception("Learnf _get_all not possible, call Category _get_all instead!")
 
     def save_learnf(self, client_context, category):
-        pattern = category.pattern
-        topic = category.topic
-        that = category.that
-        template = category.template
+        YLogger.debug(self, "Storing learnf category in Mongo [%s] [%s] [%s] [%s] [%s] [%s]",
+                      client_context.client.id,
+                      client_context.userid,
+                      category.pattern,
+                      category.topic,
+                      category.that,
+                      category.template)
+
+        # pattern = category.pattern
+        # topic = category.topic
+        # that = category.that
+        # template = category.template
+        # Changes
+        pattern = category.pattern.text
+        topic = category.topic.text
+        that = category.that.text
+        template = category.template.resolve(client_context)
+        # End Changes
 
         groupid = "LEARNF"
         userid = client_context.userid

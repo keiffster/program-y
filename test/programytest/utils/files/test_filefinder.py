@@ -13,7 +13,7 @@ class MockFileFinder(FileFinder):
         self.files = []
         self.except_on_load = except_on_load
 
-    def load_file_contents(self, id, filename, userid="*"):
+    def load_file_contents(self, fileid, filename, userid="*"):
         if self.except_on_load is True:
             raise Exception("Mock Exception")
 

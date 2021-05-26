@@ -55,12 +55,12 @@ class FileFinder(ABC):
             just_filename = FileFinder.get_just_filename_from_filepath(file[0])
             try:
                 if filename_as_userid is True:
-                    userid = just_filename
+                    id = just_filename
 
                 else:
-                    userid = "*"
+                    id = "*"
 
-                collection[just_filename.upper()] = self.load_file_contents(just_filename, file[1], userid=userid)
+                collection[just_filename.upper()] = self.load_file_contents(fileid=just_filename, filename=file[1], userid=id)
                 file_maps[just_filename.upper()] = file[1]
 
             except Exception as excep:

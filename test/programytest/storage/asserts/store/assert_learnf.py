@@ -1,4 +1,5 @@
 import unittest
+import xml.etree.ElementTree as ET
 
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.learn import LearnCategory
@@ -18,7 +19,7 @@ class LearnfStoreAsserts(unittest.TestCase):
         template = TemplateNode()
         template.append(TemplateWordNode("Hello"))
 
-        category = LearnCategory("HELLO *", "*", "*", template.to_xml(client_context))
+        category = LearnCategory(ET.Element("HELLO"), ET.Element("*"), ET.Element("*"), template)
 
         store.save_learnf(client_context, category)
 

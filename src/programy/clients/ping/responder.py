@@ -55,15 +55,24 @@ class PingResponder():
                        config.ssl_key_file)
 
             outputLog(None, "Healthcheck running in https mode")
-            ping_app.run(host=config.host,
-                         port=config.port,
-                         debug=config.debug,
-                         ssl_context=context)
+            try:
+                ping_app.run(host=config.host,
+                             port=config.port,
+                             debug=config.debug,
+                             ssl_context=context)
+
+            except Exception as error:
+                print("Healthcheck failed to start:", error)
+
         else:
             outputLog(None, "Healthcheck running in http mode, careful now !")
-            ping_app.run(host=config.host,
-                         port=config.port,
-                         debug=config.debug)
+            try:
+                ping_app.run(host=config.host,
+                             port=config.port,
+                             debug=config.debug)
+
+            except Exception as error:
+                print("Healthcheck failed to start:", error)
 
     def start_ping_service(self, ping_app: Flask):
         t = threading.Thread(target=PingResponder.ping_service, args=(ping_app, self.config))

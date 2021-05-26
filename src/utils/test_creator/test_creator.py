@@ -1,5 +1,7 @@
 import xml.etree.ElementTree as ET
 import sys
+import os
+
 
 def load_replacements(replace_file):
     texts = {}
@@ -22,10 +24,12 @@ def load_replacements(replace_file):
 
     return texts, sets, bots
 
+
 def replace_wildcard(text, texts, wildcard):
     if wildcard in text and wildcard in texts:
         return text.replace(wildcard, texts[wildcard])
     return text
+
 
 def replace_wildcards(text, texts):
     text = replace_wildcard(text, texts, "*")
@@ -34,29 +38,20 @@ def replace_wildcards(text, texts):
     text = replace_wildcard(text, texts, "_")
     return text
 
-if __name__ == '__main__':
 
-    aiml_file = sys.argv[1]
-    test_file = sys.argv[2]
-    ljust = int(sys.argv[3])
-    replace_file = sys.argv[4]
+def create_test_file(source, destination):
 
-    default = None
-    if len(sys.argv) > 5:
-        default = sys.argv[5]
+    print ("Creating %s in %s" %(source, destination))
 
-    print("aiml_file:", aiml_file)
-    print("test_file:", test_file)
-    print("replace_file:", replace_file)
-    print("Default:", default)
+    directory = os.path.dirname(destination)
+    if not os.path.exists(directory):
+        os.makedirs(directory)
 
-    texts, sets, bots = load_replacements(replace_file)
-
-    with open(test_file, "w+") as output_file:
+    with open(destination, "w+") as output_file:
         if default is not None:
             output_file.write('$DEFAULT, "%s"\n\n'%default)
         try:
-            tree = ET.parse(aiml_file)
+            tree = ET.parse(source)
             aiml = tree.getroot()
             categories = aiml.findall('category')
             for category in categories:
@@ -107,7 +102,15 @@ if __name__ == '__main__':
 
                 else:
                     template = category.find('template')
-                    test_line = '%s "answer"'%(question)
+
+                    answer = template.text
+                    if answer:
+                        if len(answer) > 80:
+                            answer = (answer[0:80])
+                    else:
+                        answer = "ERROR"
+
+                    test_line = '%s "%s"' % (question, answer.strip())
 
                 output_file.write(test_line)
                 output_file.write("\n")
@@ -119,6 +122,47 @@ if __name__ == '__main__':
         except Exception as e:
             print(e)
 
-        exit(0)
 
+
+if __name__ == '__main__':
+
+    source = sys.argv[1]
+    if source not in ['-f', '-d']:
+        print ("Please specify file -f or directory -d")
+        exit(-1)
+
+    aiml_source = sys.argv[2]
+    test_dest = sys.argv[3]
+    ljust = int(sys.argv[4])
+    replace_file = sys.argv[5]
+
+    default = None
+    if len(sys.argv) > 6:
+        default = sys.argv[6]
+
+    print("aiml_source:", aiml_source)
+    print("test_dest:", test_dest)
+    print("replace_file:", replace_file)
+    print("Default:", default)
+
+    listOfFiles = list()
+    if source == '-d':
+        for (dirpath, dirnames, filenames) in os.walk(aiml_source):
+            listOfFiles += [os.path.join(dirpath.replace(aiml_source, ""), file) for file in filenames]
+
+    else:
+        listOfFiles == aiml_source
+
+    texts, sets, bots = load_replacements(replace_file)
+
+    if source == '-f':
+        create_test_file(aiml_source, test_dest)
+
+    else:
+
+        for fileToProcess in listOfFiles:
+            if fileToProcess[0] == '/':
+                create_test_file(aiml_source + fileToProcess, test_dest + fileToProcess + ".tests")
+            else:
+                create_test_file(aiml_source + os.sep + fileToProcess, test_dest + os.sep + fileToProcess + ".tests")
 

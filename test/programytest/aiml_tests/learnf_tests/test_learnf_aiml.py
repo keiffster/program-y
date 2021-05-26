@@ -32,7 +32,10 @@ class LearnfAIMLTests(unittest.TestCase):
         self._client_context = client.create_client_context("testid")
 
     def tearDown(self):
-        shutil.rmtree(self._client_context.client._learnf_path)
+        try:
+            shutil.rmtree(self._client_context.client._learnf_path)
+        except:
+            pass
 
     def test_my_name_is_fred(self):
         response = self._client_context.bot.ask_question(self._client_context, "MY NAME IS FRED")
@@ -66,6 +69,19 @@ class LearnfAIMLTests(unittest.TestCase):
         self.assertIsNotNone(response)
         self.assertEqual(response, "JOHN PLAYED CRICKET.")
 
+    def test_lazyracoon(self):
+        response = self._client_context.bot.ask_question(self._client_context, "hi")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, "Hey LazyRac00n.")
+
+        response = self._client_context.bot.ask_question(self._client_context, "hello IS SYNONYM OF hi")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, "Learning hello = hi.")
+
+        response = self._client_context.bot.ask_question(self._client_context, "hello")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, "Hey LazyRac00n.")
+
     def check_file_contents(self, pattern, topic, that, template):
         learnf_file = self._client_context.client._learnf_path + os.sep + "testid.aiml"
 
@@ -92,3 +108,4 @@ class LearnfAIMLTests(unittest.TestCase):
         templates = categories[0].findall('template')
         self.assertEqual(1, len(templates))
         self.assertEqual(templates[0].text, template)
+
