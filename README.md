@@ -1,5 +1,13 @@
-# Program-Y
+# pyaiml2
+pyaiml2 is a fork from Program Y by keiffstar. The current version of Program Y by keiffstar is unusable due to changes in setuptools and sleekxmpp module. This fork aims to keep the project up-to-date and usable. I haven't yet changed anything more and will add any changes here accordingly
 
+## How to install
+Download the source code and use
+```
+pip install pyaiml2/src/
+```
+
+# Program-Y
 Program Y is a fully compliant AIML 2.1 chatbot framework written in Python 3. It includes an entire platform for 
 building your own chat bots using Artificial Intelligence Markup Language, or AIML for short. 
 For more information about Program-y, its features and its history then check out the Background page.
@@ -58,12 +66,3 @@ space seperator rather than a mix of underscore and dash '-'. The list of change
 * default_response_srai
 
 The convention going forward is that all variables will use underscore '_' as a space seperator
-
-## Contact
-There are a number of ways you can get help
-
-* [Github](https://github.com/keiffster/program-y/issues) Raise an issue directly
-* [Slack](https://program-y.slack.com) Talk live with the Dev Team
-* [Gitter](https://gitter.im/Program-y) Talk with the Dev Team
-* Email (See below) although I don't check it every day
-* Twitter, but more of an announcement channel
