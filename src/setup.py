@@ -31,13 +31,13 @@ setup(
   author_email = 'keiffster@gmail.com',
   url = 'https://github.com/Ghoul072/pyaiml2.git',
   download_url = download_url,
-  keywords = ['aiml', 'chatbot', 'virtual assistant', 'ai'],
+  keywords = ['aiml', 'chatbot', 'virtual assistant', 'ai', 'aiml2', 'interpreter'],
   classifiers = [
       # How mature is this project? Common values are
       #   3 - Alpha
       #   4 - Beta
       #   5 - Production/Stable
-      'Development Status :: 5 - Production/Stable',
+      'Development Status :: 4 - Production/Stable',
 
       # Indicate who your project is intended for
       'Intended Audience :: Developers',
