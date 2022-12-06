@@ -16,10 +16,10 @@ long_description = ""
 with open(path.join(here, path.join(here, 'README.md')), encoding='utf-8') as f:
     long_description = f.read()
 
-download_url = "https://github.com/keiffster/program-y/%s.tar.gz"%version
+download_url = "https://github.com/Ghoul072/pyaiml2/%s.tar.gz"%version
 
 setup(
-  name = 'programy',
+  name = 'pyaiml2',
   packages=find_packages(),
   package_data={'': ['*.conf', '*.aiml']},
   include_package_data=True,
@@ -29,7 +29,7 @@ setup(
   long_description_content_type='text/markdown',
   author = 'Keith Sterling',
   author_email = 'keiffster@gmail.com',
-  url = 'https://github.com/keiffster/program-y.git',
+  url = 'https://github.com/Ghoul072/pyaiml2.git',
   download_url = download_url,
   keywords = ['aiml', 'chatbot', 'virtual assistant', 'ai'],
   classifiers = [
