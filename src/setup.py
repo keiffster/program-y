@@ -65,7 +65,7 @@ setup(
       'Flask==1.1.1',
       'Flask-SocketIO==4.2.1',
       'tweepy==3.8.0',
-      'sleekxmpp==1.3.3',
+      'slixmpp==1.3.3',
       'python-telegram-bot==12.0.0',
       'pymessenger==0.0.7.0',
       'twilio==6.35.1',

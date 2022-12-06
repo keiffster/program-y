@@ -14,15 +14,15 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import sleekxmpp
+import slixmpp
 from programy.utils.logging.ylogger import YLogger
 
 
-class XmppClient(sleekxmpp.ClientXMPP):
+class XmppClient(slixmpp.ClientXMPP):
 
     def __init__(self, bot_client, jid, password):
         self._bot_client = bot_client
-        sleekxmpp.ClientXMPP.__init__(self, jid, password)
+        slixmpp.ClientXMPP.__init__(self, jid, password)
         self.add_event_handlers()
 
     def add_event_handlers(self):
