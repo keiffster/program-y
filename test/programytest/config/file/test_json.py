@@ -111,9 +111,7 @@ class JSONConfigurationFileTests(ConfigurationBaseFileTests):
         text = ""
         with open(text_file, "r+") as textfile:
             lines = textfile.readlines()
-            for line in lines:
-                text += line
-                text += "\n"
+            text = "\n".join(lines)
 
         configuration = json.load_from_text(text, ConsoleConfiguration(), ".")
 
