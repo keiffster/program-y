@@ -62,7 +62,7 @@ setup(
       'lxml==4.9.1',
       'PyYAML==5.4',
       'requests==2.22.0',
-      'Flask==1.1.1',
+      'Flask==2.2.5',
       'Flask-SocketIO==4.2.1',
       'tweepy==3.8.0',
       'sleekxmpp==1.3.3',
