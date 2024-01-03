@@ -82,7 +82,7 @@ setup(
       'emoji==0.5.4',
       'autocorrect==0.4.4',
       'textblob==0.15.3',
-      'redis==3.3.11',
+      'redis==4.4.4',
       'pymongo==3.10.0',
       'SQLAlchemy==1.3.12',
       'PyMySQL==0.9.3'
