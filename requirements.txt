@@ -9,7 +9,7 @@ zeep==4.0.0
 fuzzywuzzy==0.18.0
 python-Levenshtein==0.12.2
 
-requests==2.25.1
+requests==2.31.0
 Flask==1.1.2
 Flask-SocketIO==5.0.1
 
